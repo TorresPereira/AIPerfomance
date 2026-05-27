@@ -12,11 +12,6 @@ jobs:
     timeout-minutes: 10
 
     steps:
-
-
-
-
-    
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -35,6 +30,22 @@ jobs:
           path: /tmp/garmin_session.pkl
           key: garmin-session-v1
           restore-keys: garmin-session-v1
+
+      # ── DIAGNÓSTICO: remova este step depois que funcionar ──
+      - name: Testar chave Anthropic
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          echo "Tamanho da chave: ${#ANTHROPIC_API_KEY} chars"
+          echo "Prefixo: ${ANTHROPIC_API_KEY:0:7}..."
+          HTTP=$(curl -s -o /tmp/resp.json -w "%{http_code}" \
+            https://api.anthropic.com/v1/messages \
+            -H "x-api-key: $ANTHROPIC_API_KEY" \
+            -H "anthropic-version: 2023-06-01" \
+            -H "content-type: application/json" \
+            -d '{"model":"claude-haiku-4-5-20251001","max_tokens":10,"messages":[{"role":"user","content":"oi"}]}')
+          echo "HTTP status: $HTTP"
+          cat /tmp/resp.json
 
       - name: Rodar briefing
         env:
