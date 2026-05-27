@@ -21,16 +21,15 @@ jobs:
           python-version: '3.11'
 
       - name: Instalar dependências
-        run: pip install garminconnect
+        run: pip install "garminconnect>=0.2.22"
 
-      # Restaura sessão Garmin do cache para evitar 429
-      - name: Restaurar sessão Garmin (cache)
+      # Cache de sessão Garmin — evita 429 por login repetido
+      - name: Restaurar sessão Garmin
         uses: actions/cache@v4
         with:
           path: /tmp/garmin_session.pkl
-          key: garmin-session-${{ github.run_id }}
-          restore-keys: |
-            garmin-session-
+          key: garmin-session-v1
+          restore-keys: garmin-session-v1
 
       - name: Rodar briefing
         env:
@@ -41,11 +40,3 @@ jobs:
           EMAIL_FROM:        ${{ secrets.EMAIL_FROM }}
           EMAIL_TO:          ${{ secrets.EMAIL_TO }}
         run: python garmin_briefing.py
-
-      # Salva sessão atualizada no cache para próxima execução
-      - name: Salvar sessão Garmin (cache)
-        if: always()
-        uses: actions/cache@v4
-        with:
-          path: /tmp/garmin_session.pkl
-          key: garmin-session-${{ github.run_id }}
