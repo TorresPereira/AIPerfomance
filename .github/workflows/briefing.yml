@@ -1,10 +1,10 @@
-name: Garmin Daily Briefing
+name: Triathlon Daily Briefing
 
 on:
   schedule:
     # 6h horário de Brasília = 9h UTC (BRT = UTC-3)
     - cron: '0 9 * * *'
-  workflow_dispatch:   # permite rodar manualmente pelo GitHub também
+  workflow_dispatch:  # roda manualmente pelo GitHub também
 
 jobs:
   briefing:
@@ -12,10 +12,10 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: Checkout do repositório
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configurar Python 3.11
+      - name: Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -25,9 +25,10 @@ jobs:
 
       - name: Rodar briefing
         env:
-          GARMIN_EMAIL:     ${{ secrets.GARMIN_EMAIL }}
-          GARMIN_PASSWORD:  ${{ secrets.GARMIN_PASSWORD }}
-          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-          EMAIL_FROM:       ${{ secrets.EMAIL_FROM }}
-          EMAIL_TO:         ${{ secrets.EMAIL_TO }}
+          GARMIN_EMAIL:      ${{ secrets.GARMIN_EMAIL }}
+          GARMIN_PASSWORD:   ${{ secrets.GARMIN_PASSWORD }}
+          SENDGRID_API_KEY:  ${{ secrets.SENDGRID_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          EMAIL_FROM:        ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO:          ${{ secrets.EMAIL_TO }}
         run: python garmin_briefing.py
