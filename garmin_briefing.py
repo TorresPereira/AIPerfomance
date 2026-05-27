@@ -13,6 +13,8 @@ import datetime
 import traceback
 import urllib.request
 import urllib.error
+import pickle
+import pathlib
 
 from garminconnect import Garmin
 
@@ -23,6 +25,9 @@ SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
 ANTHROPIC_API_KEY= os.environ["ANTHROPIC_API_KEY"]
 EMAIL_FROM       = os.environ["EMAIL_FROM"]
 EMAIL_TO         = os.environ["EMAIL_TO"]
+
+# Cache de sessão — evita login repetido e o 429 do Garmin
+SESSION_FILE = pathlib.Path("/tmp/garmin_session.pkl")
 
 TODAY     = datetime.date.today()
 YESTERDAY = TODAY - datetime.timedelta(days=1)
@@ -68,9 +73,23 @@ def semaforo_emoji(valor, baixo, alto, inverso=False):
 
 # ─── Coleta Garmin ────────────────────────────────────────────────────────────
 
-def coletar_dados():
+def garmin_login():
+    """Login com cache de sessão para evitar 429 por excesso de logins."""
     api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
+    if SESSION_FILE.exists():
+        try:
+            api.login(SESSION_FILE)
+            print("  Sessão restaurada do cache.")
+            return api
+        except Exception as e:
+            print(f"  Cache expirado ({e}), fazendo novo login...")
     api.login()
+    api.garth.dump(SESSION_FILE)
+    print("  Novo login realizado e sessão salva.")
+    return api
+
+def coletar_dados():
+    api = garmin_login()
     dados = {"saude": {}, "treinos_ontem": [], "calendario_hoje": []}
 
     # === SAÚDE ===
@@ -207,26 +226,33 @@ def coletar_dados():
 
     # === CALENDÁRIO DE HOJE ===
     try:
-        cal = api.get_garmin_workouts_for_date(TODAY_STR)
+        # get_workout_schedule retorna lista de workouts do calendário para a semana
+        cal = api.get_workout_schedule(TODAY_STR)
         for w in (cal or []):
-            nome_w  = w.get("workoutName") or w.get("description") or "Treino"
-            tipo_w  = (w.get("sportType", {}).get("sportTypeKey") or "").lower()
-            duracao_w = w.get("estimatedDurationInSecs")
-            dist_w    = w.get("estimatedDistanceInMeters")
+            # Cada item pode ter estrutura ligeiramente diferente por versão da lib
+            nome_w    = (w.get("workoutName") or w.get("title") or w.get("description") or "Treino")
+            tipo_raw  = (w.get("sportType") or w.get("activityType") or "")
+            if isinstance(tipo_raw, dict):
+                tipo_w = (tipo_raw.get("sportTypeKey") or tipo_raw.get("typeKey") or "").lower()
+            else:
+                tipo_w = str(tipo_raw).lower()
 
-            if "swim" in tipo_w: icone_w = "🏊"
-            elif "cycling" in tipo_w or "bike" in tipo_w: icone_w = "🚴"
-            elif "running" in tipo_w or "run" in tipo_w: icone_w = "🏃"
-            else: icone_w = "⚡"
+            duracao_w = w.get("estimatedDurationInSecs") or w.get("duration")
+            dist_w    = w.get("estimatedDistanceInMeters") or w.get("distance")
+
+            if "swim" in tipo_w:                          icone_w = "🏊"
+            elif "cycl" in tipo_w or "bike" in tipo_w:   icone_w = "🚴"
+            elif "run" in tipo_w:                         icone_w = "🏃"
+            else:                                          icone_w = "⚡"
 
             dados["calendario_hoje"].append({
-                "icone": icone_w,
-                "nome": nome_w,
-                "tipo": tipo_w,
-                "duracao": segundos_para_tempo(duracao_w),
-                "distancia": metros_para_dist(dist_w),
+                "icone":    icone_w,
+                "nome":     nome_w,
+                "tipo":     tipo_w,
+                "duracao":  segundos_para_tempo(duracao_w),
+                "distancia":metros_para_dist(dist_w),
                 "_duracao_s": duracao_w,
-                "_dist_m": dist_w,
+                "_dist_m":    dist_w,
             })
     except:
         traceback.print_exc()
@@ -296,22 +322,30 @@ Responda em JSON com exatamente estas chaves (sem markdown, sem texto fora do JS
         method="POST"
     )
 
-    with urllib.request.urlopen(req) as resp:
-        result = json.loads(resp.read())
+    try:
+        with urllib.request.urlopen(req) as resp:
+            result = json.loads(resp.read())
+    except urllib.error.HTTPError as e:
+        body = e.read().decode()
+        print(f"Anthropic API error {e.code}: {body}")
+        return {
+            "resumo_ontem": f"Erro ao consultar IA (HTTP {e.code}). Verifique o secret ANTHROPIC_API_KEY no GitHub.",
+            "analise_recuperacao": "—", "validacao_treino_hoje": "—",
+            "sugestao_ajuste": "—", "foco_tecnico": "—", "alerta": None
+        }
 
     raw = result["content"][0]["text"].strip()
+    # Remove blocos markdown caso o modelo os inclua
     raw = raw.replace("```json", "").replace("```", "").strip()
 
     try:
         return json.loads(raw)
-    except:
+    except json.JSONDecodeError:
+        print(f"JSON inválido da IA: {raw[:200]}")
         return {
-            "resumo_ontem": raw[:300],
-            "analise_recuperacao": "—",
-            "validacao_treino_hoje": "—",
-            "sugestao_ajuste": "—",
-            "foco_tecnico": "—",
-            "alerta": None
+            "resumo_ontem": raw[:400],
+            "analise_recuperacao": "—", "validacao_treino_hoje": "—",
+            "sugestao_ajuste": "—", "foco_tecnico": "—", "alerta": None
         }
 
 # ─── HTML do e-mail ───────────────────────────────────────────────────────────
