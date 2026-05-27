@@ -326,7 +326,7 @@ Responda em JSON com exatamente estas chaves (sem markdown, sem texto fora do JS
 }}"""
 
     payload = json.dumps({
-        "model": "claude-sonnet-4-20250514",
+        "model": "claude-sonnet-4-6",
         "max_tokens": 1000,
         "messages": [{"role": "user", "content": prompt}]
     }).encode("utf-8")
