@@ -74,18 +74,38 @@ def semaforo_emoji(valor, baixo, alto, inverso=False):
 # ─── Coleta Garmin ────────────────────────────────────────────────────────────
 
 def garmin_login():
-    """Login com cache de sessão para evitar 429 por excesso de logins."""
-    api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
+    """Login com cache de sessão para evitar 429.
+    Compatível com qualquer versão da garminconnect — não depende de .garth.
+    """
     if SESSION_FILE.exists():
         try:
-            api.login(SESSION_FILE)
+            with open(SESSION_FILE, "rb") as f:
+                session_data = pickle.load(f)
+            api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
+            api.sess.cookies.update(session_data.get("cookies", {}))
+            if session_data.get("headers"):
+                api.sess.headers.update(session_data["headers"])
+            api.get_full_name()  # valida sessão com chamada leve
             print("  Sessão restaurada do cache.")
             return api
         except Exception as e:
-            print(f"  Cache expirado ({e}), fazendo novo login...")
+            print(f"  Cache inválido/expirado ({e}), fazendo novo login...")
+            SESSION_FILE.unlink(missing_ok=True)
+
+    api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
     api.login()
-    api.garth.dump(SESSION_FILE)
-    print("  Novo login realizado e sessão salva.")
+
+    try:
+        session_data = {
+            "cookies": dict(api.sess.cookies),
+            "headers": dict(api.sess.headers),
+        }
+        with open(SESSION_FILE, "wb") as f:
+            pickle.dump(session_data, f)
+        print("  Login realizado e sessão salva em cache.")
+    except Exception as e:
+        print(f"  Aviso: não salvou cache ({e})")
+
     return api
 
 def coletar_dados():
