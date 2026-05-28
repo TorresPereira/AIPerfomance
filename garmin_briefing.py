@@ -13,10 +13,12 @@ import datetime
 import traceback
 import urllib.request
 import urllib.error
+
 import pickle
 import pathlib
-
 from garminconnect import Garmin
+
+SESSION_FILE = pathlib.Path("/tmp/garmin_session.pkl")
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 GARMIN_EMAIL     = os.environ["GARMIN_EMAIL"]
@@ -25,9 +27,6 @@ SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
 ANTHROPIC_API_KEY= os.environ["ANTHROPIC_API_KEY"]
 EMAIL_FROM       = os.environ["EMAIL_FROM"]
 EMAIL_TO         = os.environ["EMAIL_TO"]
-
-# Cache de sessão — evita login repetido e o 429 do Garmin
-SESSION_FILE = pathlib.Path("/tmp/garmin_session.pkl")
 
 TODAY     = datetime.date.today()
 YESTERDAY = TODAY - datetime.timedelta(days=1)
@@ -74,38 +73,30 @@ def semaforo_emoji(valor, baixo, alto, inverso=False):
 # ─── Coleta Garmin ────────────────────────────────────────────────────────────
 
 def garmin_login():
-    """Login com cache de sessão para evitar 429.
-    Compatível com qualquer versão da garminconnect — não depende de .garth.
-    """
+    import pickle
     if SESSION_FILE.exists():
         try:
             with open(SESSION_FILE, "rb") as f:
-                session_data = pickle.load(f)
+                sd = pickle.load(f)
             api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
-            api.sess.cookies.update(session_data.get("cookies", {}))
-            if session_data.get("headers"):
-                api.sess.headers.update(session_data["headers"])
-            api.get_full_name()  # valida sessão com chamada leve
+            api.sess.cookies.update(sd.get("cookies", {}))
+            if sd.get("headers"):
+                api.sess.headers.update(sd["headers"])
+            api.get_full_name()
             print("  Sessão restaurada do cache.")
             return api
         except Exception as e:
-            print(f"  Cache inválido/expirado ({e}), fazendo novo login...")
+            print(f"  Cache expirado ({e}), novo login...")
             SESSION_FILE.unlink(missing_ok=True)
-
     api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
     api.login()
-
     try:
-        session_data = {
-            "cookies": dict(api.sess.cookies),
-            "headers": dict(api.sess.headers),
-        }
+        sd = {"cookies": dict(api.sess.cookies), "headers": dict(api.sess.headers)}
         with open(SESSION_FILE, "wb") as f:
-            pickle.dump(session_data, f)
-        print("  Login realizado e sessão salva em cache.")
+            pickle.dump(sd, f)
+        print("  Login realizado, sessão salva.")
     except Exception as e:
         print(f"  Aviso: não salvou cache ({e})")
-
     return api
 
 def coletar_dados():
@@ -115,13 +106,29 @@ def coletar_dados():
     # === SAÚDE ===
     s = dados["saude"]
 
+    # === HRV ===
     try:
-        hrv = api.get_hrv_data(TODAY_STR)
-        summ = hrv.get("hrvSummary", {})
-        s["hrv"]        = summ.get("lastNight")
-        s["hrv_status"] = summ.get("hrvStatus", "").lower()
-    except: s["hrv"] = s["hrv_status"] = None
+        hrv_raw = api.get_hrv_data(TODAY_STR)
+        print("  [DEBUG HRV raw]:", json.dumps(hrv_raw, default=str)[:500])
+        summ = hrv_raw.get("hrvSummary", {})
+        # Tenta lastNight primeiro, depois weeklyAvg, depois valor direto
+        s["hrv"] = (summ.get("lastNight")
+                    or summ.get("lastNight5MinHigh")
+                    or hrv_raw.get("hrvSummary", {}).get("lastNight"))
+        s["hrv_status"] = (summ.get("hrvStatus") or summ.get("status") or "").lower()
+        if not s["hrv"]:
+            # Tenta pegar do array de leituras se existir
+            readings = hrv_raw.get("hrv5MinReadings") or hrv_raw.get("hrvReadings") or []
+            if readings:
+                vals = [r.get("hrvValue") or r.get("value") for r in readings if r]
+                vals = [v for v in vals if v]
+                s["hrv"] = round(sum(vals)/len(vals), 1) if vals else None
+        print(f"  HRV extraído: {s['hrv']} ({s['hrv_status']})")
+    except Exception as e:
+        print(f"  [HRV ERROR] {e}")
+        s["hrv"] = s["hrv_status"] = None
 
+    # === SONO ===
     try:
         sono = api.get_sleep_data(TODAY_STR)
         d = sono.get("dailySleepDTO", {})
@@ -129,32 +136,53 @@ def coletar_dados():
         s["sono_score"]  = d.get("sleepScores", {}).get("overall", {}).get("value")
         s["sono_deep_h"] = round((d.get("deepSleepSeconds") or 0) / 3600, 1)
         s["sono_rem_h"]  = round((d.get("remSleepSeconds") or 0) / 3600, 1)
-    except: s["sono_h"] = s["sono_score"] = s["sono_deep_h"] = s["sono_rem_h"] = None
+        print(f"  Sono: {s['sono_h']}h score={s['sono_score']}")
+    except Exception as e:
+        print(f"  [SONO ERROR] {e}")
+        s["sono_h"] = s["sono_score"] = s["sono_deep_h"] = s["sono_rem_h"] = None
 
+    # === BODY BATTERY ===
     try:
         bb = api.get_body_battery(TODAY_STR, TODAY_STR)
         vals = [x.get("charged") for x in (bb or []) if x.get("charged") is not None]
         s["readiness"] = max(vals) if vals else None
-    except: s["readiness"] = None
+        print(f"  Readiness: {s['readiness']}")
+    except Exception as e:
+        print(f"  [READINESS ERROR] {e}")
+        s["readiness"] = None
 
+    # === TRAINING STATUS / ACWR ===
     try:
         ts = api.get_training_status(TODAY_STR)
         lb = ts.get("trainingLoadBalance", {})
-        s["acwr"]            = round(lb.get("acuteChronicWorkloadRatio") or 0, 2) or None
-        s["training_status"] = ts.get("trainingStatus", {}).get("trainingStatus", "")
+        s["acwr"]               = round(lb.get("acuteChronicWorkloadRatio") or 0, 2) or None
+        s["training_status"]    = ts.get("trainingStatus", {}).get("trainingStatus", "")
         s["training_readiness"] = ts.get("trainingReadiness", {}).get("score")
-    except: s["acwr"] = s["training_status"] = s["training_readiness"] = None
+        print(f"  ACWR: {s['acwr']}")
+    except Exception as e:
+        print(f"  [ACWR ERROR] {e}")
+        s["acwr"] = s["training_status"] = s["training_readiness"] = None
 
+    # === VO2MAX ===
     try:
         perf = api.get_max_metrics(TODAY_STR)
-        for item in perf:
-            v = item.get("generic", {}).get("vo2MaxPreciseValue") or \
-                item.get("cycling", {}).get("vo2MaxPreciseValue")
-            if v:
-                s["vo2max"] = v
-                break
-        else: s["vo2max"] = None
-    except: s["vo2max"] = None
+        print("  [DEBUG VO2 raw]:", json.dumps(perf, default=str)[:600])
+        s["vo2max"] = None
+        for item in (perf or []):
+            # Tenta todas as chaves conhecidas
+            for sub in ["generic", "cycling", "running"]:
+                node = item.get(sub, {}) if isinstance(item, dict) else {}
+                for key in ["vo2MaxPreciseValue", "vo2Max", "vo2MaxValue"]:
+                    v = node.get(key)
+                    if v:
+                        s["vo2max"] = v
+                        break
+                if s["vo2max"]: break
+            if s["vo2max"]: break
+        print(f"  VO2max extraído: {s['vo2max']}")
+    except Exception as e:
+        print(f"  [VO2MAX ERROR] {e}")
+        s["vo2max"] = None
 
     try:
         pesos = api.get_weigh_ins(TODAY_STR, TODAY_STR)
@@ -246,33 +274,26 @@ def coletar_dados():
 
     # === CALENDÁRIO DE HOJE ===
     try:
-        # get_workout_schedule retorna lista de workouts do calendário para a semana
         cal = api.get_workout_schedule(TODAY_STR)
         for w in (cal or []):
-            # Cada item pode ter estrutura ligeiramente diferente por versão da lib
-            nome_w    = (w.get("workoutName") or w.get("title") or w.get("description") or "Treino")
-            tipo_raw  = (w.get("sportType") or w.get("activityType") or "")
-            if isinstance(tipo_raw, dict):
-                tipo_w = (tipo_raw.get("sportTypeKey") or tipo_raw.get("typeKey") or "").lower()
-            else:
-                tipo_w = str(tipo_raw).lower()
+            nome_w  = w.get("workoutName") or w.get("description") or "Treino"
+            tipo_w  = (w.get("sportType", {}).get("sportTypeKey") or "").lower()
+            duracao_w = w.get("estimatedDurationInSecs")
+            dist_w    = w.get("estimatedDistanceInMeters")
 
-            duracao_w = w.get("estimatedDurationInSecs") or w.get("duration")
-            dist_w    = w.get("estimatedDistanceInMeters") or w.get("distance")
-
-            if "swim" in tipo_w:                          icone_w = "🏊"
-            elif "cycl" in tipo_w or "bike" in tipo_w:   icone_w = "🚴"
-            elif "run" in tipo_w:                         icone_w = "🏃"
-            else:                                          icone_w = "⚡"
+            if "swim" in tipo_w: icone_w = "🏊"
+            elif "cycling" in tipo_w or "bike" in tipo_w: icone_w = "🚴"
+            elif "running" in tipo_w or "run" in tipo_w: icone_w = "🏃"
+            else: icone_w = "⚡"
 
             dados["calendario_hoje"].append({
-                "icone":    icone_w,
-                "nome":     nome_w,
-                "tipo":     tipo_w,
-                "duracao":  segundos_para_tempo(duracao_w),
-                "distancia":metros_para_dist(dist_w),
+                "icone": icone_w,
+                "nome": nome_w,
+                "tipo": tipo_w,
+                "duracao": segundos_para_tempo(duracao_w),
+                "distancia": metros_para_dist(dist_w),
                 "_duracao_s": duracao_w,
-                "_dist_m":    dist_w,
+                "_dist_m": dist_w,
             })
     except:
         traceback.print_exc()
@@ -317,6 +338,7 @@ TREINO AGENDADO PARA HOJE NO CALENDÁRIO GARMIN:{cal_txt}
 
 Responda em JSON com exatamente estas chaves (sem markdown, sem texto fora do JSON):
 {{
+  "frase_motivacional": "1 frase motivacional curta e poderosa para triatleta 70.3, personalizada para o estado atual. Máximo 15 palavras. Em português. Sem clichês.",
   "resumo_ontem": "2-3 frases analisando os treinos de ontem: qualidade, execução, pontos positivos e de atenção por modalidade",
   "analise_recuperacao": "1-2 frases sobre o estado de recuperação atual baseado nos dados fisiológicos",
   "validacao_treino_hoje": "🟢 IDEAL / 🟡 AJUSTAR / 🔴 SUBSTITUIR — seguido de 1-2 frases explicando se o treino agendado é adequado para o estado atual",
@@ -348,25 +370,16 @@ Responda em JSON com exatamente estas chaves (sem markdown, sem texto fora do JS
     except urllib.error.HTTPError as e:
         body = e.read().decode()
         print(f"Anthropic API error {e.code}: {body}")
-        return {
-            "resumo_ontem": f"Erro ao consultar IA (HTTP {e.code}). Verifique o secret ANTHROPIC_API_KEY no GitHub.",
-            "analise_recuperacao": "—", "validacao_treino_hoje": "—",
-            "sugestao_ajuste": "—", "foco_tecnico": "—", "alerta": None
-        }
+        return {"frase_motivacional": "Foco no processo.", "resumo_ontem": f"Erro IA (HTTP {e.code}). Verifique ANTHROPIC_API_KEY.",
+                "analise_recuperacao": "—", "validacao_treino_hoje": "—", "sugestao_ajuste": "—", "foco_tecnico": "—", "alerta": None}
 
-    raw = result["content"][0]["text"].strip()
-    # Remove blocos markdown caso o modelo os inclua
-    raw = raw.replace("```json", "").replace("```", "").strip()
-
+    raw = result["content"][0]["text"].strip().replace("```json","").replace("```","").strip()
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
-        print(f"JSON inválido da IA: {raw[:200]}")
-        return {
-            "resumo_ontem": raw[:400],
-            "analise_recuperacao": "—", "validacao_treino_hoje": "—",
-            "sugestao_ajuste": "—", "foco_tecnico": "—", "alerta": None
-        }
+        print(f"JSON inválido: {raw[:200]}")
+        return {"frase_motivacional": "Foco no processo.", "resumo_ontem": raw[:400],
+                "analise_recuperacao": "—", "validacao_treino_hoje": "—", "sugestao_ajuste": "—", "foco_tecnico": "—", "alerta": None}
 
 # ─── HTML do e-mail ───────────────────────────────────────────────────────────
 
