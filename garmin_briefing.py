@@ -315,14 +315,21 @@ def coletar_dados():
             except Exception as em:
                 print(f"  {name} falhou: {em}")
         for w in (cal or []):
-            nome_w  = w.get("workoutName") or w.get("description") or "Treino"
-            tipo_w  = (w.get("sportType", {}).get("sportTypeKey") or "").lower()
-            duracao_w = w.get("estimatedDurationInSecs")
-            dist_w    = w.get("estimatedDistanceInMeters")
+            # Alguns métodos retornam strings simples, outros retornam dicts
+            if isinstance(w, str):
+                nome_w = w; tipo_w = ""; duracao_w = None; dist_w = None
+            elif isinstance(w, dict):
+                nome_w    = w.get("workoutName") or w.get("title") or w.get("description") or "Treino"
+                tipo_raw  = w.get("sportType") or w.get("activityType") or w.get("workoutSportType") or ""
+                tipo_w    = (tipo_raw.get("sportTypeKey") or tipo_raw.get("typeKey") or str(tipo_raw)).lower() if isinstance(tipo_raw, dict) else str(tipo_raw).lower()
+                duracao_w = w.get("estimatedDurationInSecs") or w.get("duration")
+                dist_w    = w.get("estimatedDistanceInMeters") or w.get("distance")
+            else:
+                continue
 
-            if "swim" in tipo_w: icone_w = "🏊"
-            elif "cycling" in tipo_w or "bike" in tipo_w: icone_w = "🚴"
-            elif "running" in tipo_w or "run" in tipo_w: icone_w = "🏃"
+            if "swim" in tipo_w or "natac" in nome_w.lower():    icone_w = "🏊"
+            elif "cycl" in tipo_w or "bike" in nome_w.lower():   icone_w = "🚴"
+            elif "run" in tipo_w or "corrida" in nome_w.lower(): icone_w = "🏃"
             else: icone_w = "⚡"
 
             dados["calendario_hoje"].append({
