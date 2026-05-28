@@ -73,31 +73,31 @@ def semaforo_emoji(valor, baixo, alto, inverso=False):
 # ─── Coleta Garmin ────────────────────────────────────────────────────────────
 
 def garmin_login():
-    import pickle
-    if SESSION_FILE.exists():
-        try:
-            with open(SESSION_FILE, "rb") as f:
-                sd = pickle.load(f)
-            api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
-            api.sess.cookies.update(sd.get("cookies", {}))
-            if sd.get("headers"):
-                api.sess.headers.update(sd["headers"])
-            api.get_full_name()
-            print("  Sessão restaurada do cache.")
-            return api
-        except Exception as e:
-            print(f"  Cache expirado ({e}), novo login...")
-            SESSION_FILE.unlink(missing_ok=True)
-    api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
-    api.login()
+    """Login usando garth (novo padrão da lib) com cache de sessão."""
+    import os
+    cache_dir = "/tmp/garmin_cache"
+    os.makedirs(cache_dir, exist_ok=True)
     try:
-        sd = {"cookies": dict(api.sess.cookies), "headers": dict(api.sess.headers)}
-        with open(SESSION_FILE, "wb") as f:
-            pickle.dump(sd, f)
-        print("  Login realizado, sessão salva.")
+        api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
+        api.login(tokenstore=cache_dir)
+        print("  Sessão restaurada do cache.")
+        return api
+    except Exception:
+        pass
+    try:
+        api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
+        api.login()
+        try:
+            api.garth.dump(cache_dir)
+            print("  Login novo, sessão salva via garth.")
+        except Exception as e:
+            print(f"  Login novo (sem cache garth: {e})")
+        return api
     except Exception as e:
-        print(f"  Aviso: não salvou cache ({e})")
-    return api
+        print(f"  Login sem cache: {e}")
+        api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
+        api.login()
+        return api
 
 def coletar_dados():
     api = garmin_login()
@@ -165,21 +165,36 @@ def coletar_dados():
 
     # === VO2MAX ===
     try:
-        perf = api.get_max_metrics(TODAY_STR)
-        print("  [DEBUG VO2 raw]:", json.dumps(perf, default=str)[:600])
         s["vo2max"] = None
-        for item in (perf or []):
-            # Tenta todas as chaves conhecidas
-            for sub in ["generic", "cycling", "running"]:
-                node = item.get(sub, {}) if isinstance(item, dict) else {}
-                for key in ["vo2MaxPreciseValue", "vo2Max", "vo2MaxValue"]:
-                    v = node.get(key)
-                    if v:
-                        s["vo2max"] = v
-                        break
+        # Método 1: get_max_metrics
+        try:
+            perf = api.get_max_metrics(TODAY_STR)
+            for item in (perf or []):
+                for sub in ["generic", "cycling", "running"]:
+                    node = item.get(sub, {}) if isinstance(item, dict) else {}
+                    for key in ["vo2MaxPreciseValue", "vo2Max", "vo2MaxValue"]:
+                        v = node.get(key)
+                        if v: s["vo2max"] = v; break
+                    if s["vo2max"]: break
                 if s["vo2max"]: break
-            if s["vo2max"]: break
-        print(f"  VO2max extraído: {s['vo2max']}")
+        except Exception: pass
+        # Método 2: get_training_status contém vo2max em alguns dispositivos
+        if not s["vo2max"]:
+            try:
+                ts2 = api.get_training_status(TODAY_STR)
+                s["vo2max"] = (ts2.get("vo2Max")
+                               or ts2.get("vo2MaxValue")
+                               or ts2.get("latestVo2Max"))
+            except Exception: pass
+        # Método 3: get_performance_metrics (Garmin Connect API alternativa)
+        if not s["vo2max"]:
+            try:
+                pm = api.get_performance_metrics(TODAY_STR)
+                s["vo2max"] = (pm.get("vo2Max")
+                               or pm.get("currentVo2Max")
+                               or pm.get("vo2MaxPreciseValue"))
+            except Exception: pass
+        print(f"  VO2max: {s['vo2max']}")
     except Exception as e:
         print(f"  [VO2MAX ERROR] {e}")
         s["vo2max"] = None
@@ -274,7 +289,17 @@ def coletar_dados():
 
     # === CALENDÁRIO DE HOJE ===
     try:
-        cal = api.get_workout_schedule(TODAY_STR)
+        # Tenta métodos alternativos para o calendário
+        cal = None
+        for method_name in ["get_workout_schedule", "get_scheduled_workouts", "get_calendar_items"]:
+            method = getattr(api, method_name, None)
+            if method:
+                try:
+                    cal = method(TODAY_STR)
+                    print(f"  Calendário via {method_name}: {len(cal or [])} item(s)")
+                    break
+                except Exception as em:
+                    print(f"  {method_name} falhou: {em}")
         for w in (cal or []):
             nome_w  = w.get("workoutName") or w.get("description") or "Treino"
             tipo_w  = (w.get("sportType", {}).get("sportTypeKey") or "").lower()
@@ -383,225 +408,125 @@ Responda em JSON com exatamente estas chaves (sem markdown, sem texto fora do JS
 
 # ─── HTML do e-mail ───────────────────────────────────────────────────────────
 
+def _sem_colors(v, lo, hi):
+    e = semaforo_emoji(v, lo, hi)
+    if e == "\U0001f7e2": return e, "#00C896", "#003a28"
+    if e == "\U0001f7e1": return e, "#FFB800", "#3a2a00"
+    if e == "\U0001f534": return e, "#FF4444", "#3a0000"
+    return e, "#1c1c1c", "#555"
+
 def gerar_html(dados, insights):
     s  = dados["saude"]
     tr = dados["treinos_ontem"]
     ca = dados["calendario_hoje"]
 
-    dias_pt = {"Monday":"Segunda","Tuesday":"Terça","Wednesday":"Quarta",
-               "Thursday":"Quinta","Friday":"Sexta","Saturday":"Sábado","Sunday":"Domingo"}
-    dia_str = f"{dias_pt.get(TODAY.strftime('%A'), TODAY.strftime('%A'))}, {TODAY.strftime('%d/%m/%Y')}"
+    dias_pt = {"Monday":"Segunda","Tuesday":"Tera","Wednesday":"Quarta",
+               "Thursday":"Quinta","Friday":"Sexta","Saturday":"Sabado","Sunday":"Domingo"}
+    dia_str = dias_pt.get(TODAY.strftime("%A"), TODAY.strftime("%A")) + ", " + TODAY.strftime("%d/%m/%Y")
 
-    # Semáforos
-    s_ready = semaforo_emoji(s.get("readiness"), 40, 70)
-    s_sono  = semaforo_emoji(s.get("sono_score"), 60, 80)
-    s_hrv   = semaforo_emoji(s.get("hrv"), 40, 60)
-    acwr    = s.get("acwr")
-    if acwr is None:           s_acwr = "⚪"
-    elif acwr > 1.5:           s_acwr = "🔴"
-    elif 0.8 <= acwr <= 1.3:   s_acwr = "🟢"
-    else:                      s_acwr = "🟡"
+    r_em, r_bg, r_dk = _sem_colors(s.get("readiness"), 40, 70)
+    h_em, h_bg, h_dk = _sem_colors(s.get("hrv"), 40, 60)
+    sn_em, sn_bg, sn_dk = _sem_colors(s.get("sono_score"), 60, 80)
+    acwr = s.get("acwr")
+    if acwr is None:          a_em,a_bg,a_dk = "\u26aa","#1c1c1c","#555"
+    elif acwr > 1.5:          a_em,a_bg,a_dk = "\U0001f534","#FF4444","#3a0000"
+    elif 0.8 <= acwr <= 1.3:  a_em,a_bg,a_dk = "\U0001f7e2","#00C896","#003a28"
+    else:                     a_em,a_bg,a_dk = "\U0001f7e1","#FFB800","#3a2a00"
 
-    # Treinos de ontem
-    treinos_html = ""
-    for t in tr:
-        pot_html = f"<span class='tag'>⚡ {t['potencia']}W</span>" if t['potencia'] else ""
-        tss_html = f"<span class='tag'>TSS {t['tss']}</span>" if t['tss'] else ""
-        treinos_html += f"""
-        <div class='treino-card'>
-          <div class='treino-header'>
-            <span class='treino-icon'>{t['icone']}</span>
-            <span class='treino-titulo'>{t['nome']}</span>
-          </div>
-          <div class='treino-stats'>
-            <div class='tstat'><div class='tstat-v'>{t['distancia']}</div><div class='tstat-l'>Distância</div></div>
-            <div class='tstat'><div class='tstat-v'>{t['duracao']}</div><div class='tstat-l'>Duração</div></div>
-            <div class='tstat'><div class='tstat-v'>{fmt(t['fc_media'], 0)} bpm</div><div class='tstat-l'>FC Média</div></div>
-            <div class='tstat'><div class='tstat-v'>{t['perf_valor']}</div><div class='tstat-l'>{t['perf_label']}</div></div>
-          </div>
-          <div class='treino-tags'>{pot_html}{tss_html}<span class='tag'>🔥 {fmt(t['calorias'],0)} kcal</span></div>
-        </div>"""
+    frase = insights.get("frase_motivacional", "Cada treino e um tijolo na sua melhor versao.")
 
-    if not treinos_html:
-        treinos_html = "<p style='color:#555;font-size:13px;padding:12px 0'>Nenhum treino registrado ontem.</p>"
+    def D(st, c): return '<div style="'+st+'">'+c+'</div>'
+    def S(st, c): return '<span style="'+st+'">'+c+'</span>'
 
-    # Calendário de hoje
-    cal_html = ""
-    for c in ca:
-        cal_html += f"""
-        <div class='cal-card'>
-          <span class='cal-icon'>{c['icone']}</span>
-          <div class='cal-info'>
-            <div class='cal-nome'>{c['nome']}</div>
-            <div class='cal-sub'>{c['duracao']} · {c['distancia']}</div>
-          </div>
-        </div>"""
-    if not cal_html:
-        cal_html = "<p style='color:#555;font-size:13px;padding:8px 0'>Nenhum treino agendado para hoje.</p>"
+    def sembox(em, bg, dk, label):
+        return D("background:"+bg+";border-radius:8px;padding:13px 4px;text-align:center",
+            S("font-size:20px;display:block", em) +
+            S("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:"+dk+";display:block;margin-top:5px", label))
 
-    # Alerta
+    def mcard(icon, label, val, sub, has):
+        bc = "#1a6fff" if has else "#242424"
+        vc = "#ffffff" if has else "#333"
+        return D("background:#181818;border-radius:8px;padding:13px 11px;border-left:3px solid "+bc,
+            S("font-size:13px", icon) +
+            D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin:4px 0 2px", label) +
+            D("font-size:19px;font-weight:700;color:"+vc+";line-height:1", val) +
+            D("font-size:10px;color:#444;margin-top:2px", sub))
+
+    def tcard(t):
+        tags = ""
+        if t["potencia"]: tags += S("background:#1e1e1e;border:1px solid #2a2a2a;border-radius:3px;padding:2px 7px;font-size:10px;color:#555;margin-right:4px", "&#9889; "+str(t["potencia"])+"W")
+        if t["tss"]:      tags += S("background:#1e1e1e;border:1px solid #2a2a2a;border-radius:3px;padding:2px 7px;font-size:10px;color:#555;margin-right:4px", "TSS "+str(t["tss"]))
+        tags += S("background:#1e1e1e;border:1px solid #2a2a2a;border-radius:3px;padding:2px 7px;font-size:10px;color:#555;margin-right:4px", "&#128293; "+fmt(t["calorias"],0)+" kcal")
+        stats = "".join(D("",D("font-size:14px;font-weight:700;color:#fff;line-height:1",v)+D("font-size:8px;text-transform:uppercase;letter-spacing:.07em;color:#444;margin-top:2px",l)) for v,l in [(t["distancia"],"Distancia"),(t["duracao"],"Duracao"),(fmt(t["fc_media"],0)+" bpm","FC Media"),(t["perf_valor"],t["perf_label"])])
+        return D("background:#181818;border-radius:8px;padding:14px;margin-bottom:8px;border-top:2px solid #1a6fff",
+            D("display:flex;align-items:center;gap:8px;margin-bottom:10px", S("font-size:9px;font-weight:700;letter-spacing:.1em;background:#1a6fff;color:#fff;padding:3px 7px;border-radius:3px",t["icone"]+" "+t["modalidade"].upper())+S("font-size:12px;color:#555",t["nome"]))+
+            D("display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px",stats)+
+            D("display:flex;flex-wrap:wrap;gap:4px",tags))
+
+    def ccard(c):
+        return D("display:flex;align-items:center;gap:12px;background:#181818;border-radius:8px;padding:13px;margin-bottom:7px;border-left:3px solid #00C896",
+            S("font-size:20px;min-width:28px;text-align:center",c["icone"])+D("",D("font-size:13px;font-weight:600;color:#fff",c["nome"])+D("font-size:11px;color:#444;margin-top:2px",c["duracao"]+" - "+c["distancia"])))
+
+    def ia(label, text, bg="#07111f", bc="#1a6fff", lc="#1a6fff", tc="#7a9bbf"):
+        return D("background:"+bg+";border-left:3px solid "+bc+";border-radius:8px;padding:13px 15px;margin-bottom:7px",
+            D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:"+lc+";margin-bottom:5px",label)+
+            D("font-size:13px;color:"+tc+";line-height:1.6",str(text)))
+
+    treinos_html = "".join(tcard(t) for t in tr) if tr else D("color:#444;font-size:13px;padding:10px 0","Nenhum treino registrado ontem.")
+    cal_html = "".join(ccard(c) for c in ca) if ca else D("color:#444;font-size:13px","Nenhum treino agendado.")
+
     alerta_html = ""
     if insights.get("alerta"):
-        alerta_html = f"""
-        <div class='alerta-box'>
-          <span style='font-size:18px'>⚠️</span>
-          <div>{insights['alerta']}</div>
-        </div>"""
+        alerta_html = D("background:#110000;border-left:3px solid #FF4444;border-radius:8px;padding:13px 15px;font-size:13px;color:#cc5555;line-height:1.5;margin-bottom:8px","&#9888;&#65039; "+str(insights["alerta"]))
 
-    # Previsões
     prev_html = ""
     if s.get("previsoes"):
-        itens = "".join(
-            f"<div class='prev-item'><div class='prev-d'>{k}</div><div class='prev-t'>{segundos_para_tempo(v)}</div></div>"
-            for k, v in s["previsoes"].items()
-        )
-        prev_html = f"""
-        <div class='section-label'>🏁 Previsão de Prova</div>
-        <div class='prev-grid'>{itens}</div>"""
+        pitems = "".join(D("background:#181818;border-radius:7px;padding:10px 6px;text-align:center",D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444",k)+D("font-size:15px;font-weight:700;color:#fff;margin-top:4px",segundos_para_tempo(v))) for k,v in s["previsoes"].items())
+        prev_html = D("font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:10px;margin-top:22px","&#127937; Previsao de Prova")+D("display:grid;grid-template-columns:repeat(4,1fr);gap:6px",pitems)
 
-    html = f"""<!DOCTYPE html>
-<html lang='pt-BR'>
-<head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600;700&display=swap');
-  *{{box-sizing:border-box;margin:0;padding:0}}
-  body{{font-family:'DM Sans',sans-serif;background:#080c10;color:#d4dce8;-webkit-font-smoothing:antialiased}}
-  .wrap{{max-width:560px;margin:24px auto;background:#0d1117;border-radius:20px;overflow:hidden;border:1px solid #1c2330}}
-  .header{{background:linear-gradient(135deg,#0a1628 0%,#0d2240 40%,#0a1e35 100%);padding:28px 28px 22px;border-bottom:1px solid #1c2330;position:relative;overflow:hidden}}
-  .header::before{{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(0,150,255,.12) 0%,transparent 70%);border-radius:50%}}
-  .header-top{{display:flex;align-items:center;gap:12px;margin-bottom:8px}}
-  .header-badge{{background:rgba(0,150,255,.15);border:1px solid rgba(0,150,255,.3);border-radius:8px;padding:6px 10px;font-size:11px;font-family:'DM Mono',monospace;color:#60a5fa;letter-spacing:.05em}}
-  .header h1{{font-size:20px;font-weight:700;color:#fff;letter-spacing:-.02em}}
-  .header p{{font-size:12px;color:#4a6080;margin-top:3px;font-family:'DM Mono',monospace}}
-  .body{{padding:24px 28px}}
-  .section-label{{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#3a5070;margin-bottom:12px;margin-top:24px;font-family:'DM Mono',monospace}}
-  .section-label:first-child{{margin-top:0}}
-  /* Semáforos */
-  .sem-row{{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:4px}}
-  .sem{{background:#111827;border:1px solid #1c2330;border-radius:12px;padding:12px 8px;text-align:center}}
-  .sem .em{{font-size:22px}}
-  .sem .lb{{font-size:9px;color:#3a5070;text-transform:uppercase;letter-spacing:.08em;margin-top:5px;font-family:'DM Mono',monospace}}
-  /* Grid saúde */
-  .health-grid{{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}}
-  .hcard{{background:#111827;border:1px solid #1c2330;border-radius:12px;padding:14px}}
-  .hcard .hi{{font-size:16px;margin-bottom:6px}}
-  .hcard .hl{{font-size:9px;color:#3a5070;text-transform:uppercase;letter-spacing:.08em;font-family:'DM Mono',monospace}}
-  .hcard .hv{{font-size:17px;font-weight:700;color:#e8f0fe;margin:3px 0 1px;font-family:'DM Mono',monospace}}
-  .hcard .hs{{font-size:10px;color:#4a6080}}
-  /* Treinos */
-  .treino-card{{background:#111827;border:1px solid #1c2330;border-radius:12px;padding:14px;margin-bottom:8px}}
-  .treino-header{{display:flex;align-items:center;gap:8px;margin-bottom:10px}}
-  .treino-icon{{font-size:18px}}
-  .treino-titulo{{font-size:13px;font-weight:600;color:#c8d8f0}}
-  .treino-stats{{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}}
-  .tstat .tstat-v{{font-size:13px;font-weight:600;color:#e8f0fe;font-family:'DM Mono',monospace}}
-  .tstat .tstat-l{{font-size:9px;color:#3a5070;text-transform:uppercase;letter-spacing:.06em;margin-top:2px}}
-  .treino-tags{{display:flex;gap:6px;flex-wrap:wrap}}
-  .tag{{background:#1c2330;border-radius:6px;padding:3px 8px;font-size:10px;color:#4a7090;font-family:'DM Mono',monospace}}
-  /* Calendário */
-  .cal-card{{background:#0f1923;border:1px solid #1a2a3a;border-left:3px solid #0066cc;border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px}}
-  .cal-icon{{font-size:20px}}
-  .cal-nome{{font-size:13px;font-weight:600;color:#c8d8f0}}
-  .cal-sub{{font-size:11px;color:#4a6080;margin-top:2px;font-family:'DM Mono',monospace}}
-  /* IA Insights */
-  .ia-box{{background:#0a1628;border:1px solid #1a3050;border-radius:14px;padding:18px;margin-bottom:10px}}
-  .ia-label{{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#2a5080;font-family:'DM Mono',monospace;margin-bottom:6px}}
-  .ia-text{{font-size:13px;color:#a0b8d0;line-height:1.6}}
-  .ia-validacao{{background:#0a1e10;border:1px solid #1a4030;border-radius:14px;padding:16px;margin-bottom:10px}}
-  .ia-validacao .ia-text{{font-size:14px;font-weight:500;color:#c8e8d0}}
-  .ia-foco{{background:#1a1000;border:1px solid #3a2800;border-radius:14px;padding:14px;margin-bottom:10px}}
-  .ia-foco .ia-text{{color:#d4b060}}
-  /* Alerta */
-  .alerta-box{{background:#1a0a0a;border:1px solid #5a1a1a;border-radius:12px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;font-size:13px;color:#e07070;line-height:1.5}}
-  /* Previsões */
-  .prev-grid{{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}}
-  .prev-item{{background:#111827;border:1px solid #1c2330;border-radius:10px;padding:10px;text-align:center}}
-  .prev-d{{font-size:9px;color:#3a5070;text-transform:uppercase;letter-spacing:.08em;font-family:'DM Mono',monospace}}
-  .prev-t{{font-size:13px;font-weight:700;color:#e8f0fe;margin-top:4px;font-family:'DM Mono',monospace}}
-  .footer{{text-align:center;padding:16px;font-size:10px;color:#1c2e40;border-top:1px solid #111827;font-family:'DM Mono',monospace}}
-  .divider{{height:1px;background:#111827;margin:20px 0}}
-</style>
-</head>
-<body>
-<div class='wrap'>
-  <div class='header'>
-    <div class='header-top'>
-      <div class='header-badge'>TRIATHLON 70.3</div>
-    </div>
-    <h1>⌚ Briefing Diário</h1>
-    <p>{dia_str}</p>
-  </div>
-  <div class='body'>
+    SL = "font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:10px"
+    DIV = D("height:1px;background:#1e1e1e;margin:18px 0","")
 
-    <!-- SEMÁFOROS -->
-    <div class='section-label'>Status Geral</div>
-    <div class='sem-row'>
-      <div class='sem'><div class='em'>{s_ready}</div><div class='lb'>Readiness</div></div>
-      <div class='sem'><div class='em'>{s_acwr}</div><div class='lb'>Carga</div></div>
-      <div class='sem'><div class='em'>{s_hrv}</div><div class='lb'>HRV</div></div>
-      <div class='sem'><div class='em'>{s_sono}</div><div class='lb'>Sono</div></div>
-    </div>
+    body = (
+        D(SL,"Status Geral")+
+        D("display:grid;grid-template-columns:repeat(4,1fr);gap:6px",sembox(r_em,r_bg,r_dk,"Readiness")+sembox(a_em,a_bg,a_dk,"Carga")+sembox(h_em,h_bg,h_dk,"HRV")+sembox(sn_em,sn_bg,sn_dk,"Sono"))+
+        D(SL+";margin-top:22px","Dados Fisiologicos")+
+        D("display:grid;grid-template-columns:repeat(3,1fr);gap:6px",
+            mcard("&#128164;","Sono",fmt(s.get("sono_h"))+"h","Score "+fmt(s.get("sono_score"),0)+" - Deep "+fmt(s.get("sono_deep_h"))+"h",bool(s.get("sono_h")))+
+            mcard("&#10084;&#65039;","HRV",fmt(s.get("hrv"),0)+" ms",(s.get("hrv_status") or "-").capitalize(),bool(s.get("hrv")))+
+            mcard("&#128267;","Readiness",fmt(s.get("readiness"),0),"Body Battery",bool(s.get("readiness")))+
+            mcard("&#128200;","ACWR",fmt(s.get("acwr"),2),"Ideal 0.8-1.3",bool(s.get("acwr")))+
+            mcard("&#129755;","VO2max",fmt(s.get("vo2max"),1),"ml/kg/min",bool(s.get("vo2max")))+
+            mcard("&#9878;&#65039;","Peso",fmt(s.get("peso"))+" kg",TODAY.strftime("%d/%m"),bool(s.get("peso"))))+
+        DIV+
+        D(SL,"Treinos de Ontem")+treinos_html+
+        ia("&#129302; Analise dos treinos",insights.get("resumo_ontem","--"))+
+        ia("&#128138; Recuperacao atual",insights.get("analise_recuperacao","--"))+
+        DIV+
+        D(SL,"Treino Agendado para Hoje")+cal_html+
+        ia("&#129302; Este treino esta adequado?",insights.get("validacao_treino_hoje","--"),tc="#a8ccf0")+
+        ia("&#128295; Sugestao de ajuste",insights.get("sugestao_ajuste","--"))+
+        ia("&#127919; Foco tecnico de hoje",insights.get("foco_tecnico","--"),bg="#110d00",bc="#FFB800",lc="#FFB800",tc="#c09040")+
+        alerta_html+prev_html
+    )
 
-    <!-- SAÚDE -->
-    <div class='section-label' style='margin-top:20px'>Dados Fisiológicos</div>
-    <div class='health-grid'>
-      <div class='hcard'><div class='hi'>💤</div><div class='hl'>Sono</div><div class='hv'>{fmt(s.get('sono_h'))}h</div><div class='hs'>Score {fmt(s.get('sono_score'),0)} · Deep {fmt(s.get('sono_deep_h'))}h</div></div>
-      <div class='hcard'><div class='hi'>❤️</div><div class='hl'>HRV</div><div class='hv'>{fmt(s.get('hrv'),0)}ms</div><div class='hs'>{(s.get('hrv_status') or '—').capitalize()}</div></div>
-      <div class='hcard'><div class='hi'>🔋</div><div class='hl'>Readiness</div><div class='hv'>{fmt(s.get('readiness'),0)}</div><div class='hs'>Body Battery</div></div>
-      <div class='hcard'><div class='hi'>📈</div><div class='hl'>ACWR</div><div class='hv'>{fmt(s.get('acwr'),2)}</div><div class='hs'>Ideal 0.8–1.3</div></div>
-      <div class='hcard'><div class='hi'>🫁</div><div class='hl'>VO₂max</div><div class='hv'>{fmt(s.get('vo2max'),1)}</div><div class='hs'>ml/kg/min</div></div>
-      <div class='hcard'><div class='hi'>⚖️</div><div class='hl'>Peso</div><div class='hv'>{fmt(s.get('peso'))}kg</div><div class='hs'>{TODAY.strftime('%d/%m')}</div></div>
-    </div>
+    return (
+        "<!DOCTYPE html><html lang='pt-BR'><head><meta charset='UTF-8'>"
+        "<meta name='viewport' content='width=device-width,initial-scale=1'></head>"
+        "<body style='font-family:Arial,Helvetica,sans-serif;background:#050505;color:#e0e0e0;margin:0;padding:0'>"
+        "<div style='max-width:560px;margin:20px auto;background:#0f0f0f;border-radius:14px;overflow:hidden;border:1px solid #222'>"
+        "<div style='background:#000;border-bottom:3px solid #1a6fff'>"
+        "<div style='padding:18px 24px 0;display:flex;justify-content:space-between;align-items:center'>"
+        "<span style='font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#fff;background:#1a6fff;padding:4px 10px;border-radius:4px'>&#8987; Triathlon 70.3</span>"
+        "<span style='font-size:11px;color:#444'>"+dia_str+"</span>"
+        "</div>"
+        "<div style='padding:16px 24px 20px;font-size:22px;font-weight:700;line-height:1.25;color:#fff'>"+frase+"</div>"
+        "</div>"
+        "<div style='padding:22px 24px 28px'>"+body+"</div>"
+        "<div style='background:#000;text-align:center;padding:12px;font-size:9px;color:#2a2a2a;letter-spacing:.1em;text-transform:uppercase'>Gerado por IA - Garmin Connect - "+TODAY_STR+"</div>"
+        "</div></body></html>"
+    )
 
-    <div class='divider'></div>
-
-    <!-- TREINOS ONTEM -->
-    <div class='section-label'>Treinos de Ontem</div>
-    {treinos_html}
-
-    <!-- IA: ANÁLISE ONTEM -->
-    <div class='ia-box'>
-      <div class='ia-label'>🤖 Análise IA — Execução dos treinos</div>
-      <div class='ia-text'>{insights.get('resumo_ontem','—')}</div>
-    </div>
-
-    <div class='ia-box' style='margin-top:0'>
-      <div class='ia-label'>💊 Análise IA — Recuperação atual</div>
-      <div class='ia-text'>{insights.get('analise_recuperacao','—')}</div>
-    </div>
-
-    <div class='divider'></div>
-
-    <!-- CALENDÁRIO HOJE -->
-    <div class='section-label'>Treino Agendado para Hoje</div>
-    {cal_html}
-
-    <!-- IA: VALIDAÇÃO -->
-    <div class='ia-validacao'>
-      <div class='ia-label'>🤖 IA — Este treino está adequado?</div>
-      <div class='ia-text'>{insights.get('validacao_treino_hoje','—')}</div>
-    </div>
-
-    <div class='ia-box' style='margin-top:0'>
-      <div class='ia-label'>🔧 Sugestão de ajuste</div>
-      <div class='ia-text'>{insights.get('sugestao_ajuste','—')}</div>
-    </div>
-
-    <div class='ia-foco'>
-      <div class='ia-label'>🎯 Foco técnico de hoje</div>
-      <div class='ia-text'>{insights.get('foco_tecnico','—')}</div>
-    </div>
-
-    {alerta_html}
-
-    {prev_html}
-
-  </div>
-  <div class='footer'>Gerado por IA · Garmin Connect · {TODAY_STR}</div>
-</div>
-</body></html>"""
-
-    return html
 
 # ─── Envio SendGrid ───────────────────────────────────────────────────────────
 
