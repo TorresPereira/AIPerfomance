@@ -2,8 +2,9 @@ name: Triathlon Daily Briefing
 
 on:
   schedule:
-    # 6h horário de Brasília = 9h UTC (BRT = UTC-3)
-    - cron: '0 9 * * *'
+    # 08:00 horário da Alemanha (CEST = UTC+2, verão)
+    # Em horário de inverno (CET = UTC+1) chegará às 07:00 local
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -23,29 +24,12 @@ jobs:
       - name: Instalar dependências
         run: pip install "garminconnect>=0.2.22"
 
-      # Cache de sessão Garmin — evita 429 por login repetido
       - name: Restaurar sessão Garmin
         uses: actions/cache@v4
         with:
-          path: /tmp/garmin_session.pkl
-          key: garmin-session-v1
-          restore-keys: garmin-session-v1
-
-      # ── DIAGNÓSTICO: remova este step depois que funcionar ──
-      - name: Testar chave Anthropic
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          echo "Tamanho da chave: ${#ANTHROPIC_API_KEY} chars"
-          echo "Prefixo: ${ANTHROPIC_API_KEY:0:7}..."
-          HTTP=$(curl -s -o /tmp/resp.json -w "%{http_code}" \
-            https://api.anthropic.com/v1/messages \
-            -H "x-api-key: $ANTHROPIC_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "content-type: application/json" \
-            -d '{"model":"claude-haiku-4-5-20251001","max_tokens":10,"messages":[{"role":"user","content":"oi"}]}')
-          echo "HTTP status: $HTTP"
-          cat /tmp/resp.json
+          path: /tmp/garmin_cache
+          key: garmin-session-v2
+          restore-keys: garmin-session-v2
 
       - name: Rodar briefing
         env:
