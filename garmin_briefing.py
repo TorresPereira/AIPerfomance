@@ -287,50 +287,50 @@ def coletar_dados():
     except:
         traceback.print_exc()
 
-    # === CALENDÁRIO DE HOJE ===
+    # === CALENDÁRIO DE AMANHÃ ===
     try:
-        # Tenta métodos alternativos para o calendário
-        cal = None
-        year, month = TODAY.year, TODAY.month
-        attempts = [
-            ("get_workout_schedule",    lambda: api.get_workout_schedule(TODAY_STR)),
-            ("get_scheduled_workouts",  lambda: api.get_scheduled_workouts(year, month)),
-            ("get_garmin_workouts",     lambda: api.get_garmin_workouts()),
-            ("get_calendar_items",      lambda: api.get_calendar_items(TODAY_STR, TODAY_STR)),
-        ]
-        for name, fn in attempts:
-            try:
-                result = fn()
-                # Filtra apenas treinos de hoje se retornou lista maior
-                if isinstance(result, list):
-                    today_items = [w for w in result if
-                        (w.get("scheduledDate") or w.get("date") or w.get("calendarDate") or "") == TODAY_STR
-                        or len(result) <= 5  # se poucos itens assume que são de hoje
-                    ]
-                    cal = today_items if today_items else result
-                else:
-                    cal = result
-                print(f"  Calendário via {name}: {len(cal or [])} item(s)")
-                break
-            except Exception as em:
-                print(f"  {name} falhou: {em}")
-        for w in (cal or []):
-            # Alguns métodos retornam strings simples, outros retornam dicts
-            if isinstance(w, str):
-                nome_w = w; tipo_w = ""; duracao_w = None; dist_w = None
-            elif isinstance(w, dict):
-                nome_w    = w.get("workoutName") or w.get("title") or w.get("description") or "Treino"
-                tipo_raw  = w.get("sportType") or w.get("activityType") or w.get("workoutSportType") or ""
-                tipo_w    = (tipo_raw.get("sportTypeKey") or tipo_raw.get("typeKey") or str(tipo_raw)).lower() if isinstance(tipo_raw, dict) else str(tipo_raw).lower()
-                duracao_w = w.get("estimatedDurationInSecs") or w.get("duration")
-                dist_w    = w.get("estimatedDistanceInMeters") or w.get("distance")
-            else:
+        TOMORROW = TODAY + datetime.timedelta(days=1)
+        TOMORROW_STR = TOMORROW.isoformat()
+        year, month = TOMORROW.year, TOMORROW.month
+
+        raw_items = []
+
+        # get_scheduled_workouts retorna dict com chave calendarItems
+        try:
+            result = api.get_scheduled_workouts(year, month)
+            if isinstance(result, dict):
+                raw_items = result.get("calendarItems") or []
+            elif isinstance(result, list):
+                raw_items = result
+            print(f"  Calendário bruto: {len(raw_items)} item(s) no mês")
+        except Exception as em:
+            print(f"  get_scheduled_workouts falhou: {em}")
+
+        # Filtra apenas treinos de amanhã
+        for w in raw_items:
+            if not isinstance(w, dict):
+                continue
+            # Data do item — tenta vários campos
+            item_date = (w.get("date") or w.get("scheduledDate")
+                         or w.get("calendarDate") or w.get("startDate") or "")
+            # Aceita formato YYYY-MM-DD ou DD/MM/YYYY
+            if TOMORROW_STR not in str(item_date) and str(TOMORROW.day) not in str(item_date):
+                continue
+            # Só workouts agendados (não atividades já feitas)
+            item_type = str(w.get("itemType") or w.get("type") or "workout").lower()
+            if "activity" in item_type:
                 continue
 
-            if "swim" in tipo_w or "natac" in nome_w.lower():    icone_w = "🏊"
-            elif "cycl" in tipo_w or "bike" in nome_w.lower():   icone_w = "🚴"
-            elif "run" in tipo_w or "corrida" in nome_w.lower(): icone_w = "🏃"
-            else: icone_w = "⚡"
+            nome_w    = (w.get("title") or w.get("workoutName") or w.get("description") or "Treino")
+            tipo_raw  = w.get("activityType") or w.get("sportType") or w.get("workoutSportType") or ""
+            tipo_w    = (tipo_raw.get("typeKey") or tipo_raw.get("sportTypeKey") or str(tipo_raw)).lower() if isinstance(tipo_raw, dict) else str(tipo_raw).lower()
+            duracao_w = w.get("duration") or w.get("estimatedDurationInSecs")
+            dist_w    = w.get("distance") or w.get("estimatedDistanceInMeters")
+
+            if "swim" in tipo_w or "swim" in nome_w.lower():      icone_w = "🏊"
+            elif "cycl" in tipo_w or "bike" in nome_w.lower():    icone_w = "🚴"
+            elif "run" in tipo_w or "run" in nome_w.lower():      icone_w = "🏃"
+            else:                                                  icone_w = "⚡"
 
             dados["calendario_hoje"].append({
                 "icone": icone_w,
@@ -341,6 +341,7 @@ def coletar_dados():
                 "_duracao_s": duracao_w,
                 "_dist_m": dist_w,
             })
+        print(f"  Treinos amanhã ({TOMORROW_STR}): {len(dados['calendario_hoje'])}")
     except:
         traceback.print_exc()
 
@@ -484,7 +485,7 @@ def gerar_html(dados, insights):
             D("display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px",stats)+
             D("display:flex;flex-wrap:wrap;gap:4px",tags))
 
-    def ccard(c):
+    # tabela de amanha gerada abaixo
         return D("display:flex;align-items:center;gap:12px;background:#181818;border-radius:8px;padding:13px;margin-bottom:7px;border-left:3px solid #00C896",
             S("font-size:20px;min-width:28px;text-align:center",c["icone"])+D("",D("font-size:13px;font-weight:600;color:#fff",c["nome"])+D("font-size:11px;color:#444;margin-top:2px",c["duracao"]+" - "+c["distancia"])))
 
@@ -494,7 +495,26 @@ def gerar_html(dados, insights):
             D("font-size:13px;color:"+tc+";line-height:1.6",str(text)))
 
     treinos_html = "".join(tcard(t) for t in tr) if tr else D("color:#444;font-size:13px;padding:10px 0","Nenhum treino registrado ontem.")
-    cal_html = "".join(ccard(c) for c in ca) if ca else D("color:#444;font-size:13px","Nenhum treino agendado.")
+    if ca:
+        rows = "".join(
+            "<tr>"
+            "<td style='padding:10px 12px;font-size:18px;width:32px'>" + c["icone"] + "</td>"
+            "<td style='padding:10px 12px;font-size:13px;font-weight:600;color:#fff'>" + c["nome"] + "</td>"
+            "<td style='padding:10px 12px;font-size:12px;color:#888;white-space:nowrap;font-family:monospace'>" + c["duracao"] + "</td>"
+            "<td style='padding:10px 12px;font-size:12px;color:#888;white-space:nowrap;font-family:monospace'>" + c["distancia"] + "</td>"
+            "</tr>"
+            for c in ca
+        )
+        cal_html = (
+            "<table style='width:100%;border-collapse:collapse;background:#181818;border-radius:8px;overflow:hidden;border-left:3px solid #00C896'>"
+            "<thead><tr style='border-bottom:1px solid #242424'>"
+            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left' colspan='2'>Treino</th>"
+            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left'>Duracao</th>"
+            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left'>Distancia</th>"
+            "</tr></thead><tbody>" + rows + "</tbody></table>"
+        )
+    else:
+        cal_html = D("color:#444;font-size:13px;padding:10px 0","Nenhum treino agendado para amanha.")
 
     alerta_html = ""
     if insights.get("alerta"):
@@ -524,7 +544,7 @@ def gerar_html(dados, insights):
         ia("&#129302; Analise dos treinos",insights.get("resumo_ontem","--"))+
         ia("&#128138; Recuperacao atual",insights.get("analise_recuperacao","--"))+
         DIV+
-        D(SL,"Treino Agendado para Hoje")+cal_html+
+        D(SL,"Treino Agendado para Amanha")+cal_html+
         ia("&#129302; Este treino esta adequado?",insights.get("validacao_treino_hoje","--"),tc="#a8ccf0")+
         ia("&#128295; Sugestao de ajuste",insights.get("sugestao_ajuste","--"))+
         ia("&#127919; Foco tecnico de hoje",insights.get("foco_tecnico","--"),bg="#110d00",bc="#FFB800",lc="#FFB800",tc="#c09040")+
