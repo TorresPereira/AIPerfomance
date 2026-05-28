@@ -166,34 +166,34 @@ def coletar_dados():
     # === VO2MAX ===
     try:
         s["vo2max"] = None
-        # Método 1: get_max_metrics
-        try:
-            perf = api.get_max_metrics(TODAY_STR)
-            for item in (perf or []):
-                for sub in ["generic", "cycling", "running"]:
-                    node = item.get(sub, {}) if isinstance(item, dict) else {}
-                    for key in ["vo2MaxPreciseValue", "vo2Max", "vo2MaxValue"]:
-                        v = node.get(key)
-                        if v: s["vo2max"] = v; break
-                    if s["vo2max"]: break
-                if s["vo2max"]: break
-        except Exception: pass
-        # Método 2: get_training_status contém vo2max em alguns dispositivos
-        if not s["vo2max"]:
+        def _extract_vo2(obj):
+            if not obj: return None
+            if isinstance(obj, list):
+                for item in obj:
+                    v = _extract_vo2(item)
+                    if v: return v
+                return None
+            if isinstance(obj, dict):
+                for key in ["vo2MaxPreciseValue","vo2Max","vo2MaxValue","currentVo2Max","latestVo2Max"]:
+                    if obj.get(key): return obj[key]
+                for sub in ["generic","cycling","running","swimming"]:
+                    v = _extract_vo2(obj.get(sub))
+                    if v: return v
+            return None
+
+        for attempt in [
+            lambda: api.get_max_metrics(TODAY_STR),
+            lambda: api.get_training_status(TODAY_STR),
+            lambda: api.get_performance_metrics(TODAY_STR),
+            lambda: api.get_user_summary(TODAY_STR),
+            lambda: api.get_stats(TODAY_STR),
+        ]:
+            if s["vo2max"]: break
             try:
-                ts2 = api.get_training_status(TODAY_STR)
-                s["vo2max"] = (ts2.get("vo2Max")
-                               or ts2.get("vo2MaxValue")
-                               or ts2.get("latestVo2Max"))
+                result = attempt()
+                s["vo2max"] = _extract_vo2(result)
             except Exception: pass
-        # Método 3: get_performance_metrics (Garmin Connect API alternativa)
-        if not s["vo2max"]:
-            try:
-                pm = api.get_performance_metrics(TODAY_STR)
-                s["vo2max"] = (pm.get("vo2Max")
-                               or pm.get("currentVo2Max")
-                               or pm.get("vo2MaxPreciseValue"))
-            except Exception: pass
+
         print(f"  VO2max: {s['vo2max']}")
     except Exception as e:
         print(f"  [VO2MAX ERROR] {e}")
@@ -291,15 +291,29 @@ def coletar_dados():
     try:
         # Tenta métodos alternativos para o calendário
         cal = None
-        for method_name in ["get_workout_schedule", "get_scheduled_workouts", "get_calendar_items"]:
-            method = getattr(api, method_name, None)
-            if method:
-                try:
-                    cal = method(TODAY_STR)
-                    print(f"  Calendário via {method_name}: {len(cal or [])} item(s)")
-                    break
-                except Exception as em:
-                    print(f"  {method_name} falhou: {em}")
+        year, month = TODAY.year, TODAY.month
+        attempts = [
+            ("get_workout_schedule",    lambda: api.get_workout_schedule(TODAY_STR)),
+            ("get_scheduled_workouts",  lambda: api.get_scheduled_workouts(year, month)),
+            ("get_garmin_workouts",     lambda: api.get_garmin_workouts()),
+            ("get_calendar_items",      lambda: api.get_calendar_items(TODAY_STR, TODAY_STR)),
+        ]
+        for name, fn in attempts:
+            try:
+                result = fn()
+                # Filtra apenas treinos de hoje se retornou lista maior
+                if isinstance(result, list):
+                    today_items = [w for w in result if
+                        (w.get("scheduledDate") or w.get("date") or w.get("calendarDate") or "") == TODAY_STR
+                        or len(result) <= 5  # se poucos itens assume que são de hoje
+                    ]
+                    cal = today_items if today_items else result
+                else:
+                    cal = result
+                print(f"  Calendário via {name}: {len(cal or [])} item(s)")
+                break
+            except Exception as em:
+                print(f"  {name} falhou: {em}")
         for w in (cal or []):
             nome_w  = w.get("workoutName") or w.get("description") or "Treino"
             tipo_w  = (w.get("sportType", {}).get("sportTypeKey") or "").lower()
