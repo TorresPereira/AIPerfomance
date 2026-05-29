@@ -2,15 +2,19 @@ name: Triathlon Daily Briefing
 
 on:
   schedule:
-    # 08:00 horário da Alemanha (CEST = UTC+2, verão)
-    # Em horário de inverno (CET = UTC+1) chegará às 07:00 local
+    # 08:00 Alemanha verão (CEST = UTC+2) = 06:00 UTC
     - cron: '0 6 * * *'
   workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   briefing:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -31,6 +35,9 @@ jobs:
           key: garmin-session-v2
           restore-keys: garmin-session-v2
 
+      - name: Criar pasta pwa
+        run: mkdir -p pwa
+
       - name: Rodar briefing
         env:
           GARMIN_EMAIL:      ${{ secrets.GARMIN_EMAIL }}
@@ -40,3 +47,11 @@ jobs:
           EMAIL_FROM:        ${{ secrets.EMAIL_FROM }}
           EMAIL_TO:          ${{ secrets.EMAIL_TO }}
         run: python garmin_briefing.py
+
+      # Publica pwa/ no GitHub Pages
+      - name: Deploy PWA → GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./pwa
+          keep_files: true       # mantém ícones e arquivos estáticos entre deploys
