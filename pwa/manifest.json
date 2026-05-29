@@ -1,6 +1,6 @@
 {
-  "name": "Triathlon Coach",
-  "short_name": "Coach",
+  "name": "TP Performance Coach",
+  "short_name": "TP Coach",
   "description": "Briefing diário de triathlon com IA",
   "start_url": ".",
   "display": "standalone",
