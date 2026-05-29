@@ -12,155 +12,414 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <style>
     :root {
-      --blue: #1a6fff;
-      --green: #00C896;
-      --yellow: #FFB800;
-      --red: #FF4444;
-      --bg: #000;
-      --card: #111;
-      --card2: #181818;
-      --border: #222;
-      --text: #e0e0e0;
-      --muted: #555;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bot: env(safe-area-inset-bottom, 0px);
+      --blue:#1a6fff; --green:#00C896; --yellow:#FFB800; --red:#FF4444;
+      --bg:#000; --card:#111; --card2:#181818; --border:#222;
+      --text:#e0e0e0; --muted:#555;
+      --st: env(safe-area-inset-top,0px);
+      --sb: env(safe-area-inset-bottom,0px);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: -apple-system, 'SF Pro Display', Arial, sans-serif; }
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,'SF Pro Display',Arial,sans-serif}
 
-    /* ── Header ── */
-    .header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(0,0,0,.92); backdrop-filter: blur(20px);
-      padding: calc(var(--safe-top) + 12px) 20px 12px;
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
+    /* ── Lock screen ── */
+    #lockScreen{
+      position:fixed;inset:0;z-index:999;
+      background:radial-gradient(ellipse at 50% 30%,#0a1628 0%,#000 70%);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:40px 32px calc(var(--sb)+40px);
+      transition:opacity .4s,transform .4s;
     }
-    .header-left { display: flex; align-items: center; gap: 10px; }
-    .header-badge { background: var(--blue); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 4px 9px; border-radius: 5px; }
-    .header-title { font-size: 17px; font-weight: 700; color: #fff; }
-    .refresh-btn { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 8px; color: var(--muted); font-size: 16px; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; }
-    .refresh-btn:active { background: #2a2a2a; transform: scale(.93); }
-    .refresh-btn.spinning { animation: spin .7s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    #lockScreen.hiding{opacity:0;transform:scale(1.04);pointer-events:none}
+    .lock-icon{font-size:72px;margin-bottom:24px;filter:drop-shadow(0 0 30px #1a6fff88)}
+    .lock-title{font-size:26px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-.02em}
+    .lock-sub{font-size:14px;color:#555;margin-bottom:48px;text-align:center;line-height:1.5}
+    .faceid-btn{
+      width:80px;height:80px;border-radius:22px;
+      background:linear-gradient(135deg,#1a3a6f,#1a6fff);
+      border:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      font-size:36px;
+      box-shadow:0 0 40px #1a6fff44;
+      transition:transform .15s,box-shadow .15s;
+      -webkit-touch-callout:none;
+    }
+    .faceid-btn:active{transform:scale(.92);box-shadow:0 0 20px #1a6fff22}
+    .faceid-btn.pulse{animation:pulse 1.5s ease-in-out infinite}
+    @keyframes pulse{0%,100%{box-shadow:0 0 40px #1a6fff44}50%{box-shadow:0 0 60px #1a6fff88}}
+    .lock-label{margin-top:16px;font-size:12px;color:#444;letter-spacing:.05em;text-transform:uppercase}
+    .lock-error{margin-top:20px;font-size:13px;color:var(--red);text-align:center;min-height:20px}
+    .lock-reset{margin-top:32px;font-size:12px;color:#333;text-decoration:underline;cursor:pointer;background:none;border:none;color:#333}
 
-    /* ── Scroll body ── */
-    .body { padding: 16px 16px calc(var(--safe-bot) + 80px); max-width: 600px; margin: 0 auto; }
+    /* ── Setup screen ── */
+    #setupScreen{
+      position:fixed;inset:0;z-index:998;
+      background:#000;
+      display:none;flex-direction:column;align-items:center;justify-content:center;
+      padding:40px 32px calc(var(--sb)+40px);
+    }
+    #setupScreen.show{display:flex}
+    .setup-steps{width:100%;max-width:320px;margin:32px 0}
+    .step{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px;opacity:.4;transition:opacity .3s}
+    .step.active{opacity:1}
+    .step.done{opacity:.6}
+    .step-num{width:28px;height:28px;border-radius:50%;background:#1a1a1a;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#666;flex-shrink:0;margin-top:1px}
+    .step.active .step-num{background:var(--blue);border-color:var(--blue);color:#fff}
+    .step.done .step-num{background:#1a3a1a;border-color:var(--green);color:var(--green)}
+    .step-text{font-size:13px;color:#888;line-height:1.5}
+    .step.active .step-text{color:#ddd}
+    .setup-btn{
+      width:100%;max-width:320px;padding:16px;border-radius:14px;
+      background:var(--blue);color:#fff;font-size:16px;font-weight:700;
+      border:none;cursor:pointer;transition:opacity .2s;
+    }
+    .setup-btn:active{opacity:.8}
+    .setup-btn:disabled{opacity:.4;cursor:not-allowed}
 
-    /* ── Date + frase ── */
-    .frase-block { background: var(--card); border-radius: 14px; padding: 18px; margin-bottom: 12px; border-left: 3px solid var(--blue); }
-    .frase-date { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px; }
-    .frase-text { font-size: 19px; font-weight: 700; color: #fff; line-height: 1.3; }
+    /* ── App ── */
+    #app{display:none}
+    #app.show{display:block}
 
-    /* ── Section label ── */
-    .slabel { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin: 20px 0 10px; }
+    .header{
+      position:sticky;top:0;z-index:100;
+      background:rgba(0,0,0,.92);backdrop-filter:blur(20px);
+      padding:calc(var(--st) + 12px) 20px 12px;
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .header-left{display:flex;align-items:center;gap:10px}
+    .header-badge{background:var(--blue);color:#fff;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 9px;border-radius:5px}
+    .header-title{font-size:17px;font-weight:700;color:#fff}
+    .header-right{display:flex;gap:8px}
+    .icon-btn{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;color:var(--muted);font-size:16px;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .icon-btn:active{background:#2a2a2a;transform:scale(.93)}
+    .icon-btn.spinning{animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
 
-    /* ── Status row ── */
-    .sem-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .sem-box { border-radius: 10px; padding: 12px 6px; text-align: center; }
-    .sem-box .se { font-size: 20px; display: block; }
-    .sem-box .sl { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; display: block; margin-top: 5px; }
+    .body{padding:16px 16px calc(var(--sb) + 80px);max-width:600px;margin:0 auto}
 
-    /* ── Badges ── */
-    .badges-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-    .badge { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 5px; border: 1px solid; }
+    .frase-block{background:var(--card);border-radius:14px;padding:18px;margin-bottom:12px;border-left:3px solid var(--blue)}
+    .frase-date{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+    .frase-text{font-size:19px;font-weight:700;color:#fff;line-height:1.3}
 
-    /* ── Metric cards ── */
-    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .mc { background: var(--card2); border-radius: 10px; padding: 12px 10px; border-left: 3px solid; }
-    .mc .mi { font-size: 14px; margin-bottom: 4px; }
-    .mc .ml { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #444; }
-    .mc .mv { font-size: 18px; font-weight: 700; line-height: 1.1; margin: 3px 0 2px; }
-    .mc .ms { font-size: 10px; color: #444; }
-
-    /* ── Tables ── */
-    .tbl-wrap { background: var(--card2); border-radius: 10px; overflow: hidden; }
-    table { width: 100%; border-collapse: collapse; }
-    thead th { padding: 8px 10px; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: #444; text-align: left; border-bottom: 1px solid #2a2a2a; }
-    tbody tr { border-bottom: 1px solid #1e1e1e; }
-    tbody tr:last-child { border-bottom: none; }
-    td { padding: 10px; font-size: 12px; color: #ccc; vertical-align: middle; }
-    td.ico { font-size: 18px; width: 32px; }
-    td.name { font-weight: 600; color: #ddd; }
-    td.mono { font-family: 'SF Mono', monospace; color: #888; white-space: nowrap; font-size: 11px; }
-
-    /* ── Briefing ── */
-    .briefing-card { background: #07111f; border-left: 3px solid var(--blue); border-radius: 10px; padding: 16px; }
-    .briefing-label { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--blue); margin-bottom: 10px; }
-    .briefing-text { font-size: 13px; color: #9ab8d8; line-height: 1.75; white-space: pre-line; }
-
-    /* ── Alert ── */
-    .alert-card { background: #110000; border-left: 3px solid var(--red); border-radius: 10px; padding: 14px; margin-top: 10px; font-size: 13px; color: #cc5555; line-height: 1.5; }
-
-    /* ── Race predictions ── */
-    .prev-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .prev-item { background: var(--card2); border-radius: 10px; padding: 10px 6px; text-align: center; }
-    .prev-d { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: #444; }
-    .prev-t { font-size: 15px; font-weight: 700; color: #fff; margin-top: 4px; font-family: 'SF Mono', monospace; }
-
-    /* ── Divider ── */
-    .divider { height: 1px; background: #1a1a1a; margin: 16px 0; }
-
-    /* ── Empty/Loading ── */
-    .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
-    .empty-icon { font-size: 48px; margin-bottom: 16px; }
-    .empty h2 { font-size: 18px; color: #888; margin-bottom: 8px; }
-    .empty p { font-size: 13px; line-height: 1.6; }
-
-    .loading-bar { height: 3px; background: linear-gradient(90deg, var(--blue), #00C896, var(--blue)); background-size: 200%; animation: loading 1.2s linear infinite; border-radius: 2px; margin-bottom: 20px; }
-    @keyframes loading { 0%{background-position:0%} 100%{background-position:200%} }
-
-    /* ── Bottom nav ── */
-    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,.95); backdrop-filter: blur(20px); border-top: 1px solid var(--border); padding: 8px 0 calc(var(--safe-bot) + 4px); display: flex; justify-content: space-around; }
-    .nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 4px 0; transition: opacity .15s; }
-    .nav-btn.active .nav-icon, .nav-btn.active .nav-label { color: var(--blue); }
-    .nav-icon { font-size: 20px; color: #444; }
-    .nav-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: #444; }
-
-    /* ── Last updated ── */
-    .last-updated { text-align: center; font-size: 10px; color: #333; margin-top: 16px; }
+    .slabel{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:20px 0 10px}
+    .sem-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .sem-box{border-radius:10px;padding:12px 6px;text-align:center}
+    .sem-box .se{font-size:20px;display:block}
+    .sem-box .sl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;display:block;margin-top:5px}
+    .badges-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .badge{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:5px;border:1px solid}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .mc{background:var(--card2);border-radius:10px;padding:12px 10px;border-left:3px solid}
+    .mc .mi{font-size:14px;margin-bottom:4px}
+    .mc .ml{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444}
+    .mc .mv{font-size:18px;font-weight:700;line-height:1.1;margin:3px 0 2px}
+    .mc .ms{font-size:10px;color:#444}
+    .tbl-wrap{background:var(--card2);border-radius:10px;overflow:hidden}
+    table{width:100%;border-collapse:collapse}
+    thead th{padding:8px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444;text-align:left;border-bottom:1px solid #2a2a2a}
+    tbody tr{border-bottom:1px solid #1e1e1e}
+    tbody tr:last-child{border-bottom:none}
+    td{padding:10px;font-size:12px;color:#ccc;vertical-align:middle}
+    td.ico{font-size:18px;width:32px}
+    td.name{font-weight:600;color:#ddd}
+    td.mono{font-family:'SF Mono',monospace;color:#888;white-space:nowrap;font-size:11px}
+    .briefing-card{background:#07111f;border-left:3px solid var(--blue);border-radius:10px;padding:16px}
+    .briefing-label{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:10px}
+    .briefing-text{font-size:13px;color:#9ab8d8;line-height:1.75;white-space:pre-line}
+    .alert-card{background:#110000;border-left:3px solid var(--red);border-radius:10px;padding:14px;margin-top:10px;font-size:13px;color:#cc5555;line-height:1.5}
+    .prev-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .prev-item{background:var(--card2);border-radius:10px;padding:10px 6px;text-align:center}
+    .prev-d{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444}
+    .prev-t{font-size:15px;font-weight:700;color:#fff;margin-top:4px;font-family:'SF Mono',monospace}
+    .divider{height:1px;background:#1a1a1a;margin:16px 0}
+    .empty{text-align:center;padding:60px 20px;color:var(--muted)}
+    .empty-icon{font-size:48px;margin-bottom:16px}
+    .empty h2{font-size:18px;color:#888;margin-bottom:8px}
+    .empty p{font-size:13px;line-height:1.6}
+    .loading-bar{height:3px;background:linear-gradient(90deg,var(--blue),#00C896,var(--blue));background-size:200%;animation:loading 1.2s linear infinite;border-radius:2px;margin-bottom:20px}
+    @keyframes loading{0%{background-position:0%}100%{background-position:200%}}
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:8px 0 calc(var(--sb) + 4px);display:flex;justify-content:space-around}
+    .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 0}
+    .nav-btn.active .nav-icon,.nav-btn.active .nav-label{color:var(--blue)}
+    .nav-icon{font-size:20px;color:#444}
+    .nav-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#444}
+    .last-updated{text-align:center;font-size:10px;color:#333;margin-top:16px}
   </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-left">
-    <span class="header-badge">⌚</span>
-    <span class="header-title">Triathlon Coach</span>
-  </div>
-  <button class="refresh-btn" id="refreshBtn" onclick="loadReport(true)">↻</button>
+<!-- ── Lock Screen ── -->
+<div id="lockScreen">
+  <div class="lock-icon">⌚</div>
+  <div class="lock-title">Triathlon Coach</div>
+  <div class="lock-sub">Seu briefing diário<br>protegido com Face ID</div>
+  <button class="faceid-btn pulse" id="faceIdBtn" onclick="authenticate()">
+    <span style="font-size:36px">&#129318;</span>
+  </button>
+  <div class="lock-label" id="lockLabel">Toque para autenticar</div>
+  <div class="lock-error" id="lockError"></div>
+  <button class="lock-reset" id="resetBtn" onclick="resetAuth()" style="display:none">
+    Redefinir autenticação
+  </button>
 </div>
 
-<div class="body" id="appBody">
-  <div class="empty">
-    <div class="empty-icon">⌚</div>
-    <h2>Carregando briefing...</h2>
-    <p>Buscando seu relatório diário</p>
+<!-- ── Setup Screen ── -->
+<div id="setupScreen">
+  <div class="lock-icon">🔐</div>
+  <div class="lock-title">Configurar Face ID</div>
+  <div class="lock-sub">Proteção biométrica para<br>seus dados de treino</div>
+  <div class="setup-steps">
+    <div class="step active" id="step1">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong style="color:#ddd">Registrar Face ID</strong><br>Toque no botão abaixo e autentique com Face ID quando solicitado</div>
+    </div>
+    <div class="step" id="step2">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Pronto</strong><br>O app será protegido automaticamente</div>
+    </div>
   </div>
+  <button class="setup-btn" id="setupBtn" onclick="registerFaceId()">
+    &#129318; Registrar Face ID
+  </button>
+  <div class="lock-error" id="setupError" style="margin-top:16px"></div>
+  <button class="lock-reset" onclick="skipAuth()" style="margin-top:24px;color:#333">
+    Usar sem autenticação
+  </button>
 </div>
 
-<nav class="bottom-nav">
-  <div class="nav-btn active" onclick="scrollTo(0,0)">
-    <span class="nav-icon">🏠</span>
-    <span class="nav-label">Hoje</span>
+<!-- ── App ── -->
+<div id="app">
+  <div class="header">
+    <div class="header-left">
+      <span class="header-badge">⌚</span>
+      <span class="header-title">Triathlon Coach</span>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" id="refreshBtn" onclick="loadReport(true)">↻</button>
+      <button class="icon-btn" onclick="lockApp()" title="Bloquear">🔒</button>
+    </div>
   </div>
-  <div class="nav-btn" onclick="scrollToSection('treinos')">
-    <span class="nav-icon">📊</span>
-    <span class="nav-label">Treinos</span>
+  <div class="body" id="appBody">
+    <div class="loading-bar"></div>
   </div>
-  <div class="nav-btn" onclick="scrollToSection('coach')">
-    <span class="nav-icon">🤖</span>
-    <span class="nav-label">Coach IA</span>
-  </div>
-  <div class="nav-btn" onclick="scrollToSection('calendario')">
-    <span class="nav-icon">📅</span>
-    <span class="nav-label">Agenda</span>
-  </div>
-</nav>
+  <nav class="bottom-nav">
+    <div class="nav-btn active" onclick="scrollTo(0,0)"><span class="nav-icon">🏠</span><span class="nav-label">Hoje</span></div>
+    <div class="nav-btn" onclick="scrollToSection('treinos')"><span class="nav-icon">📊</span><span class="nav-label">Treinos</span></div>
+    <div class="nav-btn" onclick="scrollToSection('coach')"><span class="nav-icon">🤖</span><span class="nav-label">Coach IA</span></div>
+    <div class="nav-btn" onclick="scrollToSection('calendario')"><span class="nav-icon">📅</span><span class="nav-label">Agenda</span></div>
+  </nav>
+</div>
 
 <script>
-const REPORT_URL = "report.json";
+// ── WebAuthn / Face ID ────────────────────────────────────────────────────────
+const RP_ID   = location.hostname;
+const RP_NAME = "Triathlon Coach";
+const CRED_KEY = "faceIdCredId";
+const AUTH_KEY = "authSession";
+const SESSION_MINUTES = 480; // 8h — não pede Face ID de novo no mesmo dia
 
+function isWebAuthnAvailable() {
+  return window.PublicKeyCredential !== undefined;
+}
+
+function hasCredential() {
+  return !!localStorage.getItem(CRED_KEY);
+}
+
+function isSessionValid() {
+  const ts = localStorage.getItem(AUTH_KEY);
+  if (!ts) return false;
+  return (Date.now() - parseInt(ts)) < SESSION_MINUTES * 60 * 1000;
+}
+
+function setSession() {
+  localStorage.setItem(AUTH_KEY, Date.now().toString());
+}
+
+function clearSession() {
+  localStorage.removeItem(AUTH_KEY);
+}
+
+function buf2b64(buf) {
+  return btoa(String.fromCharCode(...new Uint8Array(buf)));
+}
+
+function b642buf(b64) {
+  const bin = atob(b64);
+  return Uint8Array.from(bin, c => c.charCodeAt(0)).buffer;
+}
+
+function randBytes(n) {
+  return crypto.getRandomValues(new Uint8Array(n));
+}
+
+// ── Register ─────────────────────────────────────────────────────────────────
+async function registerFaceId() {
+  const btn = document.getElementById("setupBtn");
+  const err = document.getElementById("setupError");
+  btn.disabled = true; btn.textContent = "Aguardando Face ID...";
+  err.textContent = "";
+
+  try {
+    const credential = await navigator.credentials.create({
+      publicKey: {
+        rp: { id: RP_ID, name: RP_NAME },
+        user: {
+          id: randBytes(16),
+          name: "atleta",
+          displayName: "Triatleta",
+        },
+        challenge: randBytes(32),
+        pubKeyCredParams: [
+          { type: "public-key", alg: -7 },   // ES256
+          { type: "public-key", alg: -257 },  // RS256
+        ],
+        authenticatorSelection: {
+          authenticatorAttachment: "platform",  // Face ID / Touch ID
+          userVerification: "required",
+          residentKey: "preferred",
+        },
+        timeout: 60000,
+      }
+    });
+
+    // Salva o credential ID
+    localStorage.setItem(CRED_KEY, buf2b64(credential.rawId));
+
+    // Marca step 2 como done
+    document.getElementById("step1").classList.remove("active");
+    document.getElementById("step1").classList.add("done");
+    document.getElementById("step1").querySelector(".step-num").textContent = "✓";
+    document.getElementById("step2").classList.add("active");
+
+    btn.textContent = "✅ Face ID registrado!";
+    setTimeout(() => {
+      setSession();
+      showApp();
+    }, 800);
+
+  } catch (e) {
+    console.error(e);
+    err.textContent = e.name === "NotAllowedError"
+      ? "Face ID cancelado. Tente novamente."
+      : `Erro: ${e.message}`;
+    btn.disabled = false;
+    btn.textContent = "⟳ Tentar novamente";
+  }
+}
+
+// ── Authenticate ──────────────────────────────────────────────────────────────
+async function authenticate() {
+  const btn   = document.getElementById("faceIdBtn");
+  const label = document.getElementById("lockLabel");
+  const err   = document.getElementById("lockError");
+
+  btn.classList.remove("pulse");
+  label.textContent = "Verificando...";
+  err.textContent = "";
+
+  if (!isWebAuthnAvailable()) {
+    skipAuth();
+    return;
+  }
+
+  const credId = localStorage.getItem(CRED_KEY);
+  if (!credId) { showSetup(); return; }
+
+  try {
+    await navigator.credentials.get({
+      publicKey: {
+        rpId: RP_ID,
+        challenge: randBytes(32),
+        allowCredentials: [{
+          id: b642buf(credId),
+          type: "public-key",
+          transports: ["internal"],
+        }],
+        userVerification: "required",
+        timeout: 60000,
+      }
+    });
+
+    setSession();
+    label.textContent = "Autenticado ✓";
+    document.getElementById("lockScreen").classList.add("hiding");
+    setTimeout(showApp, 400);
+
+  } catch (e) {
+    console.error(e);
+    btn.classList.add("pulse");
+    if (e.name === "NotAllowedError") {
+      err.textContent = "Face ID cancelado. Toque para tentar novamente.";
+      label.textContent = "Toque para autenticar";
+    } else {
+      err.textContent = `Erro: ${e.message}`;
+      label.textContent = "Toque para autenticar";
+    }
+  }
+}
+
+function resetAuth() {
+  localStorage.removeItem(CRED_KEY);
+  clearSession();
+  location.reload();
+}
+
+function lockApp() {
+  clearSession();
+  document.getElementById("app").classList.remove("show");
+  const ls = document.getElementById("lockScreen");
+  ls.classList.remove("hiding");
+  ls.style.display = "flex";
+  document.getElementById("faceIdBtn").classList.add("pulse");
+  document.getElementById("lockLabel").textContent = "Toque para autenticar";
+  document.getElementById("lockError").textContent = "";
+}
+
+function skipAuth() {
+  localStorage.removeItem(CRED_KEY);
+  setSession();
+  document.getElementById("setupScreen").classList.remove("show");
+  showApp();
+}
+
+function showSetup() {
+  document.getElementById("lockScreen").style.display = "none";
+  document.getElementById("setupScreen").classList.add("show");
+}
+
+function showApp() {
+  document.getElementById("lockScreen").style.display = "none";
+  document.getElementById("setupScreen").classList.remove("show");
+  document.getElementById("app").classList.add("show");
+  loadReport();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+window.addEventListener("load", () => {
+  if (!isWebAuthnAvailable()) { showApp(); return; }
+
+  // Mostra botão de reset se já tiver credencial
+  if (hasCredential()) {
+    document.getElementById("resetBtn").style.display = "block";
+  }
+
+  if (!hasCredential()) {
+    showSetup();
+    return;
+  }
+
+  if (isSessionValid()) {
+    showApp();
+    return;
+  }
+
+  // Mostra lock screen e tenta auth automática
+  document.getElementById("lockScreen").style.display = "flex";
+  setTimeout(() => authenticate(), 600);
+});
+
+// ── Report ────────────────────────────────────────────────────────────────────
 const STATUS_COLORS = {
   "ÓTIMO":"#00C896","BOM":"#00C896","MODERADO":"#FFB800",
   "BAIXO":"#FF8C00","CRÍTICO":"#FF4444",
@@ -170,235 +429,147 @@ const STATUS_COLORS = {
 };
 
 function semColor(val, lo, hi) {
-  if (val === null || val === undefined) return { em:"⚪", bg:"#1c1c1c", dk:"#555" };
-  const v = parseFloat(val);
-  if (v >= hi) return { em:"🟢", bg:"#00C896", dk:"#003a28" };
-  if (v >= lo) return { em:"🟡", bg:"#FFB800", dk:"#3a2a00" };
-  return { em:"🔴", bg:"#FF4444", dk:"#3a0000" };
+  if (val===null||val===undefined) return {em:"⚪",bg:"#1c1c1c",dk:"#555"};
+  const v=parseFloat(val);
+  if(v>=hi) return {em:"🟢",bg:"#00C896",dk:"#003a28"};
+  if(v>=lo) return {em:"🟡",bg:"#FFB800",dk:"#3a2a00"};
+  return {em:"🔴",bg:"#FF4444",dk:"#3a0000"};
 }
 
-function fmt(v, d=1, fb="—") {
-  if (v === null || v === undefined) return fb;
+function fmt(v,d=1,fb="—"){
+  if(v===null||v===undefined) return fb;
   return parseFloat(v).toFixed(d);
 }
 
-function badge(txt) {
-  if (!txt || txt === "—") return "";
-  const c = STATUS_COLORS[txt.toUpperCase()] || "#555";
+function badge(txt){
+  if(!txt||txt==="—") return "";
+  const c=STATUS_COLORS[txt.toUpperCase()]||"#555";
   return `<span class="badge" style="color:${c};border-color:${c}44;background:${c}18">${txt}</span>`;
 }
 
-function hms(sec) {
-  if (!sec) return "—";
-  sec = parseInt(sec);
-  const h = Math.floor(sec/3600), r = sec%3600, m = Math.floor(r/60);
-  return h ? `${h}h${String(m).padStart(2,'0')}m` : `${m}m${String(sec%60).padStart(2,'0')}s`;
+function hms(sec){
+  if(!sec) return "—";
+  sec=parseInt(sec);
+  const h=Math.floor(sec/3600),r=sec%3600,m=Math.floor(r/60);
+  return h?`${h}h${String(m).padStart(2,"0")}m`:`${m}m${String(sec%60).padStart(2,"0")}s`;
 }
 
-function renderSem(val, lo, hi, label) {
-  const { em, bg, dk } = semColor(val, lo, hi);
-  return `<div class="sem-box" style="background:${bg}">
-    <span class="se">${em}</span>
-    <span class="sl" style="color:${dk}">${label}</span>
-  </div>`;
+function renderSem(val,lo,hi,label){
+  const {em,bg,dk}=semColor(val,lo,hi);
+  return `<div class="sem-box" style="background:${bg}"><span class="se">${em}</span><span class="sl" style="color:${dk}">${label}</span></div>`;
 }
 
-function renderMC(ico, label, val, sub, hasData) {
-  const bc = hasData ? "#1a6fff" : "#242424";
-  const vc = hasData ? "#fff" : "#333";
-  return `<div class="mc" style="border-color:${bc}">
-    <div class="mi">${ico}</div>
-    <div class="ml">${label}</div>
-    <div class="mv" style="color:${vc}">${val}</div>
-    <div class="ms">${sub}</div>
-  </div>`;
+function renderMC(ico,label,val,sub,has){
+  const bc=has?"#1a6fff":"#242424",vc=has?"#fff":"#333";
+  return `<div class="mc" style="border-color:${bc}"><div class="mi">${ico}</div><div class="ml">${label}</div><div class="mv" style="color:${vc}">${val}</div><div class="ms">${sub}</div></div>`;
 }
 
-function renderTable(items, cols) {
-  if (!items || !items.length) return `<div style="color:#444;font-size:12px;padding:12px">Nenhum registro.</div>`;
-  const thead = `<tr>${cols.map(c=>`<th>${c.label}</th>`).join("")}</tr>`;
-  const tbody = items.map(row =>
-    `<tr>${cols.map(c => `<td class="${c.cls||''}">${row[c.key]||"—"}</td>`).join("")}</tr>`
-  ).join("");
+function renderTable(items,cols){
+  if(!items||!items.length) return `<div style="color:#444;font-size:12px;padding:12px">Nenhum registro.</div>`;
+  const thead=`<tr>${cols.map(c=>`<th>${c.label}</th>`).join("")}</tr>`;
+  const tbody=items.map(row=>`<tr>${cols.map(c=>`<td class="${c.cls||""}">${row[c.key]||"—"}</td>`).join("")}</tr>`).join("");
   return `<div class="tbl-wrap"><table><thead>${thead}</thead><tbody>${tbody}</tbody></table></div>`;
 }
 
-function renderReport(r) {
-  const s = r.saude || {};
-  const ins = r.insights || {};
-  const ontem = r.ontem || [];
-  const hoje = r.hoje || [];
-  const amanha = r.amanha || [];
+function renderReport(r){
+  const s=r.saude||{},ins=r.insights||{};
+  const ontem=r.ontem||[],hoje=r.hoje||[],amanha=r.amanha||[];
+  const dias=["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+  const dateObj=new Date(r.date+"T12:00:00");
+  const diaStr=dias[dateObj.getDay()]+", "+dateObj.toLocaleDateString("pt-BR");
 
-  const dias = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
-  const dateObj = new Date(r.date + "T12:00:00");
-  const diaStr = dias[dateObj.getDay()] + ", " + dateObj.toLocaleDateString("pt-BR");
-
-  // Semáforos
-  const acwr = parseFloat(s.acwr);
-  let acwrSem = { em:"⚪", bg:"#1c1c1c", dk:"#555" };
-  if (!isNaN(acwr)) {
-    if (acwr > 1.5)           acwrSem = { em:"🔴", bg:"#FF4444", dk:"#3a0000" };
-    else if (acwr >= 0.8)     acwrSem = { em:"🟢", bg:"#00C896", dk:"#003a28" };
-    else                      acwrSem = { em:"🟡", bg:"#FFB800", dk:"#3a2a00" };
+  const acwr=parseFloat(s.acwr);
+  let acwrSem={em:"⚪",bg:"#1c1c1c",dk:"#555"};
+  if(!isNaN(acwr)){
+    if(acwr>1.5)       acwrSem={em:"🔴",bg:"#FF4444",dk:"#3a0000"};
+    else if(acwr>=0.8) acwrSem={em:"🟢",bg:"#00C896",dk:"#003a28"};
+    else               acwrSem={em:"🟡",bg:"#FFB800",dk:"#3a2a00"};
   }
 
-  // Treinos de ontem
-  const treino_rows = ontem.map(t => ({
-    ico: t.icone, name: t.nome, dist: t.dist, dur: t.dur,
-    perf: t.perf, fc_tss: `FC ${t.fc||"—"} | TSS ${t.tss||"—"}`
-  }));
-  const treino_cols = [
-    {key:"ico",cls:"ico",label:""},
-    {key:"name",cls:"name",label:"Atividade"},
-    {key:"dist",cls:"mono",label:"Dist"},
-    {key:"dur",cls:"mono",label:"Dur"},
-    {key:"perf",cls:"mono",label:"Pace/Vel"},
-    {key:"fc_tss",cls:"mono",label:"FC / TSS"},
-  ];
+  const treino_rows=ontem.map(t=>({ico:t.icone,name:t.nome,dist:t.dist,dur:t.dur,perf:t.perf,fc_tss:`FC ${t.fc||"—"} | TSS ${t.tss||"—"}`}));
+  const treino_cols=[{key:"ico",cls:"ico",label:""},{key:"name",cls:"name",label:"Atividade"},{key:"dist",cls:"mono",label:"Dist"},{key:"dur",cls:"mono",label:"Dur"},{key:"perf",cls:"mono",label:"Pace/Vel"},{key:"fc_tss",cls:"mono",label:"FC / TSS"}];
+  const cal_cols=[{key:"icone",cls:"ico",label:""},{key:"nome",cls:"name",label:"Treino"},{key:"dur",cls:"mono",label:"Duração"},{key:"dist",cls:"mono",label:"Distância"}];
 
-  // Calendário
-  const cal_cols = [
-    {key:"icone",cls:"ico",label:""},
-    {key:"nome",cls:"name",label:"Treino"},
-    {key:"dur",cls:"mono",label:"Duração"},
-    {key:"dist",cls:"mono",label:"Distância"},
-  ];
-
-  // Previsões
-  let prevHTML = "";
-  if (s.previsoes && Object.keys(s.previsoes).length) {
-    prevHTML = `
-      <div class="slabel" style="margin-top:20px">🏁 Previsão de Prova</div>
-      <div class="prev-grid">
-        ${Object.entries(s.previsoes).map(([k,v])=>`
-          <div class="prev-item">
-            <div class="prev-d">${k}</div>
-            <div class="prev-t">${hms(v)}</div>
-          </div>`).join("")}
-      </div>`;
+  let prevHTML="";
+  if(s.previsoes&&Object.keys(s.previsoes).length){
+    prevHTML=`<div class="slabel" style="margin-top:20px">🏁 Previsão de Prova</div><div class="prev-grid">${Object.entries(s.previsoes).map(([k,v])=>`<div class="prev-item"><div class="prev-d">${k}</div><div class="prev-t">${hms(v)}</div></div>`).join("")}</div>`;
   }
 
-  const alertHTML = ins.alerta
-    ? `<div class="alert-card">⚠️ ${ins.alerta}</div>` : "";
+  const alertHTML=ins.alerta?`<div class="alert-card">⚠️ ${ins.alerta}</div>`:"";
 
   return `
-    <div class="frase-block">
-      <div class="frase-date">${diaStr}</div>
-      <div class="frase-text">${ins.frase || "—"}</div>
-    </div>
-
+    <div class="frase-block"><div class="frase-date">${diaStr}</div><div class="frase-text">${ins.frase||"—"}</div></div>
     <div class="slabel">Status Geral</div>
     <div class="sem-row">
-      ${renderSem(s.body_battery, 40, 70, "Readiness")}
-      <div class="sem-box" style="background:${acwrSem.bg}">
-        <span class="se">${acwrSem.em}</span>
-        <span class="sl" style="color:${acwrSem.dk}">Carga</span>
-      </div>
-      ${renderSem(s.hrv, 40, 60, "HRV")}
-      ${renderSem(s.sono_score, 60, 80, "Sono")}
+      ${renderSem(s.body_battery,40,70,"Readiness")}
+      <div class="sem-box" style="background:${acwrSem.bg}"><span class="se">${acwrSem.em}</span><span class="sl" style="color:${acwrSem.dk}">Carga</span></div>
+      ${renderSem(s.hrv,40,60,"HRV")}
+      ${renderSem(s.sono_score,60,80,"Sono")}
     </div>
-    <div class="badges-row">
-      ${badge(ins.status_readiness)}
-      ${badge(ins.status_carga)}
-      ${badge(ins.acao_hoje)}
-    </div>
-
+    <div class="badges-row">${badge(ins.status_readiness)}${badge(ins.status_carga)}${badge(ins.acao_hoje)}</div>
     <div class="slabel">Dados Fisiológicos</div>
     <div class="metrics">
-      ${renderMC("💤","Sono", fmt(s.sono_h)+"h", `Score ${fmt(s.sono_score,0)} · REM ${fmt(s.sono_rem)}h`, !!s.sono_h)}
-      ${renderMC("❤️","HRV", fmt(s.hrv,0)+" ms", `7d ${fmt(s.hrv_7d,0)} · ${(s.hrv_status||"—").toUpperCase()}`, !!s.hrv)}
-      ${renderMC("🔋","Body Battery", fmt(s.body_battery,0), `Stress ${fmt(s.stress_avg,0)}`, !!s.body_battery)}
-      ${renderMC("💓","Resting HR", fmt(s.rhr,0)+" bpm", `Base ${fmt(s.rhr_baseline,0)} bpm`, !!s.rhr)}
-      ${renderMC("📈","ATL / CTL", `${fmt(s.atl,0)} / ${fmt(s.ctl,0)}`, `TSB ${fmt(s.tsb,0)} · ACWR ${fmt(s.acwr,2)}`, !!s.atl)}
-      ${renderMC("🫁","VO₂max", fmt(s.vo2max), "ml/kg/min", !!s.vo2max)}
+      ${renderMC("💤","Sono",fmt(s.sono_h)+"h",`Score ${fmt(s.sono_score,0)} · REM ${fmt(s.sono_rem)}h`,!!s.sono_h)}
+      ${renderMC("❤️","HRV",fmt(s.hrv,0)+" ms",`7d ${fmt(s.hrv_7d,0)} · ${(s.hrv_status||"—").toUpperCase()}`,!!s.hrv)}
+      ${renderMC("🔋","Body Battery",fmt(s.body_battery,0),`Stress ${fmt(s.stress_avg,0)}`,!!s.body_battery)}
+      ${renderMC("💓","Resting HR",fmt(s.rhr,0)+" bpm",`Base ${fmt(s.rhr_baseline,0)} bpm`,!!s.rhr)}
+      ${renderMC("📈","ATL / CTL",`${fmt(s.atl,0)} / ${fmt(s.ctl,0)}`,`TSB ${fmt(s.tsb,0)} · ACWR ${fmt(s.acwr,2)}`,!!s.atl)}
+      ${renderMC("🫁","VO₂max",fmt(s.vo2max),"ml/kg/min",!!s.vo2max)}
     </div>
-
     <div class="divider" id="treinos"></div>
     <div class="slabel">Treinos de Ontem</div>
-    ${renderTable(treino_rows, treino_cols)}
-
+    ${renderTable(treino_rows,treino_cols)}
     <div class="divider" id="coach"></div>
-    <div class="briefing-card">
-      <div class="briefing-label">🤖 Análise do Coach — IA</div>
-      <div class="briefing-text">${(ins.briefing||"—").replace(/\\n/g,"\n")}</div>
-    </div>
+    <div class="briefing-card"><div class="briefing-label">🤖 Análise do Coach — IA</div><div class="briefing-text">${(ins.briefing||"—").replace(/\\n/g,"\n")}</div></div>
     ${alertHTML}
-
     <div class="divider" id="calendario"></div>
     <div class="slabel">Treino de Hoje</div>
-    ${hoje.length ? renderTable(hoje, cal_cols) : '<div style="color:#444;font-size:12px;padding:8px 0">Nenhum treino agendado.</div>'}
-
+    ${hoje.length?renderTable(hoje,cal_cols):'<div style="color:#444;font-size:12px;padding:8px 0">Nenhum treino agendado.</div>'}
     <div class="slabel" style="margin-top:16px">Treino de Amanhã</div>
-    ${amanha.length ? renderTable(amanha, cal_cols) : '<div style="color:#444;font-size:12px;padding:8px 0">Nenhum treino agendado.</div>'}
-
+    ${amanha.length?renderTable(amanha,cal_cols):'<div style="color:#444;font-size:12px;padding:8px 0">Nenhum treino agendado.</div>'}
     ${prevHTML}
-    <div class="last-updated">Atualizado em ${new Date(r.generated_at||r.date).toLocaleString("pt-BR")}</div>
-  `;
+    <div class="last-updated">Atualizado em ${new Date(r.generated_at||r.date).toLocaleString("pt-BR")}</div>`;
 }
 
-function scrollToSection(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+function scrollToSection(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-async function loadReport(forceRefresh = false) {
-  const btn = document.getElementById("refreshBtn");
+async function loadReport(forceRefresh=false){
+  const btn=document.getElementById("refreshBtn");
   btn.classList.add("spinning");
-
-  const body = document.getElementById("appBody");
-  if (forceRefresh) {
-    body.innerHTML = '<div class="loading-bar"></div>';
-  }
-
-  try {
-    const url = REPORT_URL + (forceRefresh ? "?t=" + Date.now() : "");
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    const data = await res.json();
-    body.innerHTML = renderReport(data);
-
-    // Cache in localStorage
-    localStorage.setItem("lastReport", JSON.stringify(data));
-    localStorage.setItem("lastReportTime", new Date().toISOString());
-  } catch (err) {
-    // Try localStorage cache
-    const cached = localStorage.getItem("lastReport");
-    if (cached) {
-      const data = JSON.parse(cached);
-      const cachedTime = localStorage.getItem("lastReportTime");
-      body.innerHTML = renderReport(data) +
-        `<div style="background:#1a1000;border:1px solid #3a2800;border-radius:8px;padding:12px;margin-top:12px;font-size:12px;color:#FFB800;text-align:center">
-          📶 Exibindo cache de ${new Date(cachedTime).toLocaleString("pt-BR")}
-        </div>`;
-    } else {
-      body.innerHTML = `
-        <div class="empty">
-          <div class="empty-icon">⚠️</div>
-          <h2>Relatório não encontrado</h2>
-          <p>O briefing de hoje ainda não foi gerado.<br>Rode o GitHub Actions manualmente ou aguarde as 8h.</p>
-        </div>`;
+  const body=document.getElementById("appBody");
+  if(forceRefresh) body.innerHTML='<div class="loading-bar"></div>';
+  try{
+    const url="report.json"+(forceRefresh?"?t="+Date.now():"");
+    const res=await fetch(url);
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const data=await res.json();
+    body.innerHTML=renderReport(data);
+    localStorage.setItem("lastReport",JSON.stringify(data));
+    localStorage.setItem("lastReportTime",new Date().toISOString());
+  }catch(e){
+    const cached=localStorage.getItem("lastReport");
+    if(cached){
+      const data=JSON.parse(cached);
+      const cachedTime=localStorage.getItem("lastReportTime");
+      body.innerHTML=renderReport(data)+`<div style="background:#1a1000;border:1px solid #3a2800;border-radius:8px;padding:12px;margin-top:12px;font-size:12px;color:#FFB800;text-align:center">📶 Cache de ${new Date(cachedTime).toLocaleString("pt-BR")}</div>`;
+    }else{
+      body.innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><h2>Relatório não encontrado</h2><p>O briefing ainda não foi gerado hoje.<br>Rode o GitHub Actions ou aguarde as 8h.</p></div>`;
     }
   }
-
   btn.classList.remove("spinning");
 }
 
-// Service Worker
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js").catch(() => {});
-}
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
 
-// Load on start
-loadReport();
-
-// Pull to refresh (touch)
-let startY = 0;
-document.addEventListener("touchstart", e => { startY = e.touches[0].clientY; }, { passive: true });
-document.addEventListener("touchend", e => {
-  const dy = e.changedTouches[0].clientY - startY;
-  if (dy > 80 && window.scrollY === 0) loadReport(true);
-}, { passive: true });
+let startY=0;
+document.addEventListener("touchstart",e=>{startY=e.touches[0].clientY},{passive:true});
+document.addEventListener("touchend",e=>{
+  const dy=e.changedTouches[0].clientY-startY;
+  if(dy>80&&window.scrollY===0) loadReport(true);
+},{passive:true});
 </script>
 </body>
 </html>
