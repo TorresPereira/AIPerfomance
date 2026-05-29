@@ -1,610 +1,508 @@
 #!/usr/bin/env python3
-"""
-Garmin Triathlon Briefing v2
-- Coleta dados de saúde + treinos do dia anterior (natação/bike/corrida)
-- Verifica treino agendado no calendário Garmin para hoje
-- Usa Claude AI para gerar insights personalizados e validar se o treino é adequado
-- Envia e-mail HTML completo via SendGrid
-"""
+"""Garmin Triathlon Briefing v3 — Coach técnico para Half Ironman."""
 
-import os
-import json
-import datetime
-import traceback
-import urllib.request
-import urllib.error
-
-import pickle
-import pathlib
+import os, json, datetime, traceback, urllib.request, urllib.error, pickle, pathlib
 from garminconnect import Garmin
 
-SESSION_FILE = pathlib.Path("/tmp/garmin_session.pkl")
-
-# ─── Config ───────────────────────────────────────────────────────────────────
-GARMIN_EMAIL     = os.environ["GARMIN_EMAIL"]
-GARMIN_PASSWORD  = os.environ["GARMIN_PASSWORD"]
-SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
-ANTHROPIC_API_KEY= os.environ["ANTHROPIC_API_KEY"]
-EMAIL_FROM       = os.environ["EMAIL_FROM"]
-EMAIL_TO         = os.environ["EMAIL_TO"]
+# ─── Config ──────────────────────────────────────────────────────────────────
+GARMIN_EMAIL      = os.environ["GARMIN_EMAIL"]
+GARMIN_PASSWORD   = os.environ["GARMIN_PASSWORD"]
+SENDGRID_API_KEY  = os.environ["SENDGRID_API_KEY"]
+ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
+EMAIL_FROM        = os.environ["EMAIL_FROM"]
+EMAIL_TO          = os.environ["EMAIL_TO"]
 
 TODAY     = datetime.date.today()
 YESTERDAY = TODAY - datetime.timedelta(days=1)
+TOMORROW  = TODAY + datetime.timedelta(days=1)
 TODAY_STR     = TODAY.isoformat()
 YESTERDAY_STR = YESTERDAY.isoformat()
+TOMORROW_STR  = TOMORROW.isoformat()
+CACHE_DIR     = "/tmp/garmin_cache"
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
+def fmt(v, d=1, s="", fb="—"):
+    if v is None: return fb
+    return f"{round(float(v),d)}{s}"
 
-def fmt(v, casas=1, sufixo="", fallback="—"):
-    if v is None: return fallback
-    return f"{round(float(v), casas)}{sufixo}"
+def hms(sec):
+    if not sec: return "—"
+    h,r = divmod(int(sec),3600); m,s = divmod(r,60)
+    return f"{h}h{m:02d}m" if h else f"{m}m{s:02d}s"
 
-def segundos_para_tempo(s):
-    if not s: return "—"
-    h, r = divmod(int(s), 3600)
-    m, seg = divmod(r, 60)
-    return f"{h}h{m:02d}m" if h else f"{m}m{seg:02d}s"
-
-def metros_para_dist(m, modalidade="corrida"):
+def dist_fmt(m, mod="run"):
     if not m: return "—"
-    km = m / 1000
-    if modalidade == "natacao":
-        return f"{int(m)}m" if km < 1 else f"{km:.1f}km"
-    return f"{km:.1f}km"
+    km = m/1000
+    return f"{int(m)}m" if mod=="swim" and km<2 else f"{km:.1f}km"
 
-def pace_corrida(segundos, metros):
-    """Retorna pace em min/km"""
-    if not segundos or not metros or metros == 0: return "—"
-    pace_s = (segundos / metros) * 1000
-    m, s = divmod(int(pace_s), 60)
-    return f"{m}:{s:02d}/km"
+def pace_run(sec,m):
+    if not sec or not m or m==0: return "—"
+    p=int((sec/m)*1000); mm,ss=divmod(p,60)
+    return f"{mm}:{ss:02d}/km"
 
-def velocidade_bike(segundos, metros):
-    if not segundos or not metros or segundos == 0: return "—"
-    kmh = (metros / segundos) * 3600
-    return f"{kmh:.1f}km/h"
+def pace_swim(sec,m):
+    if not sec or not m or m==0: return "—"
+    p=int((sec/m)*100); mm,ss=divmod(p,60)
+    return f"{mm}:{ss:02d}/100m"
 
-def semaforo_emoji(valor, baixo, alto, inverso=False):
-    if valor is None: return "⚪"
-    if inverso:
-        return "🟢" if valor <= baixo else ("🟡" if valor <= alto else "🔴")
-    return "🟢" if valor >= alto else ("🟡" if valor >= baixo else "🔴")
+def spd_bike(sec,m):
+    if not sec or not m or sec==0: return "—"
+    return f"{(m/sec)*3.6:.1f}km/h"
 
-# ─── Coleta Garmin ────────────────────────────────────────────────────────────
+def sem(v, lo, hi):
+    if v is None: return "⚪","#1c1c1c","#555"
+    if v>=hi:  return "🟢","#00C896","#003a28"
+    if v>=lo:  return "🟡","#FFB800","#3a2a00"
+    return "🔴","#FF4444","#3a0000"
 
+# ─── Login Garmin ─────────────────────────────────────────────────────────────
 def garmin_login():
-    """Login usando garth (novo padrão da lib) com cache de sessão."""
-    import os
-    cache_dir = "/tmp/garmin_cache"
-    os.makedirs(cache_dir, exist_ok=True)
+    os.makedirs(CACHE_DIR, exist_ok=True)
     try:
         api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
-        api.login(tokenstore=cache_dir)
-        print("  Sessão restaurada do cache.")
+        api.login(tokenstore=CACHE_DIR)
+        print("  Sessão restaurada.")
         return api
-    except Exception:
-        pass
-    try:
-        api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
-        api.login()
-        try:
-            api.garth.dump(cache_dir)
-            print("  Login novo, sessão salva via garth.")
-        except Exception as e:
-            print(f"  Login novo (sem cache garth: {e})")
-        return api
-    except Exception as e:
-        print(f"  Login sem cache: {e}")
-        api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
-        api.login()
-        return api
+    except Exception: pass
+    api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
+    api.login()
+    try: api.garth.dump(CACHE_DIR); print("  Login novo, cache salvo.")
+    except Exception as e: print(f"  Login ok (sem cache: {e})")
+    return api
 
-def coletar_dados():
+# ─── Coleta de dados ──────────────────────────────────────────────────────────
+def coletar():
     api = garmin_login()
-    dados = {"saude": {}, "treinos_ontem": [], "calendario_hoje": []}
+    d = {"saude":{}, "ontem":[], "hoje":[], "amanha":[]}
+    s = d["saude"]
 
-    # === SAÚDE ===
-    s = dados["saude"]
-
-    # === HRV ===
+    # HRV
     try:
-        hrv_raw = api.get_hrv_data(TODAY_STR)
-        print("  [DEBUG HRV raw]:", json.dumps(hrv_raw, default=str)[:500])
-        summ = hrv_raw.get("hrvSummary", {})
-        # Tenta lastNight primeiro, depois weeklyAvg, depois valor direto
-        s["hrv"] = (summ.get("lastNight")
-                    or summ.get("lastNight5MinHigh")
-                    or hrv_raw.get("hrvSummary", {}).get("lastNight"))
-        s["hrv_status"] = (summ.get("hrvStatus") or summ.get("status") or "").lower()
-        if not s["hrv"]:
-            # Tenta pegar do array de leituras se existir
-            readings = hrv_raw.get("hrv5MinReadings") or hrv_raw.get("hrvReadings") or []
-            if readings:
-                vals = [r.get("hrvValue") or r.get("value") for r in readings if r]
-                vals = [v for v in vals if v]
-                s["hrv"] = round(sum(vals)/len(vals), 1) if vals else None
-        print(f"  HRV extraído: {s['hrv']} ({s['hrv_status']})")
-    except Exception as e:
-        print(f"  [HRV ERROR] {e}")
-        s["hrv"] = s["hrv_status"] = None
+        r = api.get_hrv_data(TODAY_STR)
+        summ = r.get("hrvSummary",{})
+        s["hrv"]        = summ.get("lastNight5MinHigh") or summ.get("lastNightAvg")
+        s["hrv_7d"]     = summ.get("weeklyAvg")
+        s["hrv_status"] = summ.get("status","").lower()
+        s["hrv_baseline_low"]  = summ.get("baseline",{}).get("balancedLow")
+        s["hrv_baseline_high"] = summ.get("baseline",{}).get("balancedUpper")
+        print(f"  HRV: {s['hrv']} (7d avg {s['hrv_7d']}, status {s['hrv_status']})")
+    except Exception as e: print(f"  HRV err: {e}"); s["hrv"]=s["hrv_7d"]=s["hrv_status"]=None
 
-    # === SONO ===
+    # Resting HR
     try:
-        sono = api.get_sleep_data(TODAY_STR)
-        d = sono.get("dailySleepDTO", {})
-        s["sono_h"]      = round((d.get("sleepTimeSeconds") or 0) / 3600, 1)
-        s["sono_score"]  = d.get("sleepScores", {}).get("overall", {}).get("value")
-        s["sono_deep_h"] = round((d.get("deepSleepSeconds") or 0) / 3600, 1)
-        s["sono_rem_h"]  = round((d.get("remSleepSeconds") or 0) / 3600, 1)
-        print(f"  Sono: {s['sono_h']}h score={s['sono_score']}")
+        hr = api.get_rhr_day(TODAY_STR)
+        s["rhr"]          = hr.get("allDayHR",{}).get("minHeartRate") or hr.get("restingHeartRate")
+        s["rhr_baseline"] = hr.get("baselineHeartRate")
+        print(f"  RHR: {s['rhr']} (baseline {s['rhr_baseline']})")
     except Exception as e:
-        print(f"  [SONO ERROR] {e}")
-        s["sono_h"] = s["sono_score"] = s["sono_deep_h"] = s["sono_rem_h"] = None
+        print(f"  RHR err: {e}")
+        try:
+            ud = api.get_user_summary(TODAY_STR)
+            s["rhr"] = ud.get("minHeartRateInBeatsPerMinute") or ud.get("restingHeartRateInBeatsPerMinute")
+            s["rhr_baseline"] = None
+        except: s["rhr"]=s["rhr_baseline"]=None
 
-    # === BODY BATTERY ===
+    # Sono
+    try:
+        r = api.get_sleep_data(TODAY_STR)
+        dl = r.get("dailySleepDTO",{})
+        s["sono_h"]     = round((dl.get("sleepTimeSeconds") or 0)/3600,1)
+        s["sono_score"] = dl.get("sleepScores",{}).get("overall",{}).get("value")
+        s["sono_deep"]  = round((dl.get("deepSleepSeconds") or 0)/3600,1)
+        s["sono_rem"]   = round((dl.get("remSleepSeconds") or 0)/3600,1)
+        s["sono_awake"] = round((dl.get("awakeSleepSeconds") or 0)/60,0)
+        print(f"  Sono: {s['sono_h']}h score={s['sono_score']} deep={s['sono_deep']}h rem={s['sono_rem']}h")
+    except Exception as e: print(f"  Sono err: {e}"); s["sono_h"]=s["sono_score"]=s["sono_deep"]=s["sono_rem"]=None
+
+    # Body Battery / Stress
     try:
         bb = api.get_body_battery(TODAY_STR, TODAY_STR)
         vals = [x.get("charged") for x in (bb or []) if x.get("charged") is not None]
-        s["readiness"] = max(vals) if vals else None
-        print(f"  Readiness: {s['readiness']}")
-    except Exception as e:
-        print(f"  [READINESS ERROR] {e}")
-        s["readiness"] = None
+        s["body_battery"] = max(vals) if vals else None
+        print(f"  Body Battery: {s['body_battery']}")
+    except: s["body_battery"] = None
 
-    # === TRAINING STATUS / ACWR ===
+    try:
+        ud = api.get_user_summary(TODAY_STR)
+        s["stress_avg"] = ud.get("averageStressLevel")
+        s["stress_rest"] = ud.get("restStressPercentage")
+    except: s["stress_avg"]=s["stress_rest"]=None
+
+    # Training Load / ATL / CTL / TSB / ACWR
     try:
         ts = api.get_training_status(TODAY_STR)
-        lb = ts.get("trainingLoadBalance", {})
-        s["acwr"]               = round(lb.get("acuteChronicWorkloadRatio") or 0, 2) or None
-        s["training_status"]    = ts.get("trainingStatus", {}).get("trainingStatus", "")
-        s["training_readiness"] = ts.get("trainingReadiness", {}).get("score")
-        print(f"  ACWR: {s['acwr']}")
+        lb = ts.get("trainingLoadBalance",{})
+        s["atl"]    = lb.get("acuteLoad") or lb.get("sevenDayLoad")
+        s["ctl"]    = lb.get("longTermLoad") or lb.get("twentyEightDayLoad")
+        s["tsb"]    = None
+        if s["atl"] and s["ctl"]: s["tsb"] = round(float(s["ctl"]) - float(s["atl"]),1)
+        s["acwr"]   = round(lb.get("acuteChronicWorkloadRatio") or 0,2) or None
+        s["load_3d"] = lb.get("threeDayLoad")
+        s["training_status"] = ts.get("trainingStatus",{}).get("trainingStatus","")
+        s["training_readiness"] = ts.get("trainingReadiness",{}).get("score")
+        print(f"  ATL={s['atl']} CTL={s['ctl']} TSB={s['tsb']} ACWR={s['acwr']}")
     except Exception as e:
-        print(f"  [ACWR ERROR] {e}")
-        s["acwr"] = s["training_status"] = s["training_readiness"] = None
+        print(f"  Training load err: {e}")
+        s["atl"]=s["ctl"]=s["tsb"]=s["acwr"]=s["load_3d"]=s["training_status"]=s["training_readiness"]=None
 
-    # === VO2MAX ===
+    # VO2max
     try:
         s["vo2max"] = None
-        def _extract_vo2(obj):
-            if not obj: return None
-            if isinstance(obj, list):
-                for item in obj:
-                    v = _extract_vo2(item)
+        def _vo2(obj):
+            if isinstance(obj,list):
+                for i in obj:
+                    v=_vo2(i)
                     if v: return v
                 return None
-            if isinstance(obj, dict):
-                for key in ["vo2MaxPreciseValue","vo2Max","vo2MaxValue","currentVo2Max","latestVo2Max"]:
-                    if obj.get(key): return obj[key]
-                for sub in ["generic","cycling","running","swimming"]:
-                    v = _extract_vo2(obj.get(sub))
+            if isinstance(obj,dict):
+                for k in ["vo2MaxPreciseValue","vo2Max","vo2MaxValue","currentVo2Max"]:
+                    if obj.get(k): return obj[k]
+                for sub in ["generic","cycling","running"]:
+                    v=_vo2(obj.get(sub))
                     if v: return v
             return None
-
-        for attempt in [
-            lambda: api.get_max_metrics(TODAY_STR),
-            lambda: api.get_training_status(TODAY_STR),
-            lambda: api.get_performance_metrics(TODAY_STR),
-            lambda: api.get_user_summary(TODAY_STR),
-            lambda: api.get_stats(TODAY_STR),
-        ]:
+        for fn in [lambda:api.get_max_metrics(TODAY_STR), lambda:api.get_training_status(TODAY_STR), lambda:api.get_user_summary(TODAY_STR)]:
             if s["vo2max"]: break
-            try:
-                result = attempt()
-                s["vo2max"] = _extract_vo2(result)
-            except Exception: pass
-
+            try: s["vo2max"]=_vo2(fn())
+            except: pass
         print(f"  VO2max: {s['vo2max']}")
-    except Exception as e:
-        print(f"  [VO2MAX ERROR] {e}")
-        s["vo2max"] = None
+    except: s["vo2max"]=None
 
+    # Peso
     try:
-        pesos = api.get_weigh_ins(TODAY_STR, TODAY_STR)
-        reg = pesos.get("dailyWeightSummaries", [])
-        ultimo = reg[-1].get("allDayAvgWeightValue") if reg else None
-        s["peso"] = round(ultimo / 1000, 1) if ultimo else None
-    except: s["peso"] = None
+        pw = api.get_weigh_ins(TODAY_STR, TODAY_STR)
+        reg = pw.get("dailyWeightSummaries",[])
+        s["peso"] = round(reg[-1].get("allDayAvgWeightValue")/1000,1) if reg else None
+    except: s["peso"]=None
 
+    # Race predictions
     try:
-        races = api.get_race_predictions()
-        s["previsoes"] = {
-            "5K":      races.get("time5K"),
-            "10K":     races.get("time10K"),
-            "Meia":    races.get("timeHalfMarathon"),
-            "Maratona":races.get("timeMarathon"),
-        }
-        s["previsoes"] = {k: v for k, v in s["previsoes"].items() if v}
-    except: s["previsoes"] = {}
+        r = api.get_race_predictions()
+        s["previsoes"] = {k:v for k,v in {"5K":r.get("time5K"),"10K":r.get("time10K"),"Meia":r.get("timeHalfMarathon"),"Maratona":r.get("timeMarathon")}.items() if v}
+    except: s["previsoes"]={}
 
-    # === TREINOS DE ONTEM ===
+    # ─ Treinos de ontem ─
     try:
-        atividades = api.get_activities_by_date(YESTERDAY_STR, YESTERDAY_STR)
-        for a in (atividades or []):
-            tipo_raw = (a.get("activityType", {}).get("typeKey") or "").lower()
-            if "swim" in tipo_raw or "natacao" in tipo_raw or "pool" in tipo_raw:
-                modalidade = "natacao"
-                icone = "🏊"
-            elif "cycling" in tipo_raw or "bike" in tipo_raw or "ride" in tipo_raw:
-                modalidade = "bike"
-                icone = "🚴"
-            elif "running" in tipo_raw or "run" in tipo_raw:
-                modalidade = "corrida"
-                icone = "🏃"
-            else:
-                modalidade = "outro"
-                icone = "⚡"
+        acts = api.get_activities_by_date(YESTERDAY_STR, YESTERDAY_STR)
+        for a in (acts or []):
+            tipo = (a.get("activityType",{}).get("typeKey") or "").lower()
+            if   "swim" in tipo or "pool" in tipo: mod,ico = "swim","🏊"
+            elif "cycl" in tipo or "bike" in tipo: mod,ico = "bike","🚴"
+            elif "run"  in tipo:                   mod,ico = "run","🏃"
+            else:                                  mod,ico = "other","⚡"
 
-            dist  = a.get("distance")
-            dur   = a.get("duration")
-            fc    = a.get("averageHR")
-            fc_max= a.get("maxHR")
-            cal   = a.get("calories")
-            cad   = a.get("averageRunningCadenceInStepsPerMinute") or a.get("averageBikingCadenceInRevPerMinute")
-            potencia = a.get("avgPower")
-            tss   = a.get("trainingStressScore")
-            nome  = a.get("activityName", tipo_raw.capitalize())
+            dist = a.get("distance"); dur = a.get("duration")
+            fc   = a.get("averageHR"); fc_max = a.get("maxHR")
+            tss  = a.get("trainingStressScore")
+            np   = a.get("avgPower"); cad = a.get("averageRunningCadenceInStepsPerMinute") or a.get("averageBikingCadenceInRevPerMinute")
+            elev = a.get("elevationGain"); cal_act = a.get("calories")
+            aerobic_te = a.get("aerobicTrainingEffect")
+            anaerobic_te = a.get("anaerobicTrainingEffect")
 
-            # Pace / velocidade
-            if modalidade == "corrida":
-                perf_str = pace_corrida(dur, dist)
-                perf_label = "Pace"
-            elif modalidade == "bike":
-                perf_str = velocidade_bike(dur, dist)
-                perf_label = "Velocidade"
-            elif modalidade == "natacao":
-                # Pace natação: min/100m
-                if dur and dist and dist > 0:
-                    p = (dur / dist) * 100
-                    mm, ss = divmod(int(p), 60)
-                    perf_str = f"{mm}:{ss:02d}/100m"
-                else:
-                    perf_str = "—"
-                perf_label = "Pace"
-            else:
-                perf_str = "—"
-                perf_label = "—"
+            # HR drift proxy: diff entre 1a e 2a metade (não disponível direto — usa desvio como proxy)
+            hr_drift = None
 
-            dados["treinos_ontem"].append({
-                "modalidade": modalidade,
-                "icone": icone,
-                "nome": nome,
-                "distancia": metros_para_dist(dist, modalidade),
-                "duracao": segundos_para_tempo(dur),
-                "fc_media": fc,
-                "fc_max": fc_max,
-                "calorias": cal,
-                "cadencia": cad,
-                "potencia": potencia,
-                "tss": tss,
-                "perf_label": perf_label,
-                "perf_valor": perf_str,
-                # dados brutos para a IA
-                "_dist_m": dist,
-                "_dur_s": dur,
-                "_tss": tss,
+            # Pace / speed
+            if mod=="run":   perf=pace_run(dur,dist);  pl="Pace"
+            elif mod=="bike": perf=spd_bike(dur,dist); pl="Velocidade"
+            elif mod=="swim": perf=pace_swim(dur,dist); pl="Pace"
+            else:             perf="—"; pl="—"
+
+            # IF (Intensity Factor) se tiver NP e FTP — usamos avgPower como proxy
+            # SWOLF para natação
+            swolf = a.get("avgStrokes")  # Garmin pode retornar como avgStrokes
+
+            d["ontem"].append({
+                "mod":mod,"icone":ico,"nome":a.get("activityName",mod),
+                "dist":dist_fmt(dist,mod),"dur":hms(dur),
+                "fc":fc,"fc_max":fc_max,"cal":cal_act,"cad":cad,
+                "tss":tss,"np":np,"swolf":swolf,
+                "aerobic_te":aerobic_te,"anaerobic_te":anaerobic_te,
+                "elev":elev,"perf":perf,"pl":pl,
+                "_dist_m":dist,"_dur_s":dur,
             })
-    except:
-        traceback.print_exc()
+        print(f"  Treinos ontem: {len(d['ontem'])}")
+    except: traceback.print_exc()
 
-    # === CALENDÁRIO DE AMANHÃ ===
-    try:
-        TOMORROW = TODAY + datetime.timedelta(days=1)
-        TOMORROW_STR = TOMORROW.isoformat()
-        year, month = TOMORROW.year, TOMORROW.month
-
-        raw_items = []
-
-        # get_scheduled_workouts retorna dict com chave calendarItems
+    # ─ Calendário hoje e amanhã ─
+    def _parse_calendar(target_date_str, target_date):
+        items = []
         try:
-            result = api.get_scheduled_workouts(year, month)
-            if isinstance(result, dict):
-                raw_items = result.get("calendarItems") or []
-            elif isinstance(result, list):
-                raw_items = result
-            print(f"  Calendário bruto: {len(raw_items)} item(s) no mês")
-        except Exception as em:
-            print(f"  get_scheduled_workouts falhou: {em}")
+            res = api.get_scheduled_workouts(target_date.year, target_date.month)
+            raw = res.get("calendarItems",[]) if isinstance(res,dict) else (res if isinstance(res,list) else [])
+            print(f"  Calendário {target_date_str}: {len(raw)} itens no mês")
+            for w in raw:
+                if not isinstance(w,dict): continue
+                wd = w.get("date") or w.get("scheduledDate") or w.get("calendarDate") or ""
+                if target_date_str not in str(wd): continue
+                if "activity" in str(w.get("itemType","")).lower(): continue
+                nome = w.get("title") or w.get("workoutName") or w.get("description") or "Treino"
+                tp_raw = w.get("activityType") or w.get("sportType") or ""
+                tp = (tp_raw.get("typeKey") or tp_raw.get("sportTypeKey") or str(tp_raw)).lower() if isinstance(tp_raw,dict) else str(tp_raw).lower()
+                dur_w = w.get("duration") or w.get("estimatedDurationInSecs")
+                dist_w = w.get("distance") or w.get("estimatedDistanceInMeters")
+                if   "swim" in tp or "swim" in nome.lower(): ico="🏊"
+                elif "cycl" in tp or "bike" in nome.lower(): ico="🚴"
+                elif "run"  in tp or "run"  in nome.lower(): ico="🏃"
+                else: ico="⚡"
+                items.append({"icone":ico,"nome":nome,"tipo":tp,"dur":hms(dur_w),"dist":dist_fmt(dist_w)})
+        except Exception as e:
+            print(f"  Calendário err {target_date_str}: {e}")
+        return items
 
-        # Filtra apenas treinos de amanhã
-        for w in raw_items:
-            if not isinstance(w, dict):
-                continue
-            # Data do item — tenta vários campos
-            item_date = (w.get("date") or w.get("scheduledDate")
-                         or w.get("calendarDate") or w.get("startDate") or "")
-            # Aceita formato YYYY-MM-DD ou DD/MM/YYYY
-            if TOMORROW_STR not in str(item_date) and str(TOMORROW.day) not in str(item_date):
-                continue
-            # Só workouts agendados (não atividades já feitas)
-            item_type = str(w.get("itemType") or w.get("type") or "workout").lower()
-            if "activity" in item_type:
-                continue
+    d["hoje"]  = _parse_calendar(TODAY_STR,  TODAY)
+    d["amanha"] = _parse_calendar(TOMORROW_STR, TOMORROW)
+    print(f"  Hoje: {len(d['hoje'])} treino(s) | Amanhã: {len(d['amanha'])} treino(s)")
+    return d
 
-            nome_w    = (w.get("title") or w.get("workoutName") or w.get("description") or "Treino")
-            tipo_raw  = w.get("activityType") or w.get("sportType") or w.get("workoutSportType") or ""
-            tipo_w    = (tipo_raw.get("typeKey") or tipo_raw.get("sportTypeKey") or str(tipo_raw)).lower() if isinstance(tipo_raw, dict) else str(tipo_raw).lower()
-            duracao_w = w.get("duration") or w.get("estimatedDurationInSecs")
-            dist_w    = w.get("distance") or w.get("estimatedDistanceInMeters")
-
-            if "swim" in tipo_w or "swim" in nome_w.lower():      icone_w = "🏊"
-            elif "cycl" in tipo_w or "bike" in nome_w.lower():    icone_w = "🚴"
-            elif "run" in tipo_w or "run" in nome_w.lower():      icone_w = "🏃"
-            else:                                                  icone_w = "⚡"
-
-            dados["calendario_hoje"].append({
-                "icone": icone_w,
-                "nome": nome_w,
-                "tipo": tipo_w,
-                "duracao": segundos_para_tempo(duracao_w),
-                "distancia": metros_para_dist(dist_w),
-                "_duracao_s": duracao_w,
-                "_dist_m": dist_w,
-            })
-        print(f"  Treinos amanhã ({TOMORROW_STR}): {len(dados['calendario_hoje'])}")
-    except:
-        traceback.print_exc()
-
-    return dados
-
-# ─── Claude AI Insights ───────────────────────────────────────────────────────
-
-def gerar_insights_ia(dados):
+# ─── Prompt técnico ───────────────────────────────────────────────────────────
+def gerar_insights(dados):
     s = dados["saude"]
-    treinos = dados["treinos_ontem"]
-    calendario = dados["calendario_hoje"]
 
-    # Monta contexto rico para a IA
-    treinos_txt = ""
-    for t in treinos:
-        treinos_txt += f"\n- {t['modalidade'].upper()}: {t['distancia']}, {t['duracao']}, FC média {t['fc_media']}bpm, FC max {t['fc_max']}bpm"
-        if t['potencia']: treinos_txt += f", Potência {t['potencia']}W"
-        if t['tss']: treinos_txt += f", TSS {t['tss']}"
-        if t['perf_valor'] != '—': treinos_txt += f", {t['perf_label']} {t['perf_valor']}"
-    if not treinos_txt: treinos_txt = "\n- Nenhum treino registrado"
+    def fmt_treinos(lista):
+        if not lista: return "  Nenhum treino registrado."
+        out = ""
+        for t in lista:
+            out += f"\n  [{t['mod'].upper()}] {t['nome']}: {t['dist']}, {t['dur']}, FC {t['fc']}bpm (max {t['fc_max']}bpm)"
+            if t['np']:    out += f", Potência avg {t['np']}W"
+            if t['tss']:   out += f", TSS {t['tss']}"
+            if t['swolf']: out += f", SWOLF {t['swolf']}"
+            if t['cad']:   out += f", Cad {t['cad']}"
+            if t['aerobic_te']: out += f", TE aeróbico {t['aerobic_te']}"
+            out += f", Pace/Vel: {t['perf']}"
+        return out
 
-    cal_txt = ""
-    for c in calendario:
-        cal_txt += f"\n- {c['tipo'].upper()}: {c['nome']}, duração estimada {c['duracao']}, distância {c['distancia']}"
-    if not cal_txt: cal_txt = "\n- Nenhum treino agendado para hoje"
+    def fmt_cal(lista, label):
+        if not lista: return f"  Sem treino agendado {label}."
+        return "".join(f"\n  {c['icone']} {c['nome']} ({c['dur']}, {c['dist']})" for c in lista)
 
-    prompt = f"""Você é um treinador especialista em triathlon 70.3 com profundo conhecimento em fisiologia do esporte, periodização e análise de dados de wearables Garmin.
+    hrv_trend = "—"
+    if s.get("hrv") and s.get("hrv_7d"):
+        diff = float(s["hrv"]) - float(s["hrv_7d"])
+        hrv_trend = f"+{diff:.0f}ms vs média 7d" if diff>=0 else f"{diff:.0f}ms vs média 7d"
 
-DADOS DE HOJE ({TODAY_STR}):
-- HRV: {s.get('hrv')} ms ({s.get('hrv_status')})
-- Sono: {s.get('sono_h')}h — Score {s.get('sono_score')} — Deep {s.get('sono_deep_h')}h — REM {s.get('sono_rem_h')}h
-- Body Battery (Readiness): {s.get('readiness')}/100
-- ACWR: {s.get('acwr')} (ideal 0.8–1.3)
+    prompt = f"""Você é um treinador de triathlon especializado em Half Ironman com abordagem altamente analítica.
+Gere um briefing técnico, direto e objetivo. Máximo 2000 caracteres no campo "briefing".
+
+RECUPERAÇÃO ({TODAY_STR}):
+- HRV: {s.get('hrv')} ms | Média 7d: {s.get('hrv_7d')} ms | Tendência: {hrv_trend} | Status: {s.get('hrv_status')} | Baseline: {s.get('hrv_baseline_low')}–{s.get('hrv_baseline_high')} ms
+- Resting HR: {s.get('rhr')} bpm | Baseline: {s.get('rhr_baseline')} bpm
+- Sono: {s.get('sono_h')}h | Score: {s.get('sono_score')} | Deep: {s.get('sono_deep')}h | REM: {s.get('sono_rem')}h
+- Body Battery: {s.get('body_battery')}/100 | Stress médio: {s.get('stress_avg')}
 - Training Readiness Garmin: {s.get('training_readiness')}
+
+CARGA:
+- Carga 3 dias: {s.get('load_3d')}
+- ATL (7d): {s.get('atl')}
+- CTL (28-42d): {s.get('ctl')}
+- TSB (CTL-ATL): {s.get('tsb')}
+- ACWR: {s.get('acwr')} (ideal 0.8–1.3)
+- Status Garmin: {s.get('training_status')}
 - VO2max: {s.get('vo2max')} ml/kg/min
-- Status de treino Garmin: {s.get('training_status')}
 
-TREINOS DE ONTEM ({YESTERDAY_STR}):{treinos_txt}
+TREINO DE ONTEM ({YESTERDAY_STR}):{fmt_treinos(dados['ontem'])}
 
-TREINO AGENDADO PARA HOJE NO CALENDÁRIO GARMIN:{cal_txt}
+TREINO HOJE ({TODAY_STR}):{fmt_cal(dados['hoje'], 'para hoje')}
 
-Responda em JSON com exatamente estas chaves (sem markdown, sem texto fora do JSON):
+TREINO AMANHÃ ({TOMORROW_STR}):{fmt_cal(dados['amanha'], 'para amanhã')}
+
+Responda SOMENTE em JSON válido, sem markdown:
 {{
-  "frase_motivacional": "1 frase motivacional curta e poderosa para triatleta 70.3, personalizada para o estado atual. Máximo 15 palavras. Em português. Sem clichês.",
-  "resumo_ontem": "2-3 frases analisando os treinos de ontem: qualidade, execução, pontos positivos e de atenção por modalidade",
-  "analise_recuperacao": "1-2 frases sobre o estado de recuperação atual baseado nos dados fisiológicos",
-  "validacao_treino_hoje": "🟢 IDEAL / 🟡 AJUSTAR / 🔴 SUBSTITUIR — seguido de 1-2 frases explicando se o treino agendado é adequado para o estado atual",
-  "sugestao_ajuste": "Se precisar ajustar/substituir: descreva o ajuste concreto (ex: reduzir volume 30%, trocar por natação técnica, etc). Se estiver ideal, escreva 'Siga o plano como programado.'",
-  "foco_tecnico": "1 dica técnica específica para a(s) modalidade(s) de hoje baseada nos dados recentes",
-  "alerta": "Qualquer alerta importante de saúde ou carga. Se não houver, escreva null"
+  "frase": "Frase motivacional técnica curta (máx 12 palavras, português)",
+  "briefing": "Briefing completo do treinador seguindo esta estrutura:\\n1) READINESS — avalie HRV+tendência, RHR, sono, Body Battery\\n2) TREINO ONTEM — análise por modalidade: eficiência, execução, pontos críticos\\n3) CARGA (ATL/CTL/TSB) — risco de fadiga, overreaching, tendência\\n4) HOJE — o treino planejado é adequado? manter/reduzir/ajustar + treino ajustado concreto\\n5) AMANHÃ — faz sentido? risco de overreaching?\\n6) ALERTAS — fadiga, HR drift, distribuição de zonas, outros\\n7) NUTRIÇÃO — 1 dica específica para hoje\\nSeja crítico, técnico e objetivo como um coach experiente. Máx 2000 caracteres.",
+  "status_readiness": "ÓTIMO | BOM | MODERADO | BAIXO | CRÍTICO",
+  "status_carga": "SUAVE | IDEAL | ELEVADA | SOBRECARGA",
+  "acao_hoje": "MANTER | REDUZIR 20% | REDUZIR 40% | SUBSTITUIR | DESCANSO",
+  "alerta": "Alerta crítico se houver, senão null"
 }}"""
 
     payload = json.dumps({
         "model": "claude-sonnet-4-6",
-        "max_tokens": 1000,
-        "messages": [{"role": "user", "content": prompt}]
-    }).encode("utf-8")
+        "max_tokens": 2000,
+        "messages": [{"role":"user","content":prompt}]
+    }).encode()
 
     req = urllib.request.Request(
-        "https://api.anthropic.com/v1/messages",
-        data=payload,
-        headers={
-            "x-api-key": ANTHROPIC_API_KEY,
-            "anthropic-version": "2023-06-01",
-            "content-type": "application/json",
-        },
+        "https://api.anthropic.com/v1/messages", data=payload,
+        headers={"x-api-key":ANTHROPIC_API_KEY,"anthropic-version":"2023-06-01","content-type":"application/json"},
         method="POST"
     )
-
     try:
-        with urllib.request.urlopen(req) as resp:
-            result = json.loads(resp.read())
-    except urllib.error.HTTPError as e:
-        body = e.read().decode()
-        print(f"Anthropic API error {e.code}: {body}")
-        return {"frase_motivacional": "Foco no processo.", "resumo_ontem": f"Erro IA (HTTP {e.code}). Verifique ANTHROPIC_API_KEY.",
-                "analise_recuperacao": "—", "validacao_treino_hoje": "—", "sugestao_ajuste": "—", "foco_tecnico": "—", "alerta": None}
-
-    raw = result["content"][0]["text"].strip().replace("```json","").replace("```","").strip()
-    try:
+        with urllib.request.urlopen(req) as r:
+            result = json.loads(r.read())
+        raw = result["content"][0]["text"].strip().replace("```json","").replace("```","").strip()
         return json.loads(raw)
-    except json.JSONDecodeError:
-        print(f"JSON inválido: {raw[:200]}")
-        return {"frase_motivacional": "Foco no processo.", "resumo_ontem": raw[:400],
-                "analise_recuperacao": "—", "validacao_treino_hoje": "—", "sugestao_ajuste": "—", "foco_tecnico": "—", "alerta": None}
+    except urllib.error.HTTPError as e:
+        print(f"API err {e.code}: {e.read().decode()}")
+        return {"frase":"Foco no processo.","briefing":"Erro ao consultar IA.","status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None}
+    except Exception as e:
+        print(f"Parse err: {e}")
+        return {"frase":"Foco no processo.","briefing":str(e),"status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None}
 
-# ─── HTML do e-mail ───────────────────────────────────────────────────────────
+# ─── HTML ─────────────────────────────────────────────────────────────────────
+def _sem(v,lo,hi):
+    if v is None: return "⚪","#1c1c1c","#555"
+    if float(v)>=hi: return "🟢","#00C896","#003a28"
+    if float(v)>=lo: return "🟡","#FFB800","#3a2a00"
+    return "🔴","#FF4444","#3a0000"
 
-def _sem_colors(v, lo, hi):
-    e = semaforo_emoji(v, lo, hi)
-    if e == "\U0001f7e2": return e, "#00C896", "#003a28"
-    if e == "\U0001f7e1": return e, "#FFB800", "#3a2a00"
-    if e == "\U0001f534": return e, "#FF4444", "#3a0000"
-    return e, "#1c1c1c", "#555"
+def gerar_html(dados, ins):
+    s = dados["saude"]
+    dias_pt = {"Monday":"Segunda","Tuesday":"Terça","Wednesday":"Quarta",
+               "Thursday":"Quinta","Friday":"Sexta","Saturday":"Sábado","Sunday":"Domingo"}
+    dia = dias_pt.get(TODAY.strftime("%A"),TODAY.strftime("%A")) + ", " + TODAY.strftime("%d/%m/%Y")
 
-def gerar_html(dados, insights):
-    s  = dados["saude"]
-    tr = dados["treinos_ontem"]
-    ca = dados["calendario_hoje"]
+    def D(st,c): return f'<div style="{st}">{c}</div>'
+    def S(st,c): return f'<span style="{st}">{c}</span>'
 
-    dias_pt = {"Monday":"Segunda","Tuesday":"Tera","Wednesday":"Quarta",
-               "Thursday":"Quinta","Friday":"Sexta","Saturday":"Sabado","Sunday":"Domingo"}
-    dia_str = dias_pt.get(TODAY.strftime("%A"), TODAY.strftime("%A")) + ", " + TODAY.strftime("%d/%m/%Y")
+    def sbox(em,bg,dk,lb):
+        return D(f"background:{bg};border-radius:8px;padding:12px 4px;text-align:center",
+            S("font-size:18px;display:block",em)+S(f"font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:{dk};display:block;margin-top:4px",lb))
 
-    r_em, r_bg, r_dk = _sem_colors(s.get("readiness"), 40, 70)
-    h_em, h_bg, h_dk = _sem_colors(s.get("hrv"), 40, 60)
-    sn_em, sn_bg, sn_dk = _sem_colors(s.get("sono_score"), 60, 80)
-    acwr = s.get("acwr")
-    if acwr is None:          a_em,a_bg,a_dk = "\u26aa","#1c1c1c","#555"
-    elif acwr > 1.5:          a_em,a_bg,a_dk = "\U0001f534","#FF4444","#3a0000"
-    elif 0.8 <= acwr <= 1.3:  a_em,a_bg,a_dk = "\U0001f7e2","#00C896","#003a28"
-    else:                     a_em,a_bg,a_dk = "\U0001f7e1","#FFB800","#3a2a00"
+    def mc(ico,lb,val,sub,has):
+        bc="#1a6fff" if has else "#242424"; vc="#fff" if has else "#333"
+        return D(f"background:#181818;border-radius:8px;padding:12px 10px;border-left:3px solid {bc}",
+            S("font-size:12px",ico)+
+            D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin:3px 0 2px",lb)+
+            D(f"font-size:17px;font-weight:700;color:{vc};line-height:1",val)+
+            D("font-size:10px;color:#444;margin-top:2px",sub))
 
-    frase = insights.get("frase_motivacional", "Cada treino e um tijolo na sua melhor versao.")
+    # Semáforos
+    r_em,r_bg,r_dk = _sem(s.get("body_battery"),40,70)
+    h_em,h_bg,h_dk = _sem(s.get("hrv"),40,60)
+    sn_em,sn_bg,sn_dk = _sem(s.get("sono_score"),60,80)
+    acwr=s.get("acwr")
+    if acwr is None:          a_em,a_bg,a_dk="⚪","#1c1c1c","#555"
+    elif float(acwr)>1.5:     a_em,a_bg,a_dk="🔴","#FF4444","#3a0000"
+    elif float(acwr)>=0.8:    a_em,a_bg,a_dk="🟢","#00C896","#003a28"
+    else:                     a_em,a_bg,a_dk="🟡","#FFB800","#3a2a00"
 
-    def D(st, c): return '<div style="'+st+'">'+c+'</div>'
-    def S(st, c): return '<span style="'+st+'">'+c+'</span>'
+    # Status badges
+    status_colors = {"ÓTIMO":"#00C896","BOM":"#00C896","MODERADO":"#FFB800","BAIXO":"#FF8C00","CRÍTICO":"#FF4444",
+                     "SUAVE":"#00C896","IDEAL":"#00C896","ELEVADA":"#FFB800","SOBRECARGA":"#FF4444"}
+    def badge(txt):
+        c=status_colors.get(str(txt).upper(),"#555")
+        return S(f"font-size:9px;font-weight:700;letter-spacing:.1em;background:{c}22;color:{c};border:1px solid {c}44;padding:3px 8px;border-radius:4px;text-transform:uppercase",str(txt))
 
-    def sembox(em, bg, dk, label):
-        return D("background:"+bg+";border-radius:8px;padding:13px 4px;text-align:center",
-            S("font-size:20px;display:block", em) +
-            S("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:"+dk+";display:block;margin-top:5px", label))
+    # Ação hoje
+    acao_colors={"MANTER":"#00C896","REDUZIR 20%":"#FFB800","REDUZIR 40%":"#FF8C00","SUBSTITUIR":"#FF4444","DESCANSO":"#888"}
+    ac=ins.get("acao_hoje","—")
+    ac_c=acao_colors.get(ac.upper(),"#888")
 
-    def mcard(icon, label, val, sub, has):
-        bc = "#1a6fff" if has else "#242424"
-        vc = "#ffffff" if has else "#333"
-        return D("background:#181818;border-radius:8px;padding:13px 11px;border-left:3px solid "+bc,
-            S("font-size:13px", icon) +
-            D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin:4px 0 2px", label) +
-            D("font-size:19px;font-weight:700;color:"+vc+";line-height:1", val) +
-            D("font-size:10px;color:#444;margin-top:2px", sub))
-
-    def tcard(t):
-        tags = ""
-        if t["potencia"]: tags += S("background:#1e1e1e;border:1px solid #2a2a2a;border-radius:3px;padding:2px 7px;font-size:10px;color:#555;margin-right:4px", "&#9889; "+str(t["potencia"])+"W")
-        if t["tss"]:      tags += S("background:#1e1e1e;border:1px solid #2a2a2a;border-radius:3px;padding:2px 7px;font-size:10px;color:#555;margin-right:4px", "TSS "+str(t["tss"]))
-        tags += S("background:#1e1e1e;border:1px solid #2a2a2a;border-radius:3px;padding:2px 7px;font-size:10px;color:#555;margin-right:4px", "&#128293; "+fmt(t["calorias"],0)+" kcal")
-        stats = "".join(D("",D("font-size:14px;font-weight:700;color:#fff;line-height:1",v)+D("font-size:8px;text-transform:uppercase;letter-spacing:.07em;color:#444;margin-top:2px",l)) for v,l in [(t["distancia"],"Distancia"),(t["duracao"],"Duracao"),(fmt(t["fc_media"],0)+" bpm","FC Media"),(t["perf_valor"],t["perf_label"])])
-        return D("background:#181818;border-radius:8px;padding:14px;margin-bottom:8px;border-top:2px solid #1a6fff",
-            D("display:flex;align-items:center;gap:8px;margin-bottom:10px", S("font-size:9px;font-weight:700;letter-spacing:.1em;background:#1a6fff;color:#fff;padding:3px 7px;border-radius:3px",t["icone"]+" "+t["modalidade"].upper())+S("font-size:12px;color:#555",t["nome"]))+
-            D("display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px",stats)+
-            D("display:flex;flex-wrap:wrap;gap:4px",tags))
-
-    # tabela de amanha gerada abaixo
-        return D("display:flex;align-items:center;gap:12px;background:#181818;border-radius:8px;padding:13px;margin-bottom:7px;border-left:3px solid #00C896",
-            S("font-size:20px;min-width:28px;text-align:center",c["icone"])+D("",D("font-size:13px;font-weight:600;color:#fff",c["nome"])+D("font-size:11px;color:#444;margin-top:2px",c["duracao"]+" - "+c["distancia"])))
-
-    def ia(label, text, bg="#07111f", bc="#1a6fff", lc="#1a6fff", tc="#7a9bbf"):
-        return D("background:"+bg+";border-left:3px solid "+bc+";border-radius:8px;padding:13px 15px;margin-bottom:7px",
-            D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:"+lc+";margin-bottom:5px",label)+
-            D("font-size:13px;color:"+tc+";line-height:1.6",str(text)))
-
-    treinos_html = "".join(tcard(t) for t in tr) if tr else D("color:#444;font-size:13px;padding:10px 0","Nenhum treino registrado ontem.")
-    if ca:
-        rows = "".join(
-            "<tr>"
-            "<td style='padding:10px 12px;font-size:18px;width:32px'>" + c["icone"] + "</td>"
-            "<td style='padding:10px 12px;font-size:13px;font-weight:600;color:#fff'>" + c["nome"] + "</td>"
-            "<td style='padding:10px 12px;font-size:12px;color:#888;white-space:nowrap;font-family:monospace'>" + c["duracao"] + "</td>"
-            "<td style='padding:10px 12px;font-size:12px;color:#888;white-space:nowrap;font-family:monospace'>" + c["distancia"] + "</td>"
+    # Treinos de ontem
+    def trow(t):
+        return (
+            "<tr style='border-bottom:1px solid #1e1e1e'>"
+            f"<td style='padding:9px 10px;font-size:16px;width:28px'>{t['icone']}</td>"
+            f"<td style='padding:9px 10px;font-size:12px;font-weight:600;color:#ddd'>{t['nome']}</td>"
+            f"<td style='padding:9px 10px;font-size:11px;color:#888;white-space:nowrap;font-family:monospace'>{t['dist']}</td>"
+            f"<td style='padding:9px 10px;font-size:11px;color:#888;white-space:nowrap;font-family:monospace'>{t['dur']}</td>"
+            f"<td style='padding:9px 10px;font-size:11px;color:#888;white-space:nowrap;font-family:monospace'>{t['perf']}</td>"
+            f"<td style='padding:9px 10px;font-size:11px;color:#666;white-space:nowrap;font-family:monospace'>FC {fmt(t['fc'],0)} | TSS {fmt(t['tss'],0)}</td>"
             "</tr>"
-            for c in ca
         )
-        cal_html = (
-            "<table style='width:100%;border-collapse:collapse;background:#181818;border-radius:8px;overflow:hidden;border-left:3px solid #00C896'>"
-            "<thead><tr style='border-bottom:1px solid #242424'>"
-            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left' colspan='2'>Treino</th>"
-            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left'>Duracao</th>"
-            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left'>Distancia</th>"
-            "</tr></thead><tbody>" + rows + "</tbody></table>"
+
+    def cal_table(lista, label):
+        if not lista:
+            return D("color:#444;font-size:12px;padding:8px 0",f"Nenhum treino agendado {label}.")
+        rows="".join(
+            "<tr style='border-bottom:1px solid #1e1e1e'>"
+            f"<td style='padding:9px 10px;font-size:16px;width:28px'>{c['icone']}</td>"
+            f"<td style='padding:9px 10px;font-size:12px;font-weight:600;color:#ddd'>{c['nome']}</td>"
+            f"<td style='padding:9px 10px;font-size:11px;color:#888;font-family:monospace'>{c['dur']}</td>"
+            f"<td style='padding:9px 10px;font-size:11px;color:#888;font-family:monospace'>{c['dist']}</td>"
+            "</tr>"
+            for c in lista
         )
-    else:
-        cal_html = D("color:#444;font-size:13px;padding:10px 0","Nenhum treino agendado para amanha.")
-
-    alerta_html = ""
-    if insights.get("alerta"):
-        alerta_html = D("background:#110000;border-left:3px solid #FF4444;border-radius:8px;padding:13px 15px;font-size:13px;color:#cc5555;line-height:1.5;margin-bottom:8px","&#9888;&#65039; "+str(insights["alerta"]))
-
-    prev_html = ""
-    if s.get("previsoes"):
-        pitems = "".join(D("background:#181818;border-radius:7px;padding:10px 6px;text-align:center",D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444",k)+D("font-size:15px;font-weight:700;color:#fff;margin-top:4px",segundos_para_tempo(v))) for k,v in s["previsoes"].items())
-        prev_html = D("font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:10px;margin-top:22px","&#127937; Previsao de Prova")+D("display:grid;grid-template-columns:repeat(4,1fr);gap:6px",pitems)
+        return (
+            "<table style='width:100%;border-collapse:collapse;background:#181818;border-radius:8px;overflow:hidden'>"
+            "<thead><tr style='border-bottom:1px solid #2a2a2a'>"
+            "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left' colspan='2'>Treino</th>"
+            "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left'>Duração</th>"
+            "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left'>Distância</th>"
+            f"</tr></thead><tbody>{rows}</tbody></table>"
+        )
 
     SL = "font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:10px"
-    DIV = D("height:1px;background:#1e1e1e;margin:18px 0","")
+    DIV = D("height:1px;background:#1e1e1e;margin:16px 0","")
+    briefing_html = ins.get("briefing","—").replace("\n","<br>")
+    alerta_html = D("background:#110000;border-left:3px solid #FF4444;border-radius:8px;padding:12px 15px;font-size:12px;color:#cc5555;line-height:1.5;margin-top:8px","&#9888; "+str(ins["alerta"])) if ins.get("alerta") else ""
+
+    ontem_rows = "".join(trow(t) for t in dados["ontem"]) if dados["ontem"] else f"<tr><td colspan='6' style='padding:10px;color:#444;font-size:12px'>Nenhum treino registrado</td></tr>"
+
+    prev_html=""
+    if s.get("previsoes"):
+        pitems="".join(D("background:#181818;border-radius:7px;padding:9px 6px;text-align:center",D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444",k)+D("font-size:14px;font-weight:700;color:#fff;margin-top:3px;font-family:monospace",hms(v))) for k,v in s["previsoes"].items())
+        prev_html=D(SL+";margin-top:16px","&#127937; Previsão de Prova")+D("display:grid;grid-template-columns:repeat(4,1fr);gap:6px",pitems)
 
     body = (
-        D(SL,"Status Geral")+
-        D("display:grid;grid-template-columns:repeat(4,1fr);gap:6px",sembox(r_em,r_bg,r_dk,"Readiness")+sembox(a_em,a_bg,a_dk,"Carga")+sembox(h_em,h_bg,h_dk,"HRV")+sembox(sn_em,sn_bg,sn_dk,"Sono"))+
-        D(SL+";margin-top:22px","Dados Fisiologicos")+
+        D(SL,"Status Geral") +
+        D("display:grid;grid-template-columns:repeat(4,1fr);gap:6px",
+            sbox(r_em,r_bg,r_dk,"Readiness")+sbox(a_em,a_bg,a_dk,"Carga ACWR")+sbox(h_em,h_bg,h_dk,"HRV")+sbox(sn_em,sn_bg,sn_dk,"Sono"))+
+        D("display:flex;gap:8px;margin-top:8px;flex-wrap:wrap",
+            D("display:flex;align-items:center;gap:6px",S("font-size:10px;color:#555","Readiness:")+badge(ins.get("status_readiness","—")))+
+            D("display:flex;align-items:center;gap:6px",S("font-size:10px;color:#555","Carga:")+badge(ins.get("status_carga","—")))+
+            D("display:flex;align-items:center;gap:6px",S("font-size:10px;color:#555","Ação hoje:")+S(f"font-size:9px;font-weight:700;letter-spacing:.1em;background:{ac_c}22;color:{ac_c};border:1px solid {ac_c}44;padding:3px 8px;border-radius:4px",ac)))+
+        D(SL+";margin-top:20px","Dados Fisiológicos") +
         D("display:grid;grid-template-columns:repeat(3,1fr);gap:6px",
-            mcard("&#128164;","Sono",fmt(s.get("sono_h"))+"h","Score "+fmt(s.get("sono_score"),0)+" - Deep "+fmt(s.get("sono_deep_h"))+"h",bool(s.get("sono_h")))+
-            mcard("&#10084;&#65039;","HRV",fmt(s.get("hrv"),0)+" ms",(s.get("hrv_status") or "-").capitalize(),bool(s.get("hrv")))+
-            mcard("&#128267;","Readiness",fmt(s.get("readiness"),0),"Body Battery",bool(s.get("readiness")))+
-            mcard("&#128200;","ACWR",fmt(s.get("acwr"),2),"Ideal 0.8-1.3",bool(s.get("acwr")))+
-            mcard("&#129755;","VO2max",fmt(s.get("vo2max"),1),"ml/kg/min",bool(s.get("vo2max")))+
-            mcard("&#9878;&#65039;","Peso",fmt(s.get("peso"))+" kg",TODAY.strftime("%d/%m"),bool(s.get("peso"))))+
+            mc("💤","Sono",fmt(s.get("sono_h"))+"h",f"Score {fmt(s.get('sono_score'),0)} · REM {fmt(s.get('sono_rem'))}h",bool(s.get("sono_h")))+
+            mc("❤️","HRV",fmt(s.get("hrv"),0)+" ms",f"7d avg {fmt(s.get('hrv_7d'),0)} · {(s.get('hrv_status') or '—').upper()}",bool(s.get("hrv")))+
+            mc("🔋","Body Battery",fmt(s.get("body_battery"),0),f"Stress {fmt(s.get('stress_avg'),0)}",bool(s.get("body_battery")))+
+            mc("💓","Resting HR",fmt(s.get("rhr"),0)+" bpm",f"Baseline {fmt(s.get('rhr_baseline'),0)} bpm",bool(s.get("rhr")))+
+            mc("📈","ATL / CTL",f"{fmt(s.get('atl'),0)} / {fmt(s.get('ctl'),0)}",f"TSB {fmt(s.get('tsb'),0)} · ACWR {fmt(s.get('acwr'),2)}",bool(s.get("atl")))+
+            mc("🫁","VO₂max",fmt(s.get("vo2max"),1),"ml/kg/min",bool(s.get("vo2max"))))+
         DIV+
-        D(SL,"Treinos de Ontem")+treinos_html+
-        ia("&#129302; Analise dos treinos",insights.get("resumo_ontem","--"))+
-        ia("&#128138; Recuperacao atual",insights.get("analise_recuperacao","--"))+
+        D(SL,"Treinos de Ontem") +
+        "<table style='width:100%;border-collapse:collapse;background:#181818;border-radius:8px;overflow:hidden'>"
+        "<thead><tr style='border-bottom:1px solid #2a2a2a'>"
+        "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#444;text-align:left' colspan='2'>Atividade</th>"
+        "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#444;text-align:left'>Dist</th>"
+        "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#444;text-align:left'>Dur</th>"
+        "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#444;text-align:left'>Pace/Vel</th>"
+        "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#444;text-align:left'>FC / TSS</th>"
+        f"</tr></thead><tbody>{ontem_rows}</tbody></table>"+
         DIV+
-        D(SL,"Treino Agendado para Amanha")+cal_html+
-        ia("&#129302; Este treino esta adequado?",insights.get("validacao_treino_hoje","--"),tc="#a8ccf0")+
-        ia("&#128295; Sugestao de ajuste",insights.get("sugestao_ajuste","--"))+
-        ia("&#127919; Foco tecnico de hoje",insights.get("foco_tecnico","--"),bg="#110d00",bc="#FFB800",lc="#FFB800",tc="#c09040")+
-        alerta_html+prev_html
+        D(SL,"Análise do Coach — IA") +
+        D("background:#07111f;border-left:3px solid #1a6fff;border-radius:8px;padding:14px 16px;font-size:13px;color:#9ab8d8;line-height:1.7",briefing_html)+
+        alerta_html+
+        DIV+
+        D(SL,"Treino de Hoje") + cal_table(dados["hoje"],"para hoje")+
+        D(SL+";margin-top:16px","Treino de Amanhã") + cal_table(dados["amanha"],"para amanhã")+
+        prev_html
     )
 
     return (
         "<!DOCTYPE html><html lang='pt-BR'><head><meta charset='UTF-8'>"
         "<meta name='viewport' content='width=device-width,initial-scale=1'></head>"
         "<body style='font-family:Arial,Helvetica,sans-serif;background:#050505;color:#e0e0e0;margin:0;padding:0'>"
-        "<div style='max-width:560px;margin:20px auto;background:#0f0f0f;border-radius:14px;overflow:hidden;border:1px solid #222'>"
+        "<div style='max-width:580px;margin:20px auto;background:#0f0f0f;border-radius:14px;overflow:hidden;border:1px solid #222'>"
         "<div style='background:#000;border-bottom:3px solid #1a6fff'>"
         "<div style='padding:18px 24px 0;display:flex;justify-content:space-between;align-items:center'>"
-        "<span style='font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#fff;background:#1a6fff;padding:4px 10px;border-radius:4px'>&#8987; Triathlon 70.3</span>"
-        "<span style='font-size:11px;color:#444'>"+dia_str+"</span>"
+        "<span style='font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#fff;background:#1a6fff;padding:4px 10px;border-radius:4px'>&#9202; Triathlon Coach</span>"
+        f"<span style='font-size:11px;color:#444'>{dia}</span>"
         "</div>"
-        "<div style='padding:16px 24px 20px;font-size:22px;font-weight:700;line-height:1.25;color:#fff'>"+frase+"</div>"
+        f"<div style='padding:14px 24px 18px;font-size:20px;font-weight:700;line-height:1.3;color:#fff'>{ins.get('frase','—')}</div>"
         "</div>"
-        "<div style='padding:22px 24px 28px'>"+body+"</div>"
-        "<div style='background:#000;text-align:center;padding:12px;font-size:9px;color:#2a2a2a;letter-spacing:.1em;text-transform:uppercase'>Gerado por IA - Garmin Connect - "+TODAY_STR+"</div>"
+        f"<div style='padding:20px 22px 28px'>{body}</div>"
+        f"<div style='background:#000;text-align:center;padding:12px;font-size:9px;color:#2a2a2a;letter-spacing:.1em;text-transform:uppercase'>Garmin Connect + Claude AI · {TODAY_STR}</div>"
         "</div></body></html>"
     )
 
-
 # ─── Envio SendGrid ───────────────────────────────────────────────────────────
-
-def enviar_email(html):
-    payload = json.dumps({
-        "personalizations": [{"to": [{"email": EMAIL_TO}]}],
-        "from": {"email": EMAIL_FROM, "name": "Triathlon Briefing IA"},
-        "subject": f"⌚ Briefing Triathlon — {TODAY.strftime('%d/%m/%Y')}",
-        "content": [{"type": "text/html", "value": html}]
-    }).encode("utf-8")
-
-    req = urllib.request.Request(
-        "https://api.sendgrid.com/v3/mail/send",
-        data=payload,
-        headers={
-            "Authorization": f"Bearer {SENDGRID_API_KEY}",
-            "Content-Type": "application/json"
-        },
-        method="POST"
-    )
-    with urllib.request.urlopen(req) as r:
-        print(f"E-mail enviado — HTTP {r.status}")
+def enviar(html):
+    payload=json.dumps({"personalizations":[{"to":[{"email":EMAIL_TO}]}],"from":{"email":EMAIL_FROM,"name":"Triathlon Coach"},"subject":f"&#9202; Coach Report — {TODAY.strftime('%d/%m/%Y')}","content":[{"type":"text/html","value":html}]}).encode()
+    req=urllib.request.Request("https://api.sendgrid.com/v3/mail/send",data=payload,headers={"Authorization":f"Bearer {SENDGRID_API_KEY}","Content-Type":"application/json"},method="POST")
+    with urllib.request.urlopen(req) as r: print(f"Email enviado — HTTP {r.status}")
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
-
 def main():
-    print(f"[{TODAY_STR}] Coletando dados Garmin...")
-    dados = coletar_dados()
-    print(f"  Treinos ontem: {len(dados['treinos_ontem'])}")
-    print(f"  Calendário hoje: {len(dados['calendario_hoje'])}")
-
-    print("Gerando insights com Claude AI...")
-    insights = gerar_insights_ia(dados)
-    print("Insights:", json.dumps(insights, ensure_ascii=False, indent=2))
-
-    html = gerar_html(dados, insights)
-    enviar_email(html)
+    print(f"[{TODAY_STR}] Iniciando briefing...")
+    dados  = coletar()
+    print("Gerando análise IA...")
+    ins    = gerar_insights(dados)
+    print("Briefing:", ins.get("frase"))
+    html   = gerar_html(dados, ins)
+    enviar(html)
     print("Concluído ✅")
 
 if __name__ == "__main__":
