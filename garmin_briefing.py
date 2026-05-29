@@ -495,12 +495,28 @@ def enviar(html):
     with urllib.request.urlopen(req) as r: print(f"Email enviado — HTTP {r.status}")
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
+def salvar_json(dados, ins):
+    """Salva report.json para a PWA."""
+    report = {
+        "date": TODAY_STR,
+        "generated_at": datetime.datetime.utcnow().isoformat() + "Z",
+        "saude": dados["saude"],
+        "ontem": dados["ontem"],
+        "hoje":  dados["hoje"],
+        "amanha":dados["amanha"],
+        "insights": ins,
+    }
+    with open("pwa/report.json", "w", encoding="utf-8") as f:
+        json.dump(report, f, ensure_ascii=False, default=str, indent=2)
+    print("  report.json salvo → pwa/report.json")
+
 def main():
     print(f"[{TODAY_STR}] Iniciando briefing...")
     dados  = coletar()
     print("Gerando análise IA...")
     ins    = gerar_insights(dados)
     print("Briefing:", ins.get("frase"))
+    salvar_json(dados, ins)
     html   = gerar_html(dados, ins)
     enviar(html)
     print("Concluído ✅")
