@@ -531,7 +531,39 @@ function renderReport(r){
     <div class="slabel" style="margin-top:16px">Treino de Amanhã</div>
     ${amanha.length?renderTable(amanha,cal_cols):'<div style="color:#444;font-size:12px;padding:8px 0">Nenhum treino agendado.</div>'}
     ${prevHTML}
+    ${renderForca(ins.treino_forca||[])}
     <div class="last-updated">Atualizado em ${new Date(r.generated_at||r.date).toLocaleString("pt-BR")}</div>`;
+}
+
+function renderForca(items) {
+  if (!items || !items.length) return "";
+  const CARGA_C = {leve:"#00C896",moderada:"#FFB800",pesada:"#FF4444"};
+  const rows = items.map(ex => {
+    const cg = (ex.carga||"").toLowerCase();
+    const cc = CARGA_C[cg]||"#555";
+    return `<tr>
+      <td class="name">${ex.exercicio||"—"}</td>
+      <td class="mono" style="text-align:center">${ex.series||"—"}x${ex.repeticoes||"—"}</td>
+      <td style="text-align:center;padding:10px 8px">
+        <span style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${cc};background:${cc}22;border:1px solid ${cc}44;padding:2px 7px;border-radius:4px">${ex.carga||"—"}</span>
+      </td>
+      <td style="padding:10px 12px;font-size:11px;color:#555;line-height:1.5">${ex.foco||""}</td>
+    </tr>`;
+  }).join("");
+  return `
+    <div class="divider"></div>
+    <div class="slabel">💪 Treino de Força — Sugestão IA</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Exercício</th>
+          <th style="text-align:center">Séries x Reps</th>
+          <th style="text-align:center">Carga</th>
+          <th>Foco Triathlon</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
 }
 
 function scrollToSection(id){
