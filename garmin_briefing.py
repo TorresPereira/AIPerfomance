@@ -88,32 +88,24 @@ def coletar():
         print(f"  HRV: {s['hrv']} (7d avg {s['hrv_7d']}, status {s['hrv_status']})")
     except Exception as e: print(f"  HRV err: {e}"); s["hrv"]=s["hrv_7d"]=s["hrv_status"]=None
 
-    # Resting HR
+    # Resting HR — WELLNESS_RESTING_HEART_RATE confirmado no Garmin 965
     s["rhr"] = s["rhr_baseline"] = None
-    for rhr_attempt in ["get_rhr_day", "get_heart_rates"]:
-        try:
-            fn = getattr(api, rhr_attempt)
-            hr = fn(TODAY_STR)
-            print(f"  [DEBUG RHR via {rhr_attempt}]:", json.dumps(hr, default=str)[:300])
-            if isinstance(hr, dict):
-                s["rhr"] = (hr.get("restingHeartRate")
-                            or hr.get("allDayHR",{}).get("restingHeartRate")
-                            or hr.get("allDayHR",{}).get("minHeartRate")
-                            or hr.get("heartRateValues",[[]])[0][1] if hr.get("heartRateValues") else None)
-                s["rhr_baseline"] = hr.get("baselineHeartRate") or hr.get("avgRestingHeartRate")
-            if s["rhr"]: break
-        except Exception as e:
-            print(f"  {rhr_attempt}: {e}")
-    # Fallback: user_summary
-    if not s["rhr"]:
+    try:
+        hr = api.get_rhr_day(TODAY_STR)
+        metrics = hr.get("allMetrics",{}).get("metricsMap",{})
+        rhr_list = metrics.get("WELLNESS_RESTING_HEART_RATE",[])
+        s["rhr"] = int(rhr_list[0]["value"]) if rhr_list else None
+        if not s["rhr"]:
+            s["rhr"] = hr.get("restingHeartRate")
+        print(f"  RHR: {s['rhr']} bpm")
+    except Exception as e:
+        print(f"  RHR err: {e}")
         try:
             ud = api.get_user_summary(TODAY_STR)
             s["rhr"] = (ud.get("restingHeartRateInBeatsPerMinute")
-                        or ud.get("minHeartRateInBeatsPerMinute")
-                        or ud.get("averageRestingHeartRateInBeatsPerMinute"))
-            print(f"  [DEBUG RHR via user_summary]: {s['rhr']}")
-        except Exception as e: print(f"  user_summary RHR: {e}")
-    print(f"  RHR: {s['rhr']} (baseline {s['rhr_baseline']})")
+                        or ud.get("minHeartRateInBeatsPerMinute"))
+        except: pass
+
 
     # Sono
     try:
@@ -154,14 +146,11 @@ def coletar():
         lb_raw = ts.get("mostRecentTrainingLoadBalance") or {}
         lb_map = lb_raw.get("metricsTrainingLoadBalanceDTOMap") or {}
         lb = next(iter(lb_map.values()), {}) if lb_map else {}
-        print(f"  [DEBUG lb keys]: {list(lb.keys())[:10]}")
-        print(f"  [DEBUG lb sample]: Z1={lb.get('monthlyLoadAerobicLow')} Z2={lb.get('monthlyLoadAerobicHigh')} Z3={lb.get('monthlyLoadAnaerobic')}")
 
         aerobic_low  = float(lb.get("monthlyLoadAerobicLow")  or 0)
         aerobic_high = float(lb.get("monthlyLoadAerobicHigh") or 0)
         anaerobic    = float(lb.get("monthlyLoadAnaerobic")    or 0)
         total_monthly = aerobic_low + aerobic_high + anaerobic
-        print(f"  [DEBUG total_monthly]: {total_monthly}")
 
         # Targets para comparação
         target_low_min  = lb.get("monthlyLoadAerobicLowTargetMin")
