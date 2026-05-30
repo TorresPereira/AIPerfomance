@@ -286,13 +286,44 @@ def coletar():
                 wd = w.get("date") or w.get("scheduledDate") or w.get("calendarDate") or ""
                 if target_date_str not in str(wd): continue
                 if "activity" in str(w.get("itemType","")).lower(): continue
+                # Debug primeiro item para ver estrutura completa
+                if not items:
+                    print(f"  [CAL DEBUG] keys: {list(w.keys())}")
+                    print(f"  [CAL DEBUG] full: {json.dumps(w, default=str)[:600]}")
+
                 nome = w.get("title") or w.get("workoutName") or w.get("description") or "Treino"
                 tp_raw = w.get("activityType") or w.get("sportType") or ""
                 tp = (tp_raw.get("typeKey") or tp_raw.get("sportTypeKey") or str(tp_raw)).lower() if isinstance(tp_raw,dict) else str(tp_raw).lower()
-                dur_w = w.get("duration") or w.get("estimatedDurationInSecs")
-                dist_w = w.get("distance") or w.get("estimatedDistanceInMeters")
+
+                # Duração: tenta todos os campos possíveis
+                dur_w = (w.get("duration") or w.get("estimatedDurationInSecs")
+                         or w.get("durationInSeconds") or w.get("workoutDurationInSeconds"))
+
+                # Distância: tenta todos os campos possíveis
+                dist_w = (w.get("distance") or w.get("estimatedDistanceInMeters")
+                          or w.get("distanceInMeters") or w.get("workoutDistanceInMeters"))
+
+                # Fallback: extrai duração do nome se estiver no formato "1 hr 5 min ..."
+                if not dur_w and nome:
+                    import re as _re
+                    m = _re.match(r'(\d+)\s*hr\s*(\d+)\s*min', nome)
+                    if m:
+                        dur_w = int(m.group(1))*3600 + int(m.group(2))*60
+                        # Limpa o nome removendo a duração do início
+                        nome = _re.sub(r'^\d+\s*hr\s*\d+\s*min\s*', '', nome).strip()
+                    else:
+                        m2 = _re.match(r'(\d+)\s*hr\s*', nome)
+                        if m2:
+                            dur_w = int(m2.group(1))*3600
+                            nome = _re.sub(r'^\d+\s*hr\s*', '', nome).strip()
+                        else:
+                            m3 = _re.match(r'(\d+)\s*min\s*', nome)
+                            if m3:
+                                dur_w = int(m3.group(1))*60
+                                nome = _re.sub(r'^\d+\s*min\s*', '', nome).strip()
+
                 if   "swim" in tp or "swim" in nome.lower(): ico="🏊"
-                elif "cycl" in tp or "bike" in nome.lower(): ico="🚴"
+                elif "cycl" in tp or "bike" in nome.lower() or "ride" in nome.lower(): ico="🚴"
                 elif "run"  in tp or "run"  in nome.lower(): ico="🏃"
                 else: ico="⚡"
                 items.append({"icone":ico,"nome":nome,"tipo":tp,"dur":hms(dur_w),"dist":dist_fmt(dist_w)})
@@ -361,12 +392,25 @@ Responda SOMENTE em JSON válido, sem markdown:
   "status_readiness": "ÓTIMO | BOM | MODERADO | BAIXO | CRÍTICO",
   "status_carga": "SUAVE | IDEAL | ELEVADA | SOBRECARGA",
   "acao_hoje": "MANTER | REDUZIR 20% | REDUZIR 40% | SUBSTITUIR | DESCANSO",
-  "alerta": "Alerta crítico se houver, senão null"
+  "alerta": "Alerta crítico se houver, senão null",
+  "treino_forca": [
+    {{"exercicio": "Nome do exercício", "series": 3, "repeticoes": "10-12", "carga": "moderada", "foco": "Por que este exercício para triatleta 70.3"}},
+    ...
+  ]
+}}
+Regras para treino_forca:
+- Escolha 5 a 7 exercícios adequados para triatleta 70.3 baseados no estado atual (readiness {s.get('body_battery')}, carga {s.get('training_status')})
+- Se readiness < 40 ou status = Recuperação: exercícios leves, mobilidade, core suave
+- Se readiness 40-70: força funcional moderada, glúteos, core, estabilidade
+- Se readiness > 70: força explosiva, pliometria, potência
+- Sempre inclua: 1 exercício de core, 1 de mobilidade/flexibilidade
+- carga deve ser: "leve", "moderada" ou "pesada"
+- foco deve ser 1 frase curta explicando o benefício para triathlon
 }}"""
 
     payload = json.dumps({
         "model": "claude-sonnet-4-6",
-        "max_tokens": 2000,
+        "max_tokens": 3000,
         "messages": [{"role":"user","content":prompt}]
     }).encode()
 
@@ -382,10 +426,10 @@ Responda SOMENTE em JSON válido, sem markdown:
         return json.loads(raw)
     except urllib.error.HTTPError as e:
         print(f"API err {e.code}: {e.read().decode()}")
-        return {"frase":"Foco no processo.","briefing":"Erro ao consultar IA.","status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None}
+        return {"frase":"Foco no processo.","briefing":"Erro ao consultar IA.","status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None,"treino_forca":[]}
     except Exception as e:
         print(f"Parse err: {e}")
-        return {"frase":"Foco no processo.","briefing":str(e),"status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None}
+        return {"frase":"Foco no processo.","briefing":str(e),"status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None,"treino_forca":[]}
 
 # ─── HTML ─────────────────────────────────────────────────────────────────────
 def _sem(v,lo,hi):
@@ -471,6 +515,35 @@ def gerar_html(dados, ins):
             f"</tr></thead><tbody>{rows}</tbody></table>"
         )
 
+    # ── Treino de Força ──
+    CARGA_C = {"leve":"#00C896","moderada":"#FFB800","pesada":"#FF4444"}
+    forca_itens = ins.get("treino_forca") or []
+    if forca_itens:
+        def forca_row(ex):
+            cg = str(ex.get("carga","")).lower()
+            cc = CARGA_C.get(cg,"#555")
+            return (
+                "<tr style='border-bottom:1px solid #1e1e1e'>"
+                "<td style='padding:10px 12px;font-size:13px;font-weight:600;color:#fff'>"+str(ex.get("exercicio","—"))+"</td>"
+                "<td style='padding:10px 12px;font-size:12px;color:#aaa;text-align:center;font-family:monospace;white-space:nowrap'>"+str(ex.get("series","—"))+"x"+str(ex.get("repeticoes","—"))+"</td>"
+                "<td style='padding:10px 12px;text-align:center'><span style='font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:"+cc+";background:"+cc+"22;border:1px solid "+cc+"44;padding:2px 7px;border-radius:4px'>"+str(ex.get("carga","—"))+"</span></td>"
+                "<td style='padding:10px 12px;font-size:11px;color:#555;line-height:1.4'>"+str(ex.get("foco",""))+"</td>"
+                "</tr>"
+            )
+        forca_html = (
+            D("height:1px;background:#1e1e1e;margin:16px 0","") +
+            D("font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:10px","&#128170; Treino de Forca — Sugestao IA") +
+            "<table style='width:100%;border-collapse:collapse;background:#181818;border-radius:10px;overflow:hidden'>"
+            "<thead><tr style='border-bottom:1px solid #2a2a2a'>"
+            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444;text-align:left'>Exercicio</th>"
+            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444;text-align:center'>Series x Reps</th>"
+            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444;text-align:center'>Carga</th>"
+            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444;text-align:left'>Foco Triathlon</th>"
+            "</tr></thead><tbody>"+"".join(forca_row(ex) for ex in forca_itens)+"</tbody></table>"
+        )
+    else:
+        forca_html = ""
+
     SL = "font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:10px"
     DIV = D("height:1px;background:#1e1e1e;margin:16px 0","")
     briefing_html = ins.get("briefing","—").replace("\n","<br>")
@@ -516,7 +589,7 @@ def gerar_html(dados, ins):
         DIV+
         D(SL,"Treino de Hoje") + cal_table(dados["hoje"],"para hoje")+
         D(SL+";margin-top:16px","Treino de Amanhã") + cal_table(dados["amanha"],"para amanhã")+
-        prev_html
+        prev_html+forca_html
     )
 
     return (
