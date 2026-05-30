@@ -2,8 +2,9 @@ name: Triathlon Daily Briefing
 
 on:
   schedule:
-    # 08:00 Alemanha verão (CEST = UTC+2) = 06:00 UTC
-    - cron: '0 6 * * *'
+    # 09:00 Alemanha verão (CEST = UTC+2) = 07:00 UTC
+    # 09:00 Alemanha inverno (CET  = UTC+1) = 08:00 UTC
+    - cron: '0 8 * * *'
   workflow_dispatch:
 
 permissions:
@@ -48,10 +49,9 @@ jobs:
           EMAIL_TO:          ${{ secrets.EMAIL_TO }}
         run: python garmin_briefing.py
 
-      # Publica pwa/ no GitHub Pages
       - name: Deploy PWA → GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./pwa
-          keep_files: true       # mantém ícones e arquivos estáticos entre deploys
+          keep_files: true
