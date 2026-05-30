@@ -131,18 +131,55 @@ def coletar():
     # Training Load / ATL / CTL / TSB / ACWR
     try:
         ts = api.get_training_status(TODAY_STR)
-        lb = ts.get("trainingLoadBalance",{})
-        s["atl"]    = lb.get("acuteLoad") or lb.get("sevenDayLoad")
-        s["ctl"]    = lb.get("longTermLoad") or lb.get("twentyEightDayLoad")
-        s["tsb"]    = None
-        if s["atl"] and s["ctl"]: s["tsb"] = round(float(s["ctl"]) - float(s["atl"]),1)
-        s["acwr"]   = round(lb.get("acuteChronicWorkloadRatio") or 0,2) or None
-        s["load_3d"] = lb.get("threeDayLoad")
-        s["training_status"] = ts.get("trainingStatus",{}).get("trainingStatus","")
-        s["training_readiness"] = ts.get("trainingReadiness",{}).get("score")
+        print("  [DEBUG training_status]:", json.dumps(ts, default=str)[:2000])
+
+        try:
+            tl = api.get_training_load()
+            print("  [DEBUG training_load]:", json.dumps(tl, default=str)[:1000])
+        except Exception as tle:
+            print(f"  get_training_load: {tle}")
+            tl = {}
+
+        def find_key(obj, keys):
+            # Search obj and one level deep for any of the given keys
+            if not isinstance(obj, dict): return None
+            for k in keys:
+                if obj.get(k) is not None: return obj[k]
+            for v in obj.values():
+                if isinstance(v, dict):
+                    for k in keys:
+                        if v.get(k) is not None: return v[k]
+            return None
+
+        lb  = ts.get("trainingLoadBalance") or {}
+        tr  = ts.get("trainingReadiness")   or {}
+        tst = ts.get("trainingStatus")      or {}
+
+        atl_keys = ["acuteLoad","sevenDayLoad","shortTermLoad","recentLoad","acuteTrainingLoad","weeklyLoad","acute"]
+        ctl_keys = ["longTermLoad","twentyEightDayLoad","chronicLoad","chronicTrainingLoad","baselineLoad","chronic"]
+        tsb_keys = ["trainingStressBalance","tsb","formRating"]
+        acwr_keys= ["acuteChronicWorkloadRatio","acwr","loadRatio"]
+        l3d_keys = ["threeDayLoad","recentLoad3Days","last3DaysLoad"]
+
+        s["atl"]  = find_key(ts, atl_keys)  or find_key(lb, atl_keys)  or find_key(tl, atl_keys)
+        s["ctl"]  = find_key(ts, ctl_keys)  or find_key(lb, ctl_keys)  or find_key(tl, ctl_keys)
+        s["tsb"]  = find_key(ts, tsb_keys)  or find_key(lb, tsb_keys)
+        if s["tsb"] is None and s["atl"] and s["ctl"]:
+            s["tsb"] = round(float(s["ctl"]) - float(s["atl"]), 1)
+        raw_acwr  = find_key(ts, acwr_keys) or find_key(lb, acwr_keys)
+        s["acwr"] = round(float(raw_acwr), 2) if raw_acwr else None
+        s["load_3d"] = find_key(ts, l3d_keys) or find_key(lb, l3d_keys)
+
+        s["training_status"]    = (tst.get("trainingStatus") or tst.get("status") or
+                                    ts.get("trainingStatus") if isinstance(ts.get("trainingStatus"), str) else None)
+        raw_tr = tr.get("score") or tr.get("readinessScore") or tr.get("value")
+        s["training_readiness"] = raw_tr if raw_tr else (
+                                    ts.get("trainingReadiness") if isinstance(ts.get("trainingReadiness"), (int,float)) else None)
+
         print(f"  ATL={s['atl']} CTL={s['ctl']} TSB={s['tsb']} ACWR={s['acwr']}")
     except Exception as e:
         print(f"  Training load err: {e}")
+        traceback.print_exc()
         s["atl"]=s["ctl"]=s["tsb"]=s["acwr"]=s["load_3d"]=s["training_status"]=s["training_readiness"]=None
 
     # VO2max
