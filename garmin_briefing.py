@@ -131,14 +131,14 @@ def coletar():
     # Training Load / ATL / CTL / TSB / ACWR
     try:
         ts = api.get_training_status(TODAY_STR)
-        print("  [DEBUG training_status]:", json.dumps(ts, default=str)[:2000])
 
-        try:
-            tl = api.get_training_load()
-            print("  [DEBUG training_load]:", json.dumps(tl, default=str)[:1000])
-        except Exception as tle:
-            print(f"  get_training_load: {tle}")
-            tl = {}
+        # Print top-level keys
+        print("  [DEBUG ts keys]:", list(ts.keys()))
+        # Print each top-level key value (truncated)
+        for k, v in ts.items():
+            print(f"  [DEBUG ts.{k}]:", json.dumps(v, default=str)[:400])
+
+        tl = {}
 
         def find_key(obj, keys):
             # Search obj and one level deep for any of the given keys
