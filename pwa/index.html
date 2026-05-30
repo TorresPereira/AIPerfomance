@@ -516,7 +516,7 @@ function renderReport(r){
       ${renderMC("❤️","HRV",fmt(s.hrv,0)+" ms",`7d ${fmt(s.hrv_7d,0)} · ${(s.hrv_status||"—").toUpperCase()}`,!!s.hrv)}
       ${renderMC("🔋","Body Battery",fmt(s.body_battery,0),`Stress ${fmt(s.stress_avg,0)}`,!!s.body_battery)}
       ${renderMC("💓","Resting HR",fmt(s.rhr,0)+" bpm",`Base ${fmt(s.rhr_baseline,0)} bpm`,!!s.rhr)}
-      ${renderMC("📈","ATL / CTL",`${fmt(s.atl,0)} / ${fmt(s.ctl,0)}`,`TSB ${fmt(s.tsb,0)} · ACWR ${fmt(s.acwr,2)}`,!!s.atl)}
+      ${renderMC("📈","ATL / CTL",`${fmt(s.atl,0)} / ${fmt(s.ctl,0)}`,`${s.training_status||"—"} · ${s.fitness_trend||"—"}`,!!s.atl)}
       ${renderMC("🫁","VO₂max",fmt(s.vo2max),"ml/kg/min",!!s.vo2max)}
     </div>
     <div class="divider" id="treinos"></div>

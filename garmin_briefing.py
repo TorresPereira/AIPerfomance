@@ -128,59 +128,66 @@ def coletar():
         s["stress_rest"] = ud.get("restStressPercentage")
     except: s["stress_avg"]=s["stress_rest"]=None
 
-    # Training Load / ATL / CTL / TSB / ACWR
+    # Training Load — Garmin 965 usa mostRecentTrainingLoadBalance + mostRecentTrainingStatus
     try:
         ts = api.get_training_status(TODAY_STR)
 
-        # Print top-level keys
-        print("  [DEBUG ts keys]:", list(ts.keys()))
-        # Print each top-level key value (truncated)
-        for k, v in ts.items():
-            print(f"  [DEBUG ts.{k}]:", json.dumps(v, default=str)[:400])
+        # Garmin 965: dados indexados por deviceId
+        STATUS_LABELS = {0:"Sem dados",1:"Peaking",2:"Produtivo",3:"Mantendo",
+                         4:"Recuperação",5:"Improdutivo",6:"Destreinando",7:"Sobrecarga"}
+        TREND_LABELS  = {1:"Melhorando",2:"Estável",3:"Caindo"}
 
-        tl = {}
+        # ── Training Load Balance ──
+        lb_map = (ts.get("mostRecentTrainingLoadBalance") or {}).get("metricsTrainingLoadBalanceDTOMap") or {}
+        lb = next(iter(lb_map.values()), {}) if lb_map else {}
 
-        def find_key(obj, keys):
-            # Search obj and one level deep for any of the given keys
-            if not isinstance(obj, dict): return None
-            for k in keys:
-                if obj.get(k) is not None: return obj[k]
-            for v in obj.values():
-                if isinstance(v, dict):
-                    for k in keys:
-                        if v.get(k) is not None: return v[k]
-            return None
+        aerobic_low  = lb.get("monthlyLoadAerobicLow")   or 0
+        aerobic_high = lb.get("monthlyLoadAerobicHigh")  or 0
+        anaerobic    = lb.get("monthlyLoadAnaerobic")     or 0
+        total_monthly = aerobic_low + aerobic_high + anaerobic
 
-        lb  = ts.get("trainingLoadBalance") or {}
-        tr  = ts.get("trainingReadiness")   or {}
-        tst = ts.get("trainingStatus")      or {}
+        # Targets para comparação
+        target_low_min  = lb.get("monthlyLoadAerobicLowTargetMin")
+        target_low_max  = lb.get("monthlyLoadAerobicLowTargetMax")
+        target_high_min = lb.get("monthlyLoadAerobicHighTargetMin")
+        target_high_max = lb.get("monthlyLoadAerobicHighTargetMax")
 
-        atl_keys = ["acuteLoad","sevenDayLoad","shortTermLoad","recentLoad","acuteTrainingLoad","weeklyLoad","acute"]
-        ctl_keys = ["longTermLoad","twentyEightDayLoad","chronicLoad","chronicTrainingLoad","baselineLoad","chronic"]
-        tsb_keys = ["trainingStressBalance","tsb","formRating"]
-        acwr_keys= ["acuteChronicWorkloadRatio","acwr","loadRatio"]
-        l3d_keys = ["threeDayLoad","recentLoad3Days","last3DaysLoad"]
+        # Aproximação ATL (carga semanal = mensal / 4) e CTL (mensal)
+        s["atl"]     = round(total_monthly / 4, 0) if total_monthly else None
+        s["ctl"]     = round(total_monthly, 0)     if total_monthly else None
+        s["tsb"]     = None  # Garmin não expõe TSB diretamente
+        s["acwr"]    = None  # idem
+        s["load_3d"] = lb.get("weeklyLoadAerobicLow") or lb.get("sevenDayLoad")
 
-        s["atl"]  = find_key(ts, atl_keys)  or find_key(lb, atl_keys)  or find_key(tl, atl_keys)
-        s["ctl"]  = find_key(ts, ctl_keys)  or find_key(lb, ctl_keys)  or find_key(tl, ctl_keys)
-        s["tsb"]  = find_key(ts, tsb_keys)  or find_key(lb, tsb_keys)
-        if s["tsb"] is None and s["atl"] and s["ctl"]:
-            s["tsb"] = round(float(s["ctl"]) - float(s["atl"]), 1)
-        raw_acwr  = find_key(ts, acwr_keys) or find_key(lb, acwr_keys)
-        s["acwr"] = round(float(raw_acwr), 2) if raw_acwr else None
-        s["load_3d"] = find_key(ts, l3d_keys) or find_key(lb, l3d_keys)
+        # Cargas por zona (para o prompt da IA)
+        s["load_aerobic_low"]  = round(aerobic_low, 0)  if aerobic_low  else None
+        s["load_aerobic_high"] = round(aerobic_high, 0) if aerobic_high else None
+        s["load_anaerobic"]    = round(anaerobic, 0)    if anaerobic    else None
+        s["load_total_month"]  = round(total_monthly,0) if total_monthly else None
+        s["load_target_low"]   = f"{target_low_min}–{target_low_max}"  if target_low_min else None
+        s["load_target_high"]  = f"{target_high_min}–{target_high_max}" if target_high_min else None
 
-        s["training_status"]    = (tst.get("trainingStatus") or tst.get("status") or
-                                    ts.get("trainingStatus") if isinstance(ts.get("trainingStatus"), str) else None)
-        raw_tr = tr.get("score") or tr.get("readinessScore") or tr.get("value")
-        s["training_readiness"] = raw_tr if raw_tr else (
-                                    ts.get("trainingReadiness") if isinstance(ts.get("trainingReadiness"), (int,float)) else None)
+        # ── Training Status ──
+        st_map = (ts.get("mostRecentTrainingStatus") or {}).get("latestTrainingStatusData") or {}
+        st = next(iter(st_map.values()), {}) if st_map else {}
 
-        print(f"  ATL={s['atl']} CTL={s['ctl']} TSB={s['tsb']} ACWR={s['acwr']}")
+        status_code  = st.get("trainingStatus")
+        trend_code   = st.get("fitnessTrend")
+        weekly_load  = st.get("weeklyTrainingLoad")
+
+        s["training_status"]    = STATUS_LABELS.get(status_code, str(status_code)) if status_code is not None else None
+        s["fitness_trend"]      = TREND_LABELS.get(trend_code, str(trend_code))    if trend_code is not None else None
+        s["training_readiness"] = None  # 965 não tem Training Readiness score numérico
+        if weekly_load: s["atl"] = round(weekly_load, 0)
+
+        print(f"  Carga mensal: {total_monthly:.0f} (Z1={aerobic_low:.0f} Z2={aerobic_high:.0f} Z3+={anaerobic:.0f})")
+        print(f"  ATL~={s['atl']} CTL~={s['ctl']} Status={s['training_status']} Trend={s['fitness_trend']}")
     except Exception as e:
         print(f"  Training load err: {e}")
         traceback.print_exc()
         s["atl"]=s["ctl"]=s["tsb"]=s["acwr"]=s["load_3d"]=s["training_status"]=s["training_readiness"]=None
+        s["load_aerobic_low"]=s["load_aerobic_high"]=s["load_anaerobic"]=s["load_total_month"]=None
+        s["load_target_low"]=s["load_target_high"]=s["fitness_trend"]=None
 
     # VO2max
     try:
@@ -328,14 +335,12 @@ RECUPERAÇÃO ({TODAY_STR}):
 - Body Battery: {s.get('body_battery')}/100 | Stress médio: {s.get('stress_avg')}
 - Training Readiness Garmin: {s.get('training_readiness')}
 
-CARGA:
-- Carga 3 dias: {s.get('load_3d')}
-- ATL (7d): {s.get('atl')}
-- CTL (28-42d): {s.get('ctl')}
-- TSB (CTL-ATL): {s.get('tsb')}
-- ACWR: {s.get('acwr')} (ideal 0.8–1.3)
-- Status Garmin: {s.get('training_status')}
-- VO2max: {s.get('vo2max')} ml/kg/min
+CARGA (Garmin 965 — modelo mensal por zona):
+- Carga mensal total: {s.get('load_total_month')} | Target Z1: {s.get('load_target_low')} | Target Z2: {s.get('load_target_high')}
+- Zona Aeróbica Leve (Z1): {s.get('load_aerobic_low')} | Zona Aeróbica Alta (Z2): {s.get('load_aerobic_high')} | Anaeróbica (Z3+): {s.get('load_anaerobic')}
+- ATL estimado (~semanal): {s.get('atl')} | CTL estimado (~mensal): {s.get('ctl')}
+- Status Garmin: {s.get('training_status')} | Tendência de Fitness: {s.get('fitness_trend')}
+- VO2max corrida: {s.get('vo2max')} ml/kg/min
 
 TREINO DE ONTEM ({YESTERDAY_STR}):{fmt_treinos(dados['ontem'])}
 
