@@ -89,18 +89,31 @@ def coletar():
     except Exception as e: print(f"  HRV err: {e}"); s["hrv"]=s["hrv_7d"]=s["hrv_status"]=None
 
     # Resting HR
-    try:
-        hr = api.get_rhr_day(TODAY_STR)
-        s["rhr"]          = hr.get("allDayHR",{}).get("minHeartRate") or hr.get("restingHeartRate")
-        s["rhr_baseline"] = hr.get("baselineHeartRate")
-        print(f"  RHR: {s['rhr']} (baseline {s['rhr_baseline']})")
-    except Exception as e:
-        print(f"  RHR err: {e}")
+    s["rhr"] = s["rhr_baseline"] = None
+    for rhr_attempt in ["get_rhr_day", "get_heart_rates"]:
+        try:
+            fn = getattr(api, rhr_attempt)
+            hr = fn(TODAY_STR)
+            print(f"  [DEBUG RHR via {rhr_attempt}]:", json.dumps(hr, default=str)[:300])
+            if isinstance(hr, dict):
+                s["rhr"] = (hr.get("restingHeartRate")
+                            or hr.get("allDayHR",{}).get("restingHeartRate")
+                            or hr.get("allDayHR",{}).get("minHeartRate")
+                            or hr.get("heartRateValues",[[]])[0][1] if hr.get("heartRateValues") else None)
+                s["rhr_baseline"] = hr.get("baselineHeartRate") or hr.get("avgRestingHeartRate")
+            if s["rhr"]: break
+        except Exception as e:
+            print(f"  {rhr_attempt}: {e}")
+    # Fallback: user_summary
+    if not s["rhr"]:
         try:
             ud = api.get_user_summary(TODAY_STR)
-            s["rhr"] = ud.get("minHeartRateInBeatsPerMinute") or ud.get("restingHeartRateInBeatsPerMinute")
-            s["rhr_baseline"] = None
-        except: s["rhr"]=s["rhr_baseline"]=None
+            s["rhr"] = (ud.get("restingHeartRateInBeatsPerMinute")
+                        or ud.get("minHeartRateInBeatsPerMinute")
+                        or ud.get("averageRestingHeartRateInBeatsPerMinute"))
+            print(f"  [DEBUG RHR via user_summary]: {s['rhr']}")
+        except Exception as e: print(f"  user_summary RHR: {e}")
+    print(f"  RHR: {s['rhr']} (baseline {s['rhr_baseline']})")
 
     # Sono
     try:
@@ -138,13 +151,17 @@ def coletar():
         TREND_LABELS  = {1:"Melhorando",2:"Estável",3:"Caindo"}
 
         # ── Training Load Balance ──
-        lb_map = (ts.get("mostRecentTrainingLoadBalance") or {}).get("metricsTrainingLoadBalanceDTOMap") or {}
+        lb_raw = ts.get("mostRecentTrainingLoadBalance") or {}
+        lb_map = lb_raw.get("metricsTrainingLoadBalanceDTOMap") or {}
         lb = next(iter(lb_map.values()), {}) if lb_map else {}
+        print(f"  [DEBUG lb keys]: {list(lb.keys())[:10]}")
+        print(f"  [DEBUG lb sample]: Z1={lb.get('monthlyLoadAerobicLow')} Z2={lb.get('monthlyLoadAerobicHigh')} Z3={lb.get('monthlyLoadAnaerobic')}")
 
-        aerobic_low  = lb.get("monthlyLoadAerobicLow")   or 0
-        aerobic_high = lb.get("monthlyLoadAerobicHigh")  or 0
-        anaerobic    = lb.get("monthlyLoadAnaerobic")     or 0
+        aerobic_low  = float(lb.get("monthlyLoadAerobicLow")  or 0)
+        aerobic_high = float(lb.get("monthlyLoadAerobicHigh") or 0)
+        anaerobic    = float(lb.get("monthlyLoadAnaerobic")    or 0)
         total_monthly = aerobic_low + aerobic_high + anaerobic
+        print(f"  [DEBUG total_monthly]: {total_monthly}")
 
         # Targets para comparação
         target_low_min  = lb.get("monthlyLoadAerobicLowTargetMin")
