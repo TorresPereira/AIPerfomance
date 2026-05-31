@@ -405,12 +405,13 @@ Regras para treino_forca:
 - Se readiness > 70: força explosiva, pliometria, potência
 - Sempre inclua: 1 exercício de core, 1 de mobilidade/flexibilidade
 - carga deve ser: "leve", "moderada" ou "pesada"
-- foco deve ser 1 frase curta explicando o benefício para triathlon
-}}"""
+- foco: 1 frase curta explicando o benefício para triathlon
+- "series" deve ser número inteiro, "repeticoes" pode ser string como "10-12" ou "30s"
+Retorne EXATAMENTE o JSON acima preenchido. Nenhum texto fora do JSON."""
 
     payload = json.dumps({
         "model": "claude-sonnet-4-6",
-        "max_tokens": 3000,
+        "max_tokens": 4000,
         "messages": [{"role":"user","content":prompt}]
     }).encode()
 
@@ -637,6 +638,7 @@ def main():
     print("Gerando análise IA...")
     ins    = gerar_insights(dados)
     print("Briefing:", ins.get("frase"))
+    print(f"  Força: {len(ins.get('treino_forca') or [])} exercícios")
     salvar_json(dados, ins)
     html   = gerar_html(dados, ins)
     enviar(html)
