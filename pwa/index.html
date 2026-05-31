@@ -159,13 +159,15 @@
     .forca-header h2{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
     .forca-header p{font-size:13px;color:#888;line-height:1.5}
     .forca-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#a855f722;color:#a855f7;border:1px solid #a855f744;padding:3px 8px;border-radius:4px;margin-bottom:10px}
-    .ex-card{background:#181818;border-radius:12px;margin-bottom:10px;overflow:hidden;border-left:3px solid #a855f7}
-    .ex-card-header{padding:14px 16px 10px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-    .ex-name{font-size:15px;font-weight:700;color:#fff;line-height:1.3}
-    .ex-sets{background:#a855f722;border:1px solid #a855f744;border-radius:6px;padding:4px 10px;font-size:13px;font-weight:700;color:#a855f7;white-space:nowrap;font-family:monospace}
-    .ex-card-body{padding:0 16px 14px;display:flex;align-items:center;gap:10px}
+    .ex-card{background:#181818;border-radius:14px;margin-bottom:12px;overflow:hidden;display:flex;gap:0}
+    .ex-card-img{width:100px;min-width:100px;display:flex;align-items:center;justify-content:center;padding:12px;position:relative;flex-shrink:0}
+    .ex-card-img svg{width:64px;height:64px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.4))}
+    .ex-sets-overlay{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:11px;font-weight:700;color:rgba(255,255,255,.7);font-family:monospace;letter-spacing:.04em}
+    .ex-card-info{flex:1;padding:14px 14px 14px 4px;display:flex;flex-direction:column;justify-content:center;gap:6px;min-width:0}
+    .ex-name{font-size:14px;font-weight:700;color:#fff;line-height:1.3}
+    .ex-meta{display:flex;align-items:center;gap:8px}
     .carga-badge{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid}
-    .ex-foco{font-size:12px;color:#555;line-height:1.5;flex:1}
+    .ex-foco{font-size:11px;color:#555;line-height:1.5}
     .last-updated{text-align:center;font-size:10px;color:#333;margin-top:16px}
   </style>
 </head>
@@ -555,35 +557,147 @@ function renderReport(r){
     <div class="last-updated">Atualizado em ${new Date(r.generated_at||r.date).toLocaleString("pt-BR")}</div>`;
 }
 
+// ── Exercise SVG illustrations ──────────────────────────────────────────────
+const EX_SVGS = {
+  squat: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="12" r="7" fill="white" opacity=".9"/>
+    <path d="M40 20 L40 42 M40 42 L28 60 M40 42 L52 60 M28 60 L24 72 M52 60 L56 72" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M32 26 L20 34 M48 26 L60 34" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </svg>`,
+  lunge: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="12" r="7" fill="white" opacity=".9"/>
+    <path d="M40 20 L40 38" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M40 38 L26 56 M40 38 L54 50" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M26 56 L22 70 M54 50 L58 68" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M33 26 L22 32 M47 26 L58 32" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </svg>`,
+  hinge: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="28" cy="20" r="7" fill="white" opacity=".9"/>
+    <path d="M28 27 L28 44" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M28 44 L56 44" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M56 44 L60 56" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M28 44 L16 56 M28 44 L22 60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M22 26 L12 30" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </svg>`,
+  push: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="28" r="7" fill="white" opacity=".9"/>
+    <path d="M40 35 L40 50" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M40 40 L24 44 M40 40 L56 44" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M24 50 L16 50 M56 50 L64 50" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M40 50 L34 62 M40 50 L46 62" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </svg>`,
+  pull: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="38" r="7" fill="white" opacity=".9"/>
+    <path d="M40 31 L40 18" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M40 22 L24 14 M40 22 L56 14" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M40 45 L34 58 M40 45 L46 58" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M40 35 L28 42 M40 35 L52 42" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </svg>`,
+  core: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="14" r="7" fill="white" opacity=".9"/>
+    <path d="M40 21 L40 38" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M12 48 L68 48" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M12 48 L16 56 M68 48 L64 56" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M40 38 L26 42 M40 38 L54 42" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </svg>`,
+  mobility: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="14" r="7" fill="white" opacity=".9"/>
+    <path d="M40 21 L40 44" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M40 30 L22 24 M40 30 L58 24" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M40 44 L28 62 M40 44 L52 62" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M20 60 C28 54 36 62 44 56 C52 50 60 58 68 52" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".5"/>
+  </svg>`,
+  plyo: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="10" r="7" fill="white" opacity=".9"/>
+    <path d="M40 17 L40 36" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M40 25 L26 20 M40 25 L54 20" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M40 36 L30 50 M40 36 L50 50" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M16 68 L64 68" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".4"/>
+    <path d="M28 4 L32 8 M52 4 L48 8" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+  </svg>`,
+  row: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="22" cy="28" r="7" fill="white" opacity=".9"/>
+    <path d="M22 35 L22 52" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M22 52 L16 64 M22 52 L28 64" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M22 43 L60 38" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M60 38 L64 32" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M22 35 L14 40" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </svg>`,
+  generic: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="12" r="7" fill="white" opacity=".9"/>
+    <path d="M40 20 L40 46 M40 46 L28 64 M40 46 L52 64" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M40 32 L24 26 M40 32 L56 26" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </svg>`
+};
+
+const EX_COLORS = {
+  squat:    ["#1a3a6f","#2a5aaf"],
+  lunge:    ["#1a4a2f","#2a7a4f"],
+  hinge:    ["#3a2a1a","#7a5a2a"],
+  push:     ["#3a1a2a","#7a2a5a"],
+  pull:     ["#1a2a3a","#2a5a7a"],
+  core:     ["#2a1a3a","#5a2a7a"],
+  mobility: ["#1a3a3a","#2a6a6a"],
+  plyo:     ["#3a2a1a","#8a5a1a"],
+  row:      ["#1a1a3a","#3a3a8a"],
+  generic:  ["#222","#333"]
+};
+
+function getExType(name) {
+  const n = (name||"").toLowerCase();
+  if (/agacham|squat|sumô|goblet|hack/.test(n))          return "squat";
+  if (/afundo|lunge|búlgar|step.up|passada/.test(n))     return "lunge";
+  if (/deadlift|terra|rdl|ponte|hip.thrust|stiff/.test(n)) return "hinge";
+  if (/supino|flexão|press|push|ombro|overhead/.test(n)) return "push";
+  if (/remada|pulldown|puxada|pull.up|barra/.test(n))    return "pull";
+  if (/prancha|plank|abdom|crunch|core|oblíq/.test(n))   return "core";
+  if (/mobil|alonga|rotaç|quadril|pigeon|foam/.test(n))  return "mobility";
+  if (/salto|plio|box.jump|burpee|skipping/.test(n))     return "plyo";
+  if (/remada|remo|rowing/.test(n))                       return "row";
+  return "generic";
+}
+
 function renderForca(items, saude) {
   const CARGA_C = {leve:"#00C896",moderada:"#FFB800",pesada:"#FF4444"};
-  const CARGA_I = {leve:"🟢",moderada:"🟡",pesada:"🔴"};
+  const CARGA_I = {leve:"Leve",moderada:"Moderada",pesada:"Pesada"};
   const bb = parseFloat(saude&&saude.body_battery)||0;
   let nivel = "Força Funcional", sub = "Estado moderado — estabilidade e controle";
   if (bb < 40)      { nivel = "Recuperação Ativa"; sub = "Readiness baixo — mobilidade e core suave"; }
   else if (bb >= 70){ nivel = "Força & Potência";  sub = "Ótimo estado — treine com intensidade"; }
+
   if (!items || !items.length) return `
     <div class="forca-header">
       <div class="forca-badge">💪 Treino de Força</div>
       <h2>${nivel}</h2><p>Rode o briefing para gerar sugestões.</p></div>`;
+
   const cards = items.map((ex,i) => {
-    const cg = (ex.carga||"leve").toLowerCase();
-    const cc = CARGA_C[cg]||"#555";
-    const ci = CARGA_I[cg]||"⚪";
-    return `<div class="ex-card">
-      <div class="ex-card-header">
-        <div class="ex-name">${ex.exercicio||"—"}</div>
-        <div class="ex-sets">${ex.series||"—"}×${ex.repeticoes||"—"}</div>
+    const cg  = (ex.carga||"leve").toLowerCase();
+    const cc  = CARGA_C[cg]||"#555";
+    const cl  = CARGA_I[cg]||"Leve";
+    const typ = getExType(ex.exercicio);
+    const [c1,c2] = EX_COLORS[typ];
+    const svg = EX_SVGS[typ];
+    return `
+    <div class="ex-card" style="animation:fadeUp .35s ease both;animation-delay:${i*0.06}s">
+      <div class="ex-card-img" style="background:linear-gradient(135deg,${c1},${c2})">
+        ${svg}
+        <div class="ex-sets-overlay">${ex.series||"—"}×${ex.repeticoes||"—"}</div>
       </div>
-      <div class="ex-card-body">
-        <span class="carga-badge" style="color:${cc};border-color:${cc}44;background:${cc}18">${ci} ${ex.carga||"—"}</span>
-        <span class="ex-foco">${ex.foco||""}</span>
-      </div></div>`;
+      <div class="ex-card-info">
+        <div class="ex-name">${ex.exercicio||"—"}</div>
+        <div class="ex-meta">
+          <span class="carga-badge" style="color:${cc};border-color:${cc}44;background:${cc}18">● ${cl}</span>
+        </div>
+        <div class="ex-foco">${ex.foco||""}</div>
+      </div>
+    </div>`;
   }).join("");
+
   return `
     <div class="forca-header">
       <div class="forca-badge">💪 Sugestão IA · ${items.length} exercícios</div>
-      <h2>${nivel}</h2><p>${sub}</p></div>
+      <h2>${nivel}</h2><p>${sub}</p>
+    </div>
     ${cards}`;
 }
 
