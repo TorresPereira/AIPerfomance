@@ -141,11 +141,31 @@
     .empty p{font-size:13px;line-height:1.6}
     .loading-bar{height:3px;background:linear-gradient(90deg,var(--blue),#00C896,var(--blue));background-size:200%;animation:loading 1.2s linear infinite;border-radius:2px;margin-bottom:20px}
     @keyframes loading{0%{background-position:0%}100%{background-position:200%}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:8px 0 calc(var(--sb) + 4px);display:flex;justify-content:space-around}
-    .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 0}
+    .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 0;position:relative;transition:opacity .15s}
     .nav-btn.active .nav-icon,.nav-btn.active .nav-label{color:var(--blue)}
-    .nav-icon{font-size:20px;color:#444}
-    .nav-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#444}
+    .nav-btn.active::after{content:'';position:absolute;top:-8px;left:20%;right:20%;height:2px;background:var(--blue);border-radius:0 0 2px 2px}
+    .nav-icon{font-size:20px;color:#444;transition:color .2s}
+    .nav-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#444;transition:color .2s}
+    /* Força tab gets purple accent */
+    .nav-btn.tab-forca.active .nav-icon,.nav-btn.tab-forca.active .nav-label{color:#a855f7}
+    .nav-btn.tab-forca.active::after{background:#a855f7}
+    /* Tab pages */
+    .tab-page{display:none}
+    .tab-page.active{display:block}
+    /* Força tab page styles */
+    .forca-header{background:linear-gradient(135deg,#1a0a2e,#2a0a4e);border-radius:14px;padding:20px;margin-bottom:16px;border:1px solid #3a1a5e}
+    .forca-header h2{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+    .forca-header p{font-size:13px;color:#888;line-height:1.5}
+    .forca-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#a855f722;color:#a855f7;border:1px solid #a855f744;padding:3px 8px;border-radius:4px;margin-bottom:10px}
+    .ex-card{background:#181818;border-radius:12px;margin-bottom:10px;overflow:hidden;border-left:3px solid #a855f7}
+    .ex-card-header{padding:14px 16px 10px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .ex-name{font-size:15px;font-weight:700;color:#fff;line-height:1.3}
+    .ex-sets{background:#a855f722;border:1px solid #a855f744;border-radius:6px;padding:4px 10px;font-size:13px;font-weight:700;color:#a855f7;white-space:nowrap;font-family:monospace}
+    .ex-card-body{padding:0 16px 14px;display:flex;align-items:center;gap:10px}
+    .carga-badge{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid}
+    .ex-foco{font-size:12px;color:#555;line-height:1.5;flex:1}
     .last-updated{text-align:center;font-size:10px;color:#333;margin-top:16px}
   </style>
 </head>
@@ -206,10 +226,11 @@
     <div class="loading-bar"></div>
   </div>
   <nav class="bottom-nav">
-    <div class="nav-btn active" onclick="scrollTo(0,0)"><span class="nav-icon">🏠</span><span class="nav-label">Hoje</span></div>
-    <div class="nav-btn" onclick="scrollToSection('treinos')"><span class="nav-icon">📊</span><span class="nav-label">Treinos</span></div>
-    <div class="nav-btn" onclick="scrollToSection('coach')"><span class="nav-icon">🤖</span><span class="nav-label">Coach IA</span></div>
-    <div class="nav-btn" onclick="scrollToSection('calendario')"><span class="nav-icon">📅</span><span class="nav-label">Agenda</span></div>
+    <div class="nav-btn active" id="tab-home" onclick="switchTab('home')"><span class="nav-icon">🏠</span><span class="nav-label">Hoje</span></div>
+    <div class="nav-btn" id="tab-treinos" onclick="switchTab('treinos')"><span class="nav-icon">📊</span><span class="nav-label">Treinos</span></div>
+    <div class="nav-btn" id="tab-coach" onclick="switchTab('coach')"><span class="nav-icon">🤖</span><span class="nav-label">Coach</span></div>
+    <div class="nav-btn" id="tab-agenda" onclick="switchTab('agenda')"><span class="nav-icon">📅</span><span class="nav-label">Agenda</span></div>
+    <div class="nav-btn tab-forca" id="tab-forca" onclick="switchTab('forca')"><span class="nav-icon">💪</span><span class="nav-label">Força</span></div>
   </nav>
 </div>
 
@@ -531,44 +552,84 @@ function renderReport(r){
     <div class="slabel" style="margin-top:16px">Treino de Amanhã</div>
     ${amanha.length?renderTable(amanha,cal_cols):'<div style="color:#444;font-size:12px;padding:8px 0">Nenhum treino agendado.</div>'}
     ${prevHTML}
-    ${renderForca(ins.treino_forca||[])}
     <div class="last-updated">Atualizado em ${new Date(r.generated_at||r.date).toLocaleString("pt-BR")}</div>`;
 }
 
-function renderForca(items) {
-  if (!items || !items.length) return "";
+function renderForca(items, saude) {
   const CARGA_C = {leve:"#00C896",moderada:"#FFB800",pesada:"#FF4444"};
-  const rows = items.map(ex => {
-    const cg = (ex.carga||"").toLowerCase();
+  const CARGA_I = {leve:"🟢",moderada:"🟡",pesada:"🔴"};
+  const bb = parseFloat(saude&&saude.body_battery)||0;
+  let nivel = "Força Funcional", sub = "Estado moderado — estabilidade e controle";
+  if (bb < 40)      { nivel = "Recuperação Ativa"; sub = "Readiness baixo — mobilidade e core suave"; }
+  else if (bb >= 70){ nivel = "Força & Potência";  sub = "Ótimo estado — treine com intensidade"; }
+  if (!items || !items.length) return `
+    <div class="forca-header">
+      <div class="forca-badge">💪 Treino de Força</div>
+      <h2>${nivel}</h2><p>Rode o briefing para gerar sugestões.</p></div>`;
+  const cards = items.map((ex,i) => {
+    const cg = (ex.carga||"leve").toLowerCase();
     const cc = CARGA_C[cg]||"#555";
-    return `<tr>
-      <td class="name">${ex.exercicio||"—"}</td>
-      <td class="mono" style="text-align:center">${ex.series||"—"}x${ex.repeticoes||"—"}</td>
-      <td style="text-align:center;padding:10px 8px">
-        <span style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${cc};background:${cc}22;border:1px solid ${cc}44;padding:2px 7px;border-radius:4px">${ex.carga||"—"}</span>
-      </td>
-      <td style="padding:10px 12px;font-size:11px;color:#555;line-height:1.5">${ex.foco||""}</td>
-    </tr>`;
+    const ci = CARGA_I[cg]||"⚪";
+    return `<div class="ex-card">
+      <div class="ex-card-header">
+        <div class="ex-name">${ex.exercicio||"—"}</div>
+        <div class="ex-sets">${ex.series||"—"}×${ex.repeticoes||"—"}</div>
+      </div>
+      <div class="ex-card-body">
+        <span class="carga-badge" style="color:${cc};border-color:${cc}44;background:${cc}18">${ci} ${ex.carga||"—"}</span>
+        <span class="ex-foco">${ex.foco||""}</span>
+      </div></div>`;
   }).join("");
   return `
-    <div class="divider"></div>
-    <div class="slabel">💪 Treino de Força — Sugestão IA</div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr>
-          <th>Exercício</th>
-          <th style="text-align:center">Séries x Reps</th>
-          <th style="text-align:center">Carga</th>
-          <th>Foco Triathlon</th>
-        </tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    </div>`;
+    <div class="forca-header">
+      <div class="forca-badge">💪 Sugestão IA · ${items.length} exercícios</div>
+      <h2>${nivel}</h2><p>${sub}</p></div>
+    ${cards}`;
 }
 
 function scrollToSection(id){
   const el=document.getElementById(id);
   if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+// ── Tab system ──────────────────────────────────────────────────────────────
+let currentReport = null;
+
+function switchTab(tab) {
+  // Update nav buttons
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('tab-'+tab);
+  if (btn) btn.classList.add('active');
+
+  const body = document.getElementById('appBody');
+
+  if (tab === 'forca') {
+    const items = currentReport ? (currentReport.insights||{}).treino_forca||[] : [];
+    const saude = currentReport ? currentReport.saude||{} : {};
+    body.innerHTML = renderForca(items, saude);
+    window.scrollTo(0,0);
+    return;
+  }
+
+  // For other tabs, show main report and scroll to section
+  if (currentReport) {
+    body.innerHTML = renderReport(currentReport);
+  }
+  window.scrollTo(0,0);
+
+  const sectionMap = {
+    home: null,
+    treinos: 'treinos',
+    coach: 'coach',
+    agenda: 'calendario'
+  };
+  const sec = sectionMap[tab];
+  if (sec) {
+    setTimeout(() => {
+      const el = document.getElementById(sec);
+      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 50);
+  }
 }
 
 async function loadReport(forceRefresh=false){
@@ -582,12 +643,14 @@ async function loadReport(forceRefresh=false){
     if(!res.ok) throw new Error("HTTP "+res.status);
     const data=await res.json();
     body.innerHTML=renderReport(data);
+    currentReport = data;
     localStorage.setItem("lastReport",JSON.stringify(data));
     localStorage.setItem("lastReportTime",new Date().toISOString());
   }catch(e){
     const cached=localStorage.getItem("lastReport");
     if(cached){
       const data=JSON.parse(cached);
+      currentReport=data;
       const cachedTime=localStorage.getItem("lastReportTime");
       body.innerHTML=renderReport(data)+`<div style="background:#1a1000;border:1px solid #3a2800;border-radius:8px;padding:12px;margin-top:12px;font-size:12px;color:#FFB800;text-align:center">📶 Cache de ${new Date(cachedTime).toLocaleString("pt-BR")}</div>`;
     }else{
