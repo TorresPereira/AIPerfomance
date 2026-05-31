@@ -195,28 +195,22 @@ def coletar():
         s["load_aerobic_low"]=s["load_aerobic_high"]=s["load_anaerobic"]=s["load_total_month"]=None
         s["load_target_low"]=s["load_target_high"]=s["fitness_trend"]=None
 
-    # VO2max
+    # VO2max — campo confirmado: get_training_status → mostRecentVO2Max.generic.vo2MaxPreciseValue
     try:
         s["vo2max"] = None
-        def _vo2(obj):
-            if isinstance(obj,list):
-                for i in obj:
-                    v=_vo2(i)
-                    if v: return v
-                return None
-            if isinstance(obj,dict):
-                for k in ["vo2MaxPreciseValue","vo2Max","vo2MaxValue","currentVo2Max"]:
-                    if obj.get(k): return obj[k]
-                for sub in ["generic","cycling","running"]:
-                    v=_vo2(obj.get(sub))
-                    if v: return v
-            return None
-        for fn in [lambda:api.get_max_metrics(TODAY_STR), lambda:api.get_training_status(TODAY_STR), lambda:api.get_user_summary(TODAY_STR)]:
-            if s["vo2max"]: break
-            try: s["vo2max"]=_vo2(fn())
-            except: pass
+        ts_vo2 = api.get_training_status(TODAY_STR)
+        vo2_node = ts_vo2.get("mostRecentVO2Max") or {}
+        # Tenta corrida primeiro, depois ciclismo
+        for sport in ["generic", "running", "cycling"]:
+            node = vo2_node.get(sport) or {}
+            v = node.get("vo2MaxPreciseValue") or node.get("vo2MaxValue")
+            if v:
+                s["vo2max"] = v
+                break
         print(f"  VO2max: {s['vo2max']}")
-    except: s["vo2max"]=None
+    except Exception as e:
+        print(f"  VO2max err: {e}")
+        s["vo2max"] = None
 
     # Peso
     try:
@@ -286,11 +280,6 @@ def coletar():
                 wd = w.get("date") or w.get("scheduledDate") or w.get("calendarDate") or ""
                 if target_date_str not in str(wd): continue
                 if "activity" in str(w.get("itemType","")).lower(): continue
-                # Debug primeiro item para ver estrutura completa
-                if not items:
-                    print(f"  [CAL DEBUG] keys: {list(w.keys())}")
-                    print(f"  [CAL DEBUG] full: {json.dumps(w, default=str)[:600]}")
-
                 nome = w.get("title") or w.get("workoutName") or w.get("description") or "Treino"
                 tp_raw = w.get("activityType") or w.get("sportType") or ""
                 tp = (tp_raw.get("typeKey") or tp_raw.get("sportTypeKey") or str(tp_raw)).lower() if isinstance(tp_raw,dict) else str(tp_raw).lower()
@@ -638,7 +627,6 @@ def main():
     print("Gerando análise IA...")
     ins    = gerar_insights(dados)
     print("Briefing:", ins.get("frase"))
-    print(f"  Força: {len(ins.get('treino_forca') or [])} exercícios")
     salvar_json(dados, ins)
     html   = gerar_html(dados, ins)
     enviar(html)
