@@ -580,9 +580,13 @@ def gerar_html(dados, ins):
         alerta_html+
         DIV+
         D(SL,"Treino de Hoje") + cal_table(dados["hoje"],"para hoje")+
-        ia("&#127919; Analise do Treino de Hoje",insights.get("analise_hoje","—"),bg="#071a0f",bc="#00C896",lc="#00C896",tc="#70c090")+
-        ia("&#128295; Ajuste Concreto",insights.get("sugestao_ajuste") or insights.get("acao_hoje","—"))+
-        D(SL+";margin-top:16px","Treino de Amanha") + cal_table(dados["amanha"],"para amanha")+
+        D(SL,"Treino de Hoje") + cal_table(dados["hoje"],"para hoje")+
+        D("background:#071a0f;border-left:3px solid #00C896;border-radius:8px;padding:13px 15px;margin-top:8px",
+          D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#00C896;margin-bottom:5px","&#127919; Analise do Treino de Hoje")+
+          D("font-size:13px;color:#70c090;line-height:1.6",str(ins.get("analise_hoje") or "—")))+
+        D("background:#07111f;border-left:3px solid #1a6fff;border-radius:8px;padding:13px 15px;margin-top:8px",
+          D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#1a6fff;margin-bottom:5px","&#128295; Ajuste Concreto")+
+          D("font-size:13px;color:#9ab8d8;line-height:1.6",str(ins.get("sugestao_ajuste") or ins.get("acao_hoje") or "—")))+
         prev_html+forca_html
     )
 
