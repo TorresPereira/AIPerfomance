@@ -377,10 +377,12 @@ TREINO AMANHÃ ({TOMORROW_STR}):{fmt_cal(dados['amanha'], 'para amanhã')}
 Responda SOMENTE em JSON válido, sem markdown:
 {{
   "frase": "Frase motivacional técnica curta (máx 12 palavras, português)",
-  "briefing": "Briefing completo do treinador seguindo esta estrutura:\\n1) READINESS — avalie HRV+tendência, RHR, sono, Body Battery\\n2) TREINO ONTEM — análise por modalidade: eficiência, execução, pontos críticos\\n3) CARGA (ATL/CTL/TSB) — risco de fadiga, overreaching, tendência\\n4) HOJE — o treino planejado é adequado? manter/reduzir/ajustar + treino ajustado concreto\\n5) AMANHÃ — faz sentido? risco de overreaching?\\n6) ALERTAS — fadiga, HR drift, distribuição de zonas, outros\\n7) NUTRIÇÃO — 1 dica específica para hoje\\nSeja crítico, técnico e objetivo como um coach experiente. Máx 2000 caracteres.",
+  "briefing": "Briefing completo do treinador seguindo esta estrutura:\\n1) READINESS — avalie HRV+tendência, RHR, sono, Body Battery\\n2) TREINO ONTEM — análise por modalidade: eficiência, execução, pontos críticos\\n3) CARGA — distribuição de zonas, risco de fadiga/overreaching\\n4) ANÁLISE DO TREINO DE HOJE — tipo de sessão, zonas alvo, objetivo fisiológico, como executar dado o estado atual\\n5) AJUSTE CONCRETO — o que manter ou modificar com valores exatos (ex: reduzir Z3 de 20min para 12min)\\n6) ALERTAS — HR drift, sinais de alerta, fadiga acumulada\\n7) NUTRIÇÃO — 1 dica específica pré/durante/pós treino de hoje\\nSeja técnico e objetivo. Máx 2000 caracteres.",
   "status_readiness": "ÓTIMO | BOM | MODERADO | BAIXO | CRÍTICO",
   "status_carga": "SUAVE | IDEAL | ELEVADA | SOBRECARGA",
   "acao_hoje": "MANTER | REDUZIR 20% | REDUZIR 40% | SUBSTITUIR | DESCANSO",
+  "acao_hoje": "MANTER | REDUZIR 20% | REDUZIR 40% | SUBSTITUIR | DESCANSO",
+  "analise_hoje": "Análise técnica do treino de hoje: tipo de sessão, zonas alvo, duração ideal, principais pontos de execução e atenção. 2-3 frases diretas.",
   "alerta": "Alerta crítico se houver, senão null",
   "treino_forca": [
     {{"exercicio": "Nome do exercício", "series": 3, "repeticoes": "10-12", "carga": "moderada", "foco": "Por que este exercício para triatleta 70.3"}},
@@ -578,7 +580,9 @@ def gerar_html(dados, ins):
         alerta_html+
         DIV+
         D(SL,"Treino de Hoje") + cal_table(dados["hoje"],"para hoje")+
-        D(SL+";margin-top:16px","Treino de Amanhã") + cal_table(dados["amanha"],"para amanhã")+
+        ia("&#127919; Analise do Treino de Hoje",insights.get("analise_hoje","—"),bg="#071a0f",bc="#00C896",lc="#00C896",tc="#70c090")+
+        ia("&#128295; Ajuste Concreto",insights.get("sugestao_ajuste") or insights.get("acao_hoje","—"))+
+        D(SL+";margin-top:16px","Treino de Amanha") + cal_table(dados["amanha"],"para amanha")+
         prev_html+forca_html
     )
 
