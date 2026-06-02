@@ -551,6 +551,15 @@ function renderReport(r){
     <div class="divider" id="calendario"></div>
     <div class="slabel">Treino de Hoje</div>
     ${hoje.length?renderTable(hoje,cal_cols):'<div style="color:#444;font-size:12px;padding:8px 0">Nenhum treino agendado.</div>'}
+    ${ins.analise_hoje ? `
+    <div style="background:#071a0f;border-left:3px solid #00C896;border-radius:8px;padding:13px 15px;margin-top:10px;margin-bottom:4px">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#00C896;margin-bottom:5px">🎯 Análise do Treino de Hoje</div>
+      <div style="font-size:13px;color:#70c090;line-height:1.6">${ins.analise_hoje}</div>
+    </div>
+    <div style="background:#07111f;border-left:3px solid #1a6fff;border-radius:8px;padding:13px 15px;margin-bottom:8px">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#1a6fff;margin-bottom:5px">🔧 Ajuste Concreto</div>
+      <div style="font-size:13px;color:#7a9bbf;line-height:1.6">${ins.sugestao_ajuste||ins.acao_hoje||"—"}</div>
+    </div>` : ""}
     <div class="slabel" style="margin-top:16px">Treino de Amanhã</div>
     ${amanha.length?renderTable(amanha,cal_cols):'<div style="color:#444;font-size:12px;padding:8px 0">Nenhum treino agendado.</div>'}
     ${prevHTML}
