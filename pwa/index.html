@@ -142,6 +142,8 @@
     .loading-bar{height:3px;background:linear-gradient(90deg,var(--blue),#00C896,var(--blue));background-size:200%;animation:loading 1.2s linear infinite;border-radius:2px;margin-bottom:20px}
     @keyframes loading{0%{background-position:0%}100%{background-position:200%}}
     @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .pin-key{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;height:56px;font-size:20px;font-weight:600;color:#fff;cursor:pointer;transition:background .1s;-webkit-tap-highlight-color:transparent}
+    .pin-key:active{background:#333}
     .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:8px 0 calc(var(--sb) + 4px);display:flex;justify-content:space-around}
     .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 0;position:relative;transition:opacity .15s}
     .nav-btn.active .nav-icon,.nav-btn.active .nav-label{color:var(--blue)}
@@ -213,27 +215,70 @@
 
 <!-- ── Setup Screen ── -->
 <div id="setupScreen">
-  <div class="lock-icon"><img src="apple-touch-icon.png" style="width:80px;height:80px;border-radius:20px;opacity:.85"></div>
-  <div class="lock-title">Configurar Face ID</div>
-  <div class="lock-sub">Proteção biométrica para<br>seus dados de treino</div>
-  <div class="setup-steps">
-    <div class="step active" id="step1">
-      <div class="step-num">1</div>
-      <div class="step-text"><strong style="color:#ddd">Registrar Face ID</strong><br>Toque no botão abaixo e autentique com Face ID quando solicitado</div>
-    </div>
-    <div class="step" id="step2">
-      <div class="step-num">2</div>
-      <div class="step-text"><strong>Pronto</strong><br>O app será protegido automaticamente</div>
-    </div>
+  <img src="apple-touch-icon.png" style="width:72px;height:72px;border-radius:18px;margin-bottom:20px">
+  <div class="lock-title">Proteger o App</div>
+  <div class="lock-sub">Escolha como deseja<br>proteger seus dados</div>
+  <div style="width:100%;max-width:300px;display:flex;flex-direction:column;gap:10px;margin-top:28px">
+    <button class="setup-btn" id="setupBtn" onclick="registerFaceId()" style="background:#1a1a2e;border:1px solid #1a6fff44">
+      &#129318; Face ID / Touch ID
+    </button>
+    <button class="setup-btn" onclick="document.getElementById('setupScreen').classList.remove('show');document.getElementById('setupPinScreen').style.display='flex'" style="background:#1a1a1a;border:1px solid #333">
+      &#128290; Usar PIN de 4 digitos
+    </button>
+    <button class="lock-reset" onclick="skipAuth()" style="margin-top:8px">Usar sem protecao</button>
   </div>
-  <button class="setup-btn" id="setupBtn" onclick="registerFaceId()">
-    &#129318; Registrar Face ID
-  </button>
-  <div class="lock-error" id="setupError" style="margin-top:16px"></div>
-  <button class="lock-reset" onclick="skipAuth()" style="margin-top:24px;color:#333">
-    Usar sem autenticação
-  </button>
+  <div class="lock-error" id="setupError" style="margin-top:14px"></div>
 </div>
+
+<!-- PIN Setup -->
+<div id="setupPinScreen" style="position:fixed;inset:0;z-index:998;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px">
+  <img src="apple-touch-icon.png" style="width:60px;height:60px;border-radius:15px;margin-bottom:20px">
+  <div class="lock-title">Criar PIN</div>
+  <div class="lock-sub" style="margin-bottom:24px">4 digitos numericos</div>
+  <div style="width:100%;max-width:280px;display:flex;flex-direction:column;gap:12px">
+    <div>
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:6px">PIN</div>
+      <input id="pin1" type="password" inputmode="numeric" maxlength="4" placeholder="xxxx" style="width:100%;background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:12px 16px;color:#fff;font-size:20px;letter-spacing:.3em;text-align:center;outline:none">
+    </div>
+    <div>
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:6px">Confirmar PIN</div>
+      <input id="pin2" type="password" inputmode="numeric" maxlength="4" placeholder="xxxx" style="width:100%;background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:12px 16px;color:#fff;font-size:20px;letter-spacing:.3em;text-align:center;outline:none">
+    </div>
+    <div class="lock-error" id="pinSetupError"></div>
+    <button class="setup-btn" onclick="savePin()">Salvar PIN</button>
+    <button class="lock-reset" onclick="document.getElementById('setupPinScreen').style.display='none';document.getElementById('setupScreen').classList.add('show')">Voltar</button>
+  </div>
+</div>
+
+<!-- PIN Entry -->
+<div id="pinScreen" style="position:fixed;inset:0;z-index:997;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px calc(var(--sb)+40px)">
+  <img src="apple-touch-icon.png" style="width:64px;height:64px;border-radius:16px;margin-bottom:24px">
+  <div class="lock-title" style="margin-bottom:6px">TP Performance</div>
+  <div class="lock-sub" style="margin-bottom:28px">Digite seu PIN</div>
+  <div id="pinDots" style="display:flex;gap:14px;margin-bottom:6px">
+    <div class="dot" style="width:14px;height:14px;border-radius:50%;border:2px solid #444;transition:background .15s"></div>
+    <div class="dot" style="width:14px;height:14px;border-radius:50%;border:2px solid #444;transition:background .15s"></div>
+    <div class="dot" style="width:14px;height:14px;border-radius:50%;border:2px solid #444;transition:background .15s"></div>
+    <div class="dot" style="width:14px;height:14px;border-radius:50%;border:2px solid #444;transition:background .15s"></div>
+  </div>
+  <div class="lock-error" id="pinError" style="margin-bottom:20px;min-height:16px"></div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:240px">
+    <button onclick="pinKey(1)" class="pin-key">1</button>
+    <button onclick="pinKey(2)" class="pin-key">2</button>
+    <button onclick="pinKey(3)" class="pin-key">3</button>
+    <button onclick="pinKey(4)" class="pin-key">4</button>
+    <button onclick="pinKey(5)" class="pin-key">5</button>
+    <button onclick="pinKey(6)" class="pin-key">6</button>
+    <button onclick="pinKey(7)" class="pin-key">7</button>
+    <button onclick="pinKey(8)" class="pin-key">8</button>
+    <button onclick="pinKey(9)" class="pin-key">9</button>
+    <div></div>
+    <button onclick="pinKey(0)" class="pin-key">0</button>
+    <button onclick="pinDel()" class="pin-key" style="font-size:18px">&#9003;</button>
+  </div>
+  <button class="lock-reset" onclick="resetAuth()" style="margin-top:24px">Esqueci o PIN</button>
+</div>
+
 
 <!-- ── App ── -->
 <div id="app">
@@ -295,212 +340,171 @@
 </div>
 
 <script>
-// ── WebAuthn / Face ID ────────────────────────────────────────────────────────
-const RP_ID   = location.hostname;
-const RP_NAME = "Triathlon Coach";
-const CRED_KEY = "faceIdCredId";
-const AUTH_KEY = "authSession";
-const SESSION_MINUTES = 480; // 8h — não pede Face ID de novo no mesmo dia
-
-function isWebAuthnAvailable() {
-  return window.PublicKeyCredential !== undefined;
-}
-
-function hasCredential() {
-  return !!localStorage.getItem(CRED_KEY);
-}
+// ── Auth ─────────────────────────────────────────────────────────────────────
+const CRED_KEY    = "tpCredId";
+const PIN_KEY     = "tpPinHash";
+const AUTH_KEY    = "tpSession";
+const SESSION_MIN = 480; // 8h
 
 function isSessionValid() {
   const ts = localStorage.getItem(AUTH_KEY);
-  if (!ts) return false;
-  return (Date.now() - parseInt(ts)) < SESSION_MINUTES * 60 * 1000;
+  return ts && (Date.now() - parseInt(ts)) < SESSION_MIN * 60000;
+}
+function setSession()   { localStorage.setItem(AUTH_KEY, Date.now()); }
+function clearSession() { localStorage.removeItem(AUTH_KEY); }
+
+function hasCred()  { return !!localStorage.getItem(CRED_KEY); }
+function hasPin()   { return !!localStorage.getItem(PIN_KEY); }
+function faceIdOk() { return !!window.PublicKeyCredential; }
+
+async function simpleHash(pin) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("tp_" + pin));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
 }
 
-function setSession() {
-  localStorage.setItem(AUTH_KEY, Date.now().toString());
-}
-
-function clearSession() {
-  localStorage.removeItem(AUTH_KEY);
-}
-
-function buf2b64(buf) {
-  return btoa(String.fromCharCode(...new Uint8Array(buf)));
-}
-
-function b642buf(b64) {
-  const bin = atob(b64);
-  return Uint8Array.from(bin, c => c.charCodeAt(0)).buffer;
-}
-
-function randBytes(n) {
-  return crypto.getRandomValues(new Uint8Array(n));
-}
-
-// ── Register ─────────────────────────────────────────────────────────────────
+// ── Face ID register ──────────────────────────────────────────────────────────
 async function registerFaceId() {
   const btn = document.getElementById("setupBtn");
   const err = document.getElementById("setupError");
-  btn.disabled = true; btn.textContent = "Aguardando Face ID...";
-  err.textContent = "";
-
+  btn.disabled = true; btn.textContent = "Aguardando..."; err.textContent = "";
   try {
-    const credential = await navigator.credentials.create({
-      publicKey: {
-        rp: { id: RP_ID, name: RP_NAME },
-        user: {
-          id: randBytes(16),
-          name: "atleta",
-          displayName: "Triatleta",
-        },
-        challenge: randBytes(32),
-        pubKeyCredParams: [
-          { type: "public-key", alg: -7 },   // ES256
-          { type: "public-key", alg: -257 },  // RS256
-        ],
-        authenticatorSelection: {
-          authenticatorAttachment: "platform",  // Face ID / Touch ID
-          userVerification: "required",
-          residentKey: "preferred",
-        },
-        timeout: 60000,
-      }
-    });
-
-    // Salva o credential ID
-    localStorage.setItem(CRED_KEY, buf2b64(credential.rawId));
-
-    // Marca step 2 como done
-    document.getElementById("step1").classList.remove("active");
-    document.getElementById("step1").classList.add("done");
-    document.getElementById("step1").querySelector(".step-num").textContent = "✓";
-    document.getElementById("step2").classList.add("active");
-
-    btn.textContent = "✅ Face ID registrado!";
-    setTimeout(() => {
-      setSession();
-      showApp();
-    }, 800);
-
-  } catch (e) {
-    console.error(e);
-    err.textContent = e.name === "NotAllowedError"
-      ? "Face ID cancelado. Tente novamente."
-      : `Erro: ${e.message}`;
-    btn.disabled = false;
-    btn.textContent = "⟳ Tentar novamente";
+    const cred = await navigator.credentials.create({ publicKey: {
+      rp: { id: location.hostname, name: "TP Coach" },
+      user: { id: crypto.getRandomValues(new Uint8Array(16)), name: "atleta", displayName: "Atleta" },
+      challenge: crypto.getRandomValues(new Uint8Array(32)),
+      pubKeyCredParams: [{ type:"public-key", alg:-7 }, { type:"public-key", alg:-257 }],
+      authenticatorSelection: { authenticatorAttachment:"platform", userVerification:"required", residentKey:"preferred" },
+      timeout: 60000
+    }});
+    const b64 = btoa(String.fromCharCode(...new Uint8Array(cred.rawId)));
+    localStorage.setItem(CRED_KEY, b64);
+    setSession(); showApp();
+  } catch(e) {
+    btn.disabled = false; btn.textContent = "Tentar Face ID";
+    err.textContent = e.name === "NotAllowedError" ? "Cancelado. Tente novamente ou use PIN." : `Erro: ${e.message}`;
   }
 }
 
-// ── Authenticate ──────────────────────────────────────────────────────────────
+// ── Face ID authenticate ──────────────────────────────────────────────────────
 async function authenticate() {
   const btn   = document.getElementById("faceIdBtn");
   const label = document.getElementById("lockLabel");
   const err   = document.getElementById("lockError");
-
   btn.classList.remove("pulse");
-  label.textContent = "Verificando...";
-  err.textContent = "";
-
-  if (!isWebAuthnAvailable()) {
-    skipAuth();
-    return;
-  }
-
-  const credId = localStorage.getItem(CRED_KEY);
-  if (!credId) { showSetup(); return; }
-
+  label.textContent = "Verificando..."; err.textContent = "";
   try {
-    await navigator.credentials.get({
-      publicKey: {
-        rpId: RP_ID,
-        challenge: randBytes(32),
-        allowCredentials: [{
-          id: b642buf(credId),
-          type: "public-key",
-          transports: ["internal"],
-        }],
-        userVerification: "required",
-        timeout: 60000,
-      }
-    });
-
+    const credId = localStorage.getItem(CRED_KEY);
+    await navigator.credentials.get({ publicKey: {
+      rpId: location.hostname,
+      challenge: crypto.getRandomValues(new Uint8Array(32)),
+      allowCredentials: [{ id: Uint8Array.from(atob(credId), c=>c.charCodeAt(0)).buffer, type:"public-key", transports:["internal"] }],
+      userVerification: "required",
+      timeout: 60000
+    }});
     setSession();
-    label.textContent = "Autenticado ✓";
     document.getElementById("lockScreen").classList.add("hiding");
     setTimeout(showApp, 400);
-
-  } catch (e) {
-    console.error(e);
+  } catch(e) {
     btn.classList.add("pulse");
-    if (e.name === "NotAllowedError") {
-      err.textContent = "Face ID cancelado. Toque para tentar novamente.";
-      label.textContent = "Toque para autenticar";
-    } else {
-      err.textContent = `Erro: ${e.message}`;
-      label.textContent = "Toque para autenticar";
-    }
+    err.textContent = e.name==="NotAllowedError" ? "Cancelado — toque para tentar." : `Erro: ${e.message}`;
+    label.textContent = "Toque para autenticar";
   }
+}
+
+// ── PIN system ────────────────────────────────────────────────────────────────
+let pinInput = "";
+
+async function checkPin() {
+  if (pinInput.length < 4) return;
+  const h = await simpleHash(pinInput);
+  if (h === localStorage.getItem(PIN_KEY)) {
+    setSession();
+    document.getElementById("pinScreen").style.display = "none";
+    document.getElementById("lockScreen").style.display = "none";
+    showApp();
+  } else {
+    document.getElementById("pinDots").querySelectorAll(".dot").forEach(d=>{ d.style.background="#FF4444"; setTimeout(()=>d.style.background="",400); });
+    pinInput = ""; updatePinDots();
+    document.getElementById("pinError").textContent = "PIN incorreto";
+  }
+}
+
+function pinKey(k) {
+  if (pinInput.length >= 4) return;
+  pinInput += k; updatePinDots();
+  document.getElementById("pinError").textContent = "";
+  if (pinInput.length === 4) setTimeout(checkPin, 150);
+}
+
+function pinDel() {
+  pinInput = pinInput.slice(0,-1); updatePinDots();
+}
+
+function updatePinDots() {
+  document.querySelectorAll("#pinDots .dot").forEach((d,i)=>{
+    d.style.background = i < pinInput.length ? "#fff" : "transparent";
+  });
+}
+
+async function savePin() {
+  const p1 = document.getElementById("pin1").value;
+  const p2 = document.getElementById("pin2").value;
+  const e  = document.getElementById("pinSetupError");
+  if (!/^\d{4}$/.test(p1)) { e.textContent="Use 4 dígitos numéricos"; return; }
+  if (p1 !== p2)            { e.textContent="PINs não coincidem"; return; }
+  localStorage.setItem(PIN_KEY, await simpleHash(p1));
+  setSession(); closeSetupPin(); showApp();
+}
+
+function showPinEntry() {
+  document.getElementById("lockScreen").style.display = "none";
+  document.getElementById("pinScreen").style.display = "flex";
+  pinInput = ""; updatePinDots();
+}
+
+function closeSetupPin() {
+  document.getElementById("setupPinScreen").style.display = "none";
 }
 
 function resetAuth() {
-  localStorage.removeItem(CRED_KEY);
-  clearSession();
-  location.reload();
+  localStorage.removeItem(CRED_KEY); localStorage.removeItem(PIN_KEY); clearSession(); location.reload();
 }
-
 function lockApp() {
   clearSession();
   document.getElementById("app").classList.remove("show");
   const ls = document.getElementById("lockScreen");
-  ls.classList.remove("hiding");
-  ls.style.display = "flex";
+  ls.classList.remove("hiding"); ls.style.display = "flex";
   document.getElementById("faceIdBtn").classList.add("pulse");
   document.getElementById("lockLabel").textContent = "Toque para autenticar";
   document.getElementById("lockError").textContent = "";
 }
-
-function skipAuth() {
-  localStorage.removeItem(CRED_KEY);
-  setSession();
+function skipAuth() { localStorage.removeItem(CRED_KEY); localStorage.removeItem(PIN_KEY); setSession(); closeSetupAny(); showApp(); }
+function closeSetupAny() {
   document.getElementById("setupScreen").classList.remove("show");
-  showApp();
-}
-
-function showSetup() {
+  document.getElementById("setupPinScreen").style.display = "none";
   document.getElementById("lockScreen").style.display = "none";
-  document.getElementById("setupScreen").classList.add("show");
-}
-
-function showApp() {
-  document.getElementById("lockScreen").style.display = "none";
-  document.getElementById("setupScreen").classList.remove("show");
-  document.getElementById("app").classList.add("show");
-  loadReport();
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 window.addEventListener("load", () => {
-  if (!isWebAuthnAvailable()) { showApp(); return; }
+  // Session still valid — go straight to app
+  if (isSessionValid()) { showApp(); return; }
 
-  // Mostra botão de reset se já tiver credencial
-  if (hasCredential()) {
+  // No auth configured — show setup
+  if (!hasCred() && !hasPin()) { showSetup(); return; }
+
+  // PIN configured
+  if (hasPin() && !hasCred()) { showPinEntry(); return; }
+
+  // Face ID configured
+  if (hasCred()) {
+    document.getElementById("lockScreen").style.display = "flex";
     document.getElementById("resetBtn").style.display = "block";
-  }
-
-  if (!hasCredential()) {
-    showSetup();
+    setTimeout(() => authenticate(), 500);
     return;
   }
 
-  if (isSessionValid()) {
-    showApp();
-    return;
-  }
-
-  // Mostra lock screen e tenta auth automática
-  document.getElementById("lockScreen").style.display = "flex";
-  setTimeout(() => authenticate(), 600);
+  showSetup();
 });
 
 // ── Report ────────────────────────────────────────────────────────────────────
