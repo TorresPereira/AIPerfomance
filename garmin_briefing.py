@@ -73,7 +73,7 @@ def garmin_login():
 # ─── Coleta de dados ──────────────────────────────────────────────────────────
 def coletar():
     api = garmin_login()
-    d = {"saude":{}, "ontem":[], "hoje":[], "amanha":[]}
+    d = {"saude":{}, "ontem":[], "hoje":[], "amanha":[], "hoje_feito":[]}
     s = d["saude"]
 
     # HRV
@@ -268,6 +268,33 @@ def coletar():
         print(f"  Treinos ontem: {len(d['ontem'])}")
     except: traceback.print_exc()
 
+    # ─ Atividades de HOJE (treino já feito antes do briefing) ─
+    try:
+        acts_hoje = api.get_activities_by_date(TODAY_STR, TODAY_STR)
+        for a in (acts_hoje or []):
+            tipo = (a.get("activityType",{}).get("typeKey") or "").lower()
+            if   "swim" in tipo or "pool" in tipo: mod,ico = "swim","🏊"
+            elif "cycl" in tipo or "bike" in tipo: mod,ico = "bike","🚴"
+            elif "run"  in tipo:                   mod,ico = "run","🏃"
+            else:                                  mod,ico = "other","⚡"
+            dist = a.get("distance"); dur = a.get("duration")
+            fc = a.get("averageHR"); fc_max = a.get("maxHR")
+            tss = a.get("trainingStressScore"); np = a.get("avgPower")
+            if mod=="run":    perf=pace_run(dur,dist);  pl="Pace"
+            elif mod=="bike": perf=spd_bike(dur,dist);  pl="Velocidade"
+            elif mod=="swim": perf=pace_swim(dur,dist); pl="Pace"
+            else:             perf="—";                 pl="—"
+            d["hoje_feito"].append({
+                "mod":mod,"icone":ico,"nome":a.get("activityName",mod),
+                "dist":dist_fmt(dist,mod),"dur":hms(dur),
+                "fc":fc,"fc_max":fc_max,"tss":tss,"np":np,
+                "perf":perf,"pl":pl,"_dist_m":dist,"_dur_s":dur,
+            })
+        if d["hoje_feito"]:
+            print(f"  Treino já feito hoje: {len(d['hoje_feito'])} atividade(s)")
+    except Exception as e:
+        print(f"  Atividades hoje err: {e}")
+
     # ─ Calendário hoje e amanhã ─
     def _parse_calendar(target_date_str, target_date):
         items = []
@@ -371,13 +398,14 @@ CARGA (Garmin 965 — modelo mensal por zona):
 TREINO DE ONTEM ({YESTERDAY_STR}):{fmt_treinos(dados['ontem'])}
 
 TREINO HOJE ({TODAY_STR}):{fmt_cal(dados['hoje'], 'para hoje')}
+TREINO JÁ EXECUTADO HOJE:{fmt_treinos(dados['hoje_feito']) if dados['hoje_feito'] else "  Nenhum treino registrado ainda hoje."}
 
 TREINO AMANHÃ ({TOMORROW_STR}):{fmt_cal(dados['amanha'], 'para amanhã')}
 
 Responda SOMENTE em JSON válido, sem markdown:
 {{
   "frase": "Frase motivacional técnica curta (máx 12 palavras, português)",
-  "briefing": "Briefing completo do treinador seguindo esta estrutura:\\n1) READINESS — avalie HRV+tendência, RHR, sono, Body Battery\\n2) TREINO ONTEM — análise por modalidade: eficiência, execução, pontos críticos\\n3) CARGA — distribuição de zonas, risco de fadiga/overreaching\\n4) ANÁLISE DO TREINO DE HOJE — tipo de sessão, zonas alvo, objetivo fisiológico, como executar dado o estado atual\\n5) AJUSTE CONCRETO — o que manter ou modificar com valores exatos (ex: reduzir Z3 de 20min para 12min)\\n6) ALERTAS — HR drift, sinais de alerta, fadiga acumulada\\n7) NUTRIÇÃO — 1 dica específica pré/durante/pós treino de hoje\\nSeja técnico e objetivo. Máx 2000 caracteres.",
+  "briefing": "Briefing completo do treinador seguindo esta estrutura:\\n1) READINESS — avalie HRV+tendência, RHR, sono, Body Battery\\n2) TREINO ONTEM — análise por modalidade: eficiência, execução, pontos críticos\\n3) CARGA — distribuição de zonas, risco de fadiga/overreaching\\n4) ANÁLISE DO TREINO DE HOJE (se já executado: analise a execução real vs planejado; se não: oriente como executar) — tipo de sessão, zonas alvo, objetivo fisiológico, como executar dado o estado atual\\n5) AJUSTE CONCRETO — o que manter ou modificar com valores exatos (ex: reduzir Z3 de 20min para 12min)\\n6) ALERTAS — HR drift, sinais de alerta, fadiga acumulada\\n7) NUTRIÇÃO — 1 dica específica pré/durante/pós treino de hoje\\nSeja técnico e objetivo. Máx 2000 caracteres.",
   "status_readiness": "ÓTIMO | BOM | MODERADO | BAIXO | CRÍTICO",
   "status_carga": "SUAVE | IDEAL | ELEVADA | SOBRECARGA",
   "acao_hoje": "MANTER | REDUZIR 20% | REDUZIR 40% | SUBSTITUIR | DESCANSO",
@@ -623,6 +651,7 @@ def salvar_json(dados, ins):
         "ontem": dados["ontem"],
         "hoje":  dados["hoje"],
         "amanha":dados["amanha"],
+        "hoje_feito":dados["hoje_feito"],
         "insights": ins,
     }
     with open("pwa/report.json", "w", encoding="utf-8") as f:
