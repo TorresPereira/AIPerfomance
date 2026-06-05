@@ -175,7 +175,7 @@
 
 <!-- ── Lock Screen ── -->
 <div id="lockScreen">
-  <div class="lock-icon">⌚</div>
+  <div class="lock-icon"><img src="apple-touch-icon.png" style="width:90px;height:90px;border-radius:22px;box-shadow:0 0 40px #1a6fff44"></div>
   <div class="lock-title">TP Performance</div>
   <div class="lock-sub">Seu briefing diário<br>protegido com Face ID</div>
   <button class="faceid-btn pulse" id="faceIdBtn" onclick="authenticate()">
@@ -190,7 +190,7 @@
 
 <!-- ── Setup Screen ── -->
 <div id="setupScreen">
-  <div class="lock-icon">🔐</div>
+  <div class="lock-icon"><img src="apple-touch-icon.png" style="width:80px;height:80px;border-radius:20px;opacity:.85"></div>
   <div class="lock-title">Configurar Face ID</div>
   <div class="lock-sub">Proteção biométrica para<br>seus dados de treino</div>
   <div class="setup-steps">
@@ -216,7 +216,7 @@
 <div id="app">
   <div class="header">
     <div class="header-left">
-      <span class="header-badge">⌚</span>
+      <span class="header-badge" style="display:flex;align-items:center;gap:6px;padding:4px 10px"><img src="icon-192.png" style="width:16px;height:16px;border-radius:3px">TP</span>
       <span class="header-title">Triathlon Coach</span>
     </div>
     <div class="header-right">
@@ -551,6 +551,14 @@ function renderReport(r){
     <div class="divider" id="calendario"></div>
     <div class="slabel">Treino de Hoje</div>
     ${hoje.length?renderTable(hoje,cal_cols):'<div style="color:#444;font-size:12px;padding:8px 0">Nenhum treino agendado.</div>'}
+    \${(r.hoje_feito&&r.hoje_feito.length)?`
+    <div style='background:#0a1a0a;border:1px solid #1a3a1a;border-radius:8px;padding:10px 12px;margin-top:8px;display:flex;align-items:center;gap:8px'>
+      <span style='font-size:16px'>&#9989;</span>
+      <div>
+        <div style='font-size:11px;font-weight:700;color:#00C896;text-transform:uppercase;letter-spacing:.08em'>Treino já executado hoje</div>
+        <div style='font-size:12px;color:#555;margin-top:2px'>\${r.hoje_feito.map(t=>t.icone+' '+t.nome+' — '+t.dist+' · '+t.dur).join(' | ')}</div>
+      </div>
+    </div>` : ''}
     ${ins.analise_hoje ? `
     <div style="background:#071a0f;border-left:3px solid #00C896;border-radius:8px;padding:13px 15px;margin-top:10px;margin-bottom:4px">
       <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#00C896;margin-bottom:5px">🎯 Análise do Treino de Hoje</div>
