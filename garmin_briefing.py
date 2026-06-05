@@ -289,6 +289,12 @@ def coletar():
                 "dist":dist_fmt(dist,mod),"dur":hms(dur),
                 "fc":fc,"fc_max":fc_max,"tss":tss,"np":np,
                 "perf":perf,"pl":pl,"_dist_m":dist,"_dur_s":dur,
+                "swolf":a.get("avgStrokes"),
+                "cad":a.get("averageRunningCadenceInStepsPerMinute") or a.get("averageBikingCadenceInRevPerMinute"),
+                "cal":a.get("calories"),
+                "aerobic_te":a.get("aerobicTrainingEffect"),
+                "anaerobic_te":a.get("anaerobicTrainingEffect"),
+                "elev":a.get("elevationGain"),
             })
         if d["hoje_feito"]:
             print(f"  Treino já feito hoje: {len(d['hoje_feito'])} atividade(s)")
