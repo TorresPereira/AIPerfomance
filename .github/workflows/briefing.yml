@@ -2,9 +2,9 @@ name: Triathlon Daily Briefing
 
 on:
   schedule:
-    # 09:00 Alemanha verão (CEST = UTC+2) = 07:00 UTC
-    # 09:00 Alemanha inverno (CET  = UTC+1) = 08:00 UTC
-    - cron: '0 1 * * *'
+    # 08:00 Alemanha verão (CEST = UTC+2) = 06:00 UTC
+    # 09:00 Alemanha inverno (CET  = UTC+1) = 07:00 UTC
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 permissions:
