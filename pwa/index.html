@@ -142,6 +142,12 @@
     .loading-bar{height:3px;background:linear-gradient(90deg,var(--blue),#00C896,var(--blue));background-size:200%;animation:loading 1.2s linear infinite;border-radius:2px;margin-bottom:20px}
     @keyframes loading{0%{background-position:0%}100%{background-position:200%}}
     @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .pdot{width:14px;height:14px;border-radius:50%;border:2px solid #333;background:transparent;transition:all .15s}
+    .pdot.filled{background:#fff;border-color:#fff}
+    .pdot.error{background:#FF4444;border-color:#FF4444}
+    .pkey{background:#1c1c1c;border:1px solid #2a2a2a;border-radius:14px;height:60px;font-size:22px;font-weight:500;color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .1s;user-select:none}
+    .pkey:active,.pkey.pressed{background:#333}
+    .pkey-del{font-size:18px}
     .pin-key{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;height:56px;font-size:20px;font-weight:600;color:#fff;cursor:pointer;transition:background .1s;-webkit-tap-highlight-color:transparent}
     .pin-key:active{background:#333}
     .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:8px 0 calc(var(--sb) + 4px);display:flex;justify-content:space-around}
@@ -198,87 +204,38 @@
 </head>
 <body>
 
-<!-- ── Lock Screen ── -->
-<div id="lockScreen">
-  <div class="lock-icon"><img src="apple-touch-icon.png" style="width:90px;height:90px;border-radius:22px;box-shadow:0 0 40px #1a6fff44"></div>
-  <div class="lock-title">TP Performance</div>
-  <div class="lock-sub">Seu briefing diário<br>protegido com Face ID</div>
-  <button class="faceid-btn pulse" id="faceIdBtn" onclick="authenticate()">
-    <span style="font-size:36px">&#129318;</span>
-  </button>
-  <div class="lock-label" id="lockLabel">Toque para autenticar</div>
-  <div class="lock-error" id="lockError"></div>
-  <button class="lock-reset" id="resetBtn" onclick="resetAuth()" style="display:none">
-    Redefinir autenticação
-  </button>
-</div>
+<!-- ── PIN Screen ── -->
+<div id="pinScreen" style="position:fixed;inset:0;z-index:999;background:radial-gradient(ellipse at 50% 30%,#0a1628 0%,#000 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px calc(var(--sb)+40px);transition:opacity .3s" class="">
+  <img src="apple-touch-icon.png" style="width:76px;height:76px;border-radius:20px;margin-bottom:20px;box-shadow:0 0 40px #1a6fff33">
+  <div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px" id="pinTitle">TP Performance</div>
+  <div style="font-size:13px;color:#444;margin-bottom:32px" id="pinSub">Digite seu PIN</div>
 
-<!-- ── Setup Screen ── -->
-<div id="setupScreen">
-  <img src="apple-touch-icon.png" style="width:72px;height:72px;border-radius:18px;margin-bottom:20px">
-  <div class="lock-title">Proteger o App</div>
-  <div class="lock-sub">Escolha como deseja<br>proteger seus dados</div>
-  <div style="width:100%;max-width:300px;display:flex;flex-direction:column;gap:10px;margin-top:28px">
-    <button class="setup-btn" id="setupBtn" onclick="registerFaceId()" style="background:#1a1a2e;border:1px solid #1a6fff44">
-      &#129318; Face ID / Touch ID
-    </button>
-    <button class="setup-btn" onclick="document.getElementById('setupScreen').classList.remove('show');document.getElementById('setupPinScreen').style.display='flex'" style="background:#1a1a1a;border:1px solid #333">
-      &#128290; Usar PIN de 4 digitos
-    </button>
-    <button class="lock-reset" onclick="skipAuth()" style="margin-top:8px">Usar sem protecao</button>
+  <!-- Dots -->
+  <div id="pinDots" style="display:flex;gap:16px;margin-bottom:8px">
+    <div class="pdot"></div><div class="pdot"></div><div class="pdot"></div><div class="pdot"></div>
   </div>
-  <div class="lock-error" id="setupError" style="margin-top:14px"></div>
-</div>
+  <div id="pinError" style="font-size:12px;color:#FF4444;min-height:18px;margin-bottom:16px;text-align:center"></div>
 
-<!-- PIN Setup -->
-<div id="setupPinScreen" style="position:fixed;inset:0;z-index:998;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px">
-  <img src="apple-touch-icon.png" style="width:60px;height:60px;border-radius:15px;margin-bottom:20px">
-  <div class="lock-title">Criar PIN</div>
-  <div class="lock-sub" style="margin-bottom:24px">4 digitos numericos</div>
-  <div style="width:100%;max-width:280px;display:flex;flex-direction:column;gap:12px">
-    <div>
-      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:6px">PIN</div>
-      <input id="pin1" type="password" inputmode="numeric" maxlength="4" placeholder="xxxx" style="width:100%;background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:12px 16px;color:#fff;font-size:20px;letter-spacing:.3em;text-align:center;outline:none">
-    </div>
-    <div>
-      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:6px">Confirmar PIN</div>
-      <input id="pin2" type="password" inputmode="numeric" maxlength="4" placeholder="xxxx" style="width:100%;background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:12px 16px;color:#fff;font-size:20px;letter-spacing:.3em;text-align:center;outline:none">
-    </div>
-    <div class="lock-error" id="pinSetupError"></div>
-    <button class="setup-btn" onclick="savePin()">Salvar PIN</button>
-    <button class="lock-reset" onclick="document.getElementById('setupPinScreen').style.display='none';document.getElementById('setupScreen').classList.add('show')">Voltar</button>
-  </div>
-</div>
-
-<!-- PIN Entry -->
-<div id="pinScreen" style="position:fixed;inset:0;z-index:997;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px calc(var(--sb)+40px)">
-  <img src="apple-touch-icon.png" style="width:64px;height:64px;border-radius:16px;margin-bottom:24px">
-  <div class="lock-title" style="margin-bottom:6px">TP Performance</div>
-  <div class="lock-sub" style="margin-bottom:28px">Digite seu PIN</div>
-  <div id="pinDots" style="display:flex;gap:14px;margin-bottom:6px">
-    <div class="dot" style="width:14px;height:14px;border-radius:50%;border:2px solid #444;transition:background .15s"></div>
-    <div class="dot" style="width:14px;height:14px;border-radius:50%;border:2px solid #444;transition:background .15s"></div>
-    <div class="dot" style="width:14px;height:14px;border-radius:50%;border:2px solid #444;transition:background .15s"></div>
-    <div class="dot" style="width:14px;height:14px;border-radius:50%;border:2px solid #444;transition:background .15s"></div>
-  </div>
-  <div class="lock-error" id="pinError" style="margin-bottom:20px;min-height:16px"></div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:240px">
-    <button onclick="pinKey(1)" class="pin-key">1</button>
-    <button onclick="pinKey(2)" class="pin-key">2</button>
-    <button onclick="pinKey(3)" class="pin-key">3</button>
-    <button onclick="pinKey(4)" class="pin-key">4</button>
-    <button onclick="pinKey(5)" class="pin-key">5</button>
-    <button onclick="pinKey(6)" class="pin-key">6</button>
-    <button onclick="pinKey(7)" class="pin-key">7</button>
-    <button onclick="pinKey(8)" class="pin-key">8</button>
-    <button onclick="pinKey(9)" class="pin-key">9</button>
+  <!-- Keypad -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:252px">
+    <button class="pkey" onclick="pk(1)">1</button>
+    <button class="pkey" onclick="pk(2)">2</button>
+    <button class="pkey" onclick="pk(3)">3</button>
+    <button class="pkey" onclick="pk(4)">4</button>
+    <button class="pkey" onclick="pk(5)">5</button>
+    <button class="pkey" onclick="pk(6)">6</button>
+    <button class="pkey" onclick="pk(7)">7</button>
+    <button class="pkey" onclick="pk(8)">8</button>
+    <button class="pkey" onclick="pk(9)">9</button>
     <div></div>
-    <button onclick="pinKey(0)" class="pin-key">0</button>
-    <button onclick="pinDel()" class="pin-key" style="font-size:18px">&#9003;</button>
+    <button class="pkey" onclick="pk(0)">0</button>
+    <button class="pkey pkey-del" onclick="pdel()">⌫</button>
   </div>
-  <button class="lock-reset" onclick="resetAuth()" style="margin-top:24px">Esqueci o PIN</button>
-</div>
 
+  <button id="pinActionBtn" style="margin-top:28px;font-size:12px;color:#333;background:none;border:none;cursor:pointer;text-decoration:underline" onclick="pinAction()">
+    Criar PIN
+  </button>
+</div>
 
 <!-- ── App ── -->
 <div id="app">
@@ -340,452 +297,109 @@
 </div>
 
 <script>
-// ── Auth ─────────────────────────────────────────────────────────────────────
-const CRED_KEY    = "tpCredId";
-const PIN_KEY     = "tpPinHash";
-const AUTH_KEY    = "tpSession";
-const SESSION_MIN = 480; // 8h
+// ── PIN Auth ─────────────────────────────────────────────────────────────────
+const PIN_KEY  = "tpPin";     // stored as SHA-256 hash
+const SESS_KEY = "tpSess";
+const SESS_MIN = 480;         // 8h session
 
-function isSessionValid() {
-  const ts = localStorage.getItem(AUTH_KEY);
-  return ts && (Date.now() - parseInt(ts)) < SESSION_MIN * 60000;
-}
-function setSession()   { localStorage.setItem(AUTH_KEY, Date.now()); }
-function clearSession() { localStorage.removeItem(AUTH_KEY); }
+const isSessionValid = () => { const t=localStorage.getItem(SESS_KEY); return t&&(Date.now()-+t)<SESS_MIN*60000; };
+const setSession     = () => localStorage.setItem(SESS_KEY, Date.now());
+const clearSession   = () => localStorage.removeItem(SESS_KEY);
+const hasPin         = () => !!localStorage.getItem(PIN_KEY);
 
-function hasCred()  { return !!localStorage.getItem(CRED_KEY); }
-function hasPin()   { return !!localStorage.getItem(PIN_KEY); }
-function faceIdOk() { return !!window.PublicKeyCredential; }
-
-async function simpleHash(pin) {
-  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("tp_" + pin));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+async function sha(s) {
+  const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("tp"+s));
+  return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
 }
 
-// ── Face ID register ──────────────────────────────────────────────────────────
-async function registerFaceId() {
-  const btn = document.getElementById("setupBtn");
-  const err = document.getElementById("setupError");
-  btn.disabled = true; btn.textContent = "Aguardando..."; err.textContent = "";
-  try {
-    const cred = await navigator.credentials.create({ publicKey: {
-      rp: { id: location.hostname, name: "TP Coach" },
-      user: { id: crypto.getRandomValues(new Uint8Array(16)), name: "atleta", displayName: "Atleta" },
-      challenge: crypto.getRandomValues(new Uint8Array(32)),
-      pubKeyCredParams: [{ type:"public-key", alg:-7 }, { type:"public-key", alg:-257 }],
-      authenticatorSelection: { authenticatorAttachment:"platform", userVerification:"required", residentKey:"preferred" },
-      timeout: 60000
-    }});
-    const b64 = btoa(String.fromCharCode(...new Uint8Array(cred.rawId)));
-    localStorage.setItem(CRED_KEY, b64);
-    setSession(); showApp();
-  } catch(e) {
-    btn.disabled = false; btn.textContent = "Tentar Face ID";
-    err.textContent = e.name === "NotAllowedError" ? "Cancelado. Tente novamente ou use PIN." : `Erro: ${e.message}`;
-  }
+// PIN state
+let pinBuf = "", pinMode = "enter"; // "enter" | "create" | "confirm"
+let pinTemp = "";
+
+function pinAction() {
+  if (!hasPin()) { startCreate(); }
+  else { localStorage.removeItem(PIN_KEY); clearSession(); startCreate(); }
 }
 
-// ── Face ID authenticate ──────────────────────────────────────────────────────
-async function authenticate() {
-  const btn   = document.getElementById("faceIdBtn");
-  const label = document.getElementById("lockLabel");
-  const err   = document.getElementById("lockError");
-  btn.classList.remove("pulse");
-  label.textContent = "Verificando..."; err.textContent = "";
-  try {
-    const credId = localStorage.getItem(CRED_KEY);
-    await navigator.credentials.get({ publicKey: {
-      rpId: location.hostname,
-      challenge: crypto.getRandomValues(new Uint8Array(32)),
-      allowCredentials: [{ id: Uint8Array.from(atob(credId), c=>c.charCodeAt(0)).buffer, type:"public-key", transports:["internal"] }],
-      userVerification: "required",
-      timeout: 60000
-    }});
-    setSession();
-    document.getElementById("lockScreen").classList.add("hiding");
-    setTimeout(showApp, 400);
-  } catch(e) {
-    btn.classList.add("pulse");
-    err.textContent = e.name==="NotAllowedError" ? "Cancelado — toque para tentar." : `Erro: ${e.message}`;
-    label.textContent = "Toque para autenticar";
-  }
-}
-
-// ── PIN system ────────────────────────────────────────────────────────────────
-let pinInput = "";
-
-async function checkPin() {
-  if (pinInput.length < 4) return;
-  const h = await simpleHash(pinInput);
-  if (h === localStorage.getItem(PIN_KEY)) {
-    setSession();
-    document.getElementById("pinScreen").style.display = "none";
-    document.getElementById("lockScreen").style.display = "none";
-    showApp();
-  } else {
-    document.getElementById("pinDots").querySelectorAll(".dot").forEach(d=>{ d.style.background="#FF4444"; setTimeout(()=>d.style.background="",400); });
-    pinInput = ""; updatePinDots();
-    document.getElementById("pinError").textContent = "PIN incorreto";
-  }
-}
-
-function pinKey(k) {
-  if (pinInput.length >= 4) return;
-  pinInput += k; updatePinDots();
+function startCreate() {
+  pinMode = "create"; pinBuf = ""; pinTemp = "";
+  document.getElementById("pinTitle").textContent = "Criar PIN";
+  document.getElementById("pinSub").textContent   = "Escolha 4 dígitos";
+  document.getElementById("pinActionBtn").textContent = "";
   document.getElementById("pinError").textContent = "";
-  if (pinInput.length === 4) setTimeout(checkPin, 150);
+  updateDots();
 }
 
-function pinDel() {
-  pinInput = pinInput.slice(0,-1); updatePinDots();
+function pk(n) {
+  if (pinBuf.length >= 4) return;
+  pinBuf += n; updateDots();
+  if (pinBuf.length === 4) setTimeout(processPin, 150);
 }
 
-function updatePinDots() {
-  document.querySelectorAll("#pinDots .dot").forEach((d,i)=>{
-    d.style.background = i < pinInput.length ? "#fff" : "transparent";
+function pdel() {
+  pinBuf = pinBuf.slice(0,-1); updateDots();
+  document.getElementById("pinError").textContent = "";
+}
+
+function updateDots() {
+  document.querySelectorAll(".pdot").forEach((d,i)=>{
+    d.classList.toggle("filled", i < pinBuf.length);
+    d.classList.remove("error");
   });
 }
 
-async function savePin() {
-  const p1 = document.getElementById("pin1").value;
-  const p2 = document.getElementById("pin2").value;
-  const e  = document.getElementById("pinSetupError");
-  if (!/^\d{4}$/.test(p1)) { e.textContent="Use 4 dígitos numéricos"; return; }
-  if (p1 !== p2)            { e.textContent="PINs não coincidem"; return; }
-  localStorage.setItem(PIN_KEY, await simpleHash(p1));
-  setSession(); closeSetupPin(); showApp();
+function shakeError(msg) {
+  document.getElementById("pinError").textContent = msg;
+  document.querySelectorAll(".pdot").forEach(d=>d.classList.add("error"));
+  pinBuf = ""; setTimeout(updateDots, 500);
 }
 
-function showPinEntry() {
-  document.getElementById("lockScreen").style.display = "none";
-  document.getElementById("pinScreen").style.display = "flex";
-  pinInput = ""; updatePinDots();
+async function processPin() {
+  if (pinMode === "create") {
+    pinTemp = pinBuf; pinBuf = "";
+    document.getElementById("pinTitle").textContent = "Confirmar PIN";
+    document.getElementById("pinSub").textContent   = "Digite novamente";
+    pinMode = "confirm"; updateDots(); return;
+  }
+  if (pinMode === "confirm") {
+    if (pinBuf !== pinTemp) { shakeError("PINs não coincidem"); pinMode="create"; pinTemp=""; 
+      document.getElementById("pinTitle").textContent="Criar PIN";
+      document.getElementById("pinSub").textContent="Escolha 4 dígitos"; return; }
+    localStorage.setItem(PIN_KEY, await sha(pinBuf));
+    setSession(); unlockApp(); return;
+  }
+  // mode === "enter"
+  const h = await sha(pinBuf);
+  if (h === localStorage.getItem(PIN_KEY)) { setSession(); unlockApp(); }
+  else { shakeError("PIN incorreto"); }
 }
 
-function closeSetupPin() {
-  document.getElementById("setupPinScreen").style.display = "none";
+function unlockApp() {
+  const ps = document.getElementById("pinScreen");
+  ps.style.opacity = "0";
+  setTimeout(()=>{ ps.style.display="none"; showApp(); }, 300);
 }
 
-function resetAuth() {
-  localStorage.removeItem(CRED_KEY); localStorage.removeItem(PIN_KEY); clearSession(); location.reload();
-}
 function lockApp() {
   clearSession();
   document.getElementById("app").classList.remove("show");
-  const ls = document.getElementById("lockScreen");
-  ls.classList.remove("hiding"); ls.style.display = "flex";
-  document.getElementById("faceIdBtn").classList.add("pulse");
-  document.getElementById("lockLabel").textContent = "Toque para autenticar";
-  document.getElementById("lockError").textContent = "";
-}
-function skipAuth() { localStorage.removeItem(CRED_KEY); localStorage.removeItem(PIN_KEY); setSession(); closeSetupAny(); showApp(); }
-function closeSetupAny() {
-  document.getElementById("setupScreen").classList.remove("show");
-  document.getElementById("setupPinScreen").style.display = "none";
-  document.getElementById("lockScreen").style.display = "none";
+  const ps = document.getElementById("pinScreen");
+  ps.style.display  = "flex";
+  ps.style.opacity  = "1";
+  pinBuf = ""; pinMode = "enter";
+  document.getElementById("pinTitle").textContent = "TP Performance";
+  document.getElementById("pinSub").textContent   = "Digite seu PIN";
+  document.getElementById("pinActionBtn").textContent = hasPin() ? "Redefinir PIN" : "Criar PIN";
+  document.getElementById("pinError").textContent = "";
+  updateDots();
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
-window.addEventListener("load", () => {
-  // Session still valid — go straight to app
-  if (isSessionValid()) { showApp(); return; }
-
-  // No auth configured — show setup
-  if (!hasCred() && !hasPin()) { showSetup(); return; }
-
-  // PIN configured
-  if (hasPin() && !hasCred()) { showPinEntry(); return; }
-
-  // Face ID configured
-  if (hasCred()) {
-    document.getElementById("lockScreen").style.display = "flex";
-    document.getElementById("resetBtn").style.display = "block";
-    setTimeout(() => authenticate(), 500);
-    return;
-  }
-
-  showSetup();
-});
-
-// ── Report ────────────────────────────────────────────────────────────────────
-const STATUS_COLORS = {
-  "ÓTIMO":"#00C896","BOM":"#00C896","MODERADO":"#FFB800",
-  "BAIXO":"#FF8C00","CRÍTICO":"#FF4444",
-  "SUAVE":"#00C896","IDEAL":"#00C896","ELEVADA":"#FFB800","SOBRECARGA":"#FF4444",
-  "MANTER":"#00C896","REDUZIR 20%":"#FFB800","REDUZIR 40%":"#FF8C00",
-  "SUBSTITUIR":"#FF4444","DESCANSO":"#888"
-};
-
-function semColor(val, lo, hi) {
-  if (val===null||val===undefined) return {em:"⚪",bg:"#1c1c1c",dk:"#555"};
-  const v=parseFloat(val);
-  if(v>=hi) return {em:"🟢",bg:"#00C896",dk:"#003a28"};
-  if(v>=lo) return {em:"🟡",bg:"#FFB800",dk:"#3a2a00"};
-  return {em:"🔴",bg:"#FF4444",dk:"#3a0000"};
+function showApp() {
+  document.getElementById("app").classList.add("show");
+  loadReport();
 }
 
-function fmt(v,d=1,fb="—"){
-  if(v===null||v===undefined) return fb;
-  return parseFloat(v).toFixed(d);
-}
-
-function badge(txt){
-  if(!txt||txt==="—") return "";
-  const c=STATUS_COLORS[txt.toUpperCase()]||"#555";
-  return `<span class="badge" style="color:${c};border-color:${c}44;background:${c}18">${txt}</span>`;
-}
-
-function hms(sec){
-  if(!sec) return "—";
-  sec=parseInt(sec);
-  const h=Math.floor(sec/3600),r=sec%3600,m=Math.floor(r/60);
-  return h?`${h}h${String(m).padStart(2,"0")}m`:`${m}m${String(sec%60).padStart(2,"0")}s`;
-}
-
-function renderSem(val,lo,hi,label){
-  const {em,bg,dk}=semColor(val,lo,hi);
-  return `<div class="sem-box" style="background:${bg}"><span class="se">${em}</span><span class="sl" style="color:${dk}">${label}</span></div>`;
-}
-
-function renderMC(ico,label,val,sub,has){
-  const bc=has?"#1a6fff":"#242424",vc=has?"#fff":"#333";
-  return `<div class="mc" style="border-color:${bc}"><div class="mi">${ico}</div><div class="ml">${label}</div><div class="mv" style="color:${vc}">${val}</div><div class="ms">${sub}</div></div>`;
-}
-
-function renderTable(items,cols){
-  if(!items||!items.length) return `<div style="color:#444;font-size:12px;padding:12px">Nenhum registro.</div>`;
-  const thead=`<tr>${cols.map(c=>`<th>${c.label}</th>`).join("")}</tr>`;
-  const tbody=items.map(row=>`<tr>${cols.map(c=>`<td class="${c.cls||""}">${row[c.key]||"—"}</td>`).join("")}</tr>`).join("");
-  return `<div class="tbl-wrap"><table><thead>${thead}</thead><tbody>${tbody}</tbody></table></div>`;
-}
-
-function renderReport(r){
-  const s=r.saude||{},ins=r.insights||{};
-  const ontem=r.ontem||[],hoje=r.hoje||[],amanha=r.amanha||[];
-  const dias=["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
-  const dateObj=new Date(r.date+"T12:00:00");
-  const diaStr=dias[dateObj.getDay()]+", "+dateObj.toLocaleDateString("pt-BR");
-
-  const acwr=parseFloat(s.acwr);
-  let acwrSem={em:"⚪",bg:"#1c1c1c",dk:"#555"};
-  if(!isNaN(acwr)){
-    if(acwr>1.5)       acwrSem={em:"🔴",bg:"#FF4444",dk:"#3a0000"};
-    else if(acwr>=0.8) acwrSem={em:"🟢",bg:"#00C896",dk:"#003a28"};
-    else               acwrSem={em:"🟡",bg:"#FFB800",dk:"#3a2a00"};
-  }
-
-  const treino_rows=ontem.map(t=>({ico:t.icone,name:t.nome,dist:t.dist,dur:t.dur,perf:t.perf,fc_tss:`FC ${t.fc||"—"} | TSS ${t.tss||"—"}`}));
-  const treino_cols=[{key:"ico",cls:"ico",label:""},{key:"name",cls:"name",label:"Atividade"},{key:"dist",cls:"mono",label:"Dist"},{key:"dur",cls:"mono",label:"Dur"},{key:"perf",cls:"mono",label:"Pace/Vel"},{key:"fc_tss",cls:"mono",label:"FC / TSS"}];
-  const cal_cols=[{key:"icone",cls:"ico",label:""},{key:"nome",cls:"name",label:"Treino"},{key:"dur",cls:"mono",label:"Duração"},{key:"dist",cls:"mono",label:"Distância"}];
-
-  let prevHTML="";
-  if(s.previsoes&&Object.keys(s.previsoes).length){
-    prevHTML=`<div class="slabel" style="margin-top:20px">🏁 Previsão de Prova</div><div class="prev-grid">${Object.entries(s.previsoes).map(([k,v])=>`<div class="prev-item"><div class="prev-d">${k}</div><div class="prev-t">${hms(v)}</div></div>`).join("")}</div>`;
-  }
-
-  const alertHTML=ins.alerta?`<div class="alert-card">⚠️ ${ins.alerta}</div>`:"";
-
-  return `
-    <div class="frase-block"><div class="frase-date">${diaStr}</div><div class="frase-text">${ins.frase||"—"}</div></div>
-    <div class="slabel">Status Geral</div>
-    <div class="sem-row">
-      ${renderSem(s.body_battery,40,70,"Readiness")}
-      <div class="sem-box" style="background:${acwrSem.bg}"><span class="se">${acwrSem.em}</span><span class="sl" style="color:${acwrSem.dk}">Carga</span></div>
-      ${renderSem(s.hrv,40,60,"HRV")}
-      ${renderSem(s.sono_score,60,80,"Sono")}
-    </div>
-    <div class="badges-row">${badge(ins.status_readiness)}${badge(ins.status_carga)}${badge(ins.acao_hoje)}</div>
-    <div class="slabel">Dados Fisiológicos</div>
-    <div class="metrics">
-      ${renderMC("💤","Sono",fmt(s.sono_h)+"h",`Score ${fmt(s.sono_score,0)} · REM ${fmt(s.sono_rem)}h`,!!s.sono_h)}
-      ${renderMC("❤️","HRV",fmt(s.hrv,0)+" ms",`7d ${fmt(s.hrv_7d,0)} · ${(s.hrv_status||"—").toUpperCase()}`,!!s.hrv)}
-      ${renderMC("🔋","Body Battery",fmt(s.body_battery,0),`Stress ${fmt(s.stress_avg,0)}`,!!s.body_battery)}
-      ${renderMC("💓","Resting HR",fmt(s.rhr,0)+" bpm",`Base ${fmt(s.rhr_baseline,0)} bpm`,!!s.rhr)}
-      ${renderMC("📈","ATL / CTL",`${fmt(s.atl,0)} / ${fmt(s.ctl,0)}`,`${s.training_status||"—"} · ${s.fitness_trend||"—"}`,!!s.atl)}
-      ${renderMC("🫁","VO₂max",fmt(s.vo2max),"ml/kg/min",!!s.vo2max)}
-    </div>
-    <div class="divider" id="treinos"></div>
-    <div class="slabel">Treinos de Ontem</div>
-    ${renderTable(treino_rows,treino_cols)}
-    <div class="divider" id="coach"></div>
-    <div class="briefing-card"><div class="briefing-label">🤖 Análise do Coach — IA</div><div class="briefing-text">${(ins.briefing||"—").replace(/\\n/g,"\n")}</div></div>
-    ${alertHTML}
-    <div class="divider" id="calendario"></div>
-    <div class="slabel">Treino de Hoje</div>
-    ${hoje.length?renderTable(hoje,cal_cols):'<div style="color:#444;font-size:12px;padding:8px 0">Nenhum treino agendado.</div>'}
-    \${(r.hoje_feito&&r.hoje_feito.length)?`
-    <div style='background:#0a1a0a;border:1px solid #1a3a1a;border-radius:8px;padding:10px 12px;margin-top:8px;display:flex;align-items:center;gap:8px'>
-      <span style='font-size:16px'>&#9989;</span>
-      <div>
-        <div style='font-size:11px;font-weight:700;color:#00C896;text-transform:uppercase;letter-spacing:.08em'>Treino já executado hoje</div>
-        <div style='font-size:12px;color:#555;margin-top:2px'>\${r.hoje_feito.map(t=>t.icone+' '+t.nome+' — '+t.dist+' · '+t.dur).join(' | ')}</div>
-      </div>
-    </div>` : ''}
-    ${ins.analise_hoje ? `
-    <div style="background:#071a0f;border-left:3px solid #00C896;border-radius:8px;padding:13px 15px;margin-top:10px;margin-bottom:4px">
-      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#00C896;margin-bottom:5px">🎯 Análise do Treino de Hoje</div>
-      <div style="font-size:13px;color:#70c090;line-height:1.6">${ins.analise_hoje}</div>
-    </div>
-    <div style="background:#07111f;border-left:3px solid #1a6fff;border-radius:8px;padding:13px 15px;margin-bottom:8px">
-      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#1a6fff;margin-bottom:5px">🔧 Ajuste Concreto</div>
-      <div style="font-size:13px;color:#7a9bbf;line-height:1.6">${ins.sugestao_ajuste||ins.acao_hoje||"—"}</div>
-    </div>` : ""}
-    <div class="slabel" style="margin-top:16px">Treino de Amanhã</div>
-    ${amanha.length?renderTable(amanha,cal_cols):'<div style="color:#444;font-size:12px;padding:8px 0">Nenhum treino agendado.</div>'}
-    ${prevHTML}
-    <div class="last-updated">Atualizado em ${new Date(r.generated_at||r.date).toLocaleString("pt-BR")}</div>`;
-}
-
-// ── Exercise SVG illustrations ──────────────────────────────────────────────
-const EX_SVGS = {
-  squat: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="40" cy="12" r="7" fill="white" opacity=".9"/>
-    <path d="M40 20 L40 42 M40 42 L28 60 M40 42 L52 60 M28 60 L24 72 M52 60 L56 72" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M32 26 L20 34 M48 26 L60 34" stroke="white" stroke-width="3" stroke-linecap="round"/>
-  </svg>`,
-  lunge: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="40" cy="12" r="7" fill="white" opacity=".9"/>
-    <path d="M40 20 L40 38" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M40 38 L26 56 M40 38 L54 50" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M26 56 L22 70 M54 50 L58 68" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M33 26 L22 32 M47 26 L58 32" stroke="white" stroke-width="3" stroke-linecap="round"/>
-  </svg>`,
-  hinge: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="28" cy="20" r="7" fill="white" opacity=".9"/>
-    <path d="M28 27 L28 44" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M28 44 L56 44" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M56 44 L60 56" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M28 44 L16 56 M28 44 L22 60" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M22 26 L12 30" stroke="white" stroke-width="3" stroke-linecap="round"/>
-  </svg>`,
-  push: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="40" cy="28" r="7" fill="white" opacity=".9"/>
-    <path d="M40 35 L40 50" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M40 40 L24 44 M40 40 L56 44" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M24 50 L16 50 M56 50 L64 50" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M40 50 L34 62 M40 50 L46 62" stroke="white" stroke-width="3" stroke-linecap="round"/>
-  </svg>`,
-  pull: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="40" cy="38" r="7" fill="white" opacity=".9"/>
-    <path d="M40 31 L40 18" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M40 22 L24 14 M40 22 L56 14" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M40 45 L34 58 M40 45 L46 58" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M40 35 L28 42 M40 35 L52 42" stroke="white" stroke-width="3" stroke-linecap="round"/>
-  </svg>`,
-  core: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="40" cy="14" r="7" fill="white" opacity=".9"/>
-    <path d="M40 21 L40 38" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M12 48 L68 48" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M12 48 L16 56 M68 48 L64 56" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M40 38 L26 42 M40 38 L54 42" stroke="white" stroke-width="3" stroke-linecap="round"/>
-  </svg>`,
-  mobility: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="40" cy="14" r="7" fill="white" opacity=".9"/>
-    <path d="M40 21 L40 44" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M40 30 L22 24 M40 30 L58 24" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M40 44 L28 62 M40 44 L52 62" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M20 60 C28 54 36 62 44 56 C52 50 60 58 68 52" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".5"/>
-  </svg>`,
-  plyo: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="40" cy="10" r="7" fill="white" opacity=".9"/>
-    <path d="M40 17 L40 36" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M40 25 L26 20 M40 25 L54 20" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M40 36 L30 50 M40 36 L50 50" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M16 68 L64 68" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".4"/>
-    <path d="M28 4 L32 8 M52 4 L48 8" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-  </svg>`,
-  row: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="22" cy="28" r="7" fill="white" opacity=".9"/>
-    <path d="M22 35 L22 52" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M22 52 L16 64 M22 52 L28 64" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M22 43 L60 38" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M60 38 L64 32" stroke="white" stroke-width="3" stroke-linecap="round"/>
-    <path d="M22 35 L14 40" stroke="white" stroke-width="3" stroke-linecap="round"/>
-  </svg>`,
-  generic: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="40" cy="12" r="7" fill="white" opacity=".9"/>
-    <path d="M40 20 L40 46 M40 46 L28 64 M40 46 L52 64" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M40 32 L24 26 M40 32 L56 26" stroke="white" stroke-width="3" stroke-linecap="round"/>
-  </svg>`
-};
-
-const EX_COLORS = {
-  squat:    ["#1a3a6f","#2a5aaf"],
-  lunge:    ["#1a4a2f","#2a7a4f"],
-  hinge:    ["#3a2a1a","#7a5a2a"],
-  push:     ["#3a1a2a","#7a2a5a"],
-  pull:     ["#1a2a3a","#2a5a7a"],
-  core:     ["#2a1a3a","#5a2a7a"],
-  mobility: ["#1a3a3a","#2a6a6a"],
-  plyo:     ["#3a2a1a","#8a5a1a"],
-  row:      ["#1a1a3a","#3a3a8a"],
-  generic:  ["#222","#333"]
-};
-
-function getExType(name) {
-  const n = (name||"").toLowerCase();
-  if (/agacham|squat|sumô|goblet|hack/.test(n))          return "squat";
-  if (/afundo|lunge|búlgar|step.up|passada/.test(n))     return "lunge";
-  if (/deadlift|terra|rdl|ponte|hip.thrust|stiff/.test(n)) return "hinge";
-  if (/supino|flexão|press|push|ombro|overhead/.test(n)) return "push";
-  if (/remada|pulldown|puxada|pull.up|barra/.test(n))    return "pull";
-  if (/prancha|plank|abdom|crunch|core|oblíq/.test(n))   return "core";
-  if (/mobil|alonga|rotaç|quadril|pigeon|foam/.test(n))  return "mobility";
-  if (/salto|plio|box.jump|burpee|skipping/.test(n))     return "plyo";
-  if (/remada|remo|rowing/.test(n))                       return "row";
-  return "generic";
-}
-
-function renderForca(items, saude) {
-  const CARGA_C = {leve:"#00C896",moderada:"#FFB800",pesada:"#FF4444"};
-  const CARGA_I = {leve:"Leve",moderada:"Moderada",pesada:"Pesada"};
-  const bb = parseFloat(saude&&saude.body_battery)||0;
-  let nivel = "Força Funcional", sub = "Estado moderado — estabilidade e controle";
-  if (bb < 40)      { nivel = "Recuperação Ativa"; sub = "Readiness baixo — mobilidade e core suave"; }
-  else if (bb >= 70){ nivel = "Força & Potência";  sub = "Ótimo estado — treine com intensidade"; }
-
-  if (!items || !items.length) return `
-    <div class="forca-header">
-      <div class="forca-badge">💪 Treino de Força</div>
-      <h2>${nivel}</h2><p>Rode o briefing para gerar sugestões.</p></div>`;
-
-  const cards = items.map((ex,i) => {
-    const cg  = (ex.carga||"leve").toLowerCase();
-    const cc  = CARGA_C[cg]||"#555";
-    const cl  = CARGA_I[cg]||"Leve";
-    const typ = getExType(ex.exercicio);
-    const [c1,c2] = EX_COLORS[typ];
-    const svg = EX_SVGS[typ];
-    return `
-    <div class="ex-card" style="animation:fadeUp .35s ease both;animation-delay:${i*0.06}s">
-      <div class="ex-card-img" style="background:linear-gradient(135deg,${c1},${c2})">
-        ${svg}
-        <div class="ex-sets-overlay">${ex.series||"—"}×${ex.repeticoes||"—"}</div>
-      </div>
-      <div class="ex-card-info">
-        <div class="ex-name">${ex.exercicio||"—"}</div>
-        <div class="ex-meta">
-          <span class="carga-badge" style="color:${cc};border-color:${cc}44;background:${cc}18">● ${cl}</span>
-        </div>
-        <div class="ex-foco">${ex.foco||""}</div>
-      </div>
-    </div>`;
-  }).join("");
-
-  return `
-    <div class="forca-header">
-      <div class="forca-badge">💪 Sugestão IA · ${items.length} exercícios</div>
-      <h2>${nivel}</h2><p>${sub}</p>
-    </div>
-    ${cards}`;
-}
-
-function scrollToSection(id){
-  const el=document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
-}
-
-// ── GitHub Workflow trigger ──────────────────────────────────────────────────
+// ── GitHub Workflow// ── GitHub Workflow trigger ──────────────────────────────────────────────────
 const GH_CFG_KEY = "ghConfig";
 
 function getConfig() {
@@ -941,6 +555,23 @@ async function loadReport(forceRefresh=false){
   }
   btn.classList.remove("spinning");
 }
+
+
+// ── App Init ──────────────────────────────────────────────────────────────────
+(function init() {
+  if (isSessionValid()) { showApp(); return; }
+  // Show PIN screen
+  const ps = document.getElementById('pinScreen');
+  ps.style.display = 'flex';
+  if (!hasPin()) {
+    // First time — go straight to create
+    startCreate();
+  } else {
+    pinMode = 'enter';
+    document.getElementById('pinActionBtn').textContent = 'Redefinir PIN';
+  }
+  updateDots();
+})();
 
 if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
 
