@@ -8,6 +8,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   briefing:
@@ -48,10 +50,17 @@ jobs:
           EMAIL_TO:          ${{ secrets.EMAIL_TO }}
         run: python garmin_briefing.py
 
-      - name: Commit report.json → main
+      - name: Commit report.json
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add pwa/report.json
-          git diff --staged --quiet || git commit -m "📊 report $(date +%Y-%m-%d\ %H:%M) UTC"
+          git diff --staged --quiet || git commit -m "📊 report $(date +'%Y-%m-%d %H:%M') UTC"
           git push
+
+      - name: Deploy PWA → GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./pwa
+          keep_files: false
