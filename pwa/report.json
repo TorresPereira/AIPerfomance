@@ -1,6 +1,6 @@
 {
   "date": "2026-06-07",
-  "generated_at": "2026-06-07T19:06:34.339835Z",
+  "generated_at": "2026-06-07T19:23:27.988062Z",
   "saude": {
     "hrv": 59,
     "hrv_7d": 35,
@@ -127,61 +127,61 @@
   ],
   "insights": {
     "frase": "HRV em alta: capitalize a recuperação com inteligência hoje.",
-    "briefing": "1) READINESS: HRV 59ms é expressivo — +24ms vs média 7d (35ms), acima do baseline 33–42ms. Sinal claro de supercompensação autonômica. RHR 61bpm aceitável. Sono 6h é limitante (abaixo do ideal >7h), mas Deep Sleep 2.1h é robusto — recuperação estrutural preservada. Body Battery 62 e Stress 17 confirmam estado funcional moderado-bom. Readiness geral: BOM, com ressalva ao sono.\n2) TREINO ONTEM: Run 14.5km @ 7:14/km, FC 127bpm, Potência 292W, TE 3.0. Pace conservador, FC baixa — sessão bem controlada em Z1/Z2. Cadência 161spm levemente elevada para pace tão suave; pode indicar passada curta. Sem pontos críticos.\n3) CARGA: Z1=1739 (acima do target máx 1415 — excedente de +323). Z2=608 (abaixo do mínimo 957). Z3+=673. Perfil com excesso de volume leve e déficit aeróbico estrutural. ATL 755 com status Garmin 'Recuperação' — carga recente gerenciável.\n4) HOJE (EXECUTADO): Ciclismo 65.7km/2h27m, FC 140bpm, Potência 145W, TSS 140.6, TE 3.7 — sessão executada em Z2 consistente, dentro do planejado Steady Long Ride. FC max 162 pontual, sem drift relevante. Tênis adicional (1h28m, FC 107, TE 2.1) gerou carga neuromuscular/cognitiva extra não planejada — soma do dia considerável.\n5) AJUSTE: Manter plano de Força amanhã, mas limitar séries pesadas. Reduzir volume Z3+ nas próximas sessões — já em 673 do mês. Priorizar Z2 estruturado para corrigir déficit.\n6) ALERTAS: Tênis pós-ciclismo elevou carga total do dia além do planejado. FC max 165bpm no tênis — pico anaeróbico não programado. Monitorar HRV amanhã; se cair abaixo de 40ms, substituir força por mobilidade.\n7) NUTRIÇÃO: Pós-treino hoje — priorize 40g proteína + 80g carboidrato na janela de 30min (ex: whey + banana + aveia) para recuperação muscular antes da sessão de força amanhã.",
+    "briefing": "1) READINESS: HRV 59ms (+24ms vs média 7d de 35ms) — spike expressivo, acima do baseline (33–42ms). Pode indicar supercompensação real ou resposta adaptativa pós-esforço. RHR 61bpm sem baseline definido — monitorar tendência. Sono 6h/score 77: deep sleep 2.1h é sólido, REM 1.0h abaixo do ideal. Body Battery 62 — reserva funcional moderada-boa. Status geral: MODERADO com tendência positiva.\n2) TREINO ONTEM: Run 14.5km @ 7:14/km, FC 127bpm, TE aeróbico 3.0. Pace conservador, zona Z1 baixa — adequado para dia de volume leve. Cadência 161spm: aceitável. Execução controlada, sem pontos críticos.\n3) CARGA: Z1 mensal 1739 (acima do target máx 1415) — excesso de volume leve. Z2 608 (abaixo do target mínimo 957) — déficit de estímulo aeróbico estruturado. Z3+ 673 — dentro do tolerável. Desequilíbrio Z1/Z2 é o ponto crítico. ATL 755 com status Garmin 'Recuperação'.\n4) HOJE EXECUTADO: Ciclismo 65.7km/2h27m, FC 140bpm, Potência 145W, TSS 140.6, TE 3.7 — sessão bem executada, intensidade Z1/Z2 adequada, TSS compatível com steady ride planejado. Tênis 1h28m adicionado: FC média 107bpm, picos 165bpm — carga neural e cardiovascular extra não planejada, TE 2.1 leve.\n5) AJUSTE: Não adicionar mais volume hoje. Tênis já gerou carga adicional (~60–70 TSS estimado). Total do dia: elevado. Amanhã force deve ser mantida mas reduzida em intensidade — evitar falha muscular.\n6) ALERTAS: Pico FC tênis 165bpm com FC média 107 — resposta intermitente típica, mas soma ao dia pesado. Volume Z1 mensal 23% acima do teto — risco de stagnação aeróbica por subestimulação Z2.\n7) NUTRIÇÃO: Pós-treino hoje — refeição com 30–40g proteína + 80–100g carboidrato complexo nas próximas 2h para otimizar recuperação muscular e glicogênio antes da sessão de força amanhã.",
     "status_readiness": "BOM",
     "status_carga": "ELEVADA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Ciclismo executado dentro do objetivo: Z2 estável, TSS 140 compatível com Long Ride de 2h30m planejado — execução adequada. Tênis adicional (1h28m, FC max 165bpm) adicionou carga anaeróbica não planejada, elevando o estresse total do dia além do prescrito. Amanhã monitorar HRV antes de definir intensidade da sessão de força.",
-    "alerta": "Tênis pós-ciclismo gerou pico FC 165bpm não programado — carga combinada do dia supera o planejado. Se HRV amanhã < 40ms, substituir força por mobilidade e core leve.",
+    "analise_hoje": "Ciclismo steady executado dentro do plano: TSS 140.6, FC 140bpm e potência 145W indicam Z1/Z2 bem distribuído, TE 3.7 confirma estímulo aeróbico efetivo. Tênis adicional gerou carga extra não planejada com picos anaeróbicos (FC 165bpm), elevando fadiga neuromuscular do dia. Volume total do dia é compatível com o estado de readiness, mas não deve ser acrescido de mais nada.",
+    "alerta": "Volume mensal Z1 acima do teto (+23%): risco de déficit de adaptação aeróbica por ausência de estímulo Z2 adequado. Priorizar sessões Z2 estruturadas nos próximos 7 dias.",
     "treino_forca": [
       {
         "exercicio": "Agachamento Goblet",
         "series": 3,
-        "repeticoes": "12-15",
-        "carga": "moderada",
-        "foco": "Força funcional de quadríceps e glúteos para potência no ciclismo e corrida"
-      },
-      {
-        "exercicio": "Romanian Deadlift (RDL) unilateral",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Estabilidade de quadril e força posterior — reduz risco de lesão na corrida"
-      },
-      {
-        "exercicio": "Elevação de quadril (Hip Thrust) com barra",
-        "series": 3,
         "repeticoes": "12",
         "carga": "moderada",
-        "foco": "Ativação de glúteo máximo — melhora propulsão no ciclismo e fase de apoio na corrida"
+        "foco": "Força funcional de quadríceps e glúteos para potência no pedal e corrida"
       },
       {
-        "exercicio": "Prancha lateral com abdução de quadril",
+        "exercicio": "Ponte de Glúteo Unilateral",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "leve",
+        "foco": "Ativação e estabilização glútea para prevenir lesões no run"
+      },
+      {
+        "exercicio": "Prancha Lateral com Abdução de Quadril",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e estabilidade pélvica — essencial para economia de corrida no 70.3"
+        "foco": "Core lateral e estabilidade pélvica — essencial para economia de corrida"
       },
       {
-        "exercicio": "Step-up com joelho elevado",
+        "exercicio": "Remada com Halteres em Apoio",
         "series": 3,
-        "repeticoes": "10-10",
+        "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Força unilateral e equilíbrio — simula demanda neuromuscular da corrida pós-bike"
+        "foco": "Força de tração para equilíbrio postural e eficiência na natação"
       },
       {
-        "exercicio": "Mobilidade de quadril — 90/90 stretch",
-        "series": 2,
-        "repeticoes": "45s",
-        "carga": "leve",
-        "foco": "Restaura amplitude de movimento do quadril após volume elevado de ciclismo"
-      },
-      {
-        "exercicio": "Dead Bug",
+        "exercicio": "Elevação de Panturrilha Unilateral",
         "series": 3,
-        "repeticoes": "8-10",
+        "repeticoes": "15",
+        "carga": "moderada",
+        "foco": "Força excêntrica do tríceps sural para absorção de impacto no run"
+      },
+      {
+        "exercicio": "Hip Hinge com Haltere (RDL)",
+        "series": 3,
+        "repeticoes": "10",
+        "carga": "moderada",
+        "foco": "Cadeia posterior — isquiotibiais e glúteos para potência no ciclismo e corrida"
+      },
+      {
+        "exercicio": "Mobilidade de Quadril em 90/90 + Rotação Torácica",
+        "series": 2,
+        "repeticoes": "8",
         "carga": "leve",
-        "foco": "Core profundo e coordenação — protege lombar durante esforços prolongados no 70.3"
+        "foco": "Amplitude articular e mobilidade torácica para posição aerodinâmica no bike"
       }
     ]
   }
