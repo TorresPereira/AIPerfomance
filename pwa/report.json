@@ -1,0 +1,145 @@
+{
+  "date": "2026-06-07",
+  "generated_at": "2026-06-07T07:15:59.450574Z",
+  "saude": {
+    "hrv": 59,
+    "hrv_7d": 35,
+    "hrv_status": "balanced",
+    "hrv_baseline_low": 33,
+    "hrv_baseline_high": 42,
+    "rhr": 61,
+    "rhr_baseline": null,
+    "sono_h": 6.0,
+    "sono_score": 77,
+    "sono_deep": 2.1,
+    "sono_rem": 1.0,
+    "sono_awake": 0.0,
+    "body_battery": 62,
+    "stress_avg": 15,
+    "stress_rest": 94.17,
+    "atl": 690.0,
+    "ctl": 2760.0,
+    "tsb": null,
+    "acwr": null,
+    "load_3d": null,
+    "load_aerobic_low": 1543.0,
+    "load_aerobic_high": 608.0,
+    "load_anaerobic": 609.0,
+    "load_total_month": 2760.0,
+    "load_target_low": "577–1415",
+    "load_target_high": "957–1795",
+    "training_status": "Recuperação",
+    "fitness_trend": "Estável",
+    "training_readiness": null,
+    "vo2max": 49.2,
+    "peso": null,
+    "previsoes": {
+      "5K": 1354,
+      "10K": 2871,
+      "Meia": 6457,
+      "Maratona": 14396
+    }
+  },
+  "ontem": [
+    {
+      "mod": "run",
+      "icone": "🏃",
+      "nome": "Erkrath Running",
+      "dist": "14.5km",
+      "dur": "1h44m",
+      "fc": 127.0,
+      "fc_max": 161.0,
+      "cal": 1166.0,
+      "cad": 161.109375,
+      "tss": null,
+      "np": 292.0,
+      "swolf": null,
+      "aerobic_te": 3.0,
+      "anaerobic_te": 1.0,
+      "elev": 91.0,
+      "perf": "7:14/km",
+      "pl": "Pace",
+      "_dist_m": 14481.080078125,
+      "_dur_s": 6292.671875
+    }
+  ],
+  "hoje": [
+    {
+      "icone": "🚴",
+      "nome": "Steady Long Ride",
+      "tipo": "",
+      "dur": "2h30m",
+      "dist": "—"
+    }
+  ],
+  "amanha": [
+    {
+      "icone": "⚡",
+      "nome": "Strength 💪",
+      "tipo": "",
+      "dur": "—",
+      "dist": "—"
+    }
+  ],
+  "hoje_feito": [],
+  "insights": {
+    "frase": "HRV em alta: capitalize o estado de recuperação hoje.",
+    "briefing": "1) READINESS: HRV 59ms é excepcional — +24ms acima da média 7d (35ms) e bem acima do baseline (33–42ms). Sinal claro de supercompensação. RHR 61bpm aceitável. Sono 6h é o ponto fraco: Deep 2.1h é bom, mas REM 1.0h abaixo do ideal — pode limitar recuperação cognitiva e hormonal. Body Battery 62 e stress médio 15 confirmam estado parasimpático favorável. Status geral: BOM com ressalva no sono.\n2) TREINO ONTEM: Run 14.5km a 7:14/km, FC avg 127bpm (Z2 baixo), potência 292W, TE aeróbico 3.0. Sessão bem executada — FC controlada, intensidade aeróbica adequada. Cadência 161spm é baixa para corrida (ideal >170spm): ponto crítico a corrigir. Pace conservador compatível com volume de 1h44m.\n3) CARGA: Z1 em 1543 (acima do target máx 1415) — volume leve excessivo. Z2 em 608 (abaixo do target mín 957) — déficit aeróbico moderado. Z3+ em 609 — proporcional. Garmin indica Recuperação com fitness estável. Sem risco de overreaching imediato, mas Z2 precisa de atenção nas próximas semanas.\n4) TREINO HOJE — Steady Long Ride 2h30m: Objetivo é estímulo aeróbico Z2 para compensar déficit identificado. Execute 80% do tempo em Z2 (FC 135–148bpm estimado), primeiros 20min em Z1 de aquecimento. Mantenha potência consistente, evite picos anaeróbicos. Ideal para aproveitar o HRV elevado sem comprometer amanhã (força).\n5) AJUSTE CONCRETO: Manter 2h30m. Estrutura: 20min Z1 + 1h50min Z2 steady + 20min Z1 cool-down. Sem trechos Z3+. Cadência alvo no pedal: 85–90rpm.\n6) ALERTAS: Monitorar HR drift após 1h30m — se FC subir >8bpm sem aumento de potência, reduzir intensidade. Sono insuficiente pode antecipar fadiga central após 1h45m.\n7) NUTRIÇÃO: Durante o ride — 60g CHO/hora (gel + bebida isotônica), iniciar ingestão aos 30min sem esperar sede. Hidratação mínima 500ml/hora.",
+    "status_readiness": "BOM",
+    "status_carga": "SUAVE",
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Steady Long Ride de 2h30m com foco total em Z2 aeróbico — sessão estratégica para corrigir déficit de Z2 identificado na carga mensal. Execute com FC controlada (135–148bpm), potência estável e cadência 85–90rpm. Aproveite o HRV elevado para maximizar estímulo aeróbico sem comprometer a sessão de força de amanhã.",
+    "alerta": "Cadência de corrida 161spm está abaixo do ideal para 70.3 — priorize drills de cadência nas próximas sessões de run para atingir >170spm e reduzir custo energético.",
+    "treino_forca": [
+      {
+        "exercicio": "Agachamento Búlgaro (Split Squat)",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Força unilateral de glúteo e quadríceps, compensa assimetrias geradas pelo ciclismo prolongado"
+      },
+      {
+        "exercicio": "Romanian Deadlift (RDL)",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Fortalece cadeia posterior (isquiotibiais e glúteos), essencial para propulsão na corrida do 70.3"
+      },
+      {
+        "exercicio": "Step-Up com Joelho Alto",
+        "series": 3,
+        "repeticoes": "12",
+        "carga": "leve",
+        "foco": "Simula mecânica de corrida e ativa estabilizadores do quadril para economia de movimento"
+      },
+      {
+        "exercicio": "Prancha Lateral com Abdução de Quadril",
+        "series": 3,
+        "repeticoes": "30s",
+        "carga": "leve",
+        "foco": "Core lateral e glúteo médio — previne colapso pélvico na fase de corrida do triathlon"
+      },
+      {
+        "exercicio": "Dead Bug",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "leve",
+        "foco": "Estabilização de core profundo com controle respiratório, base para postura no ciclismo e corrida"
+      },
+      {
+        "exercicio": "Hip Flexor Stretch + Abertura Torácica (mobilidade)",
+        "series": 2,
+        "repeticoes": "45s",
+        "carga": "leve",
+        "foco": "Compensa posição fechada do ciclismo, melhora mobilidade torácica e extensão de quadril para corrida"
+      },
+      {
+        "exercicio": "Elevação de Panturrilha Unilateral (Calf Raise)",
+        "series": 3,
+        "repeticoes": "15",
+        "carga": "moderada",
+        "foco": "Fortalece complexo sóleo-gastrocnêmio, reduz risco de lesão e melhora eficiência de passada"
+      }
+    ]
+  }
+}
