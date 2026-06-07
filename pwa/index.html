@@ -528,84 +528,93 @@ function switchTab(tab) {
   }
 }
 
-// Extrai user/repo do hostname GitHub Pages
 function getGitHubInfo() {
   const user = location.hostname.split(".")[0];
   const repo = location.pathname.split("/").filter(Boolean)[0] || "";
   return { user, repo };
 }
 
+// Retorna lista de URLs a tentar em ordem
+function getReportUrls(bust) {
+  const qs = bust ? "?t=" + Date.now() : "";
+  const { user, repo } = getGitHubInfo();
+  return [
+    // 1. Mesma origem (GitHub Pages)
+    location.origin + "/" + repo + "/report.json" + qs,
+    // 2. Raiz do site (se Pages servir da raiz)
+    location.origin + "/report.json" + qs,
+    // 3. raw.githubusercontent.com
+    `https://raw.githubusercontent.com/${user}/${repo}/main/pwa/report.json` + qs,
+    // 4. Relativo (fallback)
+    "report.json" + qs,
+  ];
+}
+
 function getReportUrl(bust) {
   const { user, repo } = getGitHubInfo();
-  const raw = `https://raw.githubusercontent.com/${user}/${repo}/main/pwa/report.json`;
-  return raw + (bust ? "?t=" + Date.now() : "");
+  return `https://raw.githubusercontent.com/${user}/${repo}/main/pwa/report.json` + (bust ? "?t="+Date.now() : "");
 }
 
 async function loadReport(forceRefresh=false){
-  const btn=document.getElementById("refreshBtn");
+  const btn  = document.getElementById("refreshBtn");
+  const body = document.getElementById("appBody");
   btn.classList.add("spinning");
-  const body=document.getElementById("appBody");
-  if(forceRefresh) body.innerHTML='<div class="loading-bar"></div>';
+  if (forceRefresh) body.innerHTML = '<div class="loading-bar"></div>';
 
-  const reportUrl = getReportUrl(forceRefresh);
+  // Try multiple URLs in sequence
+  const urls = getReportUrls(forceRefresh);
+  let loaded  = false;
 
-  try{
-    const res = await fetch(reportUrl, { cache: forceRefresh ? "no-store" : "default" });
-    if(!res.ok) throw new Error("HTTP " + res.status);
-    const data = await res.json();
-    currentReport = data;
-    body.innerHTML = renderReport(data);
-    localStorage.setItem("lastReport", JSON.stringify(data));
-    localStorage.setItem("lastReportTime", new Date().toISOString());
-  } catch(e) {
+  for (const url of urls) {
+    try {
+      const res  = await fetch(url, { cache: forceRefresh ? "no-store" : "default" });
+      if (!res.ok) continue;
+      const data = await res.json();
+      currentReport = data;
+      body.innerHTML = renderReport(data);
+      localStorage.setItem("lastReport",     JSON.stringify(data));
+      localStorage.setItem("lastReportTime", new Date().toISOString());
+      loaded = true;
+      break;
+    } catch(e) { /* try next URL */ }
+  }
+
+  if (!loaded) {
     const cached = localStorage.getItem("lastReport");
     if (cached) {
-      const data = JSON.parse(cached);
-      currentReport = data;
+      const data      = JSON.parse(cached);
       const cachedTime = localStorage.getItem("lastReportTime");
-      body.innerHTML = renderReport(data) + `
-        <div style="background:#1a1000;border:1px solid #3a2800;border-radius:8px;padding:12px;margin-top:12px;font-size:12px;color:#FFB800;text-align:center">
-          📶 Exibindo cache · ${new Date(cachedTime).toLocaleString("pt-BR")}
+      currentReport   = data;
+      body.innerHTML  = renderReport(data) +
+        `<div style="background:#1a1000;border:1px solid #3a2800;border-radius:8px;padding:12px;margin-top:12px;font-size:12px;color:#FFB800;text-align:center">
+          📶 Cache · ${new Date(cachedTime).toLocaleString("pt-BR")}
         </div>`;
     } else {
-      const {user,repo} = getGitHubInfo();
+      const {user, repo} = getGitHubInfo();
+      const rawUrl = `https://raw.githubusercontent.com/${user}/${repo}/main/pwa/report.json`;
       body.innerHTML = `
         <div class="empty">
           <div class="empty-icon">⚠️</div>
           <h2>Relatório não encontrado</h2>
-
           <div style="background:#111;border-radius:10px;padding:14px;margin:16px 0;text-align:left;width:100%">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:8px">Diagnóstico</div>
-            <div style="font-size:11px;color:#555;line-height:1.8">
-              👤 Usuário: <strong style="color:#888">${user||"não detectado"}</strong><br>
-              📦 Repositório: <strong style="color:#888">${repo||"não detectado"}</strong><br>
-              🔗 URL: <span style="color:#1a6fff;word-break:break-all;font-size:10px">${reportUrl}</span>
-            </div>
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:8px">URL testada</div>
+            <div style="font-size:11px;color:#1a6fff;word-break:break-all">${rawUrl}</div>
           </div>
-
-          <div style="background:#111;border-radius:10px;padding:14px;margin-bottom:16px;text-align:left;width:100%">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:8px">Verificar</div>
-            <div style="font-size:11px;color:#555;line-height:2">
-              1. GitHub → <strong style="color:#888">Actions</strong> → o workflow rodou com ✅?<br>
-              2. No repo → pasta <strong style="color:#888">pwa/</strong> → existe <strong style="color:#888">report.json</strong>?<br>
-              3. Settings → Actions → <strong style="color:#888">Read and write permissions</strong>
-            </div>
+          <div style="font-size:12px;color:#555;line-height:2;margin-bottom:20px;text-align:left;width:100%">
+            1. Abra a URL acima no Safari — se der 404, o workflow não commitou ainda<br>
+            2. GitHub → Actions → verifique se o workflow terminou com ✅<br>
+            3. Settings → Actions → <strong style="color:#777">Read and write permissions</strong>
           </div>
-
-          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-            <button onclick="window.open('${reportUrl}','_blank')" style="background:#1a1a1a;color:#aaa;border:1px solid #333;border-radius:10px;padding:11px 18px;font-size:13px;font-weight:600;cursor:pointer">
-              🔗 Abrir URL
-            </button>
-            <button onclick="triggerWorkflow()" style="background:#1a6fff;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:13px;font-weight:700;cursor:pointer">
-              ▶ Rodar Agora
-            </button>
+          <div style="display:flex;gap:10px;justify-content:center">
+            <button onclick="window.open('${rawUrl}','_blank')" style="background:#1a1a1a;color:#aaa;border:1px solid #333;border-radius:10px;padding:11px 18px;font-size:13px;font-weight:600;cursor:pointer">🔗 Testar URL</button>
+            <button onclick="triggerWorkflow()" style="background:#1a6fff;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:13px;font-weight:700;cursor:pointer">▶ Rodar Agora</button>
           </div>
         </div>`;
     }
   }
+
   btn.classList.remove("spinning");
 }
-
 
 // ── App Init ──────────────────────────────────────────────────────────────────
 (function init() {
