@@ -1,6 +1,6 @@
 {
   "date": "2026-06-07",
-  "generated_at": "2026-06-07T07:15:59.450574Z",
+  "generated_at": "2026-06-07T07:19:57.259409Z",
   "saude": {
     "hrv": 59,
     "hrv_7d": 35,
@@ -83,62 +83,62 @@
   ],
   "hoje_feito": [],
   "insights": {
-    "frase": "HRV em alta: capitalize o estado de recuperação hoje.",
-    "briefing": "1) READINESS: HRV 59ms é excepcional — +24ms acima da média 7d (35ms) e bem acima do baseline (33–42ms). Sinal claro de supercompensação. RHR 61bpm aceitável. Sono 6h é o ponto fraco: Deep 2.1h é bom, mas REM 1.0h abaixo do ideal — pode limitar recuperação cognitiva e hormonal. Body Battery 62 e stress médio 15 confirmam estado parasimpático favorável. Status geral: BOM com ressalva no sono.\n2) TREINO ONTEM: Run 14.5km a 7:14/km, FC avg 127bpm (Z2 baixo), potência 292W, TE aeróbico 3.0. Sessão bem executada — FC controlada, intensidade aeróbica adequada. Cadência 161spm é baixa para corrida (ideal >170spm): ponto crítico a corrigir. Pace conservador compatível com volume de 1h44m.\n3) CARGA: Z1 em 1543 (acima do target máx 1415) — volume leve excessivo. Z2 em 608 (abaixo do target mín 957) — déficit aeróbico moderado. Z3+ em 609 — proporcional. Garmin indica Recuperação com fitness estável. Sem risco de overreaching imediato, mas Z2 precisa de atenção nas próximas semanas.\n4) TREINO HOJE — Steady Long Ride 2h30m: Objetivo é estímulo aeróbico Z2 para compensar déficit identificado. Execute 80% do tempo em Z2 (FC 135–148bpm estimado), primeiros 20min em Z1 de aquecimento. Mantenha potência consistente, evite picos anaeróbicos. Ideal para aproveitar o HRV elevado sem comprometer amanhã (força).\n5) AJUSTE CONCRETO: Manter 2h30m. Estrutura: 20min Z1 + 1h50min Z2 steady + 20min Z1 cool-down. Sem trechos Z3+. Cadência alvo no pedal: 85–90rpm.\n6) ALERTAS: Monitorar HR drift após 1h30m — se FC subir >8bpm sem aumento de potência, reduzir intensidade. Sono insuficiente pode antecipar fadiga central após 1h45m.\n7) NUTRIÇÃO: Durante o ride — 60g CHO/hora (gel + bebida isotônica), iniciar ingestão aos 30min sem esperar sede. Hidratação mínima 500ml/hora.",
+    "frase": "HRV elevado: capitalize a janela de adaptação hoje.",
+    "briefing": "1) READINESS — HRV 59ms é +41% acima do baseline (33–42ms) e +24ms vs média 7d: sinal claro de supercompensação ativa. RHR 62bpm sem baseline para comparar, mas aceitável. Sono 6h é insuficiente (ideal >7h), porém Deep Sleep 2.1h é excelente — recuperação estrutural preservada. REM 1.0h baixo, atenção cognitiva reduzida. Body Battery 62 e Stress 15 confirmam estado recuperado. Readiness geral: BOM, com ressalva ao sono.\n2) TREINO ONTEM — Run 14.5km a 7:14/km, FC média 127bpm (Z1-Z2), TE aeróbico 3.0 (impacto moderado-alto). Potência 292W com cad 161spm é levemente baixa — ideal >165spm para economia. FC max 161bpm sem picos sustentados sugere boa contenção. Execução controlada, adequada para volume de base.\n3) CARGA — Z1 1543 vs target máx 1415: ACIMA do limite superior. Z2 608 dentro do range. Z3+ 609 elevado proporcionalmente. Distribuição piramidal invertida no Z1 representa excesso de volume leve sem progressão estruturada. Status Garmin Recuperação + tendência estável confirmam ausência de overreaching agudo.\n4) TREINO HOJE — Steady Long Ride 2h30m. Com HRV em pico, executar majoritariamente em Z2 (FC 140–155bpm estimado). Objetivo: desenvolver base aeróbica e eficiência lipídica. Manter cadência 88–92rpm. Primeiros 20min em Z1 para aquecimento progressivo.\n5) AJUSTE CONCRETO — Manter 2h30m. Z1: 20min | Z2: 1h50min | Z3: máx 20min no final se sensação permitir. Não forçar Z3 dado excesso mensal já acumulado.\n6) ALERTAS — Z1 mensal já 9% acima do teto. Evitar adicionar volume Z1 esta semana. Monitorar HR drift após 90min: se FC subir >8bpm sem aumento de potência, recuar para Z1.\n7) NUTRIÇÃO — Durante o ride: 60g CHO/hora (gel + isotônico), iniciar ingestão em 30min para preservar glicogênio hepático e manter potência estável nas últimas 45min.",
     "status_readiness": "BOM",
-    "status_carga": "SUAVE",
+    "status_carga": "ELEVADA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Steady Long Ride de 2h30m com foco total em Z2 aeróbico — sessão estratégica para corrigir déficit de Z2 identificado na carga mensal. Execute com FC controlada (135–148bpm), potência estável e cadência 85–90rpm. Aproveite o HRV elevado para maximizar estímulo aeróbico sem comprometer a sessão de força de amanhã.",
-    "alerta": "Cadência de corrida 161spm está abaixo do ideal para 70.3 — priorize drills de cadência nas próximas sessões de run para atingir >170spm e reduzir custo energético.",
+    "analise_hoje": "Steady Long Ride de 2h30m é sessão de base aeróbica com foco em eficiência lipídica e volume cardiovascular. Executar 80% do tempo em Z2 (FC 140–155bpm), cadência 88–92rpm, evitando Z3+ além de 20min finais opcionais. Com HRV em supercompensação, a sessão tem alto potencial adaptativo se a intensidade for controlada.",
+    "alerta": "Z1 mensal (1543) ultrapassa teto do target (1415) em 9% — reduzir volume leve nos próximos 7 dias e priorizar qualidade sobre quantidade.",
     "treino_forca": [
       {
-        "exercicio": "Agachamento Búlgaro (Split Squat)",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Força unilateral de glúteo e quadríceps, compensa assimetrias geradas pelo ciclismo prolongado"
-      },
-      {
-        "exercicio": "Romanian Deadlift (RDL)",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Fortalece cadeia posterior (isquiotibiais e glúteos), essencial para propulsão na corrida do 70.3"
-      },
-      {
-        "exercicio": "Step-Up com Joelho Alto",
+        "exercicio": "Agachamento Goblet",
         "series": 3,
         "repeticoes": "12",
-        "carga": "leve",
-        "foco": "Simula mecânica de corrida e ativa estabilizadores do quadril para economia de movimento"
+        "carga": "moderada",
+        "foco": "Fortalece glúteos e quad para potência no ciclismo e corrida"
       },
       {
-        "exercicio": "Prancha Lateral com Abdução de Quadril",
+        "exercicio": "Stiff Unilateral (RDL)",
+        "series": 3,
+        "repeticoes": "10",
+        "carga": "moderada",
+        "foco": "Isquiotibiais e estabilidade pélvica, reduz risco lesão na corrida"
+      },
+      {
+        "exercicio": "Elevação Pélvica com Bola (Hip Thrust)",
+        "series": 3,
+        "repeticoes": "12",
+        "carga": "moderada",
+        "foco": "Ativa glúteo máximo para extensão do quadril eficiente no pedal"
+      },
+      {
+        "exercicio": "Prancha Lateral com Abdução",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e glúteo médio — previne colapso pélvico na fase de corrida do triathlon"
+        "foco": "Core lateral e glúteo médio — estabilidade pélvica na corrida"
       },
       {
         "exercicio": "Dead Bug",
         "series": 3,
-        "repeticoes": "10-12",
+        "repeticoes": "10",
         "carga": "leve",
-        "foco": "Estabilização de core profundo com controle respiratório, base para postura no ciclismo e corrida"
+        "foco": "Core profundo e coordenação neuromuscular para postura aerodinâmica"
       },
       {
-        "exercicio": "Hip Flexor Stretch + Abertura Torácica (mobilidade)",
+        "exercicio": "Avanço Búlgaro",
+        "series": 3,
+        "repeticoes": "10",
+        "carga": "moderada",
+        "foco": "Força funcional unilateral que replica demanda da corrida e ciclismo"
+      },
+      {
+        "exercicio": "Mobilidade de Quadril (90-90 stretch + rotação torácica)",
         "series": 2,
         "repeticoes": "45s",
         "carga": "leve",
-        "foco": "Compensa posição fechada do ciclismo, melhora mobilidade torácica e extensão de quadril para corrida"
-      },
-      {
-        "exercicio": "Elevação de Panturrilha Unilateral (Calf Raise)",
-        "series": 3,
-        "repeticoes": "15",
-        "carga": "moderada",
-        "foco": "Fortalece complexo sóleo-gastrocnêmio, reduz risco de lesão e melhora eficiência de passada"
+        "foco": "Amplitude de movimento para posição aero e eficiência na passada"
       }
     ]
   }
