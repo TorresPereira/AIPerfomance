@@ -34,8 +34,8 @@ jobs:
           key: garmin-session-v2
           restore-keys: garmin-session-v2
 
-      - name: Criar pasta pwa
-        run: mkdir -p pwa
+      - name: Criar pastas
+        run: mkdir -p pwa docs
 
       - name: Rodar briefing
         env:
@@ -47,11 +47,14 @@ jobs:
           EMAIL_TO:          ${{ secrets.EMAIL_TO }}
         run: python garmin_briefing.py
 
+      - name: Copiar report.json para docs/
+        run: cp pwa/report.json docs/report.json
+
       - name: Publicar report.json
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pwa/report.json
+          git add docs/report.json pwa/report.json
           git diff --staged --quiet && echo "Sem alterações" && exit 0
           git commit -m "📊 briefing $(date +'%Y-%m-%d %H:%M UTC')"
           git push origin HEAD:main
