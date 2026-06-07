@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TP Coach">
+  <meta name="theme-color" content="#000000">
+  <title>TP Performance Coach</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <style>
+    :root {
+      --blue:#1a6fff; --green:#00C896; --yellow:#FFB800; --red:#FF4444;
+      --bg:#000; --card:#111; --card2:#181818; --border:#222;
+      --text:#e0e0e0; --muted:#555;
+      --st: env(safe-area-inset-top,0px);
+      --sb: env(safe-area-inset-bottom,0px);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,'SF Pro Display',Arial,sans-serif}
+
+    /* ── Lock screen ── */
+    #lockScreen{
+      position:fixed;inset:0;z-index:999;
+      background:radial-gradient(ellipse at 50% 30%,#0a1628 0%,#000 70%);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:40px 32px calc(var(--sb)+40px);
+      transition:opacity .4s,transform .4s;
+    }
+    #lockScreen.hiding{opacity:0;transform:scale(1.04);pointer-events:none}
+    .lock-icon{font-size:72px;margin-bottom:24px;filter:drop-shadow(0 0 30px #1a6fff88)}
+    .lock-title{font-size:26px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-.02em}
+    .lock-sub{font-size:14px;color:#555;margin-bottom:48px;text-align:center;line-height:1.5}
+    .faceid-btn{
+      width:80px;height:80px;border-radius:22px;
+      background:linear-gradient(135deg,#1a3a6f,#1a6fff);
+      border:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      font-size:36px;
+      box-shadow:0 0 40px #1a6fff44;
+      transition:transform .15s,box-shadow .15s;
+      -webkit-touch-callout:none;
+    }
+    .faceid-btn:active{transform:scale(.92);box-shadow:0 0 20px #1a6fff22}
+    .faceid-btn.pulse{animation:pulse 1.5s ease-in-out infinite}
+    @keyframes pulse{0%,100%{box-shadow:0 0 40px #1a6fff44}50%{box-shadow:0 0 60px #1a6fff88}}
+    .lock-label{margin-top:16px;font-size:12px;color:#444;letter-spacing:.05em;text-transform:uppercase}
+    .lock-error{margin-top:20px;font-size:13px;color:var(--red);text-align:center;min-height:20px}
+    .lock-reset{margin-top:32px;font-size:12px;color:#333;text-decoration:underline;cursor:pointer;background:none;border:none;color:#333}
+
+    /* ── Setup screen ── */
+    #setupScreen{
+      position:fixed;inset:0;z-index:998;
+      background:#000;
+      display:none;flex-direction:column;align-items:center;justify-content:center;
+      padding:40px 32px calc(var(--sb)+40px);
+    }
+    #setupScreen.show{display:flex}
+    .setup-steps{width:100%;max-width:320px;margin:32px 0}
+    .step{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px;opacity:.4;transition:opacity .3s}
+    .step.active{opacity:1}
+    .step.done{opacity:.6}
+    .step-num{width:28px;height:28px;border-radius:50%;background:#1a1a1a;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#666;flex-shrink:0;margin-top:1px}
+    .step.active .step-num{background:var(--blue);border-color:var(--blue);color:#fff}
+    .step.done .step-num{background:#1a3a1a;border-color:var(--green);color:var(--green)}
+    .step-text{font-size:13px;color:#888;line-height:1.5}
+    .step.active .step-text{color:#ddd}
+    .setup-btn{
+      width:100%;max-width:320px;padding:16px;border-radius:14px;
+      background:var(--blue);color:#fff;font-size:16px;font-weight:700;
+      border:none;cursor:pointer;transition:opacity .2s;
+    }
+    .setup-btn:active{opacity:.8}
+    .setup-btn:disabled{opacity:.4;cursor:not-allowed}
+
+    /* ── App ── */
+    #app{display:none}
+    #app.show{display:block}
+
+    .header{
+      position:sticky;top:0;z-index:100;
+      background:rgba(0,0,0,.92);backdrop-filter:blur(20px);
+      padding:calc(var(--st) + 12px) 20px 12px;
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .header-left{display:flex;align-items:center;gap:10px}
+    .header-badge{background:var(--blue);color:#fff;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 9px;border-radius:5px}
+    .header-title{font-size:17px;font-weight:700;color:#fff}
+    .header-right{display:flex;gap:8px}
+    .icon-btn{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;color:var(--muted);font-size:16px;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .icon-btn:active{background:#2a2a2a;transform:scale(.93)}
+    .icon-btn.spinning{animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .body{padding:16px 16px calc(var(--sb) + 80px);max-width:600px;margin:0 auto}
+
+    .frase-block{background:var(--card);border-radius:14px;padding:18px;margin-bottom:12px;border-left:3px solid var(--blue)}
+    .frase-date{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+    .frase-text{font-size:19px;font-weight:700;color:#fff;line-height:1.3}
+
+    .slabel{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:20px 0 10px}
+    .sem-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .sem-box{border-radius:10px;padding:12px 6px;text-align:center}
+    .sem-box .se{font-size:20px;display:block}
+    .sem-box .sl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;display:block;margin-top:5px}
+    .badges-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .badge{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:5px;border:1px solid}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .mc{background:var(--card2);border-radius:10px;padding:12px 10px;border-left:3px solid}
+    .mc .mi{font-size:14px;margin-bottom:4px}
+    .mc .ml{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444}
+    .mc .mv{font-size:18px;font-weight:700;line-height:1.1;margin:3px 0 2px}
+    .mc .ms{font-size:10px;color:#444}
+    .tbl-wrap{background:var(--card2);border-radius:10px;overflow:hidden}
+    table{width:100%;border-collapse:collapse}
+    thead th{padding:8px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444;text-align:left;border-bottom:1px solid #2a2a2a}
+    tbody tr{border-bottom:1px solid #1e1e1e}
+    tbody tr:last-child{border-bottom:none}
+    td{padding:10px;font-size:12px;color:#ccc;vertical-align:middle}
+    td.ico{font-size:18px;width:32px}
+    td.name{font-weight:600;color:#ddd}
+    td.mono{font-family:'SF Mono',monospace;color:#888;white-space:nowrap;font-size:11px}
+    .briefing-card{background:#07111f;border-left:3px solid var(--blue);border-radius:10px;padding:16px}
+    .briefing-label{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:10px}
+    .briefing-text{font-size:13px;color:#9ab8d8;line-height:1.75;white-space:pre-line}
+    .alert-card{background:#110000;border-left:3px solid var(--red);border-radius:10px;padding:14px;margin-top:10px;font-size:13px;color:#cc5555;line-height:1.5}
+    .prev-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .prev-item{background:var(--card2);border-radius:10px;padding:10px 6px;text-align:center}
+    .prev-d{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444}
+    .prev-t{font-size:15px;font-weight:700;color:#fff;margin-top:4px;font-family:'SF Mono',monospace}
+    .divider{height:1px;background:#1a1a1a;margin:16px 0}
+    .empty{text-align:center;padding:60px 20px;color:var(--muted)}
+    .empty-icon{font-size:48px;margin-bottom:16px}
+    .empty h2{font-size:18px;color:#888;margin-bottom:8px}
+    .empty p{font-size:13px;line-height:1.6}
+    .loading-bar{height:3px;background:linear-gradient(90deg,var(--blue),#00C896,var(--blue));background-size:200%;animation:loading 1.2s linear infinite;border-radius:2px;margin-bottom:20px}
+    @keyframes loading{0%{background-position:0%}100%{background-position:200%}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .pdot{width:14px;height:14px;border-radius:50%;border:2px solid #333;background:transparent;transition:all .15s}
+    .pdot.filled{background:#fff;border-color:#fff}
+    .pdot.error{background:#FF4444;border-color:#FF4444}
+    .pkey{background:#1c1c1c;border:1px solid #2a2a2a;border-radius:14px;height:60px;font-size:22px;font-weight:500;color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .1s;user-select:none}
+    .pkey:active,.pkey.pressed{background:#333}
+    .pkey-del{font-size:18px}
+    .pin-key{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;height:56px;font-size:20px;font-weight:600;color:#fff;cursor:pointer;transition:background .1s;-webkit-tap-highlight-color:transparent}
+    .pin-key:active{background:#333}
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:8px 0 calc(var(--sb) + 4px);display:flex;justify-content:space-around}
+    .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 0;position:relative;transition:opacity .15s}
+    .nav-btn.active .nav-icon,.nav-btn.active .nav-label{color:var(--blue)}
+    .nav-btn.active::after{content:'';position:absolute;top:-8px;left:20%;right:20%;height:2px;background:var(--blue);border-radius:0 0 2px 2px}
+    .nav-icon{font-size:20px;color:#444;transition:color .2s}
+    .nav-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#444;transition:color .2s}
+    /* Força tab gets purple accent */
+    .nav-btn.tab-forca.active .nav-icon,.nav-btn.tab-forca.active .nav-label{color:#a855f7}
+    .nav-btn.tab-forca.active::after{background:#a855f7}
+    /* Tab pages */
+    .tab-page{display:none}
+    .tab-page.active{display:block}
+    /* Força tab page styles */
+    .forca-header{background:linear-gradient(135deg,#1a0a2e,#2a0a4e);border-radius:14px;padding:20px;margin-bottom:16px;border:1px solid #3a1a5e}
+    .forca-header h2{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+    .forca-header p{font-size:13px;color:#888;line-height:1.5}
+    .forca-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#a855f722;color:#a855f7;border:1px solid #a855f744;padding:3px 8px;border-radius:4px;margin-bottom:10px}
+    .ex-card{background:#181818;border-radius:14px;margin-bottom:12px;overflow:hidden;display:flex;gap:0}
+    .ex-card-img{width:100px;min-width:100px;display:flex;align-items:center;justify-content:center;padding:12px;position:relative;flex-shrink:0}
+    .ex-card-img svg{width:64px;height:64px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.4))}
+    .ex-sets-overlay{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:11px;font-weight:700;color:rgba(255,255,255,.7);font-family:monospace;letter-spacing:.04em}
+    .ex-card-info{flex:1;padding:14px 14px 14px 4px;display:flex;flex-direction:column;justify-content:center;gap:6px;min-width:0}
+    .ex-name{font-size:14px;font-weight:700;color:#fff;line-height:1.3}
+    .ex-meta{display:flex;align-items:center;gap:8px}
+    .carga-badge{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid}
+    .ex-foco{font-size:11px;color:#555;line-height:1.5}
+    .last-updated{text-align:center;font-size:10px;color:#333;margin-top:16px}
+    .run-btn{background:#1a6fff22;border:1px solid #1a6fff44;border-radius:8px;color:#1a6fff;font-size:14px;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;position:relative}
+    .run-btn:active{background:#1a6fff44;transform:scale(.93)}
+    .run-btn.running{animation:pulse-blue 1s ease-in-out infinite}
+    .run-btn .run-tooltip{position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);background:#222;color:#aaa;font-size:9px;white-space:nowrap;padding:3px 7px;border-radius:4px;pointer-events:none;opacity:0;transition:opacity .2s}
+    .run-btn:hover .run-tooltip{opacity:1}
+    @keyframes pulse-blue{0%,100%{box-shadow:0 0 0 0 #1a6fff44}50%{box-shadow:0 0 0 6px #1a6fff11}}
+    /* Config screen */
+    #configScreen{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px calc(var(--sb)+32px)}
+    #configScreen.show{display:flex}
+    .config-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:6px}
+    .config-sub{font-size:13px;color:#555;margin-bottom:28px;text-align:center;line-height:1.5}
+    .config-form{width:100%;max-width:340px;display:flex;flex-direction:column;gap:14px}
+    .config-field label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;display:block;margin-bottom:6px}
+    .config-field input{width:100%;background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:12px 14px;color:#e0e0e0;font-size:14px;outline:none;transition:border-color .2s}
+    .config-field input:focus{border-color:#1a6fff}
+    .config-save{width:100%;max-width:340px;padding:14px;border-radius:12px;background:#1a6fff;color:#fff;font-size:15px;font-weight:700;border:none;cursor:pointer;margin-top:4px;transition:opacity .2s}
+    .config-save:active{opacity:.8}
+    .config-cancel{margin-top:12px;font-size:12px;color:#333;text-decoration:underline;cursor:pointer;background:none;border:none}
+    .config-hint{font-size:11px;color:#333;text-align:center;margin-top:16px;line-height:1.6;max-width:320px}
+    .run-status{position:fixed;bottom:calc(var(--sb)+80px);left:50%;transform:translateX(-50%);background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:10px 18px;font-size:12px;color:#aaa;white-space:nowrap;z-index:300;transition:opacity .3s;opacity:0;pointer-events:none}
+    .run-status.show{opacity:1}
+    .run-status.ok{border-color:#00C89644;color:#00C896}
+    .run-status.err{border-color:#FF444444;color:#FF4444}
+  </style>
+</head>
+<body>
+
+<!-- ── PIN Screen ── -->
+<div id="pinScreen" style="position:fixed;inset:0;z-index:999;background:radial-gradient(ellipse at 50% 30%,#0a1628 0%,#000 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px calc(var(--sb)+40px);transition:opacity .3s" class="">
+  <img src="apple-touch-icon.png" style="width:76px;height:76px;border-radius:20px;margin-bottom:20px;box-shadow:0 0 40px #1a6fff33">
+  <div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px" id="pinTitle">TP Performance</div>
+  <div style="font-size:13px;color:#444;margin-bottom:32px" id="pinSub">Digite seu PIN</div>
+
+  <!-- Dots -->
+  <div id="pinDots" style="display:flex;gap:16px;margin-bottom:8px">
+    <div class="pdot"></div><div class="pdot"></div><div class="pdot"></div><div class="pdot"></div>
+  </div>
+  <div id="pinError" style="font-size:12px;color:#FF4444;min-height:18px;margin-bottom:16px;text-align:center"></div>
+
+  <!-- Keypad -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:252px">
+    <button class="pkey" onclick="pk(1)">1</button>
+    <button class="pkey" onclick="pk(2)">2</button>
+    <button class="pkey" onclick="pk(3)">3</button>
+    <button class="pkey" onclick="pk(4)">4</button>
+    <button class="pkey" onclick="pk(5)">5</button>
+    <button class="pkey" onclick="pk(6)">6</button>
+    <button class="pkey" onclick="pk(7)">7</button>
+    <button class="pkey" onclick="pk(8)">8</button>
+    <button class="pkey" onclick="pk(9)">9</button>
+    <div></div>
+    <button class="pkey" onclick="pk(0)">0</button>
+    <button class="pkey pkey-del" onclick="pdel()">⌫</button>
+  </div>
+
+  <button id="pinActionBtn" style="margin-top:28px;font-size:12px;color:#333;background:none;border:none;cursor:pointer;text-decoration:underline" onclick="pinAction()">
+    Criar PIN
+  </button>
+</div>
+
+<!-- ── App ── -->
+<div id="app">
+  <div class="header">
+    <div class="header-left">
+      <span class="header-badge" style="display:flex;align-items:center;gap:6px;padding:4px 10px"><img src="icon-192.png" style="width:16px;height:16px;border-radius:3px">TP</span>
+      <span class="header-title">Triathlon Coach</span>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" id="refreshBtn" onclick="loadReport(true)">↻</button>
+      <button class="run-btn" id="runBtn" onclick="triggerWorkflow()" title="Rodar briefing agora">
+        ▶
+        <span class="run-tooltip">Rodar agora</span>
+      </button>
+      <button class="icon-btn" onclick="openConfig()" title="Configurar">⚙️</button>
+      <button class="icon-btn" onclick="lockApp()" title="Bloquear">🔒</button>
+    </div>
+  </div>
+  <div class="body" id="appBody">
+    <div class="loading-bar"></div>
+  </div>
+  <!-- Config Screen -->
+  <div id="configScreen">
+    <div style="font-size:48px;margin-bottom:16px">⚙️</div>
+    <div class="config-title">Configurar Execução</div>
+    <div class="config-sub">Para acionar o briefing pelo app,<br>informe seu repositório GitHub</div>
+    <div class="config-form">
+      <div class="config-field">
+        <label>Usuário GitHub</label>
+        <input id="cfgUser" type="text" placeholder="ex: joaosilva" autocorrect="off" autocapitalize="off">
+      </div>
+      <div class="config-field">
+        <label>Nome do Repositório</label>
+        <input id="cfgRepo" type="text" placeholder="ex: AIPerfomance" autocorrect="off" autocapitalize="off">
+      </div>
+      <div class="config-field">
+        <label>Personal Access Token</label>
+        <input id="cfgToken" type="password" placeholder="ghp_xxxxxxxxxxxx">
+      </div>
+      <button class="config-save" onclick="saveConfig()">Salvar</button>
+      <button class="config-cancel" onclick="closeConfig()">Cancelar</button>
+    </div>
+    <div class="config-hint">
+      Token em: GitHub → Settings → Developer settings<br>
+      → Fine-grained tokens → Actions: Read &amp; write
+    </div>
+  </div>
+
+  <!-- Run status toast -->
+  <div class="run-status" id="runStatus"></div>
+
+  <nav class="bottom-nav">
+    <div class="nav-btn active" id="tab-home" onclick="switchTab('home')"><span class="nav-icon">🏠</span><span class="nav-label">Hoje</span></div>
+    <div class="nav-btn" id="tab-treinos" onclick="switchTab('treinos')"><span class="nav-icon">📊</span><span class="nav-label">Treinos</span></div>
+    <div class="nav-btn" id="tab-coach" onclick="switchTab('coach')"><span class="nav-icon">🤖</span><span class="nav-label">Coach</span></div>
+    <div class="nav-btn" id="tab-agenda" onclick="switchTab('agenda')"><span class="nav-icon">📅</span><span class="nav-label">Agenda</span></div>
+    <div class="nav-btn tab-forca" id="tab-forca" onclick="switchTab('forca')"><span class="nav-icon">💪</span><span class="nav-label">Força</span></div>
+  </nav>
+</div>
+
+<script>
+// ── PIN Auth ─────────────────────────────────────────────────────────────────
+const PIN_KEY  = "tpPin";     // stored as SHA-256 hash
+const SESS_KEY = "tpSess";
+const SESS_MIN = 480;         // 8h session
+
+const isSessionValid = () => { const t=localStorage.getItem(SESS_KEY); return t&&(Date.now()-+t)<SESS_MIN*60000; };
+const setSession     = () => localStorage.setItem(SESS_KEY, Date.now());
+const clearSession   = () => localStorage.removeItem(SESS_KEY);
+const hasPin         = () => !!localStorage.getItem(PIN_KEY);
+
+async function sha(s) {
+  const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("tp"+s));
+  return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
+}
+
+// PIN state
+let pinBuf = "", pinMode = "enter"; // "enter" | "create" | "confirm"
+let pinTemp = "";
+
+function pinAction() {
+  if (!hasPin()) { startCreate(); }
+  else { localStorage.removeItem(PIN_KEY); clearSession(); startCreate(); }
+}
+
+function startCreate() {
+  pinMode = "create"; pinBuf = ""; pinTemp = "";
+  document.getElementById("pinTitle").textContent = "Criar PIN";
+  document.getElementById("pinSub").textContent   = "Escolha 4 dígitos";
+  document.getElementById("pinActionBtn").textContent = "";
+  document.getElementById("pinError").textContent = "";
+  updateDots();
+}
+
+function pk(n) {
+  if (pinBuf.length >= 4) return;
+  pinBuf += n; updateDots();
+  if (pinBuf.length === 4) setTimeout(processPin, 150);
+}
+
+function pdel() {
+  pinBuf = pinBuf.slice(0,-1); updateDots();
+  document.getElementById("pinError").textContent = "";
+}
+
+function updateDots() {
+  document.querySelectorAll(".pdot").forEach((d,i)=>{
+    d.classList.toggle("filled", i < pinBuf.length);
+    d.classList.remove("error");
+  });
+}
+
+function shakeError(msg) {
+  document.getElementById("pinError").textContent = msg;
+  document.querySelectorAll(".pdot").forEach(d=>d.classList.add("error"));
+  pinBuf = ""; setTimeout(updateDots, 500);
+}
+
+async function processPin() {
+  if (pinMode === "create") {
+    pinTemp = pinBuf; pinBuf = "";
+    document.getElementById("pinTitle").textContent = "Confirmar PIN";
+    document.getElementById("pinSub").textContent   = "Digite novamente";
+    pinMode = "confirm"; updateDots(); return;
+  }
+  if (pinMode === "confirm") {
+    if (pinBuf !== pinTemp) { shakeError("PINs não coincidem"); pinMode="create"; pinTemp=""; 
+      document.getElementById("pinTitle").textContent="Criar PIN";
+      document.getElementById("pinSub").textContent="Escolha 4 dígitos"; return; }
+    localStorage.setItem(PIN_KEY, await sha(pinBuf));
+    setSession(); unlockApp(); return;
+  }
+  // mode === "enter"
+  const h = await sha(pinBuf);
+  if (h === localStorage.getItem(PIN_KEY)) { setSession(); unlockApp(); }
+  else { shakeError("PIN incorreto"); }
+}
+
+function unlockApp() {
+  const ps = document.getElementById("pinScreen");
+  ps.style.opacity = "0";
+  setTimeout(()=>{ ps.style.display="none"; showApp(); }, 300);
+}
+
+function lockApp() {
+  clearSession();
+  document.getElementById("app").classList.remove("show");
+  const ps = document.getElementById("pinScreen");
+  ps.style.display  = "flex";
+  ps.style.opacity  = "1";
+  pinBuf = ""; pinMode = "enter";
+  document.getElementById("pinTitle").textContent = "TP Performance";
+  document.getElementById("pinSub").textContent   = "Digite seu PIN";
+  document.getElementById("pinActionBtn").textContent = hasPin() ? "Redefinir PIN" : "Criar PIN";
+  document.getElementById("pinError").textContent = "";
+  updateDots();
+}
+
+function showApp() {
+  document.getElementById("app").classList.add("show");
+  loadReport();
+}
+
+// ── GitHub Workflow// ── GitHub Workflow trigger ──────────────────────────────────────────────────
+const GH_CFG_KEY = "ghConfig";
+
+function getConfig() {
+  try { return JSON.parse(localStorage.getItem(GH_CFG_KEY)||"{}"); } catch{ return {}; }
+}
+
+function openConfig() {
+  const cfg = getConfig();
+  document.getElementById("cfgUser").value  = cfg.user  || "";
+  document.getElementById("cfgRepo").value  = cfg.repo  || "";
+  document.getElementById("cfgToken").value = cfg.token || "";
+  document.getElementById("configScreen").classList.add("show");
+}
+
+function closeConfig() {
+  document.getElementById("configScreen").classList.remove("show");
+}
+
+function saveConfig() {
+  const cfg = {
+    user:  document.getElementById("cfgUser").value.trim(),
+    repo:  document.getElementById("cfgRepo").value.trim(),
+    token: document.getElementById("cfgToken").value.trim(),
+  };
+  if (!cfg.user || !cfg.repo || !cfg.token) {
+    showToast("Preencha todos os campos", "err"); return;
+  }
+  localStorage.setItem(GH_CFG_KEY, JSON.stringify(cfg));
+  closeConfig();
+  showToast("Configuração salva ✓", "ok");
+}
+
+function showToast(msg, type="ok") {
+  const el = document.getElementById("runStatus");
+  el.textContent = msg;
+  el.className = "run-status show " + type;
+  setTimeout(() => el.classList.remove("show"), 3000);
+}
+
+async function triggerWorkflow() {
+  const cfg = getConfig();
+  if (!cfg.user || !cfg.repo || !cfg.token) {
+    openConfig(); return;
+  }
+
+  const btn = document.getElementById("runBtn");
+  btn.classList.add("running");
+  btn.textContent = "⏳";
+  showToast("Iniciando briefing...");
+
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${cfg.user}/${cfg.repo}/actions/workflows/briefing.yml/dispatches`,
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${cfg.token}`,
+          "Accept": "application/vnd.github+json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ref: "main" }),
+      }
+    );
+
+    if (res.status === 204) {
+      showToast("✅ Briefing iniciado! Pronto em ~2 min", "ok");
+      // Auto-refresh report after 3 minutes
+      setTimeout(() => loadReport(true), 3 * 60 * 1000);
+    } else if (res.status === 401) {
+      showToast("Token inválido — reconfigure", "err");
+      openConfig();
+    } else if (res.status === 404) {
+      showToast("Repositório não encontrado", "err");
+      openConfig();
+    } else {
+      const body = await res.text();
+      showToast(`Erro ${res.status}`, "err");
+      console.error(body);
+    }
+  } catch(e) {
+    showToast("Erro de rede", "err");
+    console.error(e);
+  } finally {
+    btn.classList.remove("running");
+    btn.innerHTML = "&#9654;<span class=\"run-tooltip\">Rodar agora</span>";
+  }
+}
+
+// ── Tab system ──────────────────────────────────────────────────────────────
+let currentReport = null;
+
+function switchTab(tab) {
+  // Update nav buttons
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('tab-'+tab);
+  if (btn) btn.classList.add('active');
+
+  const body = document.getElementById('appBody');
+
+  if (tab === 'forca') {
+    const items = currentReport ? (currentReport.insights||{}).treino_forca||[] : [];
+    const saude = currentReport ? currentReport.saude||{} : {};
+    body.innerHTML = renderForca(items, saude);
+    window.scrollTo(0,0);
+    return;
+  }
+
+  // For other tabs, show main report and scroll to section
+  if (currentReport) {
+    body.innerHTML = renderReport(currentReport);
+  }
+  window.scrollTo(0,0);
+
+  const sectionMap = {
+    home: null,
+    treinos: 'treinos',
+    coach: 'coach',
+    agenda: 'calendario'
+  };
+  const sec = sectionMap[tab];
+  if (sec) {
+    setTimeout(() => {
+      const el = document.getElementById(sec);
+      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 50);
+  }
+}
+
+function getGitHubInfo() {
+  const user = location.hostname.split(".")[0];
+  const repo = location.pathname.split("/").filter(Boolean)[0] || "";
+  return { user, repo };
+}
+
+// Retorna lista de URLs a tentar em ordem
+function getReportUrls(bust) {
+  const qs = bust ? "?t=" + Date.now() : "";
+  const { user, repo } = getGitHubInfo();
+  return [
+    // 1. Mesma origem — docs/ servido pelo GitHub Pages
+    location.origin + "/report.json" + qs,
+    // 2. raw.githubusercontent.com — docs/report.json
+    `https://raw.githubusercontent.com/${user}/${repo}/main/docs/report.json` + qs,
+    // 3. raw.githubusercontent.com — pwa/report.json (fallback)
+    `https://raw.githubusercontent.com/${user}/${repo}/main/docs/report.json` + qs,
+    // 4. Relativo
+    "report.json" + qs,
+  ];
+}
+
+function getReportUrl(bust) {
+  const { user, repo } = getGitHubInfo();
+  return `https://raw.githubusercontent.com/${user}/${repo}/main/docs/report.json` + (bust ? "?t="+Date.now() : "");
+}
+
+async function loadReport(forceRefresh=false){
+  const btn  = document.getElementById("refreshBtn");
+  const body = document.getElementById("appBody");
+  btn.classList.add("spinning");
+  if (forceRefresh) body.innerHTML = '<div class="loading-bar"></div>';
+
+  // Try multiple URLs in sequence
+  const urls = getReportUrls(forceRefresh);
+  let loaded  = false;
+
+  for (const url of urls) {
+    try {
+      const res  = await fetch(url, { cache: forceRefresh ? "no-store" : "default" });
+      if (!res.ok) continue;
+      const data = await res.json();
+      currentReport = data;
+      body.innerHTML = renderReport(data);
+      localStorage.setItem("lastReport",     JSON.stringify(data));
+      localStorage.setItem("lastReportTime", new Date().toISOString());
+      loaded = true;
+      break;
+    } catch(e) { /* try next URL */ }
+  }
+
+  if (!loaded) {
+    const cached = localStorage.getItem("lastReport");
+    if (cached) {
+      const data      = JSON.parse(cached);
+      const cachedTime = localStorage.getItem("lastReportTime");
+      currentReport   = data;
+      body.innerHTML  = renderReport(data) +
+        `<div style="background:#1a1000;border:1px solid #3a2800;border-radius:8px;padding:12px;margin-top:12px;font-size:12px;color:#FFB800;text-align:center">
+          📶 Cache · ${new Date(cachedTime).toLocaleString("pt-BR")}
+        </div>`;
+    } else {
+      const {user, repo} = getGitHubInfo();
+      const rawUrl = `https://raw.githubusercontent.com/${user}/${repo}/main/docs/report.json`;
+      body.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">⚠️</div>
+          <h2>Relatório não encontrado</h2>
+          <div style="background:#111;border-radius:10px;padding:14px;margin:16px 0;text-align:left;width:100%">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:8px">URL testada</div>
+            <div style="font-size:11px;color:#1a6fff;word-break:break-all">${rawUrl}</div>
+          </div>
+          <div style="font-size:12px;color:#555;line-height:2;margin-bottom:20px;text-align:left;width:100%">
+            1. Abra a URL acima no Safari — se der 404, o workflow não commitou ainda<br>
+            2. GitHub → Actions → verifique se o workflow terminou com ✅<br>
+            3. Settings → Actions → <strong style="color:#777">Read and write permissions</strong>
+          </div>
+          <div style="display:flex;gap:10px;justify-content:center">
+            <button onclick="window.open('${rawUrl}','_blank')" style="background:#1a1a1a;color:#aaa;border:1px solid #333;border-radius:10px;padding:11px 18px;font-size:13px;font-weight:600;cursor:pointer">🔗 Testar URL</button>
+            <button onclick="triggerWorkflow()" style="background:#1a6fff;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:13px;font-weight:700;cursor:pointer">▶ Rodar Agora</button>
+          </div>
+        </div>`;
+    }
+  }
+
+  btn.classList.remove("spinning");
+}
+
+// ── App Init ──────────────────────────────────────────────────────────────────
+(function init() {
+  if (isSessionValid()) { showApp(); return; }
+  // Show PIN screen
+  const ps = document.getElementById('pinScreen');
+  ps.style.display = 'flex';
+  if (!hasPin()) {
+    // First time — go straight to create
+    startCreate();
+  } else {
+    pinMode = 'enter';
+    document.getElementById('pinActionBtn').textContent = 'Redefinir PIN';
+  }
+  updateDots();
+})();
+
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+
+let startY=0;
+document.addEventListener("touchstart",e=>{startY=e.touches[0].clientY},{passive:true});
+document.addEventListener("touchend",e=>{
+  const dy=e.changedTouches[0].clientY-startY;
+  if(dy>80&&window.scrollY===0) loadReport(true);
+},{passive:true});
+</script>
+</body>
+</html>
