@@ -528,11 +528,14 @@ function switchTab(tab) {
   }
 }
 
-// URL do report.json — sempre relativa à raiz do site publicado
+// URL do report.json via raw.githubusercontent.com (mais confiável que GitHub Pages)
 function getReportUrl(bust) {
-  // Garante que busca da raiz do GitHub Pages, não de sub-path
-  const base = location.origin + location.pathname.replace(/\/[^\/]*$/, "/").replace(/\/+$/,"/");
-  return base + "report.json" + (bust ? "?t=" + Date.now() : "");
+  // Extrai user e repo do hostname GitHub Pages: user.github.io/repo
+  const parts = location.hostname.split(".");
+  const user  = parts[0];
+  const repo  = location.pathname.split("/").filter(Boolean)[0] || "";
+  const raw   = `https://raw.githubusercontent.com/${user}/${repo}/main/pwa/report.json`;
+  return raw + (bust ? "?t=" + Date.now() : "");
 }
 
 async function loadReport(forceRefresh=false){
