@@ -528,13 +528,16 @@ function switchTab(tab) {
   }
 }
 
-// URL do report.json via raw.githubusercontent.com (mais confiável que GitHub Pages)
+// Extrai user/repo do hostname GitHub Pages
+function getGitHubInfo() {
+  const user = location.hostname.split(".")[0];
+  const repo = location.pathname.split("/").filter(Boolean)[0] || "";
+  return { user, repo };
+}
+
 function getReportUrl(bust) {
-  // Extrai user e repo do hostname GitHub Pages: user.github.io/repo
-  const parts = location.hostname.split(".");
-  const user  = parts[0];
-  const repo  = location.pathname.split("/").filter(Boolean)[0] || "";
-  const raw   = `https://raw.githubusercontent.com/${user}/${repo}/main/pwa/report.json`;
+  const { user, repo } = getGitHubInfo();
+  const raw = `https://raw.githubusercontent.com/${user}/${repo}/main/pwa/report.json`;
   return raw + (bust ? "?t=" + Date.now() : "");
 }
 
@@ -565,23 +568,38 @@ async function loadReport(forceRefresh=false){
           📶 Exibindo cache · ${new Date(cachedTime).toLocaleString("pt-BR")}
         </div>`;
     } else {
+      const {user,repo} = getGitHubInfo();
       body.innerHTML = `
         <div class="empty">
           <div class="empty-icon">⚠️</div>
           <h2>Relatório não encontrado</h2>
-          <p style="margin-bottom:16px">O briefing ainda não foi gerado ou o deploy não concluiu.</p>
-          <div style="background:#111;border-radius:8px;padding:12px;font-size:11px;color:#444;text-align:left;word-break:break-all;margin-bottom:16px">
-            🔗 Tentando buscar:<br><span style="color:#666">${reportUrl}</span>
+
+          <div style="background:#111;border-radius:10px;padding:14px;margin:16px 0;text-align:left;width:100%">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:8px">Diagnóstico</div>
+            <div style="font-size:11px;color:#555;line-height:1.8">
+              👤 Usuário: <strong style="color:#888">${user||"não detectado"}</strong><br>
+              📦 Repositório: <strong style="color:#888">${repo||"não detectado"}</strong><br>
+              🔗 URL: <span style="color:#1a6fff;word-break:break-all;font-size:10px">${reportUrl}</span>
+            </div>
           </div>
-          <p style="font-size:12px;color:#444">
-            1. Vá em <strong style="color:#666">GitHub → Actions</strong><br>
-            2. Execute <strong style="color:#666">Triathlon Daily Briefing</strong><br>
-            3. Aguarde o workflow concluir (~2min)<br>
-            4. Toque em ↻ para atualizar
-          </p>
-          <button onclick="triggerWorkflow()" style="margin-top:20px;background:#1a6fff;color:#fff;border:none;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer">
-            ▶ Rodar Agora
-          </button>
+
+          <div style="background:#111;border-radius:10px;padding:14px;margin-bottom:16px;text-align:left;width:100%">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:8px">Verificar</div>
+            <div style="font-size:11px;color:#555;line-height:2">
+              1. GitHub → <strong style="color:#888">Actions</strong> → o workflow rodou com ✅?<br>
+              2. No repo → pasta <strong style="color:#888">pwa/</strong> → existe <strong style="color:#888">report.json</strong>?<br>
+              3. Settings → Actions → <strong style="color:#888">Read and write permissions</strong>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+            <button onclick="window.open('${reportUrl}','_blank')" style="background:#1a1a1a;color:#aaa;border:1px solid #333;border-radius:10px;padding:11px 18px;font-size:13px;font-weight:600;cursor:pointer">
+              🔗 Abrir URL
+            </button>
+            <button onclick="triggerWorkflow()" style="background:#1a6fff;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:13px;font-weight:700;cursor:pointer">
+              ▶ Rodar Agora
+            </button>
+          </div>
         </div>`;
     }
   }
