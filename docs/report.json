@@ -1,6 +1,6 @@
 {
   "date": "2026-06-07",
-  "generated_at": "2026-06-07T19:04:25.232270Z",
+  "generated_at": "2026-06-07T19:06:34.339835Z",
   "saude": {
     "hrv": 59,
     "hrv_7d": 35,
@@ -126,62 +126,62 @@
     }
   ],
   "insights": {
-    "frase": "HRV elevado, corpo pronto: recupere com inteligência hoje.",
-    "briefing": "1) READINESS: HRV 59ms (+24ms vs média 7d) é sinal positivo de recuperação parassimpática robusta, acima do baseline (33–42ms). RHR 61bpm sem baseline para comparar. Sono 6h é insuficiente (ideal >7h), mas Deep 2.1h é excelente — recuperação estrutural garantida. Body Battery 62 e Stress 17 confirmam estado equilibrado. Readiness geral: BOM, com ressalva no sono.\n2) TREINO ONTEM: Run 14.5km @ 7:14/km, FC 127bpm, potência 292W, TE 3.0. Ritmo conservador e FC controlada indicam execução aeróbica correta em Z1/Z2. Cad 161 é normal para GPS (81spm real). Sem sinais de overreaching.\n3) CARGA: Z1 em 1739 (acima do target máx 1415) — volume leve excessivo. Z2 em 608 (abaixo do mínimo 957) — déficit aeróbico moderado. Z3+ em 673 — aceitável. Status Garmin 'Recuperação' e tendência estável confirmam semana de baixa intensidade. Risco de overreaching: baixo.\n4) HOJE EXECUTADO: Ciclismo 65.7km/2h27m, FC 140bpm (Z2 alto/Z3 limiar), potência avg 145W, TSS 140 — sessão bem executada, ligeiramente acima de um steady ride típico em FC. TE 3.7 confirma estímulo aeróbico efetivo. Tênis adicional (1h28m, FC 107, TE 2.1) adicionou carga neuromuscular e cardiovascular leve. Combinação gerou dia moderadamente carregado.\n5) AJUSTE: Amanhã (força): manter volume planejado, foco em mobilidade + core + força funcional moderada. Evitar excêntricos pesados pós-ciclismo longo. Limitar sessão a 45–55min.\n6) ALERTAS: FC máx tênis 165bpm sugere picos anaeróbicos — monitorar acúmulo Z3+. Z1 mensal já 23% acima do teto; reduzir volume leve nas próximas sessões. Sono abaixo de 7h cronicamente pode reverter ganho de HRV.\n7) NUTRIÇÃO: Pós-treino de hoje — priorize 30–40g proteína + 80–100g carboidrato na janela de 30min (ex: iogurte grego + banana + granola). Hidratação noturna: 500ml com eletrólitos para otimizar sono e recuperação muscular.",
+    "frase": "HRV em alta: capitalize a recuperação com inteligência hoje.",
+    "briefing": "1) READINESS: HRV 59ms é expressivo — +24ms vs média 7d (35ms), acima do baseline 33–42ms. Sinal claro de supercompensação autonômica. RHR 61bpm aceitável. Sono 6h é limitante (abaixo do ideal >7h), mas Deep Sleep 2.1h é robusto — recuperação estrutural preservada. Body Battery 62 e Stress 17 confirmam estado funcional moderado-bom. Readiness geral: BOM, com ressalva ao sono.\n2) TREINO ONTEM: Run 14.5km @ 7:14/km, FC 127bpm, Potência 292W, TE 3.0. Pace conservador, FC baixa — sessão bem controlada em Z1/Z2. Cadência 161spm levemente elevada para pace tão suave; pode indicar passada curta. Sem pontos críticos.\n3) CARGA: Z1=1739 (acima do target máx 1415 — excedente de +323). Z2=608 (abaixo do mínimo 957). Z3+=673. Perfil com excesso de volume leve e déficit aeróbico estrutural. ATL 755 com status Garmin 'Recuperação' — carga recente gerenciável.\n4) HOJE (EXECUTADO): Ciclismo 65.7km/2h27m, FC 140bpm, Potência 145W, TSS 140.6, TE 3.7 — sessão executada em Z2 consistente, dentro do planejado Steady Long Ride. FC max 162 pontual, sem drift relevante. Tênis adicional (1h28m, FC 107, TE 2.1) gerou carga neuromuscular/cognitiva extra não planejada — soma do dia considerável.\n5) AJUSTE: Manter plano de Força amanhã, mas limitar séries pesadas. Reduzir volume Z3+ nas próximas sessões — já em 673 do mês. Priorizar Z2 estruturado para corrigir déficit.\n6) ALERTAS: Tênis pós-ciclismo elevou carga total do dia além do planejado. FC max 165bpm no tênis — pico anaeróbico não programado. Monitorar HRV amanhã; se cair abaixo de 40ms, substituir força por mobilidade.\n7) NUTRIÇÃO: Pós-treino hoje — priorize 40g proteína + 80g carboidrato na janela de 30min (ex: whey + banana + aveia) para recuperação muscular antes da sessão de força amanhã.",
     "status_readiness": "BOM",
-    "status_carga": "IDEAL",
+    "status_carga": "ELEVADA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Ciclismo executado com TSS 140 e FC 140bpm indica sessão no limite superior do Z2/entrada de Z3 — ligeiramente mais intenso que um steady ride padrão, mas dentro do aceitável dado HRV elevado. Tênis adicional (1h28m) eleva carga total do dia para moderada-alta, com picos anaeróbicos pontuais. Execução real superou o planejado em volume e intensidade; amanhã deve ser força leve e recuperativa.",
-    "alerta": "FC máx 165bpm no tênis indica entrada anaeróbica não planejada; Z1 mensal 23% acima do teto — reduzir volume leve nas próximas sessões para reequilibrar distribuição de zonas.",
+    "analise_hoje": "Ciclismo executado dentro do objetivo: Z2 estável, TSS 140 compatível com Long Ride de 2h30m planejado — execução adequada. Tênis adicional (1h28m, FC max 165bpm) adicionou carga anaeróbica não planejada, elevando o estresse total do dia além do prescrito. Amanhã monitorar HRV antes de definir intensidade da sessão de força.",
+    "alerta": "Tênis pós-ciclismo gerou pico FC 165bpm não programado — carga combinada do dia supera o planejado. Se HRV amanhã < 40ms, substituir força por mobilidade e core leve.",
     "treino_forca": [
       {
         "exercicio": "Agachamento Goblet",
         "series": 3,
         "repeticoes": "12-15",
         "carga": "moderada",
-        "foco": "Fortalece glúteos e quadríceps para potência no ciclismo e corrida"
+        "foco": "Força funcional de quadríceps e glúteos para potência no ciclismo e corrida"
       },
       {
-        "exercicio": "Ponte de Glúteo Unilateral",
+        "exercicio": "Romanian Deadlift (RDL) unilateral",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Estabilidade de quadril e força posterior — reduz risco de lesão na corrida"
+      },
+      {
+        "exercicio": "Elevação de quadril (Hip Thrust) com barra",
         "series": 3,
         "repeticoes": "12",
-        "carga": "leve",
-        "foco": "Estabilidade pélvica e ativação glútea para corrida eficiente"
+        "carga": "moderada",
+        "foco": "Ativação de glúteo máximo — melhora propulsão no ciclismo e fase de apoio na corrida"
       },
       {
-        "exercicio": "Prancha Lateral com Rotação",
+        "exercicio": "Prancha lateral com abdução de quadril",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core antirotacional essencial para economia de movimento no triathlon"
+        "foco": "Core lateral e estabilidade pélvica — essencial para economia de corrida no 70.3"
       },
       {
-        "exercicio": "Afundo Reverso com Joelho Elevado",
+        "exercicio": "Step-up com joelho elevado",
         "series": 3,
-        "repeticoes": "10",
+        "repeticoes": "10-10",
         "carga": "moderada",
-        "foco": "Equilíbrio unilateral e força funcional para corrida e transições"
+        "foco": "Força unilateral e equilíbrio — simula demanda neuromuscular da corrida pós-bike"
       },
       {
-        "exercicio": "Remada com Halteres (Bent Over Row)",
-        "series": 3,
-        "repeticoes": "12",
-        "carga": "moderada",
-        "foco": "Fortalece dorsais e romboides para postura na natação e no ciclismo"
-      },
-      {
-        "exercicio": "Hip 90/90 Mobility Flow",
+        "exercicio": "Mobilidade de quadril — 90/90 stretch",
         "series": 2,
-        "repeticoes": "60s",
+        "repeticoes": "45s",
         "carga": "leve",
-        "foco": "Mobilidade de quadril para prevenir lesões e melhorar braçada e passada"
+        "foco": "Restaura amplitude de movimento do quadril após volume elevado de ciclismo"
       },
       {
         "exercicio": "Dead Bug",
         "series": 3,
-        "repeticoes": "10",
+        "repeticoes": "8-10",
         "carga": "leve",
-        "foco": "Estabilidade lombar profunda e coordenação core para todas as modalidades"
+        "foco": "Core profundo e coordenação — protege lombar durante esforços prolongados no 70.3"
       }
     ]
   }
