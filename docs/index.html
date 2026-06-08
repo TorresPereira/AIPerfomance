@@ -529,30 +529,29 @@ function switchTab(tab) {
 }
 
 function getGitHubInfo() {
-  const user = location.hostname.split(".")[0];
-  const repo = location.pathname.split("/").filter(Boolean)[0] || "";
+  // Prioridade: config salva pelo usuario (tela ⚙️) > hostname detection
+  const cfg = getConfig();
+  if (cfg.user && cfg.repo) return { user: cfg.user, repo: cfg.repo };
+  const user = location.hostname.split('.')[0];
+  const repo = location.pathname.split('/').filter(Boolean)[0] || '';
   return { user, repo };
 }
 
-// Retorna lista de URLs a tentar em ordem
 function getReportUrls(bust) {
-  const qs = bust ? "?t=" + Date.now() : "";
+  const qs = bust ? '?t=' + Date.now() : '';
   const { user, repo } = getGitHubInfo();
+  const raw = (path) => `https://raw.githubusercontent.com/${user}/${repo}/main/${path}/report.json${qs}`;
   return [
-    // 1. Mesma origem — docs/ servido pelo GitHub Pages
-    location.origin + "/report.json" + qs,
-    // 2. raw.githubusercontent.com — docs/report.json
-    `https://raw.githubusercontent.com/${user}/${repo}/main/docs/report.json` + qs,
-    // 3. raw.githubusercontent.com — pwa/report.json (fallback)
-    `https://raw.githubusercontent.com/${user}/${repo}/main/docs/report.json` + qs,
-    // 4. Relativo
-    "report.json" + qs,
-  ];
+    raw('docs'),
+    raw('pwa'),
+    location.origin + '/report.json' + qs,
+    './report.json' + qs,
+  ].filter((u,i,a) => a.indexOf(u) === i); // deduplica
 }
 
 function getReportUrl(bust) {
   const { user, repo } = getGitHubInfo();
-  return `https://raw.githubusercontent.com/${user}/${repo}/main/docs/report.json` + (bust ? "?t="+Date.now() : "");
+  return `https://raw.githubusercontent.com/${user}/${repo}/main/docs/report.json` + (bust ? '?t='+Date.now() : '');
 }
 
 async function loadReport(forceRefresh=false){
@@ -591,6 +590,11 @@ async function loadReport(forceRefresh=false){
         </div>`;
     } else {
       const {user, repo} = getGitHubInfo();
+      // Se user/repo não configurados, pede configuração
+      if (!user || !repo || user === '127' || user.includes('localhost')) {
+        body.innerHTML = `<div class='empty'><div class='empty-icon'>⚙️</div><h2>Configure o repositório</h2><p style='margin:12px 0 20px;font-size:13px;color:#555'>Toque em ⚙️ no header e informe<br>seu usuário e repositório GitHub.</p><button onclick='openConfig()' style='background:#1a6fff;color:#fff;border:none;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer'>⚙️ Configurar</button></div>`;
+        btn.classList.remove('spinning'); return;
+      }
       const rawUrl = `https://raw.githubusercontent.com/${user}/${repo}/main/docs/report.json`;
       body.innerHTML = `
         <div class="empty">
