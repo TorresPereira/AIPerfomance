@@ -566,8 +566,9 @@ async function loadReport(forceRefresh=false){
 
   for (const url of urls) {
     try {
-      const res  = await fetch(url, { cache: forceRefresh ? "no-store" : "default" });
-      if (!res.ok) continue;
+      body.innerHTML = `<div class='loading-bar'></div><div style='text-align:center;font-size:10px;color:#333;padding:8px;word-break:break-all'>${url.replace('https://raw.githubusercontent.com/','')}</div>`;
+      const res  = await fetch(url, { cache: "no-store", mode: "cors" });
+      if (!res.ok) { console.warn('HTTP', res.status, url); continue; }
       const data = await res.json();
       currentReport = data;
       body.innerHTML = renderReport(data);
@@ -575,7 +576,7 @@ async function loadReport(forceRefresh=false){
       localStorage.setItem("lastReportTime", new Date().toISOString());
       loaded = true;
       break;
-    } catch(e) { /* try next URL */ }
+    } catch(e) { console.error('Fetch failed:', url, e.message); }
   }
 
   if (!loaded) {
