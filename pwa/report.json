@@ -1,6 +1,6 @@
 {
   "date": "2026-06-08",
-  "generated_at": "2026-06-08T07:50:25.339838Z",
+  "generated_at": "2026-06-08T17:37:37.446461Z",
   "saude": {
     "hrv": 56,
     "hrv_7d": 35,
@@ -14,18 +14,18 @@
     "sono_deep": 1.6,
     "sono_rem": 1.2,
     "sono_awake": 9.0,
-    "body_battery": 48,
-    "stress_avg": 23,
-    "stress_rest": 65.26,
-    "atl": 755.0,
-    "ctl": 3021.0,
+    "body_battery": 51,
+    "stress_avg": 22,
+    "stress_rest": 61.8,
+    "atl": 764.0,
+    "ctl": 3056.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 1739.0,
+    "load_aerobic_low": 1760.0,
     "load_aerobic_high": 608.0,
-    "load_anaerobic": 673.0,
-    "load_total_month": 3021.0,
+    "load_anaerobic": 688.0,
+    "load_total_month": 3056.0,
     "load_target_low": "577–1415",
     "load_target_high": "957–1795",
     "training_status": "Recuperação",
@@ -94,64 +94,107 @@
     }
   ],
   "amanha": [],
-  "hoje_feito": [],
+  "hoje_feito": [
+    {
+      "mod": "other",
+      "icone": "⚡",
+      "nome": "Strength 💪",
+      "dist": "—",
+      "dur": "57m46s",
+      "fc": 108.0,
+      "fc_max": 153.0,
+      "tss": null,
+      "np": null,
+      "perf": "—",
+      "pl": "—",
+      "_dist_m": 0.0,
+      "_dur_s": 3466.2451171875,
+      "swolf": null,
+      "cad": null,
+      "cal": 436.0,
+      "aerobic_te": 1.5,
+      "anaerobic_te": 1.0,
+      "elev": null
+    },
+    {
+      "mod": "bike",
+      "icone": "🚴",
+      "nome": "Erkrath eBiking",
+      "dist": "1.1km",
+      "dur": "7m08s",
+      "fc": 81.0,
+      "fc_max": 119.0,
+      "tss": null,
+      "np": null,
+      "perf": "9.4km/h",
+      "pl": "Velocidade",
+      "_dist_m": 1125.0799560546875,
+      "_dur_s": 428.74700927734375,
+      "swolf": null,
+      "cad": 55.0,
+      "cal": 29.0,
+      "aerobic_te": 0.10000000149011612,
+      "anaerobic_te": 0.0,
+      "elev": 6.0
+    }
+  ],
   "insights": {
-    "frase": "HRV em alta: capitalize a recuperação com força inteligente.",
-    "briefing": "1) READINESS — HRV 56ms é +68% acima da média 7d (35ms) e supera o baseline (33–42ms), sinal robusto de supercompensação. Sono 7.8h com score 80 e deep 1.6h é adequado. Body Battery 48/100 e stress 23 indicam estado funcional moderado-bom. Readiness global: BOM, com janela real de treino de qualidade.\n\n2) TREINO ONTEM — Ciclismo (65.7km, 2h27m, 145W avg, FC 140bpm): TSS 140 com potência baixa sugere terreno ondulado ou vento, mas FC elevada para potência modesta indica possível fadiga neuromuscular ou calor. TE aeróbico 3.7 = estímulo aeróbico produtivo. Tênis (1h28m, FC 107/max 165bpm): FC max 165 com média baixa = picos anaeróbicos esporádicos; carga adicional real ao sistema cardiovascular.\n\n3) CARGA — Z1 mensal 1739 (acima do teto 1415), Z2 608 (abaixo do alvo 957–1795), Z3+ 673 = polarização invertida. Excesso em Z1 e déficit em Z2 é o ponto crítico. Status Garmin: Recuperação, alinhado com ATL semanal 755. Risco de overreaching: baixo hoje, mas monitorar Z3 acumulado.\n\n4) TREINO HOJE — Força funcional moderada. Objetivo: estímulo neuromuscular sem carga cardiovascular adicional. Zonas alvo: sem componente aeróbico relevante. Duração ideal: 45–55min. Executar em ritmo controlado, pausas completas (60–90s), sem componente metabólico.\n\n5) AJUSTE CONCRETO — Manter volume planejado. Limitar séries pesadas: máx 3x10 em exercícios compostos. Não adicionar circuitos ou HIIT. Próxima sessão Z2 (amanhã livre): reprogramar corrida/bike 45–60min Z2 estritamente abaixo de 145bpm.\n\n6) ALERTAS — FC máx 165bpm no tênis merece atenção: não é treinamento controlado. Z1 mensal 23% acima do teto; reduzir volume extensivo nas próximas semanas e priorizar Z2 real. Monitorar RHR nas próximas manhãs.\n\n7) NUTRIÇÃO — Pré-força: 20–25g carboidrato + 15g proteína 45min antes (ex: banana + iogurte grego). Pós: shake com 30g proteína em até 30min para síntese muscular.",
+    "frase": "HRV elevado: capitalize a recuperação com precisão hoje.",
+    "briefing": "1) READINESS — HRV 56ms (+21ms vs média 7d de 35ms) é sinal robusto de supercompensação; bem acima do baseline 33–42ms. Sono 7.8h/score 80 com Deep 1.6h adequado. Body Battery 51 moderado, stress 22 baixo. Estado: recuperado e pronto para carga moderada.\n\n2) TREINO ONTEM — Ciclismo 65.7km/2h27m: potência avg 145W com FC 140bpm indica Z2 aeróbico, TSS 140 expressivo para sessão única. TE aeróbico 3.7 confirma estímulo efetivo. Tênis 1h28m: FC avg 107bpm/max 165bpm — picos anaeróbicos intermitentes, TE 2.1 residual. Combinação gerou carga total relevante no domingo.\n\n3) CARGA — Z1 em 1760 (acima do target máx 1415), Z2 em 608 (abaixo do target mín 957), Z3+ em 688. Problema estrutural: excesso de Z1 e déficit de Z2 — polarização invertida. Carga mensal 3056 com status Garmin 'Recuperação' e fitness estável. ATL 764 gerenciável.\n\n4) HOJE (EXECUTADO) — Strength 57min com FC avg 108bpm/max 153bpm: sessão executada dentro do esperado. TE 1.5 confirma estímulo neuromuscular leve-moderado. eBike 7min irrelevante fisiologicamente. Execução adequada ao estado de recuperação pós-TSS 140 de ontem.\n\n5) AJUSTE CONCRETO — Sessão de força já concluída. Amanhã sem treino: manter descanso ativo. Semana: priorizar Z2 ciclismo/corrida (alvo +350 unidades Z2). Reduzir Z1 excessivo de 1760 para próximo ciclo target ≤1415.\n\n6) ALERTAS — Z1 acima do teto mensal é sinal de treino excessivamente confortável. FC max 153bpm no strength indica recrutamento elevado — monitorar. Nenhum sinal agudo de overreaching.\n\n7) NUTRIÇÃO — Pós-strength hoje: 20–25g proteína (whey ou equivalente) + carboidrato moderado (banana + aveia) dentro de 30min para otimizar síntese proteica e repor glicogênio residual.",
     "status_readiness": "BOM",
-    "status_carga": "ELEVADA",
+    "status_carga": "IDEAL",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Sessão de força funcional moderada com foco em estabilidade, glúteos e core — ideal dado Body Battery 48 e status de recuperação. Evitar falha muscular e componente metabólico; priorizar qualidade de movimento e ativação. Duração 45–55min com pausas completas de 60–90s entre séries.",
-    "alerta": "Z1 mensal 23% acima do teto (1739 vs máx 1415): reduzir volume extensivo e priorizar Z2 nas próximas semanas para corrigir distribuição de zonas.",
+    "analise_hoje": "Sessão de força executada: 57min com FC avg 108bpm e TE 1.5 — estímulo neuromuscular leve-moderado, adequado ao contexto pós-TSS 140 de ontem. FC max 153bpm indica momentos de esforço real; aceitável para força funcional. Objetivo fisiológico atingido: manutenção neuromuscular sem comprometer recuperação aeróbica.",
+    "alerta": "Z1 mensal em 1760 supera target máximo de 1415 — risco de polarização inadequada com déficit crônico de Z2. Reequilibrar distribuição de zonas na próxima semana.",
     "treino_forca": [
       {
         "exercicio": "Agachamento Goblet",
         "series": 3,
-        "repeticoes": "10-12",
+        "repeticoes": "12-15",
         "carga": "moderada",
-        "foco": "Ativa glúteos e quadríceps replicando demanda do ciclismo e corrida"
+        "foco": "Força funcional de quadríceps e glúteos para potência no ciclismo e corrida 70.3"
       },
       {
-        "exercicio": "Elevação Pélvica (Hip Thrust) com barra",
+        "exercicio": "Ponte de Glúteos Unilateral",
         "series": 3,
         "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Potência de glúteo máximo essencial para propulsão no ciclismo e corrida"
+        "carga": "leve",
+        "foco": "Ativa glúteo médio e máximo, corrige desequilíbrios críticos na corrida"
       },
       {
-        "exercicio": "Remada Unilateral com Haltere",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Equilíbrio postural e força de tração para aerodinâmica no ciclismo"
-      },
-      {
-        "exercicio": "Avanço Búlgaro (Split Squat)",
-        "series": 3,
-        "repeticoes": "8-10",
-        "carga": "moderada",
-        "foco": "Força unilateral e estabilidade do joelho para corrida e transições"
-      },
-      {
-        "exercicio": "Prancha Lateral com Abdução de Quadril",
+        "exercicio": "Prancha Lateral com Abdução",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e abdutores: estabilidade pélvica na corrida"
+        "foco": "Estabilidade de core lateral, essencial para economia de corrida no 70.3"
+      },
+      {
+        "exercicio": "Remada com Halteres (bent-over)",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Fortalece musculatura costas para postura aerodinâmica sustentada no ciclismo"
+      },
+      {
+        "exercicio": "Step-Up com Joelho Alto",
+        "series": 3,
+        "repeticoes": "10",
+        "carga": "moderada",
+        "foco": "Simula padrão de corrida, fortalece cadeia posterior e equilíbrio unilateral"
       },
       {
         "exercicio": "Dead Bug",
         "series": 3,
         "repeticoes": "8-10",
         "carga": "leve",
-        "foco": "Ativação profunda de core com controle motor — base para todas as modalidades"
+        "foco": "Core profundo e estabilização lombar, previne lesões em volume alto de treino"
       },
       {
-        "exercicio": "Mobilidade de Quadril (90/90 Hip Stretch + rotação torácica)",
+        "exercicio": "Mobilidade de Quadril (90/90 stretch)",
         "series": 2,
-        "repeticoes": "45s",
+        "repeticoes": "60s",
         "carga": "leve",
-        "foco": "Libera restrições após ciclismo prolongado, previne lesões lombares e de IT-band"
+        "foco": "Libera flexores do quadril comprimidos pelo ciclismo, melhora passada na corrida"
       }
     ]
   }
