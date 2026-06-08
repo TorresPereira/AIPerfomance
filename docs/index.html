@@ -14,7 +14,6 @@
 :root{
   --blue:#1a6fff;--green:#00C896;--yellow:#FFB800;--red:#FF4444;
   --bg:#000;--card:#111;--card2:#161616;--border:#1e1e1e;--text:#ddd;--muted:#444;
-  --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,sans-serif;overflow:hidden}
@@ -22,7 +21,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 /* ── PIN ── */
 #pin{position:fixed;inset:0;z-index:99;background:radial-gradient(ellipse at 50% 30%,#060e1c,#000 65%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:40px 28px calc(var(--sb)+20px)}
+  padding:env(safe-area-inset-top,44px) 28px env(safe-area-inset-bottom,20px)}
 .pin-logo{width:72px;height:72px;border-radius:20px;margin-bottom:20px;box-shadow:0 0 40px #1a6fff33}
 .pin-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
 .pin-ver{font-size:10px;color:#1a6fff;font-family:monospace;margin-bottom:28px}
@@ -40,10 +39,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 .pin-link{margin-top:24px;font-size:12px;color:#2a2a2a;background:none;border:none;cursor:pointer;text-decoration:underline}
 
 /* ── App ── */
-#app{display:none;position:fixed;inset:0;flex-direction:column}
+#app{display:none;position:fixed;inset:0;flex-direction:column;
+  padding-top:env(safe-area-inset-top,44px);
+  padding-bottom:env(safe-area-inset-bottom,0px)}
 #app.show{display:flex}
 .hdr{background:rgba(0,0,0,.92);backdrop-filter:blur(16px);
-  padding:calc(var(--st)+10px) 16px 10px;border-bottom:1px solid var(--border);
+  padding:10px 16px;border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .hdr-left{display:flex;align-items:center;gap:8px}
 .hdr-badge{background:var(--blue);color:#fff;font-size:10px;font-weight:700;
@@ -58,12 +59,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 .ibtn.spin{animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:14px 14px calc(var(--sb)+74px);max-width:600px;margin:0 auto;width:100%;min-height:0}
+.body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:14px 14px 16px;max-width:600px;margin:0 auto;width:100%;min-height:0}
 
 /* ── Nav ── */
 .nav{flex-shrink:0;background:rgba(0,0,0,.95);
   backdrop-filter:blur(16px);border-top:1px solid var(--border);
-  padding:8px 0 calc(var(--sb)+6px);display:flex;justify-content:space-around}
+  padding:8px 0 10px;display:flex;justify-content:space-around}
 .ntab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 0}
 .ntab .ni{font-size:19px;color:#333;transition:color .15s}
 .ntab .nl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#333;transition:color .15s}
@@ -130,7 +131,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 /* ── Config ── */
 #cfg{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.97);
   display:none;flex-direction:column;align-items:center;justify-content:center;
-  padding:40px 28px calc(var(--sb)+20px)}
+  padding:40px 28px 40px}
 #cfg.show{display:flex}
 .cfg-form{width:100%;max-width:320px;display:flex;flex-direction:column;gap:14px}
 .cfg-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:5px}
@@ -166,7 +167,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.2 · 08/06/2026</div>
+  <div class="pin-ver">v3.2.1 · 08/06/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
