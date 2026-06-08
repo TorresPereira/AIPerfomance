@@ -560,25 +560,30 @@ async function loadReport(forceRefresh=false){
   btn.classList.add("spinning");
   if (forceRefresh) body.innerHTML = '<div class="loading-bar"></div>';
 
-  // Try multiple URLs in sequence
-  const urls = getReportUrls(forceRefresh);
-  let loaded  = false;
+  // GitHub Contents API — tem CORS correto para fetch() de JavaScript
+  const { user, repo } = getGitHubInfo();
+  const cfg = getConfig();
+  const apiUrl = `https://api.github.com/repos/${user}/${repo}/contents/docs/report.json?ref=main&t=${Date.now()}`;
+  let loaded = false;
 
-  for (const url of urls) {
-    try {
-      body.innerHTML = `<div class='loading-bar'></div><div style='text-align:center;font-size:10px;color:#333;padding:8px;word-break:break-all'>${url.replace('https://raw.githubusercontent.com/','')}</div>`;
-      const res  = await fetch(url, { cache: "no-store", mode: "cors" });
-      if (!res.ok) { console.warn('HTTP', res.status, url); continue; }
+  try {
+    const headers = { 'Accept': 'application/vnd.github.raw+json' };
+    if (cfg.token) headers['Authorization'] = `Bearer ${cfg.token}`;
+    body.innerHTML = '<div class="loading-bar"></div>';
+    const res = await fetch(apiUrl, { headers, cache: 'no-store' });
+    if (res.ok) {
       const data = await res.json();
       currentReport = data;
       body.innerHTML = renderReport(data);
-      localStorage.setItem("lastReport",     JSON.stringify(data));
-      localStorage.setItem("lastReportTime", new Date().toISOString());
+      localStorage.setItem('lastReport',     JSON.stringify(data));
+      localStorage.setItem('lastReportTime', new Date().toISOString());
       loaded = true;
-      break;
-    } catch(e) { console.error('Fetch failed:', url, e.message); }
+    } else {
+      console.warn('GitHub API error:', res.status, await res.text());
+    }
+  } catch(e) {
+    console.error('GitHub API fetch failed:', e.message);
   }
-
   if (!loaded) {
     const cached = localStorage.getItem("lastReport");
     if (cached) {
@@ -637,7 +642,12 @@ async function loadReport(forceRefresh=false){
   updateDots();
 })();
 
-if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+// Remove qualquer service worker antigo que possa estar interferindo
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then(regs => {
+    regs.forEach(r => r.unregister());
+  });
+}
 
 let startY=0;
 document.addEventListener("touchstart",e=>{startY=e.touches[0].clientY},{passive:true});
