@@ -1,6 +1,6 @@
 {
   "date": "2026-06-08",
-  "generated_at": "2026-06-08T20:32:04.316961Z",
+  "generated_at": "2026-06-08T20:39:55.597012Z",
   "saude": {
     "hrv": 56,
     "hrv_7d": 35,
@@ -16,7 +16,7 @@
     "sono_awake": 9.0,
     "body_battery": 51,
     "stress_avg": 25,
-    "stress_rest": 50.56,
+    "stress_rest": 50.48,
     "atl": 764.0,
     "ctl": 3056.0,
     "tsb": null,
@@ -154,62 +154,62 @@
     }
   ],
   "insights": {
-    "frase": "HRV elevado: aproveite a janela de adaptação com precisão.",
-    "briefing": "1) READINESS: HRV 56ms (+21ms vs média 7d, baseline 33-42ms) — valor significativamente acima do baseline, sinal claro de recuperação sistêmica avançada. Sono 7.8h, score 80, deep 1.6h adequado. Body Battery 51 moderado mas stress 25 baixo. Estado geral: BOM/ÓTIMO para treino de qualidade.\n\n2) TREINO ONTEM: Ciclismo 65.7km/2h27m — FC média 140bpm, potência 145W, TSS 140.6, TE aeróbico 3.7. Carga expressiva, provavelmente Z2 predominante com picos. Tênis 1h28m — FC 107bpm, TE 2.1, baixo impacto cardiovascular mas impacto neuromuscular e articular relevante (mudanças de direção). Combinação ontem: ~4h de atividade, TSS total elevado.\n\n3) CARGA: Z1 1760 (acima do target máx 1415 — excesso de 345 pontos). Z2 608 (abaixo do target mínimo 957). Z3+ 688 — distribuição desequilibrada: volume Z1 excessivo, Z2 insuficiente, Z3 acima para fase atual. Status Garmin 'Recuperação' coerente. Risco de desequilíbrio de polarização, não de overreaching agudo.\n\n4) HOJE EXECUTADO: Força 57min FC 108bpm TE 1.5 — sessão leve, bem calibrada para o dia pós-carga. eBike 7min FC 81bpm — aquecimento/deslocamento, irrelevante fisiologicamente. Execução adequada ao estado.\n\n5) AJUSTE: Para amanhã (6×4min Threshold): dado HRV elevado, executar normalmente. Manter intervalos a 95-100% FTP ou FC ~88-92% FCmax. Não reduzir volume. 'More Gears' deve preceder como aquecimento neuromuscular (2 rounds completos).\n\n6) ALERTAS: Z1 mensal 24% acima do teto — revisar próximas semanas para aumentar Z2. Tênis impacto articular lateral: monitorar joelhos pré-intervalos amanhã.\n\n7) NUTRIÇÃO: Pré-força hoje (já executado) — amanhã pré-threshold: 40-60g carboidrato 60min antes (banana + gel ou aveia). Durante 6×4min: não necessário. Pós: proteína 25-30g em até 30min.",
+    "frase": "HRV em alta: capitalize a recuperação com precisão hoje.",
+    "briefing": "1) READINESS — HRV 56ms (+21ms vs média 7d, baseline 33-42ms): sinal claro de supercompensação/recuperação avançada. Sono 7.8h, score 80, deep 1.6h adequado. Body Battery 51/100 limita sessões de alta intensidade isoladas, mas é compatível com força funcional. RHR 62bpm sem baseline definido — monitorar tendência. Status geral: BOM, com reserva aeróbica disponível.\n\n2) TREINO ONTEM — Ciclismo 65.7km, 2h27m, 145W avg, FC 140bpm, TSS 140.6: carga expressiva para um domingo, TE 3.7 indica estímulo aeróbico efetivo. Cadência 81rpm abaixo do ideal (88-92rpm para 70.3). Tênis 1h28m, FC avg 107bpm, TE 2.1: recuperativo, sem impacto significativo na carga.\n\n3) CARGA — Z1: 1760 (acima do target máx 1415, +24%). Z2: 608 (abaixo do target mínimo 957, -36%). Z3+: 688. Desequilíbrio: excesso em Z1 e déficit em Z2. Risco de subdesenvolvimento do limiar aeróbico. Status Garmin Recuperação + TSS 140 ontem = janela de recuperação ativa hoje bem aplicada.\n\n4) TREINO HOJE — Força executada: 57min, FC avg 108bpm, TE 1.5. Execução adequada para dia de recuperação. Intensidade controlada, sem estresse cardiovascular significativo. eBike 7min: deslocamento, irrelevante fisiologicamente.\n\n5) AJUSTE CONCRETO — Amanhã (09/06): More Gears + 6x4min Threshold. Dado HRV elevado, executar intervalos com potência alvo 88-95% FTP. Limitar recuperação entre talhetes a 2min ativos (não 3min). Manter aquecimento mínimo 15min em Z1-Z2.\n\n6) ALERTAS — Z1 cronicamente acima do target (+24%): reduzir volume de Z1 nas próximas 2 semanas em ~15%. Z2 deficitário: priorizar blocos contínuos de 20-30min em Z2 nos treinos de base.\n\n7) NUTRIÇÃO — Pré-treino força (já executado): para amanhã threshold, ingerir 40-60g CHO 60min antes (banana + aveia) para sustentar 6 séries de alta intensidade sem depleção.",
     "status_readiness": "BOM",
     "status_carga": "ELEVADA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Sessão de força executada em 57min com FC média 108bpm e TE 1.5 — intensidade leve a moderada, apropriada para dia de recuperação ativa pós-TSS 140. Objetivo fisiológico cumprido: estímulo neuromuscular sem comprometer recuperação para threshold de amanhã. Execução dentro do esperado para readiness moderado.",
-    "alerta": "Z1 mensal 24% acima do target máximo (1760 vs 1415): redistribuir carga para Z2 nas próximas semanas para otimizar adaptação aeróbica Half Ironman.",
+    "analise_hoje": "Sessão de força executada com controle adequado: FC avg 108bpm e TE 1.5 confirmam estímulo neuromuscular sem sobrecarga cardiovascular, ideal para dia pós-TSS 140. Duração de 57min dentro do esperado para readiness moderado (Body Battery 51). Execução alinhada ao planejado — dia de recuperação ativa bem gerenciado.",
+    "alerta": "Z1 mensal 24% acima do target máximo: risco de estagnação do limiar aeróbico. Reequilibrar distribuição aumentando Z2 nos próximos ciclos.",
     "treino_forca": [
       {
-        "exercicio": "Agachamento Goblet",
-        "series": 3,
-        "repeticoes": "12-15",
-        "carga": "moderada",
-        "foco": "Força funcional de quadríceps e glúteos para potência no ciclismo e corrida"
-      },
-      {
-        "exercicio": "Ponte de Glúteos Unilateral",
-        "series": 3,
-        "repeticoes": "12 cada lado",
-        "carga": "leve",
-        "foco": "Ativa glúteo médio e máximo, reduz desequilíbrios na corrida e pedalada"
-      },
-      {
-        "exercicio": "Prancha Lateral com Abdução",
-        "series": 3,
-        "repeticoes": "30s cada lado",
-        "carga": "leve",
-        "foco": "Estabilidade de core lateral, essencial para economia de movimento no triathlon"
-      },
-      {
-        "exercicio": "Remada com Halteres (inclinado)",
+        "exercicio": "Agachamento Goblet com pausa (3s no fundo)",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Fortalece dorsais e romboides para postura aerodinâmica e natação eficiente"
+        "foco": "Força funcional de quadríceps e glúteos para economia de pedalada e corrida no 70.3"
       },
       {
-        "exercicio": "Avanço Reverso com Joelho Elevado",
+        "exercicio": "Ponte de Glúteos Unilateral (Single-leg Hip Thrust)",
         "series": 3,
-        "repeticoes": "10 cada lado",
+        "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Força unilateral de quadril e equilíbrio para corrida estável no 70.3"
+        "foco": "Ativa glúteo máximo unilateralmente, corrigindo assimetrias comuns em ciclistas"
       },
       {
-        "exercicio": "Dead Bug",
+        "exercicio": "Prancha Lateral com Abdução de Quadril",
         "series": 3,
-        "repeticoes": "8 cada lado",
+        "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core profundo e coordenação contralateral, protege lombar no ciclismo longo"
+        "foco": "Core lateral e estabilidade pélvica para manter postura na corrida final do 70.3"
       },
       {
-        "exercicio": "Mobilidade de Quadril 90/90",
-        "series": 2,
-        "repeticoes": "60s cada lado",
+        "exercicio": "Remada Unilateral com Haltere (Bent-over Row)",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Equilíbrio postural entre musculatura anterior e posterior para posição aerodinâmica no bike"
+      },
+      {
+        "exercicio": "Step-up com Joelho Alto (caixa 40cm)",
+        "series": 3,
+        "repeticoes": "10",
+        "carga": "moderada",
+        "foco": "Simula padrão de corrida e fortalece cadeia posterior para transição bike-run"
+      },
+      {
+        "exercicio": "Dead Bug (Inseto Morto)",
+        "series": 3,
+        "repeticoes": "8-10",
         "carga": "leve",
-        "foco": "Aumenta amplitude de quadril para pedalada eficiente e passada mais econômica"
+        "foco": "Core profundo e estabilidade lombar essenciais para manter forma técnica nas últimas milhas"
+      },
+      {
+        "exercicio": "Mobilidade de Quadril 90-90 com rotação torácica",
+        "series": 2,
+        "repeticoes": "8-10",
+        "carga": "leve",
+        "foco": "Libera flexores do quadril encurtados pelo ciclismo e melhora rotação para a braçada na natação"
       }
     ]
   }
