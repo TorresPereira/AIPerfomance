@@ -170,7 +170,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.2 · 08/06/2026</div>
+  <div class="pin-ver">v3.2.1 · 08/06/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -308,15 +308,21 @@ function adjustLayout(){
   const hdr = document.querySelector('.hdr');
   const nav = document.querySelector('.nav');
   const body = document.querySelector('.body');
-  if(hdr && nav && body){
-    body.style.top    = hdr.getBoundingClientRect().height + 'px';
-    body.style.bottom = nav.getBoundingClientRect().height + 'px';
-  }
+  if(!hdr||!nav||!body) return;
+  // Use window.innerHeight to guarantee full screen height
+  const hh = hdr.getBoundingClientRect().height;
+  const nh = nav.getBoundingClientRect().height;
+  body.style.top    = Math.round(hh) + 'px';
+  body.style.bottom = Math.round(nh) + 'px';
 }
 function showApp(){
   document.getElementById('pin').style.display='none';
   document.getElementById('app').classList.add('show');
+  // Run multiple times to ensure correct after fonts/images load
+  adjustLayout();
   requestAnimationFrame(adjustLayout);
+  setTimeout(adjustLayout, 100);
+  setTimeout(adjustLayout, 300);
   loadReport();
 }
 window.addEventListener('resize', adjustLayout);
