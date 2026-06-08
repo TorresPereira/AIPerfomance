@@ -1,6 +1,6 @@
 {
   "date": "2026-06-08",
-  "generated_at": "2026-06-08T20:12:27.294926Z",
+  "generated_at": "2026-06-08T20:20:54.974984Z",
   "saude": {
     "hrv": 56,
     "hrv_7d": 35,
@@ -154,62 +154,62 @@
     }
   ],
   "insights": {
-    "frase": "HRV em alta: capitalize a recuperação com precisão.",
-    "briefing": "1) READINESS: HRV 56ms é +21ms acima da média 7d (35ms) e acima do baseline (33-42ms) — sinal forte de recuperação supercompensada. Sono 7.8h/score 80 com deep 1.6h adequado. Body Battery 51 moderado, stress 25 baixo. Status geral: BOM, janela favorável para treino de qualidade amanhã.\n\n2) TREINO ONTEM: Ciclismo 65.7km/2h27m — FC média 140bpm, potência 145W, TSS 140.6 indica sessão de carga significativa (Z2/limiar baixo). TE aeróbico 3.7 confirma estímulo aeróbico sólido. Potência 145W modesta sugere sessão controlada ou terreno. Tênis 1h28m FC 107bpm — carga anaeróbica intermitente leve (picos 165bpm), TE 2.1 residual. Combinação gerou carga acumulada relevante.\n\n3) CARGA: Z1 mensal 1760 — 24% acima do teto target (1415). Z2 608 — abaixo do piso target (957). Z3+ 688 elevado proporcionalmente. Distribuição desequilibrada: déficit Z2, excesso Z1 e Z3+. Risco de overreaching se Z3+ continuar crescendo sem base Z2 consolidada.\n\n4) HOJE (executado): Força 57min FC 108bpm, TE 1.5 — sessão leve, adequada ao dia pós-carga. eBike 7min irrelevante. Execução correta: sessão de recuperação ativa sem estresse cardiovascular adicional.\n\n5) AJUSTE CONCRETO: Amanhã — 'More Gears' como aquecimento técnico OK. Threshold 6x4min: manter protocolo, mas limitar FC máx a 92% FCmax nos intervalos. Se FC não estabilizar em 2min de recuperação, reduzir para 4 repetições.\n\n6) ALERTAS: Z1 mensal 24% acima do teto — revisar volume de baixa intensidade. Z2 subdosado compromete base aeróbica Half IM. Monitorar HR drift nos threshold de amanhã.\n\n7) NUTRIÇÃO: Pré-treino amanhã (threshold): 45-60min antes, 40-50g carboidrato de baixo índice glicêmico + 200ml água. Evite treinar em jejum em sessão de alta intensidade.",
+    "frase": "HRV elevado: janela aberta, execute com precisão amanhã.",
+    "briefing": "1) READINESS — HRV 56ms vs média 7d de 35ms (+21ms): recuperação expressiva, bem acima do baseline (33–42ms). Sinal verde fisiológico. RHR 62bpm sem baseline definido — monitorar tendência. Sono 7.8h, score 80, deep 1.6h adequado. Body Battery 51/100 moderado após ontem. Readiness geral: BOM, com reserva para amanhã.\n\n2) TREINO ONTEM — Ciclismo 65.7km, 2h27m, 145W avg, FC 140bpm, TSS 140.6: sessão de carga real, TE aeróbico 3.7 indica estímulo aeróbico efetivo. Potência 145W sugere intensidade Z2 baixo/Z1 alto — eficiente para volume. Tênis 1h28m, FC avg 107bpm, TE 2.1: carga neuromuscular adicional com picos a 165bpm (anaeróbico). Combinação gerou TSS elevado no domingo.\n\n3) CARGA — Z1: 1760 (acima do target máx 1415), Z2: 608 (abaixo do target mín 957), Z3+: 688. Distribuição desequilibrada: excesso Z1, déficit Z2, Z3 elevado. Risco de subdesenvolvimento aeróbico de limiar. Status Garmin: Recuperação — correto para hoje.\n\n4) HOJE (EXECUTADO) — Strength 57min, FC avg 108bpm, TE 1.5: sessão leve, adequada ao dia de recuperação. Execução compatível com o planejado. eBike 7min: deslocamento, irrelevante fisiologicamente.\n\n5) AJUSTE — Amanhã (09/06): \"More Gears\" como ativação + 6×4min Threshold. Dado HRV elevado, executar threshold em FC limiar real (~165–170bpm ou ~88–92% FCmax). Não reduzir volume, mas garantir aquecimento 15min Z1 antes dos intervalos. Manter 6 repetições.\n\n6) ALERTAS — Z1 mensal 24% acima do teto: reduzir rides longos em Z1 puro nas próximas 2 semanas, migrar para Z2 estruturado. Pico FC tênis 165bpm: evitar acúmulo de sessões mistas no mesmo dia em semanas de carga.\n\n7) NUTRIÇÃO — Pré-threshold amanhã: 40–60g carboidrato 60min antes (banana + gel). Durante: gel a cada 20min se ultrapassar 60min total. Pós: proteína 25–30g + carboidrato em até 30min.",
     "status_readiness": "BOM",
     "status_carga": "ELEVADA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Sessão de força executada adequadamente — 57min com FC média 108bpm confirma estímulo neuromuscular sem sobrecarga cardiovascular, ideal para dia de recuperação ativa. TE aeróbico 1.5 indica impacto sistêmico mínimo, preservando recursos para threshold de amanhã. Execução alinhada com o estado de recuperação atual.",
-    "alerta": "Z1 mensal 24% acima do teto (1760 vs 1415 max): redistribuir volume para Z2 nas próximas semanas. Déficit Z2 compromete base aeróbica para Half IM.",
+    "analise_hoje": "Sessão de força de 57min executada com FC avg 108bpm e TE 1.5 — leve, adequada ao contexto de recuperação pós-TSS 140 de ontem. Estímulo neuromuscular controlado sem comprometer a readiness para o threshold de amanhã. Execução dentro do esperado para o status Recuperação do Garmin.",
+    "alerta": "Z1 mensal 24% acima do teto máximo (1760 vs 1415): redistribuir intensidade para Z2 nas próximas sessões de bike para corrigir desequilíbrio de zonas.",
     "treino_forca": [
       {
         "exercicio": "Agachamento Goblet",
         "series": 3,
         "repeticoes": "12-15",
         "carga": "moderada",
-        "foco": "Força funcional de quadríceps e glúteos para potência no pedal e corrida"
+        "foco": "Força funcional de quadríceps e glúteos para pedal eficiente no 70.3"
       },
       {
-        "exercicio": "Romanian Deadlift (RDL) Unilateral",
+        "exercicio": "Ponte de Glúteos Unilateral",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "leve",
+        "foco": "Ativa glúteo médio e máximo, corrigindo desequilíbrios na corrida pós-bike"
+      },
+      {
+        "exercicio": "Prancha com Elevação Alternada de Braço",
+        "series": 3,
+        "repeticoes": "30s",
+        "carga": "leve",
+        "foco": "Core anti-rotacional — estabilidade no tronco durante as três modalidades"
+      },
+      {
+        "exercicio": "Levantamento Terra Romeno",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Ativa isquiotibiais e glúteo médio, estabilidade pélvica na corrida"
-      },
-      {
-        "exercicio": "Prancha com Rotação (Pallof Press)",
-        "series": 3,
-        "repeticoes": "12 cada lado",
-        "carga": "leve",
-        "foco": "Core anti-rotacional, transfere para estabilidade no aero e corrida"
+        "foco": "Força de isquiotibiais e cadeia posterior, essencial para economia de corrida"
       },
       {
         "exercicio": "Step-Up com Joelho Alto",
         "series": 3,
-        "repeticoes": "10 cada lado",
+        "repeticoes": "10",
         "carga": "moderada",
-        "foco": "Simula mecânica da corrida, força unilateral e propriocepção"
+        "foco": "Simula padrão de corrida, reforça glúteo e equilíbrio unilateral"
       },
       {
-        "exercicio": "Hip Thrust com Pausa",
-        "series": 3,
-        "repeticoes": "12-15",
-        "carga": "moderada",
-        "foco": "Ativação máxima de glúteo, potência no final da pedalada e propulsão na corrida"
+        "exercicio": "Rotação de Quadril em Quatro Apoios (mobilidade)",
+        "series": 2,
+        "repeticoes": "10-12",
+        "carga": "leve",
+        "foco": "Mobilidade do quadril para melhorar amplitude no pedal e passada"
       },
       {
-        "exercicio": "Remada com Halteres (Bent-Over Row)",
+        "exercicio": "Remada com Halteres (prone)",
         "series": 3,
         "repeticoes": "12",
         "carga": "moderada",
-        "foco": "Equilíbrio muscular posterior, postura aero e eficiência na natação"
-      },
-      {
-        "exercicio": "Mobilidade de Quadril — 90/90 com Rotação",
-        "series": 2,
-        "repeticoes": "45s cada lado",
-        "carga": "leve",
-        "foco": "Amplitude de quadril para stride na corrida e pedalada eficiente"
+        "foco": "Fortalece dorsais e escapulares para sustentação na posição aero do TT"
       }
     ]
   }
