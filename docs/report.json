@@ -1,6 +1,6 @@
 {
   "date": "2026-06-09",
-  "generated_at": "2026-06-09T11:52:10.498993Z",
+  "generated_at": "2026-06-09T11:56:12.785674Z",
   "saude": {
     "hrv": 52,
     "hrv_7d": 35,
@@ -88,62 +88,62 @@
   "amanha": [],
   "hoje_feito": [],
   "insights": {
-    "frase": "HRV elevado: janela de recuperação ativa, use com inteligência.",
-    "briefing": "1) READINESS: HRV 52ms é +48% acima da baseline (33-42ms) e +17ms vs média 7d — sinal claro de supercompensação parassimpática. Corpo respondendo bem ao descanso. RHR 60bpm sem baseline histórica, neutro. Sono é o ponto fraco: 6.8h com score 62, REM crítico em apenas 0.2h — comprometendo consolidação neuromuscular e síntese proteica. Body Battery 59/100 com stress médio 18 indica reserva funcional moderada-boa. Status geral: MODERADO puxando para BOM.\n2) TREINO ONTEM: Musculação 57min com FC média 108bpm (TE aeróbico 1.5) — sessão leve, adequada ao status de recuperação. eBike foi deslocamento ativo irrelevante (1.1km, FC 81bpm). Execução correta para o dia.\n3) CARGA: Z1 em 1570 ultrapassa o teto de 1415 (+11%) — volume aeróbico leve acima do ideal. Z2 em 608 está abaixo do piso (957), indicando déficit de estímulo aeróbico moderado. Z3+ em 674 está elevado para fase de recuperação. ATL 713 com status Garmin 'Recuperação' confirma: semana anterior foi exigente. Risco moderado de overreaching se retomar carga alta agora.\n4) TREINO HOJE: Dia livre — correto. Prioridade é recuperação ativa ou força funcional leve aproveitando o HRV elevado. Não há treino específico agendado.\n5) AJUSTE CONCRETO: Manter Z3+ zerado hoje. Se optar por treino, limite sessão a 40min máx em Z1 (FC < 130bpm). Força: séries de 3x10-12 com carga leve-moderada, foco em estabilidade e mobilidade.\n6) ALERTAS: REM 0.2h é alerta real — sono fragmentado reduz recuperação neural. Monitorar HRV nos próximos 2 dias; queda para <40ms indica ressalto negativo. Z1 acima do teto mensal: evitar volume fácil excessivo esta semana.\n7) NUTRIÇÃO: Priorize hoje 1.6g proteína/kg corporal distribuída em 4 refeições para maximizar síntese muscular pós-força, dado o déficit de sono REM.",
-    "status_readiness": "MODERADO",
-    "status_carga": "ELEVADA",
+    "frase": "HRV elevado: aproveite a janela de recuperação ativa hoje.",
+    "briefing": "1) READINESS: HRV 52ms (+17ms vs média 7d de 35ms) — spike significativo acima do baseline (33–42ms), indicando supercompensação ou queda de carga recente. Body Battery 59 e Stress 18 reforçam estado equilibrado. Sono comprometido: 6.8h, Score 62, REM apenas 0.2h (criticamente baixo) e Deep 1.4h — atenção ao impacto cognitivo e hormonal. RHR 60bpm sem baseline definido, monitorar tendência. Status geral: BOM, com ressalva no sono.\n2) TREINO ONTEM: Musculação 57min com FC média 108/max 153bpm — TE aeróbico 1.5 (baixo, adequado para força). Execução controlada. eBike 7min a 9.4km/h — irrelevante como estímulo, deslocamento. Sem sinais de sobrecarga neuromuscular.\n3) CARGA: Z1 em 1570 (acima do target máx 1415 — excesso de volume leve). Z2 em 608 (abaixo do mínimo 957 — déficit aeróbico moderado). Z3+ em 674 — proporcionalmente alto. Distribuição polarizada invertida: falta base Z2, excesso Z3+. Status Garmin: Recuperação. ATL 713 vs CTL 2853 — semana leve em curso.\n4) HOJE — Sem treino agendado. Dia de descanso ativo recomendado. Se optar por sessão, mobilidade geral 20–30min ou caminhada Z1 (<120bpm) por 30min máximo.\n5) AJUSTE: Manter descanso hoje. Próxima semana priorizar Z2 bike/corrida (+20% volume Z2, reduzir Z3+ para <400 mensal acumulado).\n6) ALERTAS: REM 0.2h é alerta real — sono fragmentado compromete recuperação hormonal. HRV spike pode ser artefato; validar amanhã. Z2 deficitária a longo prazo limita adaptação aeróbica para 70.3.\n7) NUTRIÇÃO: Hoje sem treino — foque em janela anti-inflamatória: refeição rica em ômega-3 (salmão/sardinha) + carboidrato complexo no jantar para restaurar glicogênio e suportar qualidade do sono.",
+    "status_readiness": "BOM",
+    "status_carga": "SUAVE",
     "acao_hoje": "DESCANSO",
-    "analise_hoje": "Dia sem treino agendado — decisão correta dado ATL elevado e sono com REM crítico (0.2h). Se houver disposição, sessão de força funcional leve 40-50min é a única opção válida. Zonas aeróbicas devem ser evitadas para não inflar Z1 já acima do teto mensal.",
-    "alerta": "REM 0.2h criticamente baixo — recuperação neural comprometida. Evitar estímulos intensos até REM > 1.0h por 2 noites consecutivas.",
+    "analise_hoje": "Dia sem treino agendado — indicado descanso ativo ou mobilidade leve (<30min). HRV elevado sugere boa recuperação, mas REM crítico de 0.2h exige prioridade ao sono esta noite. Nenhuma sessão estruturada necessária; preservar energia para retomada de Z2 amanhã.",
+    "alerta": "REM 0.2h criticamente baixo — risco de recuperação incompleta e comprometimento hormonal. Priorize higiene do sono esta noite.",
     "treino_forca": [
       {
-        "exercicio": "Mobilidade de quadril com rotação torácica (world's greatest stretch)",
+        "exercicio": "Romanian Deadlift (RDL)",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Fortalece isquiotibiais e glúteos essenciais para potência na pedalada e corrida"
+      },
+      {
+        "exercicio": "Agachamento Goblet",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Desenvolve estabilidade de quadril e força funcional para corrida no 70.3"
+      },
+      {
+        "exercicio": "Prancha Lateral com Elevação de Quadril",
+        "series": 3,
+        "repeticoes": "30s",
+        "carga": "leve",
+        "foco": "Core lateral — estabiliza pelve na corrida e previne lesões lombares"
+      },
+      {
+        "exercicio": "Step-Up com Joelho Alto",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Simula padrão de corrida, ativa glúteo médio e melhora equilíbrio unilateral"
+      },
+      {
+        "exercicio": "Remada com Halteres (bent-over)",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Fortalece dorsais e postura para manter forma na natação e no aero do bike"
+      },
+      {
+        "exercicio": "Dead Bug",
+        "series": 3,
+        "repeticoes": "8-10",
+        "carga": "leve",
+        "foco": "Core profundo anti-extensão — estabilidade lombar crítica nas três modalidades"
+      },
+      {
+        "exercicio": "Mobilidade de Quadril 90/90 + Piriforme",
         "series": 2,
-        "repeticoes": "8 cada lado",
+        "repeticoes": "60s",
         "carga": "leve",
-        "foco": "Libera cadeia posterior e rotação torácica essencial para posição aerodinâmica no bike"
-      },
-      {
-        "exercicio": "Agachamento búlgaro com halteres",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Força unilateral de glúteo e quadríceps — base da potência na pedalada e corrida"
-      },
-      {
-        "exercicio": "Ponte de glúteos com elevação unilateral",
-        "series": 3,
-        "repeticoes": "12 cada lado",
-        "carga": "leve",
-        "foco": "Ativa glúteo médio e estabiliza pelve na fase de corrida do 70.3"
-      },
-      {
-        "exercicio": "Prancha lateral com abdução de quadril",
-        "series": 3,
-        "repeticoes": "30s cada lado",
-        "carga": "leve",
-        "foco": "Core lateral e glúteo médio — previne colapso pélvico na corrida pós-bike"
-      },
-      {
-        "exercicio": "Remada com haltere unilateral (single-arm row)",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Força de puxada e estabilidade escapular — melhora eficiência da braçada na natação"
-      },
-      {
-        "exercicio": "Elevação de panturrilha unilateral em degrau",
-        "series": 3,
-        "repeticoes": "15 cada lado",
-        "carga": "moderada",
-        "foco": "Fortalece complexo sóleo-gastrocnêmio reduzindo risco de lesão na corrida de 21km"
-      },
-      {
-        "exercicio": "Dead bug com extensão alternada",
-        "series": 3,
-        "repeticoes": "10 cada lado",
-        "carga": "leve",
-        "foco": "Core anti-extensão profundo — mantém postura eficiente nas horas finais da prova"
+        "foco": "Libera rotadores do quadril, melhora passada e previne síndrome do IT band"
       }
     ]
   }
