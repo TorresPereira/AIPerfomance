@@ -344,11 +344,13 @@ def coletar():
                                 dur_w = int(m3.group(1))*60
                                 nome = _re.sub(r'^\d+\s*min\s*', '', nome).strip()
 
-                if   "swim" in tp or "swim" in nome.lower(): ico="🏊"
-                elif "cycl" in tp or "bike" in nome.lower() or "ride" in nome.lower(): ico="🚴"
-                elif "run"  in tp or "run"  in nome.lower(): ico="🏃"
-                else: ico="⚡"
-                items.append({"icone":ico,"nome":nome,"tipo":tp,"dur":hms(dur_w),"dist":dist_fmt(dist_w)})
+                tp_k = str(w.get('sportTypeKey') or '').lower()
+                tp_all = tp_k or tp
+                n = nome.lower()
+                if   any(x in tp_all for x in ['swim','pool','natac']) or any(x in n for x in ['swim','natac','piscina','pool']): ico='🏊'
+                elif any(x in tp_all for x in ['cycl','bike']) or any(x in n for x in ['bike','ride','cicl','ciclismo','bicicl']): ico='🚴'
+                elif any(x in tp_all for x in ['run','tread']) or any(x in n for x in ['run','corrida','correr']): ico='🏃'
+                else: ico='⚡'
         except Exception as e:
             print(f"  Calendário err {target_date_str}: {e}")
         return items
