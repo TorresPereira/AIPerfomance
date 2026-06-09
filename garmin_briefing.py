@@ -308,9 +308,13 @@ def coletar():
             res = api.get_scheduled_workouts(target_date.year, target_date.month)
             raw = res.get("calendarItems",[]) if isinstance(res,dict) else (res if isinstance(res,list) else [])
             print(f"  Calendário {target_date_str}: {len(raw)} itens no mês")
+            # Debug: mostra todas as datas únicas encontradas
+            datas = sorted(set(str(w.get("date") or w.get("scheduledDate") or w.get("calendarDate") or "") for w in raw if isinstance(w,dict)))
+            print(f"  Datas no calendário: {datas}")
             for w in raw:
                 if not isinstance(w,dict): continue
                 wd = w.get("date") or w.get("scheduledDate") or w.get("calendarDate") or ""
+                print(f"  [CAL] date={wd} type={w.get('itemType')} title={w.get('title','')} sport={w.get('sportTypeKey','')}")
                 if target_date_str not in str(wd): continue
                 if "activity" in str(w.get("itemType","")).lower(): continue
                 nome = w.get("title") or w.get("workoutName") or w.get("description") or "Treino"
