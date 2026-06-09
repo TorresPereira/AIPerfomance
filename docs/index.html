@@ -169,7 +169,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.2.1 · 08/06/2026</div>
+  <div class="pin-ver">v3.3 · 08/06/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -489,7 +489,15 @@ function renderHome(){
     ${mc("📈","ATL / CTL",`${f(s.atl,0)} / ${f(s.ctl,0)}`,`${s.training_status||"—"} · ${s.fitness_trend||"—"}`,!!s.atl)}
     ${mc("🫁","VO₂max",f(s.vo2max),"ml/kg/min",!!s.vo2max)}
   </div>
-  ${s.previsoes&&Object.keys(s.previsoes).length?`<div class="sl">🏁 Previsão de Prova</div><div class="prev-grid">${Object.entries(s.previsoes).map(([k,v])=>`<div class="prev-item"><div class="prev-d">${k}</div><div class="prev-t">${hms(v)}</div></div>`).join("")}</div>`:""}`;
+  ${s.previsoes&&Object.keys(s.previsoes).length?`<div class="sl">🏁 Previsão de Prova</div><div class="prev-grid">${Object.entries(s.previsoes).map(([k,v])=>`<div class="prev-item"><div class="prev-d">${k}</div><div class="prev-t">${hms(v)}</div></div>`).join("")}</div>`:""}
+  ${renderCountdown(s)}
+  ${renderClima(report.clima||{})}
+  ${renderSemana(report.semana||{})}
+  ${renderHRVChart(report.hrv_7dias||[])}
+  ${renderRisco(s)}
+  ${renderNutricao(s)}
+  ${renderSono(s)}
+  `;
 }
 
 function renderTreinos(){
@@ -542,6 +550,190 @@ function renderForca(){
         <div class="ex-foco">${ex.foco||""}</div></div></div>`;
   }).join("");
   return `<div class="forca-hdr"><div class="forca-badge">💪 Sugestão IA · ${items.length} exercícios</div><h2>${nivel}</h2><p>${sub}</p></div>${cards}`;
+}
+
+// ─── New feature renderers ───────────────────────────────────────────────────
+
+function renderCountdown(s) {
+  if (!s.prova_dias && s.prova_dias !== 0) return "";
+  const fase_col = {BASE:"#1a6fff","BUILD":"#FFB800","PEAK":"#FF8C00","TAPER":"#a855f7","TAPER FINAL":"#FF4444"};
+  const col = fase_col[s.prova_fase] || "#1a6fff";
+  const pct = Math.max(0, Math.min(100, 100 - (s.prova_dias / 180 * 100)));
+  return `
+  <div class="sl">🏁 Countdown da Prova</div>
+  <div style="background:#111;border-radius:12px;padding:16px;border-left:3px solid ${col}">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div>
+        <div style="font-size:28px;font-weight:700;color:#fff;line-height:1">${s.prova_dias}</div>
+        <div style="font-size:11px;color:#444;margin-top:2px">dias para ${s.prova_data||"—"}</div>
+      </div>
+      <span style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${col};background:${col}22;border:1px solid ${col}44;padding:4px 10px;border-radius:5px">${s.prova_fase||"—"}</span>
+    </div>
+    <div style="height:4px;background:#1a1a1a;border-radius:2px;overflow:hidden">
+      <div style="height:100%;width:${pct}%;background:${col};border-radius:2px;transition:width .5s"></div>
+    </div>
+  </div>`;
+}
+
+function renderClima(c) {
+  if (!c.temp_max) return "";
+  const chuva_col = c.chuva_pct > 60 ? "#1a6fff" : c.chuva_pct > 30 ? "#FFB800" : "#00C896";
+  const vento_col = c.vento_kmh > 30 ? "#FF4444" : c.vento_kmh > 15 ? "#FFB800" : "#00C896";
+  return `
+  <div class="sl">🌤 Clima Hoje — Erkrath</div>
+  <div style="background:#111;border-radius:12px;padding:14px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center">
+    <div style="text-align:center">
+      <div style="font-size:40px">${c.emoji||"🌤"}</div>
+      <div style="font-size:18px;font-weight:700;color:#fff;margin-top:4px">${c.temp_atual||c.temp_max}°C</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div style="background:#161616;border-radius:8px;padding:8px 10px">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Min / Max</div>
+        <div style="font-size:14px;font-weight:700;color:#ddd;margin-top:2px">${c.temp_min}° / ${c.temp_max}°</div>
+      </div>
+      <div style="background:#161616;border-radius:8px;padding:8px 10px">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Chuva</div>
+        <div style="font-size:14px;font-weight:700;margin-top:2px" style="color:${chuva_col}">${c.chuva_pct}%</div>
+      </div>
+      <div style="background:#161616;border-radius:8px;padding:8px 10px">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Vento</div>
+        <div style="font-size:14px;font-weight:700;color:${vento_col};margin-top:2px">${c.vento_kmh} km/h</div>
+      </div>
+      <div style="background:#161616;border-radius:8px;padding:8px 10px">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Condição</div>
+        <div style="font-size:11px;font-weight:700;color:#888;margin-top:4px">${c.chuva_pct>60?"Levar capa":c.vento_kmh>25?"Vento forte":"Favorável"}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderSemana(sem) {
+  if (!sem.swim_km && !sem.bike_km && !sem.run_km) return "";
+  const total = (sem.swim_km||0) + (sem.bike_km||0) + (sem.run_km||0);
+  function bar(km, max, col) {
+    const pct = max > 0 ? Math.min(100, (km/max)*100) : 0;
+    return `<div style="height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden;margin-top:4px"><div style="height:100%;width:${pct}%;background:${col};border-radius:3px"></div></div>`;
+  }
+  const maxKm = Math.max(sem.swim_km||0, (sem.bike_km||0)/5, sem.run_km||0, 1);
+  return `
+  <div class="sl">📅 Volume Esta Semana</div>
+  <div style="background:#111;border-radius:12px;padding:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+    <div>
+      <div style="font-size:16px;margin-bottom:4px">🏊</div>
+      <div style="font-size:15px;font-weight:700;color:#fff">${(sem.swim_km||0).toFixed(1)}<span style="font-size:10px;color:#444">km</span></div>
+      <div style="font-size:10px;color:#444">${Math.round(sem.swim_min||0)}min</div>
+      ${bar(sem.swim_km||0, maxKm, "#1a6fff")}
+    </div>
+    <div>
+      <div style="font-size:16px;margin-bottom:4px">🚴</div>
+      <div style="font-size:15px;font-weight:700;color:#fff">${(sem.bike_km||0).toFixed(0)}<span style="font-size:10px;color:#444">km</span></div>
+      <div style="font-size:10px;color:#444">${Math.round(sem.bike_min||0)}min</div>
+      ${bar((sem.bike_km||0)/5, maxKm, "#FFB800")}
+    </div>
+    <div>
+      <div style="font-size:16px;margin-bottom:4px">🏃</div>
+      <div style="font-size:15px;font-weight:700;color:#fff">${(sem.run_km||0).toFixed(1)}<span style="font-size:10px;color:#444">km</span></div>
+      <div style="font-size:10px;color:#444">${Math.round(sem.run_min||0)}min</div>
+      ${bar(sem.run_km||0, maxKm, "#00C896")}
+    </div>
+  </div>`;
+}
+
+function renderHRVChart(series) {
+  if (!series || !series.length) return "";
+  const vals = series.map(x => x.value).filter(v => v != null);
+  if (!vals.length) return "";
+  const max = Math.max(...vals, 1), min = Math.min(...vals);
+  const W = 280, H = 60, pad = 8;
+  const points = series.map((x, i) => {
+    const xp = pad + (i / (series.length-1)) * (W - pad*2);
+    const yp = x.value != null ? H - pad - ((x.value - min) / (max - min + 1)) * (H - pad*2) : null;
+    return {x: xp, y: yp, v: x.value, d: x.date};
+  }).filter(p => p.y != null);
+  const polyline = points.map(p => `${p.x},${p.y}`).join(" ");
+  const avg = Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+  const lastV = vals[vals.length-1];
+  const trend = lastV > avg ? "↑" : lastV < avg ? "↓" : "→";
+  const trendCol = lastV > avg ? "#00C896" : lastV < avg ? "#FF4444" : "#FFB800";
+  return `
+  <div class="sl">❤️ Tendência HRV — 7 Dias</div>
+  <div style="background:#111;border-radius:12px;padding:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="font-size:22px;font-weight:700;color:#fff">${lastV} <span style="font-size:14px;color:#444">ms</span></div>
+      <span style="font-size:14px;font-weight:700;color:${trendCol}">${trend} vs média ${avg}ms</span>
+    </div>
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:60px;overflow:visible">
+      <polyline points="${polyline}" fill="none" stroke="#1a6fff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      ${points.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="3" fill="#1a6fff"/>`).join("")}
+      ${points.map(p=>`<text x="${p.x}" y="${p.y-6}" text-anchor="middle" font-size="8" fill="#444">${p.v}</text>`).join("")}
+    </svg>
+    <div style="display:flex;justify-content:space-between;margin-top:4px">
+      <span style="font-size:9px;color:#333">${series[0]?.date?.slice(5)||""}</span>
+      <span style="font-size:9px;color:#333">Hoje</span>
+    </div>
+  </div>`;
+}
+
+function renderRisco(s) {
+  if (!s.risco_lesao) return "";
+  const col = s.risco_cor || "#555";
+  const msg = {BAIXO:"Carga bem distribuída.",MODERADO:"Monitore fadiga acumulada.",ELEVADO:"Reduza intensidade se sentir dores.",ALTO:"Risco real de lesão — reduza carga agora."}[s.risco_lesao]||"";
+  return `
+  <div class="sl">⚠️ Risco de Lesão</div>
+  <div style="background:#111;border-left:3px solid ${col};border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px">
+    <div style="font-size:28px;font-weight:800;color:${col};min-width:32px">${{BAIXO:"✓",MODERADO:"~",ELEVADO:"!",ALTO:"!!"}[s.risco_lesao]||"?"}</div>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#fff">${s.risco_lesao}</div>
+      <div style="font-size:11px;color:#555;margin-top:3px">${msg}</div>
+    </div>
+  </div>`;
+}
+
+function renderNutricao(s) {
+  const n = s.nutricao;
+  if (!n || !n.cho_g_h) return "";
+  return `
+  <div class="sl">🍌 Nutrição de Hoje</div>
+  <div style="background:#111;border-radius:12px;padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <div style="background:#161616;border-radius:8px;padding:10px">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Carboidrato</div>
+      <div style="font-size:16px;font-weight:700;color:#FFB800;margin-top:3px">${n.cho_g_h}g<span style="font-size:10px;color:#444">/h</span></div>
+      <div style="font-size:10px;color:#444">≈ ${n.cho_total||"—"}g total</div>
+    </div>
+    <div style="background:#161616;border-radius:8px;padding:10px">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Hidratação</div>
+      <div style="font-size:16px;font-weight:700;color:#1a6fff;margin-top:3px">${n.agua_ml_h}<span style="font-size:10px;color:#444">ml/h</span></div>
+      <div style="font-size:10px;color:#444">≈ ${n.agua_total||"—"}ml total</div>
+    </div>
+    <div style="background:#161616;border-radius:8px;padding:10px">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Pré-treino</div>
+      <div style="font-size:16px;font-weight:700;color:#00C896;margin-top:3px">${n.pre_kcal}<span style="font-size:10px;color:#444">kcal</span></div>
+      <div style="font-size:10px;color:#444">60min antes</div>
+    </div>
+    <div style="background:#161616;border-radius:8px;padding:10px">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Pós-treino</div>
+      <div style="font-size:16px;font-weight:700;color:#a855f7;margin-top:3px">${n.pos_prot_g}g<span style="font-size:10px;color:#444"> prot</span></div>
+      <div style="font-size:10px;color:#444">em 30min</div>
+    </div>
+  </div>`;
+}
+
+function renderSono(s) {
+  if (!s.sono_alvo_h) return "";
+  const deficit = s.sono_deficit_h || 0;
+  const col = deficit > 1 ? "#FF4444" : deficit > 0.5 ? "#FFB800" : "#00C896";
+  return `
+  <div class="sl">🛌 Recomendação de Sono</div>
+  <div style="background:#111;border-radius:12px;padding:14px;display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <div style="font-size:24px;font-weight:700;color:#fff">${s.sono_alvo_h}h <span style="font-size:13px;color:#444">alvo</span></div>
+      <div style="font-size:12px;color:#555;margin-top:4px">Deitar até: <strong style="color:#aaa">${s.sono_deita}</strong></div>
+    </div>
+    <div style="text-align:right">
+      ${deficit > 0 ? `<div style="font-size:13px;font-weight:700;color:${col}">−${deficit}h déficit</div>` : `<div style="font-size:13px;font-weight:700;color:#00C896">✓ Em dia</div>`}
+      <div style="font-size:11px;color:#444;margin-top:4px">Ontem: ${s.sono_h||"—"}h</div>
+    </div>
+  </div>`;
 }
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
