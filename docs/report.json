@@ -1,6 +1,6 @@
 {
   "date": "2026-06-09",
-  "generated_at": "2026-06-09T11:56:12.785674Z",
+  "generated_at": "2026-06-09T12:01:07.544505Z",
   "saude": {
     "hrv": 52,
     "hrv_7d": 35,
@@ -84,66 +84,89 @@
       "_dur_s": 428.74700927734375
     }
   ],
-  "hoje": [],
-  "amanha": [],
+  "hoje": [
+    {
+      "icone": "🏊",
+      "nome": "More Gears, More Efficiency (2 rounds)",
+      "tipo": "",
+      "dur": "—",
+      "dist": "—"
+    },
+    {
+      "icone": "🚴",
+      "nome": "6 × 4 min Threshold Intervals",
+      "tipo": "",
+      "dur": "—",
+      "dist": "—"
+    }
+  ],
+  "amanha": [
+    {
+      "icone": "🏊",
+      "nome": "Swimming  🥽🩲🏊",
+      "tipo": "",
+      "dur": "—",
+      "dist": "—"
+    }
+  ],
   "hoje_feito": [],
   "insights": {
-    "frase": "HRV elevado: aproveite a janela de recuperação ativa hoje.",
-    "briefing": "1) READINESS: HRV 52ms (+17ms vs média 7d de 35ms) — spike significativo acima do baseline (33–42ms), indicando supercompensação ou queda de carga recente. Body Battery 59 e Stress 18 reforçam estado equilibrado. Sono comprometido: 6.8h, Score 62, REM apenas 0.2h (criticamente baixo) e Deep 1.4h — atenção ao impacto cognitivo e hormonal. RHR 60bpm sem baseline definido, monitorar tendência. Status geral: BOM, com ressalva no sono.\n2) TREINO ONTEM: Musculação 57min com FC média 108/max 153bpm — TE aeróbico 1.5 (baixo, adequado para força). Execução controlada. eBike 7min a 9.4km/h — irrelevante como estímulo, deslocamento. Sem sinais de sobrecarga neuromuscular.\n3) CARGA: Z1 em 1570 (acima do target máx 1415 — excesso de volume leve). Z2 em 608 (abaixo do mínimo 957 — déficit aeróbico moderado). Z3+ em 674 — proporcionalmente alto. Distribuição polarizada invertida: falta base Z2, excesso Z3+. Status Garmin: Recuperação. ATL 713 vs CTL 2853 — semana leve em curso.\n4) HOJE — Sem treino agendado. Dia de descanso ativo recomendado. Se optar por sessão, mobilidade geral 20–30min ou caminhada Z1 (<120bpm) por 30min máximo.\n5) AJUSTE: Manter descanso hoje. Próxima semana priorizar Z2 bike/corrida (+20% volume Z2, reduzir Z3+ para <400 mensal acumulado).\n6) ALERTAS: REM 0.2h é alerta real — sono fragmentado compromete recuperação hormonal. HRV spike pode ser artefato; validar amanhã. Z2 deficitária a longo prazo limita adaptação aeróbica para 70.3.\n7) NUTRIÇÃO: Hoje sem treino — foque em janela anti-inflamatória: refeição rica em ômega-3 (salmão/sardinha) + carboidrato complexo no jantar para restaurar glicogênio e suportar qualidade do sono.",
+    "frase": "HRV elevado: capitalize o pico, execute com precisão.",
+    "briefing": "1) READINESS: HRV 52ms (+17ms vs média 7d, acima do baseline 33-42ms) sinaliza recuperação neuromuscular sólida — melhor leitura recente. RHR 60bpm sem baseline comparativo, neutro. Sono 6.8h com score 62 é o ponto fraco: REM 0.2h é criticamente baixo (ideal >1.5h), comprometendo consolidação cognitiva e hormonal. Body Battery 59 e stress médio 18 indicam estado gerenciável. Readiness geral: BOM, com ressalva no sono.\n\n2) TREINO ONTEM: Musculação 57min com FC média 108bpm e TE aeróbico 1.5 — sessão de estímulo leve, adequada. eBike 7min a 9.4km/h é deslocamento ativo, ignorável analiticamente. Carga total do dia: mínima, favorecendo recuperação.\n\n3) CARGA: Z1 em 1570 (acima do teto 1415) e Z3+ em 674 — volume aeróbico leve excessivo e carga anaeróbica relevante. Z2 em 608 (abaixo do piso 957) indica déficit de estímulo aeróbico de qualidade. ATL 713 com status Garmin 'Recuperação' confirma semana leve. Risco de overreaching: baixo.\n\n4) TREINO HOJE: Natação 'More Gears, More Efficiency' foca variação de cadência e eficiência de braçada — Z1-Z2, ~45-50min, ideal para desenvolver feel of water sem carga cardiovascular alta. Bike 6×4min Threshold (Z4, ~88-95% FCmax ou ~95-105% FTP) — sessão de qualidade crítica. Total: ~90min combinado.\n\nExecução bike: aquecimento 15min Z1-Z2, séries 4min mantendo cadência 85-95rpm, recuperação 3-4min Z1 entre séries, cooldown 10min. Dado REM baixo, monitorar HR drift na série 4-6.\n\n5) AJUSTE: Manter as 6 séries de threshold. Se drift de FC >5bpm nas últimas 2 séries, reduzir para 4×4min. Natação: manter volume planejado, foco técnico.\n\n6) ALERTAS: REM 0.2h é alerta amarelo — capacidade de adaptação reduzida. Monitorar HR nas séries finais do threshold. Z2 mensal deficitária: priorizar Z2 nos próximos treinos.\n\n7) NUTRIÇÃO: Pré-bike threshold (2h antes): 60-80g CHO de baixo índice glicêmico + 200ml água. Durante: gel 30min antes do fim se sessão >60min total.",
     "status_readiness": "BOM",
     "status_carga": "SUAVE",
-    "acao_hoje": "DESCANSO",
-    "analise_hoje": "Dia sem treino agendado — indicado descanso ativo ou mobilidade leve (<30min). HRV elevado sugere boa recuperação, mas REM crítico de 0.2h exige prioridade ao sono esta noite. Nenhuma sessão estruturada necessária; preservar energia para retomada de Z2 amanhã.",
-    "alerta": "REM 0.2h criticamente baixo — risco de recuperação incompleta e comprometimento hormonal. Priorize higiene do sono esta noite.",
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Dupla sessão: natação técnica Z1-Z2 focada em eficiência de braçada (~45min) seguida de bike 6×4min em zona threshold (Z4). Objetivo fisiológico central é elevar potência aeróbica e lactato threshold no ciclismo. Com HRV elevado e carga recente suave, o corpo está apto para absorver o estímulo de qualidade — executar as séries com potência/FC consistente, não crescente.",
+    "alerta": "REM 0.2h criticamente baixo — recuperação hormonal comprometida. Priorizar higiene do sono esta noite. Monitorar HR drift nas séries 4-6 do threshold.",
     "treino_forca": [
+      {
+        "exercicio": "Agachamento Búlgaro",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Força unilateral de glúteo e quadríceps, diretamente transferível para pedalada e corrida em 70.3"
+      },
       {
         "exercicio": "Romanian Deadlift (RDL)",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Fortalece isquiotibiais e glúteos essenciais para potência na pedalada e corrida"
+        "foco": "Fortalece isquiotibiais e glúteo, prevenindo lesões na corrida do half"
       },
       {
-        "exercicio": "Agachamento Goblet",
+        "exercicio": "Prancha com Alcance Alternado (Dead Bug)",
         "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Desenvolve estabilidade de quadril e força funcional para corrida no 70.3"
-      },
-      {
-        "exercicio": "Prancha Lateral com Elevação de Quadril",
-        "series": 3,
-        "repeticoes": "30s",
+        "repeticoes": "10",
         "carga": "leve",
-        "foco": "Core lateral — estabiliza pelve na corrida e previne lesões lombares"
+        "foco": "Core anti-rotacional, estabilidade lombar essencial nas 3 modalidades"
       },
       {
         "exercicio": "Step-Up com Joelho Alto",
         "series": 3,
-        "repeticoes": "10-12",
+        "repeticoes": "12",
         "carga": "moderada",
-        "foco": "Simula padrão de corrida, ativa glúteo médio e melhora equilíbrio unilateral"
+        "foco": "Simula padrão de corrida, ativa glúteo médio e melhora estabilidade do quadril"
       },
       {
-        "exercicio": "Remada com Halteres (bent-over)",
+        "exercicio": "Remada com Halteres (prone)",
         "series": 3,
-        "repeticoes": "10-12",
+        "repeticoes": "12",
         "carga": "moderada",
-        "foco": "Fortalece dorsais e postura para manter forma na natação e no aero do bike"
+        "foco": "Fortalece dorsais e romboides, melhorando postura aerodinâmica no ciclismo e tração na natação"
       },
       {
-        "exercicio": "Dead Bug",
-        "series": 3,
-        "repeticoes": "8-10",
-        "carga": "leve",
-        "foco": "Core profundo anti-extensão — estabilidade lombar crítica nas três modalidades"
-      },
-      {
-        "exercicio": "Mobilidade de Quadril 90/90 + Piriforme",
+        "exercicio": "Mobilidade de Quadril — 90/90 Hip Stretch",
         "series": 2,
         "repeticoes": "60s",
         "carga": "leve",
-        "foco": "Libera rotadores do quadril, melhora passada e previne síndrome do IT band"
+        "foco": "Libera rotadores do quadril tensionados pelo ciclismo, prevenindo compensações na corrida"
+      },
+      {
+        "exercicio": "Ponte de Glúteo Unilateral (Single-leg Glute Bridge)",
+        "series": 3,
+        "repeticoes": "15",
+        "carga": "leve",
+        "foco": "Ativa glúteo máximo unilateralmente, corrigindo desequilíbrios comuns em ciclistas-corredores"
       }
     ]
   }
