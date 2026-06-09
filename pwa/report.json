@@ -1,6 +1,6 @@
 {
   "date": "2026-06-09",
-  "generated_at": "2026-06-09T14:22:56.953127Z",
+  "generated_at": "2026-06-09T14:33:37.398780Z",
   "saude": {
     "hrv": 52,
     "hrv_7d": 35,
@@ -142,7 +142,7 @@
     "temp_min": 12.2,
     "chuva_pct": 96,
     "vento_kmh": 21.6,
-    "temp_atual": 18.5,
+    "temp_atual": 18.1,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
@@ -176,62 +176,68 @@
     }
   ],
   "insights": {
-    "frase": "HRV em alta: capitalize a recuperação com execução precisa.",
-    "briefing": "1) READINESS — HRV 52ms está 57% acima da média 7d (35ms) e supera o baseline superior (42ms): sinal fisiológico positivo de supercompensação. RHR 60bpm aceitável. Sono 6.8h/score 62 é o ponto fraco: deep sleep 1.4h adequado, mas REM 0.2h criticamente baixo — impacta consolidação neuromuscular. Body Battery 59 moderado. Readiness global: BOM, condicionado pelo déficit de REM.\n2) TREINO ONTEM — Musculação 57min com FC média 108bpm (max 153): intensidade controlada, TE 1.5 indica estímulo leve-moderado adequado para fase de recuperação. eBike 1.1km/7min foi deslocamento, sem valor de treino. Sessão de ontem: apropriada e bem executada.\n3) CARGA — Z1 em 1570 (acima do target máx 1415): excesso de volume leve acumulado. Z2 608 (abaixo do target mín 957): déficit aeróbico de base. Z3+ em 674 elevado proporcionalmente. Distribuição invertida: pouco Z2, muito Z3+. Status Garmin Recuperação confirma. Risco lesão MODERADO — monitorar.\n4) TREINO HOJE — Dois treinos planejados: natação técnica 'More Gears' (eficiência de braçada, Z1-Z2) + bike 6×4min Threshold (Z4, ~FTP). Dado REM baixo, execução do threshold requer atenção ao drift de FC. Nenhum treino executado ainda. Clima: chuva 96%, 12°C mín — bike outdoor descartado, usar rolo.\n5) AJUSTE CONCRETO — Natação: executar conforme plano, foco técnico, FC ≤Z2. Bike threshold: manter 6 repetições mas reduza intervalo para 3min30s se FC >95% FCmax na rep 4. Recuperação entre intervalos: 3min ativo Z1. Volume total bike: não exceder 60min.\n6) ALERTAS — REM 0.2h é alerta crítico: risco de déficit cognitivo e recuperação muscular incompleta. Z1 acima do teto mensal — evitar volume adicional leve desnecessário. Monitorar HR drift no threshold: se FC subir >8bpm na última repetição vs primeira, encerrar série.\n7) NUTRIÇÃO — Pré-bike threshold: 40g CHO (banana + gel) 30min antes para sustentar intensidade Z4. Hidratação mínima 500ml durante bike em rolo mesmo no frio.",
+    "frase": "HRV em alta — use a janela de recuperação com inteligência.",
+    "sec_readiness": "HRV 52ms representa +17ms acima da média 7d (35ms) e está acima do baseline (33–42ms), indicando supercompensação e janela favorável de adaptação. RHR em 60bpm sem baseline histórico para comparação; sono de 6.8h com score 62 é insuficiente — déficit de 1.7h com REM crítico em apenas 0.2h comprometendo recuperação neural. Body Battery 59/100 com stress médio 18 indica reserva funcional moderada, suficiente para treino técnico controlado.",
+    "sec_treino_ontem": "Sessão de força de 57min com FC média 108bpm (max 153bpm) e TE aeróbico 1.5 indica estímulo neuromuscular leve-moderado dentro do esperado para recuperação ativa. O eBiking de 1.1km em 7min foi essencialmente deslocamento, sem valor de treino mensurável. Sem natação ou corrida — volume semanal praticamente zerado, o que justifica o HRV elevado de hoje.",
+    "sec_carga": "Z1 mensal em 1570 unidades supera o target máximo de 1415 (+11%), enquanto Z2 em 608 está bem abaixo do target mínimo de 957 (-36%) — polarização invertida e subótima para Half Ironman. Z3+ em 674 está desproporcionalmente elevado dado o déficit em Z2, aumentando risco de fadiga sem base aeróbica sólida. Risco de lesão MODERADO com ATL/CTL indicando carga acumulada; fase sem prova definida permite redistribuição imediata.",
+    "sec_hoje": "Treino planejado: natação técnica (More Gears, More Efficiency — 2 rounds) + bike threshold 6×4min. Nenhum treino executado ainda. Para a natação, foco em cadência de braçada e eficiência por ciclo, mantendo FC abaixo de 140bpm. Para o bike threshold, alvo de potência 220–240W (estimado para VO2max 49.2), FC teto 165bpm nos intervalos com recuperação de 2min a FC<130bpm entre séries.",
+    "sec_ajuste": "Executar os 6×4min de threshold em potência 220–240W com FC teto 165bpm; se não houver medidor de potência, manter percepção 8/10. Limitar total Z3+ a 24min (6×4min) — sem extensões. Natação máximo 45min técnico, FC<140bpm.",
+    "sec_alertas": "REM de apenas 0.2h indica recuperação neural comprometida — monitorar coordenação técnica na natação e risco de forma degradada nos intervalos de bike. Z2 mensal 36% abaixo do target mínimo: próximas sessões devem priorizar blocos longos em Z2 para corrigir distribuição. Chuva 96% e vento 21.6km/h — sessão de bike deve ser feita em rolo/trainer para segurança e controle de zona.",
+    "sec_nutricao": "Pré-treino: 350kcal com predominância de CHO (arroz/banana/aveia) 60–90min antes. Pós-treino: 30g proteína + 60–80g CHO para reposição; hidratar 600ml/h durante execução e priorizar sono de 8.5h — deitar às 22h para compensar déficit neural crítico do REM.",
     "status_readiness": "BOM",
-    "status_carga": "ELEVADA",
+    "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Sessão dupla: natação técnica em Z1-Z2 focada em eficiência de braçada (cadência e tração), seguida de bike threshold 6×4min em Z4 (~88-95% FTP) no rolo dado clima adverso. Objetivo fisiológico: manutenção da potência limiar sem acumular fadiga excessiva. Ponto crítico: monitorar FC nas últimas repetições do threshold — REM baixo pode antecipar deriva metabólica.",
-    "alerta": "REM crítico (0.2h): recuperação neural comprometida. Sono alvo 8.5h — deitar às 22h no máximo. Evitar cafeína após 14h.",
+    "analise_hoje": "Janela de HRV favorável permite executar os intervalos de threshold planejados com qualidade; priorizar execução técnica na natação dado o REM baixo que pode afetar coordenação. Bike deve ser realizado em ambiente controlado (trainer) devido às condições climáticas adversas.",
+    "alerta": "REM 0.2h indica recuperação neural insuficiente — monitorar técnica e interromper se FC drift >10bpm nos últimos intervalos de threshold.",
     "treino_forca": [
       {
         "exercicio": "Agachamento Goblet",
         "series": 3,
-        "repeticoes": "12",
+        "repeticoes": "12-15",
         "carga": "moderada",
-        "foco": "Força funcional de quadríceps e glúteos para potência no pedal"
+        "foco": "Força funcional de quadríceps e glúteos para potência no pedal e corrida em descida"
       },
       {
-        "exercicio": "Ponte de Glúteos Unilateral",
+        "exercicio": "Ponte de Glúteo Unilateral",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "leve",
-        "foco": "Ativação glútea e estabilidade pélvica para corrida e bike"
+        "foco": "Ativação e estabilização glútea para corrigir desequilíbrios na corrida e ciclismo"
       },
       {
-        "exercicio": "Prancha Lateral com Abdução de Quadril",
+        "exercicio": "Remada com Halteres (Bent-over Row)",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Fortalecimento de dorsais e romboides para sustentação postural na natação e no aero"
+      },
+      {
+        "exercicio": "Prancha Lateral com Rotação",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e estabilidade lombo-pélvica — reduz compensações na corrida"
-      },
-      {
-        "exercicio": "Remada com Halteres em Posição Split",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Força de tração dorsal essencial para eficiência na natação"
-      },
-      {
-        "exercicio": "Step-Up com Joelho Alto",
-        "series": 3,
-        "repeticoes": "10",
-        "carga": "moderada",
-        "foco": "Padrão unilateral funcional — força de ciclagem e transição bike-run"
+        "foco": "Core oblíquo e estabilidade lombar essencial para eficiência de braçada e corrida"
       },
       {
         "exercicio": "Dead Bug",
         "series": 3,
         "repeticoes": "8-10",
         "carga": "leve",
-        "foco": "Core profundo e coordenação contralateral — base para todas as modalidades"
+        "foco": "Ativação profunda de core anti-extensão, reduz fadiga lombar em provas longas"
+      },
+      {
+        "exercicio": "Avanço com Rotação de Tronco",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "leve",
+        "foco": "Força funcional unilateral + mobilidade torácica para eficiência na passada e braçada"
       },
       {
         "exercicio": "Mobilidade de Quadril 90/90 + Hip Flexor Stretch",
         "series": 2,
         "repeticoes": "45s",
         "carga": "leve",
-        "foco": "Amplitude de quadril para posição aerodinâmica no bike e passada na corrida"
+        "foco": "Libera flexores do quadril encurtados pelo ciclismo, melhora comprimento de passada na corrida"
       }
     ]
   }
