@@ -1,31 +1,31 @@
 {
-  "date": "2026-06-08",
-  "generated_at": "2026-06-08T20:47:58.704594Z",
+  "date": "2026-06-09",
+  "generated_at": "2026-06-09T05:26:57.263979Z",
   "saude": {
-    "hrv": 56,
+    "hrv": 52,
     "hrv_7d": 35,
     "hrv_status": "balanced",
     "hrv_baseline_low": 33,
     "hrv_baseline_high": 42,
-    "rhr": 62,
+    "rhr": 60,
     "rhr_baseline": null,
-    "sono_h": 7.8,
-    "sono_score": 80,
-    "sono_deep": 1.6,
-    "sono_rem": 1.2,
-    "sono_awake": 9.0,
-    "body_battery": 51,
-    "stress_avg": 25,
-    "stress_rest": 50.15,
-    "atl": 764.0,
-    "ctl": 3056.0,
+    "sono_h": 6.8,
+    "sono_score": 62,
+    "sono_deep": 1.4,
+    "sono_rem": 0.2,
+    "sono_awake": 8.0,
+    "body_battery": 55,
+    "stress_avg": 16,
+    "stress_rest": 87.37,
+    "atl": 713.0,
+    "ctl": 2853.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 1760.0,
+    "load_aerobic_low": 1570.0,
     "load_aerobic_high": 608.0,
-    "load_anaerobic": 688.0,
-    "load_total_month": 3056.0,
+    "load_anaerobic": 674.0,
+    "load_total_month": 2853.0,
     "load_target_low": "577–1415",
     "load_target_high": "957–1795",
     "training_status": "Recuperação",
@@ -34,66 +34,57 @@
     "vo2max": 49.2,
     "peso": null,
     "previsoes": {
-      "5K": 1354,
-      "10K": 2872,
-      "Meia": 6468,
-      "Maratona": 14433
+      "5K": 1357,
+      "10K": 2875,
+      "Meia": 6487,
+      "Maratona": 14487
     }
   },
   "ontem": [
     {
       "mod": "other",
       "icone": "⚡",
-      "nome": "Erkrath Road Cycling",
-      "dist": "65.7km",
-      "dur": "2h27m",
-      "fc": 140.0,
-      "fc_max": 162.0,
-      "cal": 1509.0,
-      "cad": 81.0,
-      "tss": 140.60000610351562,
-      "np": 145.0,
-      "swolf": null,
-      "aerobic_te": 3.700000047683716,
-      "anaerobic_te": 1.2000000476837158,
-      "elev": 233.0,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 65700.7890625,
-      "_dur_s": 8860.1796875
-    },
-    {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Erkrath Tennis",
-      "dist": "3.3km",
-      "dur": "1h28m",
-      "fc": 107.0,
-      "fc_max": 165.0,
-      "cal": 634.0,
-      "cad": 23.34375,
+      "nome": "Strength 💪",
+      "dist": "—",
+      "dur": "57m46s",
+      "fc": 108.0,
+      "fc_max": 153.0,
+      "cal": 436.0,
+      "cad": null,
       "tss": null,
       "np": null,
       "swolf": null,
-      "aerobic_te": 2.0999999046325684,
-      "anaerobic_te": 2.4000000953674316,
+      "aerobic_te": 1.5,
+      "anaerobic_te": 1.0,
       "elev": null,
       "perf": "—",
       "pl": "—",
-      "_dist_m": 3341.56005859375,
-      "_dur_s": 5335.966796875
+      "_dist_m": 0.0,
+      "_dur_s": 3466.2451171875
+    },
+    {
+      "mod": "bike",
+      "icone": "🚴",
+      "nome": "Erkrath eBiking",
+      "dist": "1.1km",
+      "dur": "7m08s",
+      "fc": 81.0,
+      "fc_max": 119.0,
+      "cal": 29.0,
+      "cad": 55.0,
+      "tss": null,
+      "np": null,
+      "swolf": null,
+      "aerobic_te": 0.10000000149011612,
+      "anaerobic_te": 0.0,
+      "elev": 6.0,
+      "perf": "9.4km/h",
+      "pl": "Velocidade",
+      "_dist_m": 1125.0799560546875,
+      "_dur_s": 428.74700927734375
     }
   ],
   "hoje": [
-    {
-      "icone": "⚡",
-      "nome": "Strength 💪",
-      "tipo": "",
-      "dur": "—",
-      "dist": "—"
-    }
-  ],
-  "amanha": [
     {
       "icone": "⚡",
       "nome": "More Gears, More Efficiency (2 rounds)",
@@ -109,107 +100,73 @@
       "dist": "—"
     }
   ],
-  "hoje_feito": [
+  "amanha": [
     {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Strength 💪",
-      "dist": "—",
-      "dur": "57m46s",
-      "fc": 108.0,
-      "fc_max": 153.0,
-      "tss": null,
-      "np": null,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 0.0,
-      "_dur_s": 3466.2451171875,
-      "swolf": null,
-      "cad": null,
-      "cal": 436.0,
-      "aerobic_te": 1.5,
-      "anaerobic_te": 1.0,
-      "elev": null
-    },
-    {
-      "mod": "bike",
-      "icone": "🚴",
-      "nome": "Erkrath eBiking",
-      "dist": "1.1km",
-      "dur": "7m08s",
-      "fc": 81.0,
-      "fc_max": 119.0,
-      "tss": null,
-      "np": null,
-      "perf": "9.4km/h",
-      "pl": "Velocidade",
-      "_dist_m": 1125.0799560546875,
-      "_dur_s": 428.74700927734375,
-      "swolf": null,
-      "cad": 55.0,
-      "cal": 29.0,
-      "aerobic_te": 0.10000000149011612,
-      "anaerobic_te": 0.0,
-      "elev": 6.0
+      "icone": "🏊",
+      "nome": "Swimming  🥽🩲🏊",
+      "tipo": "",
+      "dur": "—",
+      "dist": "—"
     }
   ],
+  "hoje_feito": [],
   "insights": {
-    "frase": "HRV em alta: capitalize a recuperação com precisão amanhã.",
-    "briefing": "1) READINESS: HRV 56ms é +21ms acima da média 7d (35ms) e acima do baseline (33–42ms) — sinal claro de supercompensação. Sono 7.8h, score 80, deep 1.6h adequado. Body Battery 51 reflete carga acumulada de ontem. RHR 62 sem baseline definido. Status geral: BOM, com janela anabólica favorável para amanhã.\n\n2) TREINO ONTEM: Ciclismo 65.7km/2h27m, FC média 140bpm, potência 145W — TSS 140.6 indica sessão de carga moderada-alta. TE aeróbico 3.7 confirma estímulo aeróbico efetivo. Potência 145W provavelmente Z2 baixo, FC 140 sugere desacoplamento leve (eficiência cardíaca adequada para o esforço). Tênis 1h28m, FC 107 média mas pico 165bpm — estímulo neuromuscular e anaeróbico não planejado; ALERTA: picos de FC no tênis adicionam carga anaeróbica ao dia.\n\n3) CARGA: Z1 em 1760 (acima do target máx 1415) — volume leve excessivo. Z2 em 608 (abaixo do target mínimo 957) — déficit aeróbico moderado. Z3+ em 688 — anaeróbico elevado considerando status de recuperação. Redistribuição necessária nas próximas semanas: migrar volume de Z1 para Z2.\n\n4) HOJE (EXECUTADO): Força 57min, FC média 108, TE 1.5 — sessão leve, correta para o dia pós-carga. eBike 7min irrelevante. Execução adequada ao planejado.\n\n5) AJUSTE: Manter padrão de hoje. Para amanhã (6×4min Threshold): executar com potência alvo 88–93% FTP, FC não ultrapassar 170bpm. Aquecimento mínimo 15min Z1–Z2 antes dos intervalos.\n\n6) ALERTAS: Z1 acima do teto mensal — evitar volume fácil excessivo esta semana. Picos de FC no tênis (165bpm) não contabilizados no TSS real.\n\n7) NUTRIÇÃO: Pré-treino força de hoje (já executado) — para amanhã (intervalos threshold): 60g CHO 90min antes, 1 gel no aquecimento, reidratação 500ml/h durante.",
+    "frase": "HRV elevado: capitalize o sinal, execute com precisão.",
+    "briefing": "1) READINESS: HRV 52ms é +24% acima do baseline (33–42ms) e +17ms vs média 7d — sinal fisiológico positivo robusto. RHR 60bpm sem baseline comparativo, neutro. Sono comprometido: 6.8h, score 62, REM crítico (0.2h) indica recuperação neural incompleta. Body Battery 55/100 com stress baixo (16) — sistema autônomo estável. Readiness geral: BOM, com ressalva no sono.\n\n2) TREINO ONTEM: Musculação 57min a FC média 108bpm — sessão leve, TE aeróbico 1.5, sem estímulo cardiovascular relevante. eBike 1.1km/7min é deslocamento, irrelevante como carga. Dia de recuperação ativa eficiente.\n\n3) CARGA: Z1 em 1570 (acima do target máx 1415 — overflow de +155 unidades). Z2 em 608 (abaixo do mínimo 957 — déficit de -349). Z3+ em 674 — proporcionalmente elevado. Distribuição invertida: excesso de volume leve, déficit de trabalho aeróbico estruturado. Status Garmin Recuperação + fitness estável confirmam platô de adaptação.\n\n4) TREINO HOJE: Dois blocos planejados — 'More Gears, More Efficiency' (eficiência de pedalada, Z2 técnico) + 6×4min Threshold (Z4, ~88–93% FCmax). Objetivo fisiológico: elevar Z2 estruturado e estimular limiar. Com HRV elevado, o corpo está pronto para absorver carga threshold. Execute warm-up 10min Z1, bloco técnico 2 rounds focando cadência >90rpm, depois 6×4min com 2min recuperação ativa Z1 entre intervalos. FC alvo nos blocos: 155–165bpm.\n\n5) AJUSTE CONCRETO: Manter protocolo completo. Dado déficit de Z2, adicionar 5min de cool-down em Z2 (não Z1) ao final. Monitorar HR drift nos últimos 2 intervalos — se FC subir >8bpm sem aumento de potência, encerrar série.\n\n6) ALERTAS: REM 0.2h é crítico — resposta cognitiva e coordenação motora podem estar reduzidas. Atenção à técnica nos intervalos threshold. Z1 acima do target mensal: evitar volume adicional desnecessário esta semana.\n\n7) NUTRIÇÃO: Pré-treino (60min antes): 40–50g carboidrato de rápida absorção + 200ml água. Durante intervalos threshold: 1 gel aos 30min se sessão >60min. Pós: proteína 25–30g + carboidrato 60g em até 40min para otimizar síntese dado sono deficiente.",
     "status_readiness": "BOM",
-    "status_carga": "ELEVADA",
+    "status_carga": "IDEAL",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Sessão de força 57min executada com FC média 108bpm e TE 1.5 — estímulo neuromuscular leve, apropriado para dia de recuperação ativa pós-TSS 140. Carga cardiovascular mínima, preservando reservas para os intervalos de threshold amanhã. Execução alinhada ao objetivo de recuperação funcional.",
-    "alerta": "Z1 mensal em 1760 supera teto de 1415 — redistribuir volume para Z2 nas próximas sessões. Tênis gerou pico FC 165bpm não refletido no TSS oficial do dia.",
+    "analise_hoje": "Sessão dupla de ciclismo: bloco técnico de eficiência (Z2, cadência alta) seguido de 6×4min threshold (Z4, ~88–93% FCmax, FC alvo 155–165bpm). Objetivo fisiológico é elevar estímulo de limiar anaeróbico e corrigir déficit de Z2 mensal. Execute warm-up rigoroso de 10min e monitore HR drift nos intervalos finais — sinal precoce de fadiga neuromuscular dado REM baixo.",
+    "alerta": "REM 0.2h criticamente baixo: coordenação motora e tomada de decisão reduzidas. Monitorar técnica de pedalada e HR drift nos últimos intervalos. Suspender série se FC derivar >8bpm sem aumento de potência.",
     "treino_forca": [
       {
-        "exercicio": "Romanian Deadlift (RDL)",
+        "exercicio": "Agachamento Goblet",
+        "series": 3,
+        "repeticoes": "12-15",
+        "carga": "moderada",
+        "foco": "Força funcional de quadríceps e glúteos, base para potência na pedalada e corrida 70.3"
+      },
+      {
+        "exercicio": "Ponte de Glúteos com Isometria",
+        "series": 3,
+        "repeticoes": "12 + 5s hold",
+        "carga": "leve",
+        "foco": "Ativa glúteo máximo e estabiliza quadril, prevenindo queda pélvica na corrida"
+      },
+      {
+        "exercicio": "Step-up Unilateral",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Fortalece isquiotibiais e glúteos, músculos primários da pedalada e corrida no 70.3"
+        "foco": "Equilíbrio e força unilateral essenciais para economia de corrida no 70.3"
       },
       {
-        "exercicio": "Step-Up com Halteres",
-        "series": 3,
-        "repeticoes": "10",
-        "carga": "moderada",
-        "foco": "Estabilidade unilateral e força funcional de quadril para corrida pós-bike"
-      },
-      {
-        "exercicio": "Prancha Lateral com Abdução de Quadril",
+        "exercicio": "Prancha com Variação Lateral (Plank to Side Plank)",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e glúteo médio — previne colapso pélvico na corrida"
+        "foco": "Core anti-rotacional estabiliza tronco em todas as três modalidades"
       },
       {
-        "exercicio": "Hip Thrust com Peso Corporal",
+        "exercicio": "Romanian Deadlift (RDL) com Halteres",
         "series": 3,
-        "repeticoes": "15",
-        "carga": "leve",
-        "foco": "Ativação de glúteo máximo para potência no final do pedal stroke"
-      },
-      {
-        "exercicio": "Agachamento Búlgaro",
-        "series": 3,
-        "repeticoes": "8-10",
+        "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Força unilateral de quadríceps e equilíbrio pélvico crítico para economia de corrida"
+        "foco": "Fortalece cadeia posterior (isquiotibiais/glúteos), reduz risco de lesão na corrida"
       },
       {
-        "exercicio": "Dead Bug",
-        "series": 3,
-        "repeticoes": "8",
-        "carga": "leve",
-        "foco": "Estabilização lombo-pélvica profunda — base para postura aerodinâmica no bike"
-      },
-      {
-        "exercicio": "Mobilidade de Quadril em 90/90",
+        "exercicio": "Mobilidade de Quadril — 90/90 Hip Switch",
         "series": 2,
-        "repeticoes": "60s",
+        "repeticoes": "8 cada lado",
         "carga": "leve",
-        "foco": "Libera rotadores do quadril — reduz tensão acumulada do ciclismo e melhora passada"
+        "foco": "Amplitude de quadril melhora braçada na natação e passada na corrida"
+      },
+      {
+        "exercicio": "Rotação Pallof Press",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "leve",
+        "foco": "Estabilidade anti-rotacional de core, transfere diretamente para eficiência de pedalada"
       }
     ]
   }
