@@ -1,6 +1,6 @@
 {
   "date": "2026-06-09",
-  "generated_at": "2026-06-09T05:26:57.263979Z",
+  "generated_at": "2026-06-09T08:57:56.028394Z",
   "saude": {
     "hrv": 52,
     "hrv_7d": 35,
@@ -14,9 +14,9 @@
     "sono_deep": 1.4,
     "sono_rem": 0.2,
     "sono_awake": 8.0,
-    "body_battery": 55,
-    "stress_avg": 16,
-    "stress_rest": 87.37,
+    "body_battery": 59,
+    "stress_avg": 15,
+    "stress_rest": 88.34,
     "atl": 713.0,
     "ctl": 2853.0,
     "tsb": null,
@@ -112,61 +112,61 @@
   "hoje_feito": [],
   "insights": {
     "frase": "HRV elevado: capitalize o sinal, execute com precisão.",
-    "briefing": "1) READINESS: HRV 52ms é +24% acima do baseline (33–42ms) e +17ms vs média 7d — sinal fisiológico positivo robusto. RHR 60bpm sem baseline comparativo, neutro. Sono comprometido: 6.8h, score 62, REM crítico (0.2h) indica recuperação neural incompleta. Body Battery 55/100 com stress baixo (16) — sistema autônomo estável. Readiness geral: BOM, com ressalva no sono.\n\n2) TREINO ONTEM: Musculação 57min a FC média 108bpm — sessão leve, TE aeróbico 1.5, sem estímulo cardiovascular relevante. eBike 1.1km/7min é deslocamento, irrelevante como carga. Dia de recuperação ativa eficiente.\n\n3) CARGA: Z1 em 1570 (acima do target máx 1415 — overflow de +155 unidades). Z2 em 608 (abaixo do mínimo 957 — déficit de -349). Z3+ em 674 — proporcionalmente elevado. Distribuição invertida: excesso de volume leve, déficit de trabalho aeróbico estruturado. Status Garmin Recuperação + fitness estável confirmam platô de adaptação.\n\n4) TREINO HOJE: Dois blocos planejados — 'More Gears, More Efficiency' (eficiência de pedalada, Z2 técnico) + 6×4min Threshold (Z4, ~88–93% FCmax). Objetivo fisiológico: elevar Z2 estruturado e estimular limiar. Com HRV elevado, o corpo está pronto para absorver carga threshold. Execute warm-up 10min Z1, bloco técnico 2 rounds focando cadência >90rpm, depois 6×4min com 2min recuperação ativa Z1 entre intervalos. FC alvo nos blocos: 155–165bpm.\n\n5) AJUSTE CONCRETO: Manter protocolo completo. Dado déficit de Z2, adicionar 5min de cool-down em Z2 (não Z1) ao final. Monitorar HR drift nos últimos 2 intervalos — se FC subir >8bpm sem aumento de potência, encerrar série.\n\n6) ALERTAS: REM 0.2h é crítico — resposta cognitiva e coordenação motora podem estar reduzidas. Atenção à técnica nos intervalos threshold. Z1 acima do target mensal: evitar volume adicional desnecessário esta semana.\n\n7) NUTRIÇÃO: Pré-treino (60min antes): 40–50g carboidrato de rápida absorção + 200ml água. Durante intervalos threshold: 1 gel aos 30min se sessão >60min. Pós: proteína 25–30g + carboidrato 60g em até 40min para otimizar síntese dado sono deficiente.",
+    "briefing": "1) READINESS — HRV 52ms é +24% acima do baseline (33–42ms) e +17ms vs média 7d: sinal fisiológico positivo claro. RHR 60bpm sem baseline definido, uso limitado. Sono é o ponto fraco: 6.8h com score 62, REM apenas 0.2h (criticamente baixo) e deep 1.4h adequado. Body Battery 59 e stress 15 indicam recuperação parcial. Readiness geral: BOM, mas sono REM comprometido limita recuperação neural — relevante para sessões de alta intensidade.\n\n2) TREINO ONTEM — Musculação 57min com FC média 108bpm (TE 1.5): sessão leve de força, adequada. eBike 1.1km/7min: deslocamento, irrelevante fisiologicamente. Carga total ontem: mínima. Positivo para recuperação.\n\n3) CARGA — Z1: 1570 (acima do target máx 1415, +11%). Z2: 608 (abaixo do mínimo 957, déficit de 349 pts). Z3+: 674. Desequilíbrio claro: Z1 excessivo, Z2 insuficiente. Necessário aumentar volume aeróbico moderado. Status Garmin Recuperação confirma: semana de carga baixa.\n\n4) TREINO HOJE — Dois blocos: 'More Gears Efficiency' (cadência/força específica, Z2) + 6×4min Threshold (Z4, ~95% FTP). Sessão mista de qualidade. HRV favorece execução dos intervalos. Porém, REM baixo exige atenção ao controle de intensidade nos blocos threshold. Execute 'More Gears' em Z2 firme (cadência 90–95rpm). Nos 6×4min: alvo Z4, FC não deve exceder 92% FCmax. Recuperação entre séries: 2–3min Z1 completo.\n\n5) AJUSTE CONCRETO — Manter os 6×4min conforme planejado. Se FC subir >93% FCmax antes do intervalo 4, reduzir para 4×4min. Aquecimento mínimo 12min Z1-Z2. Cooldown 8min Z1. Não comprimir recuperações abaixo de 2min.\n\n6) ALERTAS — REM 0.2h é crítico: vigiar sinais de fadiga neural (queda de potência >8% entre série 1 e 6). HR drift nos últimos 2 intervalos é indicador de sobrecarga — se ocorrer, encerrar série. Z2 mensal deficitário: priorizar Z2 nos próximos 7 dias.\n\n7) NUTRIÇÃO — Pré-treino (60min antes): 40–50g carboidrato de baixo IG + 200ml água. Durante threshold: gole de isotônico a cada intervalo. Pós: proteína 20–25g em até 30min para otimizar recuperação muscular.",
     "status_readiness": "BOM",
-    "status_carga": "IDEAL",
+    "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Sessão dupla de ciclismo: bloco técnico de eficiência (Z2, cadência alta) seguido de 6×4min threshold (Z4, ~88–93% FCmax, FC alvo 155–165bpm). Objetivo fisiológico é elevar estímulo de limiar anaeróbico e corrigir déficit de Z2 mensal. Execute warm-up rigoroso de 10min e monitore HR drift nos intervalos finais — sinal precoce de fadiga neuromuscular dado REM baixo.",
-    "alerta": "REM 0.2h criticamente baixo: coordenação motora e tomada de decisão reduzidas. Monitorar técnica de pedalada e HR drift nos últimos intervalos. Suspender série se FC derivar >8bpm sem aumento de potência.",
+    "analise_hoje": "Sessão de qualidade no ciclismo com dois blocos: eficiência de pedalada em Z2 (cadência 90–95rpm) seguido de 6×4min em Z4 threshold (~95% FTP). Objetivo fisiológico: estimular adaptações de potência aeróbica e economia de movimento. HRV favorável permite execução integral, mas monitorar FC nos últimos intervalos para evitar deriva anaeróbica não planejada.",
+    "alerta": "REM 0.2h criticamente baixo — risco de fadiga neural durante blocos threshold. Interromper série se queda de potência >8% ou FC >93% FCmax antes do 4º intervalo.",
     "treino_forca": [
       {
-        "exercicio": "Agachamento Goblet",
-        "series": 3,
-        "repeticoes": "12-15",
-        "carga": "moderada",
-        "foco": "Força funcional de quadríceps e glúteos, base para potência na pedalada e corrida 70.3"
-      },
-      {
-        "exercicio": "Ponte de Glúteos com Isometria",
-        "series": 3,
-        "repeticoes": "12 + 5s hold",
-        "carga": "leve",
-        "foco": "Ativa glúteo máximo e estabiliza quadril, prevenindo queda pélvica na corrida"
-      },
-      {
-        "exercicio": "Step-up Unilateral",
+        "exercicio": "Agachamento Búlgaro (Split Squat)",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Equilíbrio e força unilateral essenciais para economia de corrida no 70.3"
+        "foco": "Força unilateral de glúteo e quadríceps, diretamente transferível para pedalada e corrida no 70.3"
       },
       {
-        "exercicio": "Prancha com Variação Lateral (Plank to Side Plank)",
+        "exercicio": "Ponte de Glúteo com Elevação Unilateral",
+        "series": 3,
+        "repeticoes": "12-15",
+        "carga": "leve",
+        "foco": "Ativa glúteo médio e máximo, previne lesões de quadril e melhora propulsão na corrida"
+      },
+      {
+        "exercicio": "Remada com Halteres (Bent-Over Row)",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Fortalece romboides e trapézio, sustenta postura aerodinâmica no ciclismo e braçada na natação"
+      },
+      {
+        "exercicio": "Prancha Lateral com Abdução de Quadril",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core anti-rotacional estabiliza tronco em todas as três modalidades"
+        "foco": "Core lateral e estabilidade pélvica, reduz gasto energético na corrida do 70.3"
       },
       {
-        "exercicio": "Romanian Deadlift (RDL) com Halteres",
+        "exercicio": "Dead Bug (Core Antiextensão)",
         "series": 3,
         "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Fortalece cadeia posterior (isquiotibiais/glúteos), reduz risco de lesão na corrida"
+        "carga": "leve",
+        "foco": "Estabilização lombar e coordenação neuromuscular essencial para eficiência nas três modalidades"
       },
       {
-        "exercicio": "Mobilidade de Quadril — 90/90 Hip Switch",
+        "exercicio": "Mobilidade de Quadril — 90/90 Hip Stretch",
         "series": 2,
-        "repeticoes": "8 cada lado",
+        "repeticoes": "45s",
         "carga": "leve",
-        "foco": "Amplitude de quadril melhora braçada na natação e passada na corrida"
+        "foco": "Melhora amplitude de movimento do quadril, reduz tensão no psoas após longas sessões de bike"
       },
       {
-        "exercicio": "Rotação Pallof Press",
+        "exercicio": "Elevação de Panturrilha Unilateral (Calf Raise)",
         "series": 3,
-        "repeticoes": "10-12",
-        "carga": "leve",
-        "foco": "Estabilidade anti-rotacional de core, transfere diretamente para eficiência de pedalada"
+        "repeticoes": "15-20",
+        "carga": "moderada",
+        "foco": "Fortalece complexo sural, protege tendão de Aquiles e melhora economia de corrida"
       }
     ]
   }
