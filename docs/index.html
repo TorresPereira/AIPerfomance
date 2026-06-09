@@ -38,13 +38,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 .key:active{background:#2a2a2a}
 .pin-link{margin-top:24px;font-size:12px;color:#2a2a2a;background:none;border:none;cursor:pointer;text-decoration:underline}
 
-/* ── App ── */
-#app{display:none}
-#app.show{display:block}
-.hdr{position:fixed;top:0;left:0;right:0;z-index:10;
+/* ── App — pure CSS flexbox, no JS needed ── */
+#app{display:none;position:fixed;inset:0;flex-direction:column}
+#app.show{display:flex}
+.hdr{flex-shrink:0;
   background:rgba(0,0,0,.95);backdrop-filter:blur(16px);
-  padding-top:env(safe-area-inset-top,44px);
-  padding-left:16px;padding-right:16px;padding-bottom:10px;
+  padding:env(safe-area-inset-top,44px) 16px 10px;
   border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between}
 .hdr-left{display:flex;align-items:center;gap:8px}
@@ -60,15 +59,13 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 .ibtn.spin{animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.body{position:fixed;left:0;right:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:none;padding:14px 14px 16px}
+.body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:none;padding:14px 14px 16px}
 
 /* ── Nav ── */
-.nav{position:fixed;bottom:0;left:0;right:0;z-index:10;
+.nav{flex-shrink:0;
   background:rgba(0,0,0,.95);backdrop-filter:blur(16px);
   border-top:1px solid var(--border);
-  /* padding-bottom cobre o home indicator do iPhone */
-  padding-top:10px;
-  padding-bottom:calc(env(safe-area-inset-bottom,0px) + 10px);
+  padding:10px 0 env(safe-area-inset-bottom,8px);
   display:flex;justify-content:space-around}
 .ntab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 0}
 .ntab .ni{font-size:19px;color:#333;transition:color .15s}
@@ -172,7 +169,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.2.2 · 08/06/2026</div>
+  <div class="pin-ver">v3.2.1 · 08/06/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -306,29 +303,11 @@ function lock(){ clrSess(); document.getElementById("app").classList.remove("sho
   document.getElementById("pinErr").textContent="";
   dots();
 }
-function adjustLayout(){
-  const hdr = document.querySelector('.hdr');
-  const nav = document.querySelector('.nav');
-  const body = document.querySelector('.body');
-  if(!hdr||!nav||!body) return;
-  // Use window.innerHeight to guarantee full screen height
-  const hh = hdr.getBoundingClientRect().height;
-  const nh = nav.getBoundingClientRect().height;
-  body.style.top    = Math.round(hh) + 'px';
-  // Add 2px buffer to prevent 1px gap at bottom
-  body.style.bottom = (Math.round(nh) + 2) + 'px';
-}
 function showApp(){
   document.getElementById('pin').style.display='none';
   document.getElementById('app').classList.add('show');
-  // Run multiple times to ensure correct after fonts/images load
-  adjustLayout();
-  requestAnimationFrame(adjustLayout);
-  setTimeout(adjustLayout, 100);
-  setTimeout(adjustLayout, 300);
   loadReport();
 }
-window.addEventListener('resize', adjustLayout);
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const getCfg  = () => { try{ return JSON.parse(localStorage.getItem(CFG_K)||"{}"); }catch{ return {}; } };
