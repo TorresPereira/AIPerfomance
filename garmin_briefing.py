@@ -20,6 +20,15 @@ YESTERDAY_STR = YESTERDAY.isoformat()
 TOMORROW_STR  = TOMORROW.isoformat()
 CACHE_DIR     = "/tmp/garmin_cache"
 
+# Data da próxima prova — configure RACE_DATE="YYYY-MM-DD" em GitHub Secrets
+_race_env = os.environ.get("RACE_DATE","")
+try:    RACE_DATE = datetime.date.fromisoformat(_race_env) if _race_env else None
+except: RACE_DATE = None
+
+# Localização para clima (padrão: Erkrath)
+WEATHER_LAT = os.environ.get("WEATHER_LAT", "51.2227")
+WEATHER_LON = os.environ.get("WEATHER_LON", "6.9116")
+
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 def fmt(v, d=1, s="", fb="—"):
     if v is None: return fb
@@ -73,7 +82,7 @@ def garmin_login():
 # ─── Coleta de dados ──────────────────────────────────────────────────────────
 def coletar():
     api = garmin_login()
-    d = {"saude":{}, "ontem":[], "hoje":[], "amanha":[], "hoje_feito":[]}
+    d = {"saude":{}, "ontem":[], "hoje":[], "amanha":[], "hoje_feito":[], "semana":{}, "clima":{}, "hrv_7dias":[]}
     s = d["saude"]
 
     # HRV
@@ -225,6 +234,144 @@ def coletar():
         s["previsoes"] = {k:v for k,v in {"5K":r.get("time5K"),"10K":r.get("time10K"),"Meia":r.get("timeHalfMarathon"),"Maratona":r.get("timeMarathon")}.items() if v}
     except: s["previsoes"]={}
 
+    # ─── 1. HRV últimos 7 dias ─────────────────────────────────────────────────
+    try:
+        hrv_series = []
+        for i in range(6, -1, -1):
+            day = (TODAY - datetime.timedelta(days=i)).isoformat()
+            try:
+                r7 = api.get_hrv_data(day)
+                v = (r7.get("hrvSummary",{}).get("lastNight5MinHigh")
+                     or r7.get("hrvSummary",{}).get("lastNightAvg"))
+                hrv_series.append({"date": day, "value": round(float(v),0) if v else None})
+            except: hrv_series.append({"date": day, "value": None})
+        d["hrv_7dias"] = hrv_series
+        print(f"  HRV 7d: {[x['value'] for x in hrv_series]}")
+    except Exception as e: print(f"  HRV 7d err: {e}")
+
+    # ─── 2. Volume semanal por modalidade ───────────────────────────────────────
+    try:
+        semana_inicio = (TODAY - datetime.timedelta(days=TODAY.weekday())).isoformat()
+        acts_semana = api.get_activities_by_date(semana_inicio, TODAY_STR) or []
+        sem = {"swim_km":0,"swim_min":0,"bike_km":0,"bike_min":0,"run_km":0,"run_min":0,"total_tss":0,"n_treinos":0}
+        for a in acts_semana:
+            tipo = (a.get("activityType",{}).get("typeKey") or "").lower()
+            dist = float(a.get("distance") or 0) / 1000
+            dur  = float(a.get("duration") or 0) / 60
+            tss  = float(a.get("trainingStressScore") or 0)
+            sem["total_tss"] += tss
+            sem["n_treinos"]  += 1
+            if "swim" in tipo or "pool" in tipo: sem["swim_km"]+=dist; sem["swim_min"]+=dur
+            elif "cycl" in tipo or "bike" in tipo: sem["bike_km"]+=dist; sem["bike_min"]+=dur
+            elif "run" in tipo: sem["run_km"]+=dist; sem["run_min"]+=dur
+        sem = {k: round(v,1) for k,v in sem.items()}
+        d["semana"] = sem
+        print(f"  Semana: swim={sem['swim_km']}km bike={sem['bike_km']}km run={sem['run_km']}km")
+    except Exception as e: print(f"  Semana err: {e}")
+
+    # ─── 3. Risco de lesão (spike ATL) ──────────────────────────────────────────
+    try:
+        atl = float(s.get("atl") or 0)
+        ctl = float(s.get("ctl") or 1)
+        acwr = atl / ctl if ctl > 0 else 0
+        if   acwr > 1.5: s["risco_lesao"] = "ALTO";   s["risco_cor"] = "#FF4444"
+        elif acwr > 1.3: s["risco_lesao"] = "ELEVADO"; s["risco_cor"] = "#FF8C00"
+        elif acwr >= 0.8:s["risco_lesao"] = "BAIXO";   s["risco_cor"] = "#00C896"
+        else:            s["risco_lesao"] = "MODERADO"; s["risco_cor"] = "#FFB800"
+        print(f"  Risco lesão: {s['risco_lesao']} (ACWR={acwr:.2f})")
+    except: s["risco_lesao"] = None; s["risco_cor"] = "#555"
+
+    # ─── 4. Countdown da prova + fase de treino ──────────────────────────────────
+    try:
+        if RACE_DATE:
+            dias = (RACE_DATE - TODAY).days
+            s["prova_dias"]  = dias
+            s["prova_data"]  = RACE_DATE.strftime("%d/%m/%Y")
+            if   dias <= 7:  s["prova_fase"] = "TAPER FINAL"
+            elif dias <= 21: s["prova_fase"] = "TAPER"
+            elif dias <= 42: s["prova_fase"] = "PEAK"
+            elif dias <= 84: s["prova_fase"] = "BUILD"
+            else:            s["prova_fase"] = "BASE"
+            print(f"  Prova: {dias} dias ({s['prova_fase']})")
+        else:
+            s["prova_dias"] = s["prova_data"] = s["prova_fase"] = None
+    except: s["prova_dias"] = s["prova_data"] = s["prova_fase"] = None
+
+    # ─── 5. Clima (Open-Meteo — gratuito, sem API key) ───────────────────────────
+    try:
+        url_clima = (f"https://api.open-meteo.com/v1/forecast"
+                     f"?latitude={WEATHER_LAT}&longitude={WEATHER_LON}"
+                     f"&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,"
+                     f"windspeed_10m_max,weathercode"
+                     f"&current_weather=true"
+                     f"&timezone=Europe%2FBerlin&forecast_days=1")
+        with urllib.request.urlopen(url_clima, timeout=10) as r:
+            cj = json.loads(r.read())
+        daily = cj.get("daily",{}); cur = cj.get("current_weather",{})
+        wcode = daily.get("weathercode",[0])[0]
+        # WMO weather codes → emoji
+        def wmo_emoji(c):
+            if c==0: return "☀️"
+            if c<=3: return "🌤️"
+            if c<=48: return "🌫️"
+            if c<=67: return "🌧️"
+            if c<=77: return "🌨️"
+            if c<=82: return "⛈️"
+            return "🌩️"
+        d["clima"] = {
+            "temp_max": daily.get("temperature_2m_max",[None])[0],
+            "temp_min": daily.get("temperature_2m_min",[None])[0],
+            "chuva_pct": daily.get("precipitation_probability_max",[0])[0],
+            "vento_kmh": daily.get("windspeed_10m_max",[0])[0],
+            "temp_atual": cur.get("temperature"),
+            "emoji": wmo_emoji(wcode),
+        }
+        print(f"  Clima: {d['clima']['emoji']} {d['clima']['temp_max']}°C chuva={d['clima']['chuva_pct']}%")
+    except Exception as e: print(f"  Clima err: {e}")
+
+    # ─── 6 & 7. Nutrição/Hidratação + Sono ideal ─────────────────────────────────
+    try:
+        hoje_treinos = d.get("hoje",[])
+        dur_total_min = 0
+        for t in hoje_treinos:
+            dur_s = t.get("_dur_s") or 0
+            if not dur_s:
+                # parse "2h30m" → minutos
+                import re
+                m = re.match(r'(\d+)h(\d+)m', t.get("dur",""))
+                if m: dur_s = int(m.group(1))*3600 + int(m.group(2))*60
+                else:
+                    m2 = re.match(r'(\d+)m', t.get("dur",""))
+                    if m2: dur_s = int(m2.group(1))*60
+            dur_total_min += dur_s / 60
+
+        # Zona dominante do treino de hoje
+        zona_hoje = "Z2" if s.get("acao_hoje","MANTER") == "MANTER" else "Z1"
+        fator_cho = 60 if zona_hoje == "Z1" else 80  # g CHO/h
+
+        s["nutricao"] = {
+            "cho_g_h":    fator_cho,
+            "cho_total":  round(fator_cho * dur_total_min / 60, 0) if dur_total_min > 0 else None,
+            "agua_ml_h":  600 if d["clima"].get("temp_max",20) < 20 else 750,
+            "agua_total": round(600 * dur_total_min / 60, 0) if dur_total_min > 0 else None,
+            "pre_kcal":   350,
+            "pos_prot_g": 30,
+            "dur_min":    round(dur_total_min, 0),
+        }
+
+        # Sono ideal: 8h mínimo, ajustado pela carga
+        carga_hoje = s.get("load_total_month",0) or 0
+        sono_alvo = 8.5 if carga_hoje > 2500 else 8.0
+        # Horário para dormir = próximo treino duro - sono_alvo
+        # Simplificado: sugere horário fixo com base no treino de amanhã
+        s["sono_alvo_h"]   = sono_alvo
+        s["sono_deita"]    = f"{23 - int(sono_alvo - 1)}:00" if sono_alvo > 0 else "22:30"
+        s["sono_deficit_h"]= round(sono_alvo - (s.get("sono_h") or 0), 1) if s.get("sono_h") else None
+
+        print(f"  Nutrição: CHO {s['nutricao']['cho_g_h']}g/h | Água {s['nutricao']['agua_ml_h']}ml/h")
+        print(f"  Sono alvo: {sono_alvo}h | Deitar: {s['sono_deita']}")
+    except Exception as e: print(f"  Nutrição/Sono err: {e}")
+        
     # ─ Treinos de ontem ─
     try:
         acts = api.get_activities_by_date(YESTERDAY_STR, YESTERDAY_STR)
@@ -401,9 +548,19 @@ RECUPERAÇÃO ({TODAY_STR}):
 CARGA (Garmin 965 — modelo mensal por zona):
 - Carga mensal total: {s.get('load_total_month')} | Target Z1: {s.get('load_target_low')} | Target Z2: {s.get('load_target_high')}
 - Zona Aeróbica Leve (Z1): {s.get('load_aerobic_low')} | Zona Aeróbica Alta (Z2): {s.get('load_aerobic_high')} | Anaeróbica (Z3+): {s.get('load_anaerobic')}
-- ATL estimado (~semanal): {s.get('atl')} | CTL estimado (~mensal): {s.get('ctl')}
-- Status Garmin: {s.get('training_status')} | Tendência de Fitness: {s.get('fitness_trend')}
-- VO2max corrida: {s.get('vo2max')} ml/kg/min
+- ATL estimado: {s.get('atl')} | CTL estimado: {s.get('ctl')} | Risco de Lesão: {s.get('risco_lesao')}
+- Status Garmin: {s.get('training_status')} | Tendência: {s.get('fitness_trend')} | VO2max: {s.get('vo2max')} ml/kg/min
+- VOLUME SEMANAL: Natação {dados['semana'].get('swim_km',0)}km | Bike {dados['semana'].get('bike_km',0)}km | Corrida {dados['semana'].get('run_km',0)}km
+
+PROVA & CONTEXTO:
+- Próxima prova: {s.get('prova_data','não configurada')} | Dias restantes: {s.get('prova_dias','—')} | Fase: {s.get('prova_fase','—')}
+- Clima hoje: {dados['clima'].get('emoji','')} {dados['clima'].get('temp_max','—')}°C max / {dados['clima'].get('temp_min','—')}°C min | Chuva: {dados['clima'].get('chuva_pct','—')}% | Vento: {dados['clima'].get('vento_kmh','—')}km/h
+
+NUTRIÇÃO ESTIMADA PARA HOJE:
+- Duração total treinos: {s.get('nutricao',{}).get('dur_min','—')} min
+- CHO: {s.get('nutricao',{}).get('cho_g_h','—')}g/h ({s.get('nutricao',{}).get('cho_total','—')}g total)
+- Hidratação: {s.get('nutricao',{}).get('agua_ml_h','—')}ml/h | Pré-treino: {s.get('nutricao',{}).get('pre_kcal','—')}kcal | Pós: {s.get('nutricao',{}).get('pos_prot_g','—')}g proteína
+- Sono alvo: {s.get('sono_alvo_h','—')}h | Déficit atual: {s.get('sono_deficit_h','—')}h | Deitar às: {s.get('sono_deita','—')}
 
 TREINO DE ONTEM ({YESTERDAY_STR}):{fmt_treinos(dados['ontem'])}
 
@@ -662,6 +819,9 @@ def salvar_json(dados, ins):
         "hoje":  dados["hoje"],
         "amanha":dados["amanha"],
         "hoje_feito":dados["hoje_feito"],
+        "semana":  dados["semana"],
+        "clima":   dados["clima"],
+        "hrv_7dias":dados["hrv_7dias"],
         "insights": ins,
     }
     with open("pwa/report.json", "w", encoding="utf-8") as f:
