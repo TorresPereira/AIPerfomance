@@ -169,7 +169,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.3 · 08/06/2026</div>
+  <div class="pin-ver">v3.4.1 · 08/06/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -508,11 +508,66 @@ function renderTreinos(){
     (hj.length?`<div class="sl">Treinos de Hoje</div>${tbl(hj,cols)}`:"");
 }
 
+function coachCard(icon, title, text, bg, bc, lc, tc) {
+  if (!text || text === "null") return "";
+  return `
+  <div style="background:${bg};border-left:3px solid ${bc};border-radius:12px;padding:14px;margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <span style="font-size:16px">${icon}</span>
+      <span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:${lc}">${title}</span>
+    </div>
+    <div style="font-size:13px;color:${tc};line-height:1.7">${text}</div>
+  </div>`;
+}
+
 function renderCoach(){
-  const ins=report.insights||{};
-  return `<div class="sl">Análise do Coach</div>
-  ${iaCard("🤖 Briefing Completo",ins.briefing,"#060e18","var(--blue)","var(--blue)","#7a9bbf")}
-  ${ins.alerta?`<div class="alert-card">⚠️ ${ins.alerta}</div>`:""}`;
+  const ins = report.insights || {};
+  const s   = report.saude   || {};
+
+  // Score bar helper
+  function scoreBar(val, lo, hi, label) {
+    const pct = val != null ? Math.min(100, Math.max(0, ((parseFloat(val)-lo)/(hi-lo))*100)) : 0;
+    const col = pct >= 66 ? "#00C896" : pct >= 33 ? "#FFB800" : "#FF4444";
+    return `<div style="margin-bottom:6px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+        <span style="font-size:10px;color:#555">${label}</span>
+        <span style="font-size:10px;font-weight:700;color:${col}">${val||"—"}</span>
+      </div>
+      <div style="height:4px;background:#1a1a1a;border-radius:2px">
+        <div style="height:100%;width:${pct}%;background:${col};border-radius:2px"></div>
+      </div>
+    </div>`;
+  }
+
+  return `
+  <!-- Status summary bar -->
+  <div style="background:#111;border-radius:12px;padding:14px;margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
+    ${badge(ins.status_readiness)} ${badge(ins.status_carga)} ${badge(ins.acao_hoje)}
+    ${ins.alerta ? `<span style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid;color:#FF4444;border-color:#FF444444;background:#FF444418">⚠️ ALERTA</span>` : ""}
+  </div>
+
+  <!-- Scores visuais -->
+  <div style="background:#111;border-radius:12px;padding:14px;margin-bottom:14px">
+    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:12px">📊 Indicadores do Dia</div>
+    ${scoreBar(s.hrv, 20, 80, "HRV")}
+    ${scoreBar(s.body_battery, 0, 100, "Body Battery")}
+    ${scoreBar(s.sono_score, 0, 100, "Score do Sono")}
+    ${scoreBar(s.vo2max, 35, 65, "VO₂max")}
+  </div>
+
+  <!-- 7 seções do coach -->
+  <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:12px">🤖 Análise do Treinador</div>
+
+  ${coachCard("😴","1 — Readiness & Recuperação", ins.sec_readiness, "#071a14","#00C896","#00C896","#70c090")}
+  ${coachCard("🏊","2 — Treino de Ontem", ins.sec_treino_ontem, "#0a0f1a","#1a6fff","#1a6fff","#7a9bbf")}
+  ${coachCard("📈","3 — Carga & Zonas", ins.sec_carga, "#1a110a","#FFB800","#FFB800","#c09040")}
+  ${coachCard("🎯","4 — Treino de Hoje", ins.sec_hoje, "#071a0f","#00C896","#00C896","#70c090")}
+  ${coachCard("🔧","5 — Ajuste Concreto", ins.sec_ajuste, "#07111f","#1a6fff","#1a6fff","#9ab8d8")}
+  ${ins.sec_alertas && ins.sec_alertas !== "null" ? coachCard("⚠️","6 — Alertas", ins.sec_alertas, "#110000","#FF4444","#FF4444","#cc5555") : ""}
+  ${coachCard("🍌","7 — Nutrição", ins.sec_nutricao, "#0f0a00","#FFB800","#FFB800","#b08030")}
+
+  ${ins.alerta && ins.alerta !== "null" ? `<div class="alert-card">⚠️ ${ins.alerta}</div>` : ""}
+  `;
 }
 
 function renderAgenda(){
