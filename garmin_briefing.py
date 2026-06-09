@@ -572,13 +572,18 @@ TREINO AMANHÃ ({TOMORROW_STR}):{fmt_cal(dados['amanha'], 'para amanhã')}
 Responda SOMENTE em JSON válido, sem markdown:
 {{
   "frase": "Frase motivacional técnica curta (máx 12 palavras, português)",
-  "briefing": "Briefing completo do treinador seguindo esta estrutura:\\n1) READINESS — avalie HRV+tendência, RHR, sono, Body Battery\\n2) TREINO ONTEM — análise por modalidade: eficiência, execução, pontos críticos\\n3) CARGA — distribuição de zonas, risco de fadiga/overreaching\\n4) ANÁLISE DO TREINO DE HOJE (se já executado: analise a execução real vs planejado; se não: oriente como executar) — tipo de sessão, zonas alvo, objetivo fisiológico, como executar dado o estado atual\\n5) AJUSTE CONCRETO — o que manter ou modificar com valores exatos (ex: reduzir Z3 de 20min para 12min)\\n6) ALERTAS — HR drift, sinais de alerta, fadiga acumulada\\n7) NUTRIÇÃO — 1 dica específica pré/durante/pós treino de hoje\\nSeja técnico e objetivo. Máx 2000 caracteres.",
+  "sec_readiness": "2-3 frases: HRV {s.get('hrv')}ms vs tendência 7d, RHR, sono (qualidade/déficit), Body Battery. Direto e quantitativo.",
+  "sec_treino_ontem": "2-3 frases: análise das modalidades executadas ontem — eficiência, execução, pontos críticos. Se não houve treino: null.",
+  "sec_carga": "2-3 frases: distribuição Z1/Z2/Z3 vs targets, risco de fadiga, fase {s.get('prova_fase','—')}. Seja crítico.",
+  "sec_hoje": "2-3 frases: análise do treino de hoje — se já executado analise real vs planejado; se não, como executar e zonas alvo exatas.",
+  "sec_ajuste": "1-2 frases com valores EXATOS: ex. Manter 2h30 mas limitar Z3 a 10min. FC teto 155bpm. Potência alvo 200-220W.",
+  "sec_alertas": "Alertas técnicos específicos: HR drift, fadiga, distribuição zonas, sobrecarga. Se nada crítico: null.",
+  "sec_nutricao": "1-2 frases específicas: pré/durante/pós treino de hoje com valores reais.",
   "status_readiness": "ÓTIMO | BOM | MODERADO | BAIXO | CRÍTICO",
   "status_carga": "SUAVE | IDEAL | ELEVADA | SOBRECARGA",
   "acao_hoje": "MANTER | REDUZIR 20% | REDUZIR 40% | SUBSTITUIR | DESCANSO",
-  "acao_hoje": "MANTER | REDUZIR 20% | REDUZIR 40% | SUBSTITUIR | DESCANSO",
-  "analise_hoje": "Análise técnica do treino de hoje: tipo de sessão, zonas alvo, duração ideal, principais pontos de execução e atenção. 2-3 frases diretas.",
-  "alerta": "Alerta crítico se houver, senão null",
+  "analise_hoje": "Análise técnica do treino de hoje em 1-2 frases diretas.",
+  "alerta": "Alerta crítico em 1 frase se houver, senão null",
   "treino_forca": [
     {{"exercicio": "Nome do exercício", "series": 3, "repeticoes": "10-12", "carga": "moderada", "foco": "Por que este exercício para triatleta 70.3"}},
     ...
@@ -597,7 +602,7 @@ Retorne EXATAMENTE o JSON acima preenchido. Nenhum texto fora do JSON."""
 
     payload = json.dumps({
         "model": "claude-sonnet-4-6",
-        "max_tokens": 4000,
+        "max_tokens": 5000,
         "messages": [{"role":"user","content":prompt}]
     }).encode()
 
