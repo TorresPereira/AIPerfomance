@@ -16,7 +16,7 @@
   --bg:#000;--card:#111;--card2:#161616;--border:#1e1e1e;--text:#ddd;--muted:#444;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{height:100%}body{height:100%;height:-webkit-fill-available;background:var(--bg);color:var(--text);font-family:-apple-system,sans-serif;overflow:hidden}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,sans-serif;overflow:hidden}
 
 /* ── PIN ── */
 #pin{position:fixed;inset:0;z-index:99;background:radial-gradient(ellipse at 50% 30%,#060e1c,#000 65%);
@@ -39,7 +39,7 @@ html{height:100%}body{height:100%;height:-webkit-fill-available;background:var(-
 .pin-link{margin-top:24px;font-size:12px;color:#2a2a2a;background:none;border:none;cursor:pointer;text-decoration:underline}
 
 /* ── App — pure CSS flexbox, no JS needed ── */
-#app{display:none;position:fixed;top:0;left:0;right:0;bottom:0;height:100%;height:-webkit-fill-available;flex-direction:column}
+#app{display:none;position:fixed;top:0;left:0;right:0;bottom:0;flex-direction:column}
 #app.show{display:flex}
 .hdr{flex-shrink:0;
   background:rgba(0,0,0,.95);backdrop-filter:blur(16px);
@@ -169,7 +169,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.2 · 08/06/2026</div>
+  <div class="pin-ver">v3.2.1 · 08/06/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -428,7 +428,7 @@ function badge(t){ if(!t||t==="—")return""; const c=SC[t.toUpperCase()]||"#555
 function sem(v,lo,hi){ if(v==null)return{em:"⚪",bg:"#1c1c1c",dk:"#444"}; const n=+v; if(n>=hi)return{em:"🟢",bg:"#00C896",dk:"#003a28"}; if(n>=lo)return{em:"🟡",bg:"#FFB800",dk:"#3a2a00"}; return{em:"🔴",bg:"#FF4444",dk:"#3a0000"}; }
 function sbox(em,bg,dk,lb){ return `<div class="sbox" style="background:${bg}"><span class="se">${em}</span><span class="sl2" style="color:${dk}">${lb}</span></div>`; }
 function mc(ico,lbl,val,sub,has){ const bc=has?"var(--blue)":"#222",vc=has?"#fff":"#2a2a2a"; return `<div class="mc" style="border-color:${bc}"><div class="mi">${ico}</div><div class="ml">${lbl}</div><div class="mv" style="color:${vc}">${val}</div><div class="ms">${sub}</div></div>`; }
-function tbl(rows,cols){ if(!rows.length)return`<div style="color:var(--muted);font-size:12px;padding:12px">Nenhum registro.</div>`; return`<div class="tbl"><table><thead><tr>${cols.map(c=>`<th>${c.l}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td class="${c.c||""}">${r[c.k]||"—"}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`; }
+function tbl(rows,cols){ if(!rows.length)return`<div style="color:var(--muted);font-size:12px;padding:12px">Nenhum registro.</div>`; return`<div class="tbl"><table><thead><tr>${cols.map(c=>`<th>${c.l}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td class="${c.c||c.cls||""}">${r[c.k]||"—"}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`; }
 function iaCard(lbl,txt,bg="#071118",bc="var(--blue)",lc="var(--blue)",tc="#7a9bbf"){ return `<div class="ia-card" style="background:${bg};border-left:3px solid ${bc}"><div class="ia-lbl" style="color:${lc}">${lbl}</div><div class="ia-txt" style="color:${tc}">${txt||"—"}</div></div>`; }
 
 // ─── SVG exercises ────────────────────────────────────────────────────────────
