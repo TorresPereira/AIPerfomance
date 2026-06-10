@@ -2,21 +2,17 @@ name: Triathlon Daily Briefing
 
 on:
   schedule:
+    # 08:00 Alemanha verão (CEST = UTC+2) = 06:00 UTC
     - cron: '0 6 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   briefing:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
@@ -46,16 +42,17 @@ jobs:
         env:
           GARMIN_EMAIL:      ${{ secrets.GARMIN_EMAIL }}
           GARMIN_PASSWORD:   ${{ secrets.GARMIN_PASSWORD }}
-          SENDGRID_API_KEY:  ${{ secrets.SENDGRID_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          EMAIL_FROM:        ${{ secrets.EMAIL_FROM }}
-          EMAIL_TO:          ${{ secrets.EMAIL_TO }}
+          RACE_DATE:         ${{ secrets.RACE_DATE }}
+          NTFY_TOPIC:        ${{ secrets.NTFY_TOPIC }}
+          WEATHER_LAT:       "51.2227"
+          WEATHER_LON:       "6.9116"
         run: python garmin_briefing.py
 
       - name: Copiar report.json para docs/
         run: cp pwa/report.json docs/report.json
 
-      - name: Commit report.json no repositório
+      - name: Publicar report.json
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -63,15 +60,3 @@ jobs:
           git diff --staged --quiet && echo "Sem alterações" && exit 0
           git commit -m "📊 briefing $(date +'%Y-%m-%d %H:%M UTC')"
           git push origin HEAD:main
-
-      - name: Configurar GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload para GitHub Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./docs
-
-      - name: Deploy GitHub Pages
-        id: deploy
-        uses: actions/deploy-pages@v4
