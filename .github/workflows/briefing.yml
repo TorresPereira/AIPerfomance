@@ -49,7 +49,9 @@ jobs:
         run: python garmin_briefing.py
 
       - name: Sincronizar pwa para docs
-        run: cp -r pwa/. docs/
+        run: |
+          cp -r pwa/. docs/
+          touch docs/.nojekyll
 
       - name: Publicar no repositório
         run: |
