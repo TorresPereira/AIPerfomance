@@ -169,7 +169,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.4.1 · 08/06/2026</div>
+  <div class="pin-ver">v3.5 · 08/06/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -201,11 +201,14 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
     <div><div class="cfg-lbl">Usuário GitHub</div><input id="cfgUser" class="cfg-inp" placeholder="ex: torrespereira" autocorrect="off" autocapitalize="none"></div>
     <div><div class="cfg-lbl">Repositório</div><input id="cfgRepo" class="cfg-inp" placeholder="ex: AIPerfomance" autocorrect="off" autocapitalize="none"></div>
     <div><div class="cfg-lbl">Personal Access Token</div><input id="cfgTok" class="cfg-inp" type="password" placeholder="github_pat_..."></div>
+    <div><div class="cfg-lbl">Tópico ntfy.sh (notificações)</div><input id="cfgNtfy" class="cfg-inp" placeholder="tp-coach-seunome" autocorrect="off" autocapitalize="none"></div>
     <button class="btn-primary" style="width:100%;margin-top:0" onclick="saveCfg()">Salvar</button>
     <button class="btn-sec" style="width:100%;margin-top:0" onclick="closeCfg()">Cancelar</button>
   </div>
   <div style="font-size:10px;color:#222;text-align:center;margin-top:16px;line-height:1.7">
-    Token: GitHub → Settings → Developer settings<br>Fine-grained tokens → Actions: Read & write
+    Token: GitHub → Settings → Developer settings<br>Fine-grained tokens → Actions: Read & write<br><br>
+    Notificações: adicione o mesmo tópico como<br>secret NTFY_TOPIC no GitHub Actions<br>
+    e instale o app <strong style="color:#333">ntfy</strong> no iPhone
   </div>
 </div>
 
@@ -316,6 +319,7 @@ const openCfg = () => {
   document.getElementById("cfgUser").value=c.user||"";
   document.getElementById("cfgRepo").value=c.repo||"";
   document.getElementById("cfgTok").value=c.token||"";
+  document.getElementById("cfgNtfy").value=c.ntfy||"";
   document.getElementById("cfg").classList.add("show");
 };
 const closeCfg = () => document.getElementById("cfg").classList.remove("show");
@@ -324,7 +328,8 @@ function saveCfg(){
   const r=document.getElementById("cfgRepo").value.trim();
   const t=document.getElementById("cfgTok").value.trim();
   if(!u||!r){ toast("Preencha usuário e repositório","err"); return; }
-  localStorage.setItem(CFG_K,JSON.stringify({user:u,repo:r,token:t}));
+  const ntfy = document.getElementById("cfgNtfy").value.trim();
+  localStorage.setItem(CFG_K,JSON.stringify({user:u,repo:r,token:t,ntfy}));
   closeCfg(); toast("Configuração salva ✓","ok");
   loadReport(true);
 }
@@ -490,13 +495,17 @@ function renderHome(){
     ${mc("🫁","VO₂max",f(s.vo2max),"ml/kg/min",!!s.vo2max)}
   </div>
   ${s.previsoes&&Object.keys(s.previsoes).length?`<div class="sl">🏁 Previsão de Prova</div><div class="prev-grid">${Object.entries(s.previsoes).map(([k,v])=>`<div class="prev-item"><div class="prev-d">${k}</div><div class="prev-t">${hms(v)}</div></div>`).join("")}</div>`:""}
+  ${renderPRs(report.prs||[])}
   ${renderCountdown(s)}
   ${renderClima(report.clima||{})}
-  ${renderSemana(report.semana||{})}
+  ${renderSemana(report.semana||{},report.semana_passada||{})}
   ${renderHRVChart(report.hrv_7dias||[])}
   ${renderRisco(s)}
   ${renderNutricao(s)}
   ${renderSono(s)}
+  ${renderVO2Chart(report.vo2max_hist||[])}
+  ${renderSonoPerf(report.sono_performance||[])}
+  ${renderNotas()}
   `;
 }
 
@@ -609,6 +618,95 @@ function renderForca(){
 
 // ─── New feature renderers ───────────────────────────────────────────────────
 
+function renderPRs(prs) {
+  if (!prs || !prs.length) return "";
+  return `
+  <div style="background:linear-gradient(135deg,#1a0f00,#2a1500);border-radius:12px;padding:14px;margin-bottom:4px;border:1px solid #FFB80033">
+    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#FFB800;margin-bottom:10px">🏆 Novo Recorde Pessoal!</div>
+    ${prs.map(p=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+      <span style="font-size:16px">${p.tipo.split(' ')[0]}</span>
+      <div><div style="font-size:12px;font-weight:700;color:#fff">${p.tipo}</div>
+      <div style="font-size:11px;color:#888">${p.desc}</div></div>
+    </div>`).join("")}
+  </div>`;
+}
+
+function renderVO2Chart(hist) {
+  if (!hist || hist.length < 2) return "";
+  const vals = hist.map(x=>x.value);
+  const max = Math.max(...vals)+1, min = Math.min(...vals)-1;
+  const W=280, H=60, pad=8;
+  const pts = hist.map((x,i)=>({
+    x: pad+(i/(hist.length-1))*(W-pad*2),
+    y: H-pad-((x.value-min)/(max-min))*(H-pad*2),
+    v: x.value, d: x.date
+  }));
+  const line = pts.map(p=>`${p.x},${p.y}`).join(" ");
+  const last = vals[vals.length-1], first = vals[0];
+  const trend = last > first ? `<span style="color:#00C896">▲ ${(last-first).toFixed(1)}</span>` : last < first ? `<span style="color:#FF4444">▼ ${(first-last).toFixed(1)}</span>` : `<span style="color:#555">→</span>`;
+  return `
+  <div class="sl">🫁 Evolução VO₂max — 30 dias</div>
+  <div style="background:#111;border-radius:12px;padding:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="font-size:22px;font-weight:700;color:#fff">${last} <span style="font-size:11px;color:#444">ml/kg/min</span></div>
+      <span style="font-size:13px">${trend} <span style="color:#444;font-size:11px">vs início</span></span>
+    </div>
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:60px">
+      <polyline points="${line}" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="${pts[pts.length-1].x}" cy="${pts[pts.length-1].y}" r="4" fill="#a855f7"/>
+    </svg>
+    <div style="display:flex;justify-content:space-between;margin-top:2px">
+      <span style="font-size:9px;color:#333">${hist[0]?.date?.slice(5)||""}</span>
+      <span style="font-size:9px;color:#333">Hoje</span>
+    </div>
+  </div>`;
+}
+
+function renderSonoPerf(data) {
+  if (!data || data.length < 3) return "";
+  const good = data.filter(d=>d.sono>=7), bad = data.filter(d=>d.sono<6);
+  if (!good.length || !bad.length) return "";
+  const avgGood = good.reduce((a,b)=>a+b.te,0)/good.length;
+  const avgBad  = bad.reduce((a,b)=>a+b.te,0)/bad.length;
+  const diff = ((avgGood-avgBad)/avgBad*100).toFixed(0);
+  const col = diff > 0 ? "#00C896" : "#FF4444";
+  return `
+  <div class="sl">💤 Sono × Performance</div>
+  <div style="background:#111;border-radius:12px;padding:14px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+      <div style="text-align:center">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:4px">≥ 7h sono</div>
+        <div style="font-size:20px;font-weight:700;color:#00C896">${avgGood.toFixed(1)}</div>
+        <div style="font-size:9px;color:#444">TE médio</div>
+      </div>
+      <div style="display:flex;align-items:center;font-size:22px;font-weight:800;color:${col}">${diff>0?"+":""}${diff}%</div>
+      <div style="text-align:center">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:4px">< 6h sono</div>
+        <div style="font-size:20px;font-weight:700;color:#FF4444">${avgBad.toFixed(1)}</div>
+        <div style="font-size:9px;color:#444">TE médio</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#555;text-align:center">Com mais sono, seu Training Effect é ${Math.abs(diff)}% ${diff>0?"melhor":"pior"}</div>
+  </div>`;
+}
+
+// Notes (localStorage)
+function renderNotas() {
+  const nota = localStorage.getItem('nota_'+((report||{}).date||'')) || '';
+  return `
+  <div class="sl">📝 Observação do Dia</div>
+  <div style="background:#111;border-radius:12px;padding:12px">
+    <textarea id="notaArea" placeholder="Como se sentiu hoje? Câimbra? Muito vento? Dores?" 
+      style="width:100%;background:transparent;border:none;color:#ddd;font-size:13px;font-family:-apple-system,sans-serif;resize:none;outline:none;line-height:1.6;min-height:60px"
+      oninput="salvarNota(this.value)">${nota}</textarea>
+  </div>`;
+}
+function salvarNota(v) {
+  if (report?.date) localStorage.setItem('nota_'+report.date, v);
+}
+
+// ─── New feature renderers ───────────────────────────────────────────────────
+
 function renderCountdown(s) {
   if (!s.prova_dias && s.prova_dias !== 0) return "";
   const fase_col = {BASE:"#1a6fff","BUILD":"#FFB800","PEAK":"#FF8C00","TAPER":"#a855f7","TAPER FINAL":"#FF4444"};
@@ -662,34 +760,46 @@ function renderClima(c) {
   </div>`;
 }
 
-function renderSemana(sem) {
+function renderSemana(sem, lw) {
   if (!sem.swim_km && !sem.bike_km && !sem.run_km) return "";
-  const total = (sem.swim_km||0) + (sem.bike_km||0) + (sem.run_km||0);
-  function bar(km, max, col) {
-    const pct = max > 0 ? Math.min(100, (km/max)*100) : 0;
-    return `<div style="height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden;margin-top:4px"><div style="height:100%;width:${pct}%;background:${col};border-radius:3px"></div></div>`;
+  lw = lw || {};
+  function diffStr(cur, prev) {
+    if (!prev && !cur) return "";
+    const d = (cur||0) - (prev||0);
+    if (Math.abs(d) < 0.5) return `<span style="color:#555">→</span>`;
+    return d > 0
+      ? `<span style="color:#00C896;font-size:10px">▲${d.toFixed(1)}</span>`
+      : `<span style="color:#FF4444;font-size:10px">▼${Math.abs(d).toFixed(1)}</span>`;
   }
-  const maxKm = Math.max(sem.swim_km||0, (sem.bike_km||0)/5, sem.run_km||0, 1);
+  function bar(cur, prev, max, col) {
+    const p1 = max > 0 ? Math.min(100,(cur/max)*100) : 0;
+    const p2 = max > 0 ? Math.min(100,((prev||0)/max)*100) : 0;
+    return `<div style="height:5px;background:#1a1a1a;border-radius:3px;overflow:hidden;margin-top:4px;position:relative">
+      <div style="height:100%;width:${p2}%;background:#2a2a2a;border-radius:3px;position:absolute"></div>
+      <div style="height:100%;width:${p1}%;background:${col};border-radius:3px;position:absolute"></div>
+    </div>`;
+  }
+  const maxKm = Math.max(sem.swim_km||0,(sem.bike_km||0)/5,sem.run_km||0,lw.swim_km||0,(lw.bike_km||0)/5,lw.run_km||0,1);
   return `
-  <div class="sl">📅 Volume Esta Semana</div>
+  <div class="sl">📅 Volume Esta Semana <span style="color:#333;font-weight:400;font-size:9px">vs semana passada</span></div>
   <div style="background:#111;border-radius:12px;padding:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
     <div>
-      <div style="font-size:16px;margin-bottom:4px">🏊</div>
-      <div style="font-size:15px;font-weight:700;color:#fff">${(sem.swim_km||0).toFixed(1)}<span style="font-size:10px;color:#444">km</span></div>
-      <div style="font-size:10px;color:#444">${Math.round(sem.swim_min||0)}min</div>
-      ${bar(sem.swim_km||0, maxKm, "#1a6fff")}
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:15px">🏊</span>${diffStr(sem.swim_km,lw.swim_km)}</div>
+      <div style="font-size:15px;font-weight:700;color:#fff;margin-top:2px">${(sem.swim_km||0).toFixed(1)}<span style="font-size:9px;color:#444">km</span></div>
+      <div style="font-size:10px;color:#333">${Math.round(sem.swim_min||0)}min</div>
+      ${bar(sem.swim_km||0,lw.swim_km||0,maxKm,"#1a6fff")}
     </div>
     <div>
-      <div style="font-size:16px;margin-bottom:4px">🚴</div>
-      <div style="font-size:15px;font-weight:700;color:#fff">${(sem.bike_km||0).toFixed(0)}<span style="font-size:10px;color:#444">km</span></div>
-      <div style="font-size:10px;color:#444">${Math.round(sem.bike_min||0)}min</div>
-      ${bar((sem.bike_km||0)/5, maxKm, "#FFB800")}
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:15px">🚴</span>${diffStr(sem.bike_km,lw.bike_km)}</div>
+      <div style="font-size:15px;font-weight:700;color:#fff;margin-top:2px">${(sem.bike_km||0).toFixed(0)}<span style="font-size:9px;color:#444">km</span></div>
+      <div style="font-size:10px;color:#333">${Math.round(sem.bike_min||0)}min</div>
+      ${bar((sem.bike_km||0)/5,(lw.bike_km||0)/5,maxKm,"#FFB800")}
     </div>
     <div>
-      <div style="font-size:16px;margin-bottom:4px">🏃</div>
-      <div style="font-size:15px;font-weight:700;color:#fff">${(sem.run_km||0).toFixed(1)}<span style="font-size:10px;color:#444">km</span></div>
-      <div style="font-size:10px;color:#444">${Math.round(sem.run_min||0)}min</div>
-      ${bar(sem.run_km||0, maxKm, "#00C896")}
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:15px">🏃</span>${diffStr(sem.run_km,lw.run_km)}</div>
+      <div style="font-size:15px;font-weight:700;color:#fff;margin-top:2px">${(sem.run_km||0).toFixed(1)}<span style="font-size:9px;color:#444">km</span></div>
+      <div style="font-size:10px;color:#333">${Math.round(sem.run_min||0)}min</div>
+      ${bar(sem.run_km||0,lw.run_km||0,maxKm,"#00C896")}
     </div>
   </div>`;
 }
