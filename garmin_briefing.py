@@ -447,7 +447,12 @@ def coletar():
         # Horário para dormir = próximo treino duro - sono_alvo
         # Simplificado: sugere horário fixo com base no treino de amanhã
         s["sono_alvo_h"]   = sono_alvo
-        s["sono_deita"]    = f"{23 - int(sono_alvo - 1)}:00" if sono_alvo > 0 else "22:30"
+        # Acordar às 06:30 → deitar = 06:30 - sono_alvo
+        wake_h = 6.5
+        bed_h = (wake_h - sono_alvo) % 24
+        bed_hh = int(bed_h)
+        bed_mm = "30" if (bed_h % 1) >= 0.5 else "00"
+        s["sono_deita"] = f"{bed_hh:02d}:{bed_mm}"
         s["sono_deficit_h"]= round(sono_alvo - (s.get("sono_h") or 0), 1) if s.get("sono_h") else None
 
         print(f"  Nutrição: CHO {s['nutricao']['cho_g_h']}g/h | Água {s['nutricao']['agua_ml_h']}ml/h")
@@ -712,6 +717,30 @@ def _sem(v,lo,hi):
     if float(v)>=lo: return "🟡","#FFB800","#3a2a00"
     return "🔴","#FF4444","#3a0000"
 
+
+def salvar_json(dados, ins):
+    report = {
+        "date": TODAY_STR,
+        "generated_at": datetime.datetime.utcnow().isoformat() + "Z",
+        "saude":        dados["saude"],
+        "ontem":        dados["ontem"],
+        "hoje":         dados["hoje"],
+        "amanha":       dados["amanha"],
+        "hoje_feito":   dados["hoje_feito"],
+        "semana":       dados.get("semana",{}),
+        "semana_passada":dados.get("semana_passada",{}),
+        "clima":        dados.get("clima",{}),
+        "hrv_7dias":    dados.get("hrv_7dias",[]),
+        "vo2max_hist":  dados.get("vo2max_hist",[]),
+        "prs":          dados.get("prs",[]),
+        "sono_performance": dados.get("sono_performance",[]),
+        "insights":     ins,
+    }
+    import os
+    os.makedirs("pwa", exist_ok=True)
+    with open("pwa/report.json", "w", encoding="utf-8") as f:
+        json.dump(report, f, ensure_ascii=False, default=str, indent=2)
+    print("  report.json salvo → pwa/report.json")
 
 def notificar(ins):
     if not NTFY_TOPIC: return
