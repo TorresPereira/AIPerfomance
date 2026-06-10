@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   briefing:
@@ -48,15 +50,22 @@ jobs:
           WEATHER_LON:       "6.9116"
         run: python garmin_briefing.py
 
-      - name: Sincronizar pwa para docs
+      - name: Preparar docs
         run: |
           cp -r pwa/. docs/
           touch docs/.nojekyll
 
-      - name: Publicar no repositório
+      - name: Commit report.json no main
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f docs/
+          git add -f pwa/report.json
           git commit -m "📊 briefing $(date +'%Y-%m-%d %H:%M UTC')" || true
-          git push origin HEAD:main
+          git push origin HEAD:main || true
+
+      - name: Deploy GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          force_orphan: true
