@@ -1,6 +1,6 @@
 {
   "date": "2026-06-10",
-  "generated_at": "2026-06-10T09:22:51.352978Z",
+  "generated_at": "2026-06-10T09:27:51.162941Z",
   "saude": {
     "hrv": 66,
     "hrv_7d": 36,
@@ -303,68 +303,68 @@
     }
   ],
   "insights": {
-    "frase": "HRV em alta: capitalize a recuperação com precisão.",
-    "sec_readiness": "HRV de 66ms representa +30ms acima da média 7d (36ms) e está acima do baseline 33–42ms — sinal robusto de supercompensação. RHR em 59bpm sem baseline definido, mas coerente com estado equilibrado. Sono de 7h com score 69 é insuficiente: deep sleep 1.7h adequado, mas REM de apenas 0.4h compromete consolidação neuromuscular; déficit de 1.5h exige atenção. Body Battery 54/100 com stress médio 21 indica reserva funcional moderada.",
-    "sec_treino_ontem": "Sessão SWIM de 2.8km em 1h02m com pace 2:12/100m e FC média 123bpm — execução aeróbica controlada dentro da zona alvo. SWOLF 11.8 indica boa eficiência técnica na água para o volume realizado. TE aeróbico 2.8 confirma estímulo leve-moderado, adequado para a fase BASE; sem pontos críticos.",
-    "sec_carga": "Z1 acumulado em 1654 já supera o teto do target (1415), indicando excesso de volume leve — padrão de acúmulo sem polarização adequada. Z2 em 608 está abaixo do target mínimo (957), revelando déficit de estímulo aeróbico estrutural nesta fase BASE. Z3+ em 673 está elevado proporcionalmente ao volume total, aumentando o risco de lesão classificado como MODERADO; redistribuição urgente nas próximas semanas.",
-    "sec_hoje": "Treino planejado era natação livre; executado: 1500m em 38m37s, FC média 130bpm (max 157bpm), pace 2:34/100m. Comparado ao treino de ontem (2:12/100m, FC 123bpm), houve queda de eficiência significativa: pace 22s/100m mais lento e FC 7bpm mais alta, com pico de 157bpm sugerindo esforço anaeróbico pontual. SWOLF 13.7 vs 11.8 ontem confirma degradação técnica — possivelmente fadiga acumulada de sessões consecutivas de natação.",
-    "sec_ajuste": "Para amanhã (Steady Run 55min): manter duração integral com FC teto em 148bpm, zona aeróbica leve-moderada, pace controlado sem variações — máximo 5min em Z3 se sensação for boa.",
-    "sec_alertas": "Alerta de eficiência técnica na natação: queda de SWOLF 11.8→13.7 e pace 2:12→2:34 em sessões consecutivas indica fadiga técnica acumulada — evitar novo volume de natação antes de 48h. REM de 0.4h é valor crítico para recuperação neural; priorizar janela de sono até 22h00 esta noite.",
-    "sec_nutricao": "Treino já executado (38min natação): janela pós-treino — consumir 30g proteína + 60g CHO nos próximos 30min para reparação. Para o restante do dia sem treino adicional: manutenção calórica normal, hidratação mínima 2L dado clima frio e baixo stress metabólico.",
+    "frase": "HRV em alta — execute com controle, construa a base.",
+    "sec_readiness": "HRV de 66ms representa +30ms acima da média 7d (36ms) e acima do baseline 33–42ms — sinal positivo de recuperação autonômica. RHR 59bpm sem baseline para comparação, mas compatível com atleta em fase BASE. Sono 7.0h com score 69, deep sleep 1.7h adequado mas REM apenas 0.4h (déficit de 1.5h) compromete recuperação cognitiva e hormonal; Body Battery 54/100 com stress 21 indica reserva funcional moderada.",
+    "sec_treino_ontem": "Sessão SWIM 2.8km em 1h02m com pace 2:12/100m e SWOLF 11.8 — eficiência técnica elevada para o volume. FC média 123bpm (max 145bpm) manteve caráter aeróbico adequado com TE 2.8. Sessão bem executada sem pontos críticos.",
+    "sec_carga": "Z1 em 1654 contra target máximo de 1415 — já 17% acima do teto recomendado, indicando excesso de volume leve. Z2 em 608 abaixo do target mínimo de 957 e Z3+ em 673 acima do esperado para fase BASE — polarização invertida e anaeróbico elevado são alertas diretos. Com ATL 734 e risco MODERADO de lesão, a distribuição atual compromete a progressão segura da base aeróbica.",
+    "sec_hoje": "Treino planejado de natação executado: 1500m em 38m37s com pace 2:34/100m e SWOLF 13.7 — queda de eficiência técnica significativa vs ontem (SWOLF 11.8 → 13.7, pace 2:12 → 2:34). FC média 130bpm com pico de 157bpm indica esforço proporcionalmente elevado para o volume; TE 2.7 coerente mas a degradação de SWOLF sugere fadiga neuromuscular ou execução descuidada na segunda sessão consecutiva.",
+    "sec_ajuste": "Amanhã Steady Run 55min: manter FC teto em 148bpm (Z2 aeróbico), pace controlado sem desvios — nenhum estímulo Z3+. Prioridade absoluta é regularidade aeróbica dado Z3 já excedido no mês.",
+    "sec_alertas": "SWOLF degradou 16% em sessão consecutiva de natação — sinal de fadiga técnica acumulada; evitar segunda sessão de natação antes de 36h. Z1 mensal 17% acima do teto e Z3+ acima do target BASE — revisar intensidade das próximas sessões para reequilibrar distribuição.",
+    "sec_nutricao": "Treino já executado hoje (38min): pós-treino imediato com 30g de proteína + 60–80g CHO para reposição glicogênica. Hidratação mínima 1.2L ao longo do dia dado clima frio (18.6°C) com baixa percepção de sede; priorizar deitar às 22:00 para atacar déficit de sono de 1.5h.",
     "status_readiness": "BOM",
     "status_carga": "ELEVADA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Sessão de 1500m executada com queda mensurável de eficiência vs ontem — SWOLF +1.9 e pace +22s/100m com FC mais alta indicam fadiga técnica, não falha de esforço. Treino válido para o dia, mas sinaliza necessidade de pausa de natação amanhã.",
-    "alerta": "Dois dias consecutivos de natação geraram degradação técnica mensurável (SWOLF 11.8→13.7); não acumular terceira sessão de swim sem 48h de intervalo.",
+    "analise_hoje": "Sessão concluída com volume adequado mas queda expressiva de eficiência técnica (SWOLF +1.9 e pace +22s/100m vs ontem) e FC máxima de 157bpm desproporcional para 1500m — indica acúmulo de fadiga técnica em sessões consecutivas de natação.",
+    "alerta": "SWOLF 13.7 e FC max 157bpm em 1500m após sessão de 2.8km ontem — fadiga técnica de natação confirmada; não adicionar volume aquático extra hoje.",
     "treino_forca": [
-      {
-        "exercicio": "Ponte de Glúteos Unilateral",
-        "series": 3,
-        "repeticoes": "12-15",
-        "carga": "leve",
-        "foco": "Ativa glúteo médio e máximo para estabilidade pélvica na corrida e no ciclismo"
-      },
-      {
-        "exercicio": "Agachamento Goblet",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Desenvolve força funcional de quadril e joelho com padrão de movimento específico para bike e corrida"
-      },
-      {
-        "exercicio": "Prancha Lateral com Abdução de Quadril",
-        "series": 3,
-        "repeticoes": "30s",
-        "carga": "leve",
-        "foco": "Core lateral e estabilidade de quadril — previne colapso pélvico na corrida do 70.3"
-      },
-      {
-        "exercicio": "Step-Up com Joelho Alto",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Simula padrão de recrutamento da corrida, fortalece glúteo e iliopsoas de forma integrada"
-      },
-      {
-        "exercicio": "Rotação Torácica em Quatro Apoios",
-        "series": 2,
-        "repeticoes": "10-12",
-        "carga": "leve",
-        "foco": "Mobilidade de coluna torácica — melhora postura aerodinâmica no bike e respiração na natação"
-      },
       {
         "exercicio": "Dead Bug",
         "series": 3,
-        "repeticoes": "8-10",
+        "repeticoes": "10-12",
         "carga": "leve",
-        "foco": "Core profundo com coordenação contralateral — estabilidade lombar essencial para transferência de potência no triathlon"
+        "foco": "Estabilização lombo-pélvica essencial para postura na corrida e aerodinâmica no ciclismo"
       },
       {
-        "exercicio": "Alongamento de Psoas em Avanço Estático",
-        "series": 2,
-        "repeticoes": "40s",
+        "exercicio": "Hip Hinge com Elástico (Romanian Deadlift)",
+        "series": 3,
+        "repeticoes": "12-15",
+        "carga": "moderada",
+        "foco": "Ativa cadeia posterior (glúteo/isquio) reduzindo risco de lesão na corrida do 70.3"
+      },
+      {
+        "exercicio": "Step-Up Unilateral",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Força funcional unilateral de quadril simulando a pedalada e estabilidade na corrida"
+      },
+      {
+        "exercicio": "Pallof Press",
+        "series": 3,
+        "repeticoes": "12",
         "carga": "leve",
-        "foco": "Mobilidade de flexores de quadril encurtados pelo tempo em posição aero no bike"
+        "foco": "Anti-rotação de core transfere diretamente para estabilidade no nado e na corrida"
+      },
+      {
+        "exercicio": "Elevação de Quadril (Glute Bridge) com pausa 2s",
+        "series": 3,
+        "repeticoes": "15",
+        "carga": "leve",
+        "foco": "Ativação de glúteo médio e máximo — prevenção de colapso pélvico na corrida longa"
+      },
+      {
+        "exercicio": "Mobilidade de Quadril 90/90",
+        "series": 2,
+        "repeticoes": "60s",
+        "carga": "leve",
+        "foco": "Restaura amplitude de rotação do quadril comprimida pelo volume de natação e ciclismo"
+      },
+      {
+        "exercicio": "Prancha Lateral com Abdução",
+        "series": 3,
+        "repeticoes": "30s",
+        "carga": "leve",
+        "foco": "Fortalece glúteo médio e estabilizadores laterais — crítico para economia de corrida no 70.3"
       }
     ]
   }
