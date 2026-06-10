@@ -7,10 +7,7 @@ from garminconnect import Garmin
 # ─── Config ──────────────────────────────────────────────────────────────────
 GARMIN_EMAIL      = os.environ["GARMIN_EMAIL"]
 GARMIN_PASSWORD   = os.environ["GARMIN_PASSWORD"]
-SENDGRID_API_KEY  = os.environ["SENDGRID_API_KEY"]
 ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
-EMAIL_FROM        = os.environ["EMAIL_FROM"]
-EMAIL_TO          = os.environ["EMAIL_TO"]
 
 TODAY     = datetime.date.today()
 YESTERDAY = TODAY - datetime.timedelta(days=1)
@@ -19,6 +16,9 @@ TODAY_STR     = TODAY.isoformat()
 YESTERDAY_STR = YESTERDAY.isoformat()
 TOMORROW_STR  = TOMORROW.isoformat()
 CACHE_DIR     = "/tmp/garmin_cache"
+
+# Notificação push via ntfy.sh (grátis, sem servidor)
+NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "")  # ex: "tp-coach-abc123"
 
 # Data da próxima prova — configure RACE_DATE="YYYY-MM-DD" em GitHub Secrets
 _race_env = os.environ.get("RACE_DATE","")
@@ -82,7 +82,7 @@ def garmin_login():
 # ─── Coleta de dados ──────────────────────────────────────────────────────────
 def coletar():
     api = garmin_login()
-    d = {"saude":{}, "ontem":[], "hoje":[], "amanha":[], "hoje_feito":[], "semana":{}, "clima":{}, "hrv_7dias":[]}
+    d = {"saude":{}, "ontem":[], "hoje":[], "amanha":[], "hoje_feito":[], "semana":{}, "semana_passada":{}, "clima":{}, "hrv_7dias":[], "vo2max_hist":[], "prs":[], "sono_performance":[]}
     s = d["saude"]
 
     # HRV
@@ -268,6 +268,88 @@ def coletar():
         d["semana"] = sem
         print(f"  Semana: swim={sem['swim_km']}km bike={sem['bike_km']}km run={sem['run_km']}km")
     except Exception as e: print(f"  Semana err: {e}")
+
+    # ─── 2b. Volume semana passada (para comparativo) ──────────────────────────
+    try:
+        seg_passada = TODAY - datetime.timedelta(days=TODAY.weekday()+7)
+        dom_passada = seg_passada + datetime.timedelta(days=6)
+        acts_lw = api.get_activities_by_date(seg_passada.isoformat(), dom_passada.isoformat()) or []
+        lw = {"swim_km":0,"swim_min":0,"bike_km":0,"bike_min":0,"run_km":0,"run_min":0}
+        for a in acts_lw:
+            tipo = (a.get("activityType",{}).get("typeKey") or "").lower()
+            dist = float(a.get("distance") or 0)/1000
+            dur  = float(a.get("duration") or 0)/60
+            if "swim" in tipo or "pool" in tipo: lw["swim_km"]+=dist; lw["swim_min"]+=dur
+            elif "cycl" in tipo or "bike" in tipo: lw["bike_km"]+=dist; lw["bike_min"]+=dur
+            elif "run" in tipo: lw["run_km"]+=dist; lw["run_min"]+=dur
+        d["semana_passada"] = {k:round(v,1) for k,v in lw.items()}
+        print(f"  Semana passada: swim={lw['swim_km']:.1f}km bike={lw['bike_km']:.1f}km run={lw['run_km']:.1f}km")
+    except Exception as e: print(f"  Semana passada err: {e}"); d["semana_passada"]={}
+
+    # ─── 2c. VO2max últimos 30 dias ──────────────────────────────────────────────
+    try:
+        vo2_hist = []
+        for i in range(29, -1, -1):
+            day = (TODAY - datetime.timedelta(days=i)).isoformat()
+            try:
+                ts_d = api.get_training_status(day)
+                vn = ts_d.get("mostRecentVO2Max",{}).get("generic",{})
+                v  = vn.get("vo2MaxPreciseValue") or vn.get("vo2MaxValue")
+                if v: vo2_hist.append({"date":day,"value":round(float(v),1)})
+            except: pass
+        d["vo2max_hist"] = vo2_hist[-15:]  # últimos 15 com valor
+        print(f"  VO2max hist: {len(d['vo2max_hist'])} pontos")
+    except Exception as e: print(f"  VO2max hist err: {e}"); d["vo2max_hist"]=[]
+
+    # ─── 2d. PRs automáticos (compara com últimos 90 dias) ───────────────────────
+    try:
+        acts_90 = api.get_activities_by_date(
+            (TODAY - datetime.timedelta(days=90)).isoformat(), YESTERDAY_STR) or []
+        best = {"run_pace_s":999999,"bike_kmh":0,"swim_pace_s":999999}
+        for a in acts_90:
+            tipo = (a.get("activityType",{}).get("typeKey") or "").lower()
+            dist = float(a.get("distance") or 0)
+            dur  = float(a.get("duration") or 1)
+            if "run" in tipo and dist>1000:
+                p = dur/dist*1000
+                if p < best["run_pace_s"]: best["run_pace_s"]=p
+            elif ("cycl" in tipo or "bike" in tipo) and dist>5000:
+                spd = (dist/1000)/(dur/3600)
+                if spd > best["bike_kmh"]: best["bike_kmh"]=round(spd,1)
+            elif ("swim" in tipo or "pool" in tipo) and dist>100:
+                p = dur/dist*100
+                if p < best["swim_pace_s"]: best["swim_pace_s"]=p
+
+        prs = []
+        for t in (d.get("ontem",[]) + d.get("hoje_feito",[])):
+            if t["mod"]=="run" and t.get("_dist_m",0)>1000 and t.get("_dur_s"):
+                p = t["_dur_s"]/t["_dist_m"]*1000
+                if p < best["run_pace_s"]*0.98:
+                    prs.append({"tipo":"🏃 Corrida","desc":f"Novo pace: {pace_run(t['_dur_s'],t['_dist_m'])}"})
+            elif t["mod"]=="bike" and t.get("_dist_m",0)>5000 and t.get("_dur_s"):
+                spd = (t["_dist_m"]/1000)/(t["_dur_s"]/3600)
+                if spd > best["bike_kmh"]*1.02:
+                    prs.append({"tipo":"🚴 Ciclismo","desc":f"Nova velocidade: {spd:.1f}km/h"})
+        d["prs"] = prs
+        if prs: print(f"  PRs detectados: {len(prs)}")
+    except Exception as e: print(f"  PRs err: {e}"); d["prs"]=[]
+
+    # ─── 2e. Correlação sono × desempenho (últimos 14 dias) ──────────────────────
+    try:
+        corr_data = []
+        for i in range(13, -1, -1):
+            day = (TODAY - datetime.timedelta(days=i)).isoformat()
+            try:
+                sl = api.get_sleep_data(day)
+                sh = round((sl.get("dailySleepDTO",{}).get("sleepTimeSeconds") or 0)/3600, 1)
+                acts_day = api.get_activities_by_date(day, day) or []
+                te = max((float(a.get("aerobicTrainingEffect") or 0) for a in acts_day), default=None)
+                if sh > 0 and te:
+                    corr_data.append({"date":day,"sono":sh,"te":round(te,1)})
+            except: pass
+        d["sono_performance"] = corr_data
+        print(f"  Sono×performance: {len(corr_data)} dias com dados")
+    except Exception as e: print(f"  Sono×perf err: {e}"); d["sono_performance"]=[]
 
     # ─── 3. Risco de lesão (spike ATL) ──────────────────────────────────────────
     try:
@@ -630,219 +712,31 @@ def _sem(v,lo,hi):
     if float(v)>=lo: return "🟡","#FFB800","#3a2a00"
     return "🔴","#FF4444","#3a0000"
 
-def gerar_html(dados, ins):
-    s = dados["saude"]
-    dias_pt = {"Monday":"Segunda","Tuesday":"Terça","Wednesday":"Quarta",
-               "Thursday":"Quinta","Friday":"Sexta","Saturday":"Sábado","Sunday":"Domingo"}
-    dia = dias_pt.get(TODAY.strftime("%A"),TODAY.strftime("%A")) + ", " + TODAY.strftime("%d/%m/%Y")
 
-    def D(st,c): return f'<div style="{st}">{c}</div>'
-    def S(st,c): return f'<span style="{st}">{c}</span>'
-
-    def sbox(em,bg,dk,lb):
-        return D(f"background:{bg};border-radius:8px;padding:12px 4px;text-align:center",
-            S("font-size:18px;display:block",em)+S(f"font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:{dk};display:block;margin-top:4px",lb))
-
-    def mc(ico,lb,val,sub,has):
-        bc="#1a6fff" if has else "#242424"; vc="#fff" if has else "#333"
-        return D(f"background:#181818;border-radius:8px;padding:12px 10px;border-left:3px solid {bc}",
-            S("font-size:12px",ico)+
-            D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin:3px 0 2px",lb)+
-            D(f"font-size:17px;font-weight:700;color:{vc};line-height:1",val)+
-            D("font-size:10px;color:#444;margin-top:2px",sub))
-
-    # Semáforos
-    r_em,r_bg,r_dk = _sem(s.get("body_battery"),40,70)
-    h_em,h_bg,h_dk = _sem(s.get("hrv"),40,60)
-    sn_em,sn_bg,sn_dk = _sem(s.get("sono_score"),60,80)
-    acwr=s.get("acwr")
-    if acwr is None:          a_em,a_bg,a_dk="⚪","#1c1c1c","#555"
-    elif float(acwr)>1.5:     a_em,a_bg,a_dk="🔴","#FF4444","#3a0000"
-    elif float(acwr)>=0.8:    a_em,a_bg,a_dk="🟢","#00C896","#003a28"
-    else:                     a_em,a_bg,a_dk="🟡","#FFB800","#3a2a00"
-
-    # Status badges
-    status_colors = {"ÓTIMO":"#00C896","BOM":"#00C896","MODERADO":"#FFB800","BAIXO":"#FF8C00","CRÍTICO":"#FF4444",
-                     "SUAVE":"#00C896","IDEAL":"#00C896","ELEVADA":"#FFB800","SOBRECARGA":"#FF4444"}
-    def badge(txt):
-        c=status_colors.get(str(txt).upper(),"#555")
-        return S(f"font-size:9px;font-weight:700;letter-spacing:.1em;background:{c}22;color:{c};border:1px solid {c}44;padding:3px 8px;border-radius:4px;text-transform:uppercase",str(txt))
-
-    # Ação hoje
-    acao_colors={"MANTER":"#00C896","REDUZIR 20%":"#FFB800","REDUZIR 40%":"#FF8C00","SUBSTITUIR":"#FF4444","DESCANSO":"#888"}
-    ac=ins.get("acao_hoje","—")
-    ac_c=acao_colors.get(ac.upper(),"#888")
-
-    # Treinos de ontem
-    def trow(t):
-        return (
-            "<tr style='border-bottom:1px solid #1e1e1e'>"
-            f"<td style='padding:9px 10px;font-size:16px;width:28px'>{t['icone']}</td>"
-            f"<td style='padding:9px 10px;font-size:12px;font-weight:600;color:#ddd'>{t['nome']}</td>"
-            f"<td style='padding:9px 10px;font-size:11px;color:#888;white-space:nowrap;font-family:monospace'>{t['dist']}</td>"
-            f"<td style='padding:9px 10px;font-size:11px;color:#888;white-space:nowrap;font-family:monospace'>{t['dur']}</td>"
-            f"<td style='padding:9px 10px;font-size:11px;color:#888;white-space:nowrap;font-family:monospace'>{t['perf']}</td>"
-            f"<td style='padding:9px 10px;font-size:11px;color:#666;white-space:nowrap;font-family:monospace'>FC {fmt(t['fc'],0)} | TSS {fmt(t['tss'],0)}</td>"
-            "</tr>"
+def notificar(ins):
+    if not NTFY_TOPIC: return
+    try:
+        hrv = ins.get('sec_readiness','')[:60] if ins.get('sec_readiness') else ''
+        msg = f"Briefing pronto! {ins.get('frase','')} | {hrv}"
+        req = urllib.request.Request(
+            f'https://ntfy.sh/{NTFY_TOPIC}',
+            data=msg.encode(),
+            headers={'Title':'TP Performance Coach','Priority':'default','Tags':'chart_with_upwards_trend'},
+            method='POST'
         )
-
-    def cal_table(lista, label):
-        if not lista:
-            return D("color:#444;font-size:12px;padding:8px 0",f"Nenhum treino agendado {label}.")
-        rows="".join(
-            "<tr style='border-bottom:1px solid #1e1e1e'>"
-            f"<td style='padding:9px 10px;font-size:16px;width:28px'>{c['icone']}</td>"
-            f"<td style='padding:9px 10px;font-size:12px;font-weight:600;color:#ddd'>{c['nome']}</td>"
-            f"<td style='padding:9px 10px;font-size:11px;color:#888;font-family:monospace'>{c['dur']}</td>"
-            f"<td style='padding:9px 10px;font-size:11px;color:#888;font-family:monospace'>{c['dist']}</td>"
-            "</tr>"
-            for c in lista
-        )
-        return (
-            "<table style='width:100%;border-collapse:collapse;background:#181818;border-radius:8px;overflow:hidden'>"
-            "<thead><tr style='border-bottom:1px solid #2a2a2a'>"
-            "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left' colspan='2'>Treino</th>"
-            "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left'>Duração</th>"
-            "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;text-align:left'>Distância</th>"
-            f"</tr></thead><tbody>{rows}</tbody></table>"
-        )
-
-    # ── Treino de Força ──
-    CARGA_C = {"leve":"#00C896","moderada":"#FFB800","pesada":"#FF4444"}
-    forca_itens = ins.get("treino_forca") or []
-    if forca_itens:
-        def forca_row(ex):
-            cg = str(ex.get("carga","")).lower()
-            cc = CARGA_C.get(cg,"#555")
-            return (
-                "<tr style='border-bottom:1px solid #1e1e1e'>"
-                "<td style='padding:10px 12px;font-size:13px;font-weight:600;color:#fff'>"+str(ex.get("exercicio","—"))+"</td>"
-                "<td style='padding:10px 12px;font-size:12px;color:#aaa;text-align:center;font-family:monospace;white-space:nowrap'>"+str(ex.get("series","—"))+"x"+str(ex.get("repeticoes","—"))+"</td>"
-                "<td style='padding:10px 12px;text-align:center'><span style='font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:"+cc+";background:"+cc+"22;border:1px solid "+cc+"44;padding:2px 7px;border-radius:4px'>"+str(ex.get("carga","—"))+"</span></td>"
-                "<td style='padding:10px 12px;font-size:11px;color:#555;line-height:1.4'>"+str(ex.get("foco",""))+"</td>"
-                "</tr>"
-            )
-        forca_html = (
-            D("height:1px;background:#1e1e1e;margin:16px 0","") +
-            D("font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:10px","&#128170; Treino de Forca — Sugestao IA") +
-            "<table style='width:100%;border-collapse:collapse;background:#181818;border-radius:10px;overflow:hidden'>"
-            "<thead><tr style='border-bottom:1px solid #2a2a2a'>"
-            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444;text-align:left'>Exercicio</th>"
-            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444;text-align:center'>Series x Reps</th>"
-            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444;text-align:center'>Carga</th>"
-            "<th style='padding:8px 12px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#444;text-align:left'>Foco Triathlon</th>"
-            "</tr></thead><tbody>"+"".join(forca_row(ex) for ex in forca_itens)+"</tbody></table>"
-        )
-    else:
-        forca_html = ""
-
-    SL = "font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:10px"
-    DIV = D("height:1px;background:#1e1e1e;margin:16px 0","")
-    briefing_html = ins.get("briefing","—").replace("\n","<br>")
-    alerta_html = D("background:#110000;border-left:3px solid #FF4444;border-radius:8px;padding:12px 15px;font-size:12px;color:#cc5555;line-height:1.5;margin-top:8px","&#9888; "+str(ins["alerta"])) if ins.get("alerta") else ""
-
-    ontem_rows = "".join(trow(t) for t in dados["ontem"]) if dados["ontem"] else f"<tr><td colspan='6' style='padding:10px;color:#444;font-size:12px'>Nenhum treino registrado</td></tr>"
-
-    prev_html=""
-    if s.get("previsoes"):
-        pitems="".join(D("background:#181818;border-radius:7px;padding:9px 6px;text-align:center",D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444",k)+D("font-size:14px;font-weight:700;color:#fff;margin-top:3px;font-family:monospace",hms(v))) for k,v in s["previsoes"].items())
-        prev_html=D(SL+";margin-top:16px","&#127937; Previsão de Prova")+D("display:grid;grid-template-columns:repeat(4,1fr);gap:6px",pitems)
-
-    body = (
-        D(SL,"Status Geral") +
-        D("display:grid;grid-template-columns:repeat(4,1fr);gap:6px",
-            sbox(r_em,r_bg,r_dk,"Readiness")+sbox(a_em,a_bg,a_dk,"Carga ACWR")+sbox(h_em,h_bg,h_dk,"HRV")+sbox(sn_em,sn_bg,sn_dk,"Sono"))+
-        D("display:flex;gap:8px;margin-top:8px;flex-wrap:wrap",
-            D("display:flex;align-items:center;gap:6px",S("font-size:10px;color:#555","Readiness:")+badge(ins.get("status_readiness","—")))+
-            D("display:flex;align-items:center;gap:6px",S("font-size:10px;color:#555","Carga:")+badge(ins.get("status_carga","—")))+
-            D("display:flex;align-items:center;gap:6px",S("font-size:10px;color:#555","Ação hoje:")+S(f"font-size:9px;font-weight:700;letter-spacing:.1em;background:{ac_c}22;color:{ac_c};border:1px solid {ac_c}44;padding:3px 8px;border-radius:4px",ac)))+
-        D(SL+";margin-top:20px","Dados Fisiológicos") +
-        D("display:grid;grid-template-columns:repeat(3,1fr);gap:6px",
-            mc("💤","Sono",fmt(s.get("sono_h"))+"h",f"Score {fmt(s.get('sono_score'),0)} · REM {fmt(s.get('sono_rem'))}h",bool(s.get("sono_h")))+
-            mc("❤️","HRV",fmt(s.get("hrv"),0)+" ms",f"7d avg {fmt(s.get('hrv_7d'),0)} · {(s.get('hrv_status') or '—').upper()}",bool(s.get("hrv")))+
-            mc("🔋","Body Battery",fmt(s.get("body_battery"),0),f"Stress {fmt(s.get('stress_avg'),0)}",bool(s.get("body_battery")))+
-            mc("💓","Resting HR",fmt(s.get("rhr"),0)+" bpm",f"Baseline {fmt(s.get('rhr_baseline'),0)} bpm",bool(s.get("rhr")))+
-            mc("📈","ATL / CTL",f"{fmt(s.get('atl'),0)} / {fmt(s.get('ctl'),0)}",f"TSB {fmt(s.get('tsb'),0)} · ACWR {fmt(s.get('acwr'),2)}",bool(s.get("atl")))+
-            mc("🫁","VO₂max",fmt(s.get("vo2max"),1),"ml/kg/min",bool(s.get("vo2max"))))+
-        DIV+
-        D(SL,"Treinos de Ontem") +
-        "<table style='width:100%;border-collapse:collapse;background:#181818;border-radius:8px;overflow:hidden'>"
-        "<thead><tr style='border-bottom:1px solid #2a2a2a'>"
-        "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#444;text-align:left' colspan='2'>Atividade</th>"
-        "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#444;text-align:left'>Dist</th>"
-        "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#444;text-align:left'>Dur</th>"
-        "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#444;text-align:left'>Pace/Vel</th>"
-        "<th style='padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#444;text-align:left'>FC / TSS</th>"
-        f"</tr></thead><tbody>{ontem_rows}</tbody></table>"+
-        DIV+
-        D(SL,"Análise do Coach — IA") +
-        D("background:#07111f;border-left:3px solid #1a6fff;border-radius:8px;padding:14px 16px;font-size:13px;color:#9ab8d8;line-height:1.7",briefing_html)+
-        alerta_html+
-        DIV+
-        D(SL,"Treino de Hoje") + cal_table(dados["hoje"],"para hoje")+
-        D(SL,"Treino de Hoje") + cal_table(dados["hoje"],"para hoje")+
-        D("background:#071a0f;border-left:3px solid #00C896;border-radius:8px;padding:13px 15px;margin-top:8px",
-          D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#00C896;margin-bottom:5px","&#127919; Analise do Treino de Hoje")+
-          D("font-size:13px;color:#70c090;line-height:1.6",str(ins.get("analise_hoje") or "—")))+
-        D("background:#07111f;border-left:3px solid #1a6fff;border-radius:8px;padding:13px 15px;margin-top:8px",
-          D("font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#1a6fff;margin-bottom:5px","&#128295; Ajuste Concreto")+
-          D("font-size:13px;color:#9ab8d8;line-height:1.6",str(ins.get("sugestao_ajuste") or ins.get("acao_hoje") or "—")))+
-        prev_html+forca_html
-    )
-
-    return (
-        "<!DOCTYPE html><html lang='pt-BR'><head><meta charset='UTF-8'>"
-        "<meta name='viewport' content='width=device-width,initial-scale=1'></head>"
-        "<body style='font-family:Arial,Helvetica,sans-serif;background:#050505;color:#e0e0e0;margin:0;padding:0'>"
-        "<div style='max-width:580px;margin:20px auto;background:#0f0f0f;border-radius:14px;overflow:hidden;border:1px solid #222'>"
-        "<div style='background:#000;border-bottom:3px solid #1a6fff'>"
-        "<div style='padding:18px 24px 0;display:flex;justify-content:space-between;align-items:center'>"
-        "<span style='font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#fff;background:#1a6fff;padding:4px 10px;border-radius:4px'>&#9202; Triathlon Coach</span>"
-        f"<span style='font-size:11px;color:#444'>{dia}</span>"
-        "</div>"
-        f"<div style='padding:14px 24px 18px;font-size:20px;font-weight:700;line-height:1.3;color:#fff'>{ins.get('frase','—')}</div>"
-        "</div>"
-        f"<div style='padding:20px 22px 28px'>{body}</div>"
-        f"<div style='background:#000;text-align:center;padding:12px;font-size:9px;color:#2a2a2a;letter-spacing:.1em;text-transform:uppercase'>Garmin Connect + Claude AI · {TODAY_STR}</div>"
-        "</div></body></html>"
-    )
-
-# ─── Envio SendGrid ───────────────────────────────────────────────────────────
-def enviar(html):
-    payload=json.dumps({"personalizations":[{"to":[{"email":EMAIL_TO}]}],"from":{"email":EMAIL_FROM,"name":"Triathlon Coach"},"subject":f"&#9202; Coach Report — {TODAY.strftime('%d/%m/%Y')}","content":[{"type":"text/html","value":html}]}).encode()
-    req=urllib.request.Request("https://api.sendgrid.com/v3/mail/send",data=payload,headers={"Authorization":f"Bearer {SENDGRID_API_KEY}","Content-Type":"application/json"},method="POST")
-    with urllib.request.urlopen(req) as r: print(f"Email enviado — HTTP {r.status}")
-
-# ─── Main ─────────────────────────────────────────────────────────────────────
-def salvar_json(dados, ins):
-    """Salva report.json para a PWA."""
-    report = {
-        "date": TODAY_STR,
-        "generated_at": datetime.datetime.utcnow().isoformat() + "Z",
-        "saude": dados["saude"],
-        "ontem": dados["ontem"],
-        "hoje":  dados["hoje"],
-        "amanha":dados["amanha"],
-        "hoje_feito":dados["hoje_feito"],
-        "semana":  dados["semana"],
-        "clima":   dados["clima"],
-        "hrv_7dias":dados["hrv_7dias"],
-        "insights": ins,
-    }
-    with open("pwa/report.json", "w", encoding="utf-8") as f:
-        json.dump(report, f, ensure_ascii=False, default=str, indent=2)
-    print("  report.json salvo → pwa/report.json")
+        urllib.request.urlopen(req, timeout=10)
+        print('  Notificação enviada via ntfy.sh')
+    except Exception as e: print(f'  ntfy err: {e}')
 
 def main():
-    print(f"[{TODAY_STR}] Iniciando briefing...")
+    print(f'[{TODAY_STR}] Iniciando briefing...')
     dados  = coletar()
-    print("Gerando análise IA...")
+    print('Gerando análise IA...')
     ins    = gerar_insights(dados)
-    print("Briefing:", ins.get("frase"))
+    print('Briefing:', ins.get('frase'))
     salvar_json(dados, ins)
-    html   = gerar_html(dados, ins)
-    enviar(html)
-    print("Concluído ✅")
+    notificar(ins)
+    print('Concluído ✅')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
