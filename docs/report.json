@@ -1,6 +1,6 @@
 {
   "date": "2026-06-10",
-  "generated_at": "2026-06-10T05:50:14.077297Z",
+  "generated_at": "2026-06-10T09:22:51.352978Z",
   "saude": {
     "hrv": 66,
     "hrv_7d": 36,
@@ -15,8 +15,8 @@
     "sono_rem": 0.4,
     "sono_awake": 0.0,
     "body_battery": 54,
-    "stress_avg": 15,
-    "stress_rest": 82.31,
+    "stress_avg": 21,
+    "stress_rest": 53.78,
     "atl": 734.0,
     "ctl": 2935.0,
     "tsb": null,
@@ -41,9 +41,9 @@
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
-    "prova_dias": null,
-    "prova_data": null,
-    "prova_fase": null,
+    "prova_dias": 95,
+    "prova_data": "13/09/2026",
+    "prova_fase": "BASE",
     "nutricao": {
       "cho_g_h": 80,
       "cho_total": null,
@@ -54,7 +54,7 @@
       "dur_min": 0
     },
     "sono_alvo_h": 8.5,
-    "sono_deita": "16:00",
+    "sono_deita": "22:00",
     "sono_deficit_h": 1.5
   },
   "ontem": [
@@ -131,12 +131,20 @@
     "total_tss": 0.0,
     "n_treinos": 4
   },
+  "semana_passada": {
+    "swim_km": 3.1,
+    "swim_min": 76.6,
+    "bike_km": 7.3,
+    "bike_min": 19.0,
+    "run_km": 22.3,
+    "run_min": 148.8
+  },
   "clima": {
-    "temp_max": 18.0,
-    "temp_min": 10.5,
+    "temp_max": 18.6,
+    "temp_min": 10.4,
     "chuva_pct": 88,
-    "vento_kmh": 23.4,
-    "temp_atual": 12.3,
+    "vento_kmh": 13.7,
+    "temp_atual": 16.4,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
@@ -169,69 +177,194 @@
       "value": 66.0
     }
   ],
+  "vo2max_hist": [
+    {
+      "date": "2026-05-27",
+      "value": 49.5
+    },
+    {
+      "date": "2026-05-28",
+      "value": 49.5
+    },
+    {
+      "date": "2026-05-29",
+      "value": 49.5
+    },
+    {
+      "date": "2026-05-30",
+      "value": 49.4
+    },
+    {
+      "date": "2026-05-31",
+      "value": 49.4
+    },
+    {
+      "date": "2026-06-01",
+      "value": 49.4
+    },
+    {
+      "date": "2026-06-02",
+      "value": 49.4
+    },
+    {
+      "date": "2026-06-03",
+      "value": 49.4
+    },
+    {
+      "date": "2026-06-04",
+      "value": 49.4
+    },
+    {
+      "date": "2026-06-05",
+      "value": 49.4
+    },
+    {
+      "date": "2026-06-06",
+      "value": 49.2
+    },
+    {
+      "date": "2026-06-07",
+      "value": 49.2
+    },
+    {
+      "date": "2026-06-08",
+      "value": 49.2
+    },
+    {
+      "date": "2026-06-09",
+      "value": 49.2
+    },
+    {
+      "date": "2026-06-10",
+      "value": 49.2
+    }
+  ],
+  "prs": [],
+  "sono_performance": [
+    {
+      "date": "2026-05-29",
+      "sono": 8.1,
+      "te": 2.4
+    },
+    {
+      "date": "2026-05-30",
+      "sono": 6.1,
+      "te": 3.7
+    },
+    {
+      "date": "2026-06-01",
+      "sono": 4.3,
+      "te": 0.8
+    },
+    {
+      "date": "2026-06-02",
+      "sono": 7.2,
+      "te": 3.0
+    },
+    {
+      "date": "2026-06-03",
+      "sono": 5.8,
+      "te": 2.0
+    },
+    {
+      "date": "2026-06-04",
+      "sono": 7.2,
+      "te": 3.6
+    },
+    {
+      "date": "2026-06-05",
+      "sono": 5.0,
+      "te": 3.2
+    },
+    {
+      "date": "2026-06-06",
+      "sono": 7.4,
+      "te": 3.0
+    },
+    {
+      "date": "2026-06-07",
+      "sono": 6.0,
+      "te": 3.7
+    },
+    {
+      "date": "2026-06-08",
+      "sono": 7.8,
+      "te": 1.5
+    },
+    {
+      "date": "2026-06-09",
+      "sono": 6.8,
+      "te": 2.8
+    },
+    {
+      "date": "2026-06-10",
+      "sono": 7.0,
+      "te": 2.7
+    }
+  ],
   "insights": {
-    "frase": "HRV em alta, consistência é o ativo mais valioso.",
-    "sec_readiness": "HRV de 66ms representa +30ms acima da média 7d (36ms) e acima do baseline 33–42ms — sinal de recuperação autonômica positiva. Sono de 7.0h com score 69 é subótimo: Deep 1.7h aceitável, REM apenas 0.4h indica recuperação neural incompleta com déficit de 1.5h. Body Battery 54/100 com stress médio 15 sugere capacidade funcional moderada para o dia.",
-    "sec_treino_ontem": "Swim 2.8km em 1h02min a 2:12/100m com SWOLF 11.8 — eficiência técnica alta, indicador excelente para nado de fundo. FC média 123bpm (max 145bpm) manteve trabalho predominantemente aeróbico com TE 2.8, sessão bem executada. Nenhum ponto crítico negativo; sessão dentro do esperado para fase de volume base.",
-    "sec_carga": "Z1 em 1654 ultrapassa o teto do target (577–1415), indicando excesso de volume em intensidade leve — padrão de acúmulo de fadiga residual de baixa intensidade. Z2 em 608 está abaixo do target mínimo de 957, sugerindo déficit de estímulo aeróbico efetivo. Z3+ em 673 acima do recomendável para fase sem prova definida; risco de lesão MODERADO demanda contenção de carga anaeróbica.",
-    "sec_hoje": "Treino de natação já executado: 1500m em 38m37s a 2:34/100m com FC média 130bpm (max 157bpm) e SWOLF 13.7 — pace 22s/100m mais lento que ontem com SWOLF 1.9 pontos acima, indicando queda de eficiência técnica relevante. FC máx de 157bpm sugere picos anaeróbicos não planejados; TE 2.7 ligeiramente inferior a ontem. Sessão aceitável dado contexto de recuperação, mas eficiência comprometida.",
-    "sec_ajuste": "Para amanhã (Steady Run 55min): manter ritmo exclusivamente em Z1–Z2, FC teto 148bpm, pace mínimo 5:40/km. Limitar Z3 a zero — prioridade absoluta é eficiência aeróbica sem acúmulo anaeróbico adicional.",
-    "sec_alertas": "SWOLF 13.7 vs 11.8 ontem = degradação técnica de 16% em sessão consecutiva de nado — risco de sobrecarga neuromuscular localizada no trem superior. Z1 acima do teto mensal + dois dias consecutivos de natação: monitorar fadiga de ombro. REM 0.4h indica recuperação neural insuficiente; sono deve ser prioridade máxima esta noite (mínimo 8.5h).",
-    "sec_nutricao": "Pós-nado imediato (já executado): 30g de proteína + 40–60g CHO em até 30min para otimizar síntese proteica e repleção de glicogênio. Hidratação ao longo do dia: mínimo 2.0L dado clima frio (10–18°C) e 0 min de treino adicional planejado.",
+    "frase": "HRV em alta: capitalize a recuperação com precisão.",
+    "sec_readiness": "HRV de 66ms representa +30ms acima da média 7d (36ms) e está acima do baseline 33–42ms — sinal robusto de supercompensação. RHR em 59bpm sem baseline definido, mas coerente com estado equilibrado. Sono de 7h com score 69 é insuficiente: deep sleep 1.7h adequado, mas REM de apenas 0.4h compromete consolidação neuromuscular; déficit de 1.5h exige atenção. Body Battery 54/100 com stress médio 21 indica reserva funcional moderada.",
+    "sec_treino_ontem": "Sessão SWIM de 2.8km em 1h02m com pace 2:12/100m e FC média 123bpm — execução aeróbica controlada dentro da zona alvo. SWOLF 11.8 indica boa eficiência técnica na água para o volume realizado. TE aeróbico 2.8 confirma estímulo leve-moderado, adequado para a fase BASE; sem pontos críticos.",
+    "sec_carga": "Z1 acumulado em 1654 já supera o teto do target (1415), indicando excesso de volume leve — padrão de acúmulo sem polarização adequada. Z2 em 608 está abaixo do target mínimo (957), revelando déficit de estímulo aeróbico estrutural nesta fase BASE. Z3+ em 673 está elevado proporcionalmente ao volume total, aumentando o risco de lesão classificado como MODERADO; redistribuição urgente nas próximas semanas.",
+    "sec_hoje": "Treino planejado era natação livre; executado: 1500m em 38m37s, FC média 130bpm (max 157bpm), pace 2:34/100m. Comparado ao treino de ontem (2:12/100m, FC 123bpm), houve queda de eficiência significativa: pace 22s/100m mais lento e FC 7bpm mais alta, com pico de 157bpm sugerindo esforço anaeróbico pontual. SWOLF 13.7 vs 11.8 ontem confirma degradação técnica — possivelmente fadiga acumulada de sessões consecutivas de natação.",
+    "sec_ajuste": "Para amanhã (Steady Run 55min): manter duração integral com FC teto em 148bpm, zona aeróbica leve-moderada, pace controlado sem variações — máximo 5min em Z3 se sensação for boa.",
+    "sec_alertas": "Alerta de eficiência técnica na natação: queda de SWOLF 11.8→13.7 e pace 2:12→2:34 em sessões consecutivas indica fadiga técnica acumulada — evitar novo volume de natação antes de 48h. REM de 0.4h é valor crítico para recuperação neural; priorizar janela de sono até 22h00 esta noite.",
+    "sec_nutricao": "Treino já executado (38min natação): janela pós-treino — consumir 30g proteína + 60g CHO nos próximos 30min para reparação. Para o restante do dia sem treino adicional: manutenção calórica normal, hidratação mínima 2L dado clima frio e baixo stress metabólico.",
     "status_readiness": "BOM",
     "status_carga": "ELEVADA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Swim 1500m executado com queda de eficiência (SWOLF +1.9, pace +22s/100m vs ontem) e pico de FC 157bpm indesejado para sessão de recuperação. Volume adequado, intensidade ligeiramente elevada para o contexto de dois dias consecutivos de nado.",
-    "alerta": "Dois dias consecutivos de natação com degradação de SWOLF em 16% — risco de sobrecarga de ombro; amanhã é corrida obrigatória, zero natação.",
+    "analise_hoje": "Sessão de 1500m executada com queda mensurável de eficiência vs ontem — SWOLF +1.9 e pace +22s/100m com FC mais alta indicam fadiga técnica, não falha de esforço. Treino válido para o dia, mas sinaliza necessidade de pausa de natação amanhã.",
+    "alerta": "Dois dias consecutivos de natação geraram degradação técnica mensurável (SWOLF 11.8→13.7); não acumular terceira sessão de swim sem 48h de intervalo.",
     "treino_forca": [
       {
-        "exercicio": "Prancha frontal",
-        "series": 3,
-        "repeticoes": "40s",
-        "carga": "leve",
-        "foco": "Estabilidade de core essencial para economia de movimento na corrida e posição aerodinâmica no bike"
-      },
-      {
-        "exercicio": "Ponte de glúteos unilateral",
+        "exercicio": "Ponte de Glúteos Unilateral",
         "series": 3,
         "repeticoes": "12-15",
         "carga": "leve",
-        "foco": "Ativação e força de glúteo médio/máximo para prevenir queda pélvica na corrida do 70.3"
+        "foco": "Ativa glúteo médio e máximo para estabilidade pélvica na corrida e no ciclismo"
       },
       {
-        "exercicio": "Agachamento goblet",
+        "exercicio": "Agachamento Goblet",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Força funcional de quadríceps e glúteos com postura ereta, transferência direta para saída do bike"
+        "foco": "Desenvolve força funcional de quadril e joelho com padrão de movimento específico para bike e corrida"
       },
       {
-        "exercicio": "Rotação de quadril em quatro apoios (bird-dog)",
+        "exercicio": "Prancha Lateral com Abdução de Quadril",
+        "series": 3,
+        "repeticoes": "30s",
+        "carga": "leve",
+        "foco": "Core lateral e estabilidade de quadril — previne colapso pélvico na corrida do 70.3"
+      },
+      {
+        "exercicio": "Step-Up com Joelho Alto",
         "series": 3,
         "repeticoes": "10-12",
-        "carga": "leve",
-        "foco": "Estabilidade lombo-pélvica e coordenação contralateral, reduz risco de lesão em corridas longas"
-      },
-      {
-        "exercicio": "Elevação de panturrilha unilateral",
-        "series": 3,
-        "repeticoes": "15-20",
         "carga": "moderada",
-        "foco": "Fortalecimento excêntrico de sóleo e gastrocnêmio para absorção de impacto na corrida do half"
+        "foco": "Simula padrão de recrutamento da corrida, fortalece glúteo e iliopsoas de forma integrada"
       },
       {
-        "exercicio": "Abertura de peito com theraband (retração escapular)",
-        "series": 3,
-        "repeticoes": "15",
-        "carga": "leve",
-        "foco": "Equilíbrio muscular escapular após volume de natação, prevenção de síndrome do impacto de ombro"
-      },
-      {
-        "exercicio": "Mobilidade de quadril — 90/90 stretch",
+        "exercicio": "Rotação Torácica em Quatro Apoios",
         "series": 2,
-        "repeticoes": "45s",
+        "repeticoes": "10-12",
         "carga": "leve",
-        "foco": "Amplitude de rotação interna/externa do quadril, melhora passada e posição no aero do bike"
+        "foco": "Mobilidade de coluna torácica — melhora postura aerodinâmica no bike e respiração na natação"
+      },
+      {
+        "exercicio": "Dead Bug",
+        "series": 3,
+        "repeticoes": "8-10",
+        "carga": "leve",
+        "foco": "Core profundo com coordenação contralateral — estabilidade lombar essencial para transferência de potência no triathlon"
+      },
+      {
+        "exercicio": "Alongamento de Psoas em Avanço Estático",
+        "series": 2,
+        "repeticoes": "40s",
+        "carga": "leve",
+        "foco": "Mobilidade de flexores de quadril encurtados pelo tempo em posição aero no bike"
       }
     ]
   }
