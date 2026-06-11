@@ -1,6 +1,6 @@
 {
   "date": "2026-06-11",
-  "generated_at": "2026-06-11T06:57:23.156282Z",
+  "generated_at": "2026-06-11T07:04:00.761979Z",
   "saude": {
     "hrv": 60,
     "hrv_7d": 36,
@@ -143,7 +143,7 @@
     "temp_min": 10.4,
     "chuva_pct": 96,
     "vento_kmh": 14.4,
-    "temp_atual": 11.5,
+    "temp_atual": 11.6,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
@@ -302,68 +302,68 @@
     }
   ],
   "insights": {
-    "frase": "HRV em alta: base sólida, execute com precisão hoje.",
-    "sec_readiness": "HRV 60ms representa +24ms acima da média 7d (36ms) e está acima do baseline 33–42ms — sinal claro de supercompensação e prontidão aeróbica elevada. Sono 7.6h com score 79, mas deep sleep apenas 1.2h e déficit de 0.9h indicam recuperação incompleta em qualidade. Body Battery 50/100 com stress médio 16 é adequado para treino moderado.",
-    "sec_treino_ontem": "Natação 1500m em 38:37 a pace 2:34/100m com FC média 130bpm e SWOLF 13.7 indica eficiência técnica aceitável, mas pace acima do esperado para Z2 de base — revisar técnica de braçada. TE aeróbico 2.7 confirma estímulo leve a moderado, adequado para fase BASE. Tênis 11min com FC 122bpm foi carga mínima, desconsiderável para métricas de treinamento.",
-    "sec_carga": "Z1 mensal em 1655 (target 577–1415) está 17% acima do teto — volume leve excessivo comprometendo adaptação aeróbica específica. Z2 em 491 está muito abaixo do target 957–1795, gap crítico de -49% que precisa ser corrigido nas próximas semanas. Z3+ em 651 dentro do aceitável, mas com risco de lesão MODERADO e CTL 2797, manter disciplina na distribuição de zonas.",
-    "sec_hoje": "Steady Run de 55min ainda não executado — priorizar execução em Z2 aeróbico com FC entre 138–152bpm para corrigir o déficit crítico de Z2 mensal identificado. Clima com chuva 96% e 17.5°C max: temperatura favorável para corrida, mas cuidado com superfícies molhadas — optar por percurso pavimentado plano. Monitorar HR drift: se FC ultrapassar 155bpm sem aumento de esforço percebido, reduzir pace imediatamente.",
-    "sec_ajuste": "Executar 55min integrais com FC alvo 138–152bpm (Z2), primeiros 10min de aquecimento em Z1 abaixo de 138bpm. Limitar qualquer segmento acima de 155bpm a no máximo 5min total durante toda a sessão.",
-    "sec_alertas": "Z1 mensal 17% acima do teto — reduzir treinos puramente leves e substituir por Z2 estruturado nas próximas sessões. Déficit Z2 de 49% do target mensal é o alerta mais crítico para desenvolvimento aeróbico do Half Ironman em 94 dias.",
-    "sec_nutricao": "Pré-corrida 60–90min antes: 350kcal com CHO de absorção rápida (banana + aveia) e 350ml água. Pós-treino imediato: 30g proteína whey + 40g CHO em até 30min para reposição glicogênica; deitar às 22:00 visando 8.5h para fechar déficit de sono.",
+    "frase": "HRV elevado: janela de qualidade, execute com precisão.",
+    "sec_readiness": "HRV de 60ms representa +24ms vs média 7d (36ms) e supera o baseline de 33–42ms — sinal claro de recuperação sistêmica efetiva. RHR em 61bpm sem baseline definido, mas coerente com estado balanceado. Sono de 7.6h com score 79 é funcional, porém deep sleep (1.2h) e REM (0.8h) abaixo do ideal; déficit de 0.9h acumulado exige dormir às 22h hoje. Body Battery 50/100 com stress médio 16 indica reserva moderada, suficiente para treino aeróbico controlado.",
+    "sec_treino_ontem": "Natação de 1500m em 38'37\" a 2:34/100m com FC média 130bpm e SWOLF 13.7 indica pace consistente para fase BASE, com TE aeróbico 2.7 — estímulo útil sem sobrecarga. Tênis (0.5km, 12min, FC 122bpm) foi atividade recreativa de baixíssimo impacto, irrelevante para carga de treino. Nenhum ponto crítico de recuperação derivado de ontem.",
+    "sec_carga": "Z1 mensal em 1655 unidades ultrapassa o teto do target (1415), indicando excesso de volume leve sem qualidade correspondente. Z2 em 491 está criticamente abaixo do target mínimo de 957 — déficit severo no estímulo aeróbico fundamental para BASE de 70.3. Z3+ em 651 supera proporcionalmente o recomendado para esta fase, elevando risco de lesão para MODERADO; redistribuição urgente nas próximas semanas.",
+    "sec_hoje": "Steady Run de 55min não foi executado ainda — priorize execução no período da tarde, evitando chuva e vento de 14.4km/h ou adapte para ambiente indoor. Zona alvo: Z2 exclusivo, FC entre 138–150bpm, sem excursões acima de 155bpm. O objetivo é alimentar o déficit de Z2 mensal sem adicionar carga anaeróbica desnecessária.",
+    "sec_ajuste": "Executar os 55min integrais em Z2 com FC teto 152bpm; eliminar qualquer aceleração ou trecho em Z3+. Se vento/chuva comprometerem a execução externa, substituir por esteira a pace 5:30–6:00/km.",
+    "sec_alertas": "Z2 mensal em déficit severo (491 vs mínimo 957): próximas sessões de corrida e bike devem priorizar Z2 rigoroso. Evitar treinos com componente anaeróbico até reequilíbrio da distribuição de zonas.",
+    "sec_nutricao": "Pré-treino (60min antes): 350kcal com foco em carboidratos de baixo índice glicêmico + 350ml de água. Pós-treino: 30g de proteína + carboidrato de reposição dentro de 30min; hidratação de 600ml/h durante o run mesmo em clima frio.",
     "status_readiness": "BOM",
     "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Steady Run 55min é a sessão ideal para atacar o déficit crítico de Z2 mensal com HRV favorável e clima adequado. Executar disciplinado em FC 138–152bpm sem desvios anaeróbicos.",
-    "alerta": "Z2 mensal em apenas 49% do target mínimo — risco real de subdesenvolvimento aeróbico para prova em 94 dias.",
+    "analise_hoje": "Steady Run de 55min em Z2 é a execução correta dado o HRV elevado e déficit crítico de Z2 mensal. Manter FC entre 138–152bpm durante toda a sessão sem variações.",
+    "alerta": "Z2 mensal em 49% do target mínimo — risco de subdesenvolvimento aeróbico base comprometendo adaptações para setembro.",
     "treino_forca": [
       {
         "exercicio": "Agachamento Goblet",
         "series": 3,
-        "repeticoes": "12-15",
+        "repeticoes": "12",
         "carga": "moderada",
-        "foco": "Fortalece glúteos e quadríceps para potência no ciclismo e corrida em subidas"
+        "foco": "Fortalece glúteos e quadríceps para potência na bike e corrida pós-T2"
       },
       {
-        "exercicio": "Ponte de Glúteos Unilateral",
+        "exercicio": "Ponte de Glúteo Unilateral",
         "series": 3,
-        "repeticoes": "12",
+        "repeticoes": "10-12",
         "carga": "leve",
-        "foco": "Ativa glúteo médio e corrige desequilíbrios pélvicos que causam lesões na corrida"
+        "foco": "Ativa glúteo médio reduzindo risco de lesão no joelho e quadril na corrida"
       },
       {
         "exercicio": "Prancha Lateral com Abdução de Quadril",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Estabilização de core lateral e glúteo médio — essencial para economia de corrida"
+        "foco": "Estabilidade lateral do core essencial para economia de corrida e pedalada"
       },
       {
-        "exercicio": "Elevação de Panturrilha Unilateral",
+        "exercicio": "Step-Up com Joelho Alto",
         "series": 3,
-        "repeticoes": "15",
+        "repeticoes": "10",
         "carga": "moderada",
-        "foco": "Fortalece sóleo e gastrocnêmio prevenindo tendinopatia em volume de corrida crescente"
+        "foco": "Simula padrão motor da corrida com carga funcional, melhora estabilidade unilateral"
       },
       {
-        "exercicio": "Remada com Halteres em Inclinação",
+        "exercicio": "Remada com Halteres em Apoio",
         "series": 3,
         "repeticoes": "12",
         "carga": "moderada",
-        "foco": "Fortalece dorsais e romboides para manter posição hidrodinámica e postura no ciclismo"
+        "foco": "Fortalece cadeia posterior do tronco para postura aerodinâmica na bike"
       },
       {
         "exercicio": "Dead Bug",
         "series": 3,
-        "repeticoes": "10",
+        "repeticoes": "10-12",
         "carga": "leve",
-        "foco": "Core profundo anti-extensão — transferência direta para estabilidade no aero e na corrida"
+        "foco": "Core profundo e coordenação motora, protege coluna lombar no aero da bike"
       },
       {
-        "exercicio": "Mobilidade de Quadril 90/90 com Rotação",
+        "exercicio": "Mobilidade de Quadril em 90/90",
         "series": 2,
         "repeticoes": "60s",
         "carga": "leve",
-        "foco": "Aumenta amplitude rotacional do quadril reduzindo compensações lombares após sessões longas de bike"
+        "foco": "Aumenta amplitude de quadril reduzindo restrições na pedalada e passada de corrida"
       }
     ]
   }
