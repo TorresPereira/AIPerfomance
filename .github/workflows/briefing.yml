@@ -55,11 +55,11 @@ jobs:
           cp -r pwa/. docs/
           touch docs/.nojekyll
 
-      - name: Commit report.json no main
+      - name: Commit no main (pwa + docs)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f pwa/report.json
+          git add -f pwa/report.json docs/
           git commit -m "📊 briefing $(date +'%Y-%m-%d %H:%M UTC')" || true
           git push origin HEAD:main || true
 
