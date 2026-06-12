@@ -1,6 +1,6 @@
 {
   "date": "2026-06-12",
-  "generated_at": "2026-06-12T07:41:09.284893Z",
+  "generated_at": "2026-06-12T16:35:07.624162Z",
   "saude": {
     "hrv": 52,
     "hrv_7d": 36,
@@ -15,8 +15,8 @@
     "sono_rem": 0.8,
     "sono_awake": 3.0,
     "body_battery": 58,
-    "stress_avg": 19,
-    "stress_rest": 73.23,
+    "stress_avg": 20,
+    "stress_rest": 57.02,
     "atl": 774.0,
     "ctl": 3095.0,
     "tsb": null,
@@ -161,11 +161,11 @@
     "run_min": 148.8
   },
   "clima": {
-    "temp_max": 15.7,
+    "temp_max": 16.5,
     "temp_min": 11.8,
     "chuva_pct": 100,
     "vento_kmh": 16.2,
-    "temp_atual": 14.2,
+    "temp_atual": 15.8,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
@@ -329,68 +329,68 @@
     }
   ],
   "insights": {
-    "frase": "HRV elevado hoje — aproveite a janela de adaptação.",
-    "sec_readiness": "HRV 52ms está 57% acima da média 7d (36ms) e acima do baseline (33–42ms), indicando recuperação autonômica sólida. RHR 61bpm sem baseline para comparação, mas sono de 7.5h com score 80 e deep sleep 1.6h é adequado; déficit de 1h vs alvo 8.5h é moderado. Body Battery 58/100 com stress médio 19 sugere reserva funcional suficiente para carga leve-moderada.",
-    "sec_treino_ontem": "Tênis (1h04m, FC média 120bpm, max 187bpm) gerou pico anaeróbico pontual com TE aeróbico 2.4 — contribuição para Z3+ relevante. Corrida de 3.8km em 4:05/km com FC 155bpm e potência 514W indica ritmo próximo ao limiar para distância curta, TE 3.3 adequado. Atenção: pico de 187bpm no tênis eleva carga anaeróbica acumulada.",
-    "sec_carga": "Z1 em 1701 unidades ultrapassa o teto do target (1418), indicando excesso de volume aeróbico leve. Z2 em 604 está abaixo do piso do target (954), déficit crítico para base aeróbica de 70.3. Z3+ em 790 é desproporcionalmente alto na fase BASE; status Garmin 'Sobrecarga' confirma desequilíbrio — prioridade imediata: reduzir Z3, aumentar Z2 estruturado.",
-    "sec_hoje": "Natação já executada: 1200m em 32min, pace 2:40/100m, FC 117bpm (max 135bpm), SWOLF 12.3 e TE 1.9 — sessão leve, sub-limiar, execução adequada para dia de recuperação ativa. Easy Ride planejado de 55min ainda pendente: executar em Z1 estrito, FC teto 130bpm, sem picos. Clima adverso (100% chuva, 16km/h vento) — preferir rolo/indoor.",
-    "sec_ajuste": "Easy Ride: 55min no rolo, FC teto 130bpm, potência alvo 140–160W, cadência 85–90rpm, zero Z2+. Natação já concluída dentro do padrão — sem ajuste necessário.",
-    "sec_alertas": "Z3+ mensal em 790 unidades com status 'Sobrecarga' na fase BASE é o alerta principal — risco de lesão MODERADO confirmado. Pico de 187bpm no tênis ontem indica estímulo anaeróbico não planejado; monitorar HRV amanhã antes do Long Run. Volume de bike semanal (1.1km) está criticamente baixo para 70.3 com 93 dias para a prova.",
-    "sec_nutricao": "Sem treinos longos hoje: pré-ride fácil ingerir 200kcal (carboidrato de baixo IG, 30–45min antes). Pós-treino: 30g proteína + 40g CHO para reposição glicogênio; hidratação 600ml/h durante o ride mesmo em clima frio.",
+    "frase": "HRV em alta: capitalize a recuperação com precisão hoje.",
+    "sec_readiness": "HRV 52ms está +16ms acima da média 7d (36ms) e acima do baseline (33–42ms), indicando recuperação fisiológica real — sinal verde para treino moderado. RHR 61bpm sem baseline comparativo, mas coerente com Body Battery 58/100 e stress médio 20, sugerindo sistema nervoso estável. Sono 7.5h com score 80 é positivo, porém REM 0.8h está abaixo do ideal (recomendado ≥1.5h) e déficit acumulado de 1.0h exige prioridade para deitar às 22:00.",
+    "sec_treino_ontem": "O tênis (1h04m, FC média 120bpm, TE 2.4) funcionou como estímulo Z1 leve, mas o pico de 187bpm indica esforços anaeróbicos pontuais inconsistentes com fase BASE. A corrida de 3.8km a 4:05/km com FC 155bpm e potência 514W representa intensidade elevada (limiar ou acima) para um bloco curto — TE 3.3 confirma estímulo aeróbico útil, mas combinado com tênis eleva a carga acumulada do dia além do esperado para base.",
+    "sec_carga": "Z1 com 1701 (target 580–1418) está 20% acima do limite superior — volume aeróbico leve excessivo comprime a adaptação. Z3+ em 790 ultrapassa qualquer referência aceitável para fase BASE, representando risco real de fadiga neuromuscular e lesão (risco classificado como MODERADO). Z2 em 604 está abaixo do target mínimo (954), indicando déficit na zona de maior retorno aeróbico para 70.3 — distribuição precisa de correção urgente.",
+    "sec_hoje": "Natação já executada: 1200m em 32min a 2:40/100m com FC 117bpm (max 135bpm) e TE 1.9 — esforço Z1 leve, eficiente, SWOLF 12.3 indica boa técnica. Easy Ride planejado de 55min ainda não executado: executar em Z1 estrito, FC teto 130bpm, cadência 85–95rpm, sem acelerações. O clima chuvoso (16°C, 100% chuva) indica rolo/treino indoor como opção prioritária para segurança.",
+    "sec_ajuste": "Easy Ride 55min com FC teto absoluto de 130bpm e cadência 85–95rpm; nenhum esforço Z2+ permitido. Potência alvo 120–160W (estimativa para perfil VO2max 49.4), sem picos acima de 180W.",
+    "sec_alertas": "Z3+ mensal em 790 unidades em fase BASE é o principal alerta — reduzir imediatamente esforços acima do limiar nas próximas 2 semanas. REM 0.8h cronicamente baixo pode comprometer consolidação neuromuscular; avaliar higiene do sono. Pico de FC 187bpm no tênis ontem indica que atividades recreativas estão gerando carga anaeróbica não contabilizada no planejamento.",
+    "sec_nutricao": "Pré-Easy Ride: 350kcal com CHO de absorção rápida (banana + aveia) 60min antes; durante 55min de intensidade leve, hidratação 300–350ml total com eletrólitos leves dado o frio. Pós-treino consolidado do dia: 30g proteína + 60–80g CHO na janela de 30min para reparação muscular após corrida intensa de ontem.",
     "status_readiness": "BOM",
     "status_carga": "SOBRECARGA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Natação executada com eficiência (SWOLF 12.3, FC controlada) — sessão dentro do esperado para recuperação ativa. Easy Ride pendente deve ser executado no rolo em Z1 estrito dado o status de sobrecarga e clima adverso.",
-    "alerta": "Z3+ mensal desproporcional na fase BASE com status Sobrecarga — restringir toda intensidade anaeróbica nos próximos 7 dias.",
+    "analise_hoje": "Natação executada dentro do esperado para dia de sobrecarga — Z1 leve, técnica eficiente, sem impacto adicional na carga. Easy Ride de 55min deve ser executado em Z1 estrito como ativo de recuperação, não como estímulo adaptativo.",
+    "alerta": "Z3+ mensal em 790 unidades em fase BASE — risco de lesão MODERADO; eliminar esforços anaeróbicos por 14 dias.",
     "treino_forca": [
       {
         "exercicio": "Agachamento Goblet",
         "series": 3,
         "repeticoes": "12",
         "carga": "moderada",
-        "foco": "Força funcional de quadríceps e glúteos para potência no ciclismo e corrida"
+        "foco": "Força funcional de glúteos e quadríceps para potência de pedalada e corrida no 70.3"
       },
       {
-        "exercicio": "Ponte de Glúteos Unilateral",
+        "exercicio": "Ponte de Glúteo Unilateral",
         "series": 3,
         "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Ativação e estabilização glútea para prevenir compensações na corrida"
-      },
-      {
-        "exercicio": "Prancha Lateral com Abdução de Quadril",
-        "series": 3,
-        "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e estabilidade pélvica — reduz risco de lesão no Long Run"
+        "foco": "Ativação e estabilidade glútea para prevenir lesões no quadril durante corrida"
       },
       {
-        "exercicio": "Remada com Elástico (posição de natação)",
+        "exercicio": "Prancha com Alcance Alternado (Dead Bug)",
         "series": 3,
-        "repeticoes": "15",
-        "carga": "moderada",
-        "foco": "Força de puxada para natação sem carga axial — adequado ao status de sobrecarga"
+        "repeticoes": "10-12",
+        "carga": "leve",
+        "foco": "Core antirotacional essencial para eficiência de postura em todas as modalidades do triathlon"
       },
       {
-        "exercicio": "Step-up com joelho elevado",
+        "exercicio": "Step-Up com Halteres",
         "series": 3,
         "repeticoes": "10",
         "carga": "moderada",
-        "foco": "Estabilidade unilateral e força excêntrica para corrida em subida"
+        "foco": "Estabilidade unilateral e força excêntrica para descidas na corrida e transições de ciclismo"
       },
       {
-        "exercicio": "Dead Bug",
+        "exercicio": "Remada com Haltere Unilateral",
         "series": 3,
-        "repeticoes": "8-10",
-        "carga": "leve",
-        "foco": "Core profundo (transverso abdominal) — estabilização lombar em todas as modalidades"
+        "repeticoes": "12",
+        "carga": "moderada",
+        "foco": "Força de tração para natação — latíssimo e romboides, melhora a fase de puxada"
       },
       {
-        "exercicio": "Mobilidade de Quadril 90/90 + Rotação Torácica",
+        "exercicio": "Hip Hinge com Kettlebell (RDL)",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Fortalece isquiotibiais e glúteo para economia de corrida e posição aerodinâmica no bike"
+      },
+      {
+        "exercicio": "Mobilidade de Quadril — 90/90 + Abertura Torácica",
         "series": 2,
-        "repeticoes": "60s",
+        "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Mobilidade articular para eficiência na pedalada e redução de tensão pós-tênis"
+        "foco": "Reduz restrição de quadril e melhora rotação torácica, crítico para posição no tri-bar e braçada"
       }
     ]
   }
