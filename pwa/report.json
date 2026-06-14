@@ -1,43 +1,43 @@
 {
   "date": "2026-06-14",
-  "generated_at": "2026-06-14T07:51:31.974250Z",
+  "generated_at": "2026-06-14T07:55:29.213886Z",
   "saude": {
-    "hrv": null,
-    "hrv_7d": null,
-    "hrv_status": "",
-    "hrv_baseline_low": null,
-    "hrv_baseline_high": null,
-    "rhr": null,
+    "hrv": 38,
+    "hrv_7d": 35,
+    "hrv_status": "balanced",
+    "hrv_baseline_low": 33,
+    "hrv_baseline_high": 42,
+    "rhr": 65,
     "rhr_baseline": null,
-    "sono_h": 0.0,
-    "sono_score": null,
-    "sono_deep": 0.0,
+    "sono_h": 4.4,
+    "sono_score": 47,
+    "sono_deep": 1.4,
     "sono_rem": 0.0,
-    "sono_awake": 0.0,
-    "body_battery": null,
-    "stress_avg": null,
-    "stress_rest": null,
-    "atl": null,
-    "ctl": null,
+    "sono_awake": 8.0,
+    "body_battery": 34,
+    "stress_avg": 27,
+    "stress_rest": 44.04,
+    "atl": 764.0,
+    "ctl": 3058.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": null,
-    "load_aerobic_high": null,
-    "load_anaerobic": null,
-    "load_total_month": null,
-    "load_target_low": null,
-    "load_target_high": null,
-    "training_status": null,
-    "fitness_trend": null,
+    "load_aerobic_low": 1807.0,
+    "load_aerobic_high": 461.0,
+    "load_anaerobic": 790.0,
+    "load_total_month": 3058.0,
+    "load_target_low": "580–1418",
+    "load_target_high": "954–1792",
+    "training_status": "Recuperação",
+    "fitness_trend": "Estável",
     "training_readiness": null,
-    "vo2max": null,
+    "vo2max": 49.4,
     "peso": null,
     "previsoes": {
-      "5K": 1352,
-      "10K": 2873,
-      "Meia": 6502,
-      "Maratona": 14522
+      "5K": 1353,
+      "10K": 2874,
+      "Meia": 6507,
+      "Maratona": 14537
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -53,11 +53,32 @@
       "pos_prot_g": 30,
       "dur_min": 0
     },
-    "sono_alvo_h": 8.0,
-    "sono_deita": "22:30",
-    "sono_deficit_h": null
+    "sono_alvo_h": 8.5,
+    "sono_deita": "22:00",
+    "sono_deficit_h": 4.1
   },
   "ontem": [
+    {
+      "mod": "other",
+      "icone": "⚡",
+      "nome": "Nideggen Hiking",
+      "dist": "1.3km",
+      "dur": "32m34s",
+      "fc": 83.0,
+      "fc_max": 110.0,
+      "cal": 140.0,
+      "cad": 44.0,
+      "tss": null,
+      "np": null,
+      "swolf": null,
+      "aerobic_te": 0.10000000149011612,
+      "anaerobic_te": 0.0,
+      "elev": 18.0,
+      "perf": "—",
+      "pl": "—",
+      "_dist_m": 1302.6500244140625,
+      "_dur_s": 1954.0479736328125
+    },
     {
       "mod": "other",
       "icone": "⚡",
@@ -191,7 +212,7 @@
     "run_km": 13.2,
     "run_min": 85.7,
     "total_tss": 0.0,
-    "n_treinos": 14
+    "n_treinos": 15
   },
   "semana_passada": {
     "swim_km": 3.1,
@@ -236,14 +257,10 @@
     },
     {
       "date": "2026-06-14",
-      "value": null
+      "value": 38.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-05-30",
-      "value": 49.4
-    },
     {
       "date": "2026-05-31",
       "value": 49.4
@@ -298,6 +315,10 @@
     },
     {
       "date": "2026-06-13",
+      "value": 49.4
+    },
+    {
+      "date": "2026-06-14",
       "value": 49.4
     }
   ],
@@ -370,68 +391,68 @@
     }
   ],
   "insights": {
-    "frase": "Base sólida hoje, pódio em setembro: pedale com propósito.",
-    "sec_readiness": "Dados de HRV, RHR e sono ausentes — impossível quantificar prontidão fisiológica com precisão. Ontem foram registradas 3 sessões de corrida + caminhada + futebol em Nideggen, totalizando atividade recreativa/turística de baixa-moderada intensidade. Sem Body Battery e sem score de sono, adota-se postura conservadora: readiness assumida como MODERADA por precaução.",
-    "sec_treino_ontem": "Dia recreativo em Nideggen com 3 blocos de corrida (1,9km + 1,8km + 4,1km), caminhada 2h14m e futebol. O segundo bloco de corrida atingiu FC 147bpm avg / 161bpm max com potência 407W — intensidade desproporcionalmente alta para volume baixo, indicando esforço anaeróbico não planejado. O bloco de 4,1km a 8:16/km com FC max 175bpm sinaliza drift cardiovascular relevante, possivelmente por acúmulo de fadiga neuromuscular do futebol antecedente.",
-    "sec_carga": "Volume semanal registrado: Natação 5,5km, Bike apenas 1,1km, Corrida 13,2km — distribuição severamente desequilibrada para fase BASE de 70.3. Ciclismo criticamente subdesenvolvido, comprometendo base aeróbica específica para o segmento de 90km em setembro. Sem dados de ATL/CTL/zonas, mas o risco de lesão classificado como MODERADO combinado com picos de FC ontem exige controle rigoroso da intensidade hoje.",
-    "sec_hoje": "Steady Long Ride 2h30m é o treino central do dia — exatamente o estímulo aeróbico que o ciclismo necessita após semana com apenas 1,1km de bike. Executar em Z2 sólido (aeróbico, ~65-75% FCmax estimada), sem excursões prolongadas em Z3+. Priorizar consistência de potência e cadência sobre velocidade, especialmente considerando clima adverso: 18°C, chuva 84% e vento 17,6km/h.",
-    "sec_ajuste": "Manter 2h30m com FC teto em 155bpm e potência alvo 180-210W (Z2 estável). Limitar Z3+ a máximo 10 minutos totais; qualquer spike acima de 165bpm deve ser seguido de redução imediata de carga por 3-5 minutos.",
-    "sec_alertas": "Atenção ao clima: chuva 84% + vento 17,6km/h aumentam risco de hipotermia em ride longo — layering adequado obrigatório. FC max de 175bpm registrada ontem indica sistema cardiovascular sob pressão; monitorar HR drift nos primeiros 20min do ride. Bike acumulado semanal de 1,1km é criticamente baixo para 91 dias do evento — este ride é estrategicamente indispensável, não opcional.",
-    "sec_nutricao": "Pré-ride: 350kcal ~60min antes (CHO complexo + proteína leve, ex: aveia + banana + ovo). Durante 2h30m: 80g CHO/hora (géis ou bebida esportiva) + 600ml/hora de hidratação com eletrólitos dado o esforço no frio. Pós-treino: 30g proteína + CHO de rápida absorção dentro de 30min do término.",
-    "status_readiness": "MODERADO",
-    "status_carga": "SUAVE",
-    "acao_hoje": "MANTER",
-    "analise_hoje": "Steady Long Ride 2h30m é prioritário e perfeitamente indicado: corrige o déficit crítico de volume em bike e entrega estímulo aeróbico de base que a semana não teve. Executar com disciplina de zona — FC teto 155bpm — para não comprometer o treino de força amanhã.",
-    "alerta": "Volume de ciclismo semanal de apenas 1,1km em fase BASE a 91 dias do 70.3 é insuficiente — este ride não pode ser cancelado independentemente do clima.",
+    "frase": "Recuperação ativa: base sólida se constrói com disciplina.",
+    "sec_readiness": "HRV 38ms está acima da média 7d (35ms) em +3ms, dentro do baseline 33–42ms — sinal de recuperação em curso. RHR de 65bpm sem baseline definido limita análise comparativa. Sono crítico: 4.4h com score 47, zero REM e apenas 1.4h deep — déficit de 4.1h compromete síntese proteica e consolidação neuromuscular. Body Battery 34/100 confirma reserva energética baixa.",
+    "sec_treino_ontem": "Dia fragmentado em Nideggen com hiking, futebol e 3 blocos de corrida totalizando ~7.8km de corrida — carga aeróbica dispersa sem estrutura de treino. O bloco mais intenso registrou FC máx 175bpm e pace 5:06/km (TE 2.3), indicando esforço anaeróbico não planejado. Cadência baixa nos runs (147–168spm) e pace médio lento (7-8min/km) sugerem fadiga acumulada durante o dia recreativo.",
+    "sec_carga": "Z1 mensal em 1807 — 27% acima do teto do target (1418), indicando volume aeróbico leve excessivo. Z2 com apenas 461 contra target mínimo de 954 — déficit severo de estímulo aeróbico de qualidade. Z3+ em 790 está desproporcional para fase BASE, elevando risco de fadiga sem base aeróbica adequada; distribuição precisa ser corrigida urgentemente.",
+    "sec_hoje": "Steady Long Ride de 2h30min não foi executado ainda — sono insuficiente (4.4h) e Body Battery 34 recomendam execução cautelosa. Manter o ride mas em Z1 puro, evitando qualquer drift para Z2 acima de 10min contínuos. Prioridade: estimular recuperação ativa e perfusão muscular, não acumular carga adicional.",
+    "sec_ajuste": "Executar 2h30min em Z1 estrito com FC teto 148bpm e potência alvo 170–195W (estimado ~65–72% FTP). Limitar Z2 a no máximo 10min não contínuos; cancelar completamente qualquer esforço Z3+.",
+    "sec_alertas": "Z1 mensal 27% acima do teto — risco de volume lixo acumulado sem estímulo adaptativo real. REM zerado esta noite: capacidade de coordenação motora e tomada de decisão reduzidas — atenção na técnica de pedalada. Sono < 5h em dia de treino de 2h30: monitorar sinais de overreaching (FC elevada, RPE desproporcional).",
+    "sec_nutricao": "Pré-ride: 350kcal ~60min antes (CHO complexo + proteína leve). Durante 2h30min: 40–50g CHO/h (gel ou bebida esportiva) + 500–600ml/h de líquido dado frio (12–18°C); pós-treino imediato: 30g proteína + 60g CHO para reparação e reposição de glicogênio.",
+    "status_readiness": "BAIXO",
+    "status_carga": "ELEVADA",
+    "acao_hoje": "REDUZIR 20%",
+    "analise_hoje": "Steady Long Ride viável mas deve ser convertido em sessão de recuperação ativa em Z1 estrito dado Body Battery 34 e sono crítico de 4.4h. Reduzir intensidade 20% preserva o estímulo aeróbico sem aprofundar o déficit de recuperação.",
+    "alerta": "Sono 4.4h com REM zerado + Body Battery 34: risco real de overreaching se intensidade não for controlada no ride de hoje.",
     "treino_forca": [
       {
-        "exercicio": "Agachamento Búlgaro (Split Squat)",
+        "exercicio": "Dead Bug",
         "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Força unilateral de glúteo e quadríceps, corrige assimetrias críticas para pedalada e corrida em 70.3"
-      },
-      {
-        "exercicio": "Ponte de Glúteo com Elevação Unilateral",
-        "series": 3,
-        "repeticoes": "12-15",
+        "repeticoes": "8-10",
         "carga": "leve",
-        "foco": "Ativa glúteo médio e máximo, prevenindo colapso de quadril na corrida pós-bike"
+        "foco": "Estabilidade lombo-pélvica essencial para manter posição aero sem compensações"
       },
       {
-        "exercicio": "Deadlift Romeno com Halteres",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Fortalece cadeia posterior (isquiotibiais/glúteos), transferência direta para potência de pedalada"
-      },
-      {
-        "exercicio": "Prancha com Variação Lateral (Side Plank)",
+        "exercicio": "Glute Bridge Isométrico",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core: estabilidade lombar e oblíqua, essencial para manter posição aerodinâmica no bike e economia na corrida"
+        "foco": "Ativação glútea para potência de pedalada e proteção do joelho na corrida"
       },
       {
-        "exercicio": "Step-Up com Joelho Alto",
+        "exercicio": "Agachamento Goblet (peso leve)",
         "series": 3,
         "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Simula padrão de corrida com carga, desenvolve potência de quadríceps e coordenação neuromuscular"
-      },
-      {
-        "exercicio": "Mobilidade de Quadril — 90/90 com Rotação",
-        "series": 2,
-        "repeticoes": "8-10",
         "carga": "leve",
-        "foco": "Mobilidade: recupera amplitude de rotação do quadril após volume de corrida e bike, reduz risco de lesão"
+        "foco": "Força funcional de quadríceps e glúteos com carga controlada adequada para recuperação"
       },
       {
-        "exercicio": "Remada com Halteres (Bent-Over Row)",
+        "exercicio": "Step-Up com equilíbrio",
         "series": 3,
+        "repeticoes": "8",
+        "carga": "leve",
+        "foco": "Estabilidade unilateral e força excêntrica — reduz risco de lesão na corrida de 21km"
+      },
+      {
+        "exercicio": "Prancha Lateral com Abdução de Quadril",
+        "series": 3,
+        "repeticoes": "20s",
+        "carga": "leve",
+        "foco": "Core lateral e abdutores — previne colapso pélvico na corrida em fadiga"
+      },
+      {
+        "exercicio": "Mobilidade Torácica em Foam Roller",
+        "series": 2,
         "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Fortalece romboides e trapézio médio, sustentando postura no aerobô e reduzindo fadiga cervical no segmento bike"
+        "carga": "leve",
+        "foco": "Melhora extensão torácica para posição aero na bike sem sobrecarga cervical"
+      },
+      {
+        "exercicio": "Alongamento dinâmico Psoas/Hip Flexor",
+        "series": 2,
+        "repeticoes": "30s",
+        "carga": "leve",
+        "foco": "Libera flexores do quadril encurtados pelo ciclismo — melhora passada na corrida"
       }
     ]
   }
