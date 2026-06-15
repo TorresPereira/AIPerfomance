@@ -1,31 +1,31 @@
 {
-  "date": "2026-06-14",
-  "generated_at": "2026-06-14T12:30:07.727440Z",
+  "date": "2026-06-15",
+  "generated_at": "2026-06-15T07:11:59.459330Z",
   "saude": {
-    "hrv": 38,
-    "hrv_7d": 35,
+    "hrv": 70,
+    "hrv_7d": 37,
     "hrv_status": "balanced",
     "hrv_baseline_low": 33,
     "hrv_baseline_high": 42,
-    "rhr": 65,
+    "rhr": 58,
     "rhr_baseline": null,
-    "sono_h": 4.4,
-    "sono_score": 47,
-    "sono_deep": 1.4,
-    "sono_rem": 0.0,
-    "sono_awake": 8.0,
-    "body_battery": 34,
-    "stress_avg": 27,
-    "stress_rest": 38.95,
-    "atl": 764.0,
-    "ctl": 3058.0,
+    "sono_h": 7.3,
+    "sono_score": 87,
+    "sono_deep": 1.0,
+    "sono_rem": 1.3,
+    "sono_awake": 0.0,
+    "body_battery": 68,
+    "stress_avg": 7,
+    "stress_rest": 87.82,
+    "atl": 791.0,
+    "ctl": 3166.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 1807.0,
+    "load_aerobic_low": 1895.0,
     "load_aerobic_high": 461.0,
-    "load_anaerobic": 790.0,
-    "load_total_month": 3058.0,
+    "load_anaerobic": 810.0,
+    "load_total_month": 3166.0,
     "load_target_low": "580–1418",
     "load_target_high": "954–1792",
     "training_status": "Recuperação",
@@ -35,13 +35,13 @@
     "peso": null,
     "previsoes": {
       "5K": 1353,
-      "10K": 2874,
-      "Meia": 6507,
-      "Maratona": 14537
+      "10K": 2875,
+      "Meia": 6512,
+      "Maratona": 14549
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
-    "prova_dias": 91,
+    "prova_dias": 90,
     "prova_data": "13/09/2026",
     "prova_fase": "BASE",
     "nutricao": {
@@ -55,155 +55,9 @@
     },
     "sono_alvo_h": 8.5,
     "sono_deita": "22:00",
-    "sono_deficit_h": 4.1
+    "sono_deficit_h": 1.2
   },
   "ontem": [
-    {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Nideggen Hiking",
-      "dist": "1.3km",
-      "dur": "32m34s",
-      "fc": 83.0,
-      "fc_max": 110.0,
-      "cal": 140.0,
-      "cad": 44.0,
-      "tss": null,
-      "np": null,
-      "swolf": null,
-      "aerobic_te": 0.10000000149011612,
-      "anaerobic_te": 0.0,
-      "elev": 18.0,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 1302.6500244140625,
-      "_dur_s": 1954.0479736328125
-    },
-    {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Nideggen Hiking",
-      "dist": "2.8km",
-      "dur": "2h14m",
-      "fc": 91.0,
-      "fc_max": 146.0,
-      "cal": 653.0,
-      "cad": 15.53125,
-      "tss": null,
-      "np": null,
-      "swolf": null,
-      "aerobic_te": 0.8999999761581421,
-      "anaerobic_te": 0.6000000238418579,
-      "elev": 68.0,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 2770.199951171875,
-      "_dur_s": 8046.77587890625
-    },
-    {
-      "mod": "run",
-      "icone": "🏃",
-      "nome": "Nideggen Running",
-      "dist": "1.9km",
-      "dur": "13m32s",
-      "fc": 135.0,
-      "fc_max": 147.0,
-      "cal": 173.0,
-      "cad": 162.71875,
-      "tss": null,
-      "np": 310.0,
-      "swolf": null,
-      "aerobic_te": 2.0,
-      "anaerobic_te": 0.0,
-      "elev": 37.0,
-      "perf": "7:05/km",
-      "pl": "Pace",
-      "_dist_m": 1908.5999755859375,
-      "_dur_s": 812.8049926757812
-    },
-    {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Nideggen Soccer/Football",
-      "dist": "1.4km",
-      "dur": "59m24s",
-      "fc": 101.0,
-      "fc_max": 132.0,
-      "cal": 371.0,
-      "cad": 12.21875,
-      "tss": null,
-      "np": null,
-      "swolf": null,
-      "aerobic_te": 1.0,
-      "anaerobic_te": 0.0,
-      "elev": null,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 1403.1099853515625,
-      "_dur_s": 3564.468994140625
-    },
-    {
-      "mod": "run",
-      "icone": "🏃",
-      "nome": "Nideggen Running",
-      "dist": "1.8km",
-      "dur": "9m06s",
-      "fc": 147.0,
-      "fc_max": 161.0,
-      "cal": 140.0,
-      "cad": 168.6875,
-      "tss": null,
-      "np": 407.0,
-      "swolf": null,
-      "aerobic_te": 2.299999952316284,
-      "anaerobic_te": 0.20000000298023224,
-      "elev": 23.0,
-      "perf": "5:06/km",
-      "pl": "Pace",
-      "_dist_m": 1785.1099853515625,
-      "_dur_s": 546.802001953125
-    },
-    {
-      "mod": "run",
-      "icone": "🏃",
-      "nome": "Nideggen Running",
-      "dist": "4.1km",
-      "dur": "34m18s",
-      "fc": 127.0,
-      "fc_max": 175.0,
-      "cal": 370.0,
-      "cad": 147.71875,
-      "tss": null,
-      "np": 275.0,
-      "swolf": null,
-      "aerobic_te": 2.299999952316284,
-      "anaerobic_te": 0.5,
-      "elev": 89.0,
-      "perf": "8:16/km",
-      "pl": "Pace",
-      "_dist_m": 4142.81005859375,
-      "_dur_s": 2058.2890625
-    }
-  ],
-  "hoje": [
-    {
-      "icone": "🚴",
-      "nome": "Steady Long Ride",
-      "tipo": "",
-      "dur": "2h30m",
-      "dist": "—"
-    }
-  ],
-  "amanha": [
-    {
-      "icone": "⚡",
-      "nome": "Strength 💪",
-      "tipo": "",
-      "dur": "—",
-      "dist": "—"
-    }
-  ],
-  "hoje_feito": [
     {
       "mod": "other",
       "icone": "⚡",
@@ -212,51 +66,87 @@
       "dur": "1h35m",
       "fc": 82.0,
       "fc_max": 130.0,
+      "cal": 375.0,
+      "cad": 42.234375,
       "tss": null,
       "np": null,
+      "swolf": null,
+      "aerobic_te": 0.30000001192092896,
+      "anaerobic_te": 0.30000001192092896,
+      "elev": 120.0,
       "perf": "—",
       "pl": "—",
       "_dist_m": 3505.8798828125,
-      "_dur_s": 5715.36376953125,
+      "_dur_s": 5715.36376953125
+    }
+  ],
+  "hoje": [
+    {
+      "icone": "⚡",
+      "nome": "Strength 💪",
+      "tipo": "",
+      "dur": "—",
+      "dist": "—"
+    },
+    {
+      "icone": "🚴",
+      "nome": "Easy Run w 4 × 20s Strides",
+      "tipo": "",
+      "dur": "40m00s",
+      "dist": "—"
+    }
+  ],
+  "amanha": [],
+  "hoje_feito": [
+    {
+      "mod": "run",
+      "icone": "🏃",
+      "nome": "Erkrath - 40 min Easy Run w 4 × 20s Strid",
+      "dist": "6.8km",
+      "dur": "38m43s",
+      "fc": 138.0,
+      "fc_max": 154.0,
+      "tss": null,
+      "np": 358.0,
+      "perf": "5:43/km",
+      "pl": "Pace",
+      "_dist_m": 6767.66015625,
+      "_dur_s": 2323.799072265625,
       "swolf": null,
-      "cad": 42.234375,
-      "cal": 375.0,
-      "aerobic_te": 0.30000001192092896,
-      "anaerobic_te": 0.30000001192092896,
-      "elev": 120.0
+      "cad": 168.21875,
+      "cal": 536.0,
+      "aerobic_te": 3.0,
+      "anaerobic_te": 1.5,
+      "elev": 43.0
     }
   ],
   "semana": {
+    "swim_km": 0,
+    "swim_min": 0,
+    "bike_km": 0,
+    "bike_min": 0,
+    "run_km": 6.8,
+    "run_min": 38.7,
+    "total_tss": 0.0,
+    "n_treinos": 1
+  },
+  "semana_passada": {
     "swim_km": 5.5,
     "swim_min": 133.0,
     "bike_km": 1.1,
     "bike_min": 7.1,
     "run_km": 13.2,
-    "run_min": 85.7,
-    "total_tss": 0.0,
-    "n_treinos": 16
-  },
-  "semana_passada": {
-    "swim_km": 3.1,
-    "swim_min": 76.6,
-    "bike_km": 7.3,
-    "bike_min": 19.0,
-    "run_km": 22.3,
-    "run_min": 148.8
+    "run_min": 85.7
   },
   "clima": {
-    "temp_max": 18.7,
-    "temp_min": 12.5,
-    "chuva_pct": 100,
-    "vento_kmh": 19.1,
-    "temp_atual": 17.8,
-    "emoji": "🌧️"
+    "temp_max": 19.7,
+    "temp_min": 10.6,
+    "chuva_pct": 67,
+    "vento_kmh": 14.4,
+    "temp_atual": 12.8,
+    "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-06-08",
-      "value": 56.0
-    },
     {
       "date": "2026-06-09",
       "value": 52.0
@@ -280,13 +170,13 @@
     {
       "date": "2026-06-14",
       "value": 38.0
+    },
+    {
+      "date": "2026-06-15",
+      "value": 70.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-05-31",
-      "value": 49.4
-    },
     {
       "date": "2026-06-01",
       "value": 49.4
@@ -342,15 +232,14 @@
     {
       "date": "2026-06-14",
       "value": 49.4
+    },
+    {
+      "date": "2026-06-15",
+      "value": 49.4
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-06-01",
-      "sono": 4.3,
-      "te": 0.8
-    },
     {
       "date": "2026-06-02",
       "sono": 7.2,
@@ -415,64 +304,76 @@
       "date": "2026-06-14",
       "sono": 4.4,
       "te": 0.3
+    },
+    {
+      "date": "2026-06-15",
+      "sono": 7.3,
+      "te": 3.0
     }
   ],
   "insights": {
-    "frase": "Recuperação ativa hoje, potência amanhã se construída.",
-    "sec_readiness": "HRV 38ms está acima da média 7d (35ms, +3ms), dentro do baseline 33–42ms — sinal de recuperação em curso. Sono crítico: 4.4h com score 47, REM 0.0h e déficit acumulado de 4.1h comprometem adaptação neuromuscular. Body Battery 34/100 confirma reserva energética baixa para esforços de alta intensidade.",
-    "sec_treino_ontem": "Dia atípico em Nideggen: caminhada (~4.1km total), futebol e 3 blocos de corrida (7.8km combinados) com FC atingindo 175bpm no último bloco — sobrecarga anaeróbica não planejada. Pace variando de 5:06 a 8:16/km indica esforço irregular, com TE aeróbico máximo de 2.3 nos blocos de corrida. Ausência de treino estruturado de bike e volume de natação zero ontem.",
-    "sec_carga": "Z1 mensal em 1807 — 27% acima do teto recomendado (1418), indicando volume excessivo em baixa intensidade. Z2 em 461 está criticamente abaixo do mínimo de 954, comprometendo o desenvolvimento aeróbico base. Z3+ em 790 representa 25.8% da carga total, elevado para fase BASE com risco de lesão MODERADO — distribuição invertida para este período.",
-    "sec_hoje": "Steady Long Ride de 2h30m está planejado, mas já há hiking de 1h35m executado (FC 82bpm, TE 0.3 — impacto mínimo). Com Body Battery 34 e sono deficitário, o ride deve ser executado em Z1 puro, sem progressões. Prioridade: tempo de pedal contínuo para adaptação aeróbica, não intensidade.",
-    "sec_ajuste": "Executar 2h30m de bike com FC teto 148bpm (Z1 estrito), potência alvo 170–190W. Eliminar qualquer bloco Z2+ hoje; se FC ultrapassar 150bpm por mais de 3min consecutivos, reduzir imediatamente a cadência.",
-    "sec_alertas": "REM 0.0h é alerta crítico — consolidação da memória motora e recuperação hormonal comprometidas. Z3+ acumulado mensal (790) em fase BASE exige revisão imediata do plano semanal. Bike semanal em apenas 1.1km indica lacuna grave nesta modalidade para 91 dias de prova.",
-    "sec_nutricao": "Pré-ride: 350kcal com predominância de carboidrato (60–70g CHO) 45–60min antes da saída. Durante 2h30m: 60–70g CHO/h em gel ou bebida isotônica + 500–600ml/h; pós-treino imediato: 30g proteína + 60g CHO para reposição e síntese proteica.",
-    "status_readiness": "BAIXO",
+    "frase": "HRV em alta: base sólida, executa com precisão hoje.",
+    "sec_readiness": "HRV de 70ms representa +33ms acima da média 7d (37ms) e está acima do baseline (33–42ms), sinal forte de recuperação aguda. RHR em 58bpm sem baseline definido; sono de 7.3h com score 87 é satisfatório, mas déficit acumulado de 1.2h exige atenção — deep sleep em apenas 1.0h é o ponto fraco. Body Battery 68/100 com stress médio 7 indica prontidão funcional adequada para sessão moderada.",
+    "sec_treino_ontem": "Caminhada em Nideggen (3.5km, 1h35m) com FC média 82bpm e TE aeróbico 0.3 — sessão de recuperação ativa de baixíssima intensidade, adequada ao contexto. Cadência de 42 passos/min reflete ritmo de caminhada, sem demanda cardiorrespiratória relevante. Execução coerente com status de recuperação; nenhum ponto crítico.",
+    "sec_carga": "Z1 mensal em 1895 unidades supera o teto do target (580–1418), indicando excesso de volume em zona leve — padrão que pode mascarar baixa eficiência aeróbica. Z2 (461) está muito abaixo do target mínimo (954), o que compromete o desenvolvimento aeróbico base esperado na fase BASE. Z3+ em 810 está elevado para fase BASE; risco de lesão MODERADO exige controle imediato da distribuição de zonas nas próximas semanas.",
+    "sec_hoje": "Corrida executada: 6.8km em 38m43s, pace 5:43/km, FC média 138bpm (max 154bpm), potência média 358W, TE aeróbico 3.0 — sessão bem executada dentro do plano. FC média de 138bpm para um easy run com strides é aceitável; pico de 154bpm nos strides dentro do limite esperado para esforços de 20s. TE 3.0 confirma estímulo aeróbico adequado sem sobrecarga; cadência de 168spm está ligeiramente abaixo do ideal (170–180spm) — ponto de atenção técnico.",
+    "sec_ajuste": "Sessão de corrida concluída com sucesso; manter treino de força planejado com duração máxima de 45min, limitando esforços a cargas moderadas e sem superar FC 130bpm em qualquer exercício dinâmico. Foco em qualidade de execução, não em volume.",
+    "sec_alertas": "Z1 mensal 34% acima do teto do target — revisar distribuição nas próximas 2 semanas aumentando proporção de Z2 estruturado. Cadência de corrida em 168spm: trabalhar drills de cadência para aproximar de 175–180spm e reduzir custo mecânico no 70.3.",
+    "sec_nutricao": "Treino de corrida já executado (38min): pós-treino imediato com 30g de proteína + 60–80g de CHO para recuperação muscular e reposição de glicogênio. Para o treino de força: manter hidratação mínima de 400ml durante a sessão; refeição principal pós-força com proteína de alto valor biológico (frango, ovo ou whey) e carboidrato complexo.",
+    "status_readiness": "BOM",
     "status_carga": "ELEVADA",
-    "acao_hoje": "REDUZIR 20%",
-    "analise_hoje": "O hiking matinal (1h35m, FC 82bpm) teve impacto negligenciável na carga, mas com Body Battery 34 e sono de 4.4h, o Steady Long Ride deve ser limitado em intensidade. Manter duração, sacrificar intensidade.",
-    "alerta": "REM 0.0h e déficit de sono de 4.1h comprometem recuperação neuroendócrina — priorizar sono de 8.5h esta noite é mais impactante que qualquer protocolo de treino.",
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Easy run com strides executado dentro dos parâmetros planejados — FC controlada, TE adequado e pace consistente confirmam boa execução. Cadência abaixo de 170spm é o único ajuste técnico necessário nas próximas sessões.",
+    "alerta": "Z1 mensal 34% acima do target máximo: redistribuir volume para Z2 nas próximas semanas para não comprometer adaptação aeróbica da fase BASE.",
     "treino_forca": [
       {
-        "exercicio": "Dead Bug com respiração diafragmática",
+        "exercicio": "Agachamento Búlgaro com Halteres",
         "series": 3,
-        "repeticoes": "8-10",
-        "carga": "leve",
-        "foco": "Ativa core profundo e coordenação neuromuscular sem carga axial — ideal para dias com baixo readiness"
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Fortalece glúteo e quadríceps unilateralmente, corrigindo assimetrias críticas para a corrida no 70.3"
       },
       {
-        "exercicio": "Mobilidade de quadril em 90/90 (hip switch)",
-        "series": 2,
-        "repeticoes": "45s",
+        "exercicio": "Ponte de Glúteo com Elevação Unilateral",
+        "series": 3,
+        "repeticoes": "12-15",
         "carga": "leve",
-        "foco": "Aumenta amplitude de rotação do quadril, essencial para eficiência na pedalada e passada na corrida"
+        "foco": "Ativa glúteo médio e máximo, estabilizando quadril e reduzindo risco de lesão na corrida"
       },
       {
-        "exercicio": "Glute Bridge unilateral (isométrico)",
+        "exercicio": "Remada com Halteres em Apoio (Bent Over Row)",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Fortalece cadeia posterior e melhora postura no ciclismo prolongado do 70.3"
+      },
+      {
+        "exercicio": "Prancha Frontal com Alternância de Braços",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Ativa glúteo médio e máximo sem impacto — fundamental para estabilidade pélvica na corrida do 70.3"
+        "foco": "Estabilidade de core anti-rotação essencial para eficiência na corrida e no nado"
       },
       {
-        "exercicio": "Wall Squat estático (isométrico)",
+        "exercicio": "Step-Up com Joelho Alto (banco 40cm)",
         "series": 3,
-        "repeticoes": "40s",
-        "carga": "leve",
-        "foco": "Fortalece quadríceps e melhora endurance muscular local sem sobrecarga articular em dia de recuperação"
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Simula padrão motor da corrida, fortalece glúteo e melhora potência de saída do ciclismo"
       },
       {
-        "exercicio": "Alongamento cadeia posterior (postura do camelo modificada + thor stretch)",
+        "exercicio": "Mobilidade de Quadril em 90/90 (Hip Flow)",
         "series": 2,
-        "repeticoes": "45s",
+        "repeticoes": "60s",
         "carga": "leve",
-        "foco": "Libera tensão em isquiotibiais e lombar acumulada no hiking e corrida de ontem"
+        "foco": "Melhora amplitude de quadril, reduz tensão pós-corrida e previne lesões lombares no ciclismo"
       },
       {
-        "exercicio": "Prancha lateral com elevação de quadril",
+        "exercicio": "Dead Bug com Resistência de Banda",
         "series": 3,
-        "repeticoes": "20s",
+        "repeticoes": "10-12",
         "carga": "leve",
-        "foco": "Fortalece oblíquos e estabilizadores laterais do tronco para manutenção da postura no ciclismo prolongado"
+        "foco": "Core profundo anti-extensão, protege lombar e melhora transferência de força pedal-corrida"
       }
     ]
   }
