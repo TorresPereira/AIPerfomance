@@ -1,6 +1,6 @@
 {
   "date": "2026-06-15",
-  "generated_at": "2026-06-15T07:11:59.459330Z",
+  "generated_at": "2026-06-15T20:01:56.980380Z",
   "saude": {
     "hrv": 70,
     "hrv_7d": 37,
@@ -15,8 +15,8 @@
     "sono_rem": 1.3,
     "sono_awake": 0.0,
     "body_battery": 68,
-    "stress_avg": 7,
-    "stress_rest": 87.82,
+    "stress_avg": 20,
+    "stress_rest": 50.34,
     "atl": 791.0,
     "ctl": 3166.0,
     "tsb": null,
@@ -80,24 +80,30 @@
       "_dur_s": 5715.36376953125
     }
   ],
-  "hoje": [
-    {
-      "icone": "⚡",
-      "nome": "Strength 💪",
-      "tipo": "",
-      "dur": "—",
-      "dist": "—"
-    },
-    {
-      "icone": "🚴",
-      "nome": "Easy Run w 4 × 20s Strides",
-      "tipo": "",
-      "dur": "40m00s",
-      "dist": "—"
-    }
-  ],
+  "hoje": [],
   "amanha": [],
   "hoje_feito": [
+    {
+      "mod": "other",
+      "icone": "⚡",
+      "nome": "Strength 💪",
+      "dist": "—",
+      "dur": "25m32s",
+      "fc": 91.0,
+      "fc_max": 120.0,
+      "tss": null,
+      "np": null,
+      "perf": "—",
+      "pl": "—",
+      "_dist_m": 0.0,
+      "_dur_s": 1532.7960205078125,
+      "swolf": null,
+      "cad": null,
+      "cal": 143.0,
+      "aerobic_te": 0.30000001192092896,
+      "anaerobic_te": 0.0,
+      "elev": null
+    },
     {
       "mod": "run",
       "icone": "🏃",
@@ -128,7 +134,7 @@
     "run_km": 6.8,
     "run_min": 38.7,
     "total_tss": 0.0,
-    "n_treinos": 1
+    "n_treinos": 2
   },
   "semana_passada": {
     "swim_km": 5.5,
@@ -139,11 +145,11 @@
     "run_min": 85.7
   },
   "clima": {
-    "temp_max": 19.7,
+    "temp_max": 19.4,
     "temp_min": 10.6,
-    "chuva_pct": 67,
-    "vento_kmh": 14.4,
-    "temp_atual": 12.8,
+    "chuva_pct": 93,
+    "vento_kmh": 11.2,
+    "temp_atual": 15.2,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
@@ -312,68 +318,68 @@
     }
   ],
   "insights": {
-    "frase": "HRV em alta: base sólida, executa com precisão hoje.",
-    "sec_readiness": "HRV de 70ms representa +33ms acima da média 7d (37ms) e está acima do baseline (33–42ms), sinal forte de recuperação aguda. RHR em 58bpm sem baseline definido; sono de 7.3h com score 87 é satisfatório, mas déficit acumulado de 1.2h exige atenção — deep sleep em apenas 1.0h é o ponto fraco. Body Battery 68/100 com stress médio 7 indica prontidão funcional adequada para sessão moderada.",
-    "sec_treino_ontem": "Caminhada em Nideggen (3.5km, 1h35m) com FC média 82bpm e TE aeróbico 0.3 — sessão de recuperação ativa de baixíssima intensidade, adequada ao contexto. Cadência de 42 passos/min reflete ritmo de caminhada, sem demanda cardiorrespiratória relevante. Execução coerente com status de recuperação; nenhum ponto crítico.",
-    "sec_carga": "Z1 mensal em 1895 unidades supera o teto do target (580–1418), indicando excesso de volume em zona leve — padrão que pode mascarar baixa eficiência aeróbica. Z2 (461) está muito abaixo do target mínimo (954), o que compromete o desenvolvimento aeróbico base esperado na fase BASE. Z3+ em 810 está elevado para fase BASE; risco de lesão MODERADO exige controle imediato da distribuição de zonas nas próximas semanas.",
-    "sec_hoje": "Corrida executada: 6.8km em 38m43s, pace 5:43/km, FC média 138bpm (max 154bpm), potência média 358W, TE aeróbico 3.0 — sessão bem executada dentro do plano. FC média de 138bpm para um easy run com strides é aceitável; pico de 154bpm nos strides dentro do limite esperado para esforços de 20s. TE 3.0 confirma estímulo aeróbico adequado sem sobrecarga; cadência de 168spm está ligeiramente abaixo do ideal (170–180spm) — ponto de atenção técnico.",
-    "sec_ajuste": "Sessão de corrida concluída com sucesso; manter treino de força planejado com duração máxima de 45min, limitando esforços a cargas moderadas e sem superar FC 130bpm em qualquer exercício dinâmico. Foco em qualidade de execução, não em volume.",
-    "sec_alertas": "Z1 mensal 34% acima do teto do target — revisar distribuição nas próximas 2 semanas aumentando proporção de Z2 estruturado. Cadência de corrida em 168spm: trabalhar drills de cadência para aproximar de 175–180spm e reduzir custo mecânico no 70.3.",
-    "sec_nutricao": "Treino de corrida já executado (38min): pós-treino imediato com 30g de proteína + 60–80g de CHO para recuperação muscular e reposição de glicogênio. Para o treino de força: manter hidratação mínima de 400ml durante a sessão; refeição principal pós-força com proteína de alto valor biológico (frango, ovo ou whey) e carboidrato complexo.",
+    "frase": "HRV em alta: base sólida, construa com inteligência.",
+    "sec_readiness": "HRV de 70ms representa +33ms acima da média 7d (37ms) e está acima do baseline (33–42ms), indicando recuperação parassimpática excelente. RHR de 58bpm dentro do esperado; sono de 7.3h com score 87 é funcional, porém déficit acumulado de 1.2h exige atenção — deep sleep de 1.0h está no limite mínimo. Body Battery 68/100 com stress médio 20 confirma estado favorável para carga moderada.",
+    "sec_treino_ontem": "Hiking de 3.5km/1h35min com FC média 82bpm (muito baixo) e TE aeróbico 0.3 — sessão de recuperação ativa bem executada, sem estresse fisiológico relevante. Cadência de 42 passos/min é consistente com caminhada de terreno. Sem pontos críticos; cumpriu papel regenerativo.",
+    "sec_carga": "Z1 mensal em 1895 está 477 acima do target máximo (1418), indicando excesso de volume leve que pode mascarar fadiga crônica. Z2 com apenas 461 (target 954–1792) está criticamente abaixo — déficit de desenvolvimento aeróbico base. Z3+ em 810 é desproporcional para fase BASE; risco de lesão MODERADO é coerente com esse desequilíbrio. Reequilíbrio Z2 é prioridade imediata.",
+    "sec_hoje": "Treino já executado: força (25min, FC 91bpm) + Easy Run 6.8km/38min com 4×20s strides (FC média 138bpm, máx 154bpm, pace 5:43/km, potência 358W). FC média no easy run está adequada para Z2 leve; máx 154bpm aceitável nos strides. TE aeróbico 3.0 confirma estímulo aeróbico efetivo. Execução alinhada com o planejado para dia de base.",
+    "sec_ajuste": "Easy run executado corretamente — FC teto respeitado (154bpm máx). Para próximas sessões de corrida fácil: manter FC abaixo de 150bpm no contínuo e limitar strides a 6×20s máx. Potência de corrida alvo: 320–340W para pace Z2.",
+    "sec_alertas": "Z2 mensal criticamente baixo (461 vs target mínimo 954) — risco de base aeróbica insuficiente a 90 dias da prova. Corrigir nas próximas 3 semanas priorizando blocos longos em Z2. Sono deep de 1.0h está no limite; manter horário de dormir às 22h para recuperar déficit.",
+    "sec_nutricao": "Dia sem treino principal: foco em recuperação — priorizar 30g de proteína pós-treino já executado (concluído) e refeição completa com CHO moderado (~150–180g ao longo do dia). Hidratação mínima 2.0L dado clima frio (10–19°C) e chuva.",
     "status_readiness": "BOM",
-    "status_carga": "ELEVADA",
+    "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Easy run com strides executado dentro dos parâmetros planejados — FC controlada, TE adequado e pace consistente confirmam boa execução. Cadência abaixo de 170spm é o único ajuste técnico necessário nas próximas sessões.",
-    "alerta": "Z1 mensal 34% acima do target máximo: redistribuir volume para Z2 nas próximas semanas para não comprometer adaptação aeróbica da fase BASE.",
+    "analise_hoje": "Easy run de 6.8km com strides bem executado — FC e TE aeróbico dentro do esperado para fase BASE. Sessão de força complementar adequada ao estado de recuperação; dia tecnicamente bem aproveitado.",
+    "alerta": "Z2 mensal em 461 (déficit de ~500 pontos): risco de subdesenvolvimento aeróbico crítico para Half Ironman em 90 dias.",
     "treino_forca": [
       {
-        "exercicio": "Agachamento Búlgaro com Halteres",
+        "exercicio": "Romanian Deadlift (RDL)",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Fortalece glúteo e quadríceps unilateralmente, corrigindo assimetrias críticas para a corrida no 70.3"
+        "foco": "Fortalece isquiotibiais e glúteos para transferência de potência no ciclismo e corrida"
       },
       {
-        "exercicio": "Ponte de Glúteo com Elevação Unilateral",
+        "exercicio": "Bulgarian Split Squat",
+        "series": 3,
+        "repeticoes": "8-10",
+        "carga": "moderada",
+        "foco": "Estabilidade unilateral e força de quadril essencial para economia de corrida"
+      },
+      {
+        "exercicio": "Hip Thrust com elevação",
         "series": 3,
         "repeticoes": "12-15",
-        "carga": "leve",
-        "foco": "Ativa glúteo médio e máximo, estabilizando quadril e reduzindo risco de lesão na corrida"
-      },
-      {
-        "exercicio": "Remada com Halteres em Apoio (Bent Over Row)",
-        "series": 3,
-        "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Fortalece cadeia posterior e melhora postura no ciclismo prolongado do 70.3"
+        "foco": "Ativação máxima de glúteo médio e máximo para potência no pedal e propulsão na corrida"
       },
       {
-        "exercicio": "Prancha Frontal com Alternância de Braços",
+        "exercicio": "Prancha Lateral com abdução de quadril",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Estabilidade de core anti-rotação essencial para eficiência na corrida e no nado"
+        "foco": "Core lateral e estabilidade pélvica para prevenir desvios na corrida e no ciclismo"
       },
       {
-        "exercicio": "Step-Up com Joelho Alto (banco 40cm)",
+        "exercicio": "Dead Bug",
         "series": 3,
         "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Simula padrão motor da corrida, fortalece glúteo e melhora potência de saída do ciclismo"
+        "carga": "leve",
+        "foco": "Ativação de core profundo com dissociação de membros — base para postura aerodinâmica"
       },
       {
-        "exercicio": "Mobilidade de Quadril em 90/90 (Hip Flow)",
+        "exercicio": "Mobilidade de quadril — 90/90 stretch",
         "series": 2,
         "repeticoes": "60s",
         "carga": "leve",
-        "foco": "Melhora amplitude de quadril, reduz tensão pós-corrida e previne lesões lombares no ciclismo"
+        "foco": "Aumenta amplitude de rotação do quadril reduzindo sobrecarga lombar no ciclismo"
       },
       {
-        "exercicio": "Dead Bug com Resistência de Banda",
+        "exercicio": "Calf Raise excêntrico (step)",
         "series": 3,
-        "repeticoes": "10-12",
-        "carga": "leve",
-        "foco": "Core profundo anti-extensão, protege lombar e melhora transferência de força pedal-corrida"
+        "repeticoes": "12-15",
+        "carga": "moderada",
+        "foco": "Fortalece complexo gastro-sóleo para absorção de impacto e propulsão na corrida"
       }
     ]
   }
