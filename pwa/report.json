@@ -1,6 +1,6 @@
 {
   "date": "2026-06-17",
-  "generated_at": "2026-06-17T06:37:23.973033Z",
+  "generated_at": "2026-06-17T17:34:31.500358Z",
   "saude": {
     "hrv": 68,
     "hrv_7d": 38,
@@ -15,8 +15,8 @@
     "sono_rem": 1.2,
     "sono_awake": 5.0,
     "body_battery": 63,
-    "stress_avg": 16,
-    "stress_rest": 84.01,
+    "stress_avg": 21,
+    "stress_rest": 61.87,
     "atl": 669.0,
     "ctl": 2675.0,
     "tsb": null,
@@ -126,11 +126,11 @@
   },
   "clima": {
     "temp_max": 26.3,
-    "temp_min": 15.7,
-    "chuva_pct": 31,
-    "vento_kmh": 13.3,
-    "temp_atual": 18.4,
-    "emoji": "🌤️"
+    "temp_min": 15.6,
+    "chuva_pct": 20,
+    "vento_kmh": 13.0,
+    "temp_atual": 25.8,
+    "emoji": "🌧️"
   },
   "hrv_7dias": [
     {
@@ -293,68 +293,68 @@
     }
   ],
   "insights": {
-    "frase": "HRV elevado: janela de oportunidade para trabalho aeróbico preciso.",
-    "sec_readiness": "HRV de 68ms está 30ms acima da média 7d (38ms) e bem acima do baseline 33–42ms, indicando recuperação sistêmica sólida. RHR em 60bpm sem baseline registrado, mas alinhado com estado parassimpático dominante. Sono de 7h com score 80 é adequado, porém Deep Sleep em 1.1h está no limite inferior; déficit acumulado de 1.5h exige dormir às 22h hoje. Body Battery 63 e stress médio 16 confirmam janela favorável para treino moderado.",
-    "sec_treino_ontem": "eBiking de 11.2km em 38min a 17.4km/h com FC média 112bpm e TE aeróbico 1.6 indica sessão de intensidade muito baixa, essencialmente recuperação ativa. Cadência de 59rpm está abaixo do ideal para bike (85–95rpm), sugerindo padrão de pedalada ineficiente mesmo em esforço leve. FC máx de 145bpm em pico isolado com média de 112bpm confirma que a sessão ficou inteiramente em Z1 — correto para o dia.",
-    "sec_carga": "Z1 mensal em 1748 ultrapassa o teto do target (1418), indicando volume excessivo em intensidade muito baixa com possível desvio de eficiência aeróbica. Z2 em 292 está criticamente abaixo do target mínimo de 954 — déficit severo de estímulo aeróbico de base para fase BASE. Z3+ em 635 acima do recomendável com volume semanal irrisório (bike 11.2km, corrida 6.8km, natação 0km); a distribuição de zonas está invertida em relação ao protocolo 80/20 exigido nesta fase.",
-    "sec_hoje": "Treino planejado inclui natação e Easy Ride de 55min — nenhuma sessão executada ainda. Na natação, manter ritmo contínuo aeróbico leve, FC abaixo de 145bpm, foco em técnica de braçada. No Easy Ride de 55min, executar inteiramente em Z1-Z2 com FC alvo entre 120–145bpm e cadência acima de 85rpm para corrigir padrão identificado ontem.",
-    "sec_ajuste": "Easy Ride: 55min totais, FC teto 148bpm, cadência alvo 85–95rpm, sem aceleração final. Natação: volume técnico de 1200–1500m em Z1 aeróbico, pausas a cada 200m para manutenção de forma.",
-    "sec_alertas": "Z2 mensal em apenas 292 de um target mínimo de 954 é o alerta mais crítico do ciclo — cada treino deve priorizar Z2 para corrigir déficit antes que a fase BASE avance. Volume semanal de natação zerado com prova a 88 dias exige atenção imediata na consistência da modalidade.",
-    "sec_nutricao": "Pré-treino: 350kcal com carboidrato de baixo IG 60min antes (banana + aveia). Pós-treino: 30g de proteína em até 30min após última sessão; hidratação de 750ml/h durante o Easy Ride dado calor de 26°C e risco moderado de desidratação.",
+    "frase": "HRV em alta: execute com precisão, não com intensidade.",
+    "sec_readiness": "HRV de 68ms está 30ms acima da média de 7 dias (38ms) e supera o baseline de 33–42ms — sinal claro de recuperação efetiva do SNC. RHR em 60bpm sem baseline definido, mas alinhado ao contexto de recuperação. Sono de 7.0h com score 80 é adequado, porém há déficit de 1.5h em relação à meta; deep sleep em 1.1h e REM em 1.2h indicam qualidade razoável. Body Battery de 63/100 com stress médio de 21 confirma janela positiva para treino aeróbico leve.",
+    "sec_treino_ontem": "O eBike em Erkrath (11.2km, 38min40s, 17.4km/h) foi de baixíssimo impacto fisiológico — FC média de 112bpm e TE aeróbico de 1.6 indicam estímulo insuficiente para adaptação aeróbica. Cadência de 59rpm está abaixo do ideal para ciclismo (80–90rpm), sugerindo pedalada menos eficiente ou terreno exigente. Treino válido como recuperação ativa, sem relevância para progressão de carga.",
+    "sec_carga": "Z1 em 1748 ultrapassa o teto do target (580–1418), indicando excesso de volume aeróbico leve sem correspondência em Z2 (292 vs target 954–1792) — distribuição invertida e crítica para fase BASE. Z3+ em 635 está elevado proporcionalmente ao volume total de Z2, criando polarização inadequada. Risco de lesão MODERADO e CTL/ATL desbalanceados reforçam necessidade urgente de reequilibrar zonas nas próximas semanas.",
+    "sec_hoje": "Treino planejado: natação (Swimming) + Easy Ride de 55 minutos — nenhum ainda executado. Para a natação, foco em volume aeróbico Z1-Z2, FC aquática não excedendo 140bpm. O Easy Ride de 55min deve ser executado com FC controlada entre 120–140bpm (Z1-Z2), cadência-alvo 85–90rpm, sem esforços acima de Z2 — o objetivo é estimular Z2 deficitário sem comprometer a recuperação.",
+    "sec_ajuste": "Easy Ride: manter 55min com FC teto de 140bpm, 100% em Z1-Z2, cadência 85–90rpm, potência alvo 140–170W se disponível. Natação: volume entre 1500–2000m em ritmo aeróbico leve, sem sprints.",
+    "sec_alertas": "Z2 criticamente abaixo do target mensal (292 vs mínimo 954) — cada sessão fácil deve priorizar Z2 real, não Z1 passivo. Evitar armadilha de volume fácil excessivo sem estímulo aeróbico efetivo.",
+    "sec_nutricao": "Pré-treino: 350kcal com carboidrato de baixo-médio índice glicêmico 60min antes (banana + aveia). Durante o Easy Ride de 55min: 500ml de água com eletrólitos, sem necessidade de gel abaixo de 60min; pós-treino: 30g de proteína em até 30min (whey ou equivalente) + 40–60g de CHO para reposição.",
     "status_readiness": "BOM",
     "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Condição fisiológica favorável com HRV elevado justifica execução completa do plano. Prioridade é corrigir cadência na bike e acumular Z2 real na natação.",
-    "alerta": "Z2 mensal em 292 vs mínimo de 954: déficit crítico de estímulo aeróbico base — corrigir imediatamente nas próximas sessões.",
+    "analise_hoje": "Dia de dupla leve (natação + bike 55min) com readiness favorável — janela ideal para corrigir déficit de Z2 sem acumular fadiga. Execução disciplinada nas zonas é mais importante que duração.",
+    "alerta": "Z2 mensal em apenas 292 de um mínimo de 954 — base aeróbica comprometida se padrão persistir.",
     "treino_forca": [
       {
-        "exercicio": "Agachamento Búlgaro",
+        "exercicio": "Agachamento Goblet",
         "series": 3,
-        "repeticoes": "10-12",
+        "repeticoes": "12-15",
         "carga": "moderada",
-        "foco": "Força unilateral de glúteo e quadríceps, essencial para potência de pedalada e corrida no 70.3"
+        "foco": "Fortalece glúteos e quadríceps, base de potência na pedalada e corrida 70.3"
       },
       {
-        "exercicio": "Ponte de Glúteo com Isometria",
+        "exercicio": "Ponte de Glúteo Unilateral",
         "series": 3,
-        "repeticoes": "12",
+        "repeticoes": "10-12",
         "carga": "leve",
-        "foco": "Ativação e resistência de glúteo médio para estabilização pélvica na corrida"
+        "foco": "Ativa glúteo médio e corrige assimetrias posturais críticas na corrida"
       },
       {
-        "exercicio": "Remada com Halteres (Bent Over Row)",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Fortalece musculatura posterior da natação — latíssimo e romboides para braçada eficiente"
-      },
-      {
-        "exercicio": "Prancha Frontal com Alternância de Braço",
+        "exercicio": "Prancha Lateral com Abdução de Quadril",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core antirotação para manutenção de postura aerodinâmica no bike e corrida"
+        "foco": "Estabilidade de core lateral, essencial para economia de corrida no 70.3"
       },
       {
-        "exercicio": "Step-Up com Joelho Alto",
+        "exercicio": "Remada com Halteres (Unilateral)",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Transferência de força e equilíbrio para a transição bike-corrida no 70.3"
+        "foco": "Fortalece dorsais e romboides, sustentando posição aerodinâmica no ciclismo"
       },
       {
-        "exercicio": "Mobilidade de Quadril — 90/90 Hip Stretch",
-        "series": 2,
-        "repeticoes": "45s",
-        "carga": "leve",
-        "foco": "Libera cápsula do quadril comprimida pelo ciclismo, reduz risco de lesão na corrida"
-      },
-      {
-        "exercicio": "Elevação de Panturrilha Unilateral (Calf Raise)",
+        "exercicio": "Afundo Reverso com Joelho Elevado",
         "series": 3,
-        "repeticoes": "15",
+        "repeticoes": "10",
         "carga": "moderada",
-        "foco": "Resiliência do complexo sural para absorção de impacto na corrida dos 21km"
+        "foco": "Força funcional unilateral e equilíbrio, reduz risco de lesão na corrida"
+      },
+      {
+        "exercicio": "Dead Bug (Core Antiextensão)",
+        "series": 3,
+        "repeticoes": "8-10",
+        "carga": "leve",
+        "foco": "Core profundo e estabilidade lombar, protege coluna em esforços prolongados"
+      },
+      {
+        "exercicio": "Mobilidade de Quadril — 90/90 Stretch",
+        "series": 2,
+        "repeticoes": "60s",
+        "carga": "leve",
+        "foco": "Aumenta amplitude de quadril, melhora passada na corrida e posição no bike"
       }
     ]
   }
