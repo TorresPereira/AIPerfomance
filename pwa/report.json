@@ -1,6 +1,6 @@
 {
   "date": "2026-06-18",
-  "generated_at": "2026-06-18T11:10:31.147112Z",
+  "generated_at": "2026-06-18T17:50:03.807519Z",
   "saude": {
     "hrv": 51,
     "hrv_7d": 37,
@@ -14,9 +14,9 @@
     "sono_deep": 1.2,
     "sono_rem": 0.8,
     "sono_awake": 57.0,
-    "body_battery": 40,
-    "stress_avg": 30,
-    "stress_rest": 35.58,
+    "body_battery": 41,
+    "stress_avg": 36,
+    "stress_rest": 24.62,
     "atl": 673.0,
     "ctl": 2691.0,
     "tsb": null,
@@ -160,11 +160,11 @@
     "run_min": 85.7
   },
   "clima": {
-    "temp_max": 32.8,
+    "temp_max": 32.6,
     "temp_min": 18.1,
     "chuva_pct": 34,
-    "vento_kmh": 12.6,
-    "temp_atual": 29.8,
+    "vento_kmh": 8.6,
+    "temp_atual": 31.5,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
@@ -333,68 +333,68 @@
     }
   ],
   "insights": {
-    "frase": "HRV em alta: base sólida, execução inteligente hoje.",
-    "sec_readiness": "HRV 51ms está 38% acima da média 7d (37ms) e supera o baseline máximo (42ms), sinal de recuperação expressiva. Sono de 7.2h com score 68 é insuficiente — deep sleep 1.2h e REM 0.8h abaixo do ideal, déficit de 1.3h acumulado. Body Battery 40/100 limita capacidade de esforço máximo, apesar do HRV favorável.",
-    "sec_treino_ontem": "Natação 1000m a 2:24/100m com SWOLF 12.1 indica técnica razoável mas com margem de melhora em eficiência de braçada. Bike indoor 26.5km a 28.3km/h com FC média 124bpm — TE aeróbico 2.3, carga leve e adequada para fase BASE. Ambas as sessões dentro de Z1-Z2, sem pontos críticos de sobrecarga.",
-    "sec_carga": "Z1 em 1782 ultrapassa o teto do target (1418), indicando excesso de volume aeróbico leve sem progressão de qualidade. Z2 em 292 está muito abaixo do mínimo target (954), subdesenvolvendo a base aeróbica de alta intensidade necessária para o 70.3. Z3+ em 618 é excessivo para fase BASE — risco de lesão MODERADO confirmado por desequilíbrio nas zonas.",
-    "sec_hoje": "Treino Power Through Scull (short) já executado: 2.2km em 54min09s, FC média 123bpm, SWOLF 11.0 — melhora técnica evidente vs ontem (SWOLF 12.1 → 11.0). TE aeróbico 2.5 confirma estímulo leve-moderado adequado ao status de recuperação. Pace 2:26/100m dentro do esperado para sessão de eficiência técnica.",
-    "sec_ajuste": "Nenhum treino adicional recomendado hoje — sessão já executada com carga suficiente para o status Recuperação + Body Battery 40. Priorizar descanso ativo, deitar às 22:00 para atingir 8.5h de sono e reduzir déficit acumulado.",
-    "sec_alertas": "Z2 criticamente sub-utilizada (292 vs mínimo 954): reequilibrar distribuição nas próximas semanas priorizando sessões em Z2. Z1 excessiva pode criar falsa sensação de volume sem adaptação aeróbica efetiva para o 70.3.",
-    "sec_nutricao": "Sem treinos adicionais hoje: foco em 3 refeições balanceadas com ~1.6g proteína/kg e CHO moderado para reposição glicogênica. Hidratação mínima 2.5L dado calor de 32.8°C, pré-sono incluir 30g proteína (whey ou caseína) para recuperação muscular noturna.",
+    "frase": "HRV em alta: capitalize a recuperação com precisão hoje.",
+    "sec_readiness": "HRV de 51ms está 14ms acima da média 7d (37ms) e acima do baseline (33–42ms), sinalizando recuperação autonômica positiva. Sono de 7.2h com score 68 é insuficiente — deep sleep 1.2h e REM 0.8h abaixo do ideal, déficit de 1.3h acumulado. Body Battery 41/100 com stress médio 36 indica reserva energética limitada para esforços intensos.",
+    "sec_treino_ontem": "Natação 1000m em 2:24/100m com SWOLF 12.1 e FC média 129bpm — eficiência técnica aceitável para base, TE 2.4 indica estímulo aeróbico leve-moderado adequado. Bike indoor 26.5km a 28.3km/h com FC 124bpm e TE 2.3 — sessão de baixa intensidade, dentro do Z1, cumpriu função regenerativa. Sem pontos críticos; carga combinada coerente com status de recuperação.",
+    "sec_carga": "Z1 mensal em 1782 ultrapassa o teto do target (1418), indicando excesso de volume leve sem contrapartida de Z2 (292 vs target 954–1792) — polarização invertida problemática para fase BASE. Z3+ em 618 está elevado proporcionalmente ao Z2, criando perfil de carga desequilibrado. Risco de lesão MODERADO com ATL 673 requer monitoramento; volume semanal ainda baixo (Swim 3.2km, Bike 37.7km, Run 6.8km).",
+    "sec_hoje": "Treino executado: Power Through Scull (short) 2.2km em 54min, FC média 123bpm (max 144bpm), SWOLF 11.0 e TE 2.5 — melhora técnica relevante vs ontem (SWOLF 12.1→11.0), indicando boa ativação neuromuscular no drill. Pace 2:26/100m consistente com trabalho técnico de scull; FC controlada sugere execução dentro do Z1-Z2 baixo, adequado para o estado de recuperação. Sessão bem executada; objetivo técnico cumprido.",
+    "sec_ajuste": "Não há treino adicional planejado para hoje — manter repouso ativo, limitar qualquer esforço espontâneo a FC abaixo de 130bpm e duração máxima de 20min. Priorizar sono: deitar às 22:00 buscando 8.5h para reduzir déficit acumulado.",
+    "sec_alertas": "Z2 mensal criticamente abaixo do target mínimo (292 vs 954) — prioridade estrutural nas próximas semanas para corrigir polarização. Body Battery 41 limita sessões adicionais hoje; evitar estímulos espontâneos acima de Z1.",
+    "sec_nutricao": "Dia sem treino adicional: manter ingestão calórica de manutenção com foco em 30g proteína pós-treino matinal já executado e hidratação de 2.5–3L ao longo do dia dado calor de 32.6°C. Priorizar CHO complexos no jantar (150–200g arroz/batata-doce) para recarregar Body Battery e suportar recuperação noturna.",
     "status_readiness": "BOM",
-    "status_carga": "ELEVADA",
-    "acao_hoje": "DESCANSO",
-    "analise_hoje": "Power Through Scull executado com melhora técnica real (SWOLF 11.0 vs 12.1 ontem), volume adequado de 2.2km para dia de recuperação. Encerrar aqui — Body Battery 40 não suporta carga adicional sem comprometer adaptação.",
-    "alerta": "Z2 acumulada no mês (292) representa apenas 30% do target mínimo (954) — risco de base aeróbica insuficiente para o Half Ironman em 87 dias.",
+    "status_carga": "SUAVE",
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Power Through Scull entregou melhora técnica real (SWOLF 11.0 vs 12.1 ontem) com FC controlada a 123bpm — sessão eficiente para fase BASE. Execução alinhada ao estado de recuperação; não há gap entre planejado e realizado.",
+    "alerta": "Z2 mensal em apenas 292 (target mínimo 954) — risco de subdesenvolvimento aeróbico base comprometendo adaptações para 70.3 em 87 dias.",
     "treino_forca": [
       {
         "exercicio": "Dead Bug",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "leve",
-        "foco": "Estabilização lombo-pélvica essencial para manter postura eficiente na corrida e no ciclismo"
+        "foco": "Estabilidade lombo-pélvica essencial para postura eficiente no aero e na corrida"
       },
       {
         "exercicio": "Ponte de Glúteo Unilateral",
         "series": 3,
         "repeticoes": "12-15",
         "carga": "leve",
-        "foco": "Ativa glúteo médio e máximo, reduzindo colapso pélvico na corrida do 70.3"
+        "foco": "Ativa glúteo médio e máximo, reduzindo sobrecarga em joelho e lombar na corrida"
       },
       {
         "exercicio": "Agachamento Goblet",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Força funcional de membros inferiores com controle postural para potência no ciclismo"
+        "foco": "Força funcional de quadríceps e glúteos para potência na pedalada e saída da bike"
       },
       {
-        "exercicio": "Remada com Elástico (posição nado)",
+        "exercicio": "Remada com Elástico (resistência moderada)",
         "series": 3,
-        "repeticoes": "15",
-        "carga": "leve",
-        "foco": "Fortalece romboides e manguito rotador, melhorando tração e eficiência na natação"
+        "repeticoes": "12-15",
+        "carga": "moderada",
+        "foco": "Fortalece escapular e dorsais, melhorando tração e eficiência na natação"
       },
       {
-        "exercicio": "Avanço Reverso com Joelho elevado",
+        "exercicio": "Avanço com Passada Lateral (Lateral Lunge)",
         "series": 3,
         "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Estabilidade unilateral e força de quadril transferível diretamente à passada na corrida"
+        "carga": "leve",
+        "foco": "Estabilidade de quadril e adutores, prevenindo colapso em corridas longas"
       },
       {
         "exercicio": "Prancha Lateral com Abdução de Quadril",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e glúteo médio — previne lesões de joelho e IT band em volumes crescentes"
+        "foco": "Core lateral e glúteo médio — reduz fadiga postural na corrida final do 70.3"
       },
       {
-        "exercicio": "Hip Flexor Stretch + Rotação Torácica (mobilidade)",
+        "exercicio": "Mobilidade de Quadril em 90/90 (Hip 90/90 Stretch)",
         "series": 2,
-        "repeticoes": "45s",
+        "repeticoes": "60s",
         "carga": "leve",
-        "foco": "Recupera amplitude de quadril e mobilidade torácica, contrabalançando postura fechada do ciclismo"
+        "foco": "Libera rotação interna/externa do quadril, melhorando amplitude na pedalada e passada"
       }
     ]
   }
