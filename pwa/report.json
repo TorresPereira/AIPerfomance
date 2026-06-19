@@ -1,6 +1,6 @@
 {
   "date": "2026-06-19",
-  "generated_at": "2026-06-19T12:17:22.106191Z",
+  "generated_at": "2026-06-19T16:19:59.785720Z",
   "saude": {
     "hrv": 61,
     "hrv_7d": 37,
@@ -15,8 +15,8 @@
     "sono_rem": 0.9,
     "sono_awake": 12.0,
     "body_battery": 50,
-    "stress_avg": 23,
-    "stress_rest": 49.13,
+    "stress_avg": 26,
+    "stress_rest": 41.89,
     "atl": 682.0,
     "ctl": 2729.0,
     "tsb": null,
@@ -132,11 +132,11 @@
     "run_min": 85.7
   },
   "clima": {
-    "temp_max": 36.4,
-    "temp_min": 20.5,
-    "chuva_pct": 56,
-    "vento_kmh": 27.4,
-    "temp_atual": 35.3,
+    "temp_max": 35.8,
+    "temp_min": 20.9,
+    "chuva_pct": 54,
+    "vento_kmh": 27.7,
+    "temp_atual": 22.0,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
@@ -305,68 +305,68 @@
     }
   ],
   "insights": {
-    "frase": "HRV em alta: base sólida para o Long Run de amanhã.",
-    "sec_readiness": "HRV de 61ms representa +24ms acima da média 7d (37ms) e está acima do baseline 33–42ms — sinal claro de recuperação efetiva. Sono de 7h com score 77 é aceitável, mas déficit de 1.5h e REM baixo (0.9h) indicam recuperação cognitiva incompleta. Body Battery em 50/100 com stress médio 23 sugere prontidão moderada-boa para esforços leves a moderados.",
-    "sec_treino_ontem": "Natação Power Through Scull (2.2km/54min) com FC média 123bpm e SWOLF 11 indica sessão técnica eficiente e bem controlada. TE aeróbico 2.5 confirma estímulo leve-moderado, adequado para fase BASE. Pace 2:26/100m compatível com trabalho de técnica — sem pontos críticos.",
-    "sec_carga": "Z1 em 1805 unidades ultrapassa o target máximo de 1418 em +27%, indicando excesso de volume aeróbico leve sem contrapartida em Z2 (292 vs target 954–1792). Z3+ em 633 também está elevado para fase BASE. Distribuição desequilibrada: falta Z2 estruturado e há risco MODERADO de lesão por volume mal polarizado.",
-    "sec_hoje": "Treino executado: tênis (58min, FC média 111bpm, max 154bpm, TE 1.8) — atividade recreativa de baixo impacto metabólico, sem estímulo triathlon-específico relevante. FC máxima de 154bpm em pico isolado não representa carga sustentada. Dia efetivamente de recuperação ativa — positivo dado o Long Run amanhã.",
-    "sec_ajuste": "Hoje: descanso total ou mobilidade máx 20min. Amanhã (Long Run 1h05min): manter FC abaixo de 148bpm (Z2 aeróbico), últimos 10min em Z1 para não comprometer recuperação semanal.",
-    "sec_alertas": "Z1 acima do target máximo mensal (+27%) com Z2 criticamente abaixo do mínimo — risco de treinar muito no 'meio-termo' improdutivo. Corrigir nas próximas sessões com corrida e bike estruturados em Z2 real (limiar aeróbico).",
-    "sec_nutricao": "Dia sem treino estruturado: priorizar 350kcal pré-descanso noturno com CHO de baixo IG + 30g proteína pós-tênis para manutenção muscular. Hidratação mínima 2.0L ao longo do dia dado calor de 36.4°C; dormir às 22:00 para atingir 8.5h e quitar déficit acumulado.",
+    "frase": "HRV em alta: base sólida, amanhã entregue a corrida longa.",
+    "sec_readiness": "HRV de 61ms está +24ms acima da média 7d (37ms) e bem acima do baseline 33–42ms — sinal claro de recuperação sistêmica efetiva. Sono de 7h com score 77 é funcional, mas deep sleep (1.5h) e REM (0.9h) indicam qualidade parcial; déficit de 1.5h exige dormir às 22h hoje. Body Battery em 50/100 com stress médio 26 confirma estado equilibrado, adequado para dia de recuperação ativa.",
+    "sec_treino_ontem": "Natação Power Through Scull: 2.2km em 54min a pace 2:26/100m com FC média 123bpm — sessão técnica de baixa intensidade executada dentro do esperado. SWOLF 11 indica eficiência de braçada aceitável para sessão de sculling. TE aeróbico 2.5 confirma estímulo leve-moderado, sem comprometer recuperação.",
+    "sec_carga": "Z1 em 1805 unidades ultrapassa o target máximo de 1418 — volume aeróbico leve está 27% acima do prescrito, sinalizando excesso de trabalho extensivo. Z2 em 292 está criticamente abaixo do target mínimo de 954, comprometendo desenvolvimento aeróbico de base na fase BASE. Z3+ em 633 também excede o ideal; distribuição precisa ser reequilibrada urgentemente nas próximas semanas.",
+    "sec_hoje": "Treino hoje foi atividade de tênis (58min, FC média 111bpm, pico 154bpm, TE 1.8) — atividade recreativa não planejada com pico de FC em 154bpm que tangenciou zona anaeróbica. Para um dia de recuperação, o estímulo foi aceitável dado o baixo TE aeróbico (1.8), mas o pico de 154bpm requer atenção considerando o Long Run amanhã. Sem treino estruturado programado para hoje: objetivo cumprido em termos de recuperação ativa.",
+    "sec_ajuste": "Amanhã no Long Run (1h05m): manter FC teto em 148bpm (Z2 firme), primeiros 15min em Z1 (FC < 135bpm), sem aceitar Z3 — prioridade absoluta é qualidade aeróbica. Dormir 8.5h esta noite é condição não-negociável para performance amanhã.",
+    "sec_alertas": "Z1 acima do target máximo em 27% e Z2 criticamente subdosada (292 vs mínimo 954) — padrão de treino extensivo sem qualidade aeróbica suficiente para fase BASE. Pico de FC 154bpm no tênis hoje exige monitoramento de HRV amanhã antes do Long Run.",
+    "sec_nutricao": "Hoje sem treino estruturado: priorizar refeições normoglicêmicas, ~2g CHO/kg e 1.8g proteína/kg ao longo do dia para recuperação muscular. Pré Long Run amanhã: 350kcal (CHO 60g + proteína 10g) 90min antes do início; hidratar 500ml nas 2h anteriores.",
     "status_readiness": "BOM",
     "status_carga": "ELEVADA",
     "acao_hoje": "DESCANSO",
-    "analise_hoje": "Tênis recreativo executado com FC controlada (média 111bpm) funcionou como recuperação ativa — sem impacto negativo para amanhã. Nenhum ajuste necessário; preservar energia para o Long Run de 1h05min.",
-    "alerta": "Z2 mensal em apenas 292 unidades contra mínimo de 954 — urgente reequilibrar distribuição de zonas nas próximas semanas para não comprometer adaptação aeróbica BASE.",
+    "analise_hoje": "Tênis recreativo de 58min com FC média 111bpm funcionou como recuperação ativa adequada, sem comprometer o sistema energético para o Long Run de amanhã. O pico pontual de 154bpm foi isolado e o TE baixo (1.8) confirma que o estresse fisiológico foi mínimo.",
+    "alerta": "Z2 mensal em apenas 292 vs target mínimo de 954 — base aeróbica de qualidade gravemente subdosada para 86 dias de prova.",
     "treino_forca": [
       {
         "exercicio": "Ponte de Glúteos com Isometria",
         "series": 3,
         "repeticoes": "12-15",
         "carga": "leve",
-        "foco": "Ativa glúteo máximo e médio, reduz sobrecarga lombar na corrida e no pedal"
+        "foco": "Ativa glúteo máximo e médio sem sobrecarga lombar — base de propulsão na corrida e pedalada do 70.3"
       },
       {
-        "exercicio": "Agachamento Búlgaro com Peso Corporal",
+        "exercicio": "Agachamento Goblet",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Força unilateral de quadril e joelho, essencial para estabilidade na corrida 70.3"
+        "foco": "Força funcional de quadril e joelho com tronco estável — padrão motor essencial para corrida em fadiga no Half"
+      },
+      {
+        "exercicio": "Levantamento Terra Romeno Unilateral",
+        "series": 3,
+        "repeticoes": "10",
+        "carga": "moderada",
+        "foco": "Cadeia posterior unilateral corrige assimetrias comuns em triatletas e previne lesão isquiotibial"
       },
       {
         "exercicio": "Prancha Lateral com Abdução de Quadril",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e glúteo médio — previne colapso pélvico no Long Run"
+        "foco": "Core lateral e glúteo médio — estabilidade pélvica crítica para eficiência na corrida longa"
       },
       {
-        "exercicio": "Elevação de Panturrilha Excêntrica (step)",
+        "exercicio": "Remada com Halteres (TRX ou Cabo)",
         "series": 3,
-        "repeticoes": "12-15",
+        "repeticoes": "12",
         "carga": "moderada",
-        "foco": "Fortalece tendão de Aquiles e panturrilha, reduz risco de lesão em alto volume de corrida"
+        "foco": "Fortalece romboides e grande dorsal — melhora postura na natação e resistência no aerotúnel do bike"
       },
       {
-        "exercicio": "Remada com Elástico (puxada escapular)",
-        "series": 3,
-        "repeticoes": "15",
-        "carga": "leve",
-        "foco": "Estabiliza escapula e melhora tração na natação, corrige postura no aero"
-      },
-      {
-        "exercicio": "Dead Bug (core anti-extensão)",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "leve",
-        "foco": "Core profundo e controle lombopélvico — base para eficiência nas três modalidades"
-      },
-      {
-        "exercicio": "Mobilidade de Quadril 90-90 com Rotação",
+        "exercicio": "Mobilidade de Quadril 90/90 (Hip Flow)",
         "series": 2,
+        "repeticoes": "60s",
+        "carga": "leve",
+        "foco": "Restaura amplitude de rotação interna e externa — reduz compensações lombares na corrida e no aero"
+      },
+      {
+        "exercicio": "Dead Bug",
+        "series": 3,
         "repeticoes": "8-10",
         "carga": "leve",
-        "foco": "Melhora amplitude de quadril para pedal eficiente e passada de corrida sem compensações"
+        "foco": "Core profundo anti-extensão sem estresse espinhal — estabilização lombo-pélvica essencial para os 3 segmentos do 70.3"
       }
     ]
   }
