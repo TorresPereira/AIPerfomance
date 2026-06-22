@@ -1,6 +1,6 @@
 {
   "date": "2026-06-22",
-  "generated_at": "2026-06-22T14:34:55.417812Z",
+  "generated_at": "2026-06-22T18:59:25.293669Z",
   "saude": {
     "hrv": 71,
     "hrv_7d": 35,
@@ -15,8 +15,8 @@
     "sono_rem": 1.0,
     "sono_awake": 0.0,
     "body_battery": 64,
-    "stress_avg": 19,
-    "stress_rest": 69.33,
+    "stress_avg": 22,
+    "stress_rest": 58.48,
     "atl": 684.0,
     "ctl": 2736.0,
     "tsb": null,
@@ -146,11 +146,11 @@
     "run_min": 90.2
   },
   "clima": {
-    "temp_max": 31.2,
+    "temp_max": 31.0,
     "temp_min": 20.0,
     "chuva_pct": 2,
     "vento_kmh": 18.4,
-    "temp_atual": 31.2,
+    "temp_atual": 27.7,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
@@ -314,68 +314,68 @@
     }
   ],
   "insights": {
-    "frase": "HRV recuperado: hoje força, amanhã volume com qualidade.",
-    "sec_readiness": "HRV 71ms representa +36ms acima da média 7d (35ms), superando inclusive o baseline 33–42ms — sinal claro de supercompensação pontual. RHR 59bpm sem baseline comparativo, mas dentro de parâmetros aceitáveis para o perfil. Sono 6.4h com score 76, Deep 1.4h e REM 1.0h são insuficientes — déficit de 2.1h compromete síntese proteica e consolidação neuromuscular; Body Battery 64/100 com stress médio 19 indica reserva funcional moderada, adequada para treino de força controlado.",
-    "sec_treino_ontem": "Corrida 7.4km a 6:57/km com FC média 133bpm e potência 297W gerou TE aeróbico 2.5 — estímulo leve-moderado, execução dentro de Z2 baixo, sem sobrecarga. Tênis (1.4km/48min, FC 114bpm) funcionou como atividade complementar de baixo impacto, TE 2.0. Ponto crítico: cadência de corrida 163spm está abaixo do ideal (170–175spm), indicando passada longa que aumenta impacto articular.",
-    "sec_carga": "Z1 mensal em 1727 ultrapassa o teto target (1412) em +22%, enquanto Z2 está em 378 contra mínimo de 960 — distribuição invertida, base aeróbica de qualidade subdesenvolvida. Z3+ em 631 representa 23% da carga total, excessivo para fase BUILD sem base Z2 sólida. Status Garmin 'Improdutivo' confirma: volume alto mas intensidade mal distribuída, gerando risco de lesão MODERADO sem adaptação aeróbica proporcional.",
-    "sec_hoje": "Treino de força planejado é apropriado dado o Body Battery 64 e HRV elevado — janela favorável para estímulo neuromuscular sem comprometer amanhã. Foco em padrões funcionais para triathlon: quadril, core estabilizador e cadeia posterior. Duração alvo: 45–55 minutos, sem elevação significativa de FC (manter abaixo de 130bpm).",
-    "sec_ajuste": "Limitar sessão a 50min com 5-7 exercícios funcionais, séries de 3x10-12 com carga moderada e recuperação 75–90s. FC teto 130bpm; evitar falha muscular — objetivo é ativação, não hipertrofia.",
-    "sec_alertas": "Z1 supera target máximo mensal em 315 unidades — reduzir volume fácil nas próximas semanas e priorizar Z2 estruturado. Cadência de corrida 163spm: trabalhar drills de cadência para atingir 170–175spm. Déficit de sono acumulado (2.1h) exige dormir às 22:00 esta noite obrigatoriamente antes do bloco natação+bike de amanhã.",
-    "sec_nutricao": "Pré-força: 350kcal com CHO de absorção média (aveia/banana) 60–90min antes. Pós-treino: 30g proteína + 40–60g CHO em até 30min após sessão para otimizar síntese muscular e recarregar glicogênio para amanhã.",
+    "frase": "HRV elevado: janela de oportunidade, use com precisão.",
+    "sec_readiness": "HRV 71ms representa +36ms acima da média 7d (35ms) e está acima do baseline 33–42ms, sinalizando recuperação autonômica expressiva — janela anabólica favorável. RHR 59bpm sem baseline definido; sono 6.4h com apenas 1.4h deep e 1.0h REM indica qualidade comprometida, déficit de 2.1h impactando recuperação estrutural. Body Battery 64/100 com stress médio 22 sugere reserva funcional adequada para treino de força moderado.",
+    "sec_treino_ontem": "Corrida de 7.4km a 6:57/km com FC média 133bpm e potência 297W — ritmo conservador, TE 2.5 indica estímulo aeróbico leve, adequado para dia de volume baixo. Tênis (1.4km, 48min, FC 114bpm) adicionou carga neuromuscular lateral não específica ao triathlon — TE 2.0, sem impacto significativo na fadiga. Carga combinada ontem foi controlada; execução dentro do esperado para fase BUILD com sessão leve.",
+    "sec_carga": "Z1 em 1727 unidades está 22% acima do teto target (1412), indicando excesso de volume em baixa intensidade. Z2 em 378 está criticamente abaixo do piso mínimo (960), representando apenas 39% do target — déficit grave de estímulo aeróbico específico para 70.3. Z3+ em 631 está acima do recomendado para esta fase BUILD, e com status Garmin 'Improdutivo' o risco de lesão MODERADO exige rebalanceamento urgente da distribuição de zonas nas próximas semanas.",
+    "sec_hoje": "Treino de força programado sem duração definida — executar sessão de 45–55 minutos com foco em força funcional moderada dado Body Battery 64 e readiness na faixa 40–70. Priorizar cadeia posterior, glúteos e core estabilizador, sem componente explosivo. Evitar falha muscular; manter RIR 2–3 em todos os exercícios para preservar qualidade neurológica para amanhã (natação + bike).",
+    "sec_ajuste": "Limitar sessão a 50min total, 5–6 exercícios, séries de 3x10-12 com carga moderada. Nenhum trabalho anaeróbico ou HIIT; FC nunca deve exceder 130bpm durante a sessão de força.",
+    "sec_alertas": "Z2 acima do piso target: risco de monotonia de treinamento e platô de adaptação aeróbica se não corrigido nas próximas sessões de bike e corrida. Sono deficiente (6.4h, deep 1.4h) compromete síntese proteica — priorizar 8.5h esta noite (deitar 22h). Carga mensal Z1 excedida; redistribuir volume para Z2 a partir de amanhã.",
+    "sec_nutricao": "Pré-força: 350kcal com carboidrato de baixo-médio IG 60min antes (ex: aveia + fruta). Pós-treino imediato: 30g proteína + 40–60g CHO para síntese muscular e reposição de glicogênio; hidratação mínima 750ml durante a sessão dado 31°C e vento 18km/h.",
     "status_readiness": "BOM",
     "status_carga": "ELEVADA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Sessão de força moderada é o estímulo correto para hoje — HRV elevado oferece janela anabólica, mas Body Battery 64 exige controle de volume. Priorizar qualidade de movimento sobre carga absoluta.",
-    "alerta": "Z1 mensal 22% acima do teto e Z2 abaixo de 40% do mínimo target — reequilibrar distribuição de zonas imediatamente ou status Improdutivo persistirá.",
+    "analise_hoje": "Sessão de força é adequada e estratégica para o dia com HRV elevado e volume zero — capitaliza a janela de recuperação sem acumular carga cardiovascular. Execução moderada preserva qualidade para bloco natação+bike de amanhã.",
+    "alerta": "Z2 mensal em apenas 39% do target mínimo — risco real de adaptação aeróbica insuficiente para 70.3 em 83 dias.",
     "treino_forca": [
       {
-        "exercicio": "Agachamento Búlgaro",
+        "exercicio": "Agachamento Búlgaro (Split Squat)",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Força unilateral de quadríceps e glúteo, corrige assimetrias críticas para a corrida no 70.3"
+        "foco": "Força unilateral de glúteo e quadríceps, corrigindo assimetrias críticas para corrida e bike no 70.3"
       },
       {
-        "exercicio": "Romanian Deadlift (RDL)",
-        "series": 3,
-        "repeticoes": "10",
-        "carga": "moderada",
-        "foco": "Ativa cadeia posterior (isquiotibiais/glúteos) essencial para economia de corrida e pedalada eficiente"
-      },
-      {
-        "exercicio": "Hip Thrust com pausa",
-        "series": 3,
-        "repeticoes": "12",
-        "carga": "moderada",
-        "foco": "Potência de extensão de quadril diretamente transferível para propulsão na corrida e ciclismo"
-      },
-      {
-        "exercicio": "Remada Unilateral com Haltere",
+        "exercicio": "Deadlift Romeno com Halteres",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Fortalece dorsais e romboides para sustentação postural na natação e no aero do triathlon"
+        "foco": "Ativa isquiotibiais e glúteo máximo, cadeia posterior essencial para potência de pedalada e economia de corrida"
       },
       {
-        "exercicio": "Prancha com Variação Lateral (Pallof Press)",
+        "exercicio": "Remada Curvada com Halteres",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Fortalece musculatura das costas e retratores escapulares, postura na natação e no aero da bike"
+      },
+      {
+        "exercicio": "Elevação Lateral + Frontal de Ombros",
+        "series": 3,
+        "repeticoes": "12-15",
+        "carga": "leve",
+        "foco": "Estabilização do manguito rotador para eficiência e prevenção de lesão na braçada"
+      },
+      {
+        "exercicio": "Prancha com Alcance Alternado (Dead Bug variação)",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Estabilidade de core anti-rotação, reduz gasto energético lateral na corrida e natação"
+        "foco": "Core anti-rotação: estabilidade lombo-pélvica transfere diretamente para economia em todas as modalidades do triathlon"
       },
       {
         "exercicio": "Elevação de Panturrilha Unilateral",
         "series": 3,
-        "repeticoes": "15",
+        "repeticoes": "15-20",
         "carga": "moderada",
-        "foco": "Fortalece complexo sural para absorção de impacto e propulsão na corrida — prevenção de lesão"
+        "foco": "Fortalece sóleo e gastrocnêmio, reduzindo risco de lesão em corrida após bike no 70.3"
       },
       {
-        "exercicio": "Mobilidade de Quadril 90/90 + Abertura Torácica",
+        "exercicio": "Mobilidade de Quadril 90-90 + Abertura Torácica",
         "series": 2,
-        "repeticoes": "8",
+        "repeticoes": "60s",
         "carga": "leve",
-        "foco": "Restaura amplitude de quadril e rotação torácica, melhora posição aero e mecânica de nado"
+        "foco": "Restaura amplitude de quadril e rotação torácica, melhorando posição aero na bike e braçada na natação"
       }
     ]
   }
