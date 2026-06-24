@@ -1,47 +1,47 @@
 {
-  "date": "2026-06-23",
-  "generated_at": "2026-06-23T16:12:54.360676Z",
+  "date": "2026-06-24",
+  "generated_at": "2026-06-24T14:00:28.731878Z",
   "saude": {
-    "hrv": 52,
-    "hrv_7d": 34,
-    "hrv_status": "balanced",
+    "hrv": 40,
+    "hrv_7d": 31,
+    "hrv_status": "low",
     "hrv_baseline_low": 33,
     "hrv_baseline_high": 43,
     "rhr": 65,
     "rhr_baseline": null,
-    "sono_h": 5.0,
-    "sono_score": 53,
-    "sono_deep": 0.8,
-    "sono_rem": 0.6,
-    "sono_awake": 65.0,
-    "body_battery": 22,
+    "sono_h": 8.4,
+    "sono_score": 42,
+    "sono_deep": 1.0,
+    "sono_rem": 0.2,
+    "sono_awake": 54.0,
+    "body_battery": 19,
     "stress_avg": 42,
-    "stress_rest": 21.52,
-    "atl": 661.0,
-    "ctl": 2644.0,
+    "stress_rest": 6.9,
+    "atl": 642.0,
+    "ctl": 2567.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 1635.0,
+    "load_aerobic_low": 1573.0,
     "load_aerobic_high": 378.0,
-    "load_anaerobic": 631.0,
-    "load_total_month": 2644.0,
+    "load_anaerobic": 616.0,
+    "load_total_month": 2567.0,
     "load_target_low": "575–1412",
     "load_target_high": "960–1798",
-    "training_status": "Improdutivo",
+    "training_status": "8",
     "fitness_trend": "Estável",
     "training_readiness": null,
     "vo2max": 49.2,
     "peso": null,
     "previsoes": {
-      "5K": 1373,
-      "10K": 2898,
-      "Meia": 6596,
-      "Maratona": 14765
+      "5K": 1379,
+      "10K": 2906,
+      "Meia": 6618,
+      "Maratona": 14821
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
-    "prova_dias": 82,
+    "prova_dias": 81,
     "prova_data": "13/09/2026",
     "prova_fase": "BUILD",
     "nutricao": {
@@ -55,36 +55,22 @@
     },
     "sono_alvo_h": 8.5,
     "sono_deita": "22:00",
-    "sono_deficit_h": 3.5
+    "sono_deficit_h": 0.1
   },
   "ontem": [],
   "hoje": [
     {
       "icone": "🏊",
-      "nome": "Breath & Position Mix (long)",
+      "nome": "Swimming  🥽🩲🏊",
       "tipo": "",
       "dur": "—",
-      "dist": "—"
-    },
-    {
-      "icone": "🚴",
-      "nome": "Aerobic Ride",
-      "tipo": "",
-      "dur": "1h00m",
-      "dist": "—"
-    },
-    {
-      "icone": "⚡",
-      "nome": "Treino",
-      "tipo": "",
-      "dur": "1h05m",
       "dist": "—"
     }
   ],
   "amanha": [
     {
-      "icone": "🏊",
-      "nome": "Swimming  🥽🩲🏊",
+      "icone": "🏃",
+      "nome": "5 × 2 min Fast Intervals",
       "tipo": "",
       "dur": "—",
       "dist": "—"
@@ -110,18 +96,14 @@
     "run_min": 90.2
   },
   "clima": {
-    "temp_max": 30.2,
-    "temp_min": 19.1,
+    "temp_max": 36.3,
+    "temp_min": 20.1,
     "chuva_pct": 0,
-    "vento_kmh": 11.2,
-    "temp_atual": 30.2,
+    "vento_kmh": 10.4,
+    "temp_atual": 35.8,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-06-17",
-      "value": 68.0
-    },
     {
       "date": "2026-06-18",
       "value": 51.0
@@ -145,13 +127,13 @@
     {
       "date": "2026-06-23",
       "value": 52.0
+    },
+    {
+      "date": "2026-06-24",
+      "value": 40.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-06-09",
-      "value": 49.2
-    },
     {
       "date": "2026-06-10",
       "value": 49.2
@@ -207,15 +189,14 @@
     {
       "date": "2026-06-23",
       "value": 49.2
+    },
+    {
+      "date": "2026-06-24",
+      "value": 49.2
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-06-10",
-      "sono": 7.0,
-      "te": 2.7
-    },
     {
       "date": "2026-06-11",
       "sono": 7.6,
@@ -273,68 +254,61 @@
     }
   ],
   "insights": {
-    "frase": "Recuperação inteligente hoje é performance em setembro.",
-    "sec_readiness": "HRV de 52ms está significativamente acima da média de 7d (34ms), sugerindo recuperação autonômica positiva, mas partindo de base baixa (baseline 33–43ms). Sono de 5.0h com score 53 é insuficiente — déficit de 3.5h compromete síntese proteica e consolidação neural. Body Battery em 22/100 com stress médio 42 indica reserva energética criticamente baixa para sessões de qualidade.",
+    "frase": "Body Battery baixo: recupere hoje para construir amanhã.",
+    "sec_readiness": "HRV 40ms está acima da média 7d (31ms) em +9ms, sinalizando leve melhora autonômica, mas ainda abaixo do baseline (33–43ms). Sono de 8.4h com score 42 é preocupante: apenas 1.0h de sono profundo e 0.2h REM indicam recuperação estrutural muito pobre. Body Battery em 19/100 com estresse médio 42 confirma estado de recuperação insuficiente para carga de treino relevante.",
     "sec_treino_ontem": null,
-    "sec_carga": "Z1 em 1635 ultrapassa o teto do target (1412), indicando volume aeróbico leve excessivo. Z2 em 378 está bem abaixo do mínimo (960), comprometendo adaptação aeróbica central na fase BUILD. Z3+ em 631 está desproporcional ao Z2, gerando perfil polarizado negativo com risco de lesão MODERADO e status Garmin Improdutivo.",
-    "sec_hoje": "Três sessões planejadas (natação técnica + pedal aeróbico 1h + treino 1h05) representam carga considerável para Body Battery de 22. Executar com controle rigoroso de FC: natação foco em apneia e posição sem esforço intenso; pedal estritamente Z1-Z2; terceira sessão avaliar contexto e limitar intensidade. Prioridade absoluta é não aprofundar o buraco de fadiga.",
-    "sec_ajuste": "FC teto 145bpm em todas as sessões hoje; pedal limitado a Z1-Z2 com potência alvo 160–185W. Terceira sessão (1h05): reduzir 40% do volume previsto se FC não estabilizar abaixo de 145bpm nos primeiros 10min.",
-    "sec_alertas": "Body Battery 22/100 é limiar crítico — risco real de overreaching se as três sessões forem executadas em sequência sem monitoramento de FC. HR drift acima de 8bpm em sessão contínua deve ser sinal de interrupção imediata. Z1 mensal já supera target máximo; qualquer volume adicional intenso agrava o status Improdutivo.",
-    "sec_nutricao": "Pré-treino: 350kcal com CHO de absorção rápida (banana + aveia) 60min antes da primeira sessão; durante pedal: 500–750ml/h com eletrólitos e 40–60g CHO/h dado o calor de 30°C. Pós-treino: 30g proteína + 80g CHO em até 30min para iniciar recuperação; deitar às 22:00 visando 8.5h de sono para sanar déficit crítico.",
+    "sec_carga": "Z1 em 1573 ultrapassa o target máximo de 1412, indicando volume aeróbico leve excessivo. Z3+ em 616 representa 24% da carga total — elevado para fase BUILD sem base Z2 consolidada (378 vs target mínimo 960). Distribuição invertida: Z2 criticamente subdosada, risco moderado de lesão por polarização inadequada.",
+    "sec_hoje": "Sessão de natação programada sem parâmetros definidos (distância/intensidade não especificados). Dado Body Battery 19 e qualidade de sono crítica, executar sessão técnica de baixíssima intensidade — foco em drills e sensação aquática, sem esforço cardiovascular relevante. Manter FC abaixo de 130bpm durante toda a sessão.",
+    "sec_ajuste": "Limitar natação a 30–40min máximo, 100% em Z1 técnico, FC teto 130bpm. Nenhum esforço anaeróbico — preservar pernas para os 5×2min rápidos de amanhã.",
+    "sec_alertas": "Body Battery 19/100 é criticamente baixo — risco real de subperformance e acúmulo de fadiga residual. Sono REM em 0.2h compromete consolidação neuromuscular; evitar qualquer esforço Z2+ hoje. Z2 mensal 60% abaixo do target mínimo: prioridade estrutural nas próximas semanas.",
+    "sec_nutricao": "Sem treino de alta demanda hoje: pré-natação 200–250kcal leve (banana + aveia), hidratação 500ml antes da sessão. Pós-treino: 30g proteína + CHO moderado (~60g) para reparação e recarga glicogênica visando amanhã.",
     "status_readiness": "BAIXO",
-    "status_carga": "SOBRECARGA",
+    "status_carga": "ELEVADA",
     "acao_hoje": "REDUZIR 40%",
-    "analise_hoje": "Com Body Battery em 22 e sono de 5h, executar as três sessões em volume integral seria contraproducente na fase BUILD a 82 dias da prova. Reduzir para natação técnica (posição/apneia, sem esforço) + pedal de 45min Z1 máximo, descartando ou encurtando a terceira sessão para 20–25min de mobilidade.",
-    "alerta": "Body Battery 22/100 combinado com sono 5h e Z1 mensal acima do teto: risco real de overreaching se carga não for reduzida hoje.",
+    "analise_hoje": "Natação deve ser puramente técnica e restaurativa, máximo 40min em Z1, priorizando drills de braçada e posição hidro. Qualquer intensidade acima disso compromete a execução dos intervalos rápidos amanhã.",
+    "alerta": "Body Battery 19/100 combinado com REM 0.2h: não executar nenhum esforço Z2+ hoje — risco de fadiga acumulada comprometer fase BUILD.",
     "treino_forca": [
+      {
+        "exercicio": "Mobilidade de quadril — rotação interna/externa em decúbito",
+        "series": 2,
+        "repeticoes": "10 cada lado",
+        "carga": "leve",
+        "foco": "Reduz rigidez do ciclismo e melhora passada na corrida"
+      },
       {
         "exercicio": "Dead Bug",
         "series": 3,
-        "repeticoes": "10-12",
+        "repeticoes": "8 cada lado",
         "carga": "leve",
-        "foco": "Estabilização lombar e coordenação contralateral essencial para postura no aero e na corrida"
+        "foco": "Estabilização lombar essencial para posição aero e corrida eficiente"
       },
       {
-        "exercicio": "Ponte de Glúteo Unilateral (Single-leg Glute Bridge)",
-        "series": 3,
-        "repeticoes": "12-15",
-        "carga": "leve",
-        "foco": "Ativa glúteo médio e máximo para eficiência na pedalada e absorção de impacto na corrida"
-      },
-      {
-        "exercicio": "Agachamento Goblet com pausa (3s no fundo)",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Força funcional de quadril e mobilidade de tornozelo para corrida eficiente no 70.3"
-      },
-      {
-        "exercicio": "Prancha Lateral com Abdução de Quadril",
+        "exercicio": "Glute Bridge Isométrico",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e glúteo médio para estabilidade pélvica na corrida e prevenção de lesão"
+        "foco": "Ativa glúteo máximo sem estresse articular — propulsão no pedal e corrida"
       },
       {
-        "exercicio": "Mobilidade de Quadril — 90/90 Hip Stretch",
-        "series": 2,
-        "repeticoes": "60s",
-        "carga": "leve",
-        "foco": "Libera flexores e rotadores do quadril sobrecarregados pelo ciclismo; melhora passada na corrida"
-      },
-      {
-        "exercicio": "Romanian Deadlift (RDL) com halteres",
+        "exercicio": "Clamshell com elástico leve",
         "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Fortalece cadeia posterior (isquiotibiais/glúteos) reduzindo risco de lesão na fase de corrida do 70.3"
+        "repeticoes": "15 cada lado",
+        "carga": "leve",
+        "foco": "Estabilidade de quadril previne joelho valgo na corrida e pedal"
       },
       {
-        "exercicio": "Alongamento dinâmico de peitoral e ombros (abertura torácica)",
+        "exercicio": "Prancha lateral com apoio no joelho",
         "series": 2,
-        "repeticoes": "10-12",
+        "repeticoes": "20s cada lado",
         "carga": "leve",
-        "foco": "Melhora rotação de ombros e postura na natação, reduzindo arrasto e risco de tendinite de manguito"
+        "foco": "Core lateral reduz oscilação lateral — economia de corrida no 70.3"
+      },
+      {
+        "exercicio": "Alongamento dinâmico posterior de cadeia — leg swing frontal",
+        "series": 2,
+        "repeticoes": "12 cada lado",
+        "carga": "leve",
+        "foco": "Mobilidade isquiossural melhora comprimento de passada e previne lesão"
       }
     ]
   }
