@@ -1,43 +1,43 @@
 {
   "date": "2026-06-30",
-  "generated_at": "2026-06-30T09:30:20.684071Z",
+  "generated_at": "2026-06-30T11:37:40.422786Z",
   "saude": {
-    "hrv": null,
-    "hrv_7d": null,
-    "hrv_status": "",
-    "hrv_baseline_low": null,
-    "hrv_baseline_high": null,
-    "rhr": null,
+    "hrv": 52,
+    "hrv_7d": 30,
+    "hrv_status": "low",
+    "hrv_baseline_low": 33,
+    "hrv_baseline_high": 42,
+    "rhr": 61,
     "rhr_baseline": null,
-    "sono_h": 0.0,
-    "sono_score": null,
-    "sono_deep": 0.0,
-    "sono_rem": 0.0,
-    "sono_awake": 0.0,
-    "body_battery": null,
-    "stress_avg": null,
-    "stress_rest": null,
-    "atl": null,
-    "ctl": null,
+    "sono_h": 5.0,
+    "sono_score": 56,
+    "sono_deep": 1.2,
+    "sono_rem": 0.4,
+    "sono_awake": 26.0,
+    "body_battery": 41,
+    "stress_avg": 29,
+    "stress_rest": 39.49,
+    "atl": 513.0,
+    "ctl": 2051.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": null,
-    "load_aerobic_high": null,
-    "load_anaerobic": null,
-    "load_total_month": null,
-    "load_target_low": null,
-    "load_target_high": null,
-    "training_status": null,
-    "fitness_trend": null,
+    "load_aerobic_low": 1203.0,
+    "load_aerobic_high": 378.0,
+    "load_anaerobic": 470.0,
+    "load_total_month": 2051.0,
+    "load_target_low": "448–1101",
+    "load_target_high": "748–1401",
+    "training_status": "8",
+    "fitness_trend": "Estável",
     "training_readiness": null,
-    "vo2max": null,
+    "vo2max": 49.2,
     "peso": null,
     "previsoes": {
-      "5K": 1375,
-      "10K": 2910,
-      "Meia": 6641,
-      "Maratona": 14870
+      "5K": 1372,
+      "10K": 2907,
+      "Meia": 6634,
+      "Maratona": 14856
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,7 +55,7 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": null
+    "sono_deficit_h": 3.0
   },
   "ontem": [],
   "hoje": [],
@@ -80,12 +80,12 @@
     "run_min": 41.9
   },
   "clima": {
-    "temp_max": 24.7,
+    "temp_max": 25.8,
     "temp_min": 16.4,
-    "chuva_pct": 22,
-    "vento_kmh": 13.3,
-    "temp_atual": 24.0,
-    "emoji": "🌧️"
+    "chuva_pct": 61,
+    "vento_kmh": 16.2,
+    "temp_atual": 25.1,
+    "emoji": "🌤️"
   },
   "hrv_7dias": [
     {
@@ -114,14 +114,10 @@
     },
     {
       "date": "2026-06-30",
-      "value": null
+      "value": 52.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-06-15",
-      "value": 49.4
-    },
     {
       "date": "2026-06-16",
       "value": 49.4
@@ -177,6 +173,10 @@
     {
       "date": "2026-06-29",
       "value": 49.2
+    },
+    {
+      "date": "2026-06-30",
+      "value": 49.2
     }
   ],
   "prs": [],
@@ -228,68 +228,68 @@
     }
   ],
   "insights": {
-    "frase": "Sem dados, sem escusa: construa a base hoje.",
-    "sec_readiness": "Dados de HRV, RHR e Body Battery não registrados — impossível quantificar prontidão fisiológica com precisão. Sono reportado como 0h, o que indica falha de sincronização do dispositivo ou ausência real de monitoramento noturno. Sem baseline definido, qualquer decisão de carga é conservadora por protocolo.",
+    "frase": "Recuperação ativa hoje, potência real amanhã.",
+    "sec_readiness": "HRV de 52ms está +22ms acima da média 7d (30ms), sinal positivo de rebote autonômico, mas ainda abaixo do baseline de 33–42ms em tendência histórica — interpretar com cautela. Sono de 5.0h com score 56, apenas 1.2h de sono profundo e 0.4h REM representa déficit crítico de 3h, comprometendo síntese proteica e consolidação neuromuscular. Body Battery em 41/100 com stress médio 29 confirma recuperação incompleta — organismo não está pronto para carga significativa.",
     "sec_treino_ontem": null,
-    "sec_carga": "Volume semanal zerado em todas as modalidades (Natação 0km, Bike 0km, Corrida 0km) com dados de zona indisponíveis — impossível avaliar distribuição Z1/Z2/Z3 vs targets. A 75 dias da prova em fase BUILD, ausência de carga registrada é tecnicamente preocupante para progressão de CTL. Risco de lesão classificado como MODERADO mesmo sem dados, sinalizando flag sistêmico que exige atenção.",
-    "sec_hoje": "Nenhum treino agendado para hoje — dia de descanso ativo ou lacuna no plano. Recomenda-se sessão de força funcional de baixa demanda cardiovascular para manutenção neuromuscular. Priorize mobilidade de quadril, estabilidade de core e padrões motores específicos do triathlon.",
-    "sec_ajuste": "Sem treino de endurance hoje: limitar qualquer atividade espontânea a 45min máximo em Z1 (FC < 130bpm). Foco total na sessão de força com carga moderada e controle técnico rigoroso.",
-    "sec_alertas": "Ausência completa de dados biométricos compromete tomada de decisão — sincronizar Garmin 965 imediatamente. Volume semanal zerado a 75 dias de prova 70.3 requer retomada estruturada na semana corrente para não comprometer CTL mínimo necessário.",
-    "sec_nutricao": "Sem treino de endurance hoje: priorize refeições normais com CHO moderado (~4g/kg) e proteína distribuída (0.4g/kg por refeição, mínimo 4 refeições). Pós-força: 30g proteína + 40g CHO em até 45min; hidratação basal de 35ml/kg/dia.",
-    "status_readiness": "MODERADO",
+    "sec_carga": "Z1 em 1203 unidades ultrapassa o teto do target (448–1101), enquanto Z2 com 378 está muito abaixo do alvo mínimo de 748 — distribuição invertida, prejudicando o estímulo aeróbico de base da fase BUILD. Z3+ em 470 também excede proporcionalmente, elevando risco de fadiga acumulada sem o suporte aeróbico adequado. Com ATL 513 e risco de lesão MODERADO, a semana zero de volume (0km em todas modalidades) é coerente, mas exige retomada progressiva e controlada.",
+    "sec_hoje": "Nenhum treino agendado para hoje — decisão correta diante do Body Battery 41 e déficit de sono de 3h. O foco total deve ser recuperação qualitativa: priorizar sono (deitar 22h30), hidratação e nutrição de suporte. Utilize o tempo para mobilidade suave e força funcional de baixa intensidade como estímulo manutenção sem carga autonômica adicional.",
+    "sec_ajuste": "Limitar qualquer atividade física hoje a no máximo 30–40min de força funcional leve, FC abaixo de 120bpm. Zero atividade aeróbica — preservar recursos para retomada amanhã.",
+    "sec_alertas": "Sono em 5.0h com REM apenas 0.4h é o alerta prioritário — comprometimento direto de recuperação muscular e hormonal. Z1 acumulado mensal acima do teto e Z2 abaixo do piso mínimo indicam necessidade de reequilibrar distribuição nas próximas semanas para não comprometer adaptação aeróbica da fase BUILD.",
+    "sec_nutricao": "Sem treino hoje, priorizar alimentação de recuperação: 1.6–1.8g proteína/kg ao longo do dia e carboidratos de baixo IG para reposição de glicogênio sem pico insulínico. Hidratação mínima de 2.5L ao longo do dia; pré-sono incluir 30g proteína (caseína ou fonte mista) para otimizar síntese noturna.",
+    "status_readiness": "BAIXO",
     "status_carga": "SUAVE",
     "acao_hoje": "DESCANSO",
-    "analise_hoje": "Dia sem treino estruturado registrado — use a sessão de força como estímulo neuromuscular de manutenção, não como carga adicional. Sincronize dispositivos e revise o plano semanal para garantir volume BUILD adequado.",
-    "alerta": "Volume zerado em semana de fase BUILD a 75 dias da prova — risco real de perda de adaptação aeróbica se padrão persistir.",
+    "analise_hoje": "Dia sem treino totalmente justificado pelo conjunto HRV abaixo do baseline, sono deficitário crítico e Body Battery 41. Qualquer carga aeróbica hoje aprofundaria o buraco de recuperação com 75 dias ainda para a prova.",
+    "alerta": "Déficit de sono de 3h com REM em 0.4h representa risco real de supressão hormonal e imunossupressão — prioridade máxima é dormir 8h esta noite.",
     "treino_forca": [
       {
-        "exercicio": "Agachamento Goblet",
+        "exercicio": "Agachamento Goblet com Kettlebell",
         "series": 3,
         "repeticoes": "12-15",
-        "carga": "moderada",
-        "foco": "Força funcional de quadríceps e glúteos para potência no pedal e saída de transição"
-      },
-      {
-        "exercicio": "Ponte de Glúteo Unilateral",
-        "series": 3,
-        "repeticoes": "10-12",
         "carga": "leve",
-        "foco": "Ativação e estabilização de glúteo médio para prevenir queda pélvica na corrida"
+        "foco": "Ativa glúteos e quadríceps sem impacto axial, base para potência no pedal e corrida"
       },
       {
-        "exercicio": "Prancha Lateral com Abdução de Quadril",
+        "exercicio": "Ponte de Glúteos Unilateral (Single-leg Glute Bridge)",
+        "series": 3,
+        "repeticoes": "12",
+        "carga": "leve",
+        "foco": "Corrige desequilíbrios pélvicos e fortalece cadeia posterior essencial para corrida no 70.3"
+      },
+      {
+        "exercicio": "Prancha Frontal com Respiração Diafragmática",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e estabilidade lombopélvica crítica para economia de corrida"
+        "foco": "Estabilização de core sem sobrecarga — mantém tensão funcional e controle respiratório"
       },
       {
-        "exercicio": "Remada com Halteres (Bent Over Row)",
+        "exercicio": "Remada com Halteres em Apoio (Bent-over Row)",
         "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Fortalecimento de dorsais e romboides para manutenção de postura na natação e no aero"
+        "repeticoes": "12",
+        "carga": "leve",
+        "foco": "Fortalece romboides e trapézio médio, melhorando postura na natação e no aero"
       },
       {
-        "exercicio": "Avanço com Passada Alternada",
+        "exercicio": "Step-up com Joelho Alto",
         "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Força unilateral de membros inferiores simulando padrão motor da corrida"
+        "repeticoes": "10",
+        "carga": "leve",
+        "foco": "Simula padrão motor da corrida, ativa iliopsoas e glúteo com controle excêntrico"
       },
       {
-        "exercicio": "Mobilidade de Quadril 90/90",
+        "exercicio": "Mobilidade de Quadril 90-90 (Hip 90/90 Stretch)",
         "series": 2,
-        "repeticoes": "60s",
+        "repeticoes": "45s",
         "carga": "leve",
-        "foco": "Amplitude de rotação de quadril para eficiência no pedal e redução de tensão lombar"
+        "foco": "Libera rotadores externos do quadril, reduz risco de lesão em triatletas com alto volume bike"
       },
       {
-        "exercicio": "Dead Bug",
+        "exercicio": "Dead Bug com Braço e Perna Alternados",
         "series": 3,
-        "repeticoes": "8-10",
+        "repeticoes": "10",
         "carga": "leve",
-        "foco": "Controle motor de core profundo com dissociação de membros, base para estabilidade em todas as modalidades"
+        "foco": "Integração core-membros em padrão cruzado, essencial para eficiência na corrida e estabilidade no aero"
       }
     ]
   }
