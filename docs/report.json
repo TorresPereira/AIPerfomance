@@ -1,31 +1,31 @@
 {
-  "date": "2026-07-01",
-  "generated_at": "2026-07-01T09:42:02.459723Z",
+  "date": "2026-07-02",
+  "generated_at": "2026-07-02T08:53:21.142050Z",
   "saude": {
-    "hrv": 69,
-    "hrv_7d": 33,
+    "hrv": 45,
+    "hrv_7d": 32,
     "hrv_status": "unbalanced",
-    "hrv_baseline_low": 34,
+    "hrv_baseline_low": 33,
     "hrv_baseline_high": 43,
-    "rhr": 61,
+    "rhr": 64,
     "rhr_baseline": null,
-    "sono_h": 7.2,
-    "sono_score": 80,
-    "sono_deep": 1.3,
-    "sono_rem": 1.4,
-    "sono_awake": 11.0,
-    "body_battery": 63,
-    "stress_avg": 17,
-    "stress_rest": 79.73,
-    "atl": 500.0,
-    "ctl": 2001.0,
+    "sono_h": 6.3,
+    "sono_score": 66,
+    "sono_deep": 1.6,
+    "sono_rem": 0.7,
+    "sono_awake": 20.0,
+    "body_battery": 34,
+    "stress_avg": 29,
+    "stress_rest": 34.35,
+    "atl": 448.0,
+    "ctl": 1791.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 1180.0,
-    "load_aerobic_high": 378.0,
-    "load_anaerobic": 442.0,
-    "load_total_month": 2001.0,
+    "load_aerobic_low": 1161.0,
+    "load_aerobic_high": 244.0,
+    "load_anaerobic": 386.0,
+    "load_total_month": 1791.0,
     "load_target_low": "448–1101",
     "load_target_high": "748–1401",
     "training_status": "Improdutivo",
@@ -34,14 +34,14 @@
     "vo2max": 49.2,
     "peso": null,
     "previsoes": {
-      "5K": 1373,
-      "10K": 2909,
-      "Meia": 6640,
-      "Maratona": 14871
+      "5K": 1379,
+      "10K": 2918,
+      "Meia": 6664,
+      "Maratona": 14933
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
-    "prova_dias": 74,
+    "prova_dias": 73,
     "prova_data": "13/09/2026",
     "prova_fase": "BUILD",
     "nutricao": {
@@ -55,34 +55,50 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 0.8
+    "sono_deficit_h": 1.7
   },
-  "ontem": [
+  "ontem": [],
+  "hoje": [
     {
-      "mod": "bike",
-      "icone": "🚴",
-      "nome": "Erkrath eBiking",
-      "dist": "18.5km",
-      "dur": "49m24s",
-      "fc": 105.0,
-      "fc_max": 148.0,
-      "cal": 304.0,
-      "cad": 62.0,
-      "tss": null,
-      "np": null,
-      "swolf": null,
-      "aerobic_te": 1.2999999523162842,
-      "anaerobic_te": 0.6000000238418579,
-      "elev": 149.0,
-      "perf": "22.4km/h",
-      "pl": "Velocidade",
-      "_dist_m": 18478.759765625,
-      "_dur_s": 2964.73291015625
+      "icone": "🏃",
+      "nome": "Steady Run",
+      "tipo": "",
+      "dur": "1h00m",
+      "dist": "—"
     }
   ],
-  "hoje": [],
-  "amanha": [],
-  "hoje_feito": [],
+  "amanha": [
+    {
+      "icone": "🚴",
+      "nome": "Easy Ride",
+      "tipo": "",
+      "dur": "1h00m",
+      "dist": "—"
+    }
+  ],
+  "hoje_feito": [
+    {
+      "mod": "other",
+      "icone": "⚡",
+      "nome": "Erkrath Walking",
+      "dist": "1.0km",
+      "dur": "20m07s",
+      "fc": 83.0,
+      "fc_max": 106.0,
+      "tss": null,
+      "np": null,
+      "perf": "—",
+      "pl": "—",
+      "_dist_m": 1004.030029296875,
+      "_dur_s": 1207.06298828125,
+      "swolf": null,
+      "cad": 42.65625,
+      "cal": 90.0,
+      "aerobic_te": 0.20000000298023224,
+      "anaerobic_te": 0.0,
+      "elev": 7.0
+    }
+  ],
   "semana": {
     "swim_km": 0,
     "swim_min": 0,
@@ -91,7 +107,7 @@
     "run_km": 0,
     "run_min": 0,
     "total_tss": 0.0,
-    "n_treinos": 1
+    "n_treinos": 2
   },
   "semana_passada": {
     "swim_km": 0,
@@ -102,18 +118,14 @@
     "run_min": 41.9
   },
   "clima": {
-    "temp_max": 27.0,
-    "temp_min": 16.7,
-    "chuva_pct": 14,
-    "vento_kmh": 14.4,
-    "temp_atual": 23.4,
-    "emoji": "🌤️"
+    "temp_max": 26.0,
+    "temp_min": 16.3,
+    "chuva_pct": 100,
+    "vento_kmh": 22.7,
+    "temp_atual": 23.5,
+    "emoji": "🌧️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-06-25",
-      "value": 59.0
-    },
     {
       "date": "2026-06-26",
       "value": 58.0
@@ -137,13 +149,13 @@
     {
       "date": "2026-07-01",
       "value": 69.0
+    },
+    {
+      "date": "2026-07-02",
+      "value": 45.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-06-17",
-      "value": 49.4
-    },
     {
       "date": "2026-06-18",
       "value": 49.4
@@ -199,15 +211,14 @@
     {
       "date": "2026-07-01",
       "value": 49.2
+    },
+    {
+      "date": "2026-07-02",
+      "value": 49.2
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-06-18",
-      "sono": 7.2,
-      "te": 2.5
-    },
     {
       "date": "2026-06-19",
       "sono": 7.0,
@@ -247,71 +258,76 @@
       "date": "2026-06-30",
       "sono": 5.0,
       "te": 1.3
+    },
+    {
+      "date": "2026-07-02",
+      "sono": 6.3,
+      "te": 0.2
     }
   ],
   "insights": {
-    "frase": "HRV elevado, carga improdutiva: reconstrua com inteligência hoje.",
-    "sec_readiness": "HRV de 69ms representa spike de +36ms vs média 7d (33ms), acima do baseline 34–43ms — sinal de recuperação autonômica, mas padrão instável (unbalanced). Sono de 7.2h com score 80 é aceitável, porém déficit de 0.8h e deep sleep em 1.3h indicam recuperação estrutural incompleta. Body Battery 63/100 com stress médio 17 posiciona o atleta em janela funcional moderada — apto para estímulo leve a moderado.",
-    "sec_treino_ontem": "eBike de 18.5km em 49min a 22.4km/h com FC média 105bpm (TE aeróbico 1.3) configura estímulo regenerativo de baixíssima intensidade — sem valor de carga significativo. Cadência de 62rpm está abaixo do ideal para eficiência neuromuscular ciclística (alvo ≥85rpm). Sessão válida como recuperação ativa, não como build.",
-    "sec_carga": "Z1 em 1180 ultrapassa o teto do target (1101), enquanto Z2 em 378 está criticamente abaixo do piso de 748 — polarização invertida e ineficiente para fase BUILD. Z3+ em 442 acima do necessário sem base aeróbica Z2 consolidada representa risco real de sobrecarga anaeróbica sem adaptação central. Status Garmin 'Improdutivo' corrobora: o atleta está treinando volume sem qualidade aeróbica direcionada.",
-    "sec_hoje": "Sem treino agendado — dia de descanso ativo programado. Com 74 dias para a prova e status improdutivo, a prioridade é estímulo de força funcional e mobilidade para manter recrutamento neuromuscular sem adicionar carga cardiovascular. Janela ideal para trabalho de força em 40–55min com FC abaixo de 130bpm.",
-    "sec_ajuste": "Sessão de força funcional de 45min máximo, FC teto 130bpm. Nenhum componente aeróbico estruturado hoje — preservar recuperação autonômica para retomada de Z2 amanhã.",
-    "sec_alertas": "Z2 acumulada no mês (378) representa apenas 50% do piso target (748) — déficit crítico de base aeróbica a 74 dias da prova. Volume semanal de natação e corrida em zero é alarmante para fase BUILD em Half Ironman. Priorizar redistribuição modal urgente nos próximos 7 dias.",
-    "sec_nutricao": "Dia sem treino cardiovascular: manter ingestão de carboidratos em 3–4g/kg para reposição de glicogênio muscular pós-semana. Pós-força: 30g de proteína em até 40min; hidratação basal de 35ml/kg dado calor de 27°C previsto.",
-    "status_readiness": "MODERADO",
+    "frase": "HRV em alta, mas o corpo pede cautela hoje.",
+    "sec_readiness": "HRV 45ms está acima da baseline (33–43ms) e +13ms vs média 7d, sinal positivo de recuperação autonômica, porém status 'unbalanced' indica resposta ainda instável. Sono de 6.3h com score 66, deep sleep 1.6h e REM apenas 0.7h — déficit de 1.7h compromete consolidação hormonal e reparação muscular. Body Battery 34/100 com stress médio 29 reforça reserva energética limitada para esforço de qualidade.",
+    "sec_treino_ontem": null,
+    "sec_carga": "Z1 em 1161 ultrapassa o teto do target (448–1101), indicando volume aeróbico leve excessivo sem contrapartida em Z2 (244 vs target 748–1401) — distribuição invertida para fase BUILD. Z3+ em 386 representa 21.5% da carga total, desproporcional sem base Z2 consolidada. Status Garmin 'Improdutivo' confirma: a carga não está gerando adaptação, risco de lesão MODERADO deve ser monitorado.",
+    "sec_hoje": "O Steady Run de 1h estava planejado, mas o único registro real é um walking de 1km a FC 83bpm (TE aeróbico 0.2) — treino principal não executado. Com Body Battery 34 e sono deficitário, caso o Steady Run seja realizado, deve ser estritamente em Z1: FC alvo 130–142bpm, pace controlado, sem acelerações. Chuva 100% e vento 22.7km/h exigem atenção ao resfriamento e segurança.",
+    "sec_ajuste": "Executar Steady Run limitado a 40–45min, FC teto 142bpm, 100% em Z1 — eliminar qualquer trecho em Z2+ hoje. Se sensação de esforço > RPE 12 nos primeiros 15min, substituir por mobilidade/caminhada e preservar para o Easy Ride amanhã.",
+    "sec_alertas": "Body Battery 34 aliado ao sono REM de apenas 0.7h eleva risco de HR drift precoce durante a corrida — monitorar FC a cada 5min. Z1 mensal já no teto; qualquer volume adicional hoje em Z1 agrava o desequilíbrio de distribuição. Ausência total de natação e corrida na semana (0km cada) compromete especificidade para o Half Ironman em 73 dias.",
+    "sec_nutricao": "Pré-treino (se executar o run): 350kcal com CHO de absorção rápida 60–90min antes, hidratação de 500ml. Pós-treino imediato: 30g proteína + 40–60g CHO para reparação e reposição glicogênica; priorizar deitar às 22:30 para atingir as 8h alvo e compensar déficit atual de 1.7h.",
+    "status_readiness": "BAIXO",
     "status_carga": "SUAVE",
-    "acao_hoje": "SUBSTITUIR",
-    "analise_hoje": "Dia sem treino agendado é oportunidade estratégica para força funcional direcionada ao 70.3, mantendo estímulo neuromuscular sem comprometer a recuperação autonômica em curso. Substituir inatividade total por 45min de força moderada é a decisão técnica correta.",
-    "alerta": "Zero km de natação e corrida na semana com 74 dias para prova em fase BUILD exige redistribuição modal imediata a partir de amanhã.",
+    "acao_hoje": "REDUZIR 40%",
+    "analise_hoje": "Treino principal (Steady Run 1h) não foi executado; apenas walking de baixíssimo impacto registrado — dia funcionalmente vazio em termos de estímulo de treinamento. Com readiness comprometido (BB 34, sono deficitário), a não execução pode ter sido a decisão correta, mas exige replanejamento da semana para recuperar especificidade.",
+    "alerta": "Z1 mensal acima do teto e Z2 em apenas 16% do target — continuar assim compromete a adaptação aeróbica essencial para o Half Ironman em setembro.",
     "treino_forca": [
-      {
-        "exercicio": "Agachamento Búlgaro",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Força unilateral de glúteo e quadríceps, corrige assimetrias críticas para corrida e ciclismo no 70.3"
-      },
-      {
-        "exercicio": "Ponte de Glúteo com Isometria",
-        "series": 3,
-        "repeticoes": "12",
-        "carga": "moderada",
-        "foco": "Ativa glúteo máximo e reduz sobrecarga lombar na posição aerodinâmica da bike"
-      },
-      {
-        "exercicio": "Remada Unilateral com Haltere",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Estabilidade escapular e força de tração essenciais para eficiência na natação"
-      },
-      {
-        "exercicio": "Prancha com Elevação Alternada de Braço",
-        "series": 3,
-        "repeticoes": "30s",
-        "carga": "leve",
-        "foco": "Core anti-rotação — estabiliza o tronco na corrida e mantém postura na bike sob fadiga"
-      },
-      {
-        "exercicio": "Elevação de Panturrilha Unilateral",
-        "series": 3,
-        "repeticoes": "15",
-        "carga": "moderada",
-        "foco": "Fortalece complexo sóleo-gastrocnêmio, reduz risco de lesão na corrida do 70.3"
-      },
-      {
-        "exercicio": "Mobilidade de Quadril em 90/90",
-        "series": 2,
-        "repeticoes": "60s",
-        "carga": "leve",
-        "foco": "Restaura amplitude de rotação do quadril, melhora mecânica de passada e pedalada"
-      },
       {
         "exercicio": "Dead Bug",
         "series": 3,
+        "repeticoes": "8 cada lado",
+        "carga": "leve",
+        "foco": "Ativa estabilização lombo-pélvica sem carga axial, essencial para postura na corrida e no ciclismo"
+      },
+      {
+        "exercicio": "Ponte de Glúteo Unilateral (Single-Leg Glute Bridge)",
+        "series": 3,
         "repeticoes": "10-12",
         "carga": "leve",
-        "foco": "Coordenação core-membros, protege lombar e melhora estabilidade central em todas as modalidades"
+        "foco": "Fortalece glúteo médio e máximo reduzindo risco de lesão no quadril durante a corrida"
+      },
+      {
+        "exercicio": "Agachamento Isométrico na Parede (Wall Sit)",
+        "series": 3,
+        "repeticoes": "30s",
+        "carga": "leve",
+        "foco": "Desenvolve resistência de quadríceps para manter potência no ciclismo sem impacto articular"
+      },
+      {
+        "exercicio": "Bird Dog",
+        "series": 3,
+        "repeticoes": "8 cada lado",
+        "carga": "leve",
+        "foco": "Integra estabilidade de core com coordenação escapular, beneficiando a braçada na natação"
+      },
+      {
+        "exercicio": "Mobilidade de Quadril — 90/90 Hip Stretch",
+        "series": 2,
+        "repeticoes": "45s cada lado",
+        "carga": "leve",
+        "foco": "Libera rotadores externos do quadril, melhorando eficiência de pedalada e passada na corrida"
+      },
+      {
+        "exercicio": "Prancha Lateral com Abdução de Quadril",
+        "series": 3,
+        "repeticoes": "20s cada lado",
+        "carga": "leve",
+        "foco": "Estabiliza pelve lateralmente, prevenindo colapso no quadril em corridas longas"
+      },
+      {
+        "exercicio": "Alongamento Dinâmico de Isquiotibiais (Leg Swing)",
+        "series": 2,
+        "repeticoes": "10 cada lado",
+        "carga": "leve",
+        "foco": "Aumenta amplitude de movimento posterior da coxa, reduzindo tensão na corrida e no ciclismo"
       }
     ]
   }
