@@ -1,6 +1,6 @@
 {
   "date": "2026-07-17",
-  "generated_at": "2026-07-17T07:16:25.165170Z",
+  "generated_at": "2026-07-17T08:06:19.872780Z",
   "saude": {
     "hrv": 55,
     "hrv_7d": 36,
@@ -15,8 +15,8 @@
     "sono_rem": 0.4,
     "sono_awake": 9.0,
     "body_battery": 44,
-    "stress_avg": 20,
-    "stress_rest": 76.0,
+    "stress_avg": 24,
+    "stress_rest": 52.37,
     "atl": 166.0,
     "ctl": 664.0,
     "tsb": null,
@@ -143,7 +143,7 @@
     "temp_max": 29.7,
     "temp_min": 18.4,
     "chuva_pct": 14,
-    "vento_kmh": 17.6,
+    "vento_kmh": 18.7,
     "temp_atual": 22.7,
     "emoji": "🌤️"
   },
@@ -278,68 +278,68 @@
     }
   ],
   "insights": {
-    "frase": "HRV em alta: execute com inteligência, construa com consistência.",
-    "sec_readiness": "HRV de 55ms representa +19ms acima da média 7d (36ms) e está acima do baseline (32–42ms), indicando recuperação autonômica sólida. Sono de 6h com score 65, deep sleep 1.5h e REM apenas 0.4h — déficit de 2h compromete regeneração hormonal. Body Battery 44/100 com stress 20 sugere capacidade funcional moderada, suficiente para treino controlado.",
-    "sec_treino_ontem": "Bike leve em Erkrath: 18.1km a 24.4km/h com FC média 113bpm (max 132bpm) e TE aeróbico 2.0 — sessão de recuperação ativa bem executada dentro de Z1. Cadência 71rpm está abaixo do ideal para ciclismo de triathlon (85–95rpm), ponto a corrigir no Easy Ride de hoje. Estímulo adequado para o dia anterior ao Long Run.",
-    "sec_carga": "Z1 em 480 (target 325–845) e Z2 em 113 (target 626–1146) — Z2 criticamente abaixo do mínimo, exigindo progressão urgente na fase BUILD. Z3+ em 70 representa 10.5% da carga total, aceitável, mas sem base Z2 sólida o risco de lesão moderado tende a aumentar. Volume semanal (Swim 1km / Bike 18.1km / Run 7.2km) está muito abaixo do necessário para 70.3 com prova em 58 dias.",
-    "sec_hoje": "Run de 7.2km já executado: FC média 131bpm (max 155bpm), pace 7:24/km e potência 284W — TE aeróbico 2.8 indica estímulo moderado, dentro do esperado. Cadência de 159spm está baixa para corrida (ideal ≥170spm), gerando impacto excessivo e ineficiência mecânica. Easy Ride planejado (1h10m) ainda pendente — deve ser executado com FC teto 130bpm e cadência 88–95rpm.",
-    "sec_ajuste": "Easy Ride: 1h10m com FC estritamente abaixo de 130bpm, cadência alvo 88–95rpm, potência estimada 140–160W. Nenhum esforço Z2+ após o Run já executado — sessão exclusivamente regenerativa.",
-    "sec_alertas": "Cadência de corrida em 159spm é ponto crítico recorrente — risco aumentado de lesão por sobrecarga em tibiais e joelhos com volume crescendo no BUILD. REM de 0.4h indica recuperação cognitiva e hormonal insuficiente; priorizar 8h de sono antes do Long Run amanhã (deitar 22h30). Z2 acumulada no mês (113) está 81% abaixo do target mínimo — necessário plano de progressão imediato.",
-    "sec_nutricao": "Pós-Run executado: ingerir imediatamente 30g proteína + 60–80g CHO para iniciar recuperação muscular antes do Bike. Durante o Easy Ride (1h10m): 500–600ml de fluidos com eletrólitos e 40–50g CHO; jantar rico em carboidratos complexos (200–250g) para carregar glicogênio para o Long Run de amanhã.",
+    "frase": "HRV em alta: capitalize o sinal, execute com precisão.",
+    "sec_readiness": "HRV de 55ms representa +19ms acima da média 7d (36ms) e está acima do baseline (32–42ms), sinal verde de recuperação fisiológica real. Sono de 6h com score 65 é subótimo: REM crítico em apenas 0.4h, déficit de 2h compromete consolidação neuromuscular. Body Battery em 44/100 com stress médio 24 indica reserva funcional moderada — suficiente para treino leve a moderado, não para esforço máximo.",
+    "sec_treino_ontem": "Bike em Erkrath de 18.1km a 24.4km/h com FC média 113bpm (TE aeróbico 2.0) foi corretamente executado em Z1 — sessão de recuperação ativa eficiente. Cadência de 71rpm está abaixo do ideal para triathlon (85–95rpm), padrão a corrigir em sessões futuras. Sem sinais de sobrecarga: FC máx de 132bpm confirma contenção de intensidade.",
+    "sec_carga": "Z1 em 480 unidades está dentro do target (325–845) e Z2 em 113 está muito abaixo do target mínimo (626), indicando déficit de estímulo aeróbico estrutural na fase BUILD. Z3+ em 70 é aceitável, mas a subexposição em Z2 é o ponto crítico: sem volume aeróbico sustentado, adaptações cardiovasculares para o 70.3 de setembro ficam comprometidas. Volume semanal (Swim 1km / Bike 18km / Run 7.2km) é insuficiente para a fase BUILD a 58 dias da prova — urgente aumentar progressão.",
+    "sec_hoje": "Corrida já executada: 7.2km em 52m58s, FC média 131bpm (max 155bpm), pace 7:24/km e TE aeróbico 2.8 — sessão bem contida em Z2 baixo, adequada ao estado do dia. Potência média de 284W com cadência 159spm indica padrão de passada funcional. Easy Ride planejado (1h10m) ainda pendente — deve ser executado em Z1 estrito dado o acúmulo do dia.",
+    "sec_ajuste": "Easy Ride: executar 1h10m com FC teto 130bpm, cadência alvo 85–90rpm, sem ultrapassar Z1. Não acumular mais Z3+ hoje dado o Run já executado com FC máx de 155bpm.",
+    "sec_alertas": "REM de apenas 0.4h é alerta fisiológico: recuperação cognitiva e hormonal incompleta — prioridade máxima dormir 8h tonight (deitar 22:30 imprescindível). Volume semanal total está significativamente abaixo do necessário para BUILD a 58 dias da prova — risco de subpreparação maior que risco de fadiga atualmente.",
+    "sec_nutricao": "Para o Easy Ride pendente (1h10m): 500ml de líquidos com eletrólitos durante, 30–40g CHO (gel ou banana) aos 30min. Pós-treino consolidado do dia: 30g proteína + 80–100g CHO dentro de 30min após o bike para otimizar recuperação noturna e síntese proteica.",
     "status_readiness": "BOM",
     "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Run executado com intensidade moderada-controlada (FC 131/155bpm, TE 2.8) — adequado para fase BUILD, mas cadência 159spm exige correção técnica urgente. Easy Ride pendente deve ser mantido como planejado, estritamente em Z1.",
-    "alerta": "Cadência de corrida 159spm está 7% abaixo do mínimo eficiente — aumentar 5spm por semana para reduzir risco de lesão no pico de volume.",
+    "analise_hoje": "Run executado adequadamente em Z2 baixo com TE 2.8 — estímulo aeróbico útil sem comprometer recuperação. Easy Ride deve ser completado em Z1 estrito para fechar o dia dentro do volume planejado sem elevar ATL desnecessariamente.",
+    "alerta": "REM crítico (0.4h): sono fragmentado compromete recuperação hormonal — deitar às 22:30 é prioridade não negociável esta noite.",
     "treino_forca": [
       {
         "exercicio": "Agachamento Búlgaro",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Força unilateral de glúteo e quadríceps, diretamente transferível para potência no pedal e corrida."
+        "foco": "Força unilateral de glúteo e quadríceps, essencial para potência na pedalada e propulsão na corrida"
       },
       {
-        "exercicio": "Ponte de Glúteo com Mini Band",
-        "series": 3,
-        "repeticoes": "15",
-        "carga": "leve",
-        "foco": "Ativa glúteo médio e previne colapso de joelho na passada — essencial para corrida eficiente no 70.3."
-      },
-      {
-        "exercicio": "Prancha com Alcance Alternado (Dead Bug)",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "leve",
-        "foco": "Core antiextensão estabiliza pelve durante corrida e ciclismo, reduzindo vazamento de potência."
-      },
-      {
-        "exercicio": "Elevação de Panturrilha Unilateral",
+        "exercicio": "Ponte de Glúteo com Isometria",
         "series": 3,
         "repeticoes": "12-15",
-        "carga": "moderada",
-        "foco": "Fortalece sóleo e gastrocnêmio — fundamental para absorção de impacto e propulsão na corrida do 70.3."
-      },
-      {
-        "exercicio": "Remada com Halteres (Bent-Over Row)",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Fortalece cadeia posterior do tronco, melhorando postura aerodinâmica no ciclismo e braçada na natação."
-      },
-      {
-        "exercicio": "Hip Flexor Stretch + Abertura Torácica (fluxo)",
-        "series": 2,
-        "repeticoes": "40s",
         "carga": "leve",
-        "foco": "Mobilidade de quadril e coluna torácica — contrabalança postura fletida do ciclismo e melhora passada na corrida."
+        "foco": "Ativação e estabilização de glúteo máximo, previne colapso pélvico na corrida em fadiga"
       },
       {
-        "exercicio": "Avanço com Rotação de Tronco",
+        "exercicio": "Prancha Lateral com Abdução",
+        "series": 3,
+        "repeticoes": "30s",
+        "carga": "leve",
+        "foco": "Core lateral e glúteo médio — estabilidade pélvica crítica nos últimos 10km do run 70.3"
+      },
+      {
+        "exercicio": "Elevação Pélvica com Barra (Hip Thrust)",
         "series": 3,
         "repeticoes": "10-12",
         "carga": "moderada",
-        "foco": "Integra força de quadril com estabilidade rotacional do core, padrão motor direto da transição bike-run."
+        "foco": "Potência de extensão de quadril transferida diretamente para eficiência na pedalada em Z2"
+      },
+      {
+        "exercicio": "Remada Unilateral com Haltere",
+        "series": 3,
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Força de tração dorsal e estabilização escapular, reduz fadiga postural na natação e no aerobar"
+      },
+      {
+        "exercicio": "Dead Bug",
+        "series": 3,
+        "repeticoes": "8-10",
+        "carga": "leve",
+        "foco": "Core profundo anti-extensão — mantém posição aerodinâmica estável no bike sob fadiga"
+      },
+      {
+        "exercicio": "Mobilidade de Quadril em 90/90 + Rotação Torácica",
+        "series": 2,
+        "repeticoes": "45s",
+        "carga": "leve",
+        "foco": "Amplitude de quadril e mobilidade torácica para posição eficiente no aerobar e passada de corrida"
       }
     ]
   }
