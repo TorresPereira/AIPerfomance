@@ -1,31 +1,31 @@
 {
-  "date": "2026-08-05",
-  "generated_at": "2026-08-05T08:31:40.770546Z",
+  "date": "2026-08-06",
+  "generated_at": "2026-08-06T08:31:51.524879Z",
   "saude": {
-    "hrv": 83,
+    "hrv": 56,
     "hrv_7d": 34,
     "hrv_status": "balanced",
     "hrv_baseline_low": 32,
     "hrv_baseline_high": 42,
-    "rhr": 65,
+    "rhr": 66,
     "rhr_baseline": null,
-    "sono_h": 8.0,
-    "sono_score": 78,
-    "sono_deep": 1.1,
-    "sono_rem": 1.1,
-    "sono_awake": 16.0,
-    "body_battery": 43,
-    "stress_avg": 23,
-    "stress_rest": 65.33,
-    "atl": 292.0,
-    "ctl": 1168.0,
+    "sono_h": 6.9,
+    "sono_score": 72,
+    "sono_deep": 1.0,
+    "sono_rem": 1.3,
+    "sono_awake": 15.0,
+    "body_battery": 37,
+    "stress_avg": 28,
+    "stress_rest": 47.41,
+    "atl": 281.0,
+    "ctl": 1123.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 887.0,
+    "load_aerobic_low": 858.0,
     "load_aerobic_high": 95.0,
-    "load_anaerobic": 186.0,
-    "load_total_month": 1168.0,
+    "load_anaerobic": 170.0,
+    "load_total_month": 1123.0,
     "load_target_low": "162–425",
     "load_target_high": "318–581",
     "training_status": "Sobrecarga",
@@ -34,14 +34,14 @@
     "vo2max": 46.4,
     "peso": null,
     "previsoes": {
-      "5K": 1437,
-      "10K": 3171,
-      "Meia": 7405,
-      "Maratona": 16711
+      "5K": 1439,
+      "10K": 3179,
+      "Meia": 7423,
+      "Maratona": 16766
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
-    "prova_dias": 39,
+    "prova_dias": 38,
     "prova_data": "13/09/2026",
     "prova_fase": "PEAK",
     "nutricao": {
@@ -55,55 +55,51 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 0.0
+    "sono_deficit_h": 1.1
   },
   "ontem": [
-    {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Geldermalsen Stand Up Paddleboarding",
-      "dist": "2.6km",
-      "dur": "1h59m",
-      "fc": 106.0,
-      "fc_max": 160.0,
-      "cal": 698.0,
-      "cad": null,
-      "tss": null,
-      "np": null,
-      "swolf": null,
-      "aerobic_te": 2.0,
-      "anaerobic_te": 1.7999999523162842,
-      "elev": null,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 2575.330078125,
-      "_dur_s": 7194.33984375
-    },
     {
       "mod": "bike",
       "icone": "🚴",
       "nome": "Geldermalsen eBiking",
-      "dist": "0.7km",
-      "dur": "3m16s",
-      "fc": 94.0,
-      "fc_max": 104.0,
-      "cal": 19.0,
-      "cad": 40.0,
+      "dist": "15.8km",
+      "dur": "41m37s",
+      "fc": 118.0,
+      "fc_max": 135.0,
+      "cal": 349.0,
+      "cad": 67.0,
       "tss": null,
       "np": null,
       "swolf": null,
-      "aerobic_te": 0.20000000298023224,
+      "aerobic_te": 2.0,
       "anaerobic_te": 0.0,
-      "elev": 1.0,
-      "perf": "13.1km/h",
+      "elev": 81.0,
+      "perf": "22.8km/h",
       "pl": "Velocidade",
-      "_dist_m": 716.5499877929688,
-      "_dur_s": 196.2899932861328
-    }
-  ],
-  "hoje": [],
-  "amanha": [],
-  "hoje_feito": [
+      "_dist_m": 15799.6103515625,
+      "_dur_s": 2497.0791015625
+    },
+    {
+      "mod": "other",
+      "icone": "⚡",
+      "nome": "Geldermalsen Stand Up Paddleboarding",
+      "dist": "1.9km",
+      "dur": "1h14m",
+      "fc": 101.0,
+      "fc_max": 139.0,
+      "cal": 433.0,
+      "cad": null,
+      "tss": null,
+      "np": null,
+      "swolf": null,
+      "aerobic_te": 1.2999999523162842,
+      "anaerobic_te": 0.4000000059604645,
+      "elev": null,
+      "perf": "—",
+      "pl": "—",
+      "_dist_m": 1858.5799560546875,
+      "_dur_s": 4486.05419921875
+    },
     {
       "mod": "run",
       "icone": "🏃",
@@ -112,29 +108,75 @@
       "dur": "1h03m",
       "fc": 133.0,
       "fc_max": 147.0,
+      "cal": 745.0,
+      "cad": 161.375,
       "tss": null,
       "np": 300.0,
+      "swolf": null,
+      "aerobic_te": 3.200000047683716,
+      "anaerobic_te": 0.0,
+      "elev": 17.0,
       "perf": "6:53/km",
       "pl": "Pace",
       "_dist_m": 9262.2197265625,
-      "_dur_s": 3829.513916015625,
+      "_dur_s": 3829.513916015625
+    }
+  ],
+  "hoje": [],
+  "amanha": [],
+  "hoje_feito": [
+    {
+      "mod": "other",
+      "icone": "⚡",
+      "nome": "Strength",
+      "dist": "—",
+      "dur": "24m58s",
+      "fc": 89.0,
+      "fc_max": 123.0,
+      "tss": null,
+      "np": null,
+      "perf": "—",
+      "pl": "—",
+      "_dist_m": 0.0,
+      "_dur_s": 1498.2550048828125,
       "swolf": null,
-      "cad": 161.375,
-      "cal": 745.0,
-      "aerobic_te": 3.200000047683716,
+      "cad": null,
+      "cal": 122.0,
+      "aerobic_te": 0.4000000059604645,
       "anaerobic_te": 0.0,
-      "elev": 17.0
+      "elev": null
+    },
+    {
+      "mod": "bike",
+      "icone": "🚴",
+      "nome": "Geldermalsen eBiking",
+      "dist": "5.2km",
+      "dur": "14m09s",
+      "fc": 112.0,
+      "fc_max": 138.0,
+      "tss": null,
+      "np": null,
+      "perf": "22.0km/h",
+      "pl": "Velocidade",
+      "_dist_m": 5190.5400390625,
+      "_dur_s": 849.22998046875,
+      "swolf": null,
+      "cad": 75.0,
+      "cal": 114.0,
+      "aerobic_te": 1.100000023841858,
+      "anaerobic_te": 0.20000000298023224,
+      "elev": 7.0
     }
   ],
   "semana": {
     "swim_km": 0.1,
     "swim_min": 8.9,
-    "bike_km": 2.8,
-    "bike_min": 11.9,
+    "bike_km": 23.8,
+    "bike_min": 67.6,
     "run_km": 9.3,
     "run_min": 63.8,
     "total_tss": 0.0,
-    "n_treinos": 5
+    "n_treinos": 9
   },
   "semana_passada": {
     "swim_km": 0,
@@ -145,18 +187,14 @@
     "run_min": 157.1
   },
   "clima": {
-    "temp_max": 29.3,
-    "temp_min": 21.1,
-    "chuva_pct": 46,
-    "vento_kmh": 20.9,
-    "temp_atual": 25.2,
+    "temp_max": 26.1,
+    "temp_min": 16.9,
+    "chuva_pct": 2,
+    "vento_kmh": 17.6,
+    "temp_atual": 21.4,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-07-30",
-      "value": 42.0
-    },
     {
       "date": "2026-07-31",
       "value": 62.0
@@ -180,13 +218,13 @@
     {
       "date": "2026-08-05",
       "value": 83.0
+    },
+    {
+      "date": "2026-08-06",
+      "value": 56.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-07-22",
-      "value": 46.4
-    },
     {
       "date": "2026-07-23",
       "value": 46.4
@@ -242,15 +280,14 @@
     {
       "date": "2026-08-05",
       "value": 46.4
+    },
+    {
+      "date": "2026-08-06",
+      "value": 46.4
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-07-23",
-      "sono": 7.8,
-      "te": 2.2
-    },
     {
       "date": "2026-07-24",
       "sono": 7.4,
@@ -305,71 +342,76 @@
       "date": "2026-08-05",
       "sono": 8.0,
       "te": 3.2
+    },
+    {
+      "date": "2026-08-06",
+      "sono": 6.9,
+      "te": 1.1
     }
   ],
   "insights": {
-    "frase": "Pico se constrói com inteligência, não apenas com volume.",
-    "sec_readiness": "HRV de 83ms representa +49ms acima da média 7d (34ms), sinal de recuperação acima do baseline (32–42ms) — possivelmente reflexo do dia leve de ontem. Sono de 8h sem déficit, porém Deep (1.1h) e REM (1.1h) abaixo do ideal para fase PEAK, comprometendo regeneração neuromuscular. Body Battery em 43/100 com stress médio 23 indica capacidade funcional moderada — adequada para treino já executado, não para segunda sessão intensa.",
-    "sec_treino_ontem": "SUP de 1h59m a FC média 106bpm (TE 2.0) funcionou como recuperação ativa aeróbica leve — adequado para o contexto. E-bike de 3min é irrelevante do ponto de vista de carga. Ontem foi essencialmente dia de recuperação, o que justifica o rebote positivo no HRV hoje.",
-    "sec_carga": "Z1 em 887 unidades está no limite superior do target (162–425), indicando volume excessivo de baixa intensidade, enquanto Z2 em 95 está criticamente abaixo do target (318–581) — déficit de qualidade aeróbica em plena fase PEAK. Z3+ em 186 com CTL estimado em 1168 e status Garmin 'Sobrecarga' configura risco MODERADO de lesão real. A distribuição está invertida: muito Z1 fácil, pouco Z2 estruturado, Z3 desorganizado.",
-    "sec_hoje": "Corrida de 9.3km em 1h03m a FC média 133bpm (max 147bpm) e pace 6:53/km com TE aeróbico 3.2 — execução dentro da zona aeróbica leve/moderada, tecnicamente aceitável. Potência média de 300W na corrida e cadência 161spm indicam padrão de passada curta — avaliar eficiência de propulsão. Sem treino planejado, a sessão foi executada espontaneamente; volume semanal de corrida (9.3km) permanece baixo para fase PEAK.",
-    "sec_ajuste": "Não realizar segunda sessão hoje — Body Battery 43 e status Sobrecarga não suportam volume adicional. Amanhã, se executar treino, limitar Z3 a 8min total, FC teto 150bpm e pace Z2 entre 6:10–6:30/km.",
-    "sec_alertas": "Z2 mensal criticamente subtreinado (95 vs target 318–581) com apenas 39 dias para prova — risco de chegada ao PEAK sem base aeróbica consolidada. Cadência de corrida em 161spm está abaixo do ideal (170–180spm) para economia de corrida em 70.3. Monitorar acúmulo de Z3 não estruturado nas próximas semanas.",
-    "sec_nutricao": "Dia sem treino adicional: priorizar recuperação com 30g proteína pós-corrida já executada e CHO de reposição (~150–200g ao longo do dia). Hidratação mínima 2.5L dado calor de 29.3°C; deitar às 22:30 para atingir 8h de sono alvo.",
-    "status_readiness": "MODERADO",
+    "frase": "Recuperação ativa hoje, potência máxima em 38 dias.",
+    "sec_readiness": "HRV de 56ms representa +22ms acima da média 7d (34ms) e supera o baseline de 32–42ms, sinal positivo de recuperação aguda. Sono de 6.9h com score 72 e apenas 1.0h de deep sleep indica qualidade insuficiente — déficit de 1.1h compromete síntese proteica e consolidação neuromuscular. Body Battery em 37/100 com stress médio 28 confirma reserva energética baixa; dia inadequado para carga fisiológica relevante.",
+    "sec_treino_ontem": "Bike eBike (22.8km/h, FC 118bpm, TE 2.0) e SUP (FC 101bpm, TE 1.3) funcionaram como estímulos aeróbicos suaves — adequados para Z1, sem impacto acumulativo significativo. A corrida de 9.3km a 6:53/km com FC média 133bpm e potência 300W gerou TE 3.2, indicando carga aeróbica moderada-alta; FC máx de 147bpm sinaliza esforço controlado mas próximo do teto Z2. Cadência de corrida em 161spm está abaixo do ideal (170–180spm) — ponto de atenção técnico prioritário.",
+    "sec_carga": "Z1 em 858 unidades supera o target máximo de 425 em 102% — volume aeróbico leve excessivo, possivelmente inflado por atividades de baixa intensidade acumuladas. Z2 em 95 está criticamente abaixo do target mínimo de 318, representando déficit de 70% na zona de maior impacto aeróbico para 70.3. Com status Garmin em Sobrecarga, ATL 281 e fase PEAK com 38 dias para prova, a distribuição atual compromete a qualidade do estímulo adaptativo necessário nesta fase.",
+    "sec_hoje": "Treino executado hoje: força (25min, FC 89bpm, TE 0.4) e eBike de 5.2km (FC 112bpm, TE 1.1) — ambos dentro de parâmetros de recuperação ativa, sem geração de carga adicional relevante. Execução alinhada com o estado de Body Battery 37 e ausência de treino agendado — decisão correta. Sem treino adicional recomendado para hoje; foco em recuperação, mobilidade e qualidade do sono.",
+    "sec_ajuste": "Limitar qualquer atividade adicional hoje a mobilidade passiva ou caminhada leve máx 20min, FC abaixo de 110bpm. Prioridade absoluta: deitar às 22:30 para atingir 8.0h de sono e recuperar deep sleep — determinante para readiness de amanhã.",
+    "sec_alertas": "Sobrecarga Garmin combinada com Body Battery 37 e deep sleep de apenas 1.0h configura risco real de acúmulo de fadiga em fase PEAK. Z2 criticamente subdosada (95 vs mínimo 318) indica que o volume não está gerando estímulo aeróbico de qualidade — risco de chegada à prova com base aeróbica insuficiente. Cadência de corrida 161spm requer trabalho técnico específico nos próximos blocos.",
+    "sec_nutricao": "Dia sem treino de carga: priorizar CHO de baixo índice glicêmico ao longo do dia (~250–300g totais) para reabastecimento de glicogênio sem excesso calórico. Pós-treino de força já executado: 30g de proteína de alto valor biológico dentro de 30min; hidratação de manutenção 35–40ml/kg ao longo do dia, sem necessidade de protocolo de reposição intensivo.",
+    "status_readiness": "BAIXO",
     "status_carga": "SOBRECARGA",
     "acao_hoje": "DESCANSO",
-    "analise_hoje": "Corrida de 9.3km a FC controlada (133bpm avg) com TE 3.2 — estímulo aeróbico válido mas não planejado em dia de descanso programado. Cadência baixa (161spm) é ponto de atenção técnico prioritário para economia de corrida no 70.3.",
-    "alerta": "Z2 mensal em apenas 95 unidades contra target de 318–581 com 39 dias para prova — janela crítica para corrigir distribuição de intensidade antes do tapering.",
+    "analise_hoje": "Treino de força leve (25min, FC 89bpm) e eBike de recuperação (5.2km, FC 112bpm) executados de forma adequada ao estado fisiológico atual — nenhum estímulo adicional justificado com Body Battery 37. Dia corretamente tratado como recuperação ativa.",
+    "alerta": "Z2 com déficit de 70% do target mínimo em fase PEAK — redirecionar sessões dos próximos 3 dias para blocos Z2 controlados assim que readiness superar 50.",
     "treino_forca": [
       {
-        "exercicio": "Ponte de Glúteo Unilateral",
+        "exercicio": "Dead Bug",
         "series": 3,
-        "repeticoes": "12-15",
+        "repeticoes": "10-12",
         "carga": "leve",
-        "foco": "Ativa glúteo médio e máximo para estabilidade pélvica na corrida e pedalada"
+        "foco": "Estabilidade lombopélvica essencial para manutenção de postura na corrida e no ciclismo em fadiga"
       },
       {
-        "exercicio": "Agachamento Goblet",
+        "exercicio": "Glute Bridge Isométrico",
         "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Força funcional de quadril e core integrado, base para potência em subidas no bike"
+        "repeticoes": "30s",
+        "carga": "leve",
+        "foco": "Ativação de glúteo médio e máximo sem carga axial — previne lesão e melhora propulsão na corrida"
       },
       {
-        "exercicio": "Stiff com Halteres",
+        "exercicio": "Hip 90/90 Mobility",
+        "series": 2,
+        "repeticoes": "60s",
+        "carga": "leve",
+        "foco": "Mobilidade de quadril para ampliar passada e reduzir compensações lombares no ciclismo"
+      },
+      {
+        "exercicio": "Agachamento Goblet com pausa",
         "series": 3,
         "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Fortalece cadeia posterior (isquiotibiais/glúteos) essencial para eficiência de corrida"
+        "carga": "leve",
+        "foco": "Força funcional de quadríceps e glúteos com controle excêntrico — base para potência no pedal"
       },
       {
         "exercicio": "Prancha Lateral com Abdução de Quadril",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e estabilidade pélvica — reduz risco de lesão em volume de corrida crescente"
+        "foco": "Core lateral e glúteo médio — estabilidade pélvica crítica para economia de corrida no 70.3"
       },
       {
-        "exercicio": "Remada Unilateral com Halter",
+        "exercicio": "Romanian Deadlift Unilateral (peso corporal)",
         "series": 3,
         "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Fortalece dorsais e romboides para sustentação postural na natação e no aero"
+        "carga": "leve",
+        "foco": "Fortalecimento de isquiotibiais e equilíbrio unilateral — reduz assimetrias e risco de lesão em fadiga"
       },
       {
-        "exercicio": "Mobilidade de Quadril — 90/90 Hip Stretch",
+        "exercicio": "Alongamento de Psoas em Fenda Estática",
         "series": 2,
         "repeticoes": "45s",
         "carga": "leve",
-        "foco": "Melhora amplitude de quadril reduzindo tensão em glúteos e piriforme pós-corrida"
-      },
-      {
-        "exercicio": "Dead Bug",
-        "series": 3,
-        "repeticoes": "8-10",
-        "carga": "leve",
-        "foco": "Ativa core profundo com controle motor — proteção lombar em fase de carga elevada"
+        "foco": "Liberação de flexores do quadril encurtados pelo volume de ciclismo — melhora postura e passada"
       }
     ]
   }
