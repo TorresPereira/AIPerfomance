@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TP Coach">
+<meta name="theme-color" content="#000">
+<title>TP Performance Coach</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root{
+  --blue:#1a6fff;--green:#00C896;--yellow:#FFB800;--red:#FF4444;
+  --bg:#000;--card:#111;--card2:#161616;--border:#1e1e1e;--text:#ddd;--muted:#444;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,sans-serif;overflow:hidden}
+
+/* ── PIN ── */
+#pin{position:fixed;inset:0;z-index:99;background:radial-gradient(ellipse at 50% 30%,#060e1c,#000 65%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:env(safe-area-inset-top,44px) 28px env(safe-area-inset-bottom,20px)}
+.pin-logo{width:72px;height:72px;border-radius:20px;margin-bottom:20px;box-shadow:0 0 40px #1a6fff33}
+.pin-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.pin-ver{font-size:10px;color:#1a6fff;font-family:monospace;margin-bottom:28px}
+.pin-sub{font-size:13px;color:#444;margin-bottom:24px}
+.pin-dots{display:flex;gap:14px;margin-bottom:6px}
+.dot{width:13px;height:13px;border-radius:50%;border:2px solid #2a2a2a;transition:all .15s}
+.dot.on{background:#fff;border-color:#fff}
+.dot.err{background:var(--red);border-color:var(--red)}
+.pin-err{font-size:12px;color:var(--red);min-height:18px;margin-bottom:16px;text-align:center}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:240px}
+.key{background:#181818;border:1px solid #242424;border-radius:13px;height:58px;
+  font-size:22px;font-weight:400;color:#fff;cursor:pointer;transition:background .1s;
+  -webkit-tap-highlight-color:transparent;user-select:none}
+.key:active{background:#2a2a2a}
+.pin-link{margin-top:24px;font-size:12px;color:#2a2a2a;background:none;border:none;cursor:pointer;text-decoration:underline}
+
+/* ── App — pure CSS flexbox, no JS needed ── */
+#app{display:none;position:fixed;top:0;left:0;right:0;bottom:0;flex-direction:column}
+#app.show{display:flex}
+.hdr{flex-shrink:0;
+  background:rgba(0,0,0,.95);backdrop-filter:blur(16px);
+  padding:env(safe-area-inset-top,44px) 16px 10px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between}
+.hdr-left{display:flex;align-items:center;gap:8px}
+.hdr-badge{background:var(--blue);color:#fff;font-size:10px;font-weight:700;
+  letter-spacing:.1em;padding:4px 9px;border-radius:5px;display:flex;align-items:center;gap:5px}
+.hdr-badge img{width:14px;height:14px;border-radius:2px}
+.hdr-title{font-size:16px;font-weight:700;color:#fff}
+.hdr-right{display:flex;gap:6px}
+.ibtn{width:34px;height:34px;border-radius:8px;background:#141414;border:1px solid #222;
+  color:#555;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.ibtn:active{background:#222;transform:scale(.92)}
+.ibtn.run{background:#1a6fff22;border-color:#1a6fff44;color:var(--blue)}
+.ibtn.spin{animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:none;padding:14px 14px 16px}
+
+/* ── Nav ── */
+.nav{flex-shrink:0;
+  background:rgba(0,0,0,.95);backdrop-filter:blur(16px);
+  border-top:1px solid var(--border);
+  padding:10px 0 env(safe-area-inset-bottom,8px);
+  display:flex;justify-content:space-around}
+.ntab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 0}
+.ntab .ni{font-size:19px;color:#333;transition:color .15s}
+.ntab .nl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#333;transition:color .15s}
+.ntab.on .ni,.ntab.on .nl{color:var(--blue)}
+.ntab.forca.on .ni,.ntab.forca.on .nl{color:#a855f7}
+
+/* ── Cards ── */
+.sl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:18px 0 10px}
+.sl:first-child{margin-top:0}
+.divider{height:1px;background:var(--border);margin:16px 0}
+.frase{background:var(--card);border-radius:12px;padding:16px;margin-bottom:14px;border-left:3px solid var(--blue)}
+.frase-date{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.frase-text{font-size:18px;font-weight:700;color:#fff;line-height:1.3}
+.sem-row{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.sbox{border-radius:10px;padding:11px 4px;text-align:center}
+.sbox .se{font-size:18px;display:block}
+.sbox .sl2{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;display:block;margin-top:4px}
+.badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.badge{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 9px;border-radius:4px;border:1px solid}
+.mets{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.mc{background:var(--card2);border-radius:10px;padding:11px 10px;border-left:3px solid}
+.mc .mi{font-size:13px;margin-bottom:3px}
+.mc .ml{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#333}
+.mc .mv{font-size:17px;font-weight:700;line-height:1.1;margin:3px 0 2px}
+.mc .ms{font-size:10px;color:#333}
+.tbl{background:var(--card2);border-radius:10px;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+thead th{padding:7px 10px;font-size:8px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.09em;color:var(--muted);text-align:left;border-bottom:1px solid var(--border)}
+tbody tr{border-bottom:1px solid #111}
+tbody tr:last-child{border-bottom:none}
+td{padding:9px 10px;font-size:12px;color:#ccc;vertical-align:middle}
+td.ico{font-size:17px;width:30px}
+td.nm{font-weight:600;color:#ddd}
+td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
+.ia-card{border-radius:10px;padding:14px;margin-top:8px}
+.ia-lbl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}
+.ia-txt{font-size:13px;line-height:1.75;white-space:pre-line}
+.alert-card{background:#110000;border-left:3px solid var(--red);border-radius:10px;
+  padding:13px;margin-top:8px;font-size:12px;color:#cc4444;line-height:1.5}
+.prev-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.prev-item{background:var(--card2);border-radius:10px;padding:9px 4px;text-align:center}
+.prev-d{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.prev-t{font-size:14px;font-weight:700;color:#fff;margin-top:3px;font-family:monospace}
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-icon{font-size:44px;margin-bottom:16px}
+.empty h2{font-size:17px;color:#666;margin-bottom:10px}
+.empty p{font-size:12px;line-height:1.7;color:var(--muted)}
+.btn-primary{background:var(--blue);color:#fff;border:none;border-radius:10px;
+  padding:12px 22px;font-size:13px;font-weight:700;cursor:pointer;margin-top:16px;display:inline-block}
+.btn-sec{background:#1a1a1a;color:#888;border:1px solid #2a2a2a;border-radius:10px;
+  padding:12px 22px;font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;display:inline-block}
+.loading{height:3px;background:linear-gradient(90deg,var(--blue),var(--green),var(--blue));
+  background-size:200%;animation:ld 1.2s linear infinite;border-radius:2px;margin-bottom:16px}
+@keyframes ld{0%{background-position:0%}100%{background-position:200%}}
+.toast{position:fixed;bottom:calc(var(--sb)+76px);left:50%;transform:translateX(-50%);
+  background:#111;border:1px solid #222;border-radius:10px;padding:10px 18px;
+  font-size:12px;color:#888;white-space:nowrap;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+.toast.ok{border-color:#00C89644;color:var(--green)}
+.toast.err{border-color:#FF444444;color:var(--red)}
+
+/* ── Config ── */
+#cfg{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.97);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 28px 40px}
+#cfg.show{display:flex}
+.cfg-form{width:100%;max-width:320px;display:flex;flex-direction:column;gap:14px}
+.cfg-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:5px}
+.cfg-inp{width:100%;background:#0d0d0d;border:1px solid #2a2a2a;border-radius:10px;
+  padding:12px 14px;color:#e0e0e0;font-size:14px;outline:none;transition:border-color .2s}
+.cfg-inp:focus{border-color:var(--blue)}
+
+/* ── Força ── */
+.ex-card{background:var(--card2);border-radius:13px;margin-bottom:10px;display:flex;overflow:hidden}
+.ex-img{width:88px;min-width:88px;display:flex;align-items:center;justify-content:center;
+  padding:10px;position:relative}
+.ex-img svg{width:58px;height:58px}
+.ex-sets-ov{position:absolute;bottom:5px;left:0;right:0;text-align:center;
+  font-size:10px;font-weight:700;color:rgba(255,255,255,.65);font-family:monospace}
+.ex-info{flex:1;padding:13px 12px 13px 4px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-width:0}
+.ex-name{font-size:13px;font-weight:700;color:#fff;line-height:1.3}
+.ex-meta{display:flex;align-items:center;gap:7px}
+.cg-badge{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:2px 8px;border-radius:4px;border:1px solid}
+.ex-foco{font-size:11px;color:#444;line-height:1.5}
+.forca-hdr{background:linear-gradient(135deg,#120820,#1e0a38);border-radius:13px;
+  padding:18px;margin-bottom:14px;border:1px solid #2a1a4a}
+.forca-hdr h2{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}
+.forca-hdr p{font-size:12px;color:#555;line-height:1.5}
+.forca-badge{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:#a855f722;color:#a855f7;border:1px solid #a855f744;padding:3px 8px;border-radius:4px;margin-bottom:10px;display:inline-block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- PIN -->
+<div id="pin">
+  <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
+  <div class="pin-title">TP Performance</div>
+  <div class="pin-ver">v3.5 · 08/06/2026</div>
+  <div class="pin-sub" id="pinSub">Digite seu PIN</div>
+  <div class="pin-dots" id="pinDots">
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+  <div class="pin-err" id="pinErr"></div>
+  <div class="keypad">
+    <button class="key" onclick="pk(1)">1</button>
+    <button class="key" onclick="pk(2)">2</button>
+    <button class="key" onclick="pk(3)">3</button>
+    <button class="key" onclick="pk(4)">4</button>
+    <button class="key" onclick="pk(5)">5</button>
+    <button class="key" onclick="pk(6)">6</button>
+    <button class="key" onclick="pk(7)">7</button>
+    <button class="key" onclick="pk(8)">8</button>
+    <button class="key" onclick="pk(9)">9</button>
+    <div></div>
+    <button class="key" onclick="pk(0)">0</button>
+    <button class="key" onclick="pdel()">⌫</button>
+  </div>
+  <button class="pin-link" id="pinAction" onclick="pinActionFn()">Criar PIN</button>
+</div>
+
+<!-- Config -->
+<div id="cfg">
+  <div style="font-size:40px;margin-bottom:16px">⚙️</div>
+  <div style="font-size:19px;font-weight:700;color:#fff;margin-bottom:6px">Configurar</div>
+  <div style="font-size:12px;color:#444;margin-bottom:24px;text-align:center">Repositório GitHub para buscar o relatório</div>
+  <div class="cfg-form">
+    <div><div class="cfg-lbl">Usuário GitHub</div><input id="cfgUser" class="cfg-inp" placeholder="ex: torrespereira" autocorrect="off" autocapitalize="none"></div>
+    <div><div class="cfg-lbl">Repositório</div><input id="cfgRepo" class="cfg-inp" placeholder="ex: AIPerfomance" autocorrect="off" autocapitalize="none"></div>
+    <div><div class="cfg-lbl">Personal Access Token</div><input id="cfgTok" class="cfg-inp" type="password" placeholder="github_pat_..."></div>
+    <div><div class="cfg-lbl">Tópico ntfy.sh (notificações)</div><input id="cfgNtfy" class="cfg-inp" placeholder="tp-coach-seunome" autocorrect="off" autocapitalize="none"></div>
+    <button class="btn-primary" style="width:100%;margin-top:0" onclick="saveCfg()">Salvar</button>
+    <button class="btn-sec" style="width:100%;margin-top:0" onclick="closeCfg()">Cancelar</button>
+  </div>
+  <div style="font-size:10px;color:#222;text-align:center;margin-top:16px;line-height:1.7">
+    Token: GitHub → Settings → Developer settings<br>Fine-grained tokens → Actions: Read & write<br><br>
+    Notificações: adicione o mesmo tópico como<br>secret NTFY_TOPIC no GitHub Actions<br>
+    e instale o app <strong style="color:#333">ntfy</strong> no iPhone
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- App -->
+<div id="app">
+  <div class="hdr">
+    <div class="hdr-left">
+      <span class="hdr-badge"><img src="icon-192.png" alt="">TP</span>
+      <span class="hdr-title">Triathlon Coach</span>
+    </div>
+    <div class="hdr-right">
+      <button class="ibtn spin" id="refreshBtn" onclick="loadReport(true)" title="Atualizar">↻</button>
+      <button class="ibtn run" id="runBtn" onclick="runWorkflow()" title="Rodar briefing">▶</button>
+      <button class="ibtn" onclick="openCfg()" title="Configurar">⚙️</button>
+      <button class="ibtn" onclick="lock()" title="Bloquear">🔒</button>
+    </div>
+  </div>
+  <div class="body" id="body">
+    <div class="loading"></div>
+  </div>
+  <nav class="nav">
+    <div class="ntab on" id="t-home"   onclick="tab('home')"  ><span class="ni">🏠</span><span class="nl">Hoje</span></div>
+    <div class="ntab"    id="t-treinos"onclick="tab('treinos')"><span class="ni">📊</span><span class="nl">Treinos</span></div>
+    <div class="ntab"    id="t-coach"  onclick="tab('coach')" ><span class="ni">🤖</span><span class="nl">Coach</span></div>
+    <div class="ntab"    id="t-agenda" onclick="tab('agenda')" ><span class="ni">📅</span><span class="nl">Agenda</span></div>
+    <div class="ntab forca" id="t-forca"  onclick="tab('forca')" ><span class="ni">💪</span><span class="nl">Força</span></div>
+  </nav>
+</div>
+
+<script>
+// ─── Constants ────────────────────────────────────────────────────────────────
+const PIN_K  = "tp_pin";
+const SESS_K = "tp_sess";
+const CFG_K  = "tp_cfg";
+const CACHE_K= "tp_report";
+const SESS_H = 8;
+const VERSION = "v3.2";
+
+// ─── PIN ──────────────────────────────────────────────────────────────────────
+let pinBuf = "", pinMode = "enter", pinTmp = "";
+
+const hasPin  = () => !!localStorage.getItem(PIN_K);
+const sessOk  = () => { const t=localStorage.getItem(SESS_K); return t&&(Date.now()-+t)<SESS_H*3600000; };
+const setSess = () => localStorage.setItem(SESS_K, Date.now());
+const clrSess = () => localStorage.removeItem(SESS_K);
+
+async function sha(s){
+  const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("tp"+s));
+  return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
+}
+
+function pk(n){
+  if(pinBuf.length>=4)return;
+  pinBuf+=n; dots();
+  if(pinBuf.length===4)setTimeout(processPin,150);
+}
+function pdel(){ pinBuf=pinBuf.slice(0,-1); dots(); document.getElementById("pinErr").textContent=""; }
+function dots(){
+  document.querySelectorAll(".dot").forEach((d,i)=>{
+    d.classList.toggle("on",i<pinBuf.length);
+    d.classList.remove("err");
+  });
+}
+function shake(msg){
+  document.getElementById("pinErr").textContent=msg;
+  document.querySelectorAll(".dot").forEach(d=>{d.classList.add("err");d.classList.remove("on");});
+  pinBuf=""; setTimeout(()=>{ dots(); document.getElementById("pinErr").textContent=""; },600);
+}
+async function processPin(){
+  if(pinMode==="create"){ pinTmp=pinBuf; pinBuf=""; pinMode="confirm";
+    document.getElementById("pinSub").textContent="Confirme o PIN"; dots(); return; }
+  if(pinMode==="confirm"){
+    if(pinBuf!==pinTmp){ shake("PINs diferentes"); pinMode="create"; pinTmp="";
+      document.getElementById("pinSub").textContent="Crie um PIN de 4 dígitos"; return; }
+    localStorage.setItem(PIN_K,await sha(pinBuf)); setSess(); showApp(); return;
+  }
+  const h=await sha(pinBuf);
+  if(h===localStorage.getItem(PIN_K)){ setSess(); showApp(); }
+  else shake("PIN incorreto");
+}
+function pinActionFn(){
+  pinMode="create"; pinBuf=""; pinTmp="";
+  document.getElementById("pinSub").textContent="Crie um PIN de 4 dígitos";
+  document.getElementById("pinAction").textContent="";
+  dots();
+}
+function lock(){ clrSess(); document.getElementById("app").classList.remove("show");
+  document.getElementById("pin").style.display="flex";
+  pinBuf=""; pinMode="enter";
+  document.getElementById("pinSub").textContent="Digite seu PIN";
+  document.getElementById("pinAction").textContent=hasPin()?"Redefinir PIN":"Criar PIN";
+  document.getElementById("pinErr").textContent="";
+  dots();
+}
+function showApp(){
+  document.getElementById('pin').style.display='none';
+  document.getElementById('app').classList.add('show');
+  loadReport();
+}
+
+// ─── Config ───────────────────────────────────────────────────────────────────
+const getCfg  = () => { try{ return JSON.parse(localStorage.getItem(CFG_K)||"{}"); }catch{ return {}; } };
+const openCfg = () => {
+  const c=getCfg();
+  document.getElementById("cfgUser").value=c.user||"";
+  document.getElementById("cfgRepo").value=c.repo||"";
+  document.getElementById("cfgTok").value=c.token||"";
+  document.getElementById("cfgNtfy").value=c.ntfy||"";
+  document.getElementById("cfg").classList.add("show");
+};
+const closeCfg = () => document.getElementById("cfg").classList.remove("show");
+function saveCfg(){
+  const u=document.getElementById("cfgUser").value.trim();
+  const r=document.getElementById("cfgRepo").value.trim();
+  const t=document.getElementById("cfgTok").value.trim();
+  if(!u||!r){ toast("Preencha usuário e repositório","err"); return; }
+  const ntfy = document.getElementById("cfgNtfy").value.trim();
+  localStorage.setItem(CFG_K,JSON.stringify({user:u,repo:r,token:t,ntfy}));
+  closeCfg(); toast("Configuração salva ✓","ok");
+  loadReport(true);
+}
+
+// ─── Toast ────────────────────────────────────────────────────────────────────
+function toast(msg,type="ok"){
+  const el=document.getElementById("toast");
+  el.textContent=msg; el.className="toast show "+(type||"");
+  setTimeout(()=>el.classList.remove("show"),3000);
+}
+
+// ─── Workflow ─────────────────────────────────────────────────────────────────
+async function runWorkflow(){
+  const c=getCfg();
+  if(!c.token||!c.user||!c.repo){ openCfg(); return; }
+  const btn=document.getElementById("runBtn");
+  btn.textContent="⏳"; btn.disabled=true;
+  try{
+    const res=await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/actions/workflows/briefing.yml/dispatches`,
+      {method:"POST",headers:{"Authorization":"Bearer "+c.token,"Content-Type":"application/json","Accept":"application/vnd.github+json"},
+       body:JSON.stringify({ref:"main"})});
+    if(res.status===204){ toast("✅ Briefing iniciado! ~2 min","ok"); setTimeout(()=>loadReport(true),130000); }
+    else toast("Erro "+res.status+". Verifique o token.","err");
+  }catch(e){ toast("Erro de rede","err"); }
+  btn.textContent="▶"; btn.disabled=false;
+}
+
+// ─── Fetch report ─────────────────────────────────────────────────────────────
+let report = null;
+
+async function fetchReport(){
+  const c = getCfg();
+  if(!c.user || !c.repo) return null;
+
+  // GitHub Contents API — único método com CORS correto
+  const url = `https://api.github.com/repos/${c.user}/${c.repo}/contents/docs/report.json`;
+  const headers = { "Accept":"application/vnd.github.raw+json", "X-GitHub-Api-Version":"2022-11-28" };
+  if(c.token) headers["Authorization"] = "Bearer "+c.token;
+
+  const res = await fetch(url, { headers, cache:"no-store" });
+  if(!res.ok) throw new Error("GitHub API: HTTP "+res.status);
+  return await res.json();
+}
+
+// ─── Load report ──────────────────────────────────────────────────────────────
+async function loadReport(force=false){
+  const btn  = document.getElementById("refreshBtn");
+  const body = document.getElementById("body");
+  btn.classList.add("spin");
+
+  try{
+    const data = await fetchReport();
+    if(data){
+      report = data;
+      localStorage.setItem(CACHE_K, JSON.stringify(data));
+      localStorage.setItem(CACHE_K+"_t", new Date().toISOString());
+      renderTab(currentTab);
+      btn.classList.remove("spin");
+      return;
+    }
+  } catch(e){
+    console.error("fetchReport error:", e.message);
+  }
+
+  // Fallback: cache local
+  const cached = localStorage.getItem(CACHE_K);
+  if(cached){
+    try{
+      report = JSON.parse(cached);
+      const t = localStorage.getItem(CACHE_K+"_t");
+      renderTab(currentTab);
+      toast("📶 Cache · "+(t?new Date(t).toLocaleDateString("pt-BR"):""));
+      btn.classList.remove("spin");
+      return;
+    }catch{}
+  }
+
+  // Sem dados
+  const c = getCfg();
+  if(!c.user || !c.repo){
+    body.innerHTML=`<div class="empty"><div class="empty-icon">⚙️</div>
+      <h2>Configure o repositório</h2>
+      <p>Toque em ⚙️ e informe seu usuário<br>e repositório GitHub.</p>
+      <button class="btn-primary" onclick="openCfg()">⚙️ Configurar</button></div>`;
+  } else {
+    body.innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div>
+      <h2>Relatório não encontrado</h2>
+      <p style="margin-bottom:4px">Repositório configurado:</p>
+      <p style="color:var(--blue);font-family:monospace;font-size:11px;margin-bottom:16px">${c.user}/${c.repo}</p>
+      <p>Rode o workflow para gerar o relatório.</p>
+      <button class="btn-primary" onclick="runWorkflow()">▶ Rodar Agora</button></div>`;
+  }
+  btn.classList.remove("spin");
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+const f=(v,d=1,fb="—")=>v==null?"—":parseFloat(v).toFixed(d);
+const hms=s=>{ if(!s)return"—"; s=+s; const h=Math.floor(s/3600),r=s%3600,m=Math.floor(r/60); return h?`${h}h${String(m).padStart(2,"0")}m`:`${m}m${String(s%60).padStart(2,"0")}s`; };
+const SC={ÓTIMO:"#00C896",BOM:"#00C896",MODERADO:"#FFB800",BAIXO:"#FF8C00",CRÍTICO:"#FF4444",SUAVE:"#00C896",IDEAL:"#00C896",ELEVADA:"#FFB800",SOBRECARGA:"#FF4444",MANTER:"#00C896","REDUZIR 20%":"#FFB800","REDUZIR 40%":"#FF8C00",SUBSTITUIR:"#FF4444",DESCANSO:"#888"};
+function badge(t){ if(!t||t==="—")return""; const c=SC[t.toUpperCase()]||"#555"; return `<span class="badge" style="color:${c};border-color:${c}44;background:${c}18">${t}</span>`; }
+function sem(v,lo,hi){ if(v==null)return{em:"⚪",bg:"#1c1c1c",dk:"#444"}; const n=+v; if(n>=hi)return{em:"🟢",bg:"#00C896",dk:"#003a28"}; if(n>=lo)return{em:"🟡",bg:"#FFB800",dk:"#3a2a00"}; return{em:"🔴",bg:"#FF4444",dk:"#3a0000"}; }
+function sbox(em,bg,dk,lb){ return `<div class="sbox" style="background:${bg}"><span class="se">${em}</span><span class="sl2" style="color:${dk}">${lb}</span></div>`; }
+function mc(ico,lbl,val,sub,has){ const bc=has?"var(--blue)":"#222",vc=has?"#fff":"#2a2a2a"; return `<div class="mc" style="border-color:${bc}"><div class="mi">${ico}</div><div class="ml">${lbl}</div><div class="mv" style="color:${vc}">${val}</div><div class="ms">${sub}</div></div>`; }
+function tbl(rows,cols){ if(!rows.length)return`<div style="color:var(--muted);font-size:12px;padding:12px">Nenhum registro.</div>`; return`<div class="tbl"><table><thead><tr>${cols.map(c=>`<th>${c.l}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td class="${c.c||c.cls||""}">${r[c.k]||"—"}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`; }
+function iaCard(lbl,txt,bg="#071118",bc="var(--blue)",lc="var(--blue)",tc="#7a9bbf"){ return `<div class="ia-card" style="background:${bg};border-left:3px solid ${bc}"><div class="ia-lbl" style="color:${lc}">${lbl}</div><div class="ia-txt" style="color:${tc}">${txt||"—"}</div></div>`; }
+
+// ─── SVG exercises ────────────────────────────────────────────────────────────
+const SVGS={
+  squat:`<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="12" r="7" fill="white" opacity=".9"/><path d="M40 20L40 42M40 42L28 60M40 42L52 60M28 60L24 72M52 60L56 72" stroke="white" stroke-width="3.5" stroke-linecap="round"/><path d="M32 26L20 34M48 26L60 34" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>`,
+  lunge:`<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="12" r="7" fill="white" opacity=".9"/><path d="M40 20L40 38M40 38L26 56M40 38L54 50M26 56L22 70M54 50L58 68" stroke="white" stroke-width="3.5" stroke-linecap="round"/><path d="M33 26L22 32M47 26L58 32" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>`,
+  hinge:`<svg viewBox="0 0 80 80" fill="none"><circle cx="28" cy="20" r="7" fill="white" opacity=".9"/><path d="M28 27L28 44M28 44L56 44M56 44L60 56M28 44L16 56M28 44L22 60" stroke="white" stroke-width="3.5" stroke-linecap="round"/><path d="M22 26L12 30" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>`,
+  push:`<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="28" r="7" fill="white" opacity=".9"/><path d="M40 35L40 50M40 40L24 44M40 40L56 44M24 50L16 50M56 50L64 50M40 50L34 62M40 50L46 62" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>`,
+  pull:`<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="38" r="7" fill="white" opacity=".9"/><path d="M40 31L40 18M40 22L24 14M40 22L56 14M40 45L34 58M40 45L46 58M40 35L28 42M40 35L52 42" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>`,
+  core:`<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="14" r="7" fill="white" opacity=".9"/><path d="M40 21L40 38M12 48L68 48M12 48L16 56M68 48L64 56M40 38L26 42M40 38L54 42" stroke="white" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  mobility:`<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="14" r="7" fill="white" opacity=".9"/><path d="M40 21L40 44M40 30L22 24M40 30L58 24M40 44L28 62M40 44L52 62" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M20 60C28 54 36 62 44 56C52 50 60 58 68 52" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" opacity=".5"/></svg>`,
+  row:`<svg viewBox="0 0 80 80" fill="none"><circle cx="22" cy="28" r="7" fill="white" opacity=".9"/><path d="M22 35L22 52M22 52L16 64M22 52L28 64M22 43L60 38M60 38L64 32M22 35L14 40" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>`,
+  generic:`<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="12" r="7" fill="white" opacity=".9"/><path d="M40 20L40 46M40 46L28 64M40 46L52 64M40 32L24 26M40 32L56 26" stroke="white" stroke-width="3.5" stroke-linecap="round"/></svg>`
+};
+const COLS={squat:["#1a3a6f","#2a5aaf"],lunge:["#1a4a2f","#2a7a4f"],hinge:["#3a2a1a","#7a5a2a"],push:["#3a1a2a","#7a2a5a"],pull:["#1a2a3a","#2a5a7a"],core:["#2a1a3a","#5a2a7a"],mobility:["#1a3a3a","#2a6a6a"],row:["#1a1a3a","#3a3a8a"],generic:["#1a1a1a","#2a2a2a"]};
+function exType(n){ n=(n||"").toLowerCase(); if(/agacham|squat|sumô|goblet/.test(n))return"squat"; if(/afundo|lunge|búlgar|step.?up/.test(n))return"lunge"; if(/dead|terra|rdl|ponte|hip.?thrust/.test(n))return"hinge"; if(/supino|flexão|press|push|ombro/.test(n))return"push"; if(/remada|pulldown|puxada|pull.?up/.test(n))return"pull"; if(/prancha|plank|abdom|crunch|core|dead.?bug/.test(n))return"core"; if(/mobil|alonga|rotaç|quadril|pigeon/.test(n))return"mobility"; if(/remad|remo/.test(n))return"row"; return"generic"; }
+
+// ─── Tab rendering ────────────────────────────────────────────────────────────
+let currentTab = "home";
+
+function tab(id){
+  currentTab = id;
+  document.querySelectorAll(".ntab").forEach(b=>b.classList.remove("on"));
+  document.getElementById("t-"+id).classList.add("on");
+  renderTab(id);
+  window.scrollTo(0,0);
+}
+
+function renderTab(id){
+  if(!report){ loadReport(); return; }
+  const body = document.getElementById("body");
+  if(id==="forca")      { body.innerHTML = renderForca(); return; }
+  if(id==="home")       { body.innerHTML = renderHome();  return; }
+  if(id==="treinos")    { body.innerHTML = renderTreinos(); return; }
+  if(id==="coach")      { body.innerHTML = renderCoach(); return; }
+  if(id==="agenda")     { body.innerHTML = renderAgenda(); return; }
+}
+
+function renderHome(){
+  const s=report.saude, ins=report.insights||{};
+  const dias=["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+  const dt=new Date((report.date||"")+"T12:00:00");
+  const dStr=dias[dt.getDay()]+", "+dt.toLocaleDateString("pt-BR");
+  const r=sem(s.body_battery,40,70), h=sem(s.hrv,40,60), sn=sem(s.sono_score,60,80);
+  const acwr=parseFloat(s.acwr); let aSem={em:"⚪",bg:"#1c1c1c",dk:"#444"};
+  if(!isNaN(acwr)){ if(acwr>1.5)aSem={em:"🔴",bg:"#FF4444",dk:"#3a0000"}; else if(acwr>=0.8)aSem={em:"🟢",bg:"#00C896",dk:"#003a28"}; else aSem={em:"🟡",bg:"#FFB800",dk:"#3a2a00"}; }
+  return `
+  <div class="frase"><div class="frase-date">${dStr}</div><div class="frase-text">${ins.frase||"—"}</div></div>
+  <div class="sl">Status Geral</div>
+  <div class="sem-row">${sbox(r.em,r.bg,r.dk,"Readiness")}${sbox(aSem.em,aSem.bg,aSem.dk,"Carga")}${sbox(h.em,h.bg,h.dk,"HRV")}${sbox(sn.em,sn.bg,sn.dk,"Sono")}</div>
+  <div class="badges">${badge(ins.status_readiness)}${badge(ins.status_carga)}${badge(ins.acao_hoje)}</div>
+  <div class="sl">Dados Fisiológicos</div>
+  <div class="mets">
+    ${mc("💤","Sono",f(s.sono_h)+"h",`Score ${f(s.sono_score,0)} · REM ${f(s.sono_rem)}h`,!!s.sono_h)}
+    ${mc("❤️","HRV",f(s.hrv,0)+" ms",`7d ${f(s.hrv_7d,0)} · ${(s.hrv_status||"—").toUpperCase()}`,!!s.hrv)}
+    ${mc("🔋","Body Battery",f(s.body_battery,0),`Stress ${f(s.stress_avg,0)}`,!!s.body_battery)}
+    ${mc("💓","Resting HR",f(s.rhr,0)+" bpm",`Base ${f(s.rhr_baseline,0)||"—"} bpm`,!!s.rhr)}
+    ${mc("📈","ATL / CTL",`${f(s.atl,0)} / ${f(s.ctl,0)}`,`${s.training_status||"—"} · ${s.fitness_trend||"—"}`,!!s.atl)}
+    ${mc("🫁","VO₂max",f(s.vo2max),"ml/kg/min",!!s.vo2max)}
+  </div>
+  ${s.previsoes&&Object.keys(s.previsoes).length?`<div class="sl">🏁 Previsão de Prova</div><div class="prev-grid">${Object.entries(s.previsoes).map(([k,v])=>`<div class="prev-item"><div class="prev-d">${k}</div><div class="prev-t">${hms(v)}</div></div>`).join("")}</div>`:""}
+  ${renderPRs(report.prs||[])}
+  ${renderCountdown(s)}
+  ${renderClima(report.clima||{})}
+  ${renderSemana(report.semana||{},report.semana_passada||{})}
+  ${renderHRVChart(report.hrv_7dias||[])}
+  ${renderRisco(s)}
+  ${renderNutricao(s)}
+  ${renderSono(s)}
+  ${renderVO2Chart(report.vo2max_hist||[])}
+  ${renderSonoPerf(report.sono_performance||[])}
+  ${renderNotas()}
+  `;
+}
+
+function renderTreinos(){
+  const ontem=(report.ontem||[]).map(t=>({ico:t.icone,nm:t.nome,dist:t.dist,dur:t.dur,perf:t.perf,fc_tss:`${t.fc||"—"} | TSS ${t.tss||"—"}`}));
+  const hj=(report.hoje_feito||[]).map(t=>({ico:t.icone,nm:t.nome,dist:t.dist,dur:t.dur,perf:t.perf,fc_tss:`${t.fc||"—"} | TSS ${t.tss||"—"}`}));
+  const cols=[{k:"ico",c:"ico",l:""},{k:"nm",c:"nm",l:"Atividade"},{k:"dist",c:"mn",l:"Dist"},{k:"dur",c:"mn",l:"Dur"},{k:"perf",c:"mn",l:"Pace/Vel"},{k:"fc_tss",c:"mn",l:"FC/TSS"}];
+  return `<div class="sl">Treinos de Ontem</div>${tbl(ontem,cols)}`+
+    (hj.length?`<div class="sl">Treinos de Hoje</div>${tbl(hj,cols)}`:"");
+}
+
+function coachCard(icon, title, text, bg, bc, lc, tc) {
+  if (!text || text === "null") return "";
+  return `
+  <div style="background:${bg};border-left:3px solid ${bc};border-radius:12px;padding:14px;margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <span style="font-size:16px">${icon}</span>
+      <span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:${lc}">${title}</span>
+    </div>
+    <div style="font-size:13px;color:${tc};line-height:1.7">${text}</div>
+  </div>`;
+}
+
+function renderCoach(){
+  const ins = report.insights || {};
+  const s   = report.saude   || {};
+
+  // Score bar helper
+  function scoreBar(val, lo, hi, label) {
+    const pct = val != null ? Math.min(100, Math.max(0, ((parseFloat(val)-lo)/(hi-lo))*100)) : 0;
+    const col = pct >= 66 ? "#00C896" : pct >= 33 ? "#FFB800" : "#FF4444";
+    return `<div style="margin-bottom:6px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+        <span style="font-size:10px;color:#555">${label}</span>
+        <span style="font-size:10px;font-weight:700;color:${col}">${val||"—"}</span>
+      </div>
+      <div style="height:4px;background:#1a1a1a;border-radius:2px">
+        <div style="height:100%;width:${pct}%;background:${col};border-radius:2px"></div>
+      </div>
+    </div>`;
+  }
+
+  return `
+  <!-- Status summary bar -->
+  <div style="background:#111;border-radius:12px;padding:14px;margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
+    ${badge(ins.status_readiness)} ${badge(ins.status_carga)} ${badge(ins.acao_hoje)}
+    ${ins.alerta ? `<span style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid;color:#FF4444;border-color:#FF444444;background:#FF444418">⚠️ ALERTA</span>` : ""}
+  </div>
+
+  <!-- Scores visuais -->
+  <div style="background:#111;border-radius:12px;padding:14px;margin-bottom:14px">
+    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:12px">📊 Indicadores do Dia</div>
+    ${scoreBar(s.hrv, 20, 80, "HRV")}
+    ${scoreBar(s.body_battery, 0, 100, "Body Battery")}
+    ${scoreBar(s.sono_score, 0, 100, "Score do Sono")}
+    ${scoreBar(s.vo2max, 35, 65, "VO₂max")}
+  </div>
+
+  <!-- 7 seções do coach -->
+  <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#333;margin-bottom:12px">🤖 Análise do Treinador</div>
+
+  ${coachCard("😴","1 — Readiness & Recuperação", ins.sec_readiness, "#071a14","#00C896","#00C896","#70c090")}
+  ${coachCard("🏊","2 — Treino de Ontem", ins.sec_treino_ontem, "#0a0f1a","#1a6fff","#1a6fff","#7a9bbf")}
+  ${coachCard("📈","3 — Carga & Zonas", ins.sec_carga, "#1a110a","#FFB800","#FFB800","#c09040")}
+  ${coachCard("🎯","4 — Treino de Hoje", ins.sec_hoje, "#071a0f","#00C896","#00C896","#70c090")}
+  ${coachCard("🔧","5 — Ajuste Concreto", ins.sec_ajuste, "#07111f","#1a6fff","#1a6fff","#9ab8d8")}
+  ${ins.sec_alertas && ins.sec_alertas !== "null" ? coachCard("⚠️","6 — Alertas", ins.sec_alertas, "#110000","#FF4444","#FF4444","#cc5555") : ""}
+  ${coachCard("🍌","7 — Nutrição", ins.sec_nutricao, "#0f0a00","#FFB800","#FFB800","#b08030")}
+
+  ${ins.alerta && ins.alerta !== "null" ? `<div class="alert-card">⚠️ ${ins.alerta}</div>` : ""}
+  `;
+}
+
+function renderAgenda(){
+  const ins=report.insights||{};
+  const cal_cols=[{k:"icone",c:"ico",l:""},{k:"nome",c:"nm",l:"Treino"},{k:"dur",c:"mn",l:"Duração"},{k:"dist",c:"mn",l:"Distância"}];
+  const hoje=report.hoje||[], amanha=report.amanha||[];
+  const hj_feito=report.hoje_feito||[];
+  return `
+  <div class="sl">Treino de Hoje</div>
+  ${tbl(hoje,cal_cols)}
+  ${hj_feito.length?`<div style="background:#0a1a0a;border:1px solid #1a3a1a;border-radius:8px;padding:10px 12px;margin-top:8px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">✅</span><div><div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em">Já executado</div><div style="font-size:11px;color:#444;margin-top:2px">${hj_feito.map(t=>t.icone+" "+t.nome+" "+t.dist).join(" · ")}</div></div></div>`:""}
+  ${ins.analise_hoje?iaCard("🎯 Análise do Treino de Hoje",ins.analise_hoje,"#071a0f","var(--green)","var(--green)","#70c090"):""}
+  ${ins.sugestao_ajuste?iaCard("🔧 Ajuste Concreto",ins.sugestao_ajuste):""}
+  <div class="sl" style="margin-top:20px">Treino de Amanhã</div>
+  ${tbl(amanha,cal_cols)}`;
+}
+
+function renderForca(){
+  const items=(report.insights||{}).treino_forca||[];
+  const s=report.saude||{};
+  const bb=+(s.body_battery||0);
+  let nivel="Força Funcional",sub="Estado moderado — estabilidade e controle";
+  if(bb<40){nivel="Recuperação Ativa";sub="Readiness baixo — mobilidade e core suave";}
+  else if(bb>=70){nivel="Força & Potência";sub="Ótimo estado — treine com intensidade";}
+  if(!items.length)return`<div class="forca-hdr"><div class="forca-badge">💪 Treino de Força</div><h2>${nivel}</h2><p>Nenhuma sugestão. Rode o briefing para gerar.</p></div>`;
+  const CGCOL={"leve":"#00C896","moderada":"#FFB800","pesada":"#FF4444"};
+  const cards=items.map((ex,i)=>{
+    const typ=exType(ex.exercicio); const [c1,c2]=COLS[typ];
+    const cg=(ex.carga||"").toLowerCase(); const cc=CGCOL[cg]||"#555";
+    return `<div class="ex-card" style="animation:fadeUp .3s ease both;animation-delay:${i*.05}s">
+      <div class="ex-img" style="background:linear-gradient(135deg,${c1},${c2})">${SVGS[typ]}
+        <div class="ex-sets-ov">${ex.series||"—"}×${ex.repeticoes||"—"}</div></div>
+      <div class="ex-info"><div class="ex-name">${ex.exercicio||"—"}</div>
+        <div class="ex-meta"><span class="cg-badge" style="color:${cc};border-color:${cc}44;background:${cc}18">${ex.carga||"—"}</span></div>
+        <div class="ex-foco">${ex.foco||""}</div></div></div>`;
+  }).join("");
+  return `<div class="forca-hdr"><div class="forca-badge">💪 Sugestão IA · ${items.length} exercícios</div><h2>${nivel}</h2><p>${sub}</p></div>${cards}`;
+}
+
+// ─── New feature renderers ───────────────────────────────────────────────────
+
+function renderPRs(prs) {
+  if (!prs || !prs.length) return "";
+  return `
+  <div style="background:linear-gradient(135deg,#1a0f00,#2a1500);border-radius:12px;padding:14px;margin-bottom:4px;border:1px solid #FFB80033">
+    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#FFB800;margin-bottom:10px">🏆 Novo Recorde Pessoal!</div>
+    ${prs.map(p=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+      <span style="font-size:16px">${p.tipo.split(' ')[0]}</span>
+      <div><div style="font-size:12px;font-weight:700;color:#fff">${p.tipo}</div>
+      <div style="font-size:11px;color:#888">${p.desc}</div></div>
+    </div>`).join("")}
+  </div>`;
+}
+
+function renderVO2Chart(hist) {
+  if (!hist || hist.length < 2) return "";
+  const vals = hist.map(x=>x.value);
+  const max = Math.max(...vals)+1, min = Math.min(...vals)-1;
+  const W=280, H=60, pad=8;
+  const pts = hist.map((x,i)=>({
+    x: pad+(i/(hist.length-1))*(W-pad*2),
+    y: H-pad-((x.value-min)/(max-min))*(H-pad*2),
+    v: x.value, d: x.date
+  }));
+  const line = pts.map(p=>`${p.x},${p.y}`).join(" ");
+  const last = vals[vals.length-1], first = vals[0];
+  const trend = last > first ? `<span style="color:#00C896">▲ ${(last-first).toFixed(1)}</span>` : last < first ? `<span style="color:#FF4444">▼ ${(first-last).toFixed(1)}</span>` : `<span style="color:#555">→</span>`;
+  return `
+  <div class="sl">🫁 Evolução VO₂max — 30 dias</div>
+  <div style="background:#111;border-radius:12px;padding:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="font-size:22px;font-weight:700;color:#fff">${last} <span style="font-size:11px;color:#444">ml/kg/min</span></div>
+      <span style="font-size:13px">${trend} <span style="color:#444;font-size:11px">vs início</span></span>
+    </div>
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:60px">
+      <polyline points="${line}" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="${pts[pts.length-1].x}" cy="${pts[pts.length-1].y}" r="4" fill="#a855f7"/>
+    </svg>
+    <div style="display:flex;justify-content:space-between;margin-top:2px">
+      <span style="font-size:9px;color:#333">${hist[0]?.date?.slice(5)||""}</span>
+      <span style="font-size:9px;color:#333">Hoje</span>
+    </div>
+  </div>`;
+}
+
+function renderSonoPerf(data) {
+  if (!data || data.length < 3) return "";
+  const good = data.filter(d=>d.sono>=7), bad = data.filter(d=>d.sono<6);
+  if (!good.length || !bad.length) return "";
+  const avgGood = good.reduce((a,b)=>a+b.te,0)/good.length;
+  const avgBad  = bad.reduce((a,b)=>a+b.te,0)/bad.length;
+  const diff = ((avgGood-avgBad)/avgBad*100).toFixed(0);
+  const col = diff > 0 ? "#00C896" : "#FF4444";
+  return `
+  <div class="sl">💤 Sono × Performance</div>
+  <div style="background:#111;border-radius:12px;padding:14px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+      <div style="text-align:center">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:4px">≥ 7h sono</div>
+        <div style="font-size:20px;font-weight:700;color:#00C896">${avgGood.toFixed(1)}</div>
+        <div style="font-size:9px;color:#444">TE médio</div>
+      </div>
+      <div style="display:flex;align-items:center;font-size:22px;font-weight:800;color:${col}">${diff>0?"+":""}${diff}%</div>
+      <div style="text-align:center">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444;margin-bottom:4px">< 6h sono</div>
+        <div style="font-size:20px;font-weight:700;color:#FF4444">${avgBad.toFixed(1)}</div>
+        <div style="font-size:9px;color:#444">TE médio</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#555;text-align:center">Com mais sono, seu Training Effect é ${Math.abs(diff)}% ${diff>0?"melhor":"pior"}</div>
+  </div>`;
+}
+
+// Notes (localStorage)
+function renderNotas() {
+  const nota = localStorage.getItem('nota_'+((report||{}).date||'')) || '';
+  return `
+  <div class="sl">📝 Observação do Dia</div>
+  <div style="background:#111;border-radius:12px;padding:12px">
+    <textarea id="notaArea" placeholder="Como se sentiu hoje? Câimbra? Muito vento? Dores?" 
+      style="width:100%;background:transparent;border:none;color:#ddd;font-size:13px;font-family:-apple-system,sans-serif;resize:none;outline:none;line-height:1.6;min-height:60px"
+      oninput="salvarNota(this.value)">${nota}</textarea>
+  </div>`;
+}
+function salvarNota(v) {
+  if (report?.date) localStorage.setItem('nota_'+report.date, v);
+}
+
+// ─── New feature renderers ───────────────────────────────────────────────────
+
+function renderCountdown(s) {
+  if (!s.prova_dias && s.prova_dias !== 0) return "";
+  const fase_col = {BASE:"#1a6fff","BUILD":"#FFB800","PEAK":"#FF8C00","TAPER":"#a855f7","TAPER FINAL":"#FF4444"};
+  const col = fase_col[s.prova_fase] || "#1a6fff";
+  const pct = Math.max(0, Math.min(100, 100 - (s.prova_dias / 180 * 100)));
+  return `
+  <div class="sl">🏁 Countdown da Prova</div>
+  <div style="background:#111;border-radius:12px;padding:16px;border-left:3px solid ${col}">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div>
+        <div style="font-size:28px;font-weight:700;color:#fff;line-height:1">${s.prova_dias}</div>
+        <div style="font-size:11px;color:#444;margin-top:2px">dias para ${s.prova_data||"—"}</div>
+      </div>
+      <span style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${col};background:${col}22;border:1px solid ${col}44;padding:4px 10px;border-radius:5px">${s.prova_fase||"—"}</span>
+    </div>
+    <div style="height:4px;background:#1a1a1a;border-radius:2px;overflow:hidden">
+      <div style="height:100%;width:${pct}%;background:${col};border-radius:2px;transition:width .5s"></div>
+    </div>
+  </div>`;
+}
+
+function renderClima(c) {
+  if (!c.temp_max) return "";
+  const chuva_col = c.chuva_pct > 60 ? "#1a6fff" : c.chuva_pct > 30 ? "#FFB800" : "#00C896";
+  const vento_col = c.vento_kmh > 30 ? "#FF4444" : c.vento_kmh > 15 ? "#FFB800" : "#00C896";
+  return `
+  <div class="sl">🌤 Clima Hoje — Erkrath</div>
+  <div style="background:#111;border-radius:12px;padding:14px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center">
+    <div style="text-align:center">
+      <div style="font-size:40px">${c.emoji||"🌤"}</div>
+      <div style="font-size:18px;font-weight:700;color:#fff;margin-top:4px">${c.temp_atual||c.temp_max}°C</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div style="background:#161616;border-radius:8px;padding:8px 10px">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Min / Max</div>
+        <div style="font-size:14px;font-weight:700;color:#ddd;margin-top:2px">${c.temp_min}° / ${c.temp_max}°</div>
+      </div>
+      <div style="background:#161616;border-radius:8px;padding:8px 10px">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Chuva</div>
+        <div style="font-size:14px;font-weight:700;margin-top:2px" style="color:${chuva_col}">${c.chuva_pct}%</div>
+      </div>
+      <div style="background:#161616;border-radius:8px;padding:8px 10px">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Vento</div>
+        <div style="font-size:14px;font-weight:700;color:${vento_col};margin-top:2px">${c.vento_kmh} km/h</div>
+      </div>
+      <div style="background:#161616;border-radius:8px;padding:8px 10px">
+        <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Condição</div>
+        <div style="font-size:11px;font-weight:700;color:#888;margin-top:4px">${c.chuva_pct>60?"Levar capa":c.vento_kmh>25?"Vento forte":"Favorável"}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderSemana(sem, lw) {
+  if (!sem.swim_km && !sem.bike_km && !sem.run_km) return "";
+  lw = lw || {};
+  function diffStr(cur, prev) {
+    if (!prev && !cur) return "";
+    const d = (cur||0) - (prev||0);
+    if (Math.abs(d) < 0.5) return `<span style="color:#555">→</span>`;
+    return d > 0
+      ? `<span style="color:#00C896;font-size:10px">▲${d.toFixed(1)}</span>`
+      : `<span style="color:#FF4444;font-size:10px">▼${Math.abs(d).toFixed(1)}</span>`;
+  }
+  function bar(cur, prev, max, col) {
+    const p1 = max > 0 ? Math.min(100,(cur/max)*100) : 0;
+    const p2 = max > 0 ? Math.min(100,((prev||0)/max)*100) : 0;
+    return `<div style="height:5px;background:#1a1a1a;border-radius:3px;overflow:hidden;margin-top:4px;position:relative">
+      <div style="height:100%;width:${p2}%;background:#2a2a2a;border-radius:3px;position:absolute"></div>
+      <div style="height:100%;width:${p1}%;background:${col};border-radius:3px;position:absolute"></div>
+    </div>`;
+  }
+  const maxKm = Math.max(sem.swim_km||0,(sem.bike_km||0)/5,sem.run_km||0,lw.swim_km||0,(lw.bike_km||0)/5,lw.run_km||0,1);
+  return `
+  <div class="sl">📅 Volume Esta Semana <span style="color:#333;font-weight:400;font-size:9px">vs semana passada</span></div>
+  <div style="background:#111;border-radius:12px;padding:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:15px">🏊</span>${diffStr(sem.swim_km,lw.swim_km)}</div>
+      <div style="font-size:15px;font-weight:700;color:#fff;margin-top:2px">${(sem.swim_km||0).toFixed(1)}<span style="font-size:9px;color:#444">km</span></div>
+      <div style="font-size:10px;color:#333">${Math.round(sem.swim_min||0)}min</div>
+      ${bar(sem.swim_km||0,lw.swim_km||0,maxKm,"#1a6fff")}
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:15px">🚴</span>${diffStr(sem.bike_km,lw.bike_km)}</div>
+      <div style="font-size:15px;font-weight:700;color:#fff;margin-top:2px">${(sem.bike_km||0).toFixed(0)}<span style="font-size:9px;color:#444">km</span></div>
+      <div style="font-size:10px;color:#333">${Math.round(sem.bike_min||0)}min</div>
+      ${bar((sem.bike_km||0)/5,(lw.bike_km||0)/5,maxKm,"#FFB800")}
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:15px">🏃</span>${diffStr(sem.run_km,lw.run_km)}</div>
+      <div style="font-size:15px;font-weight:700;color:#fff;margin-top:2px">${(sem.run_km||0).toFixed(1)}<span style="font-size:9px;color:#444">km</span></div>
+      <div style="font-size:10px;color:#333">${Math.round(sem.run_min||0)}min</div>
+      ${bar(sem.run_km||0,lw.run_km||0,maxKm,"#00C896")}
+    </div>
+  </div>`;
+}
+
+function renderHRVChart(series) {
+  if (!series || !series.length) return "";
+  const vals = series.map(x => x.value).filter(v => v != null);
+  if (!vals.length) return "";
+  const max = Math.max(...vals, 1), min = Math.min(...vals);
+  const W = 280, H = 60, pad = 8;
+  const points = series.map((x, i) => {
+    const xp = pad + (i / (series.length-1)) * (W - pad*2);
+    const yp = x.value != null ? H - pad - ((x.value - min) / (max - min + 1)) * (H - pad*2) : null;
+    return {x: xp, y: yp, v: x.value, d: x.date};
+  }).filter(p => p.y != null);
+  const polyline = points.map(p => `${p.x},${p.y}`).join(" ");
+  const avg = Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+  const lastV = vals[vals.length-1];
+  const trend = lastV > avg ? "↑" : lastV < avg ? "↓" : "→";
+  const trendCol = lastV > avg ? "#00C896" : lastV < avg ? "#FF4444" : "#FFB800";
+  return `
+  <div class="sl">❤️ Tendência HRV — 7 Dias</div>
+  <div style="background:#111;border-radius:12px;padding:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="font-size:22px;font-weight:700;color:#fff">${lastV} <span style="font-size:14px;color:#444">ms</span></div>
+      <span style="font-size:14px;font-weight:700;color:${trendCol}">${trend} vs média ${avg}ms</span>
+    </div>
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:60px;overflow:visible">
+      <polyline points="${polyline}" fill="none" stroke="#1a6fff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      ${points.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="3" fill="#1a6fff"/>`).join("")}
+      ${points.map(p=>`<text x="${p.x}" y="${p.y-6}" text-anchor="middle" font-size="8" fill="#444">${p.v}</text>`).join("")}
+    </svg>
+    <div style="display:flex;justify-content:space-between;margin-top:4px">
+      <span style="font-size:9px;color:#333">${series[0]?.date?.slice(5)||""}</span>
+      <span style="font-size:9px;color:#333">Hoje</span>
+    </div>
+  </div>`;
+}
+
+function renderRisco(s) {
+  if (!s.risco_lesao) return "";
+  const col = s.risco_cor || "#555";
+  const msg = {BAIXO:"Carga bem distribuída.",MODERADO:"Monitore fadiga acumulada.",ELEVADO:"Reduza intensidade se sentir dores.",ALTO:"Risco real de lesão — reduza carga agora."}[s.risco_lesao]||"";
+  return `
+  <div class="sl">⚠️ Risco de Lesão</div>
+  <div style="background:#111;border-left:3px solid ${col};border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px">
+    <div style="font-size:28px;font-weight:800;color:${col};min-width:32px">${{BAIXO:"✓",MODERADO:"~",ELEVADO:"!",ALTO:"!!"}[s.risco_lesao]||"?"}</div>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#fff">${s.risco_lesao}</div>
+      <div style="font-size:11px;color:#555;margin-top:3px">${msg}</div>
+    </div>
+  </div>`;
+}
+
+function renderNutricao(s) {
+  const n = s.nutricao;
+  if (!n || !n.cho_g_h) return "";
+  return `
+  <div class="sl">🍌 Nutrição de Hoje</div>
+  <div style="background:#111;border-radius:12px;padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <div style="background:#161616;border-radius:8px;padding:10px">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Carboidrato</div>
+      <div style="font-size:16px;font-weight:700;color:#FFB800;margin-top:3px">${n.cho_g_h}g<span style="font-size:10px;color:#444">/h</span></div>
+      <div style="font-size:10px;color:#444">≈ ${n.cho_total||"—"}g total</div>
+    </div>
+    <div style="background:#161616;border-radius:8px;padding:10px">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Hidratação</div>
+      <div style="font-size:16px;font-weight:700;color:#1a6fff;margin-top:3px">${n.agua_ml_h}<span style="font-size:10px;color:#444">ml/h</span></div>
+      <div style="font-size:10px;color:#444">≈ ${n.agua_total||"—"}ml total</div>
+    </div>
+    <div style="background:#161616;border-radius:8px;padding:10px">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Pré-treino</div>
+      <div style="font-size:16px;font-weight:700;color:#00C896;margin-top:3px">${n.pre_kcal}<span style="font-size:10px;color:#444">kcal</span></div>
+      <div style="font-size:10px;color:#444">60min antes</div>
+    </div>
+    <div style="background:#161616;border-radius:8px;padding:10px">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#444">Pós-treino</div>
+      <div style="font-size:16px;font-weight:700;color:#a855f7;margin-top:3px">${n.pos_prot_g}g<span style="font-size:10px;color:#444"> prot</span></div>
+      <div style="font-size:10px;color:#444">em 30min</div>
+    </div>
+  </div>`;
+}
+
+function renderSono(s) {
+  if (!s.sono_alvo_h) return "";
+  const deficit = s.sono_deficit_h || 0;
+  const col = deficit > 1 ? "#FF4444" : deficit > 0.5 ? "#FFB800" : "#00C896";
+  return `
+  <div class="sl">🛌 Recomendação de Sono</div>
+  <div style="background:#111;border-radius:12px;padding:14px;display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <div style="font-size:24px;font-weight:700;color:#fff">${s.sono_alvo_h}h <span style="font-size:13px;color:#444">alvo</span></div>
+      <div style="font-size:12px;color:#555;margin-top:4px">Deitar até: <strong style="color:#aaa">${s.sono_deita}</strong></div>
+    </div>
+    <div style="text-align:right">
+      ${deficit > 0 ? `<div style="font-size:13px;font-weight:700;color:${col}">−${deficit}h déficit</div>` : `<div style="font-size:13px;font-weight:700;color:#00C896">✓ Em dia</div>`}
+      <div style="font-size:11px;color:#444;margin-top:4px">Ontem: ${s.sono_h||"—"}h</div>
+    </div>
+  </div>`;
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+(function init(){
+  if(sessOk()){ showApp(); return; }
+  document.getElementById("pinAction").textContent = hasPin() ? "Redefinir PIN" : "Criar PIN";
+  if(!hasPin()){ pinActionFn(); } // primeira vez: direto para criar
+})();
+</script>
+</body>
+</html>
