@@ -1,47 +1,47 @@
 {
-  "date": "2026-08-08",
-  "generated_at": "2026-08-08T06:46:50.034993Z",
+  "date": "2026-08-09",
+  "generated_at": "2026-08-09T06:51:56.325058Z",
   "saude": {
-    "hrv": 35,
-    "hrv_7d": 33,
-    "hrv_status": "balanced",
-    "hrv_baseline_low": 32,
-    "hrv_baseline_high": 42,
-    "rhr": 68,
+    "hrv": null,
+    "hrv_7d": null,
+    "hrv_status": "",
+    "hrv_baseline_low": null,
+    "hrv_baseline_high": null,
+    "rhr": 65,
     "rhr_baseline": null,
-    "sono_h": 4.8,
-    "sono_score": 37,
-    "sono_deep": 0.7,
-    "sono_rem": 0.1,
-    "sono_awake": 82.0,
-    "body_battery": 17,
-    "stress_avg": 39,
-    "stress_rest": 9.18,
-    "atl": 263.0,
-    "ctl": 1053.0,
+    "sono_h": 0.0,
+    "sono_score": null,
+    "sono_deep": 0.0,
+    "sono_rem": 0.0,
+    "sono_awake": 0.0,
+    "body_battery": 29,
+    "stress_avg": 27,
+    "stress_rest": 51.08,
+    "atl": null,
+    "ctl": null,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 802.0,
-    "load_aerobic_high": 95.0,
-    "load_anaerobic": 155.0,
-    "load_total_month": 1053.0,
-    "load_target_low": "162–425",
-    "load_target_high": "318–581",
-    "training_status": "Recuperação",
-    "fitness_trend": "Estável",
+    "load_aerobic_low": null,
+    "load_aerobic_high": null,
+    "load_anaerobic": null,
+    "load_total_month": null,
+    "load_target_low": null,
+    "load_target_high": null,
+    "training_status": null,
+    "fitness_trend": null,
     "training_readiness": null,
-    "vo2max": 46.4,
+    "vo2max": null,
     "peso": null,
     "previsoes": {
-      "5K": 1442,
-      "10K": 3190,
-      "Meia": 7453,
-      "Maratona": 16845
+      "5K": 1443,
+      "10K": 3194,
+      "Meia": 7463,
+      "Maratona": 16867
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
-    "prova_dias": 36,
+    "prova_dias": 35,
     "prova_data": "13/09/2026",
     "prova_fase": "PEAK",
     "nutricao": {
@@ -55,31 +55,9 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 3.2
+    "sono_deficit_h": null
   },
-  "ontem": [
-    {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Geldermalsen Stand Up Paddleboarding",
-      "dist": "1.6km",
-      "dur": "1h15m",
-      "fc": 101.0,
-      "fc_max": 142.0,
-      "cal": 431.0,
-      "cad": null,
-      "tss": null,
-      "np": null,
-      "swolf": null,
-      "aerobic_te": 0.800000011920929,
-      "anaerobic_te": 0.5,
-      "elev": null,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 1601.9200439453125,
-      "_dur_s": 4513.7041015625
-    }
-  ],
+  "ontem": [],
   "hoje": [],
   "amanha": [],
   "hoje_feito": [],
@@ -102,18 +80,14 @@
     "run_min": 157.1
   },
   "clima": {
-    "temp_max": 28.5,
-    "temp_min": 12.7,
-    "chuva_pct": 0,
-    "vento_kmh": 9.7,
-    "temp_atual": 17.0,
+    "temp_max": 30.5,
+    "temp_min": 16.6,
+    "chuva_pct": 16,
+    "vento_kmh": 20.5,
+    "temp_atual": 21.4,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-08-02",
-      "value": 52.0
-    },
     {
       "date": "2026-08-03",
       "value": 52.0
@@ -137,6 +111,10 @@
     {
       "date": "2026-08-08",
       "value": 35.0
+    },
+    {
+      "date": "2026-08-09",
+      "value": null
     }
   ],
   "vo2max_hist": [
@@ -204,11 +182,6 @@
   "prs": [],
   "sono_performance": [
     {
-      "date": "2026-07-26",
-      "sono": 6.1,
-      "te": 2.4
-    },
-    {
       "date": "2026-07-28",
       "sono": 7.7,
       "te": 3.4
@@ -260,61 +233,61 @@
     }
   ],
   "insights": {
-    "frase": "Sono é treino: reconstrua antes de acelerar na reta final.",
-    "sec_readiness": "HRV 35ms está acima da média 7d (33ms) em +2ms, dentro do baseline inferior (32–42ms) — sinal marginal de estabilização, mas não de recuperação plena. Sono de 4.8h com score 37, deep sleep de apenas 0.7h e REM crítico de 0.1h indicam recuperação cognitiva e muscular severamente comprometidas. Body Battery 17/100 é o indicador mais alarmante: reservas energéticas no limite mínimo operacional.",
-    "sec_treino_ontem": "Stand Up Paddleboarding de 75min a FC média 101bpm (Z1 baixo) com TE aeróbico de 0.8 — estímulo mínimo, essencialmente uma sessão de recuperação ativa. Execução adequada para um dia de descarga, sem sobrecarga cardiovascular. Ponto crítico: FC máx de 142bpm sugere esforços pontuais não sustentados — irrelevante para adaptação, mas aceitável no contexto.",
-    "sec_carga": "Z1 em 802 (acima do target máx de 425) e Z2 em 95 (abaixo do target mínimo de 318) revelam distorção grave na polarização do treino mensal. Z3+ em 155 dentro do aceitável, mas a dominância absurda de Z1 e subexposição a Z2 comprometem adaptações aeróbicas de limiar críticas a 36 dias da prova. Em fase PEAK, esse padrão é tecnicamente inadequado — risco de chegar sem estímulo de intensidade suficiente.",
-    "sec_hoje": "Nenhum treino agendado ou executado hoje — dia de descanso total confirmado. Dada a Body Battery de 17/100, sono crítico e status Garmin de Recuperação, o descanso é a decisão correta e não negociável. Foco absoluto em recuperação passiva: sono, nutrição e controle de estresse.",
-    "sec_ajuste": "Prioridade única hoje: dormir às 22:30 para atingir 8h de sono e reduzir déficit atual de 3.2h. Amanhã reavaliar HRV antes de qualquer decisão de carga.",
-    "sec_alertas": "Body Battery 17/100 combinado com REM de 0.1h configura estado de recuperação crítica — qualquer treino de intensidade hoje seria contraproducente e aumentaria risco de lesão (já MODERADO). Volume semanal de natação em 0.1km é insuficiente a 36 dias do 70.3 — sessão técnica de natação deve ser prioridade nos próximos 3 dias.",
-    "sec_nutricao": "Sem treino hoje: foco em nutrição de recuperação — 1.6–1.8g proteína/kg corporal distribuída em 4 refeições, priorizando carboidratos complexos (arroz, batata-doce) para recompor glicogênio. Hidratação mínima de 35ml/kg e evitar álcool para não comprometer arquitetura do sono desta noite.",
+    "frase": "Body Battery baixo: recuperação ativa é treino também.",
+    "sec_readiness": "Body Battery em 29/100 indica reserva energética criticamente baixa para qualquer estímulo de carga. RHR de 65 bpm sem baseline definido dificulta análise comparativa, mas o valor isolado sugere sistema nervoso ainda sob demanda. Dados de HRV e sono ausentes comprometem diagnóstico preciso, porém BB 29 + stress médio 27 apontam claramente para estado de recuperação insuficiente.",
+    "sec_treino_ontem": null,
+    "sec_carga": "Dados de CTL/ATL e distribuição de zonas ausentes impedem análise quantitativa de carga semanal. Volume registrado é residual: 0.1km natação, 23.8km bike, 9.3km corrida — muito abaixo do esperado para fase PEAK a 35 dias da prova. Risco de lesão MODERADO com volume baixo sugere ausência de consistência recente, não sobrecarga — padrão perigoso pré-competição.",
+    "sec_hoje": "Sem treino agendado para hoje, o que é coerente com Body Battery de 29/100. Dia de recuperação ativa é a decisão correta. Prioridade absoluta: sono, nutrição e mobilidade leve para restaurar reservas antes de retomar carga amanhã.",
+    "sec_ajuste": "Sem treino de intensidade hoje. Caso realize qualquer atividade, limitar a 30min de mobilidade ou caminhada leve, FC abaixo de 120bpm.",
+    "sec_alertas": "Body Battery 29/100 é limiar crítico — treinar com este nível compromete qualidade do estímulo e aumenta risco de lesão. A 35 dias da prova em fase PEAK, a ausência de dados de HRV e sono é uma lacuna de monitoramento que precisa ser corrigida imediatamente para gestão de carga eficaz.",
+    "sec_nutricao": "Sem treino hoje, foco em nutrição de recuperação: 1.6–2.0g proteína/kg ao longo do dia e carboidrato moderado 3–4g/kg para reposição de glicogênio. Hidratação mínima de 35ml/kg corporal; dormir às 22:30 para atingir 8h de sono é a intervenção mais importante desta data.",
     "status_readiness": "CRÍTICO",
     "status_carga": "SUAVE",
     "acao_hoje": "DESCANSO",
-    "analise_hoje": "Dia de descanso total justificado pelos indicadores: Body Battery 17/100 e sono com score 37 tornam qualquer estímulo de treino um risco líquido negativo. Recuperação é o treino de hoje.",
-    "alerta": "Body Battery 17/100 + REM 0.1h: sistema nervoso autônomo não recuperado — treinar hoje comprometeria os próximos 3 dias de carga em fase PEAK.",
+    "analise_hoje": "Dia de descanso completo justificado pelo Body Battery de 29/100. Recuperação hoje é pré-requisito para qualidade dos treinos PEAK nos próximos dias.",
+    "alerta": "Body Battery 29/100 a 35 dias da prova em fase PEAK: monitorar se padrão persiste amanhã — se BB < 40 novamente, revisar estrutura semanal de carga imediatamente.",
     "treino_forca": [
       {
-        "exercicio": "Mobilidade de quadril — 90/90 stretch",
-        "series": 2,
-        "repeticoes": "60s cada lado",
-        "carga": "leve",
-        "foco": "Restaurar amplitude de quadril para eficiência na pedalada e passada na corrida"
-      },
-      {
-        "exercicio": "Dead bug",
-        "series": 2,
-        "repeticoes": "8 cada lado",
-        "carga": "leve",
-        "foco": "Ativação de core profundo sem carga axial — segurança no estado de fadiga atual"
-      },
-      {
-        "exercicio": "Ponte de glúteos isométrica",
-        "series": 3,
-        "repeticoes": "30s",
-        "carga": "leve",
-        "foco": "Ativar glúteo médio e máximo sem impacto — essencial para estabilidade no run do 70.3"
-      },
-      {
-        "exercicio": "Agachamento goblet com pausa (2s no fundo)",
-        "series": 2,
-        "repeticoes": "10-12",
-        "carga": "leve",
-        "foco": "Controle excêntrico de quadríceps e mobilidade de tornozelo com carga mínima"
-      },
-      {
-        "exercicio": "Prancha lateral com elevação de quadril",
-        "series": 2,
-        "repeticoes": "20s cada lado",
-        "carga": "leve",
-        "foco": "Estabilidade lateral do core — previne desvio pélvico na corrida em fadiga"
-      },
-      {
-        "exercicio": "Rotação torácica em quatro apoios",
+        "exercicio": "Mobilidade de quadril — rotação articular",
         "series": 2,
         "repeticoes": "10 cada lado",
         "carga": "leve",
-        "foco": "Mobilidade de coluna torácica para posição aerodinâmica na bike sem compensações"
+        "foco": "Restaura amplitude articular essencial para pedaling e passada eficiente no 70.3"
+      },
+      {
+        "exercicio": "Dead Bug",
+        "series": 3,
+        "repeticoes": "8 cada lado",
+        "carga": "leve",
+        "foco": "Ativa core profundo com mínimo stress sistêmico, ideal para dias de baixo BB"
+      },
+      {
+        "exercicio": "Glute Bridge Isométrico",
+        "series": 3,
+        "repeticoes": "30s",
+        "carga": "leve",
+        "foco": "Ativa glúteo médio e máximo sem carga axial — base de potência no bike e corrida"
+      },
+      {
+        "exercicio": "Prancha lateral com respiração",
+        "series": 2,
+        "repeticoes": "20s cada lado",
+        "carga": "leve",
+        "foco": "Estabilidade lateral do tronco reduz gasto energético na corrida do 70.3"
+      },
+      {
+        "exercicio": "Alongamento de cadeia posterior — postura do pombo",
+        "series": 2,
+        "repeticoes": "40s cada lado",
+        "carga": "leve",
+        "foco": "Libera tensão acumulada em isquiotibiais e piriforme, prevenindo lesões em fase PEAK"
+      },
+      {
+        "exercicio": "Cat-Cow (mobilidade torácica e lombar)",
+        "series": 2,
+        "repeticoes": "12",
+        "carga": "leve",
+        "foco": "Mobilidade da coluna melhora postura no aero e eficiência respiratória na natação"
       }
     ]
   }
