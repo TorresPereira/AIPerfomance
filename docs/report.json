@@ -1,47 +1,47 @@
 {
-  "date": "2026-08-15",
-  "generated_at": "2026-08-15T06:33:45.279708Z",
+  "date": "2026-08-16",
+  "generated_at": "2026-08-16T06:35:29.636202Z",
   "saude": {
-    "hrv": 46,
+    "hrv": 41,
     "hrv_7d": 28,
     "hrv_status": "low",
     "hrv_baseline_low": 32,
     "hrv_baseline_high": 41,
-    "rhr": 66,
+    "rhr": 67,
     "rhr_baseline": null,
-    "sono_h": 5.8,
-    "sono_score": 47,
-    "sono_deep": 1.0,
+    "sono_h": 7.1,
+    "sono_score": 56,
+    "sono_deep": 1.6,
     "sono_rem": 0.1,
-    "sono_awake": 62.0,
-    "body_battery": 30,
-    "stress_avg": 28,
-    "stress_rest": 37.69,
-    "atl": 372.0,
-    "ctl": 1488.0,
+    "sono_awake": 15.0,
+    "body_battery": 32,
+    "stress_avg": 27,
+    "stress_rest": 56.56,
+    "atl": 380.0,
+    "ctl": 1520.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 844.0,
+    "load_aerobic_low": 928.0,
     "load_aerobic_high": 392.0,
-    "load_anaerobic": 252.0,
-    "load_total_month": 1488.0,
-    "load_target_low": "168–430",
-    "load_target_high": "313–576",
+    "load_anaerobic": 200.0,
+    "load_total_month": 1520.0,
+    "load_target_low": "208–536",
+    "load_target_high": "392–719",
     "training_status": "Sobrecarga",
     "fitness_trend": "Caindo",
     "training_readiness": null,
-    "vo2max": 47.3,
+    "vo2max": 47.2,
     "peso": null,
     "previsoes": {
       "5K": 1422,
-      "10K": 3094,
-      "Meia": 7181,
-      "Maratona": 16170
+      "10K": 3086,
+      "Meia": 7152,
+      "Maratona": 16133
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
-    "prova_dias": 29,
+    "prova_dias": 28,
     "prova_data": "13/09/2026",
     "prova_fase": "PEAK",
     "nutricao": {
@@ -55,33 +55,53 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 2.2
+    "sono_deficit_h": 0.9
   },
-  "ontem": [],
-  "hoje": [
+  "ontem": [
     {
-      "icone": "🏃",
-      "nome": "Long Run",
-      "tipo": "",
-      "dur": "1h30m",
-      "dist": "—"
+      "mod": "swim",
+      "icone": "🏊",
+      "nome": "Dusseldorf Open Water Swimming",
+      "dist": "369m",
+      "dur": "10m50s",
+      "fc": 134.0,
+      "fc_max": 151.0,
+      "cal": 149.0,
+      "cad": null,
+      "tss": null,
+      "np": null,
+      "swolf": null,
+      "aerobic_te": 2.5,
+      "anaerobic_te": 0.4000000059604645,
+      "elev": null,
+      "perf": "2:55/100m",
+      "pl": "Pace",
+      "_dist_m": 369.8699951171875,
+      "_dur_s": 650.885009765625
     },
     {
+      "mod": "run",
       "icone": "🏃",
-      "nome": "Long Run",
-      "tipo": "",
-      "dur": "1h30m",
-      "dist": "—"
-    },
-    {
-      "icone": "🏃",
-      "nome": "Long Run",
-      "tipo": "",
-      "dur": "1h05m",
-      "dist": "—"
+      "nome": "Erkrath - 1 hr 5 min Long Run",
+      "dist": "13.5km",
+      "dur": "1h32m",
+      "fc": 132.0,
+      "fc_max": 150.0,
+      "cal": 1091.0,
+      "cad": 159.578125,
+      "tss": null,
+      "np": 301.0,
+      "swolf": null,
+      "aerobic_te": 3.5,
+      "anaerobic_te": 0.0,
+      "elev": 90.0,
+      "perf": "6:51/km",
+      "pl": "Pace",
+      "_dist_m": 13480.7802734375,
+      "_dur_s": 5547.9072265625
     }
   ],
-  "amanha": [
+  "hoje": [
     {
       "icone": "🚴",
       "nome": "Steady Long Ride",
@@ -104,16 +124,17 @@
       "dist": "—"
     }
   ],
+  "amanha": [],
   "hoje_feito": [],
   "semana": {
-    "swim_km": 2.2,
-    "swim_min": 54.7,
+    "swim_km": 2.6,
+    "swim_min": 65.6,
     "bike_km": 11.4,
     "bike_min": 25.6,
-    "run_km": 11.4,
-    "run_min": 60.9,
+    "run_km": 24.9,
+    "run_min": 153.3,
     "total_tss": 30.5,
-    "n_treinos": 6
+    "n_treinos": 8
   },
   "semana_passada": {
     "swim_km": 0.1,
@@ -124,18 +145,14 @@
     "run_min": 63.8
   },
   "clima": {
-    "temp_max": 33.4,
-    "temp_min": 21.3,
-    "chuva_pct": 20,
-    "vento_kmh": 18.0,
-    "temp_atual": 25.2,
+    "temp_max": 27.8,
+    "temp_min": 18.3,
+    "chuva_pct": 8,
+    "vento_kmh": 15.8,
+    "temp_atual": 19.5,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-08-09",
-      "value": 47.0
-    },
     {
       "date": "2026-08-10",
       "value": null
@@ -159,13 +176,13 @@
     {
       "date": "2026-08-15",
       "value": 46.0
+    },
+    {
+      "date": "2026-08-16",
+      "value": 41.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-08-01",
-      "value": 46.6
-    },
     {
       "date": "2026-08-02",
       "value": 46.4
@@ -220,16 +237,15 @@
     },
     {
       "date": "2026-08-15",
-      "value": 47.3
+      "value": 47.2
+    },
+    {
+      "date": "2026-08-16",
+      "value": 47.2
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-08-02",
-      "sono": 7.6,
-      "te": 3.2
-    },
     {
       "date": "2026-08-03",
       "sono": 6.6,
@@ -269,64 +285,69 @@
       "date": "2026-08-13",
       "sono": 7.2,
       "te": 3.6
+    },
+    {
+      "date": "2026-08-15",
+      "sono": 5.8,
+      "te": 3.5
     }
   ],
   "insights": {
-    "frase": "Recuperação hoje é treino; proteja o peak com inteligência.",
-    "sec_readiness": "HRV de 46ms está acima da média 7d (28ms) em +18ms, sinal positivo de recuperação aguda, mas ainda abaixo do baseline (32–41ms) em contexto de sobrecarga acumulada. Sono crítico: 5.8h, score 47, deep sleep 1.0h e REM apenas 0.1h — déficit de 2.2h compromete síntese proteica e consolidação neuromuscular. Body Battery 30/100 indica reserva energética muito baixa para absorver carga de 4h05 de corrida planejada.",
-    "sec_treino_ontem": null,
-    "sec_carga": "Z1 em 844 (target 168–430) e Z2 em 392 (target 313–576): Z1 está 96% acima do teto, indicando volume excessivo em aeróbico leve com desequilíbrio qualitativo. CTL estimado de 1488 com ATL 372 e status Garmin 'Sobrecarga' confirmam fadiga acumulada em fase PEAK — risco de lesão MODERADO deve ser tratado como ALTO dado o sono e Body Battery atuais. Com 29 dias para a prova, qualquer carga adicional não absorvida agrava o buraco de recuperação.",
-    "sec_hoje": "Três sessões de Long Run totalizando 4h05 estão absolutamente contraindicadas com Body Battery 30, sono score 47 e status de Sobrecarga. Se alguma sessão for executada, limitar a UMA corrida de no máximo 45–50min em Z1 puro (FC ≤ 140bpm), terreno plano, pace confortável sem drift cardíaco. O cenário ideal é substituir todo o bloco de corrida por mobilidade e descanso ativo.",
-    "sec_ajuste": "Substituir as 3 sessões de Long Run por 1 corrida leve de 40min, FC teto 138bpm, Z1 exclusivo, sem progressão de pace. Amanhã (Steady Long Ride): consolidar em 2h00 no lugar de 2h45, potência alvo 160–185W (Z2 baixo), FC teto 148bpm.",
-    "sec_alertas": "SOBRECARGA confirmada pelo Garmin com Body Battery 30 e sono REM de apenas 0.1h — risco real de overreaching não-funcional a 29 dias da prova. Acúmulo de Z1 117% acima do target mensal indica volume mal distribuído; adicionar mais corrida longa hoje agrava o quadro. Monitorar HR drift durante qualquer esforço: se FC subir >8bpm sem aumento de pace, interromper imediatamente.",
-    "sec_nutricao": "Sem treinos executados hoje ainda: priorizar refeição anti-inflamatória pré-sessão com 350kcal (carboidrato complexo + proteína), hidratação mínima de 500ml antes do esforço dado o calor de 33.4°C e vento 18km/h. Pós-treino: 30g proteína em até 30min + reposição de sódio; dormir às 22:30 para buscar as 8h alvo e reduzir o déficit acumulado de 2.2h.",
-    "status_readiness": "CRÍTICO",
+    "frase": "HRV em alta, mas corpo pede inteligência na execução hoje.",
+    "sec_readiness": "HRV de 41ms representa +13ms acima da média 7d (28ms), tocando o teto do baseline pessoal (32–41ms) — sinal positivo de recuperação aguda, mas não indica prontidão plena. Sono comprometido: 7.1h com score 56, deep sleep 1.6h e REM crítico de apenas 0.1h, sugerindo recuperação neurológica insuficiente. Body Battery 32/100 com estresse médio 27 confirma reserva energética baixa — sistema ainda em processo de reconstrução pós-carga acumulada.",
+    "sec_treino_ontem": "Swim de 369m a 2:55/100m com FC média 134bpm e TE 2.5 indica sessão aeróbica leve, bem dentro da zona 1 — eficiente para o objetivo. Long Run de 13.5km em 1h32m a 6:51/km com FC 132bpm e TE 3.5 demonstra estímulo aeróbico adequado, porém pace lento para o volume de 1h32m sugere acúmulo de fadiga residual. Potência de corrida 301W com cadência 159spm aponta para passada curta — ponto a corrigir nas sessões seguintes.",
+    "sec_carga": "Z1 em 928 (target 208–536) está 73% acima do teto recomendado, e Z2 em 392 bate no piso do target (392–719) — distribuição desequilibrada com excesso de volume aeróbico leve sem consolidação em Z2. Z3+ em 200 é tolerável na fase PEAK, mas com CTL estimado em 1520 e status Garmin de Sobrecarga, o sistema está operando no limiar de risco moderado de lesão. A 28 dias da prova, a tendência de carga caindo é positiva, mas exige gestão rigorosa desta semana.",
+    "sec_hoje": "Três blocos de Steady Long Ride (2h45m + 2h45m + 2h00m) totalizam 7h30m de ciclismo — volume absolutamente incompatível com o estado atual de Body Battery 32 e sobrecarga acumulada. A execução integral representaria risco alto de overreaching agudo em fase PEAK com 28 dias para a prova. Recomenda-se consolidar em UMA sessão de 2h a 2h30m em Z1-Z2 puro, descartando os demais blocos.",
+    "sec_ajuste": "Executar apenas 1 sessão de bike com duração máxima de 2h30m, FC teto 148bpm (Z2 superior), potência alvo 175–200W, sem qualquer incursão em Z3. Cadência alvo 85–90rpm para reduzir estresse neuromuscular.",
+    "sec_alertas": "SOBRECARGA ATIVA: Z1 mensal 73% acima do target máximo — risco de volume sem qualidade. REM 0.1h indica privação de recuperação neurológica; treino intenso hoje pode agravar déficit adaptativo. Body Battery 32 ao iniciar sessão de 7h30m é contraindicado — redução obrigatória de volume.",
+    "sec_nutricao": "Pré-ride: 350kcal com ênfase em CHO complexo 60–90min antes (banana + aveia ou gel + barra). Durante os 2h30m: 60–80g CHO/h via géis/isotônico + 500–750ml/h dado calor de 27.8°C e vento 15.8km/h — monitorar sede ativa. Pós-treino: 30g proteína whey + 80g CHO simples em até 30min; deitar às 22:30 para alcançar 8h de sono e compensar déficit de 0.9h.",
+    "status_readiness": "BAIXO",
     "status_carga": "SOBRECARGA",
-    "acao_hoje": "SUBSTITUIR",
-    "analise_hoje": "Três Long Runs totalizando 4h05 são inviáveis com Body Battery 30 e sono score 47 em fase de Sobrecarga Garmin. Substituição por sessão leve única de 40min em Z1 é a decisão técnica correta para preservar a forma para o peak em 29 dias.",
-    "alerta": "Body Battery 30 + REM 0.1h + Sobrecarga Garmin: executar 4h05 de corrida hoje pode comprometer irreversivelmente a fase PEAK a 29 dias da prova.",
+    "acao_hoje": "REDUZIR 40%",
+    "analise_hoje": "O volume planejado de 7h30m de bike é inviável com Body Battery 32 e status de sobrecarga — reduzir para uma sessão única de 2h–2h30m em Z1/Z2 é a decisão tecnicamente correta para preservar a curva de forma até 13/09. Manter qualidade aeróbica sem adicionar estresse desnecessário é o princípio central desta sessão.",
+    "alerta": "Executar os 3 blocos de bike hoje com Body Battery 32 e REM 0.1h representa risco real de overreaching — redução de 40% do volume é obrigatória.",
     "treino_forca": [
-      {
-        "exercicio": "Mobilidade de quadril — rotação interna/externa em decúbito",
-        "series": 2,
-        "repeticoes": "10 cada lado",
-        "carga": "leve",
-        "foco": "Reduz tensão do iliopsoas e melhora passada na corrida pós-bike"
-      },
       {
         "exercicio": "Dead Bug",
         "series": 3,
-        "repeticoes": "8 cada lado",
+        "repeticoes": "10 por lado",
         "carga": "leve",
-        "foco": "Estabilização lombo-pélvica essencial para postura em todas as modalidades"
+        "foco": "Ativa estabilização lombar e anti-rotação sem estressar sistema nervoso — ideal com readiness baixo"
       },
       {
-        "exercicio": "Ponte de glúteos isométrica (hold 3s no topo)",
+        "exercicio": "Ponte de Glúteo Isométrica",
         "series": 3,
-        "repeticoes": "12",
-        "carga": "leve",
-        "foco": "Ativa glúteo médio e máximo sem impacto — prevenção de lesão em overreaching"
-      },
-      {
-        "exercicio": "Agachamento goblet com pausa",
-        "series": 3,
-        "repeticoes": "10",
-        "carga": "leve",
-        "foco": "Força funcional de quadríceps e glúteos sem sobrecarregar sistema nervoso fatigado"
-      },
-      {
-        "exercicio": "Prancha lateral (alternada)",
-        "series": 2,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral para estabilidade no nado e postura no aerobar"
+        "foco": "Ativa glúteo médio e máximo com baixo custo metabólico — essencial para potência no pedal e corrida"
       },
       {
-        "exercicio": "Alongamento de cadeia posterior — posição 90-90 no chão",
-        "series": 2,
-        "repeticoes": "40s cada lado",
+        "exercicio": "Agachamento Isométrico na Parede",
+        "series": 3,
+        "repeticoes": "45s",
         "carga": "leve",
-        "foco": "Libera isquiotibiais e piriforme sobrecarregados pelo volume de corrida acumulado"
+        "foco": "Fortalece quadríceps e glúteos em posição específica do ciclismo sem carga axial"
+      },
+      {
+        "exercicio": "Bird Dog",
+        "series": 3,
+        "repeticoes": "10 por lado",
+        "carga": "leve",
+        "foco": "Estabilidade de core e equilíbrio lombo-pélvico — previne lesões em treinos de longa duração"
+      },
+      {
+        "exercicio": "Mobilidade de Quadril (90/90 Hip Stretch)",
+        "series": 2,
+        "repeticoes": "60s por lado",
+        "carga": "leve",
+        "foco": "Restaura amplitude de quadril comprometida pelo volume de bike e corrida acumulado"
+      },
+      {
+        "exercicio": "Elevação de Panturrilha Unilateral",
+        "series": 3,
+        "repeticoes": "15 por lado",
+        "carga": "leve",
+        "foco": "Fortalece complexo aquileu e sóleo — reduz risco de tendinopatia em fase PEAK de corrida"
       }
     ]
   }
