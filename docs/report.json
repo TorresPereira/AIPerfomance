@@ -1,31 +1,31 @@
 {
-  "date": "2026-08-19",
-  "generated_at": "2026-08-19T06:39:11.545327Z",
+  "date": "2026-08-20",
+  "generated_at": "2026-08-20T06:40:55.808222Z",
   "saude": {
-    "hrv": 40,
+    "hrv": 65,
     "hrv_7d": 28,
     "hrv_status": "low",
     "hrv_baseline_low": 31,
     "hrv_baseline_high": 41,
-    "rhr": 67,
+    "rhr": 62,
     "rhr_baseline": null,
-    "sono_h": 7.6,
-    "sono_score": 54,
-    "sono_deep": 1.6,
-    "sono_rem": 0.4,
-    "sono_awake": 17.0,
-    "body_battery": 30,
-    "stress_avg": 30,
-    "stress_rest": 43.06,
-    "atl": 425.0,
-    "ctl": 1698.0,
+    "sono_h": 7.2,
+    "sono_score": 77,
+    "sono_deep": 1.9,
+    "sono_rem": 0.7,
+    "sono_awake": 0.0,
+    "body_battery": 57,
+    "stress_avg": 17,
+    "stress_rest": 86.85,
+    "atl": 409.0,
+    "ctl": 1637.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 930.0,
+    "load_aerobic_low": 900.0,
     "load_aerobic_high": 513.0,
-    "load_anaerobic": 256.0,
-    "load_total_month": 1698.0,
+    "load_anaerobic": 224.0,
+    "load_total_month": 1637.0,
     "load_target_low": "208–536",
     "load_target_high": "392–719",
     "training_status": "Sobrecarga",
@@ -34,20 +34,20 @@
     "vo2max": 47.2,
     "peso": null,
     "previsoes": {
-      "5K": 1418,
-      "10K": 3069,
-      "Meia": 7109,
-      "Maratona": 16036
+      "5K": 1419,
+      "10K": 3072,
+      "Meia": 7117,
+      "Maratona": 16054
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
-    "prova_dias": 25,
+    "prova_dias": 24,
     "prova_data": "13/09/2026",
     "prova_fase": "PEAK",
     "nutricao": {
       "cho_g_h": 80,
       "cho_total": null,
-      "agua_ml_h": 600,
+      "agua_ml_h": 750,
       "agua_total": null,
       "pre_kcal": 350,
       "pos_prot_g": 30,
@@ -55,38 +55,24 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 0.4
+    "sono_deficit_h": 0.8
   },
-  "ontem": [
-    {
-      "mod": "swim",
-      "icone": "🏊",
-      "nome": "Pool Swim",
-      "dist": "1200m",
-      "dur": "36m25s",
-      "fc": 119.0,
-      "fc_max": 157.0,
-      "cal": 372.0,
-      "cad": null,
-      "tss": null,
-      "np": null,
-      "swolf": 13.800000190734863,
-      "aerobic_te": 2.299999952316284,
-      "anaerobic_te": 0.699999988079071,
-      "elev": null,
-      "perf": "3:02/100m",
-      "pl": "Pace",
-      "_dist_m": 1200.0,
-      "_dur_s": 2185.693115234375
-    }
-  ],
-  "hoje": [],
-  "amanha": [
+  "ontem": [],
+  "hoje": [
     {
       "icone": "🏃",
       "nome": "Steady Run",
       "tipo": "",
       "dur": "45m00s",
+      "dist": "—"
+    }
+  ],
+  "amanha": [
+    {
+      "icone": "🚴",
+      "nome": "Easy Ride",
+      "tipo": "",
+      "dur": "50m00s",
       "dist": "—"
     }
   ],
@@ -110,18 +96,14 @@
     "run_min": 153.3
   },
   "clima": {
-    "temp_max": 19.6,
-    "temp_min": 16.2,
-    "chuva_pct": 98,
-    "vento_kmh": 15.8,
-    "temp_atual": 18.4,
+    "temp_max": 22.1,
+    "temp_min": 15.3,
+    "chuva_pct": 86,
+    "vento_kmh": 16.9,
+    "temp_atual": 16.2,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-08-13",
-      "value": 48.0
-    },
     {
       "date": "2026-08-14",
       "value": 40.0
@@ -145,13 +127,13 @@
     {
       "date": "2026-08-19",
       "value": 40.0
+    },
+    {
+      "date": "2026-08-20",
+      "value": 65.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-08-05",
-      "value": 46.4
-    },
     {
       "date": "2026-08-06",
       "value": 46.4
@@ -207,15 +189,14 @@
     {
       "date": "2026-08-19",
       "value": 47.2
+    },
+    {
+      "date": "2026-08-20",
+      "value": 47.2
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-08-06",
-      "sono": 6.9,
-      "te": 1.1
-    },
     {
       "date": "2026-08-07",
       "sono": 8.0,
@@ -258,68 +239,68 @@
     }
   ],
   "insights": {
-    "frase": "Recuperação ativa hoje é treino para vencer em 25 dias.",
-    "sec_readiness": "HRV 40ms está dentro do baseline (31–41ms) e 12ms acima da média 7d (28ms), sinal de recuperação em curso após período de stress acumulado. Sono de 7.6h com score 54 é insuficiente: deep sleep 1.6h adequado, mas REM apenas 0.4h compromete consolidação neuromuscular. Body Battery 30/100 confirma reserva energética baixa — não indicado estímulo de carga hoje.",
-    "sec_treino_ontem": "Natação 1200m em 36'25\" a 3:02/100m com FC média 119bpm (max 157bpm) indica execução em zona aeróbica leve, adequada para o momento. SWOLF 13.8 reflete eficiência técnica razoável para o volume. TE aeróbico 2.3 confirma estímulo baixo-moderado — sessão bem calibrada para o estado de fadiga acumulada.",
-    "sec_carga": "Z1 em 930 (target 208–536) e Z2 em 513 (target 392–719): Z1 está 74% acima do teto do target, indicando excesso de volume de baixa intensidade ou má distribuição. Z3+ em 256 com status Garmin 'Sobrecarga' e risco de lesão MODERADO em fase PEAK é sinal crítico — redução de carga é mandatória. Volume semanal de bike zerado e corrida em apenas 6.9km sugere desequilíbrio de modalidades.",
-    "sec_hoje": "Sem treino agendado para hoje — decisão correta dado Body Battery 30, sono de baixa qualidade e status de sobrecarga. Dia de recuperação ativa com trabalho de força leve, mobilidade e foco em sono reparador. Amanhã (Steady Run 45min) deve ser executado em Z1–Z2, FC teto 148bpm.",
-    "sec_ajuste": "Hoje: apenas força leve e mobilidade, sem carga cardiovascular. Amanhã Steady Run 45min com FC alvo 130–148bpm, ritmo conversacional, sem exceder Z2.",
-    "sec_alertas": "Garmin confirma Sobrecarga com tendência de carga caindo — janela de recuperação ativa crítica antes da prova em 25 dias. REM sleep 0.4h é valor muito baixo: priorizar deitar às 22:30 para atingir meta de 8.0h e elevar Body Battery acima de 50 até amanhã.",
-    "sec_nutricao": "Hoje sem treino: focar em alimentação anti-inflamatória, CHO moderado (~200–250g ao longo do dia) e 30g de proteína nas refeições principais para recuperação muscular. Hidratação mínima 2.0L ao longo do dia; deitar às 22:30 com refeição leve encerrada até 21:30.",
-    "status_readiness": "BAIXO",
+    "frase": "HRV em alta, mas sobrecarga exige inteligência no PEAK.",
+    "sec_readiness": "HRV de 65ms representa +37ms vs média 7d (28ms), sinal positivo de recuperação aguda, porém ainda abaixo do baseline de 31–41ms em contexto geral. Sono de 7.2h com déficit de 0.8h, REM baixo (0.7h) e deep adequado (1.9h) indicam recuperação incompleta do SNC. Body Battery em 57/100 com stress médio de 17 sugere capacidade funcional moderada — suficiente para treino leve controlado.",
+    "sec_treino_ontem": null,
+    "sec_carga": "Z1 em 900 (acima do target máx de 536) e Z2 em 513 (dentro do range), mas Z3+ em 224 com ATL estimado em 409 e status Garmin de Sobrecarga confirmam acúmulo excessivo. Na fase PEAK a 24 dias da prova, o risco MODERADO de lesão combinado com volume semanal reduzido (natação 1.2km, bike 0km, corrida 6.9km) indica fadiga residual com redução protetora do volume — tendência correta, mas Z1 precisa ser controlada. Distribuição Z1 acima do target é crítica e deve ser corrigida imediatamente.",
+    "sec_hoje": "Steady Run de 45min não foi executado ainda. Execute em Z1 puro, FC máxima de 138bpm, sem variações de ritmo. Com chuva (86%) e vento de 16.9km/h a 22°C, ajuste a percepção de esforço e mantenha calor muscular com aquecimento de 8min caminhada ativa antes de iniciar o trote.",
+    "sec_ajuste": "Limitar Steady Run a 45min com FC teto absoluto de 138bpm (Z1 aeróbico leve). Caso FC ultrapasse 142bpm por mais de 60s, reduzir pace imediatamente — sem progressão de ritmo nesta sessão.",
+    "sec_alertas": "Status de Sobrecarga Garmin com ATL 409 exige cautela: qualquer drift de FC >8bpm no final da corrida é sinal de parar. Volume semanal de bike zerado é gap crítico para Half Ironman em 24 dias — Easy Ride amanhã é obrigatório. REM de apenas 0.7h compromete consolidação neuromuscular; priorizar dormir às 22h30 hoje.",
+    "sec_nutricao": "Pré-corrida (30min antes): 350kcal de fácil digestão (banana + aveia ou gel + fruta). Pós-corrida imediato: 30g de proteína (whey ou ovo) com fonte de CHO simples para reposição; hidratação durante corrida 750ml/h ajustada para 45min (~560ml total).",
+    "status_readiness": "MODERADO",
     "status_carga": "SOBRECARGA",
-    "acao_hoje": "DESCANSO",
-    "analise_hoje": "Dia de descanso ativo corretamente posicionado — qualquer carga cardiovascular hoje aprofundaria o déficit de recuperação com prova a 25 dias. Prioridade absoluta: sono, nutrição e mobilidade.",
-    "alerta": "Body Battery 30 + REM 0.4h + status Sobrecarga: evitar qualquer treino de intensidade hoje para não comprometer o PEAK da semana.",
+    "acao_hoje": "REDUZIR 20%",
+    "analise_hoje": "Steady Run de 45min é adequado ao contexto de sobrecarga desde que executado em Z1 estrito (FC ≤138bpm), funcionando como estímulo de manutenção aeróbica sem aprofundar fadiga. O ambiente chuvoso e frio exige aquecimento prolongado e atenção ao risco de queda de performance por hipotermia periférica.",
+    "alerta": "Sobrecarga Garmin ativa + REM crítico (0.7h): qualquer sinal de fadiga aguda durante a corrida (FC elevada sem aumento de pace) deve encerrar a sessão imediatamente.",
     "treino_forca": [
       {
-        "exercicio": "Foam Roll + Mobilidade de Quadril",
-        "series": 1,
-        "repeticoes": "5min",
-        "carga": "leve",
-        "foco": "Reduz tensão miofascial acumulada e melhora amplitude para corrida e ciclismo"
-      },
-      {
-        "exercicio": "Dead Bug",
+        "exercicio": "Agachamento Goblet",
         "series": 3,
-        "repeticoes": "8-10",
-        "carga": "leve",
-        "foco": "Ativa core profundo sem gerar fadiga sistêmica, estabilidade lombar essencial no 70.3"
+        "repeticoes": "10-12",
+        "carga": "moderada",
+        "foco": "Fortalece glúteos e quadríceps para eficiência na corrida e no pedal do 70.3"
       },
       {
-        "exercicio": "Glute Bridge Isométrico",
+        "exercicio": "Ponte de Glúteo Unilateral",
+        "series": 3,
+        "repeticoes": "12-15",
+        "carga": "leve",
+        "foco": "Ativa glúteo médio e corrige desequilíbrios pélvicos comuns em triatletas"
+      },
+      {
+        "exercicio": "Prancha Lateral com Abdução",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Ativa glúteo máximo sem carga axial, melhora propulsão na corrida pós-bike"
+        "foco": "Core lateral estabiliza pelve na corrida e melhora posição aerodinâmica no bike"
       },
       {
-        "exercicio": "Clamshell com Miniband",
+        "exercicio": "Cadeira Nórdica Excêntrica",
         "series": 3,
-        "repeticoes": "15",
-        "carga": "leve",
-        "foco": "Fortalece glúteo médio e previne colapso de joelho — padrão crítico em corrida de longa duração"
+        "repeticoes": "6-8",
+        "carga": "moderada",
+        "foco": "Proteção ativa dos isquiotibiais, principal grupo de lesão em corredores de longa distância"
       },
       {
-        "exercicio": "Alongamento de Psoas (90/90 no chão)",
+        "exercicio": "Elevação de Panturrilha Unilateral",
+        "series": 3,
+        "repeticoes": "15-20",
+        "carga": "moderada",
+        "foco": "Fortalece sóleo e gastrocnêmio para eficiência de passada e prevenção de lesão no 70.3"
+      },
+      {
+        "exercicio": "Dead Bug com Respiração Diafragmática",
+        "series": 3,
+        "repeticoes": "8-10",
+        "carga": "leve",
+        "foco": "Integração de core profundo com controle respiratório — crítico para sustentação de postura em provas longas"
+      },
+      {
+        "exercicio": "Mobilidade de Quadril em 90/90",
         "series": 2,
-        "repeticoes": "45s",
+        "repeticoes": "60s",
         "carga": "leve",
-        "foco": "Mobilidade de quadril anterior reduz encurtamento por volume de bike e melhora passada na corrida"
-      },
-      {
-        "exercicio": "Bird Dog",
-        "series": 3,
-        "repeticoes": "10-12",
-        "carga": "leve",
-        "foco": "Coordenação e estabilidade lombo-pélvica sem impacto — ideal para dias de baixo readiness"
-      },
-      {
-        "exercicio": "Respiração Diafragmática + Ativação de Core",
-        "series": 1,
-        "repeticoes": "5min",
-        "carga": "leve",
-        "foco": "Reduz estresse sistêmico, melhora eficiência respiratória para natação e corrida"
+        "foco": "Libera cápsula do quadril e rotadores externos, reduzindo compensações na corrida e no bike"
       }
     ]
   }
