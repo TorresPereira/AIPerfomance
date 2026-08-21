@@ -1,6 +1,6 @@
 {
   "date": "2026-08-21",
-  "generated_at": "2026-08-21T08:56:47.031271Z",
+  "generated_at": "2026-08-21T09:00:52.223875Z",
   "saude": {
     "hrv": 49,
     "hrv_7d": 28,
@@ -152,7 +152,7 @@
     "temp_min": 14.1,
     "chuva_pct": 94,
     "vento_kmh": 16.2,
-    "temp_atual": 18.3,
+    "temp_atual": 18.5,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
@@ -464,69 +464,124 @@
     }
   },
   "insights": {
-    "frase": "Recuperação é treino: respeite o sinal do corpo hoje.",
-    "sec_readiness": "HRV 49ms está acima da média 7d (28ms) em +21ms, sinal positivo de recuperação aguda, mas ainda abaixo do baseline (31–41ms) — cautela. Sono de 6.1h com score 57 e REM 0.0h indica recuperação neurológica comprometida; déficit de 1.9h é crítico a 23 dias da prova. Body Battery 40/100 com stress médio 22 confirma reserva energética limitada para esforço significativo hoje.",
-    "sec_treino_ontem": "Corrida de 7.2km em 38:53 (pace 5:22/km) com FC média 154bpm e TE aeróbico 4.1 indica estímulo aeróbico elevado para um 'Steady Run' — zona limítrofe entre Z2 alta e Z3. Potência de corrida 384W com cadência 167spm é consistente, mas FC máxima de 168bpm sinaliza que o esforço ultrapassou o alvo steady. Execução tecnicamente dentro do volume, porém intensidade acima do ideal para fase PEAK com carga já em sobrecarga.",
-    "sec_carga": "Z1 (942) e Z2 (680) ambas acima dos targets máximos (655 e 880 respectivamente), com Z3+ em 273 — distribuição desequilibrada e sobrecarregada. ATL estimado em 474 frente a CTL 1894 indica acúmulo de fadiga aguda relevante; status Garmin confirma sobrecarga com tendência de carga caindo. Com risco de lesão MODERADO e prova em 23 dias, a janela de taper deve ser protegida — redução de volume é mandatória agora.",
-    "sec_hoje": "O treino planejado (Easy Ride 50min) já foi executado como cycling de 40:59min, 17.9km, FC média 138bpm, potência 157W e TSS 45.3 — execução adequada para o contexto de recuperação. FC máxima de 174bpm é um alerta: houve pico anaeróbico não compatível com 'easy', possivelmente por terreno ou aceleração pontual. TE aeróbico 2.9 é aceitável; o treino cumpriu função de ativação leve sem gerar carga excessiva.",
-    "sec_ajuste": "Para amanhã (Long Run 1h05min): FC teto 155bpm em Z2, pace mínimo 6:00/km, sem acelerações — objetivo exclusivamente aeróbico. Limitar qualquer segmento Z3+ a no máximo 5min totais dado o quadro de sobrecarga e REM 0.0h desta noite.",
-    "sec_alertas": "FC máxima de 174bpm durante o Easy Ride de hoje é inconsistente com o objetivo da sessão — monitorar amanhã se houve impacto no HRV matinal. REM 0.0h esta noite é criticamente preocupante: recuperação do sistema nervoso central comprometida a 23 dias da prova. Sono alvo de 8h (deitar 22:30) é não-negociável hoje.",
-    "sec_nutricao": "Sem treino adicional hoje, foco em nutrição de recuperação: 350–400kcal pré-descanso com ênfase em carboidrato de baixo IG + 30g proteína pós-treino já executado (dentro de 30min). Hidratação de manutenção: 2.0–2.5L ao longo do dia sem necessidade de protocolo esportivo intensivo.",
+    "frase": "Recuperação ativa agora é performance no dia 13.",
+    "sec_readiness": "HRV 49ms está acima da média 7d (28ms) em +21ms, sinal positivo de recuperação, mas ainda abaixo do baseline (31–41ms considerando a tendência). Sono de 6.1h com score 57 e REM 0.0h indica qualidade muito baixa — déficit de 1.9h compromete síntese proteica e adaptação. Body Battery 40/100 com stress médio 22 confirma reserva energética limitada para esforços de alta intensidade.",
+    "sec_treino_ontem": "Run de 7.2km em 38:53 a 5:22/km com FC média 154bpm e TE aeróbico 4.1 indica esforço acima do planejado para 'Steady Run' — FC elevada próxima ao limiar. Potência de corrida 384W com cadência 167spm sugere passada curta e carregada, possível acúmulo de fadiga neuromuscular. Ponto crítico: FC máx 168bpm em treino que deveria ser controlado é sinal de stress residual.",
+    "sec_carga": "Z1 em 942 (target 255–655) e Z2 em 680 (target 479–880) mostram Z1 já 44% acima do teto mensal, indicando volume excessivo em baixa intensidade com risco de fadiga cumulativa. Z3+ em 273 está moderado, mas o status Garmin 'Sobrecarga' com CTL estimado 1894 reforça risco MODERADO de lesão a 23 dias da prova. Na fase PEAK, a carga precisa cair agora para permitir supercompensação.",
+    "sec_hoje": "Treino planejado Easy Ride 50min já foi executado como 'Erkrath Cycling': 17.9km em 41min, FC 138bpm (máx 174bpm!), potência avg 157W, TSS 45.3 e TE 2.9. A FC máxima de 174bpm é um alerta crítico para um treino classificado como easy — indica pico de esforço incompatível com recuperação. Potência média 157W está adequada, mas o pico de FC sugere trecho de esforço elevado que deve ser evitado.",
+    "sec_ajuste": "Treino de hoje já executado — para amanhã (Long Run 1h05): limitar FC teto a 148bpm estritamente em Z2, pace alvo 5:45–6:10/km, potência de corrida máx 340W. Sem acelerações ou trechos em Z3+.",
+    "sec_alertas": "FC máxima de 174bpm no Easy Ride de hoje é criticamente incompatível com o estado de recuperação (Body Battery 40, sono deficiente) — risco de fadiga autonômica acumulada. REM 0.0h na noite anterior compromete recuperação neuromuscular para o Long Run amanhã. Z1 mensal 44% acima do target: revisar volume total da semana de pico.",
+    "sec_nutricao": "Para hoje (treino já concluído): pós-treino imediato com 30g de proteína + 60–80g CHO para reposição glicogênica dado TSS 45. Hidratação mínima 2.5L ao longo do dia; deitar às 22:30 com alvo de 8h de sono é prioridade máxima de recuperação.",
     "status_readiness": "BAIXO",
     "status_carga": "SOBRECARGA",
-    "acao_hoje": "MANTER",
-    "analise_hoje": "Easy Ride executado com TSS 45.3 e potência média 157W é aceitável para o dia, mas o pico de FC 174bpm deve ser investigado — possível esforço pontual não controlado. Sessão cumpriu objetivo de recuperação ativa sem comprometer o taper.",
-    "alerta": "REM 0.0h e Body Battery 40 combinados com sobrecarga Garmin: risco real de underperformance no Long Run de amanhã — priorize sono acima de qualquer outro fator hoje.",
+    "acao_hoje": "REDUZIR 20%",
+    "analise_hoje": "Easy Ride executado com potência adequada (157W avg) mas FC máx de 174bpm revela esforço pontual excessivo para o estado de recuperação atual. TSS 45.3 é aceitável, porém o pico cardiovascular compromete o objetivo de sessão regenerativa.",
+    "alerta": "FC máx 174bpm em sessão easy com Body Battery 40 e REM 0h — risco de fadiga autonômica acumulada a 23 dias da prova.",
     "treino_forca": [
       {
-        "exercicio": "Ponte de Glúteo Unilateral",
-        "series": 3,
-        "repeticoes": "12-15",
+        "exercicio": "Mobilidade de quadril em 4 apoios (CARs)",
+        "series": 2,
+        "repeticoes": "10 por lado",
         "carga": "leve",
-        "foco": "Ativa glúteo máximo e estabiliza pelve na corrida, reduzindo compensações em fadiga no 70.3"
+        "foco": "Restaura amplitude articular do quadril essencial para passada na corrida e pedalada eficiente"
       },
       {
-        "exercicio": "Prancha Lateral com Abdução de Quadril",
+        "exercicio": "Ponte de glúteo unilateral isométrica",
+        "series": 3,
+        "repeticoes": "30s por lado",
+        "carga": "leve",
+        "foco": "Ativa glúteo médio e máximo sem carga axial, fundamental para estabilidade pélvica na corrida"
+      },
+      {
+        "exercicio": "Agachamento goblet com pausa (bodyweight ou carga leve)",
+        "series": 3,
+        "repeticoes": "12",
+        "carga": "leve",
+        "foco": "Força funcional de quadríceps e glúteos com controle excêntrico para proteção do joelho"
+      },
+      {
+        "exercicio": "Prancha frontal com respiração diafragmática",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Core lateral e estabilidade do quadril — essencial para manutenção de postura na corrida pós-bike"
+        "foco": "Estabilização de core sem elevação de FC, melhora transferência de força entre bike e corrida"
       },
       {
-        "exercicio": "Agachamento Goblet com Pausa",
+        "exercicio": "Step-up lateral com mini band",
         "series": 3,
-        "repeticoes": "10-12",
-        "carga": "moderada",
-        "foco": "Força funcional de quadríceps e glúteos com controle excêntrico, base para potência no ciclismo"
-      },
-      {
-        "exercicio": "Step-Up com Joelho Alto",
-        "series": 3,
-        "repeticoes": "10",
+        "repeticoes": "10 por lado",
         "carga": "leve",
-        "foco": "Simula padrão motor da corrida e fortalece iliopsoas — melhora economia de corrida no 70.3"
+        "foco": "Estabilidade de abdutores e glúteo médio para prevenir colapso do joelho em corrida prolongada"
       },
       {
-        "exercicio": "Mobilidade de Quadril 90/90",
+        "exercicio": "Alongamento dinâmico de isquiotibiais (leg swing)",
         "series": 2,
-        "repeticoes": "60s",
+        "repeticoes": "12 por lado",
         "carga": "leve",
-        "foco": "Libera rotadores do quadril tensionados pelo ciclismo, prevenindo compensações lombares na corrida"
-      },
-      {
-        "exercicio": "Dead Bug com Respiração Controlada",
-        "series": 3,
-        "repeticoes": "8-10",
-        "carga": "leve",
-        "foco": "Ativa core profundo e coordenação neuromuscular sem elevar stress sistêmico em dia de sobrecarga"
-      },
-      {
-        "exercicio": "Alongamento Dinâmico Cadeia Posterior (Leg Swing)",
-        "series": 2,
-        "repeticoes": "12",
-        "carga": "leve",
-        "foco": "Mobilidade funcional de isquiotibiais e quadril — preparação para Long Run de amanhã"
+        "foco": "Reduz rigidez posterior acumulada pelo run de ontem, melhora ciclo de passada"
       }
-    ]
+    ],
+    "treino_academia": {
+      "dia": "A",
+      "grupo": "Posterior de coxa, glúteos e core — foco em cadeia posterior do triatleta",
+      "exercicios": [
+        {
+          "exercicio": "Leg Press 45° (máquina)",
+          "series": 3,
+          "repeticoes": "12-15",
+          "carga": "leve",
+          "musculo": "Quadríceps / Glúteos",
+          "obs": "Amplitude completa com ênfase no excêntrico controlado (3s descida); evite bloqueio total do joelho no topo."
+        },
+        {
+          "exercicio": "Mesa Flexora (máquina deitada)",
+          "series": 3,
+          "repeticoes": "12-15",
+          "carga": "leve",
+          "musculo": "Isquiotibiais",
+          "obs": "Foco no excêntrico lento (4s); isquiotibiais são críticos para prevenção de lesão em corrida de 70.3."
+        },
+        {
+          "exercicio": "Cadeira Abdutora (máquina)",
+          "series": 3,
+          "repeticoes": "15",
+          "carga": "leve",
+          "musculo": "Glúteo Médio",
+          "obs": "Movimento controlado sem impulso; glúteo médio estabiliza pelve durante corrida e pedalada."
+        },
+        {
+          "exercicio": "Stiff com barra (carga reduzida)",
+          "series": 3,
+          "repeticoes": "12",
+          "carga": "leve",
+          "musculo": "Isquiotibiais / Glúteo Máximo",
+          "obs": "Manter coluna neutra e joelhos levemente flexionados; não force amplitude além do controle lombar."
+        },
+        {
+          "exercicio": "Elevação pélvica com barra (Hip Thrust na máquina ou banco)",
+          "series": 3,
+          "repeticoes": "12",
+          "carga": "leve",
+          "musculo": "Glúteo Máximo",
+          "obs": "Isometria de 2s no topo; potência de glúteo é diretamente transferível para watts na bike."
+        },
+        {
+          "exercicio": "Panturrilha no leg press (máquina 45°)",
+          "series": 3,
+          "repeticoes": "15",
+          "carga": "leve",
+          "musculo": "Gastrocnêmio / Sóleo",
+          "obs": "Amplitude total com descida lenta; panturrilha forte reduz impacto na corrida de 21km."
+        },
+        {
+          "exercicio": "Abdominal na máquina (crunch abdominal)",
+          "series": 3,
+          "repeticoes": "15",
+          "carga": "leve",
+          "musculo": "Reto Abdominal / Core",
+          "obs": "Expiração forçada no encurtamento; core sólido mantém postura aerodinâmica nas 3 modalidades."
+        }
+      ]
+    }
   }
 }
