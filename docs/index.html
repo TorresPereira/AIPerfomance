@@ -169,7 +169,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.5 · 08/06/2026</div>
+  <div class="pin-ver">v3.2 · 08/06/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -478,8 +478,11 @@ function renderHome(){
   const dt=new Date((report.date||"")+"T12:00:00");
   const dStr=dias[dt.getDay()]+", "+dt.toLocaleDateString("pt-BR");
   const r=sem(s.body_battery,40,70), h=sem(s.hrv,40,60), sn=sem(s.sono_score,60,80);
-  const acwr=parseFloat(s.acwr); let aSem={em:"⚪",bg:"#1c1c1c",dk:"#444"};
-  if(!isNaN(acwr)){ if(acwr>1.5)aSem={em:"🔴",bg:"#FF4444",dk:"#3a0000"}; else if(acwr>=0.8)aSem={em:"🟢",bg:"#00C896",dk:"#003a28"}; else aSem={em:"🟡",bg:"#FFB800",dk:"#3a2a00"}; }
+  // Carga: usa status_carga da IA (SUAVE/IDEAL=verde, ELEVADA=amarelo, SOBRECARGA=vermelho)
+  const sc=(ins.status_carga||"").toUpperCase(); let aSem={em:"⚪",bg:"#1c1c1c",dk:"#444"};
+  if(sc==="IDEAL"||sc==="SUAVE") aSem={em:"🟢",bg:"#00C896",dk:"#003a28"};
+  else if(sc==="ELEVADA")        aSem={em:"🟡",bg:"#FFB800",dk:"#3a2a00"};
+  else if(sc==="SOBRECARGA")     aSem={em:"🔴",bg:"#FF4444",dk:"#3a0000"};
   return `
   <div class="frase"><div class="frase-date">${dStr}</div><div class="frase-text">${ins.frase||"—"}</div></div>
   <div class="sl">Status Geral</div>
@@ -496,7 +499,6 @@ function renderHome(){
   </div>
   ${s.previsoes&&Object.keys(s.previsoes).length?`<div class="sl">🏁 Previsão de Prova</div><div class="prev-grid">${Object.entries(s.previsoes).map(([k,v])=>`<div class="prev-item"><div class="prev-d">${k}</div><div class="prev-t">${hms(v)}</div></div>`).join("")}</div>`:""}
   ${renderPRs(report.prs||[])}
-  ${renderCountdown(s)}
   ${renderClima(report.clima||{})}
   ${renderSemana(report.semana||{},report.semana_passada||{})}
   ${renderHRVChart(report.hrv_7dias||[])}
@@ -579,19 +581,99 @@ function renderCoach(){
   `;
 }
 
+function workoutCard(t, idx) {
+  const hasSteps = t.passos && t.passos.length;
+  const stepsHtml = hasSteps ? `
+    <div id="wsteps-${idx}" style="display:none;padding:10px 12px;border-top:1px solid #1a1a1a">
+      ${t.passos.map((p,i)=>`<div style="display:flex;gap:8px;padding:4px 0;font-size:11px;color:#888">
+        <span style="color:#333;font-family:monospace;min-width:18px">${i+1}.</span><span>${p}</span>
+      </div>`).join("")}
+    </div>` : "";
+  return `
+  <div style="background:#161616;border-radius:10px;margin-bottom:8px;overflow:hidden">
+    <div style="display:flex;align-items:center;gap:10px;padding:11px 12px;cursor:pointer" onclick="${hasSteps?`toggleSteps(${idx})`:""}">
+      <span style="font-size:18px">${t.icone||"⚡"}</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:600;color:#ddd">${t.nome||"—"}</div>
+        <div style="font-size:11px;color:#444;font-family:monospace">${t.dur||"—"} · ${t.dist||"—"}</div>
+      </div>
+      ${hasSteps?`<span id="warrow-${idx}" style="color:#333;font-size:11px;transition:transform .2s">▼</span>`:""}
+    </div>
+    ${stepsHtml}
+  </div>`;
+}
+function toggleSteps(idx) {
+  const el = document.getElementById("wsteps-"+idx);
+  const ar = document.getElementById("warrow-"+idx);
+  if (!el) return;
+  const open = el.style.display !== "none";
+  el.style.display = open ? "none" : "block";
+  if (ar) ar.style.transform = open ? "" : "rotate(180deg)";
+}
+
 function renderAgenda(){
   const ins=report.insights||{};
   const cal_cols=[{k:"icone",c:"ico",l:""},{k:"nome",c:"nm",l:"Treino"},{k:"dur",c:"mn",l:"Duração"},{k:"dist",c:"mn",l:"Distância"}];
   const hoje=report.hoje||[], amanha=report.amanha||[];
   const hj_feito=report.hoje_feito||[];
   return `
-  <div class="sl">Treino de Hoje</div>
-  ${tbl(hoje,cal_cols)}
+  <div class="sl">Treino de Hoje <span style="color:#333;font-weight:400;font-size:9px">— toque para ver as séries</span></div>
+  ${hoje.length ? hoje.map((t,i)=>workoutCard(t,i)).join("") : tbl([],cal_cols)}
   ${hj_feito.length?`<div style="background:#0a1a0a;border:1px solid #1a3a1a;border-radius:8px;padding:10px 12px;margin-top:8px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">✅</span><div><div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em">Já executado</div><div style="font-size:11px;color:#444;margin-top:2px">${hj_feito.map(t=>t.icone+" "+t.nome+" "+t.dist).join(" · ")}</div></div></div>`:""}
   ${ins.analise_hoje?iaCard("🎯 Análise do Treino de Hoje",ins.analise_hoje,"#071a0f","var(--green)","var(--green)","#70c090"):""}
   ${ins.sugestao_ajuste?iaCard("🔧 Ajuste Concreto",ins.sugestao_ajuste):""}
   <div class="sl" style="margin-top:20px">Treino de Amanhã</div>
-  ${tbl(amanha,cal_cols)}`;
+  ${amanha.length ? amanha.map((t,i)=>workoutCard(t,100+i)).join("") : tbl([],cal_cols)}
+  ${renderMes(report.mes||{})}`;
+}
+
+function renderMes(mes) {
+  if (!Object.keys(mes).length) return "";
+  const now = new Date((report.date||"") + "T12:00:00");
+  const Y = now.getFullYear(), M = now.getMonth();
+  const first = new Date(Y, M, 1);
+  const daysInMonth = new Date(Y, M+1, 0).getDate();
+  const startDow = (first.getDay() + 6) % 7; // segunda=0
+  const hoje = now.getDate();
+  const mesNome = now.toLocaleDateString("pt-BR",{month:"long",year:"numeric"});
+
+  let cells = "";
+  for (let i = 0; i < startDow; i++) cells += `<div></div>`;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = `${Y}-${String(M+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+    const info = mes[key] || {planejados:[],feitos:[]};
+    const done = info.feitos.length > 0;
+    const plan = info.planejados.length > 0;
+    const past = d < hoje;
+    const isToday = d === hoje;
+
+    let bg = "#0d0d0d", border = "transparent", dotColor = "";
+    if (isToday) border = "#1a6fff";
+    if (done)                    { bg = "#0a1f14"; dotColor = "#00C896"; }
+    else if (plan && past)       { bg = "#1f0a0a"; dotColor = "#FF4444"; }
+    else if (plan && !past)      { bg = "#111";    dotColor = "#444"; }
+
+    const emos = (done ? info.feitos : info.planejados).slice(0,2).join("");
+    cells += `<div style="aspect-ratio:1;background:${bg};border:1.5px solid ${border};border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:2px">
+      <span style="font-size:9px;font-weight:700;color:${isToday?"#1a6fff":past?"#333":"#555"}">${d}</span>
+      <span style="font-size:9px;line-height:1">${emos||""}</span>
+      ${dotColor?`<span style="width:4px;height:4px;border-radius:50%;background:${dotColor}"></span>`:""}
+    </div>`;
+  }
+
+  return `
+  <div class="sl" style="margin-top:20px">📅 ${mesNome.charAt(0).toUpperCase()+mesNome.slice(1)}</div>
+  <div style="background:#111;border-radius:12px;padding:12px">
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px">
+      ${["S","T","Q","Q","S","S","D"].map(d=>`<div style="text-align:center;font-size:8px;font-weight:700;color:#333">${d}</div>`).join("")}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px">${cells}</div>
+    <div style="display:flex;gap:12px;margin-top:10px;justify-content:center">
+      <span style="font-size:9px;color:#555"><span style="color:#00C896">●</span> Feito</span>
+      <span style="font-size:9px;color:#555"><span style="color:#FF4444">●</span> Perdido</span>
+      <span style="font-size:9px;color:#555"><span style="color:#444">●</span> Planejado</span>
+    </div>
+  </div>`;
 }
 
 function renderForca(){
@@ -701,8 +783,46 @@ function renderNotas() {
       oninput="salvarNota(this.value)">${nota}</textarea>
   </div>`;
 }
+let notaPushTimer = null;
 function salvarNota(v) {
-  if (report?.date) localStorage.setItem('nota_'+report.date, v);
+  if (!report?.date) return;
+  localStorage.setItem('nota_'+report.date, v);
+  // Push para o GitHub após 3s sem digitar (para a IA ler no próximo briefing)
+  clearTimeout(notaPushTimer);
+  notaPushTimer = setTimeout(() => pushNotas(), 3000);
+}
+
+async function pushNotas() {
+  const c = getCfg();
+  if (!c.user || !c.repo || !c.token) return;
+  try {
+    // Junta todas as notas do localStorage
+    const notas = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k.startsWith('nota_')) {
+        const date = k.slice(5);
+        const val = localStorage.getItem(k);
+        if (val && val.trim()) notas[date] = val.trim();
+      }
+    }
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(notas, null, 2))));
+    const url = `https://api.github.com/repos/${c.user}/${c.repo}/contents/pwa/notas.json`;
+    const headers = {"Authorization":"Bearer "+c.token,"Accept":"application/vnd.github+json"};
+
+    // Precisa do SHA atual se o arquivo existe
+    let sha = null;
+    try {
+      const cur = await fetch(url, {headers});
+      if (cur.ok) sha = (await cur.json()).sha;
+    } catch {}
+
+    const body = {message:"📝 notas do atleta", content, branch:"main"};
+    if (sha) body.sha = sha;
+
+    const res = await fetch(url, {method:"PUT", headers, body:JSON.stringify(body)});
+    if (res.ok) console.log("Notas sincronizadas");
+  } catch(e) { console.warn("pushNotas:", e.message); }
 }
 
 // ─── New feature renderers ───────────────────────────────────────────────────
