@@ -170,7 +170,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.5 · 21/08/2026</div>
+  <div class="pin-ver">v3.6 · 21/08/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -711,13 +711,20 @@ function renderForca(){
 function renderGym(){
   const g = (report.insights||{}).treino_academia;
   const s = report.saude||{};
-  if (!g || !g.exercicios || !g.exercicios.length) {
+  // Suporta formato novo (treinos.A/B/C) e antigo (exercicios direto)
+  const treinos = g?.treinos || (g?.exercicios ? {[g.dia||"A"]: {grupo:g.grupo, exercicios:g.exercicios}} : null);
+  if (!treinos || !Object.keys(treinos).length) {
     return `<div class="empty"><div class="empty-icon">🏋️</div>
       <h2>Sem treino de academia</h2>
-      <p>Rode o briefing para gerar o treino ABC do dia.</p></div>`;
+      <p>Rode o briefing para gerar os treinos ABC.</p></div>`;
   }
+  const diaHoje = (g.dia_hoje || g.dia || "A").toUpperCase();
+  if (!window.gymDia || !treinos[window.gymDia]) window.gymDia = treinos[diaHoje] ? diaHoje : Object.keys(treinos)[0];
+  const sel = window.gymDia;
+  const t = treinos[sel] || {exercicios:[]};
+
   const DIA_COL = {A:"#FF8C00", B:"#1a6fff", C:"#00C896"};
-  const dcol = DIA_COL[(g.dia||"A").toUpperCase()] || "#FF8C00";
+  const dcol = DIA_COL[sel] || "#FF8C00";
   const MUSC_EMO = {
     "peito":"🫁","ombro":"🎽","tríceps":"💪","triceps":"💪",
     "costas":"🔙","bíceps":"💪","biceps":"💪","dorsal":"🔙",
@@ -727,7 +734,7 @@ function renderGym(){
   };
   const CGCOL = {"leve":"#00C896","moderada":"#FFB800","pesada":"#FF4444"};
 
-  const cards = g.exercicios.map((ex,i)=>{
+  const cards = (t.exercicios||[]).map((ex,i)=>{
     const m = (ex.musculo||"").toLowerCase();
     let emo = "🏋️";
     for (const k in MUSC_EMO) { if (m.includes(k)) { emo = MUSC_EMO[k]; break; } }
@@ -752,14 +759,20 @@ function renderGym(){
 
   return `
   <div style="background:linear-gradient(135deg,${dcol}18,${dcol}08);border-radius:13px;padding:18px;margin-bottom:14px;border:1px solid ${dcol}33">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-      <span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:${dcol}22;color:${dcol};border:1px solid ${dcol}44;padding:3px 8px;border-radius:4px">🏋️ Treino ${g.dia||"?"} · ${g.exercicios.length} exercícios</span>
-      <div style="display:flex;gap:4px">
-        ${["A","B","C"].map(l=>`<span style="width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;${l===(g.dia||"").toUpperCase()?`background:${DIA_COL[l]};color:#000`:`background:#1a1a1a;color:#333`}">${l}</span>`).join("")}
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:${dcol}22;color:${dcol};border:1px solid ${dcol}44;padding:3px 8px;border-radius:4px">🏋️ ${(t.exercicios||[]).length} exercícios</span>
+      <div style="display:flex;gap:6px">
+        ${["A","B","C"].map(l=>{
+          const isSel = l===sel, isToday = l===diaHoje;
+          const c = DIA_COL[l];
+          return `<button onclick="gymDia='${l}';renderTab('gym')" style="width:34px;height:34px;border-radius:9px;font-size:13px;font-weight:800;cursor:pointer;position:relative;border:1.5px solid ${isSel?c:"#2a2a2a"};background:${isSel?c:"#141414"};color:${isSel?"#000":"#555"}">
+            ${l}${isToday?`<span style="position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:${c};border:1.5px solid #000"></span>`:""}
+          </button>`;
+        }).join("")}
       </div>
     </div>
-    <h2 style="font-size:19px;font-weight:700;color:#fff;margin-bottom:3px">${g.grupo||"Treino do Dia"}</h2>
-    <p style="font-size:11px;color:#555">Rotação ABC · adaptado ao seu readiness de hoje (BB ${s.body_battery||"—"})</p>
+    <h2 style="font-size:19px;font-weight:700;color:#fff;margin-bottom:3px">${t.grupo||"Treino "+sel}</h2>
+    <p style="font-size:11px;color:#555">${sel===diaHoje?"✓ Treino recomendado para hoje":"Dia recomendado hoje: "+diaHoje} · BB ${s.body_battery||"—"}</p>
   </div>
   ${cards}`;
 }
