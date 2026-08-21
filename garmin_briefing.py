@@ -262,7 +262,7 @@ def coletar():
             sem["total_tss"] += tss
             sem["n_treinos"]  += 1
             if "swim" in tipo or "pool" in tipo: sem["swim_km"]+=dist; sem["swim_min"]+=dur
-            elif "cycl" in tipo or "bike" in tipo: sem["bike_km"]+=dist; sem["bike_min"]+=dur
+            elif "cycl" in tipo or "bik" in tipo: sem["bike_km"]+=dist; sem["bike_min"]+=dur
             elif "run" in tipo: sem["run_km"]+=dist; sem["run_min"]+=dur
         sem = {k: round(v,1) for k,v in sem.items()}
         d["semana"] = sem
@@ -280,7 +280,7 @@ def coletar():
             dist = float(a.get("distance") or 0)/1000
             dur  = float(a.get("duration") or 0)/60
             if "swim" in tipo or "pool" in tipo: lw["swim_km"]+=dist; lw["swim_min"]+=dur
-            elif "cycl" in tipo or "bike" in tipo: lw["bike_km"]+=dist; lw["bike_min"]+=dur
+            elif "cycl" in tipo or "bik" in tipo: lw["bike_km"]+=dist; lw["bike_min"]+=dur
             elif "run" in tipo: lw["run_km"]+=dist; lw["run_min"]+=dur
         d["semana_passada"] = {k:round(v,1) for k,v in lw.items()}
         print(f"  Semana passada: swim={lw['swim_km']:.1f}km bike={lw['bike_km']:.1f}km run={lw['run_km']:.1f}km")
@@ -313,7 +313,7 @@ def coletar():
             if "run" in tipo and dist>1000:
                 p = dur/dist*1000
                 if p < best["run_pace_s"]: best["run_pace_s"]=p
-            elif ("cycl" in tipo or "bike" in tipo) and dist>5000:
+            elif ("cycl" in tipo or "bik" in tipo) and dist>5000:
                 spd = (dist/1000)/(dur/3600)
                 if spd > best["bike_kmh"]: best["bike_kmh"]=round(spd,1)
             elif ("swim" in tipo or "pool" in tipo) and dist>100:
@@ -502,13 +502,14 @@ def coletar():
         for a in (acts or []):
             tipo = (a.get("activityType",{}).get("typeKey") or "").lower()
             if   "swim" in tipo or "pool" in tipo: mod,ico = "swim","🏊"
-            elif "cycl" in tipo or "bike" in tipo: mod,ico = "bike","🚴"
+            elif "cycl" in tipo or "bik" in tipo: mod,ico = "bike","🚴"
             elif "run"  in tipo:                   mod,ico = "run","🏃"
             else:                                  mod,ico = "other","⚡"
 
             dist = a.get("distance"); dur = a.get("duration")
             fc   = a.get("averageHR"); fc_max = a.get("maxHR")
             tss  = a.get("trainingStressScore")
+            tss  = round(float(tss), 0) if tss else None
             np   = a.get("avgPower"); cad = a.get("averageRunningCadenceInStepsPerMinute") or a.get("averageBikingCadenceInRevPerMinute")
             elev = a.get("elevationGain"); cal_act = a.get("calories")
             aerobic_te = a.get("aerobicTrainingEffect")
@@ -545,12 +546,12 @@ def coletar():
         for a in (acts_hoje or []):
             tipo = (a.get("activityType",{}).get("typeKey") or "").lower()
             if   "swim" in tipo or "pool" in tipo: mod,ico = "swim","🏊"
-            elif "cycl" in tipo or "bike" in tipo: mod,ico = "bike","🚴"
+            elif "cycl" in tipo or "bik" in tipo: mod,ico = "bike","🚴"
             elif "run"  in tipo:                   mod,ico = "run","🏃"
             else:                                  mod,ico = "other","⚡"
             dist = a.get("distance"); dur = a.get("duration")
             fc = a.get("averageHR"); fc_max = a.get("maxHR")
-            tss = a.get("trainingStressScore"); np = a.get("avgPower")
+            tss = a.get("trainingStressScore"); tss = round(float(tss),0) if tss else None; np = a.get("avgPower")
             if mod=="run":    perf=pace_run(dur,dist);  pl="Pace"
             elif mod=="bike": perf=spd_bike(dur,dist);  pl="Velocidade"
             elif mod=="swim": perf=pace_swim(dur,dist); pl="Pace"
@@ -704,6 +705,11 @@ PROVA & CONTEXTO:
 - Próxima prova: {s.get('prova_data','não configurada')} | Dias restantes: {s.get('prova_dias','—')} | Fase: {s.get('prova_fase','—')}
 - Clima hoje: {dados['clima'].get('emoji','')} {dados['clima'].get('temp_max','—')}°C max / {dados['clima'].get('temp_min','—')}°C min | Chuva: {dados['clima'].get('chuva_pct','—')}% | Vento: {dados['clima'].get('vento_kmh','—')}km/h
 
+TREINO DE ACADEMIA (ABC):
+- Hoje é o dia "{("ABC")[TODAY.toordinal() % 3]}" da rotação ABC:
+  A = Peito, Ombro e Tríceps | B = Costas e Bíceps | C = Pernas, Glúteos e Core
+- Gere os TRÊS treinos (A, B e C) com APARELHOS DE ACADEMIA (máquinas, cabos, halteres), todos adaptados ao readiness de hoje.
+
 OBSERVAÇÕES DO ATLETA (últimos 7 dias — CONSIDERE ISTO NA ANÁLISE):
 {chr(10).join(f'- {k}: {v}' for k,v in dados.get('notas_recentes',{}).items()) or '- nenhuma'}
 
@@ -740,12 +746,14 @@ Responda SOMENTE em JSON válido, sem markdown:
     ...
   ],
   "treino_academia": {{
-    "dia": "A, B ou C conforme informado acima",
-    "grupo": "Nome do grupo muscular do dia",
-    "exercicios": [
-      {{"exercicio": "Nome com o aparelho (ex: Supino reto na máquina)", "series": 4, "repeticoes": "8-12", "carga": "moderada", "musculo": "Peito", "obs": "Dica de execução em 1 frase"}},
-      ...
-    ]
+    "dia_hoje": "A, B ou C conforme informado acima",
+    "treinos": {{
+      "A": {{"grupo": "Peito, Ombro e Tríceps", "exercicios": [
+        {{"exercicio": "Nome com o aparelho (ex: Supino reto na máquina)", "series": 4, "repeticoes": "8-12", "carga": "moderada", "musculo": "Peito", "obs": "Dica de execução em 1 frase"}}, ...
+      ]}},
+      "B": {{"grupo": "Costas e Bíceps", "exercicios": [...]}},
+      "C": {{"grupo": "Pernas, Glúteos e Core", "exercicios": [...]}}
+    }}
   }}
 }}
 Regras para treino_forca:
@@ -756,9 +764,9 @@ Regras para treino_forca:
 - Sempre inclua: 1 exercício de core, 1 de mobilidade/flexibilidade
 - carga deve ser: "leve", "moderada" ou "pesada"
 Regras para treino_academia:
-- 6 a 8 exercícios COM APARELHOS de academia (máquinas, cabos, barras, halteres) do grupo do dia informado
+- Gere os 3 treinos completos (A, B, C), cada um com 5 a 7 exercícios COM APARELHOS (máquinas, cabos, barras, halteres)
 - Ajuste séries/reps/carga ao readiness: baixo = 3x12-15 leve | médio = 3-4x10-12 moderada | alto = 4x6-10 pesada
-- Ordene do composto para o isolado; termine com 1 exercício de core independente do dia
+- Ordene do composto para o isolado; cada treino termina com 1 exercício de core
 - "musculo" = músculo principal do exercício
 - foco: 1 frase curta explicando o benefício para triathlon
 - "series" deve ser número inteiro, "repeticoes" pode ser string como "10-12" ou "30s"
@@ -766,7 +774,7 @@ Retorne EXATAMENTE o JSON acima preenchido. Nenhum texto fora do JSON."""
 
     payload = json.dumps({
         "model": "claude-sonnet-4-6",
-        "max_tokens": 5000,
+        "max_tokens": 7000,
         "messages": [{"role":"user","content":prompt}]
     }).encode()
 
