@@ -351,6 +351,43 @@ def coletar():
         print(f"  Sono×performance: {len(corr_data)} dias com dados")
     except Exception as e: print(f"  Sono×perf err: {e}"); d["sono_performance"]=[]
 
+    # ─── 2f. Calendário do mês (planejado vs executado) ─────────────────────────
+    try:
+        res_m = api.get_scheduled_workouts(TODAY.year, TODAY.month)
+        raw_m = res_m.get("calendarItems",[]) if isinstance(res_m,dict) else (res_m or [])
+        mes = {}
+        for w in raw_m:
+            if not isinstance(w,dict): continue
+            wd = str(w.get("date") or "")
+            if not wd.startswith(f"{TODAY.year}-{TODAY.month:02d}"): continue
+            it = str(w.get("itemType") or "").lower()
+            dia = mes.setdefault(wd, {"planejados":[], "feitos":[]})
+            sport = str(w.get("sportTypeKey") or "").lower()
+            title = str(w.get("title") or "")
+            n = title.lower()
+            if any(x in sport for x in ["swim"]) or "swim" in n or "natac" in n: emo="🏊"
+            elif any(x in sport for x in ["cycl","bike"]) or any(x in n for x in ["bike","ride","cicl"]): emo="🚴"
+            elif "run" in sport or "run" in n or "corrida" in n: emo="🏃"
+            elif "strength" in sport or "strength" in n or "força" in n: emo="💪"
+            else: emo="⚡"
+            if it == "workout": dia["planejados"].append(emo)
+            elif it == "activity": dia["feitos"].append(emo)
+        d["mes"] = mes
+        print(f"  Mês: {len(mes)} dias com itens")
+    except Exception as e: print(f"  Mês err: {e}"); d["mes"]={}
+
+    # ─── 2g. Notas do usuário (se o app tiver enviado) ───────────────────────────
+    try:
+        if os.path.exists("pwa/notas.json"):
+            with open("pwa/notas.json") as nf:
+                d["notas"] = json.load(nf)
+            recentes = {k:v for k,v in d["notas"].items() if v and k >= (TODAY - datetime.timedelta(days=7)).isoformat()}
+            d["notas_recentes"] = recentes
+            if recentes: print(f"  Notas do atleta: {len(recentes)} dias recentes")
+        else:
+            d["notas"] = {}; d["notas_recentes"] = {}
+    except Exception as e: print(f"  Notas err: {e}"); d["notas"]={}; d["notas_recentes"]={}
+
     # ─── 3. Risco de lesão (spike ATL) ──────────────────────────────────────────
     try:
         atl = float(s.get("atl") or 0)
@@ -585,7 +622,31 @@ def coletar():
                 elif any(x in tp_all for x in ['cycl','bike']) or any(x in n for x in ['bike','ride','cicl','ciclismo','bicicl']): ico='🚴'
                 elif any(x in tp_all for x in ['run','tread']) or any(x in n for x in ['run','corrida','correr']): ico='🏃'
                 else: ico='⚡'
-                items.append({"icone":ico,"nome":nome,"tipo":tp,"dur":hms(dur_w),"dist":dist_fmt(dist_w)})
+                item = {"icone":ico,"nome":nome,"tipo":tp,"dur":hms(dur_w),"dist":dist_fmt(dist_w)}
+                # Detalhes completos do workout (séries/intervalos)
+                wid = w.get("workoutId") or w.get("id")
+                if wid and str(w.get("itemType","")).lower() == "workout":
+                    try:
+                        wk = api.get_workout_by_id(wid)
+                        steps = []
+                        for seg in (wk.get("workoutSegments") or []):
+                            for st in (seg.get("workoutSteps") or []):
+                                stype = (st.get("stepType") or {}).get("stepTypeKey","")
+                                dur_st = st.get("endConditionValue")
+                                target = (st.get("targetType") or {}).get("workoutTargetTypeKey","")
+                                t_lo = st.get("targetValueOne"); t_hi = st.get("targetValueTwo")
+                                desc = stype.replace("_"," ").title()
+                                if dur_st:
+                                    if dur_st >= 60: desc += f" · {int(dur_st//60)}min"
+                                    else: desc += f" · {int(dur_st)}s"
+                                if target and t_lo and "zone" in target: desc += f" · Z{int(t_lo)}"
+                                elif t_lo and t_hi and t_hi > t_lo: desc += f" · {int(t_lo)}-{int(t_hi)}"
+                                reps = st.get("numberOfIterations")
+                                if reps and reps > 1: desc = f"{int(reps)}× " + desc
+                                steps.append(desc)
+                        if steps: item["passos"] = steps[:12]
+                    except Exception as we: pass
+                items.append(item)
         except Exception as e:
             print(f"  Calendário err {target_date_str}: {e}")
             import traceback; traceback.print_exc()
@@ -642,6 +703,9 @@ CARGA (Garmin 965 — modelo mensal por zona):
 PROVA & CONTEXTO:
 - Próxima prova: {s.get('prova_data','não configurada')} | Dias restantes: {s.get('prova_dias','—')} | Fase: {s.get('prova_fase','—')}
 - Clima hoje: {dados['clima'].get('emoji','')} {dados['clima'].get('temp_max','—')}°C max / {dados['clima'].get('temp_min','—')}°C min | Chuva: {dados['clima'].get('chuva_pct','—')}% | Vento: {dados['clima'].get('vento_kmh','—')}km/h
+
+OBSERVAÇÕES DO ATLETA (últimos 7 dias — CONSIDERE ISTO NA ANÁLISE):
+{chr(10).join(f'- {k}: {v}' for k,v in dados.get('notas_recentes',{}).items()) or '- nenhuma'}
 
 NUTRIÇÃO ESTIMADA PARA HOJE:
 - Duração total treinos: {s.get('nutricao',{}).get('dur_min','—')} min
@@ -734,6 +798,7 @@ def salvar_json(dados, ins):
         "vo2max_hist":  dados.get("vo2max_hist",[]),
         "prs":          dados.get("prs",[]),
         "sono_performance": dados.get("sono_performance",[]),
+        "mes":          dados.get("mes",{}),
         "insights":     ins,
     }
     import os
@@ -742,19 +807,30 @@ def salvar_json(dados, ins):
         json.dump(report, f, ensure_ascii=False, default=str, indent=2)
     print("  report.json salvo → pwa/report.json")
 
-def notificar(ins):
+def notificar(dados, ins):
     if not NTFY_TOPIC: return
     try:
-        hrv = ins.get('sec_readiness','')[:60] if ins.get('sec_readiness') else ''
-        msg = f"Briefing pronto! {ins.get('frase','')} | {hrv}"
+        s = dados["saude"]
+        clima = dados.get("clima",{})
+        hoje  = dados.get("hoje",[])
+        linhas = [ins.get('frase','')]
+        linhas.append(f"HRV {s.get('hrv','—')}ms | Sono {s.get('sono_h','—')}h | BB {s.get('body_battery','—')}")
+        if hoje:
+            linhas.append("Hoje: " + " + ".join(f"{t.get('icone','')} {t.get('nome','')[:30]}" for t in hoje[:2]))
+        else:
+            linhas.append("Hoje: descanso 😌")
+        if clima.get("temp_max") is not None:
+            linhas.append(f"{clima.get('emoji','')} {clima.get('temp_min')}–{clima.get('temp_max')}°C | Chuva {clima.get('chuva_pct',0)}% | Vento {clima.get('vento_kmh',0)}km/h")
+        msg = "\n".join(linhas)
+        titulo = f"TP Coach · {ins.get('status_readiness','')} · {ins.get('acao_hoje','')}"
         req = urllib.request.Request(
             f'https://ntfy.sh/{NTFY_TOPIC}',
             data=msg.encode(),
-            headers={'Title':'TP Performance Coach','Priority':'default','Tags':'chart_with_upwards_trend'},
+            headers={'Title': titulo.encode('ascii','ignore').decode(), 'Priority':'default','Tags':'triathlon'},
             method='POST'
         )
         urllib.request.urlopen(req, timeout=10)
-        print('  Notificação enviada via ntfy.sh')
+        print('  Notificação rica enviada via ntfy.sh')
     except Exception as e: print(f'  ntfy err: {e}')
 
 def main():
@@ -764,7 +840,7 @@ def main():
     ins    = gerar_insights(dados)
     print('Briefing:', ins.get('frase'))
     salvar_json(dados, ins)
-    notificar(ins)
+    notificar(dados, ins)
     print('Concluído ✅')
 
 if __name__ == '__main__':
