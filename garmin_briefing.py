@@ -738,7 +738,15 @@ Responda SOMENTE em JSON válido, sem markdown:
   "treino_forca": [
     {{"exercicio": "Nome do exercício", "series": 3, "repeticoes": "10-12", "carga": "moderada", "foco": "Por que este exercício para triatleta 70.3"}},
     ...
-  ]
+  ],
+  "treino_academia": {{
+    "dia": "A, B ou C conforme informado acima",
+    "grupo": "Nome do grupo muscular do dia",
+    "exercicios": [
+      {{"exercicio": "Nome com o aparelho (ex: Supino reto na máquina)", "series": 4, "repeticoes": "8-12", "carga": "moderada", "musculo": "Peito", "obs": "Dica de execução em 1 frase"}},
+      ...
+    ]
+  }}
 }}
 Regras para treino_forca:
 - Escolha 5 a 7 exercícios adequados para triatleta 70.3 baseados no estado atual (readiness {s.get('body_battery')}, carga {s.get('training_status')})
@@ -747,6 +755,11 @@ Regras para treino_forca:
 - Se readiness > 70: força explosiva, pliometria, potência
 - Sempre inclua: 1 exercício de core, 1 de mobilidade/flexibilidade
 - carga deve ser: "leve", "moderada" ou "pesada"
+Regras para treino_academia:
+- 6 a 8 exercícios COM APARELHOS de academia (máquinas, cabos, barras, halteres) do grupo do dia informado
+- Ajuste séries/reps/carga ao readiness: baixo = 3x12-15 leve | médio = 3-4x10-12 moderada | alto = 4x6-10 pesada
+- Ordene do composto para o isolado; termine com 1 exercício de core independente do dia
+- "musculo" = músculo principal do exercício
 - foco: 1 frase curta explicando o benefício para triathlon
 - "series" deve ser número inteiro, "repeticoes" pode ser string como "10-12" ou "30s"
 Retorne EXATAMENTE o JSON acima preenchido. Nenhum texto fora do JSON."""
