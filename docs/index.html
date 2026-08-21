@@ -169,7 +169,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.2 · 08/06/2026</div>
+  <div class="pin-ver">v3.4 · 11/06/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -479,10 +479,16 @@ function renderHome(){
   const dStr=dias[dt.getDay()]+", "+dt.toLocaleDateString("pt-BR");
   const r=sem(s.body_battery,40,70), h=sem(s.hrv,40,60), sn=sem(s.sono_score,60,80);
   // Carga: usa status_carga da IA (SUAVE/IDEAL=verde, ELEVADA=amarelo, SOBRECARGA=vermelho)
-  const sc=(ins.status_carga||"").toUpperCase(); let aSem={em:"⚪",bg:"#1c1c1c",dk:"#444"};
-  if(sc==="IDEAL"||sc==="SUAVE") aSem={em:"🟢",bg:"#00C896",dk:"#003a28"};
-  else if(sc==="ELEVADA")        aSem={em:"🟡",bg:"#FFB800",dk:"#3a2a00"};
-  else if(sc==="SOBRECARGA")     aSem={em:"🔴",bg:"#FF4444",dk:"#3a0000"};
+  let sc=(ins.status_carga||"").toUpperCase().trim(); let aSem={em:"⚪",bg:"#1c1c1c",dk:"#444"};
+  if(!sc && s.load_total_month){
+    // Fallback: compara Z1 atual com o teto do target ("577-1415" → 1415)
+    const teto = parseFloat(String(s.load_target_low||"").split(/[–-]/).pop()) || 0;
+    const z1   = parseFloat(s.load_aerobic_low) || 0;
+    sc = teto && z1 > teto*1.1 ? "ELEVADA" : "IDEAL";
+  }
+  if(sc.includes("IDEAL")||sc.includes("SUAVE")) aSem={em:"🟢",bg:"#00C896",dk:"#003a28"};
+  else if(sc.includes("ELEVADA"))                aSem={em:"🟡",bg:"#FFB800",dk:"#3a2a00"};
+  else if(sc.includes("SOBRECARGA"))             aSem={em:"🔴",bg:"#FF4444",dk:"#3a0000"};
   return `
   <div class="frase"><div class="frase-date">${dStr}</div><div class="frase-text">${ins.frase||"—"}</div></div>
   <div class="sl">Status Geral</div>
