@@ -366,7 +366,7 @@ def coletar():
             title = str(w.get("title") or "")
             n = title.lower()
             if any(x in sport for x in ["swim"]) or "swim" in n or "natac" in n: emo="🏊"
-            elif any(x in sport for x in ["cycl","bike"]) or any(x in n for x in ["bike","ride","cicl"]): emo="🚴"
+            elif any(x in sport for x in ["cycl","bik"]) or any(x in n for x in ["bike","bik","ride","cicl"]): emo="🚴"
             elif "run" in sport or "run" in n or "corrida" in n: emo="🏃"
             elif "strength" in sport or "strength" in n or "força" in n: emo="💪"
             else: emo="⚡"
@@ -620,7 +620,7 @@ def coletar():
                 tp_all = tp_k or tp
                 n = nome.lower()
                 if   any(x in tp_all for x in ['swim','pool','natac']) or any(x in n for x in ['swim','natac','piscina','pool']): ico='🏊'
-                elif any(x in tp_all for x in ['cycl','bike']) or any(x in n for x in ['bike','ride','cicl','ciclismo','bicicl']): ico='🚴'
+                elif any(x in tp_all for x in ['cycl','bik']) or any(x in n for x in ['bike','bik','ride','cicl','ciclismo','bicicl']): ico='🚴'
                 elif any(x in tp_all for x in ['run','tread']) or any(x in n for x in ['run','corrida','correr']): ico='🏃'
                 else: ico='⚡'
                 item = {"icone":ico,"nome":nome,"tipo":tp,"dur":hms(dur_w),"dist":dist_fmt(dist_w)}
