@@ -1,6 +1,6 @@
 {
   "date": "2026-08-22",
-  "generated_at": "2026-08-22T06:36:00.663354Z",
+  "generated_at": "2026-08-22T06:41:52.686932Z",
   "saude": {
     "hrv": 44,
     "hrv_7d": 29,
@@ -16,22 +16,22 @@
     "sono_awake": 25.0,
     "body_battery": 34,
     "stress_avg": 26,
-    "stress_rest": 47.4,
-    "atl": 461.0,
-    "ctl": 1845.0,
+    "stress_rest": 46.84,
+    "atl": 482.0,
+    "ctl": 1929.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 915.0,
+    "load_aerobic_low": 999.0,
     "load_aerobic_high": 680.0,
     "load_anaerobic": 250.0,
-    "load_total_month": 1845.0,
-    "load_target_low": "255–655",
-    "load_target_high": "479–880",
+    "load_total_month": 1929.0,
+    "load_target_low": "253–654",
+    "load_target_high": "480–881",
     "training_status": "Sobrecarga",
     "fitness_trend": "Caindo",
     "training_readiness": null,
-    "vo2max": 47.1,
+    "vo2max": 47.0,
     "peso": null,
     "previsoes": {
       "5K": 1413,
@@ -108,16 +108,38 @@
       ]
     }
   ],
-  "hoje_feito": [],
+  "hoje_feito": [
+    {
+      "mod": "run",
+      "icone": "🏃",
+      "nome": "Erkrath Running",
+      "dist": "10.2km",
+      "dur": "1h09m",
+      "fc": 128.0,
+      "fc_max": 149.0,
+      "tss": null,
+      "np": 302.0,
+      "perf": "6:48/km",
+      "pl": "Pace",
+      "_dist_m": 10243.5703125,
+      "_dur_s": 4188.744140625,
+      "swolf": null,
+      "cad": 161.390625,
+      "cal": 809.0,
+      "aerobic_te": 3.0999999046325684,
+      "anaerobic_te": 0.5,
+      "elev": 76.0
+    }
+  ],
   "semana": {
     "swim_km": 1.2,
     "swim_min": 36.4,
     "bike_km": 17.9,
     "bike_min": 41.0,
-    "run_km": 14.1,
-    "run_min": 78.1,
+    "run_km": 24.4,
+    "run_min": 147.9,
     "total_tss": 45.3,
-    "n_treinos": 4
+    "n_treinos": 5
   },
   "semana_passada": {
     "swim_km": 2.6,
@@ -128,11 +150,11 @@
     "run_min": 153.3
   },
   "clima": {
-    "temp_max": 19.3,
-    "temp_min": 14.3,
+    "temp_max": 19.2,
+    "temp_min": 14.2,
     "chuva_pct": 96,
-    "vento_kmh": 15.5,
-    "temp_atual": 14.3,
+    "vento_kmh": 19.8,
+    "temp_atual": 15.0,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
@@ -224,7 +246,7 @@
     },
     {
       "date": "2026-08-22",
-      "value": 47.1
+      "value": 47.0
     }
   ],
   "prs": [],
@@ -273,6 +295,11 @@
       "date": "2026-08-21",
       "sono": 6.1,
       "te": 2.9
+    },
+    {
+      "date": "2026-08-22",
+      "sono": 6.1,
+      "te": 3.1
     }
   ],
   "mes": {
@@ -372,7 +399,9 @@
       "planejados": [
         "🏃"
       ],
-      "feitos": []
+      "feitos": [
+        "🏃"
+      ]
     },
     "2026-08-23": {
       "planejados": [
@@ -444,54 +473,61 @@
     }
   },
   "insights": {
-    "frase": "HRV em alta, mas carga exige cautela total hoje.",
-    "sec_readiness": "HRV 44ms está acima da média 7d de 29ms (+15ms), sinal positivo de recuperação aguda, mas ainda abaixo do baseline 31–41ms inferior. Sono de 6.1h com score 59 é insuficiente: REM crítico em apenas 0.2h, comprometendo recuperação neural e consolidação muscular. Body Battery 34/100 indica reserva energética baixa — atleta entra no dia com capacidade funcional reduzida.",
-    "sec_treino_ontem": "Bike de 17.9km a 26.2km/h com FC média 138bpm (pico 174bpm) e TSS 45 — execução dentro do esperado para um estímulo aeróbico moderado. Potência média 157W com TE aeróbico 2.9 indica sessão eficiente sem sobrecarga anaeróbica excessiva. Pico de 174bpm merece atenção: pode indicar derive cardíaco no final ou esforço pontual acima da zona alvo.",
-    "sec_carga": "Z1 em 915 (target 255–655) e Z2 em 680 (target 479–880) — Z1 severamente acima do teto, indicando volume aeróbico excessivo sem polarização adequada. Z3+ em 250 dentro do tolerável, mas a combinação com Z1 inflado gera fadiga cumulativa alta. Status Garmin de 'Sobrecarga' com CTL estimado de 1845 e ATL 461 confirma risco MODERADO de lesão — fase PEAK exige redução de volume, não aumento.",
-    "sec_hoje": "Long Run de 1h05m planejado com readiness Body Battery 34 e sono deficitário — sessão deve ser executada em Z1 puro, FC máxima 140bpm, sem progressões de ritmo. Prioridade é estímulo neuromuscular leve e manutenção de base aeróbica sem adição de carga anaeróbica. Condições climáticas (19°C, chuva 96%, vento 15.5km/h) favorecem FC menor — usar isso a favor para manter controle de intensidade.",
-    "sec_ajuste": "Limitar Long Run a 50min (redução de 23%) com FC teto absoluto de 140bpm e pace controlado em Z1 (conversacional). Abandonar qualquer progressão de ritmo final — sessão termina no momento que FC ultrapassar 142bpm por mais de 2min consecutivos.",
-    "sec_alertas": "Body Battery 34 + sono REM de apenas 0.2h = risco real de queda de performance e lesão por impacto na corrida. Z1 mensal 40% acima do target máximo — redistribuição urgente nas próximas sessões. Amanhã há Steady Long Ride de 2h: se hoje não houver recuperação adequada (dormir mínimo 8h), considerar substituir amanhã por Z1 suave de 90min.",
-    "sec_nutricao": "Pré-corrida: 350kcal com CHO de absorção rápida (banana + aveia) 45min antes; durante os 50min não é necessário gel, apenas 300ml de água com eletrólitos dado o frio. Pós-treino imediato: 30g de proteína + 40g CHO (whey + fruta) e refeição completa até 90min após — sono alvo 8h, deitar 22:30 é mandatório para recuperação antes da ride de amanhã.",
+    "frase": "Recuperação ativa hoje, potência amanhã — respeite o processo.",
+    "sec_readiness": "HRV em 44ms está acima da média 7d (29ms) em +15ms, sinal positivo de recuperação aguda, mas ainda abaixo do baseline de 31–41ms — não indica prontidão plena. Sono crítico: 6.1h com score 59, apenas 0.2h de REM (alvo mínimo 1.5h) e déficit de 1.9h comprometem síntese proteica e consolidação neuromuscular. Body Battery 34/100 confirma reservas baixas; o sistema está em recuperação, não em supercompensação.",
+    "sec_treino_ontem": "Bike de 17.9km com potência média 157W e FC 138bpm entregou TSS 45 — carga moderada, adequada para o contexto. TE aeróbico 2.9 indica estímulo de manutenção, sem sobrecarga adicional. Ponto crítico: FC máxima de 174bpm sugere pico anaeróbico pontual numa sessão que deveria ser suave — monitorar se foi sprint isolado ou drift cardíaco.",
+    "sec_carga": "Z1 em 999 (target 253–654) e Z2 em 680 (target 480–881): Z1 excessivamente inflado, possível subestimação de zonas ou volume de baixa intensidade desproporcional. Z3+ em 250 ainda dentro do tolerável, mas com CTL estimado em 1929 e status Garmin 'Sobrecarga', a fadiga acumulada é real. Na fase PEAK com 22 dias para prova, o risco de lesão MODERADO exige redução progressiva de volume — tapering deve iniciar em 7–10 dias.",
+    "sec_hoje": "Long Run planejado de 1h05m foi executado como 10.2km em 1h09m a 6:48/km com FC média 128bpm — execução dentro da zona aeróbica leve, adequada ao readiness atual. TE aeróbico 3.1 indica estímulo efetivo sem sobrecarga; cadência de 161spm está levemente abaixo do ideal (170–175spm) para economia de corrida. FC máxima de 149bpm mostra controle adequado — sessão bem executada dentro das limitações do dia.",
+    "sec_ajuste": "Para amanhã (Steady Long Ride 2h): limitar Z3 a máximo 15min totais, FC teto 150bpm, potência alvo 160–185W. Priorizar Z2 contínuo e dormir 8h esta noite — deitar 22:30 é não-negociável.",
+    "sec_alertas": "Sono REM de apenas 0.2h é alerta crítico: recuperação neuromuscular e hormonal severamente comprometida. Volume semanal de corrida (24.4km) e bike (17.9km) ainda baixo para PEAK — amanhã é sessão-chave, não subestimar. Body Battery 34 combinado com Sobrecarga Garmin: qualquer sessão de força hoje deve ser estritamente leve e de curta duração.",
+    "sec_nutricao": "Pré-treino de força: 350kcal com foco em CHO de baixo IG (aveia + banana) 60min antes; hidratação de 500ml pré-sessão dado o clima frio (19°C) e tendência à desidratação subestimada. Pós-treino: 30g proteína (whey + leucina) dentro de 30min + CHO 60–80g para reabastecimento de glicogênio visando a ride de amanhã.",
     "status_readiness": "BAIXO",
     "status_carga": "SOBRECARGA",
     "acao_hoje": "REDUZIR 20%",
-    "analise_hoje": "Long Run deve ser executado em 50min estritamente em Z1 (FC ≤140bpm), funcionando como estímulo de manutenção e não de desenvolvimento. Com Body Battery 34 e déficit de sono de 1.9h, qualquer intensidade acima de Z1 representa risco desnecessário a 22 dias da prova.",
-    "alerta": "REM de 0.2h indica recuperação neural comprometida — risco elevado de lesão por impacto na corrida hoje se intensidade não for rigorosamente controlada.",
+    "analise_hoje": "Run executado dentro do protocolo aeróbico leve: FC 128bpm e pace 6:48/km confirmam controle de intensidade adequado ao readiness baixo. Cadência de 161spm é o único ponto técnico a corrigir nas próximas sessões — alvo 170–175spm para reduzir impacto e melhorar economia.",
+    "alerta": "REM de 0.2h esta noite compromete recuperação neuromuscular — sono de 8h esta noite é prioridade absoluta antes da ride-chave de amanhã.",
     "treino_forca": [
       {
-        "exercicio": "Agachamento com peso corporal + mobilidade de quadril (círculos)",
-        "series": 3,
-        "repeticoes": "10 cada lado",
-        "carga": "leve",
-        "foco": "Mobilidade de quadril essencial para passada eficiente na corrida e pedalada em triathlon"
-      },
-      {
-        "exercicio": "Elevação pélvica (glute bridge) no colchonete",
-        "series": 3,
-        "repeticoes": "15",
-        "carga": "leve",
-        "foco": "Ativação de glúteo máximo reduz carga no joelho e melhora propulsão na corrida"
-      },
-      {
-        "exercicio": "Prensa horizontal na máquina (carga mínima)",
-        "series": 3,
-        "repeticoes": "12-15",
-        "carga": "leve",
-        "foco": "Manutenção de força de membros inferiores sem impacto articular em dia de baixo readiness"
-      },
-      {
-        "exercicio": "Prancha frontal isométrica",
+        "exercicio": "Prancha frontal no solo",
         "series": 3,
         "repeticoes": "30s",
         "carga": "leve",
-        "foco": "Estabilidade de core reduz gasto energético na posição aerodinâmica do bike"
+        "foco": "Estabilidade de core essencial para economia em corrida e posição aero no bike"
       },
       {
-        "exercicio": "Alongamento de cadeia posterior (posição de ioga — cão olhando para baixo)",
-        "series": 2,
-        "repeticoes": "45s",
+        "exercicio": "Ponte de glúteos com halteres leves",
+        "series": 3,
+        "repeticoes": "15",
         "carga": "leve",
-        "foco": "Mobilidade de isquiotibiais e panturrilha previne lesões no Long Run e na ride de amanhã"
+        "foco": "Ativação glútea previne lesão de quadril e melhora propulsão na corrida"
+      },
+      {
+        "exercicio": "Elevação lateral com halter leve",
+        "series": 3,
+        "repeticoes": "15",
+        "carga": "leve",
+        "foco": "Estabilidade escapular para postura no natação e ciclismo"
+      },
+      {
+        "exercicio": "Remada baixa no cabo",
+        "series": 3,
+        "repeticoes": "12-15",
+        "carga": "leve",
+        "foco": "Fortalecimento de retratores escapulares — postura aero e braçada eficiente"
+      },
+      {
+        "exercicio": "Mobilidade de quadril em 90/90 no solo",
+        "series": 2,
+        "repeticoes": "60s cada lado",
+        "carga": "leve",
+        "foco": "Restaura amplitude de flexão de quadril comprometida pela corrida e bike acumulados"
+      },
+      {
+        "exercicio": "Dead Bug no solo",
+        "series": 3,
+        "repeticoes": "10 cada lado",
+        "carga": "leve",
+        "foco": "Controle motor de core anti-extensão — protege lombar durante volume de corrida elevado"
       }
     ],
     "treino_academia": {
@@ -501,52 +537,60 @@
           "grupo": "Peito, Ombro e Tríceps",
           "exercicios": [
             {
-              "exercicio": "Supino reto na máquina (chest press)",
+              "exercicio": "Supino reto na máquina convergente",
               "series": 3,
               "repeticoes": "12-15",
               "carga": "leve",
               "musculo": "Peitoral maior",
-              "obs": "Mantenha escápulas retraídas e movimento controlado — evite travamento de cotovelo na extensão."
+              "obs": "Mantenha escápulas retraídas e desça controlado em 3 segundos para ativar peitoral sem sobrecarregar ombro."
             },
             {
-              "exercicio": "Desenvolvimento de ombros na máquina (shoulder press)",
+              "exercicio": "Desenvolvimento de ombros na máquina",
               "series": 3,
               "repeticoes": "12-15",
               "carga": "leve",
-              "musculo": "Deltoide",
-              "obs": "Força de ombros melhora estabilidade na posição de aero e braçada na natação."
+              "musculo": "Deltóide anterior",
+              "obs": "Evite elevar os trapézios — foco no deltóide médio para estabilidade escapular no natação."
             },
             {
-              "exercicio": "Crucifixo na máquina (pec deck)",
+              "exercicio": "Crucifixo no cabo cruzado (polia média)",
               "series": 3,
               "repeticoes": "12-15",
               "carga": "leve",
               "musculo": "Peitoral médio",
-              "obs": "Controle excêntrico de 3 segundos para maximizar ativação sem sobrecarga."
+              "obs": "Cotovelo levemente flexionado fixo durante todo o arco — protege articulação glenoumeral."
             },
             {
               "exercicio": "Elevação lateral com halteres",
               "series": 3,
-              "repeticoes": "12-15",
+              "repeticoes": "15",
               "carga": "leve",
-              "musculo": "Deltoide lateral",
-              "obs": "Mantenha cotovelos levemente flexionados e evite balançar o tronco."
+              "musculo": "Deltóide médio",
+              "obs": "Controle excêntrico em 3s, sem impulso — melhora estabilidade de ombro para braçada."
             },
             {
-              "exercicio": "Tríceps no cabo (pulley corda)",
+              "exercicio": "Tríceps polia alta com corda",
               "series": 3,
-              "repeticoes": "12-15",
+              "repeticoes": "15",
               "carga": "leve",
-              "musculo": "Tríceps",
-              "obs": "Tríceps forte melhora a fase de puxada na natação — mantenha cotovelos fixos ao corpo."
+              "musculo": "Tríceps braquial",
+              "obs": "Cotovelos fixos ao lado do corpo — extensão completa para recrutamento da cabeça longa."
             },
             {
-              "exercicio": "Prancha lateral no colchonete",
+              "exercicio": "Tríceps francês com halter (unilateral)",
+              "series": 3,
+              "repeticoes": "12 cada lado",
+              "carga": "leve",
+              "musculo": "Tríceps cabeça longa",
+              "obs": "Amplitude completa sem compensação de ombro — útil para estabilidade de braço na corrida."
+            },
+            {
+              "exercicio": "Prancha lateral no solo",
               "series": 3,
               "repeticoes": "30s cada lado",
               "carga": "leve",
-              "musculo": "Core lateral (oblíquos)",
-              "obs": "Estabilidade lateral essencial para manutenção de postura em corridas longas."
+              "musculo": "Oblíquo externo",
+              "obs": "Quadril elevado e alinhado — fortalece core lateral para estabilidade rotacional na corrida."
             }
           ]
         },
@@ -554,52 +598,60 @@
           "grupo": "Costas e Bíceps",
           "exercicios": [
             {
-              "exercicio": "Remada na máquina sentado (seated row)",
+              "exercicio": "Remada curvada com barra (carga leve)",
               "series": 3,
               "repeticoes": "12-15",
               "carga": "leve",
               "musculo": "Grande dorsal",
-              "obs": "Simula o padrão de tração da braçada — mantenha peito no apoio e puxe até o umbigo."
+              "obs": "Tronco a 45°, puxe para o umbigo — ativa dorsal e romboides essenciais para braçada eficiente."
             },
             {
-              "exercicio": "Puxada frontal no cabo (lat pulldown)",
+              "exercicio": "Puxada na máquina (pull-down)",
               "series": 3,
               "repeticoes": "12-15",
               "carga": "leve",
               "musculo": "Grande dorsal",
-              "obs": "Essencial para potência na natação — puxe até a clavícula com escápulas deprimidas."
+              "obs": "Pegada aberta, puxe até queixo e controle a subida em 3s — simula padrão da braçada crawl."
             },
             {
-              "exercicio": "Remada unilateral com halter (cotovelo apoiado no banco)",
-              "series": 3,
-              "repeticoes": "12 cada lado",
-              "carga": "leve",
-              "musculo": "Romboides / trapézio médio",
-              "obs": "Corrige assimetrias posturais frequentes em triatletas — foque na retração escapular."
-            },
-            {
-              "exercicio": "Rosca direta com barra EZ na máquina ou livre",
+              "exercicio": "Remada baixa no cabo com triângulo",
               "series": 3,
               "repeticoes": "12-15",
               "carga": "leve",
-              "musculo": "Bíceps braquial",
-              "obs": "Mantenha cotovelos fixos ao longo do corpo — evite balanço de quadril."
+              "musculo": "Romboides",
+              "obs": "Retraia escápulas no ponto final — melhora postura no aero e previne cifose torácica."
             },
             {
-              "exercicio": "Rosca martelo com halteres",
-              "series": 3,
-              "repeticoes": "12-15",
-              "carga": "leve",
-              "musculo": "Braquiorradial",
-              "obs": "Fortalece o antebraço para melhor controle do guidão em rides longas."
-            },
-            {
-              "exercicio": "Abdominal crunch na máquina",
+              "exercicio": "Extensão de coluna na máquina",
               "series": 3,
               "repeticoes": "15",
               "carga": "leve",
-              "musculo": "Reto abdominal",
-              "obs": "Core anterior estabiliza o tronco na posição fechada do aero — execute com expiração forçada."
+              "musculo": "Eretores espinhais",
+              "obs": "Amplitude controlada sem hiperextensão — fortalece cadeia posterior para posição bike prolongada."
+            },
+            {
+              "exercicio": "Rosca direta com halteres (alternada)",
+              "series": 3,
+              "repeticoes": "12 cada lado",
+              "carga": "leve",
+              "musculo": "Bíceps braquial",
+              "obs": "Supinação completa no topo — ativa bíceps em dois planos, benefício direto para braçada."
+            },
+            {
+              "exercicio": "Rosca martelo no cabo (polia baixa)",
+              "series": 3,
+              "repeticoes": "12-15",
+              "carga": "leve",
+              "musculo": "Braquial e braquiorradial",
+              "obs": "Estabilidade de punho neutra — fortalece antebraço para saída de água e controle de guidão."
+            },
+            {
+              "exercicio": "Superman no solo (isométrico)",
+              "series": 3,
+              "repeticoes": "20s sustentado",
+              "carga": "leve",
+              "musculo": "Eretores e glúteo máximo",
+              "obs": "Ativa cadeia posterior completa — compensa encurtamento causado pela posição aero no bike."
             }
           ]
         },
@@ -607,52 +659,60 @@
           "grupo": "Pernas, Glúteos e Core",
           "exercicios": [
             {
-              "exercicio": "Leg press 45° na máquina",
+              "exercicio": "Leg press 45° (amplitude média)",
               "series": 3,
-              "repeticoes": "12-15",
+              "repeticoes": "15",
               "carga": "leve",
-              "musculo": "Quadríceps / Glúteo máximo",
-              "obs": "Posição dos pés no meio da plataforma — desça até 90° no joelho sem tirar lombar do apoio."
+              "musculo": "Quadríceps e glúteo máximo",
+              "obs": "Pés na altura do ombro, desça até 90° — simula ângulo de pedalada, menor impacto articular que agachamento livre."
             },
             {
-              "exercicio": "Cadeira extensora na máquina",
+              "exercicio": "Cadeira extensora (unilateral)",
               "series": 3,
-              "repeticoes": "12-15",
+              "repeticoes": "12 cada lado",
               "carga": "leve",
               "musculo": "Quadríceps",
-              "obs": "Fortalece o quadríceps para controle de carga na pedalada — evite hiperextensão no topo."
+              "obs": "Extensão completa e excêntrico lento em 3s — fortalece VMO para estabilidade patelar na corrida."
             },
             {
-              "exercicio": "Mesa flexora (leg curl) deitado na máquina",
+              "exercicio": "Cadeira flexora deitada",
               "series": 3,
               "repeticoes": "12-15",
               "carga": "leve",
               "musculo": "Isquiotibiais",
-              "obs": "Isquios fortes reduzem risco de lesão na corrida — controle excêntrico de 3 segundos."
+              "obs": "Controle total do excêntrico — previne lesão de isquio, musculatura mais vulnerável em triatletas de corrida."
             },
             {
-              "exercicio": "Abdução de quadril na máquina (saída)",
+              "exercicio": "Abdução de quadril na máquina (sentado)",
               "series": 3,
               "repeticoes": "15",
               "carga": "leve",
               "musculo": "Glúteo médio",
-              "obs": "Glúteo médio previne síndrome do IT band e queda de pelve na corrida — essencial para 70.3."
+              "obs": "Glúteo médio forte previne queda de quadril e síndrome do trato iliotibial na corrida."
             },
             {
-              "exercicio": "Elevação de panturrilha na máquina (calf raise sentado)",
+              "exercicio": "Elevação de panturrilha na máquina (sentado)",
               "series": 3,
-              "repeticoes": "15-20",
+              "repeticoes": "20",
               "carga": "leve",
-              "musculo": "Gastrocnêmio / Sóleo",
-              "obs": "Resistência de panturrilha é crítica nos últimos 5km do half — amplitude completa de movimento."
+              "musculo": "Sóleo",
+              "obs": "Amplitude máxima com pausa no topo — sóleo é o principal absorvedor de impacto na corrida de 70.3."
             },
             {
-              "exercicio": "Prancha frontal com apoio em cotovelos no colchonete",
+              "exercicio": "Hiperextensão lombar no aparelho (sem carga)",
+              "series": 3,
+              "repeticoes": "15",
+              "carga": "leve",
+              "musculo": "Eretores e glúteo máximo",
+              "obs": "Ativa cadeia posterior sem carga axial — ideal para readiness baixo e pré-competição."
+            },
+            {
+              "exercicio": "Prancha frontal com apoio nos cotovelos",
               "series": 3,
               "repeticoes": "40s",
               "carga": "leve",
-              "musculo": "Core (transverso abdominal)",
-              "obs": "Manutenha quadril nivelado e respire de forma contínua — base para postura aerodinâmica no bike."
+              "musculo": "Core anterior (transverso e reto abdominal)",
+              "obs": "Estabilidade de core reduz custo energético na corrida e mantém posição aero no bike por mais tempo."
             }
           ]
         }
