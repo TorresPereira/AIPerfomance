@@ -1,0 +1,639 @@
+{
+  "date": "2026-09-12",
+  "generated_at": "2026-09-12T10:04:30.977228Z",
+  "saude": {
+    "hrv": 66,
+    "hrv_7d": 36,
+    "hrv_status": "balanced",
+    "hrv_baseline_low": 30,
+    "hrv_baseline_high": 40,
+    "rhr": 61,
+    "rhr_baseline": null,
+    "sono_h": 7.1,
+    "sono_score": 76,
+    "sono_deep": 2.0,
+    "sono_rem": 0.7,
+    "sono_awake": 13.0,
+    "body_battery": 54,
+    "stress_avg": 22,
+    "stress_rest": 57.05,
+    "atl": 608.0,
+    "ctl": 2433.0,
+    "tsb": null,
+    "acwr": null,
+    "load_3d": null,
+    "load_aerobic_low": 1522.0,
+    "load_aerobic_high": 559.0,
+    "load_anaerobic": 352.0,
+    "load_total_month": 2433.0,
+    "load_target_low": "424–1077",
+    "load_target_high": "772–1425",
+    "training_status": "Recuperação",
+    "fitness_trend": "Estável",
+    "training_readiness": null,
+    "vo2max": 47.7,
+    "peso": null,
+    "previsoes": {
+      "5K": 1400,
+      "10K": 3001,
+      "Meia": 6923,
+      "Maratona": 15633
+    },
+    "risco_lesao": "MODERADO",
+    "risco_cor": "#FFB800",
+    "prova_dias": 1,
+    "prova_data": "13/09/2026",
+    "prova_fase": "TAPER FINAL",
+    "nutricao": {
+      "cho_g_h": 80,
+      "cho_total": null,
+      "agua_ml_h": 750,
+      "agua_total": null,
+      "pre_kcal": 350,
+      "pos_prot_g": 30,
+      "dur_min": 0
+    },
+    "sono_alvo_h": 8.0,
+    "sono_deita": "22:30",
+    "sono_deficit_h": 0.9
+  },
+  "ontem": [
+    {
+      "mod": "bike",
+      "icone": "🚴",
+      "nome": "Erkrath - 50 min Easy Ride",
+      "dist": "17.8km",
+      "dur": "40m05s",
+      "fc": 138.0,
+      "fc_max": 156.0,
+      "cal": 451.0,
+      "cad": 79.0,
+      "tss": 46.0,
+      "np": 162.0,
+      "swolf": null,
+      "aerobic_te": 2.700000047683716,
+      "anaerobic_te": 0.800000011920929,
+      "elev": 147.0,
+      "perf": "26.7km/h",
+      "pl": "Velocidade",
+      "_dist_m": 17820.66015625,
+      "_dur_s": 2405.056884765625
+    }
+  ],
+  "hoje": [
+    {
+      "icone": "🏃",
+      "nome": "Long Run",
+      "tipo": "",
+      "dur": "1h10m",
+      "dist": "—",
+      "passos": [
+        "Warmup · 5min · Z2",
+        "Interval · 60min · Z2",
+        "Cooldown · 5min · Z2"
+      ]
+    }
+  ],
+  "amanha": [
+    {
+      "icone": "🚴",
+      "nome": "Steady Long Ride",
+      "tipo": "",
+      "dur": "2h00m",
+      "dist": "—",
+      "passos": [
+        "Warmup · 10min · Z65",
+        "Interval · 100min · Z130",
+        "Cooldown · 10min · Z65"
+      ]
+    }
+  ],
+  "hoje_feito": [],
+  "semana": {
+    "swim_km": 3.0,
+    "swim_min": 78.2,
+    "bike_km": 19.2,
+    "bike_min": 45.4,
+    "run_km": 14.1,
+    "run_min": 81.9,
+    "total_tss": 45.9,
+    "n_treinos": 8
+  },
+  "semana_passada": {
+    "swim_km": 1.8,
+    "swim_min": 50.4,
+    "bike_km": 23.7,
+    "bike_min": 92.0,
+    "run_km": 30.5,
+    "run_min": 216.0
+  },
+  "clima": {
+    "temp_max": 21.2,
+    "temp_min": 14.7,
+    "chuva_pct": 39,
+    "vento_kmh": 12.6,
+    "temp_atual": 17.3,
+    "emoji": "🌧️"
+  },
+  "hrv_7dias": [
+    {
+      "date": "2026-09-06",
+      "value": 56.0
+    },
+    {
+      "date": "2026-09-07",
+      "value": 60.0
+    },
+    {
+      "date": "2026-09-08",
+      "value": 83.0
+    },
+    {
+      "date": "2026-09-09",
+      "value": 54.0
+    },
+    {
+      "date": "2026-09-10",
+      "value": 58.0
+    },
+    {
+      "date": "2026-09-11",
+      "value": 56.0
+    },
+    {
+      "date": "2026-09-12",
+      "value": 66.0
+    }
+  ],
+  "vo2max_hist": [
+    {
+      "date": "2026-08-29",
+      "value": 47.0
+    },
+    {
+      "date": "2026-08-30",
+      "value": 47.0
+    },
+    {
+      "date": "2026-08-31",
+      "value": 47.0
+    },
+    {
+      "date": "2026-09-01",
+      "value": 47.0
+    },
+    {
+      "date": "2026-09-02",
+      "value": 47.0
+    },
+    {
+      "date": "2026-09-03",
+      "value": 47.0
+    },
+    {
+      "date": "2026-09-04",
+      "value": 47.0
+    },
+    {
+      "date": "2026-09-05",
+      "value": 47.1
+    },
+    {
+      "date": "2026-09-06",
+      "value": 47.1
+    },
+    {
+      "date": "2026-09-07",
+      "value": 47.3
+    },
+    {
+      "date": "2026-09-08",
+      "value": 47.3
+    },
+    {
+      "date": "2026-09-09",
+      "value": 47.3
+    },
+    {
+      "date": "2026-09-10",
+      "value": 47.7
+    },
+    {
+      "date": "2026-09-11",
+      "value": 47.7
+    },
+    {
+      "date": "2026-09-12",
+      "value": 47.7
+    }
+  ],
+  "prs": [],
+  "sono_performance": [
+    {
+      "date": "2026-08-30",
+      "sono": 7.7,
+      "te": 3.5
+    },
+    {
+      "date": "2026-08-31",
+      "sono": 6.8,
+      "te": 3.2
+    },
+    {
+      "date": "2026-09-01",
+      "sono": 8.2,
+      "te": 2.0
+    },
+    {
+      "date": "2026-09-02",
+      "sono": 3.1,
+      "te": 1.4
+    },
+    {
+      "date": "2026-09-03",
+      "sono": 5.4,
+      "te": 0.9
+    },
+    {
+      "date": "2026-09-04",
+      "sono": 6.2,
+      "te": 3.0
+    },
+    {
+      "date": "2026-09-05",
+      "sono": 7.1,
+      "te": 3.2
+    },
+    {
+      "date": "2026-09-06",
+      "sono": 8.4,
+      "te": 0.2
+    },
+    {
+      "date": "2026-09-07",
+      "sono": 6.2,
+      "te": 3.1
+    },
+    {
+      "date": "2026-09-08",
+      "sono": 8.3,
+      "te": 2.4
+    },
+    {
+      "date": "2026-09-09",
+      "sono": 6.1,
+      "te": 2.4
+    },
+    {
+      "date": "2026-09-10",
+      "sono": 7.4,
+      "te": 3.5
+    },
+    {
+      "date": "2026-09-11",
+      "sono": 7.5,
+      "te": 2.7
+    }
+  ],
+  "mes": {
+    "2026-09-01": {
+      "planejados": [
+        "🏊",
+        "🚴"
+      ],
+      "feitos": [
+        "🏊"
+      ]
+    },
+    "2026-09-03": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": [
+        "⚡",
+        "⚡"
+      ]
+    },
+    "2026-09-05": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": [
+        "🏃"
+      ]
+    },
+    "2026-09-07": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": [
+        "🏃",
+        "⚡"
+      ]
+    },
+    "2026-09-08": {
+      "planejados": [
+        "🏊",
+        "🚴"
+      ],
+      "feitos": [
+        "🏊",
+        "🚴"
+      ]
+    },
+    "2026-09-10": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": [
+        "🏃",
+        "⚡"
+      ]
+    },
+    "2026-09-11": {
+      "planejados": [
+        "🚴"
+      ],
+      "feitos": [
+        "🚴"
+      ]
+    },
+    "2026-09-12": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": []
+    },
+    "2026-09-13": {
+      "planejados": [
+        "🚴"
+      ],
+      "feitos": []
+    },
+    "2026-09-09": {
+      "planejados": [],
+      "feitos": [
+        "🏊"
+      ]
+    },
+    "2026-09-02": {
+      "planejados": [],
+      "feitos": [
+        "⚡"
+      ]
+    },
+    "2026-09-04": {
+      "planejados": [],
+      "feitos": [
+        "🏃",
+        "⚡"
+      ]
+    },
+    "2026-09-06": {
+      "planejados": [],
+      "feitos": [
+        "⚡"
+      ]
+    }
+  },
+  "insights": {
+    "frase": "Última ativação antes da prova: economia e foco.",
+    "sec_readiness": "HRV de 66ms está muito acima da média dos últimos 7 dias (36ms), com tendência de +30ms — sinal claro de recuperação consolidada e sistema nervoso autônomo reequilibrado. Sono em 7,1h com score 76, mas REM baixo (0,7h) e déficit de 0,9h indicam recuperação incompleta; prioridade é dormir às 22h30 hoje. Body Battery em 54/100 com stress médio 22 — estado funcional adequado para ativação leve pré-prova.",
+    "sec_treino_ontem": "Bike easy de 50min em 17,8km a 26,7km/h com FC média 138bpm e potência de 162W gerou TSS 46 — execução dentro do perfil de taper, intensidade controlada. TE aeróbico 2,7 confirma estímulo leve sem sobrecarga. Boa escolha de sessão para D-2 da prova.",
+    "sec_carga": "Z1 em 1522 (dentro do target 424–1077, levemente acima) e Z2 em 559 (abaixo do target 772–1425) indicam mês com volume aeróbico sólido mas intensidade moderada — perfil adequado para 70.3. Risco de lesão MODERADO exige cautela em qualquer estímulo residual hoje. Status Garmin 'Recuperação' e CTL alto (2433) confirmam base construída; taper está cumprindo função.",
+    "sec_hoje": "Long Run de 70min planejado para D-1 da prova — recomenda-se redução significativa: máximo 25-30min em Z1 puro como ativação neuromuscular, sem estímulo metabólico. Manter FC abaixo de 140bpm durante toda a sessão; o objetivo é ativar o sistema sem gerar fadiga residual. Evitar qualquer aceleração ou trecho em Z2+.",
+    "sec_ajuste": "Reduzir Long Run para 25min totais, FC teto absoluto de 140bpm, pace mínimo possível (conversacional). Nenhum trecho acima de Z1; últimos 5min em caminhada ativa.",
+    "sec_alertas": "D-1 de prova: qualquer treino de força ou volume elevado hoje é contraindicado — risco de fadiga muscular residual que compromete performance amanhã. REM baixo (0,7h) pode afetar recuperação cognitiva; priorize descanso após treino.",
+    "sec_nutricao": "Pré-ativação: 350kcal com carboidrato de rápida absorção (banana + aveia) 60min antes do run leve. Pós: 30g de proteína magra + 40-50g CHO para reposição glicogênica; hidratação mínima 750ml ao longo do dia dado clima ameno (21°C).",
+    "status_readiness": "BOM",
+    "status_carga": "SUAVE",
+    "acao_hoje": "REDUZIR 40%",
+    "analise_hoje": "Long Run de 70min é excessivo para D-1 de 70.3 — reduzir para 25min de ativação em Z1 estrito preserva frescor neuromuscular sem perda de estímulo. Qualquer volume além disso representa risco real de comprometer a prova amanhã.",
+    "alerta": "D-1 de prova: não execute Long Run completo — risco alto de fadiga residual comprometendo Steady Long Ride de amanhã (dia da prova).",
+    "treino_forca": [
+      {
+        "exercicio": "Agachamento no Smith Machine",
+        "series": 3,
+        "repeticoes": "12-15",
+        "carga": "leve",
+        "foco": "Ativa glúteos e quadríceps sem gerar fadiga profunda pré-prova"
+      },
+      {
+        "exercicio": "Cadeira Extensora (amplitude parcial)",
+        "series": 3,
+        "repeticoes": "12-15",
+        "carga": "leve",
+        "foco": "Ativação neuromuscular do quadríceps para economia de corrida"
+      },
+      {
+        "exercicio": "Elevação de Quadril na Máquina (Hip Thrust)",
+        "series": 3,
+        "repeticoes": "15",
+        "carga": "moderada",
+        "foco": "Força de glúteo máximo — principal estabilizador no ciclismo e corrida"
+      },
+      {
+        "exercicio": "Prancha Frontal com apoio em cotovelos",
+        "series": 3,
+        "repeticoes": "40s",
+        "carga": "leve",
+        "foco": "Core anti-rotação essencial para postura aerodinâmica no bike"
+      },
+      {
+        "exercicio": "Alongamento de Psoas e Quadril no solo (mobilidade)",
+        "series": 2,
+        "repeticoes": "45s cada lado",
+        "carga": "leve",
+        "foco": "Mobilidade de quadril reduz risco de lesão e melhora passada na corrida"
+      }
+    ],
+    "treino_academia": {
+      "dia_hoje": "C",
+      "treinos": {
+        "A": {
+          "grupo": "Peito, Ombro e Tríceps",
+          "exercicios": [
+            {
+              "exercicio": "Supino Reto na Máquina",
+              "series": 3,
+              "repeticoes": "12-15",
+              "carga": "moderada",
+              "musculo": "Peitoral",
+              "obs": "Controle a descida em 2s para ativar peitoral sem sobrecarga articular."
+            },
+            {
+              "exercicio": "Crucifixo no Pec Deck (Voador)",
+              "series": 3,
+              "repeticoes": "12-15",
+              "carga": "leve",
+              "musculo": "Peitoral",
+              "obs": "Mantenha cotovelos levemente flexionados e evite hiperextensão no final."
+            },
+            {
+              "exercicio": "Desenvolvimento de Ombros na Máquina",
+              "series": 3,
+              "repeticoes": "12-15",
+              "carga": "moderada",
+              "musculo": "Deltoide",
+              "obs": "Estabilize escápulas antes de empurrar para evitar impacto subacromial."
+            },
+            {
+              "exercicio": "Elevação Lateral com Halteres",
+              "series": 3,
+              "repeticoes": "15",
+              "carga": "leve",
+              "musculo": "Deltoide medial",
+              "obs": "Incline o torso levemente à frente para isolar o feixe médio do deltoide."
+            },
+            {
+              "exercicio": "Tríceps Pulley com Corda",
+              "series": 3,
+              "repeticoes": "12-15",
+              "carga": "moderada",
+              "musculo": "Tríceps",
+              "obs": "Abra a corda no final do movimento para maior ativação da porção longa."
+            },
+            {
+              "exercicio": "Tríceps Testa com Halteres",
+              "series": 3,
+              "repeticoes": "12",
+              "carga": "leve",
+              "musculo": "Tríceps",
+              "obs": "Mantenha cotovelos fixos e apontados para cima durante todo o movimento."
+            },
+            {
+              "exercicio": "Prancha com Rotação de Quadril (no solo)",
+              "series": 3,
+              "repeticoes": "30s",
+              "carga": "leve",
+              "musculo": "Core",
+              "obs": "Rotação controlada de quadril ativa oblíquos e melhora estabilidade no nado."
+            }
+          ]
+        },
+        "B": {
+          "grupo": "Costas e Bíceps",
+          "exercicios": [
+            {
+              "exercicio": "Puxada Frontal na Máquina (Lat Pulldown)",
+              "series": 3,
+              "repeticoes": "12-15",
+              "carga": "moderada",
+              "musculo": "Grande dorsal",
+              "obs": "Puxe até a linha do queixo e controle o retorno para maximizar ativação do dorsal."
+            },
+            {
+              "exercicio": "Remada Sentada no Cabo (triângulo)",
+              "series": 3,
+              "repeticoes": "12-15",
+              "carga": "moderada",
+              "musculo": "Romboides/Trapézio",
+              "obs": "Retraia as escápulas ao final do movimento antes de soltar o peso."
+            },
+            {
+              "exercicio": "Remada Unilateral com Halter no Banco",
+              "series": 3,
+              "repeticoes": "12 cada lado",
+              "carga": "moderada",
+              "musculo": "Grande dorsal",
+              "obs": "Puxe com o cotovelo e não com a mão para melhor ativação da costas."
+            },
+            {
+              "exercicio": "Pullover na Máquina",
+              "series": 3,
+              "repeticoes": "12-15",
+              "carga": "leve",
+              "musculo": "Grande dorsal",
+              "obs": "Excelente para conexão latissimo-core, fundamental para tração no nado."
+            },
+            {
+              "exercicio": "Rosca Direta com Barra W no Cabo",
+              "series": 3,
+              "repeticoes": "12-15",
+              "carga": "moderada",
+              "musculo": "Bíceps",
+              "obs": "Mantenha cotovelos fixos ao tronco durante toda a amplitude do movimento."
+            },
+            {
+              "exercicio": "Rosca Martelo com Halteres",
+              "series": 3,
+              "repeticoes": "12",
+              "carga": "leve",
+              "musculo": "Braquial/Bíceps",
+              "obs": "Neutro de punho ativa braquial e braquiorradial, complementando a tração no nado."
+            },
+            {
+              "exercicio": "Dead Bug no Solo (core)",
+              "series": 3,
+              "repeticoes": "10 cada lado",
+              "carga": "leve",
+              "musculo": "Core",
+              "obs": "Mantenha lombar em contato com o solo durante toda a execução do movimento."
+            }
+          ]
+        },
+        "C": {
+          "grupo": "Pernas, Glúteos e Core",
+          "exercicios": [
+            {
+              "exercicio": "Leg Press 45°",
+              "series": 3,
+              "repeticoes": "12-15",
+              "carga": "moderada",
+              "musculo": "Quadríceps/Glúteos",
+              "obs": "Posicione os pés na parte superior da plataforma para maior ativação glútea."
+            },
+            {
+              "exercicio": "Hip Thrust na Máquina (ou com barra)",
+              "series": 3,
+              "repeticoes": "15",
+              "carga": "moderada",
+              "musculo": "Glúteo máximo",
+              "obs": "Contraia o glúteo no topo por 1s antes de descer para maximizar recrutamento."
+            },
+            {
+              "exercicio": "Cadeira Extensora (amplitude parcial 60-90°)",
+              "series": 3,
+              "repeticoes": "15",
+              "carga": "leve",
+              "musculo": "Quadríceps",
+              "obs": "Amplitude parcial reduz estresse patelofemoral e mantém ativação funcional."
+            },
+            {
+              "exercicio": "Cadeira Flexora (Leg Curl deitado)",
+              "series": 3,
+              "repeticoes": "12-15",
+              "carga": "leve",
+              "musculo": "Isquiotibiais",
+              "obs": "Isquiotibiais fortes previnem lesões e melhoram a tração na fase de pedalada."
+            },
+            {
+              "exercicio": "Abdução de Quadril na Máquina",
+              "series": 3,
+              "repeticoes": "15",
+              "carga": "leve",
+              "musculo": "Glúteo médio",
+              "obs": "Glúteo médio é estabilizador primário do joelho e quadril na corrida."
+            },
+            {
+              "exercicio": "Panturrilha em Pé na Máquina (Calf Raise)",
+              "series": 3,
+              "repeticoes": "15-20",
+              "carga": "moderada",
+              "musculo": "Gastrocnêmio/Sóleo",
+              "obs": "Trabalhe a amplitude completa com descida lenta para força e prevenção de lesão."
+            },
+            {
+              "exercicio": "Prancha Lateral com apoio no cotovelo",
+              "series": 3,
+              "repeticoes": "35s cada lado",
+              "carga": "leve",
+              "musculo": "Oblíquos/Core lateral",
+              "obs": "Core lateral previne colapso de quadril na corrida e melhora estabilidade no bike."
+            }
+          ]
+        }
+      }
+    }
+  }
+}
