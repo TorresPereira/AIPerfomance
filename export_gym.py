@@ -112,7 +112,10 @@ def main():
     dia = DIA if DIA in treinos else (g.get("dia_hoje") or g.get("dia") or "A").upper()
     treino = treinos.get(dia)
     if not treino or not treino.get("exercicios"):
-        print(f"❌ Treino '{dia}' não encontrado no report.json"); return
+        print(f"❌ Treino '{dia}' não encontrado no report.json")
+        print(f"   Chaves disponíveis: {list(treinos.keys()) or 'nenhuma'}")
+        print("   Rode o briefing principal primeiro para gerar os treinos ABC.")
+        import sys; sys.exit(1)
 
     print(f"  Dia {dia}: {treino.get('grupo')} — {len(treino['exercicios'])} exercícios")
 
@@ -129,16 +132,25 @@ def main():
 
     # ── Cria o workout ──
     payload = montar_workout(dia, treino)
-    res = api.garth.connectapi("/workout-service/workout", method="POST", json=payload)
+    try:
+        resp = api.garth.post("connectapi", "/workout-service/workout",
+                              json=payload, api=True)
+        res = resp.json() if hasattr(resp, "json") else resp
+    except Exception as e:
+        import traceback; traceback.print_exc()
+        print(f"❌ Falha ao criar workout: {e}")
+        import sys; sys.exit(1)
+
     wid = (res or {}).get("workoutId")
     if not wid:
-        print(f"❌ Falha ao criar workout: {res}"); return
+        print(f"❌ Resposta sem workoutId: {json.dumps(res, default=str)[:500]}")
+        import sys; sys.exit(1)
     print(f"  ✅ Workout criado: id={wid}")
 
     # ── Agenda para hoje (aparece no calendário do relógio) ──
     try:
-        api.garth.connectapi(f"/workout-service/schedule/{wid}", method="POST",
-                             json={"date": TODAY.isoformat()})
+        api.garth.post("connectapi", f"/workout-service/schedule/{wid}",
+                       json={"date": TODAY.isoformat()}, api=True)
         print(f"  ✅ Agendado para {TODAY.isoformat()} — sincronize o relógio")
     except Exception as e:
         print(f"  ⚠️ Workout criado mas não agendado: {e}")
