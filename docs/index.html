@@ -170,7 +170,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.6 · 21/08/2026</div>
+  <div class="pin-ver">v3.7 · 21/08/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -357,6 +357,29 @@ async function runWorkflow(){
     else toast("Erro "+res.status+". Verifique o token.","err");
   }catch(e){ toast("Erro de rede","err"); }
   btn.textContent="▶"; btn.disabled=false;
+}
+
+async function exportGym(dia){
+  const c=getCfg();
+  if(!c.token||!c.user||!c.repo){ openCfg(); return; }
+  const btn=document.getElementById("gymExportBtn");
+  if(btn){ btn.textContent="⏳ Enviando..."; btn.disabled=true; }
+  try{
+    const res=await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/actions/workflows/export-gym.yml/dispatches`,
+      {method:"POST",
+       headers:{"Authorization":"Bearer "+c.token,"Content-Type":"application/json","Accept":"application/vnd.github+json"},
+       body:JSON.stringify({ref:"main",inputs:{dia:dia}})});
+    if(res.status===204){
+      toast(`⌚ Treino ${dia} a caminho do Garmin! ~1 min`,"ok");
+      if(btn){ btn.textContent="✅ Enviado — sincronize o relógio"; setTimeout(()=>{btn.textContent=`⌚ Enviar Treino ${dia} para o Garmin`;btn.disabled=false;},5000); }
+    } else {
+      toast("Erro "+res.status+". Verifique o token.","err");
+      if(btn){ btn.textContent=`⌚ Enviar Treino ${dia} para o Garmin`; btn.disabled=false; }
+    }
+  }catch(e){
+    toast("Erro de rede","err");
+    if(btn){ btn.textContent=`⌚ Enviar Treino ${dia} para o Garmin`; btn.disabled=false; }
+  }
 }
 
 // ─── Fetch report ─────────────────────────────────────────────────────────────
@@ -772,7 +795,10 @@ function renderGym(){
       </div>
     </div>
     <h2 style="font-size:19px;font-weight:700;color:#fff;margin-bottom:3px">${t.grupo||"Treino "+sel}</h2>
-    <p style="font-size:11px;color:#555">${sel===diaHoje?"✓ Treino recomendado para hoje":"Dia recomendado hoje: "+diaHoje} · BB ${s.body_battery||"—"}</p>
+    <p style="font-size:11px;color:#555;margin-bottom:12px">${sel===diaHoje?"✓ Treino recomendado para hoje":"Dia recomendado hoje: "+diaHoje} · BB ${s.body_battery||"—"}</p>
+    <button id="gymExportBtn" onclick="exportGym('${sel}')" style="width:100%;background:${dcol}22;border:1.5px solid ${dcol}55;color:${dcol};border-radius:10px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.03em">
+      ⌚ Enviar Treino ${sel} para o Garmin
+    </button>
   </div>
   ${cards}`;
 }
