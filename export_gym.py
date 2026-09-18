@@ -125,9 +125,11 @@ def main():
     try:
         api.login(tokenstore=CACHE_DIR)
         print("  Sessão restaurada.")
-    except Exception:
+    except Exception as e1:
+        print(f"  Sessão inválida ({e1}) — tentando login novo...")
         api.login()
-        api.garth.dump(CACHE_DIR)
+        try: api.garth.dump(CACHE_DIR)
+        except Exception: pass
         print("  Novo login efetuado.")
 
     # ── Cria o workout ──
