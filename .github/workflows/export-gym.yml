@@ -34,8 +34,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /tmp/garmin_cache
-          key: garmin-session-v2
-          restore-keys: garmin-session-v2
+          key: garmin-session-v3-${{ github.run_id }}
+          restore-keys: |
+            garmin-session-v3-
+            garmin-session-v2
 
       - name: Exportar treino
         env:
