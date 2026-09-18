@@ -1,0 +1,45 @@
+name: Exportar Gym para Garmin
+
+on:
+  workflow_dispatch:
+    inputs:
+      dia:
+        description: "Dia do treino (A, B ou C)"
+        required: true
+        default: "A"
+        type: choice
+        options: [A, B, C]
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependências
+        run: pip install "garminconnect>=0.2.22"
+
+      - name: Restaurar sessão Garmin
+        uses: actions/cache@v4
+        with:
+          path: /tmp/garmin_cache
+          key: garmin-session-v2
+          restore-keys: garmin-session-v2
+
+      - name: Exportar treino
+        env:
+          GARMIN_EMAIL:    ${{ secrets.GARMIN_EMAIL }}
+          GARMIN_PASSWORD: ${{ secrets.GARMIN_PASSWORD }}
+          DIA:             ${{ inputs.dia }}
+        run: python export_gym.py
