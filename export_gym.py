@@ -119,18 +119,35 @@ def main():
 
     print(f"  Dia {dia}: {treino.get('grupo')} — {len(treino['exercicios'])} exercícios")
 
-    # ── Login Garmin (sessão cacheada) ──
+    # ── Login Garmin (sessão cacheada + retry em rate limit) ──
+    import time
     os.makedirs(CACHE_DIR, exist_ok=True)
     api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
+    logado = False
     try:
         api.login(tokenstore=CACHE_DIR)
-        print("  Sessão restaurada.")
+        print("  Sessão restaurada."); logado = True
     except Exception as e1:
         print(f"  Sessão inválida ({e1}) — tentando login novo...")
-        api.login()
-        try: api.garth.dump(CACHE_DIR)
-        except Exception: pass
-        print("  Novo login efetuado.")
+        for tentativa in range(3):
+            try:
+                api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
+                api.login()
+                try: api.garth.dump(CACHE_DIR)
+                except Exception: pass
+                print("  Novo login efetuado."); logado = True; break
+            except Exception as e2:
+                if "429" in str(e2) or "Too Many" in str(e2):
+                    espera = 60 * (tentativa + 1)
+                    print(f"  ⏳ Rate limit do Garmin — aguardando {espera}s (tentativa {tentativa+1}/3)...")
+                    time.sleep(espera)
+                else:
+                    raise
+    if not logado:
+        print("❌ Garmin bloqueou logins deste IP (429). O bloqueio expira sozinho.")
+        print("   Aguarde 30-60 min e tente de novo — ou espere o briefing das 08:00")
+        print("   renovar a sessão em cache; depois disso o export usa a sessão pronta.")
+        import sys; sys.exit(1)
 
     # ── Cria o workout ──
     payload = montar_workout(dia, treino)
