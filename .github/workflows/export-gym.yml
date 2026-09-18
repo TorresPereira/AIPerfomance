@@ -39,6 +39,18 @@ jobs:
             garmin-session-v3-
             garmin-session-v2
 
+      - name: Bootstrap tokens do secret (se cache vazio)
+        env:
+          GARMIN_TOKENS: ${{ secrets.GARMIN_TOKENS }}
+        run: |
+          if [ ! -f /tmp/garmin_cache/oauth1_token.json ] && [ -n "$GARMIN_TOKENS" ]; then
+            mkdir -p /tmp/garmin_cache
+            echo "$GARMIN_TOKENS" | base64 -d | tar -xz -C /tmp/garmin_cache
+            echo "✅ Tokens restaurados do secret GARMIN_TOKENS"
+          else
+            echo "Cache já tem tokens ou secret não configurado"
+          fi
+
       - name: Exportar treino
         env:
           GARMIN_EMAIL:    ${{ secrets.GARMIN_EMAIL }}
