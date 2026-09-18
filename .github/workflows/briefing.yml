@@ -27,7 +27,7 @@ jobs:
           python-version: '3.11'
 
       - name: Instalar dependências
-        run: pip install "garminconnect>=0.2.22"
+        run: pip install "garminconnect>=0.2.22,<0.3"
 
       - name: Restaurar sessão Garmin
         uses: actions/cache@v4
