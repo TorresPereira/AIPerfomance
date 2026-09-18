@@ -1,0 +1,85 @@
+name: Triathlon Daily Briefing
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  briefing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependências
+        run: pip install "garminconnect>=0.2.22,<0.3"
+
+      - name: Restaurar sessão Garmin
+        uses: actions/cache@v4
+        with:
+          path: /tmp/garmin_cache
+          key: garmin-session-v3-${{ github.run_id }}
+          restore-keys: |
+            garmin-session-v3-
+            garmin-session-v2
+
+      - name: Bootstrap tokens do secret (se cache vazio)
+        env:
+          GARMIN_TOKENS: ${{ secrets.GARMIN_TOKENS }}
+        run: |
+          if [ ! -f /tmp/garmin_cache/oauth1_token.json ] && [ -n "$GARMIN_TOKENS" ]; then
+            mkdir -p /tmp/garmin_cache
+            echo "$GARMIN_TOKENS" | base64 -d | tar -xz -C /tmp/garmin_cache
+            echo "✅ Tokens restaurados do secret GARMIN_TOKENS"
+          else
+            echo "Cache já tem tokens ou secret não configurado"
+          fi
+
+      - name: Criar pastas
+        run: mkdir -p pwa docs
+
+      - name: Rodar briefing
+        env:
+          GARMIN_EMAIL:      ${{ secrets.GARMIN_EMAIL }}
+          GARMIN_PASSWORD:   ${{ secrets.GARMIN_PASSWORD }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          RACE_DATE:         ${{ secrets.RACE_DATE }}
+          NTFY_TOPIC:        ${{ secrets.NTFY_TOPIC }}
+          WEATHER_LAT:       "51.2227"
+          WEATHER_LON:       "6.9116"
+        run: python garmin_briefing.py
+
+      - name: Preparar docs
+        run: |
+          cp -r pwa/. docs/
+          touch docs/.nojekyll
+
+      - name: Commit no main (pwa + docs)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f pwa/report.json docs/
+          git commit -m "📊 briefing $(date +'%Y-%m-%d %H:%M UTC')" || true
+          git push origin HEAD:main || true
+
+      - name: Deploy GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          force_orphan: true
