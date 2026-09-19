@@ -64,20 +64,44 @@ def sem(v, lo, hi):
     if v>=lo:  return "🟡","#FFB800","#3a2a00"
     return "🔴","#FF4444","#3a0000"
 
-# ─── Login Garmin ─────────────────────────────────────────────────────────────
+# ─── Login Garmin (retry com backoff — evita bater no rate-limit do Garmin) ────
+def _is_429(e):
+    return "429" in str(e) or "Too Many" in str(e) or "TooManyRequests" in type(e).__name__
+
 def garmin_login():
     os.makedirs(CACHE_DIR, exist_ok=True)
+    import time
+
+    # 1) Restaurar sessão do cache (leve — não é um novo login SSO)
+    for tentativa in range(3):
+        try:
+            api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
+            api.login(tokenstore=CACHE_DIR)
+            print("  Sessão restaurada.")
+            return api
+        except Exception as e1:
+            if _is_429(e1):
+                espera = 90 * (tentativa + 1)
+                print(f"  ⏳ Rate limit ao restaurar sessão — aguardando {espera}s (tentativa {tentativa+1}/3)...")
+                time.sleep(espera)
+            else:
+                print(f"  Cache inválido ({e1}) — seguindo para login novo.")
+                break
+
+    # 2) Login novo via SSO (mais pesado — só 1 tentativa para não alimentar o bloqueio)
     try:
         api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
-        api.login(tokenstore=CACHE_DIR)
-        print("  Sessão restaurada.")
+        api.login()
+        try: api.garth.dump(CACHE_DIR); print("  Login novo, cache salvo.")
+        except Exception as e: print(f"  Login ok (sem cache: {e})")
         return api
-    except Exception: pass
-    api = Garmin(GARMIN_EMAIL, GARMIN_PASSWORD)
-    api.login()
-    try: api.garth.dump(CACHE_DIR); print("  Login novo, cache salvo.")
-    except Exception as e: print(f"  Login ok (sem cache: {e})")
-    return api
+    except Exception as e2:
+        if _is_429(e2):
+            print("❌ Garmin está bloqueando este IP (429) em múltiplos endpoints.")
+            print("   Isso costuma liberar sozinho em algumas horas — não adianta rodar de novo agora.")
+            print("   Verifique também se o secret GARMIN_TOKENS está configurado corretamente:")
+            print("   ele evita o login SSO e usa apenas refresh de token, bem menos sujeito a bloqueio.")
+        raise
 
 # ─── Coleta de dados ──────────────────────────────────────────────────────────
 def coletar():
@@ -351,30 +375,41 @@ def coletar():
         print(f"  Sono×performance: {len(corr_data)} dias com dados")
     except Exception as e: print(f"  Sono×perf err: {e}"); d["sono_performance"]=[]
 
-    # ─── 2f. Calendário do mês (planejado vs executado) ─────────────────────────
+    # ─── 2f. Calendário do mês (feitos via activities + planejados via calendar) ─
+    def _emo_sport(txt):
+        t = (txt or "").lower()
+        if "swim" in t or "pool" in t or "natac" in t: return "🏊"
+        if "cycl" in t or "bik" in t or "cicl" in t or "ride" in t: return "🚴"
+        if "run" in t or "corrida" in t: return "🏃"
+        if "strength" in t or "força" in t or "forca" in t: return "💪"
+        if "tennis" in t: return "🎾"
+        return "⚡"
+    mes = {}
+    # Feitos: atividades reais do mês (independe de plano de treino ativo)
+    try:
+        mes_ini = TODAY.replace(day=1).isoformat()
+        acts_mes = api.get_activities_by_date(mes_ini, TODAY_STR) or []
+        for a in acts_mes:
+            dstr = str(a.get("startTimeLocal") or a.get("startTimeGMT") or "")[:10]
+            if not dstr.startswith(f"{TODAY.year}-{TODAY.month:02d}"): continue
+            tipo = (a.get("activityType",{}) or {}).get("typeKey","")
+            mes.setdefault(dstr, {"planejados":[], "feitos":[]})["feitos"].append(_emo_sport(tipo))
+        print(f"  Mês feitos: {sum(len(v['feitos']) for v in mes.values())} atividades")
+    except Exception as e: print(f"  Mês feitos err: {e}")
+    # Planejados: calendário (só existe com plano de treino ativo)
     try:
         res_m = api.get_scheduled_workouts(TODAY.year, TODAY.month)
         raw_m = res_m.get("calendarItems",[]) if isinstance(res_m,dict) else (res_m or [])
-        mes = {}
         for w in raw_m:
             if not isinstance(w,dict): continue
             wd = str(w.get("date") or "")
             if not wd.startswith(f"{TODAY.year}-{TODAY.month:02d}"): continue
-            it = str(w.get("itemType") or "").lower()
-            dia = mes.setdefault(wd, {"planejados":[], "feitos":[]})
-            sport = str(w.get("sportTypeKey") or "").lower()
-            title = str(w.get("title") or "")
-            n = title.lower()
-            if any(x in sport for x in ["swim"]) or "swim" in n or "natac" in n: emo="🏊"
-            elif any(x in sport for x in ["cycl","bik"]) or any(x in n for x in ["bike","bik","ride","cicl"]): emo="🚴"
-            elif "run" in sport or "run" in n or "corrida" in n: emo="🏃"
-            elif "strength" in sport or "strength" in n or "força" in n: emo="💪"
-            else: emo="⚡"
-            if it == "workout": dia["planejados"].append(emo)
-            elif it == "activity": dia["feitos"].append(emo)
-        d["mes"] = mes
-        print(f"  Mês: {len(mes)} dias com itens")
-    except Exception as e: print(f"  Mês err: {e}"); d["mes"]={}
+            if str(w.get("itemType") or "").lower() != "workout": continue
+            emo = _emo_sport(str(w.get("sportTypeKey") or "") + " " + str(w.get("title") or ""))
+            mes.setdefault(wd, {"planejados":[], "feitos":[]})["planejados"].append(emo)
+    except Exception as e: print(f"  Mês planejados err: {e}")
+    d["mes"] = mes
+    print(f"  Mês: {len(mes)} dias com itens")
 
     # ─── 2g. Notas do usuário (se o app tiver enviado) ───────────────────────────
     try:
@@ -406,7 +441,8 @@ def coletar():
             dias = (RACE_DATE - TODAY).days
             s["prova_dias"]  = dias
             s["prova_data"]  = RACE_DATE.strftime("%d/%m/%Y")
-            if   dias <= 7:  s["prova_fase"] = "TAPER FINAL"
+            if   dias < 0:   s["prova_fase"] = "PÓS-PROVA"
+            elif dias <= 7:  s["prova_fase"] = "TAPER FINAL"
             elif dias <= 21: s["prova_fase"] = "TAPER"
             elif dias <= 42: s["prova_fase"] = "PEAK"
             elif dias <= 84: s["prova_fase"] = "BUILD"
