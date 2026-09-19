@@ -28,7 +28,7 @@ CAT_MAP = [
     (r"tr[ií]ceps|testa|franc[eê]s|corda|pushdown","TRICEPS_EXTENSION"),
     (r"afundo|lunge|b[uú]lgaro|passada",          "LUNGE"),
     (r"flexora|leg curl",                         "LEG_CURL"),
-    (r"extensora|leg extension",                  "LEG_EXTENSION"),
+    (r"extensora|leg extension",                  "SQUAT"),
     (r"panturrilha|calf",                         "CALF_RAISE"),
     (r"prancha|plank",                            "PLANK"),
     (r"abdominal|crunch|abd[oô]men",              "CRUNCH"),
@@ -36,11 +36,20 @@ CAT_MAP = [
     (r"flex[aã]o|push.?up",                       "PUSH_UP"),
 ]
 
+# Categorias válidas na taxonomia FIT do Garmin (categoria inválida → HTTP 400)
+CATS_VALIDAS = {
+    "BENCH_PRESS","CALF_RAISE","CARDIO","CARRY","CHOP","CORE","CRUNCH","CURL",
+    "DEADLIFT","FLYE","HIP_EXTENSION","HIP_RAISE","HIP_STABILITY","HYPEREXTENSION",
+    "LATERAL_RAISE","LEG_CURL","LEG_RAISE","LUNGE","OLYMPIC_LIFT","PLANK","PLYO",
+    "PULL_UP","PUSH_UP","ROW","SHOULDER_PRESS","SHOULDER_STABILITY","SHRUG",
+    "SIT_UP","SQUAT","TOTAL_BODY","TRICEPS_EXTENSION","WARM_UP",
+}
+
 def garmin_cat(nome):
     n = (nome or "").lower()
     for pat, cat in CAT_MAP:
         if re.search(pat, n):
-            return cat
+            return cat if cat in CATS_VALIDAS else "TOTAL_BODY"
     return "TOTAL_BODY"
 
 def parse_reps(rep_str):
@@ -104,10 +113,16 @@ def main():
     # ── Carrega report.json ──
     with open("pwa/report.json", encoding="utf-8") as f:
         report = json.load(f)
-    g = (report.get("insights") or {}).get("treino_academia") or {}
+    ins = report.get("insights") or {}
+    g = ins.get("treino_academia") or {}
     treinos = g.get("treinos") or {}
     if not treinos and g.get("exercicios"):
         treinos = {(g.get("dia") or "A"): {"grupo": g.get("grupo",""), "exercicios": g["exercicios"]}}
+
+    # Treino de Força (triatlo) também pode ser exportado, como opção "F"
+    forca = ins.get("treino_forca") or []
+    if forca:
+        treinos["F"] = {"grupo": "Treino de Força (Triatlo)", "exercicios": forca}
 
     dia = DIA if DIA in treinos else (g.get("dia_hoje") or g.get("dia") or "A").upper()
     treino = treinos.get(dia)
@@ -151,14 +166,28 @@ def main():
 
     # ── Cria o workout ──
     payload = montar_workout(dia, treino)
-    try:
+    def _post_workout(pl):
         resp = api.garth.post("connectapi", "/workout-service/workout",
-                              json=payload, api=True)
-        res = resp.json() if hasattr(resp, "json") else resp
+                              json=pl, api=True)
+        return resp.json() if hasattr(resp, "json") else resp
+
+    try:
+        res = _post_workout(payload)
     except Exception as e:
-        import traceback; traceback.print_exc()
-        print(f"❌ Falha ao criar workout: {e}")
-        import sys; sys.exit(1)
+        print(f"  ⚠️ 1ª tentativa falhou: {e}")
+        print("  Payload enviado (início):")
+        print("  " + json.dumps(payload, ensure_ascii=False)[:1200])
+        # Fallback: neutraliza categorias (algum nome pode ser inválido)
+        try:
+            for st in payload["workoutSegments"][0]["workoutSteps"]:
+                for sub in st.get("workoutSteps", []):
+                    if "category" in sub: sub["category"] = "TOTAL_BODY"
+            res = _post_workout(payload)
+            print("  ✅ Criado no fallback (categorias genéricas)")
+        except Exception as e2:
+            import traceback; traceback.print_exc()
+            print(f"❌ Falha ao criar workout: {e2}")
+            import sys; sys.exit(1)
 
     wid = (res or {}).get("workoutId")
     if not wid:
