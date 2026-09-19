@@ -8,7 +8,7 @@ on:
         required: true
         default: "A"
         type: choice
-        options: [A, B, C]
+        options: [A, B, C, F]
 
 permissions:
   contents: read
