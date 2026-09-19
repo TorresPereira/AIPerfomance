@@ -170,7 +170,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.7 · 21/08/2026</div>
+  <div class="pin-ver">v3.8 · 19/09/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -234,11 +234,10 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
     <div class="loading"></div>
   </div>
   <nav class="nav">
-    <div class="ntab on" id="t-home"   onclick="tab('home')"  ><span class="ni">🏠</span><span class="nl">Hoje</span></div>
+    <div class="ntab on" id="t-home"   onclick="tab('home')"  ><span class="ni">🏠</span><span class="nl">Home</span></div>
     <div class="ntab"    id="t-treinos"onclick="tab('treinos')"><span class="ni">📊</span><span class="nl">Treinos</span></div>
     <div class="ntab"    id="t-coach"  onclick="tab('coach')" ><span class="ni">🤖</span><span class="nl">Coach</span></div>
     <div class="ntab"    id="t-agenda" onclick="tab('agenda')" ><span class="ni">📅</span><span class="nl">Agenda</span></div>
-    <div class="ntab forca" id="t-forca"  onclick="tab('forca')" ><span class="ni">💪</span><span class="nl">Força</span></div>
     <div class="ntab gym" id="t-gym" onclick="tab('gym')"><span class="ni">🏋️</span><span class="nl">Gym</span></div>
   </nav>
 </div>
@@ -490,7 +489,6 @@ function tab(id){
 function renderTab(id){
   if(!report){ loadReport(); return; }
   const body = document.getElementById("body");
-  if(id==="forca")      { body.innerHTML = renderForca(); return; }
   if(id==="gym")        { body.innerHTML = renderGym(); return; }
   if(id==="home")       { body.innerHTML = renderHome();  return; }
   if(id==="treinos")    { body.innerHTML = renderTreinos(); return; }
@@ -708,45 +706,31 @@ function renderMes(mes) {
   </div>`;
 }
 
-function renderForca(){
-  const items=(report.insights||{}).treino_forca||[];
-  const s=report.saude||{};
-  const bb=+(s.body_battery||0);
-  let nivel="Força Funcional",sub="Estado moderado — estabilidade e controle";
-  if(bb<40){nivel="Recuperação Ativa";sub="Readiness baixo — mobilidade e core suave";}
-  else if(bb>=70){nivel="Força & Potência";sub="Ótimo estado — treine com intensidade";}
-  if(!items.length)return`<div class="forca-hdr"><div class="forca-badge">💪 Treino de Força</div><h2>${nivel}</h2><p>Nenhuma sugestão. Rode o briefing para gerar.</p></div>`;
-  const CGCOL={"leve":"#00C896","moderada":"#FFB800","pesada":"#FF4444"};
-  const cards=items.map((ex,i)=>{
-    const typ=exType(ex.exercicio); const [c1,c2]=COLS[typ];
-    const cg=(ex.carga||"").toLowerCase(); const cc=CGCOL[cg]||"#555";
-    return `<div class="ex-card" style="animation:fadeUp .3s ease both;animation-delay:${i*.05}s">
-      <div class="ex-img" style="background:linear-gradient(135deg,${c1},${c2})">${SVGS[typ]}
-        <div class="ex-sets-ov">${ex.series||"—"}×${ex.repeticoes||"—"}</div></div>
-      <div class="ex-info"><div class="ex-name">${ex.exercicio||"—"}</div>
-        <div class="ex-meta"><span class="cg-badge" style="color:${cc};border-color:${cc}44;background:${cc}18">${ex.carga||"—"}</span></div>
-        <div class="ex-foco">${ex.foco||""}</div></div></div>`;
-  }).join("");
-  return `<div class="forca-hdr"><div class="forca-badge">💪 Sugestão IA · ${items.length} exercícios</div><h2>${nivel}</h2><p>${sub}</p></div>${cards}`;
-}
-
-
 function renderGym(){
-  const g = (report.insights||{}).treino_academia;
+  const g = (report.insights||{}).treino_academia || {};
+  const forca = (report.insights||{}).treino_forca || [];
   const s = report.saude||{};
+
   // Suporta formato novo (treinos.A/B/C) e antigo (exercicios direto)
-  const treinos = g?.treinos || (g?.exercicios ? {[g.dia||"A"]: {grupo:g.grupo, exercicios:g.exercicios}} : null);
-  if (!treinos || !Object.keys(treinos).length) {
+  const treinosABC = g.treinos || (g.exercicios ? {[g.dia||"A"]: {grupo:g.grupo, exercicios:g.exercicios}} : {});
+  const treinos = {...treinosABC};
+  if (forca.length) treinos["F"] = {grupo:"Treino de Força (Triatlo)", exercicios:forca};
+
+  if (!Object.keys(treinos).length) {
     return `<div class="empty"><div class="empty-icon">🏋️</div>
       <h2>Sem treino de academia</h2>
-      <p>Rode o briefing para gerar os treinos ABC.</p></div>`;
+      <p>Rode o briefing para gerar os treinos.</p></div>`;
   }
+
   const diaHoje = (g.dia_hoje || g.dia || "A").toUpperCase();
-  if (!window.gymDia || !treinos[window.gymDia]) window.gymDia = treinos[diaHoje] ? diaHoje : Object.keys(treinos)[0];
+  const ordem = ["A","B","C","F"].filter(l=>treinos[l]);
+  if (!window.gymDia || !treinos[window.gymDia]) window.gymDia = treinos[diaHoje] ? diaHoje : ordem[0];
   const sel = window.gymDia;
   const t = treinos[sel] || {exercicios:[]};
+  const isForca = sel === "F";
 
-  const DIA_COL = {A:"#FF8C00", B:"#1a6fff", C:"#00C896"};
+  const DIA_COL = {A:"#FF8C00", B:"#1a6fff", C:"#00C896", F:"#a855f7"};
+  const DIA_LABEL = {A:"A", B:"B", C:"C", F:"💪"};
   const dcol = DIA_COL[sel] || "#FF8C00";
   const MUSC_EMO = {
     "peito":"🫁","ombro":"🎽","tríceps":"💪","triceps":"💪",
@@ -759,7 +743,17 @@ function renderGym(){
 
   const cards = (t.exercicios||[]).map((ex,i)=>{
     const m = (ex.musculo||"").toLowerCase();
-    let emo = "🏋️";
+    let emo = isForca ? "" : "🏋️";
+    if (isForca) {
+      const typ = exType(ex.exercicio);
+      return `
+      <div class="ex-card" style="animation:fadeUp .3s ease both;animation-delay:${i*.04}s">
+        <div class="ex-img" style="background:linear-gradient(135deg,${COLS[typ][0]},${COLS[typ][1]})">${SVGS[typ]}
+          <div class="ex-sets-ov">${ex.series||"—"}×${ex.repeticoes||"—"}</div></div>
+        <div class="ex-info"><div class="ex-name">${ex.exercicio||"—"}</div>
+          <div class="ex-meta"><span class="cg-badge" style="color:${CGCOL[(ex.carga||"").toLowerCase()]||"#555"};border-color:${CGCOL[(ex.carga||"").toLowerCase()]||"#555"}44;background:${CGCOL[(ex.carga||"").toLowerCase()]||"#555"}18">${ex.carga||"—"}</span></div>
+          <div class="ex-foco">${ex.foco||""}</div></div></div>`;
+    }
     for (const k in MUSC_EMO) { if (m.includes(k)) { emo = MUSC_EMO[k]; break; } }
     const cg = (ex.carga||"").toLowerCase();
     const cc = CGCOL[cg] || "#555";
@@ -780,24 +774,28 @@ function renderGym(){
     </div>`;
   }).join("");
 
+  const subtitulo = isForca
+    ? "Sugestão adaptada ao readiness — mobilidade, core e estabilidade para triatlo"
+    : (sel===diaHoje ? "✓ Treino recomendado para hoje" : "Dia recomendado hoje: "+diaHoje);
+
   return `
   <div style="background:linear-gradient(135deg,${dcol}18,${dcol}08);border-radius:13px;padding:18px;margin-bottom:14px;border:1px solid ${dcol}33">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-      <span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:${dcol}22;color:${dcol};border:1px solid ${dcol}44;padding:3px 8px;border-radius:4px">🏋️ ${(t.exercicios||[]).length} exercícios</span>
+      <span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:${dcol}22;color:${dcol};border:1px solid ${dcol}44;padding:3px 8px;border-radius:4px">${isForca?"💪":"🏋️"} ${(t.exercicios||[]).length} exercícios</span>
       <div style="display:flex;gap:6px">
-        ${["A","B","C"].map(l=>{
-          const isSel = l===sel, isToday = l===diaHoje;
+        ${ordem.map(l=>{
+          const isSel = l===sel, isToday = l===diaHoje && l!=="F";
           const c = DIA_COL[l];
-          return `<button onclick="gymDia='${l}';renderTab('gym')" style="width:34px;height:34px;border-radius:9px;font-size:13px;font-weight:800;cursor:pointer;position:relative;border:1.5px solid ${isSel?c:"#2a2a2a"};background:${isSel?c:"#141414"};color:${isSel?"#000":"#555"}">
-            ${l}${isToday?`<span style="position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:${c};border:1.5px solid #000"></span>`:""}
+          return `<button onclick="gymDia='${l}';renderTab('gym')" style="width:34px;height:34px;border-radius:9px;font-size:${l==="F"?"15":"13"}px;font-weight:800;cursor:pointer;position:relative;border:1.5px solid ${isSel?c:"#2a2a2a"};background:${isSel?c:"#141414"};color:${isSel?"#000":"#555"}">
+            ${DIA_LABEL[l]}${isToday?`<span style="position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:${c};border:1.5px solid #000"></span>`:""}
           </button>`;
         }).join("")}
       </div>
     </div>
     <h2 style="font-size:19px;font-weight:700;color:#fff;margin-bottom:3px">${t.grupo||"Treino "+sel}</h2>
-    <p style="font-size:11px;color:#555;margin-bottom:12px">${sel===diaHoje?"✓ Treino recomendado para hoje":"Dia recomendado hoje: "+diaHoje} · BB ${s.body_battery||"—"}</p>
+    <p style="font-size:11px;color:#555;margin-bottom:12px">${subtitulo} · BB ${s.body_battery||"—"}</p>
     <button id="gymExportBtn" onclick="exportGym('${sel}')" style="width:100%;background:${dcol}22;border:1.5px solid ${dcol}55;color:${dcol};border-radius:10px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.03em">
-      ⌚ Enviar Treino ${sel} para o Garmin
+      ⌚ Enviar Treino ${isForca?"de Força":sel} para o Garmin
     </button>
   </div>
   ${cards}`;
