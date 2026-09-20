@@ -1,0 +1,240 @@
+{
+  "gerado_em": "2026-09-20T20:53:52.604977Z",
+  "dia_hoje": "B",
+  "treinos": {
+    "A": {
+      "grupo": "Peito, Ombro e Tríceps",
+      "exercicios": [
+        {
+          "exercicio": "Supino Reto com Barra",
+          "series": 4,
+          "repeticoes": "10-12",
+          "carga": "moderada",
+          "musculo": "Peito",
+          "obs": "Mantenha os pés firmes no chão e escápulas retraídas durante todo o movimento."
+        },
+        {
+          "exercicio": "Supino Inclinado com Halteres",
+          "series": 4,
+          "repeticoes": "10-12",
+          "carga": "moderada",
+          "musculo": "Peito Superior",
+          "obs": "Incline o banco a 30-45° e evite abrir excessivamente os cotovelos para proteger o ombro."
+        },
+        {
+          "exercicio": "Crucifixo no Cabo (crossover)",
+          "series": 3,
+          "repeticoes": "12",
+          "carga": "moderada",
+          "musculo": "Peito",
+          "obs": "Mantenha leve flexão nos cotovelos e controle a fase excêntrica por 2 segundos."
+        },
+        {
+          "exercicio": "Desenvolvimento com Halteres",
+          "series": 4,
+          "repeticoes": "10-12",
+          "carga": "moderada",
+          "musculo": "Deltóide",
+          "obs": "Pressione os halteres para cima sem elevar os trapézios durante o movimento."
+        },
+        {
+          "exercicio": "Elevação Lateral com Cabo (unilateral)",
+          "series": 3,
+          "repeticoes": "12",
+          "carga": "moderada",
+          "musculo": "Deltóide Lateral",
+          "obs": "Use o cabo baixo para manter tensão constante; eleve até a altura do ombro apenas."
+        },
+        {
+          "exercicio": "Tríceps Pulley com Corda",
+          "series": 4,
+          "repeticoes": "12",
+          "carga": "moderada",
+          "musculo": "Tríceps",
+          "obs": "Abra a corda ao final do movimento e mantenha os cotovelos fixos ao lado do tronco."
+        },
+        {
+          "exercicio": "Prancha Frontal com Elevação de Braço Alternado",
+          "series": 3,
+          "repeticoes": "12 cada lado",
+          "carga": "leve",
+          "musculo": "Core/Estabilizadores",
+          "obs": "Mantenha o quadril nivelado e evite rotação durante a elevação do braço."
+        }
+      ]
+    },
+    "B": {
+      "grupo": "Costas e Bíceps",
+      "exercicios": [
+        {
+          "exercicio": "Remada Curvada com Barra",
+          "series": 4,
+          "repeticoes": "10-12",
+          "carga": "moderada",
+          "musculo": "Dorsais/Romboides",
+          "obs": "Mantenha o tronco a 45° e puxe a barra em direção ao umbigo com escápulas retraídas."
+        },
+        {
+          "exercicio": "Puxada Alta na Polia (pegada fechada supinada)",
+          "series": 4,
+          "repeticoes": "10-12",
+          "carga": "moderada",
+          "musculo": "Grande Dorsal",
+          "obs": "Puxe com os cotovelos apontados para baixo e sinta o alongamento completo no topo."
+        },
+        {
+          "exercicio": "Remada Unilateral com Halter no Banco",
+          "series": 3,
+          "repeticoes": "12 cada lado",
+          "carga": "moderada",
+          "musculo": "Grande Dorsal/Romboides",
+          "obs": "Puxe o halter em direção ao quadril, não ao ombro, para maior ativação do dorsal."
+        },
+        {
+          "exercicio": "Pullover com Halter no Banco",
+          "series": 3,
+          "repeticoes": "12",
+          "carga": "moderada",
+          "musculo": "Grande Dorsal/Serrátil",
+          "obs": "Mantenha leve flexão nos cotovelos e controle o arco do movimento até o alinhamento do tronco."
+        },
+        {
+          "exercicio": "Rosca Direta com Barra W (EZ)",
+          "series": 4,
+          "repeticoes": "10-12",
+          "carga": "moderada",
+          "musculo": "Bíceps",
+          "obs": "Mantenha os cotovelos fixos ao lado do corpo e não balance o tronco para levantar a carga."
+        },
+        {
+          "exercicio": "Rosca Martelo com Halteres",
+          "series": 3,
+          "repeticoes": "12",
+          "carga": "moderada",
+          "musculo": "Bíceps/Braquial",
+          "obs": "Execute alternado para manter qualidade de execução e foco neuromuscular em cada braço."
+        },
+        {
+          "exercicio": "Abdominal com Roda (ab wheel) ou Cabo Alta",
+          "series": 3,
+          "repeticoes": "10-12",
+          "carga": "moderada",
+          "musculo": "Core Anterior",
+          "obs": "Avance controlando o quadril sem deixar a lombar colapsar; volte acionando o abdome."
+        }
+      ]
+    },
+    "C": {
+      "grupo": "Pernas, Glúteos e Core",
+      "exercicios": [
+        {
+          "exercicio": "Agachamento Livre com Barra (Squat Rack)",
+          "series": 4,
+          "repeticoes": "10-12",
+          "carga": "moderada",
+          "musculo": "Quadríceps/Glúteos",
+          "obs": "Desça até 90° ou abaixo mantendo joelhos alinhados com os dedos dos pés."
+        },
+        {
+          "exercicio": "Leg Press 45°",
+          "series": 4,
+          "repeticoes": "10-12",
+          "carga": "moderada",
+          "musculo": "Quadríceps/Glúteos",
+          "obs": "Posicione os pés na parte superior da plataforma para maior recrutamento de glúteos."
+        },
+        {
+          "exercicio": "Stiff com Barra (Terra Romeno)",
+          "series": 4,
+          "repeticoes": "10-12",
+          "carga": "moderada",
+          "musculo": "Isquiotibiais/Glúteos",
+          "obs": "Desça a barra rente às pernas mantendo a coluna neutra e empurre o quadril para trás."
+        },
+        {
+          "exercicio": "Avanço com Halteres (Lunge Caminhada)",
+          "series": 3,
+          "repeticoes": "12 cada perna",
+          "carga": "moderada",
+          "musculo": "Glúteos/Quadríceps",
+          "obs": "Dê um passo largo e mantenha o joelho de trás a 2 cm do solo sem tocar."
+        },
+        {
+          "exercicio": "Cadeira Extensora (Leg Extension)",
+          "series": 3,
+          "repeticoes": "12",
+          "carga": "moderada",
+          "musculo": "Quadríceps",
+          "obs": "Realize a extensão completa e faça uma pausa de 1 segundo no topo para maior ativação."
+        },
+        {
+          "exercicio": "Mesa Flexora (Leg Curl Deitado)",
+          "series": 3,
+          "repeticoes": "12",
+          "carga": "moderada",
+          "musculo": "Isquiotibiais",
+          "obs": "Controle a fase excêntrica por 3 segundos para maximizar o desenvolvimento dos posteriores."
+        },
+        {
+          "exercicio": "Prancha Lateral com Elevação de Quadril (no step ou colchonete)",
+          "series": 3,
+          "repeticoes": "12 cada lado",
+          "carga": "leve",
+          "musculo": "Core Lateral/Glúteo Médio",
+          "obs": "Mantenha o corpo em linha reta e eleve o quadril até a contração máxima do oblíquo."
+        }
+      ]
+    }
+  },
+  "forca": [
+    {
+      "exercicio": "Hip Thrust com Elevação de Calcanhar (isométrico 2s no topo)",
+      "series": 3,
+      "repeticoes": "12",
+      "carga": "moderada",
+      "foco": "Fortalece o glúteo máximo que é o principal motor da pedalada e da passada na corrida."
+    },
+    {
+      "exercicio": "Dead Bug (com extensão alternada de braço e perna)",
+      "series": 3,
+      "repeticoes": "10 cada lado",
+      "carga": "leve",
+      "foco": "Estabiliza o core anti-extensão, essencial para manter a posição aerodinâmica no ciclismo sem perder potência."
+    },
+    {
+      "exercicio": "Single Leg Romanian Deadlift (peso corporal ou halter leve)",
+      "series": 3,
+      "repeticoes": "10 cada perna",
+      "carga": "leve",
+      "foco": "Desenvolve equilíbrio unilateral e força de isquiotibiais, reduzindo risco de lesão na corrida do 70.3."
+    },
+    {
+      "exercicio": "Mobilidade de Tornozelo com Agachamento Profundo (Squat to Stand)",
+      "series": 3,
+      "repeticoes": "10",
+      "carga": "leve",
+      "foco": "Melhora a mobilidade de tornozelo e quadril para uma braçada de natação mais eficiente e batida de pernas sem restrição."
+    },
+    {
+      "exercicio": "Rotação de Quadril em Quatro Apoios (Fire Hydrant com banda)",
+      "series": 3,
+      "repeticoes": "12 cada lado",
+      "carga": "leve",
+      "foco": "Ativa o glúteo médio para estabilizar o quadril durante a corrida e prevenir síndrome do trato iliotibial."
+    },
+    {
+      "exercicio": "Ponte Unilateral no Solo com Isometria (3s)",
+      "series": 3,
+      "repeticoes": "10 cada lado",
+      "carga": "leve",
+      "foco": "Corrige desequilíbrios entre membros inferiores e fortalece a cadeia posterior para uma corrida mais econômica após a bike."
+    },
+    {
+      "exercicio": "Paloff Press com Banda Elástica (anti-rotação)",
+      "series": 3,
+      "repeticoes": "12 cada lado",
+      "carga": "leve",
+      "foco": "Treina o core em anti-rotação, transferindo força de forma eficiente entre membros superiores e inferiores durante a natação e corrida."
+    }
+  ]
+}
