@@ -176,7 +176,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v4.3 · 20/09/2026</div>
+  <div class="pin-ver">v4.4 · 20/09/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -445,6 +445,21 @@ async function exportGym(dia){
     toast("Erro ao disparar. Verifique usuário/repo/token.","err");
     if(btn){ btn.textContent=`⌚ Enviar Treino ${dia} para o Garmin`; btn.disabled=false; }
   }
+}
+
+function renderEstrutura(estrutura){
+  if (!estrutura || !estrutura.length) return "";
+  const linhas = estrutura.map(b=>{
+    const tipo = (b.bloco||"").toLowerCase();
+    if (tipo === "aquecimento") return `🔥 Aquecimento ${b.duracao_min}min${b.zona?` (${b.zona})`:""}`;
+    if (tipo === "volta_calma") return `🧊 Volta à calma ${b.duracao_min}min${b.zona?` (${b.zona})`:""}`;
+    if (tipo === "intervalado") return `🔁 ${b.repeticoes}× [${b.trabalho_min}min ${b.trabalho_zona||"forte"} + ${b.descanso_min}min ${b.descanso_zona||"recup"}]`;
+    return null;
+  }).filter(Boolean);
+  if (!linhas.length) return "";
+  return `<div style="margin-top:5px;padding:6px 8px;background:#0d0d0d;border-radius:6px;border-left:2px solid #14b8a655">
+    ${linhas.map(l=>`<div style="font-size:9px;color:#666;padding:1px 0">${l}</div>`).join("")}
+  </div>`;
 }
 
 function toggleDiaPlano(dt){
@@ -888,6 +903,7 @@ function renderPlano(){
           <div style="font-size:10px;color:#555;margin-bottom:6px;line-height:1.6">
             <strong style="color:#888">${s.tipo||s.esporte}</strong>${s.zona?` · Zona ${s.zona}`:""} · ${s.duracao_min}min${s.longo?" · Sessão longa":""}
             ${s.descricao?`<br>${s.descricao}`:""}
+            ${renderEstrutura(s.estrutura)}
           </div>`).join("")}
         ${temNaoFixa?`<button class="btn-sec" style="width:100%;margin:4px 0 2px;font-size:11px;padding:9px;color:#14b8a6;border-color:#14b8a655" onclick="event.stopPropagation();syncDiaPlano('${dt}')" id="syncDia_${dt}">🔄 Sincronizar este dia com o Garmin</button>`:""}
       </div>`:""}
