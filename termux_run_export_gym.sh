@@ -10,6 +10,7 @@ set +a
 DIA="${1:-A}"
 echo "[$(date '+%Y-%m-%d %H:%M')] Exportando treino $DIA via Termux..."
 
-git pull --quiet || true
+git fetch origin main --quiet
+git reset --hard origin/main --quiet
 
 DIA="$DIA" python export_gym.py

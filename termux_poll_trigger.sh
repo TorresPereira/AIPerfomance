@@ -8,7 +8,8 @@ STATE_FILE="$HOME/.tp_last_trigger_ts"
 LAST_TS=0
 [ -f "$STATE_FILE" ] && LAST_TS=$(cat "$STATE_FILE")
 
-git pull --quiet || exit 0
+git fetch origin main --quiet || exit 0
+git reset --hard origin/main --quiet
 
 TRIGGER_FILE="pwa/trigger.json"
 [ -f "$TRIGGER_FILE" ] || exit 0

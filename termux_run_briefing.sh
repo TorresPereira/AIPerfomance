@@ -9,7 +9,8 @@ set +a
 
 echo "[$(date '+%Y-%m-%d %H:%M')] Iniciando briefing via Termux..."
 
-git pull --quiet || true
+git fetch origin main --quiet
+git reset --hard origin/main --quiet
 
 python garmin_briefing.py
 
