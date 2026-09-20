@@ -108,6 +108,27 @@ def main():
     except Exception as e:
         print(f"  ⚠️ FTP: {e}")
 
+    # ── 3. Previsão de 10K (Garmin) → zonas de pace ──────────────────────────────
+    # A previsão de corrida do Garmin (mesma que já aparece no app) é um dado
+    # confiável e específico do atleta — melhor base para pace do que o campo
+    # ambíguo de "speed" do limiar. Usado só para MOSTRAR distância no app;
+    # o alvo real enviado ao relógio continua sendo por FC (já comprovado OK).
+    try:
+        pred = api.get_race_predictions()
+        print(f"  [debug] race_predictions raw: {pred}")
+        t10k = pred.get("time10K") if isinstance(pred, dict) else None
+        if t10k and float(t10k) > 0:
+            pace_10k = float(t10k) / 10.0  # s/km
+            zonas["run_pace_10k_s_km"] = round(pace_10k)
+            # Zonas de pace como % do pace de 10K (pace MAIOR = mais devagar)
+            pct = {"Z1":(1.30,1.45), "Z2":(1.15,1.30), "Z3":(1.05,1.15), "Z4":(0.98,1.05), "Z5":(0.90,0.98)}
+            zonas["run_zonas_pace_s_km"] = {z: sorted([round(pace_10k*lo), round(pace_10k*hi)]) for z,(lo,hi) in pct.items()}
+            print(f"  ✅ Pace de 10K: {fmt_pace(pace_10k)} · zonas de pace calculadas (só para exibição no app)")
+        else:
+            print("  ⚠️ Previsão de 10K não encontrada.")
+    except Exception as e:
+        print(f"  ⚠️ Previsão de corrida: {e}")
+
     os.makedirs("pwa", exist_ok=True)
     with open("pwa/zonas_atleta.json", "w", encoding="utf-8") as f:
         json.dump(zonas, f, ensure_ascii=False, default=str, indent=2)

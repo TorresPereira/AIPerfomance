@@ -114,17 +114,13 @@ def _passo(order, step_type_id, step_type_key, dur_min, zona, desc, esporte, zon
         if faixa:
             step["targetType"] = {"workoutTargetTypeId": 2, "workoutTargetTypeKey": "power.zone"}
             step["targetValueOne"], step["targetValueTwo"] = faixa
-    elif esporte == "run":
-        faixa = _faixa_zona(zonas.get("run_zonas_pace_s_km"), zona)
-        if faixa:
-            # Garmin quer velocidade (m/s), não pace — e menor pace(s/km) = mais rápido
-            lo_s, hi_s = faixa  # segundos/km: lo=mais rápido nesta faixa, hi=mais devagar
-            v_hi = 1000.0 / lo_s  # m/s mais rápido
-            v_lo = 1000.0 / hi_s  # m/s mais devagar
-            step["targetType"] = {"workoutTargetTypeId": 3, "workoutTargetTypeKey": "pace.zone"}
-            step["targetValueOne"], step["targetValueTwo"] = round(v_lo, 2), round(v_hi, 2)
+    # Corrida: NÃO usa pace.zone (nunca testado contra a API ao vivo — se o
+    # Garmin rejeitasse, arriscaria derrubar o alvo por FC pra corrida, que já
+    # está comprovado funcionando, ver print de 20/09). run_zonas_pace_s_km
+    # existe em zonas_atleta.json só para o app mostrar pace/distância —
+    # de propósito não é usado aqui.
     if "targetValueOne" not in step:
-        # Sem faixa de potência/pace — tenta FC como faixa numérica (não zoneNumber)
+        # Sem faixa de potência (ou é corrida) — usa FC como faixa numérica
         faixa = _faixa_zona(zonas.get("hr_zonas"), zona)
         if faixa:
             step["targetType"] = {"workoutTargetTypeId": 4, "workoutTargetTypeKey": "heart.rate.custom"}
