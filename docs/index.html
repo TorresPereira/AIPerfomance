@@ -176,7 +176,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v4.1 · 19/09/2026</div>
+  <div class="pin-ver">v4.2 · 19/09/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -413,18 +413,22 @@ function toast(msg,type="ok"){
 }
 
 // ─── Workflow ─────────────────────────────────────────────────────────────────
+// Dispara ações via arquivo de gatilho (pwa/trigger.json), lido pelo Termux
+// no celular a cada 1 min — evita o bloqueio 429 do Garmin nos IPs do GitHub.
+async function dispararTrigger(action, extra){
+  return githubPutJson("pwa/trigger.json",
+    {action, ts: Date.now(), ...extra},
+    `🔔 trigger: ${action}`);
+}
+
 async function runWorkflow(){
   const c=getCfg();
   if(!c.token||!c.user||!c.repo){ openCfg(); return; }
   const btn=document.getElementById("runBtn");
   btn.textContent="⏳"; btn.disabled=true;
-  try{
-    const res=await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/actions/workflows/briefing.yml/dispatches`,
-      {method:"POST",headers:{"Authorization":"Bearer "+c.token,"Content-Type":"application/json","Accept":"application/vnd.github+json"},
-       body:JSON.stringify({ref:"main"})});
-    if(res.status===204){ toast("✅ Briefing iniciado! ~2 min","ok"); setTimeout(()=>loadReport(true),130000); }
-    else toast("Erro "+res.status+". Verifique o token.","err");
-  }catch(e){ toast("Erro de rede","err"); }
+  const ok = await dispararTrigger("briefing");
+  if(ok){ toast("📲 Enviado ao seu dispositivo — roda em até 1 min","ok"); setTimeout(()=>loadReport(true),90000); }
+  else toast("Erro ao disparar. Verifique usuário/repo/token.","err");
   btn.textContent="▶"; btn.disabled=false;
 }
 
@@ -433,20 +437,12 @@ async function exportGym(dia){
   if(!c.token||!c.user||!c.repo){ openCfg(); return; }
   const btn=document.getElementById("gymExportBtn");
   if(btn){ btn.textContent="⏳ Enviando..."; btn.disabled=true; }
-  try{
-    const res=await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/actions/workflows/export-gym.yml/dispatches`,
-      {method:"POST",
-       headers:{"Authorization":"Bearer "+c.token,"Content-Type":"application/json","Accept":"application/vnd.github+json"},
-       body:JSON.stringify({ref:"main",inputs:{dia:dia}})});
-    if(res.status===204){
-      toast(`⌚ Treino ${dia} a caminho do Garmin! ~1 min`,"ok");
-      if(btn){ btn.textContent="✅ Enviado — sincronize o relógio"; setTimeout(()=>{btn.textContent=`⌚ Enviar Treino ${dia} para o Garmin`;btn.disabled=false;},5000); }
-    } else {
-      toast("Erro "+res.status+". Verifique o token.","err");
-      if(btn){ btn.textContent=`⌚ Enviar Treino ${dia} para o Garmin`; btn.disabled=false; }
-    }
-  }catch(e){
-    toast("Erro de rede","err");
+  const ok = await dispararTrigger("export_gym", {dia});
+  if(ok){
+    toast(`⌚ Pedido enviado — seu dispositivo processa em até 1 min`,"ok");
+    if(btn){ btn.textContent="✅ Enviado — sincronize o relógio em breve"; setTimeout(()=>{btn.textContent=`⌚ Enviar Treino ${dia} para o Garmin`;btn.disabled=false;},8000); }
+  } else {
+    toast("Erro ao disparar. Verifique usuário/repo/token.","err");
     if(btn){ btn.textContent=`⌚ Enviar Treino ${dia} para o Garmin`; btn.disabled=false; }
   }
 }
