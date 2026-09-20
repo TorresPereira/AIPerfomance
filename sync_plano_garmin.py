@@ -28,7 +28,31 @@ SPORT_TYPE = {
 }
 SPORT_LABEL = {"run": "Corrida", "bike": "Bike", "swim": "Natação"}
 
-IDS_PATH = "pwa/plano_garmin_ids.json"
+IDS_PATH   = "pwa/plano_garmin_ids.json"
+ZONAS_PATH = "pwa/zonas_atleta.json"
+
+
+def carregar_zonas():
+    if not os.path.exists(ZONAS_PATH): return {}
+    try:
+        with open(ZONAS_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _faixa_zona(tabela, zona_txt):
+    """Dado {'Z1':[a,b],'Z2':[c,d],...} e um texto tipo 'Z3' ou 'Z3-Z4',
+    retorna [min, max] cobrindo todas as zonas citadas — ou None."""
+    if not tabela or not zona_txt: return None
+    nums = sorted(set(int(n) for n in re.findall(r"\d+", str(zona_txt))))
+    if not nums: return None
+    vals = []
+    for n in nums:
+        rng = tabela.get(f"Z{n}")
+        if rng: vals.extend(rng)
+    if not vals: return None
+    return [min(vals), max(vals)]
 
 
 def _is_429(e):
@@ -67,7 +91,7 @@ def _zona_num(zona):
     return max(nums) if nums else None
 
 
-def _passo(order, step_type_id, step_type_key, dur_min, zona, desc, usar_alvo):
+def _passo(order, step_type_id, step_type_key, dur_min, zona, desc, esporte, zonas, usar_alvo_numerico):
     zona_txt = f" ({zona})" if zona else ""
     step = {
         "type": "ExecutableStepDTO",
@@ -76,15 +100,39 @@ def _passo(order, step_type_id, step_type_key, dur_min, zona, desc, usar_alvo):
         "endCondition": {"conditionTypeId": 2, "conditionTypeKey": "time"},
         "endConditionValue": int(round(dur_min * 60)),
         "description": ((desc or "") + zona_txt)[:120],
-        # Alvo numérico de zona (zoneNumber) foi tentado e travou no Garmin
-        # (mostrava "HR Zone 34" com faixas tipo "Z3-Z4"). A zona vai só no
-        # texto da descrição, que renderiza limpo — sem alvo quebrado.
         "targetType": {"workoutTargetTypeId": 1, "workoutTargetTypeKey": "no.target"},
     }
+    if not usar_alvo_numerico or not zona:
+        return step
+
+    # Tenta um alvo NUMÉRICO real (faixa), do jeito que outros apps mostram
+    # (ex: "137-187 W"). IDs de targetType abaixo são melhor esforço — não
+    # confirmados contra a API ao vivo. Se o Garmin recusar, a 2ª tentativa
+    # do sync_dia cai para esta mesma descrição sem alvo (já comprovado OK).
+    if esporte == "bike":
+        faixa = _faixa_zona(zonas.get("bike_zonas_w"), zona)
+        if faixa:
+            step["targetType"] = {"workoutTargetTypeId": 2, "workoutTargetTypeKey": "power.zone"}
+            step["targetValueOne"], step["targetValueTwo"] = faixa
+    elif esporte == "run":
+        faixa = _faixa_zona(zonas.get("run_zonas_pace_s_km"), zona)
+        if faixa:
+            # Garmin quer velocidade (m/s), não pace — e menor pace(s/km) = mais rápido
+            lo_s, hi_s = faixa  # segundos/km: lo=mais rápido nesta faixa, hi=mais devagar
+            v_hi = 1000.0 / lo_s  # m/s mais rápido
+            v_lo = 1000.0 / hi_s  # m/s mais devagar
+            step["targetType"] = {"workoutTargetTypeId": 3, "workoutTargetTypeKey": "pace.zone"}
+            step["targetValueOne"], step["targetValueTwo"] = round(v_lo, 2), round(v_hi, 2)
+    if "targetValueOne" not in step:
+        # Sem faixa de potência/pace — tenta FC como faixa numérica (não zoneNumber)
+        faixa = _faixa_zona(zonas.get("hr_zonas"), zona)
+        if faixa:
+            step["targetType"] = {"workoutTargetTypeId": 4, "workoutTargetTypeKey": "heart.rate.custom"}
+            step["targetValueOne"], step["targetValueTwo"] = faixa
     return step
 
 
-def _steps_estruturados(estrutura, usar_alvo):
+def _steps_estruturados(estrutura, esporte, zonas, usar_alvo_numerico):
     """Monta aquecimento/intervalado(repeat)/volta_calma a partir dos blocos
     que a IA gerou. Retorna None se a estrutura vier vazia/mal-formada —
     quem chama cai de volta no bloco único simples."""
@@ -93,17 +141,19 @@ def _steps_estruturados(estrutura, usar_alvo):
     for bloco in estrutura:
         tipo = (bloco.get("bloco") or "").lower()
         if tipo == "aquecimento":
-            steps.append(_passo(order, 1, "warmup", bloco.get("duracao_min", 10), bloco.get("zona"), "Aquecimento", usar_alvo))
+            steps.append(_passo(order, 1, "warmup", bloco.get("duracao_min", 10), bloco.get("zona"),
+                                 "Aquecimento", esporte, zonas, usar_alvo_numerico))
             order += 1
         elif tipo == "volta_calma":
-            steps.append(_passo(order, 2, "cooldown", bloco.get("duracao_min", 10), bloco.get("zona"), "Volta à calma", usar_alvo))
+            steps.append(_passo(order, 2, "cooldown", bloco.get("duracao_min", 10), bloco.get("zona"),
+                                 "Volta à calma", esporte, zonas, usar_alvo_numerico))
             order += 1
         elif tipo == "intervalado":
             reps = int(bloco.get("repeticoes") or 1)
-            trabalho = _passo(1, 3, "interval", bloco.get("trabalho_min", 3),
-                               bloco.get("trabalho_zona"), "Forte", usar_alvo)
-            descanso = _passo(2, 4, "recovery", bloco.get("descanso_min", 1.5),
-                               bloco.get("descanso_zona"), "Recuperação", usar_alvo)
+            trabalho = _passo(1, 3, "interval", bloco.get("trabalho_min", 3), bloco.get("trabalho_zona"),
+                               "Forte", esporte, zonas, usar_alvo_numerico)
+            descanso = _passo(2, 4, "recovery", bloco.get("descanso_min", 1.5), bloco.get("descanso_zona"),
+                               "Recuperação", esporte, zonas, usar_alvo_numerico)
             steps.append({
                 "type": "RepeatGroupDTO",
                 "stepOrder": order,
@@ -117,22 +167,23 @@ def _steps_estruturados(estrutura, usar_alvo):
     return steps or None
 
 
-def montar_payload(date_str, sessao, usar_estrutura=True, usar_alvo=True):
+def montar_payload(date_str, sessao, zonas=None, usar_estrutura=True, usar_alvo_numerico=False):
     esporte = sessao.get("esporte")
     sport   = SPORT_TYPE.get(esporte)
     if not sport:
         return None
+    zonas = zonas or {}
     dur_min = int(sessao.get("duracao_min") or 30)
     nota = f"{sessao.get('zona','')} — {sessao.get('descricao','')}".strip(" —")[:250]
     nome = f"{SPORT_LABEL.get(esporte,esporte)} · {sessao.get('tipo','Treino')}"[:80]
 
     steps = None
     if usar_estrutura:
-        steps = _steps_estruturados(sessao.get("estrutura"), usar_alvo)
+        steps = _steps_estruturados(sessao.get("estrutura"), esporte, zonas, usar_alvo_numerico)
 
     if not steps:
         # Sessão contínua (ou fallback): um único bloco pela duração total
-        steps = [_passo(1, 3, "interval", dur_min, sessao.get("zona"), nota, usar_alvo)]
+        steps = [_passo(1, 3, "interval", dur_min, sessao.get("zona"), nota, esporte, zonas, usar_alvo_numerico)]
 
     return {
         "workoutName": nome,
@@ -146,7 +197,8 @@ def montar_payload(date_str, sessao, usar_estrutura=True, usar_alvo=True):
     }
 
 
-def sync_dia(api, date_str, sessoes, ids_map):
+def sync_dia(api, date_str, sessoes, ids_map, zonas=None):
+    zonas = zonas or {}
     criados = 0
     for sessao in sessoes:
         esporte = sessao.get("esporte")
@@ -161,11 +213,11 @@ def sync_dia(api, date_str, sessoes, ids_map):
             except Exception:
                 pass  # já pode ter sido apagado manualmente — segue o jogo
 
-        # 3 tentativas, cada vez mais simples: estrutura+zona → estrutura sem zona → bloco único
+        # 4 tentativas, cada vez mais simples — cai pro próximo nível só se o Garmin recusar:
         tentativas = [
-            ("estruturado com zona", dict(usar_estrutura=True,  usar_alvo=True)),
-            ("estruturado sem zona", dict(usar_estrutura=True,  usar_alvo=False)),
-            ("bloco único (fallback)", dict(usar_estrutura=False, usar_alvo=False)),
+            ("estruturado + alvo numérico (W/pace/bpm)", dict(zonas=zonas, usar_estrutura=True,  usar_alvo_numerico=True)),
+            ("estruturado com zona em texto",             dict(zonas=zonas, usar_estrutura=True,  usar_alvo_numerico=False)),
+            ("bloco único com zona em texto",              dict(zonas=zonas, usar_estrutura=False, usar_alvo_numerico=False)),
         ]
         wid = None
         for nome_tentativa, kwargs in tentativas:
@@ -219,12 +271,14 @@ def main():
         print("  Nada para sincronizar (data fora do plano ou plano vazio).")
         return
 
+    zonas = carregar_zonas()
+    print(f"  Zonas do atleta: {list(zonas.keys()) or 'nenhuma (rode buscar_zonas_garmin.py)'}")
     print(f"  {len(dias_alvo)} dia(s) para processar...")
     api = garmin_login()
 
     total = 0
     for dt in sorted(dias_alvo):
-        total += sync_dia(api, dt, dias_alvo[dt], ids_map)
+        total += sync_dia(api, dt, dias_alvo[dt], ids_map, zonas=zonas)
 
     with open(IDS_PATH, "w", encoding="utf-8") as f:
         json.dump(ids_map, f, ensure_ascii=False, indent=2)

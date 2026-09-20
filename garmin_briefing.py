@@ -1007,11 +1007,11 @@ def sincronizar_plano_amanha(dados, ins):
 
         # Reenvia só amanhã ao Garmin
         try:
-            from sync_plano_garmin import sync_dia, garmin_login as _login_sync
+            from sync_plano_garmin import sync_dia, garmin_login as _login_sync, carregar_zonas
             ids_path = "pwa/plano_garmin_ids.json"
             ids_map = json.load(open(ids_path, encoding="utf-8")) if os.path.exists(ids_path) else {}
             api2 = _login_sync()
-            n = sync_dia(api2, TOMORROW_STR, sessoes_amanha, ids_map)
+            n = sync_dia(api2, TOMORROW_STR, sessoes_amanha, ids_map, zonas=carregar_zonas())
             with open(ids_path, "w", encoding="utf-8") as f:
                 json.dump(ids_map, f, ensure_ascii=False, indent=2)
             print(f"  ⌚ {n} treino(s) de amanhã atualizado(s) no Garmin")

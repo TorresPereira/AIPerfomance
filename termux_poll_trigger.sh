@@ -36,6 +36,9 @@ if [ "$TS" -gt "$LAST_TS" ] 2>/dev/null; then
     sync_plano_dia)
       bash termux_run_sync_plano.sh "$DATA"
       ;;
+    gerar_plano)
+      bash termux_run_gerar_plano.sh
+      ;;
     *)
       echo "  Ação desconhecida: $ACTION"
       ;;
