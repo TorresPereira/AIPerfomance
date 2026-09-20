@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-20T19:46:02.995727Z",
+  "gerado_em": "2026-09-20T19:53:28.554363Z",
   "semana_inicio": "2026-09-20",
   "semana_fim": "2026-10-17",
   "config_usada": {
@@ -53,9 +53,9 @@
             {
               "esporte": "bike",
               "tipo": "Long Ride Base",
-              "duracao_min": 120,
+              "duracao_min": 105,
               "zona": "Z2",
-              "descricao": "Pedal longo em ritmo aeróbico constante, cadência 85-95rpm, foco em economia de pedalada.",
+              "descricao": "Pedalada longa em ritmo aeróbico estável, cadência 85-95rpm, sem variações bruscas de intensidade.",
               "longo": true,
               "estrutura": null,
               "fixo": false
@@ -72,10 +72,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Rodagem Leve",
+              "tipo": "Rodagem Moderada",
               "duracao_min": 45,
               "zona": "Z2",
-              "descricao": "Corrida contínua em ritmo fácil para ativar a recuperação e construir base aeróbica.",
+              "descricao": "Corrida contínua em ritmo confortável, foco em postura e passada econômica.",
               "longo": false,
               "estrutura": null,
               "fixo": false
@@ -93,15 +93,15 @@
             {
               "esporte": "run",
               "tipo": "Intervalado 6x3min",
-              "duracao_min": 46,
+              "duracao_min": 47,
               "zona": "Z4",
-              "descricao": "Intervalos em ritmo de limiar superior com recuperação ativa, foco em velocidade e economia de corrida.",
+              "descricao": "Aquecimento, 6 repetições em Z4 com recuperação ativa, volta calma para desenvolver velocidade aeróbica.",
               "longo": false,
               "estrutura": [
                 {
                   "bloco": "aquecimento",
                   "duracao_min": 10,
-                  "zona": "Z2"
+                  "zona": "Z1"
                 },
                 {
                   "bloco": "intervalado",
@@ -113,7 +113,7 @@
                 },
                 {
                   "bloco": "volta_calma",
-                  "duracao_min": 6,
+                  "duracao_min": 7,
                   "zona": "Z1"
                 }
               ],
@@ -146,10 +146,10 @@
             },
             {
               "esporte": "swim",
-              "tipo": "Natacao Base",
+              "tipo": "Natacao Técnica Base",
               "duracao_min": 45,
               "zona": "Z2",
-              "descricao": "Sessão fixa de natação com foco em técnica de braçada, equilíbrio e deslize na água.",
+              "descricao": "Sessão fixa: foco em técnica de braçada, drills de equilíbrio e deslize, ritmo aeróbico leve.",
               "longo": false,
               "estrutura": null,
               "fixo": false
@@ -166,31 +166,12 @@
           "sessoes": [
             {
               "esporte": "bike",
-              "tipo": "Pedal Tempo",
-              "duracao_min": 55,
-              "zona": "Z3",
-              "descricao": "Pedal moderado a ritmo de tempo sustentado, mantendo potência/FC estável durante o bloco principal.",
+              "tipo": "Pedalada Técnica Z2",
+              "duracao_min": 60,
+              "zona": "Z2",
+              "descricao": "Pedalada contínua em Z2, trabalho de cadência alta (95-100rpm), economia de movimento.",
               "longo": false,
-              "estrutura": [
-                {
-                  "bloco": "aquecimento",
-                  "duracao_min": 10,
-                  "zona": "Z2"
-                },
-                {
-                  "bloco": "intervalado",
-                  "repeticoes": 3,
-                  "trabalho_min": 10,
-                  "trabalho_zona": "Z3",
-                  "descanso_min": 2,
-                  "descanso_zona": "Z1"
-                },
-                {
-                  "bloco": "volta_calma",
-                  "duracao_min": 9,
-                  "zona": "Z1"
-                }
-              ],
+              "estrutura": null,
               "fixo": false
             }
           ]
@@ -215,9 +196,9 @@
             {
               "esporte": "run",
               "tipo": "Long Run Base",
-              "duracao_min": 75,
+              "duracao_min": 90,
               "zona": "Z2",
-              "descricao": "Corrida longa em ritmo aeróbico fácil, terreno plano ou levemente ondulado, foco em tempo em movimento.",
+              "descricao": "Corrida longa em ritmo aeróbico confortável, mantendo conversa possível durante todo o percurso.",
               "longo": true,
               "estrutura": null,
               "fixo": false
@@ -243,9 +224,9 @@
             {
               "esporte": "bike",
               "tipo": "Long Ride Base",
-              "duracao_min": 120,
+              "duracao_min": 110,
               "zona": "Z2",
-              "descricao": "Pedal longo em ritmo aeróbico constante, cadência 85-95rpm, foco em economia de pedalada.",
+              "descricao": "Pedalada longa progressiva em Z2, ligeiro aumento de volume em relação à semana anterior.",
               "longo": true,
               "estrutura": null,
               "fixo": false
@@ -262,10 +243,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Rodagem Leve",
-              "duracao_min": 45,
+              "tipo": "Rodagem Moderada",
+              "duracao_min": 50,
               "zona": "Z2",
-              "descricao": "Corrida contínua em ritmo fácil para ativar a recuperação pós-long ride.",
+              "descricao": "Corrida contínua em Z2, atenção à cadência de passada e relaxamento dos ombros.",
               "longo": false,
               "estrutura": null,
               "fixo": false
@@ -282,28 +263,28 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Intervalado 8x2min",
-              "duracao_min": 50,
-              "zona": "Z4",
-              "descricao": "Intervalos curtos em ritmo de limiar alto, desenvolvendo capacidade anaeróbica e velocidade de corrida.",
+              "tipo": "Tempo Run 20min",
+              "duracao_min": 43,
+              "zona": "Z3",
+              "descricao": "Aquecimento, bloco contínuo em Z3 (limiar aeróbico), volta calma para desenvolver resistência de ritmo.",
               "longo": false,
               "estrutura": [
                 {
                   "bloco": "aquecimento",
                   "duracao_min": 10,
-                  "zona": "Z2"
+                  "zona": "Z1"
                 },
                 {
                   "bloco": "intervalado",
-                  "repeticoes": 8,
-                  "trabalho_min": 2,
-                  "trabalho_zona": "Z4",
-                  "descanso_min": 1.5,
+                  "repeticoes": 1,
+                  "trabalho_min": 20,
+                  "trabalho_zona": "Z3",
+                  "descanso_min": 3,
                   "descanso_zona": "Z1"
                 },
                 {
                   "bloco": "volta_calma",
-                  "duracao_min": 8,
+                  "duracao_min": 10,
                   "zona": "Z1"
                 }
               ],
@@ -336,10 +317,10 @@
             },
             {
               "esporte": "swim",
-              "tipo": "Natacao Base",
+              "tipo": "Natacao Técnica Base",
               "duracao_min": 45,
               "zona": "Z2",
-              "descricao": "Sessão fixa de natação com foco em técnica de braçada, equilíbrio e deslize na água.",
+              "descricao": "Sessão fixa: drills de respiração bilateral, séries de 100m em ritmo aeróbico, foco em eficiência.",
               "longo": false,
               "estrutura": null,
               "fixo": false
@@ -356,31 +337,12 @@
           "sessoes": [
             {
               "esporte": "bike",
-              "tipo": "Pedal Tempo",
+              "tipo": "Pedalada Z2 Cadência",
               "duracao_min": 60,
-              "zona": "Z3",
-              "descricao": "Pedal a ritmo de tempo progressivo, mantendo FC controlada e cadência eficiente.",
+              "zona": "Z2",
+              "descricao": "Pedalada em Z2 com blocos de cadência variada (80rpm vs 100rpm), sem elevar FC.",
               "longo": false,
-              "estrutura": [
-                {
-                  "bloco": "aquecimento",
-                  "duracao_min": 10,
-                  "zona": "Z2"
-                },
-                {
-                  "bloco": "intervalado",
-                  "repeticoes": 3,
-                  "trabalho_min": 12,
-                  "trabalho_zona": "Z3",
-                  "descanso_min": 2,
-                  "descanso_zona": "Z1"
-                },
-                {
-                  "bloco": "volta_calma",
-                  "duracao_min": 8,
-                  "zona": "Z1"
-                }
-              ],
+              "estrutura": null,
               "fixo": false
             }
           ]
@@ -405,9 +367,9 @@
             {
               "esporte": "run",
               "tipo": "Long Run Base",
-              "duracao_min": 80,
+              "duracao_min": 95,
               "zona": "Z2",
-              "descricao": "Corrida longa em ritmo aeróbico fácil, aumentando ligeiramente o volume em relação à semana anterior.",
+              "descricao": "Corrida longa ligeiramente maior que a semana anterior, ritmo aeróbico estável do início ao fim.",
               "longo": true,
               "estrutura": null,
               "fixo": false
@@ -432,11 +394,21 @@
           "sessoes": [
             {
               "esporte": "bike",
-              "tipo": "Long Ride Base",
-              "duracao_min": 135,
+              "tipo": "Long Ride Base + Brick",
+              "duracao_min": 120,
               "zona": "Z2",
-              "descricao": "Pedal longo em ritmo aeróbico constante, semana de pico de volume, foco em resistência.",
+              "descricao": "Pedalada longa em Z2 seguida imediatamente de 15min de corrida de transição em Z2 (brick).",
               "longo": true,
+              "estrutura": null,
+              "fixo": false
+            },
+            {
+              "esporte": "run",
+              "tipo": "Brick Run",
+              "duracao_min": 15,
+              "zona": "Z2",
+              "descricao": "Corrida de transição logo após o long ride, adaptação neuromuscular de bike para corrida.",
+              "longo": false,
               "estrutura": null,
               "fixo": false
             }
@@ -455,7 +427,7 @@
               "tipo": "Rodagem Moderada",
               "duracao_min": 50,
               "zona": "Z2",
-              "descricao": "Corrida contínua em ritmo aeróbico confortável, mantendo boa mecânica de passada.",
+              "descricao": "Corrida contínua em Z2 para manutenção aeróbica, pernas leves após o brick do dia anterior.",
               "longo": false,
               "estrutura": null,
               "fixo": false
@@ -472,28 +444,28 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Intervalado 5x4min",
-              "duracao_min": 55,
+              "tipo": "Intervalado 8x3min",
+              "duracao_min": 54,
               "zona": "Z4",
-              "descricao": "Intervalos mais longos em ritmo de limiar, desenvolvendo resistência a velocidade e eficiência metabólica.",
+              "descricao": "Aquecimento, 8 repetições em Z4 com recuperação ativa, semana de pico de volume e qualidade.",
               "longo": false,
               "estrutura": [
                 {
                   "bloco": "aquecimento",
-                  "duracao_min": 12,
-                  "zona": "Z2"
+                  "duracao_min": 10,
+                  "zona": "Z1"
                 },
                 {
                   "bloco": "intervalado",
-                  "repeticoes": 5,
-                  "trabalho_min": 4,
+                  "repeticoes": 8,
+                  "trabalho_min": 3,
                   "trabalho_zona": "Z4",
                   "descanso_min": 2,
                   "descanso_zona": "Z1"
                 },
                 {
                   "bloco": "volta_calma",
-                  "duracao_min": 8,
+                  "duracao_min": 4,
                   "zona": "Z1"
                 }
               ],
@@ -526,10 +498,10 @@
             },
             {
               "esporte": "swim",
-              "tipo": "Natacao Base",
+              "tipo": "Natacao Aeróbica",
               "duracao_min": 45,
               "zona": "Z2",
-              "descricao": "Sessão fixa de natação com foco em técnica de braçada, equilíbrio e deslize na água.",
+              "descricao": "Sessão fixa: séries de 200m contínuos em Z2, foco em manter técnica de braçada sob fadiga leve.",
               "longo": false,
               "estrutura": null,
               "fixo": false
@@ -546,28 +518,28 @@
           "sessoes": [
             {
               "esporte": "bike",
-              "tipo": "Pedal Tempo Progressivo",
-              "duracao_min": 65,
+              "tipo": "Pedalada Intervalada 5x5min",
+              "duracao_min": 60,
               "zona": "Z3",
-              "descricao": "Pedal com blocos progressivos de intensidade, simulando o esforço médio de corrida no Ironman 70.3.",
+              "descricao": "Aquecimento, 5 blocos de 5min em Z3 com recuperação, estimulando o limiar aeróbico no bike.",
               "longo": false,
               "estrutura": [
                 {
                   "bloco": "aquecimento",
                   "duracao_min": 10,
-                  "zona": "Z2"
+                  "zona": "Z1"
                 },
                 {
                   "bloco": "intervalado",
-                  "repeticoes": 4,
-                  "trabalho_min": 10,
+                  "repeticoes": 5,
+                  "trabalho_min": 5,
                   "trabalho_zona": "Z3",
-                  "descanso_min": 2,
+                  "descanso_min": 3,
                   "descanso_zona": "Z1"
                 },
                 {
                   "bloco": "volta_calma",
-                  "duracao_min": 7,
+                  "duracao_min": 5,
                   "zona": "Z1"
                 }
               ],
@@ -594,10 +566,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Long Run Pico + Brick Curto",
-              "duracao_min": 90,
+              "tipo": "Long Run Pico",
+              "duracao_min": 105,
               "zona": "Z2",
-              "descricao": "Corrida longa em ritmo aeróbico, maior volume da fase, foco em resistência e manutenção da forma.",
+              "descricao": "Corrida longa mais extensa do bloco, ritmo aeróbico controlado, hidratação e nutrição em rota.",
               "longo": true,
               "estrutura": null,
               "fixo": false
@@ -622,10 +594,10 @@
           "sessoes": [
             {
               "esporte": "bike",
-              "tipo": "Long Ride Recuperação Ativa",
-              "duracao_min": 80,
-              "zona": "Z2",
-              "descricao": "Pedal longo reduzido em semana de recuperação, ritmo leve, sem forçar intensidade.",
+              "tipo": "Long Ride Recuperação",
+              "duracao_min": 75,
+              "zona": "Z1",
+              "descricao": "Pedalada longa reduzida em volume (~30%), ritmo muito leve de recuperação ativa em Z1.",
               "longo": true,
               "estrutura": null,
               "fixo": false
@@ -645,7 +617,7 @@
               "tipo": "Rodagem Leve",
               "duracao_min": 35,
               "zona": "Z1",
-              "descricao": "Corrida leve de recuperação ativa, ritmo muito confortável, sem esforço percebido elevado.",
+              "descricao": "Corrida leve de recuperação, sem pressão de ritmo, foco em soltar as pernas após semana de pico.",
               "longo": false,
               "estrutura": null,
               "fixo": false
@@ -659,37 +631,7 @@
           "longo_run": false,
           "fase": "BASE",
           "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "run",
-              "tipo": "Strides 4x20s",
-              "duracao_min": 35,
-              "zona": "Z3",
-              "descricao": "Corrida de recuperação com acelerações curtas para manter a neuromuscular ativa na semana de descarga.",
-              "longo": false,
-              "estrutura": [
-                {
-                  "bloco": "aquecimento",
-                  "duracao_min": 10,
-                  "zona": "Z2"
-                },
-                {
-                  "bloco": "intervalado",
-                  "repeticoes": 4,
-                  "trabalho_min": 0.33,
-                  "trabalho_zona": "Z4",
-                  "descanso_min": 2,
-                  "descanso_zona": "Z1"
-                },
-                {
-                  "bloco": "volta_calma",
-                  "duracao_min": 15,
-                  "zona": "Z1"
-                }
-              ],
-              "fixo": false
-            }
-          ]
+          "sessoes": []
         },
         "2026-10-14": {
           "dow": "qua",
@@ -716,10 +658,10 @@
             },
             {
               "esporte": "swim",
-              "tipo": "Natacao Base",
+              "tipo": "Natacao Leve Técnica",
               "duracao_min": 45,
-              "zona": "Z2",
-              "descricao": "Sessão fixa de natação com foco em técnica de braçada, equilíbrio e deslize na água.",
+              "zona": "Z1",
+              "descricao": "Sessão fixa: volume reduzido, drills de técnica e equilíbrio na água, sem esforço elevado.",
               "longo": false,
               "estrutura": null,
               "fixo": false
@@ -736,10 +678,10 @@
           "sessoes": [
             {
               "esporte": "bike",
-              "tipo": "Pedal Leve",
+              "tipo": "Pedalada Leve Z1",
               "duracao_min": 40,
-              "zona": "Z2",
-              "descricao": "Pedal curto e leve de manutenção, cadência alta e esforço baixo, semana de recuperação.",
+              "zona": "Z1",
+              "descricao": "Pedalada curta e leve em Z1, manutenção do movimento sem acúmulo de fadiga na semana de recuperação.",
               "longo": false,
               "estrutura": null,
               "fixo": false
@@ -753,7 +695,18 @@
           "longo_run": false,
           "fase": "BASE",
           "fixos": [],
-          "sessoes": []
+          "sessoes": [
+            {
+              "esporte": "run",
+              "tipo": "Strides e Ativação",
+              "duracao_min": 35,
+              "zona": "Z2",
+              "descricao": "Rodagem leve com 4-6 acelerações progressivas de 20seg ao final para manter a sensação de velocidade.",
+              "longo": false,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
         },
         "2026-10-17": {
           "dow": "sab",
@@ -766,9 +719,9 @@
             {
               "esporte": "run",
               "tipo": "Long Run Recuperação",
-              "duracao_min": 55,
+              "duracao_min": 65,
               "zona": "Z2",
-              "descricao": "Corrida longa reduzida em semana de recuperação, ritmo fácil e controlado, sem acúmulo de fadiga.",
+              "descricao": "Corrida longa reduzida (~35% menos que o pico), ritmo aeróbico suave para consolidar adaptações.",
               "longo": true,
               "estrutura": null,
               "fixo": false
