@@ -176,7 +176,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v4.7 · 20/09/2026</div>
+  <div class="pin-ver">v4.8 · 20/09/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -1078,24 +1078,9 @@ function renderGym(){
     <button id="gymExportBtn" onclick="exportGym('${sel}')" style="width:100%;background:${dcol}22;border:1.5px solid ${dcol}55;color:${dcol};border-radius:10px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.03em;margin-bottom:8px">
       ⌚ Enviar Treino ${isForca?"de Força":sel} para o Garmin
     </button>
-    <div style="display:flex;gap:8px">
-      <button class="btn-sec" style="flex:1;margin:0;font-size:11px;padding:9px" onclick="gerarTreinoAcademia()" id="gerarTreinoBtn">🔄 Gerar Novo</button>
-      ${(g.historico||{})[sel]?.length ? `<button class="btn-sec" style="flex:1;margin:0;font-size:11px;padding:9px" onclick="toggleHistoricoGym('${sel}')">📜 Histórico (${g.historico[sel].length})</button>` : ""}
-    </div>
-  </div>
-  <div id="histGym_${sel}" style="display:none;margin-bottom:14px">
-    ${((g.historico||{})[sel]||[]).map((h,i)=>`
-      <div style="background:#111;border-radius:10px;padding:10px 12px;margin-bottom:6px;opacity:.7">
-        <div style="font-size:9px;color:#444;margin-bottom:4px">${h.gerado_em?new Date(h.gerado_em).toLocaleDateString("pt-BR"):"anterior"}</div>
-        ${(h.exercicios||[]).map(ex=>`<div style="font-size:10px;color:#666;padding:2px 0">${ex.exercicio} — ${ex.series}×${ex.repeticoes}</div>`).join("")}
-      </div>`).join("")}
+    <button class="btn-sec" style="width:100%;margin:0;font-size:11px;padding:9px" onclick="gerarTreinoAcademia()" id="gerarTreinoBtn">🔄 Gerar Novo</button>
   </div>
   ${cards}`;
-}
-
-function toggleHistoricoGym(letra){
-  const el = document.getElementById("histGym_"+letra);
-  if (el) el.style.display = el.style.display==="none" ? "block" : "none";
 }
 
 async function gerarTreinoAcademia(){
