@@ -1,1 +1,4 @@
-{"action": "sync_plano", "ts": 1789931431327}
+{
+  "action": "gerar_plano",
+  "ts": 1789931999840
+}
