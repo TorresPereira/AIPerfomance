@@ -21,6 +21,13 @@
     "bike": "dom",
     "run": "sab"
   },
-  "atividades_fixas": [],
-  "atualizado_em": "2026-09-20T11:24:05.244Z"
+  "atividades_fixas": [
+    {
+      "dia": "qua",
+      "nome": "Natacao",
+      "esporte": "swim",
+      "duracao_min": 44
+    }
+  ],
+  "atualizado_em": "2026-09-20T13:24:35.488Z"
 }
