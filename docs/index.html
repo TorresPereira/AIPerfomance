@@ -176,7 +176,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v4.5 · 20/09/2026</div>
+  <div class="pin-ver">v4.6 · 20/09/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -447,13 +447,56 @@ async function exportGym(dia){
   }
 }
 
-function renderEstrutura(estrutura){
+// ─── Zonas do atleta → pace/potência/distância ────────────────────────────────
+function zonaFaixa(tabela, zonaTxt){
+  if (!tabela || !zonaTxt) return null;
+  const nums = [...new Set((String(zonaTxt).match(/\d+/g)||[]).map(Number))];
+  if (!nums.length) return null;
+  let vals = [];
+  nums.forEach(n=>{ const r = tabela["Z"+n]; if (r) vals.push(...r); });
+  if (!vals.length) return null;
+  return [Math.min(...vals), Math.max(...vals)];
+}
+function fmtPace(sKm){
+  if (!sKm) return "";
+  const m = Math.floor(sKm/60), s = Math.round(sKm%60);
+  return `${m}:${String(s).padStart(2,"0")}/km`;
+}
+// Resumo curto: pace+distância estimada (corrida) ou faixa de potência (bike)
+function resumoIntensidade(esporte, zonaTxt, durMin){
+  if (!zonaTxt || !durMin) return "";
+  if (esporte === "run" && zonasAtleta.run_zonas_pace_s_km){
+    const faixa = zonaFaixa(zonasAtleta.run_zonas_pace_s_km, zonaTxt);
+    if (faixa){
+      const [rapido, devagar] = faixa;
+      const paceMedio = (rapido+devagar)/2;
+      const dist = (durMin*60/paceMedio).toFixed(1); // durMin*60s / pace(s/km) = km
+      return `🏃 ${fmtPace(rapido)}–${fmtPace(devagar)} · ~${dist}km`;
+    }
+  }
+  if (esporte === "bike" && zonasAtleta.bike_zonas_w){
+    const faixa = zonaFaixa(zonasAtleta.bike_zonas_w, zonaTxt);
+    if (faixa) return `🚴 ${faixa[0]}–${faixa[1]}W`;
+  }
+  return "";
+}
+
+function renderEstrutura(estrutura, esporte){
   if (!estrutura || !estrutura.length) return "";
   const linhas = estrutura.map(b=>{
     const tipo = (b.bloco||"").toLowerCase();
-    if (tipo === "aquecimento") return `🔥 Aquecimento ${b.duracao_min}min${b.zona?` (${b.zona})`:""}`;
-    if (tipo === "volta_calma") return `🧊 Volta à calma ${b.duracao_min}min${b.zona?` (${b.zona})`:""}`;
-    if (tipo === "intervalado") return `🔁 ${b.repeticoes}× [${b.trabalho_min}min ${b.trabalho_zona||"forte"} + ${b.descanso_min}min ${b.descanso_zona||"recup"}]`;
+    if (tipo === "aquecimento"){
+      const r = resumoIntensidade(esporte, b.zona, b.duracao_min);
+      return `🔥 Aquecimento ${b.duracao_min}min${b.zona?` (${b.zona})`:""}${r?` · ${r}`:""}`;
+    }
+    if (tipo === "volta_calma"){
+      const r = resumoIntensidade(esporte, b.zona, b.duracao_min);
+      return `🧊 Volta à calma ${b.duracao_min}min${b.zona?` (${b.zona})`:""}${r?` · ${r}`:""}`;
+    }
+    if (tipo === "intervalado"){
+      const r = resumoIntensidade(esporte, b.trabalho_zona, b.trabalho_min);
+      return `🔁 ${b.repeticoes}× [${b.trabalho_min}min ${b.trabalho_zona||"forte"}${r?` (${r})`:""} + ${b.descanso_min}min ${b.descanso_zona||"recup"}]`;
+    }
     return null;
   }).filter(Boolean);
   if (!linhas.length) return "";
@@ -506,6 +549,7 @@ let report = null;
 let plano  = null;
 let planoConfigCache = null;
 let planoGarminIds = {};
+let zonasAtleta = {};
 
 async function fetchGithubJson(path){
   const c = getCfg();
@@ -531,6 +575,9 @@ async function fetchPlano(){
   try{
     planoGarminIds = await fetchGithubJson("pwa/plano_garmin_ids.json") || {};
   }catch(e){ planoGarminIds = planoGarminIds || {}; }
+  try{
+    zonasAtleta = await fetchGithubJson("pwa/zonas_atleta.json") || {};
+  }catch(e){ zonasAtleta = zonasAtleta || {}; }
 }
 
 // ─── Load report ──────────────────────────────────────────────────────────────
@@ -893,6 +940,7 @@ function renderPlano(){
           <div style="flex:1;min-width:0">
             <div style="font-size:12px;font-weight:600;color:#ddd">${s.tipo||s.esporte}${s.fixo?' <span style="color:#333;font-size:9px">📌 fixo</span>':(synced?' <span style="color:#14b8a6;font-size:9px">⌚ sincronizado</span>':' <span style="color:#553;font-size:9px">○ não sincronizado</span>')}</div>
             ${s.descricao?`<div style="font-size:10px;color:#444">${s.descricao}</div>`:""}
+            ${!s.fixo?(()=>{const r=resumoIntensidade(s.esporte,s.zona,s.duracao_min);return r?`<div style="font-size:9px;color:#14b8a6;margin-top:2px">${r}</div>`:"";})():""}
           </div>
           <div style="font-size:11px;color:#666;font-family:monospace">${s.duracao_min}min</div>
         </div>`;
@@ -903,7 +951,8 @@ function renderPlano(){
           <div style="font-size:10px;color:#555;margin-bottom:6px;line-height:1.6">
             <strong style="color:#888">${s.tipo||s.esporte}</strong>${s.zona?` · Zona ${s.zona}`:""} · ${s.duracao_min}min${s.longo?" · Sessão longa":""}
             ${s.descricao?`<br>${s.descricao}`:""}
-            ${renderEstrutura(s.estrutura)}
+            ${(()=>{const r=resumoIntensidade(s.esporte,s.zona,s.duracao_min);return r&&!s.estrutura?`<br><span style="color:#14b8a6">${r}</span>`:"";})()}
+            ${renderEstrutura(s.estrutura, s.esporte)}
           </div>`).join("")}
         ${temNaoFixa?`<button class="btn-sec" style="width:100%;margin:4px 0 2px;font-size:11px;padding:9px;color:#14b8a6;border-color:#14b8a655" onclick="event.stopPropagation();syncDiaPlano('${dt}')" id="syncDia_${dt}">🔄 Sincronizar este dia com o Garmin</button>`:""}
       </div>`:""}
