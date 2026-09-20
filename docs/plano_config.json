@@ -2,7 +2,7 @@
   "tipo_prova": "triathlon",
   "prova_categoria": "middle",
   "foco_modalidade": "run",
-  "horas_semana": 8,
+  "horas_semana": 7,
   "dias_disponiveis": [
     "seg",
     "ter",
@@ -29,5 +29,5 @@
       "duracao_min": 45
     }
   ],
-  "atualizado_em": "2026-09-20T19:44:13.994Z"
+  "atualizado_em": "2026-09-20T20:07:42.371Z"
 }
