@@ -17,6 +17,7 @@ TRIGGER_FILE="pwa/trigger.json"
 TS=$(python3 -c "import json;print(json.load(open('$TRIGGER_FILE')).get('ts',0))" 2>/dev/null || echo 0)
 ACTION=$(python3 -c "import json;print(json.load(open('$TRIGGER_FILE')).get('action',''))" 2>/dev/null || echo "")
 DIA=$(python3 -c "import json;print(json.load(open('$TRIGGER_FILE')).get('dia','A'))" 2>/dev/null || echo "A")
+DATA=$(python3 -c "import json;print(json.load(open('$TRIGGER_FILE')).get('data',''))" 2>/dev/null || echo "")
 
 if [ "$TS" -gt "$LAST_TS" ] 2>/dev/null; then
   echo "[$(date '+%H:%M:%S')] Novo trigger: $ACTION (ts=$TS)"
@@ -28,6 +29,12 @@ if [ "$TS" -gt "$LAST_TS" ] 2>/dev/null; then
       ;;
     export_gym)
       bash termux_run_export_gym.sh "$DIA"
+      ;;
+    sync_plano)
+      bash termux_run_sync_plano.sh
+      ;;
+    sync_plano_dia)
+      bash termux_run_sync_plano.sh "$DATA"
       ;;
     *)
       echo "  Ação desconhecida: $ACTION"
