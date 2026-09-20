@@ -11,7 +11,7 @@ Uso:
   SYNC_DATE=2026-09-22 python sync_plano_garmin.py   → sincroniza só essa data
 """
 
-import os, json, datetime, time
+import os, json, re, datetime, time
 
 from garminconnect import Garmin
 
@@ -59,27 +59,28 @@ def garmin_login():
 
 
 def _zona_num(zona):
-    """'Z4' → 4 | None se não der pra interpretar."""
+    """'Z4' → 4 | 'Z3-Z4' → 4 (pega a maior) | None se não der pra interpretar.
+    OBS: não usado para alvo numérico no Garmin (ver nota em _passo) — só
+    mantido para eventual uso futuro; usa regex, nunca concatena dígitos."""
     if not zona: return None
-    m = "".join(c for c in str(zona) if c.isdigit())
-    return int(m) if m else None
+    nums = [int(n) for n in re.findall(r"\d+", str(zona))]
+    return max(nums) if nums else None
 
 
 def _passo(order, step_type_id, step_type_key, dur_min, zona, desc, usar_alvo):
+    zona_txt = f" ({zona})" if zona else ""
     step = {
         "type": "ExecutableStepDTO",
         "stepOrder": order,
         "stepType": {"stepTypeId": step_type_id, "stepTypeKey": step_type_key},
         "endCondition": {"conditionTypeId": 2, "conditionTypeKey": "time"},
         "endConditionValue": int(round(dur_min * 60)),
-        "description": (desc or "")[:120],
+        "description": ((desc or "") + zona_txt)[:120],
+        # Alvo numérico de zona (zoneNumber) foi tentado e travou no Garmin
+        # (mostrava "HR Zone 34" com faixas tipo "Z3-Z4"). A zona vai só no
+        # texto da descrição, que renderiza limpo — sem alvo quebrado.
+        "targetType": {"workoutTargetTypeId": 1, "workoutTargetTypeKey": "no.target"},
     }
-    zn = _zona_num(zona)
-    if usar_alvo and zn:
-        step["targetType"] = {"workoutTargetTypeId": 4, "workoutTargetTypeKey": "heart.rate.zone"}
-        step["zoneNumber"] = zn
-    else:
-        step["targetType"] = {"workoutTargetTypeId": 1, "workoutTargetTypeKey": "no.target"}
     return step
 
 
@@ -100,7 +101,7 @@ def _steps_estruturados(estrutura, usar_alvo):
         elif tipo == "intervalado":
             reps = int(bloco.get("repeticoes") or 1)
             trabalho = _passo(1, 3, "interval", bloco.get("trabalho_min", 3),
-                               bloco.get("trabalho_zona"), f"Forte {bloco.get('trabalho_zona','')}", usar_alvo)
+                               bloco.get("trabalho_zona"), "Forte", usar_alvo)
             descanso = _passo(2, 4, "recovery", bloco.get("descanso_min", 1.5),
                                bloco.get("descanso_zona"), "Recuperação", usar_alvo)
             steps.append({
