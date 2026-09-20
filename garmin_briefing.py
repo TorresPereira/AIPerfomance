@@ -398,6 +398,8 @@ def coletar():
     except Exception as e: print(f"  Mês feitos err: {e}")
     # Planejados: calendário (só existe com plano de treino ativo)
     try:
+        if not hasattr(api, "get_scheduled_workouts"):
+            raise AttributeError("get_scheduled_workouts indisponível nesta versão — pulando planejados do mês")
         res_m = api.get_scheduled_workouts(TODAY.year, TODAY.month)
         raw_m = res_m.get("calendarItems",[]) if isinstance(res_m,dict) else (res_m or [])
         for w in raw_m:
@@ -612,6 +614,8 @@ def coletar():
     # ─ Calendário hoje e amanhã ─
     def _parse_calendar(target_date_str, target_date):
         items = []
+        if not hasattr(api, "get_scheduled_workouts"):
+            return items  # método não existe nesta versão da lib — sem calendário Garmin, sem problema
         try:
             res = api.get_scheduled_workouts(target_date.year, target_date.month)
             raw = res.get("calendarItems",[]) if isinstance(res,dict) else (res if isinstance(res,list) else [])
