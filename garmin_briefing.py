@@ -692,6 +692,54 @@ def coletar():
     d["hoje"]  = _parse_calendar(TODAY_STR,  TODAY)
     d["amanha"] = _parse_calendar(TOMORROW_STR, TOMORROW)
     print(f"  Hoje: {len(d['hoje'])} treino(s) | Amanhã: {len(d['amanha'])} treino(s)")
+
+    # ─── Plano de 4 semanas (se existir, tem prioridade sobre o calendário Garmin) ─
+    d["plano_meta"] = {}
+    d["plano_hoje_sessoes"] = []
+    d["plano_amanha_sessoes"] = []
+    try:
+        if os.path.exists("pwa/plano.json"):
+            with open("pwa/plano.json", encoding="utf-8") as pf:
+                plano = json.load(pf)
+            SPORT_ICO = {"swim":"🏊","bike":"🚴","run":"🏃","strength":"💪","futebol":"⚽","outro":"⚡"}
+            def _sessoes_do_dia(dstr):
+                for sem in plano.get("semanas", []):
+                    if dstr in sem.get("dias", {}):
+                        return sem["dias"][dstr].get("sessoes", []), sem.get("numero"), sem.get("fase")
+                return None, None, None
+
+            sess_hoje, num_sem, fase_sem = _sessoes_do_dia(TODAY_STR)
+            if sess_hoje is not None:
+                d["plano_meta"] = {"semana": num_sem, "fase": fase_sem}
+                d["plano_hoje_sessoes"] = sess_hoje
+                if sess_hoje:
+                    d["hoje"] = [{
+                        "icone": SPORT_ICO.get(s.get("esporte"), "⚡"),
+                        "nome": s.get("tipo", s.get("esporte","Treino")),
+                        "tipo": s.get("esporte",""),
+                        "dur": f"{int(s.get('duracao_min',0))}min",
+                        "dist": "—",
+                        "passos": [s.get("descricao")] if s.get("descricao") else [],
+                    } for s in sess_hoje]
+                print(f"  📋 Plano ativo — semana {num_sem} ({fase_sem}) — hoje: {len(sess_hoje)} sessão(ões)")
+
+            sess_amanha, _, _ = _sessoes_do_dia(TOMORROW_STR)
+            if sess_amanha is not None:
+                d["plano_amanha_sessoes"] = sess_amanha
+                if sess_amanha:
+                    d["amanha"] = [{
+                        "icone": SPORT_ICO.get(s.get("esporte"), "⚡"),
+                        "nome": s.get("tipo", s.get("esporte","Treino")),
+                        "tipo": s.get("esporte",""),
+                        "dur": f"{int(s.get('duracao_min',0))}min",
+                        "dist": "—",
+                        "passos": [s.get("descricao")] if s.get("descricao") else [],
+                    } for s in sess_amanha]
+        else:
+            print("  Sem plano de 4 semanas configurado.")
+    except Exception as e:
+        print(f"  Plano err: {e}")
+
     return d
 
 # ─── Prompt técnico ───────────────────────────────────────────────────────────
@@ -755,6 +803,9 @@ NUTRIÇÃO ESTIMADA PARA HOJE:
 - Hidratação: {s.get('nutricao',{}).get('agua_ml_h','—')}ml/h | Pré-treino: {s.get('nutricao',{}).get('pre_kcal','—')}kcal | Pós: {s.get('nutricao',{}).get('pos_prot_g','—')}g proteína
 - Sono alvo: {s.get('sono_alvo_h','—')}h | Déficit atual: {s.get('sono_deficit_h','—')}h | Deitar às: {s.get('sono_deita','—')}
 
+PLANO DE 4 SEMANAS: {"Semana " + str(dados.get("plano_meta",{}).get("semana")) + " (" + str(dados.get("plano_meta",{}).get("fase")) + ")" if dados.get("plano_meta") else "Nenhum plano configurado — use o calendário do Garmin normalmente."}
+SESSÃO PLANEJADA PARA AMANHÃ (do plano, ANTES de qualquer ajuste): {"; ".join(f"{s.get('esporte')} {s.get('tipo')} {s.get('duracao_min')}min zona {s.get('zona')}" for s in dados.get("plano_amanha_sessoes",[]) if not s.get("fixo")) or "nenhuma sessão de treino (só fixas ou descanso)"}
+
 TREINO DE ONTEM ({YESTERDAY_STR}):{fmt_treinos(dados['ontem'])}
 
 TREINO HOJE ({TODAY_STR}):{fmt_cal(dados['hoje'], 'para hoje')}
@@ -772,6 +823,7 @@ Responda SOMENTE em JSON válido, sem markdown:
   "sec_ajuste": "1-2 frases com valores EXATOS: ex. Manter 2h30 mas limitar Z3 a 10min. FC teto 155bpm. Potência alvo 200-220W.",
   "sec_alertas": "Alertas técnicos específicos: HR drift, fadiga, distribuição zonas, sobrecarga. Se nada crítico: null.",
   "sec_nutricao": "1-2 frases específicas: pré/durante/pós treino de hoje com valores reais.",
+  "sec_amanha": "Se houver plano de 4 semanas: revise a sessão planejada para amanhã considerando o estado de hoje (fadiga, sono, carga). Diga se mantém, reduz ou ajusta, com valor exato. Se não houver plano: null.",
   "status_readiness": "ÓTIMO | BOM | MODERADO | BAIXO | CRÍTICO",
   "status_carga": "SUAVE | IDEAL | ELEVADA | SOBRECARGA",
   "acao_hoje": "MANTER | REDUZIR 20% | REDUZIR 40% | SUBSTITUIR | DESCANSO",
@@ -856,6 +908,7 @@ def salvar_json(dados, ins):
         "prs":          dados.get("prs",[]),
         "sono_performance": dados.get("sono_performance",[]),
         "mes":          dados.get("mes",{}),
+        "plano_meta":   dados.get("plano_meta",{}),
         "insights":     ins,
     }
     import os
