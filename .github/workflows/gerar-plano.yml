@@ -28,6 +28,10 @@ jobs:
           RACE_DATE:         ${{ secrets.RACE_DATE }}
         run: python gerar_plano.py
 
+      - name: Disparar envio automático ao Garmin (Termux)
+        run: |
+          python3 -c "import json,time; json.dump({'action':'sync_plano','ts':int(time.time()*1000)}, open('pwa/trigger.json','w'))"
+
       - name: Sincronizar pwa para docs
         run: cp -r pwa/. docs/
 
@@ -35,6 +39,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f pwa/plano.json docs/
+          git add -f pwa/plano.json pwa/trigger.json docs/
           git commit -m "📋 plano de 4 semanas $(date +'%Y-%m-%d %H:%M UTC')" || true
-          git push origin HEAD:main
+          if ! git push origin HEAD:main; then
+            echo "Push rejeitado (outro processo escreveu ao mesmo tempo) — tentando de novo..."
+            git fetch origin main --quiet
+            git push --force-with-lease origin HEAD:main
+          fi
