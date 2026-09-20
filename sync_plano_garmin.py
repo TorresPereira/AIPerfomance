@@ -119,7 +119,10 @@ def _passo(order, step_type_id, step_type_key, dur_min, zona, desc, esporte, zon
                 # Garmin quer velocidade (m/s) — pace MENOR (s/km) = mais rápido = velocidade MAIOR
                 lo_s, hi_s = faixa
                 v_lo, v_hi = 1000.0/hi_s, 1000.0/lo_s
-                step["targetType"] = {"workoutTargetTypeId": 3, "workoutTargetTypeKey": "pace.zone"}
+                # ID 3 confirmado como CADÊNCIA (mostrou "spm" no relógio, não pace) —
+                # trocado pra 5, próximo palpite plausível na sequência 1=nenhum,
+                # 2=potência✅, 3=cadência, 4=FC✅. Ainda não testado ao vivo.
+                step["targetType"] = {"workoutTargetTypeId": 5, "workoutTargetTypeKey": "pace.zone"}
                 step["targetValueOne"], step["targetValueTwo"] = round(v_lo, 2), round(v_hi, 2)
     elif modo_alvo == "hr":
         faixa = _faixa_zona(zonas.get("hr_zonas"), zona)
