@@ -828,6 +828,10 @@ Responda SOMENTE em JSON válido, sem markdown:
   "sec_alertas": "Alertas técnicos específicos: HR drift, fadiga, distribuição zonas, sobrecarga. Se nada crítico: null.",
   "sec_nutricao": "1-2 frases específicas: pré/durante/pós treino de hoje com valores reais.",
   "sec_amanha": "Se houver plano de 4 semanas: revise a sessão planejada para amanhã considerando o estado de hoje (fadiga, sono, carga). Diga se mantém, reduz ou ajusta, com valor exato. Se não houver plano: null.",
+  "amanha_ajustado": [
+    {{"esporte": "swim|bike|run (igual ao original)", "tipo": "nome do treino (pode ajustar)", "duracao_min": 45, "zona": "Z1|Z2|Z3 (pode ajustar)", "motivo_ajuste": "1 frase se mudou algo, senão null"}},
+    "... uma entrada para CADA sessão não-fixa listada em SESSÃO PLANEJADA PARA AMANHÃ, na MESMA ordem. Lista vazia [] se não houver plano ou nenhuma sessão de treino amanhã."
+  ],
   "status_readiness": "ÓTIMO | BOM | MODERADO | BAIXO | CRÍTICO",
   "status_carga": "SUAVE | IDEAL | ELEVADA | SOBRECARGA",
   "acao_hoje": "MANTER | REDUZIR 20% | REDUZIR 40% | SUBSTITUIR | DESCANSO",
@@ -861,6 +865,10 @@ Regras para treino_academia:
 - Ordene do composto para o isolado; cada treino termina com 1 exercício de core
 - "musculo" = músculo principal do exercício
 - foco: 1 frase curta explicando o benefício para triathlon
+Regras para amanha_ajustado:
+- Sempre repita esporte e tipo originais a menos que haja motivo real para trocar (ex: dor relatada, fadiga extrema)
+- duracao_min: valor INTEIRO em minutos — reduza no máximo 30-40% em relação ao original, nunca aumente
+- motivo_ajuste: null se manteve exatamente igual ao plano original
 - "series" deve ser número inteiro, "repeticoes" pode ser string como "10-12" ou "30s"
 Retorne EXATAMENTE o JSON acima preenchido. Nenhum texto fora do JSON."""
 
@@ -882,10 +890,10 @@ Retorne EXATAMENTE o JSON acima preenchido. Nenhum texto fora do JSON."""
         return json.loads(raw)
     except urllib.error.HTTPError as e:
         print(f"API err {e.code}: {e.read().decode()}")
-        return {"frase":"Foco no processo.","briefing":"Erro ao consultar IA.","status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None,"treino_forca":[]}
+        return {"frase":"Foco no processo.","briefing":"Erro ao consultar IA.","status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None,"treino_forca":[],"amanha_ajustado":[]}
     except Exception as e:
         print(f"Parse err: {e}")
-        return {"frase":"Foco no processo.","briefing":str(e),"status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None,"treino_forca":[]}
+        return {"frase":"Foco no processo.","briefing":str(e),"status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None,"treino_forca":[],"amanha_ajustado":[]}
 
 # ─── HTML ─────────────────────────────────────────────────────────────────────
 def _sem(v,lo,hi):
@@ -947,12 +955,78 @@ def notificar(dados, ins):
         print('  Notificação rica enviada via ntfy.sh')
     except Exception as e: print(f'  ntfy err: {e}')
 
+def sincronizar_plano_amanha(dados, ins):
+    """Aplica o ajuste da IA à sessão de amanhã no plano.json e reenvia
+    só esse dia ao Garmin — reaproveitando a sessão já autenticada via
+    cache (não faz um login SSO novo)."""
+    sessoes_amanha = dados.get("plano_amanha_sessoes") or []
+    ajustadas = ins.get("amanha_ajustado") or []
+    if not sessoes_amanha:
+        print("  📋 Sem sessão planejada para amanhã — nada a sincronizar com o Garmin.")
+        return
+    if not ajustadas:
+        print("  ⚠️ IA não devolveu 'amanha_ajustado' — sincronizando amanhã com o plano original (sem alterações).")
+
+    print(f"  🔄 Sincronizando {len(sessoes_amanha)} sessão(ões) de amanhã ({TOMORROW_STR}) com o Garmin...")
+    SPORT_ICO = {"swim":"🏊","bike":"🚴","run":"🏃","strength":"💪","futebol":"⚽","outro":"⚡"}
+    try:
+        nao_fixas_idx = [i for i,s in enumerate(sessoes_amanha) if not s.get("fixo")]
+        for pos, idx in enumerate(nao_fixas_idx):
+            if pos >= len(ajustadas): break
+            adj = ajustadas[pos] or {}
+            atual = sessoes_amanha[idx]
+            sessoes_amanha[idx] = {
+                **atual,
+                "esporte":     adj.get("esporte")     or atual.get("esporte"),
+                "tipo":        adj.get("tipo")         or atual.get("tipo"),
+                "duracao_min": adj.get("duracao_min")  or atual.get("duracao_min"),
+                "zona":        adj.get("zona")          or atual.get("zona"),
+                "descricao":   adj.get("motivo_ajuste") or atual.get("descricao"),
+            }
+
+        # Atualiza o card "Treino de Amanhã" já com a versão ajustada
+        dados["amanha"] = [{
+            "icone": SPORT_ICO.get(s.get("esporte"), "⚡"),
+            "nome": s.get("tipo", s.get("esporte","Treino")),
+            "tipo": s.get("esporte",""),
+            "dur": f"{int(s.get('duracao_min',0))}min",
+            "dist": "—",
+            "passos": [s.get("descricao")] if s.get("descricao") else [],
+        } for s in sessoes_amanha]
+
+        # Atualiza o plano.json em disco (para a aba Plano mostrar o ajuste)
+        if os.path.exists("pwa/plano.json"):
+            with open("pwa/plano.json", encoding="utf-8") as f:
+                plano = json.load(f)
+            for sem in plano.get("semanas", []):
+                if TOMORROW_STR in sem.get("dias", {}):
+                    sem["dias"][TOMORROW_STR]["sessoes"] = sessoes_amanha
+            with open("pwa/plano.json", "w", encoding="utf-8") as f:
+                json.dump(plano, f, ensure_ascii=False, default=str, indent=2)
+            print("  📋 plano.json atualizado com o ajuste de amanhã")
+
+        # Reenvia só amanhã ao Garmin
+        try:
+            from sync_plano_garmin import sync_dia, garmin_login as _login_sync
+            ids_path = "pwa/plano_garmin_ids.json"
+            ids_map = json.load(open(ids_path, encoding="utf-8")) if os.path.exists(ids_path) else {}
+            api2 = _login_sync()
+            n = sync_dia(api2, TOMORROW_STR, sessoes_amanha, ids_map)
+            with open(ids_path, "w", encoding="utf-8") as f:
+                json.dump(ids_map, f, ensure_ascii=False, indent=2)
+            print(f"  ⌚ {n} treino(s) de amanhã atualizado(s) no Garmin")
+        except Exception as e:
+            print(f"  ⚠️ Não sincronizou amanhã com o Garmin: {e}")
+    except Exception as e:
+        print(f"  Ajuste do plano err: {e}")
+
 def main():
     print(f'[{TODAY_STR}] Iniciando briefing...')
     dados  = coletar()
     print('Gerando análise IA...')
     ins    = gerar_insights(dados)
     print('Briefing:', ins.get('frase'))
+    sincronizar_plano_amanha(dados, ins)
     salvar_json(dados, ins)
     notificar(dados, ins)
     print('Concluído ✅')
