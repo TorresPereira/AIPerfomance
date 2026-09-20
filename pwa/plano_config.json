@@ -1,0 +1,33 @@
+{
+  "tipo_prova": "triathlon",
+  "prova_categoria": "middle",
+  "foco_modalidade": "run",
+  "horas_semana": 8,
+  "dias_disponiveis": [
+    "seg",
+    "ter",
+    "qua",
+    "qui",
+    "sex",
+    "sab",
+    "dom"
+  ],
+  "dia_preferido": {
+    "swim": null,
+    "bike": null,
+    "run": null
+  },
+  "dia_longo": {
+    "bike": "dom",
+    "run": "sab"
+  },
+  "atividades_fixas": [
+    {
+      "dia": "qua",
+      "nome": "Natacao",
+      "esporte": "swim",
+      "duracao_min": 45
+    }
+  ],
+  "atualizado_em": "2026-09-20T11:18:23.193Z"
+}
