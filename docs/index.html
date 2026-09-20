@@ -176,7 +176,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v4.2 · 19/09/2026</div>
+  <div class="pin-ver">v4.3 · 20/09/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -279,7 +279,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 
   <button class="btn-primary" style="width:100%;margin:0 0 8px" onclick="salvarPlanoConfig()">💾 Salvar Configuração</button>
   <button class="btn-primary" style="width:100%;margin:0;background:#14b8a6" onclick="gerarPlano()" id="gerarPlanoBtn">🔄 Gerar Plano de 4 Semanas</button>
-  <p style="font-size:10px;color:#333;text-align:center;margin-top:10px;line-height:1.6">Gerar o plano consulta a IA e substitui apenas o plano<br>criado pelo app (nunca treinos já agendados no Garmin).<br>Leva ~1-2 minutos.</p>
+  <p style="font-size:10px;color:#333;text-align:center;margin-top:10px;line-height:1.6">Gerar o plano consulta a IA, substitui apenas o plano<br>criado pelo app, e envia automaticamente todas as sessões<br>de natação/bike/corrida pro seu Garmin. A cada dia, se o<br>coach ajustar o treino de amanhã, o Garmin é atualizado junto.<br><span style="color:#3a3a2a">Obs: natação tem suporte limitado do Garmin — pode<br>aparecer só como nota no calendário, sem passo a passo.</span></p>
 </div>
 
 <!-- Toast -->
@@ -447,10 +447,50 @@ async function exportGym(dia){
   }
 }
 
+function toggleDiaPlano(dt){
+  const el = document.getElementById("planoDia_"+dt);
+  const ar = document.getElementById("arrow_"+dt);
+  if(!el) return;
+  const open = el.style.display !== "none";
+  el.style.display = open ? "none" : "block";
+  if(ar) ar.style.transform = open ? "" : "rotate(180deg)";
+}
+
+async function syncDiaPlano(dt){
+  const c=getCfg();
+  if(!c.token||!c.user||!c.repo){ openCfg(); return; }
+  const btn=document.getElementById("syncDia_"+dt);
+  if(btn){ btn.textContent="⏳ Enviando..."; btn.disabled=true; }
+  const ok = await dispararTrigger("sync_plano_dia", {data: dt});
+  if(ok){
+    toast(`⌚ Dia ${dt.slice(8,10)}/${dt.slice(5,7)} a caminho do Garmin — até 1 min`,"ok");
+    if(btn){ btn.textContent="✅ Enviado"; setTimeout(()=>{btn.textContent="🔄 Sincronizar este dia com o Garmin";btn.disabled=false;},8000); }
+  } else {
+    toast("Erro ao disparar. Verifique usuário/repo/token.","err");
+    if(btn){ btn.textContent="🔄 Sincronizar este dia com o Garmin"; btn.disabled=false; }
+  }
+}
+
+async function forcarSyncPlano(){
+  const c=getCfg();
+  if(!c.token||!c.user||!c.repo){ openCfg(); return; }
+  const btn=document.getElementById("syncPlanoBtn");
+  if(btn){ btn.textContent="⏳ Enviando..."; btn.disabled=true; }
+  const ok = await dispararTrigger("sync_plano");
+  if(ok){
+    toast("⌚ Plano a caminho do Garmin — até 1 min","ok");
+    if(btn){ btn.textContent="✅ Enviado"; setTimeout(()=>{btn.textContent="⌚ Reenviar p/ Garmin";btn.disabled=false;},8000); }
+  } else {
+    toast("Erro ao disparar. Verifique usuário/repo/token.","err");
+    if(btn){ btn.textContent="⌚ Reenviar p/ Garmin"; btn.disabled=false; }
+  }
+}
+
 // ─── Fetch report ─────────────────────────────────────────────────────────────
 let report = null;
 let plano  = null;
 let planoConfigCache = null;
+let planoGarminIds = {};
 
 async function fetchGithubJson(path){
   const c = getCfg();
@@ -473,6 +513,9 @@ async function fetchPlano(){
     const cached = localStorage.getItem("tp_plano");
     if(cached){ try{ plano = JSON.parse(cached); }catch{} }
   }
+  try{
+    planoGarminIds = await fetchGithubJson("pwa/plano_garmin_ids.json") || {};
+  }catch(e){ planoGarminIds = planoGarminIds || {}; }
 }
 
 // ─── Load report ──────────────────────────────────────────────────────────────
@@ -804,14 +847,16 @@ function renderPlano(){
   const FASE_COL = {BASE:"#1a6fff",BUILD:"#FFB800",PEAK:"#FF8C00",TAPER:"#a855f7","TAPER FINAL":"#FF4444","PÓS-PROVA":"#555"};
   const fcol = FASE_COL[sem.fase] || "#14b8a6";
 
-  const dias = Object.keys(sem.dias).sort().map(dt=>{
+  const dias = Object.keys(sem.dias).sort().map((dt,di)=>{
     const info = sem.dias[dt];
     const isToday = dt === todayStr;
     const dnum = new Date(dt+"T12:00:00").getDate();
     const sessoes = info.sessoes || [];
+    const rowId = `planoDia_${dt}`;
+    const temNaoFixa = sessoes.some(s=>!s.fixo);
     return `
     <div style="background:${isToday?"#0d1a2a":"#161616"};border:1.5px solid ${isToday?"#1a6fff":"transparent"};border-radius:11px;padding:11px;margin-bottom:7px">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:${sessoes.length?"7px":"0"}">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:${sessoes.length?"7px":"0"};cursor:pointer" onclick="toggleDiaPlano('${dt}')">
         <div style="width:34px;text-align:center">
           <div style="font-size:8px;font-weight:700;color:${isToday?"#1a6fff":"#444"};text-transform:uppercase">${DOW_SHORT[info.dow]}</div>
           <div style="font-size:15px;font-weight:700;color:${isToday?"#1a6fff":"#888"}">${dnum}</div>
@@ -821,17 +866,31 @@ function renderPlano(){
           ${info.longo_bike?`<span style="font-size:8px;font-weight:700;color:#FFB800;background:#FFB80018;border:1px solid #FFB80044;padding:2px 6px;border-radius:4px;margin-right:4px">🚴 LONGO</span>`:""}
           ${info.longo_run?`<span style="font-size:8px;font-weight:700;color:#00C896;background:#00C89618;border:1px solid #00C89644;padding:2px 6px;border-radius:4px">🏃 LONGO</span>`:""}
         </div>
-        ${isToday?`<span style="font-size:8px;font-weight:700;color:#1a6fff">HOJE</span>`:""}
+        ${isToday?`<span style="font-size:8px;font-weight:700;color:#1a6fff;margin-right:6px">HOJE</span>`:""}
+        ${sessoes.length?`<span id="arrow_${dt}" style="color:#333;font-size:10px;transition:transform .2s">▼</span>`:""}
       </div>
-      ${sessoes.map(s=>`
+      ${sessoes.map(s=>{
+        const key = `${dt}_${s.esporte}`;
+        const synced = !s.fixo && planoGarminIds[key];
+        return `
         <div style="display:flex;align-items:center;gap:8px;padding:6px 0 6px 44px">
           <span style="font-size:15px">${SPORT_ICO[s.esporte]||"⚡"}</span>
           <div style="flex:1;min-width:0">
-            <div style="font-size:12px;font-weight:600;color:#ddd">${s.tipo||s.esporte}${s.fixo?' <span style="color:#333;font-size:9px">📌 fixo</span>':""}</div>
+            <div style="font-size:12px;font-weight:600;color:#ddd">${s.tipo||s.esporte}${s.fixo?' <span style="color:#333;font-size:9px">📌 fixo</span>':(synced?' <span style="color:#14b8a6;font-size:9px">⌚ sincronizado</span>':' <span style="color:#553;font-size:9px">○ não sincronizado</span>')}</div>
             ${s.descricao?`<div style="font-size:10px;color:#444">${s.descricao}</div>`:""}
           </div>
           <div style="font-size:11px;color:#666;font-family:monospace">${s.duracao_min}min</div>
-        </div>`).join("")}
+        </div>`;
+      }).join("")}
+      ${sessoes.length?`
+      <div id="${rowId}" style="display:none;padding:10px 8px 2px 44px;border-top:1px solid #1a1a1a;margin-top:6px">
+        ${sessoes.map(s=>`
+          <div style="font-size:10px;color:#555;margin-bottom:6px;line-height:1.6">
+            <strong style="color:#888">${s.tipo||s.esporte}</strong>${s.zona?` · Zona ${s.zona}`:""} · ${s.duracao_min}min${s.longo?" · Sessão longa":""}
+            ${s.descricao?`<br>${s.descricao}`:""}
+          </div>`).join("")}
+        ${temNaoFixa?`<button class="btn-sec" style="width:100%;margin:4px 0 2px;font-size:11px;padding:9px;color:#14b8a6;border-color:#14b8a655" onclick="event.stopPropagation();syncDiaPlano('${dt}')" id="syncDia_${dt}">🔄 Sincronizar este dia com o Garmin</button>`:""}
+      </div>`:""}
     </div>`;
   }).join("");
 
@@ -854,6 +913,7 @@ function renderPlano(){
   ${dias}
   <div style="display:flex;gap:8px;margin-top:12px">
     <button class="btn-sec" style="flex:1;margin:0" onclick="openCfgPlano()">⚙️ Editar Parâmetros</button>
+    <button class="btn-sec" id="syncPlanoBtn" style="flex:1;margin:0;color:#14b8a6;border-color:#14b8a655" onclick="forcarSyncPlano()">⌚ Reenviar p/ Garmin</button>
   </div>
   <p style="font-size:9px;color:#222;text-align:center;margin-top:10px">Gerado ${new Date(plano.gerado_em).toLocaleDateString("pt-BR")} · cada dia o coach revisa a sessão de amanhã</p>`;
 }
