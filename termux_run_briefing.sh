@@ -23,6 +23,10 @@ if git diff --staged --quiet; then
   echo "Sem alterações para commitar."
 else
   git commit -m "📊 briefing $(date +'%Y-%m-%d %H:%M') (Termux)"
-  git push origin HEAD:main
+  if ! git push origin HEAD:main; then
+    echo "  ⚠️ Push rejeitado (outro processo escreveu ao mesmo tempo) — tentando de novo..."
+    git fetch origin main --quiet
+    git push --force-with-lease origin HEAD:main
+  fi
   echo "✅ report.json publicado."
 fi
