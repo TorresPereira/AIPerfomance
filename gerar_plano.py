@@ -164,16 +164,29 @@ REGRAS DE PERIODIZAÇÃO:
 6. Distribua natação, bike e corrida ao longo da semana com equilíbrio, priorizando os dias preferidos quando possível.
 7. Sessões de "DIA LONGO" devem ter a maior duração da semana para aquele esporte.
 8. Duração de cada sessão em minutos, realista e coerente com o volume semanal total.
+9. Para sessões de INTERVALADO, TEMPO RUN ou séries estruturadas (não para longões/rodagens contínuas), preencha também "estrutura" com os blocos do treino — igual ao que um app de treino estruturado monta pro relógio:
+   - Sempre comece com um bloco "aquecimento" (8-15min, Z1-Z2) e termine com "volta_calma" (5-10min, Z1), a menos que o esporte seja natação, onde isso é opcional
+   - O bloco principal é "intervalado": repeticoes (número de séries), trabalho_min (duração de cada repetição), trabalho_zona (Z3-Z5, mais intensa), descanso_min (duração do descanso entre séries), descanso_zona (Z1, recuperação)
+   - Para sessões LONGAS/CONTÍNUAS (rodagem, long ride, longão), NÃO preencha "estrutura" — deixe null, só duracao_min/zona bastam
+   - "duracao_min" da sessão deve ser a SOMA de todos os blocos de "estrutura" quando ela existir (aquecimento + repeticoes×(trabalho_min+descanso_min) + volta_calma)
 
 Responda SOMENTE em JSON válido, sem markdown, no formato:
 {{
   "dias": {{
     "2026-09-20": {{"sessoes": [
-      {{"esporte": "swim|bike|run", "tipo": "Nome do treino (ex: Intervalado 6x400m)", "duracao_min": 60, "zona": "Z2", "descricao": "1 frase de execução", "longo": false}}
+      {{"esporte": "swim|bike|run", "tipo": "Nome do treino (ex: Intervalado 6x3min)", "duracao_min": 40, "zona": "Z2", "descricao": "1 frase de execução", "longo": false,
+        "estrutura": [
+          {{"bloco": "aquecimento", "duracao_min": 10, "zona": "Z1"}},
+          {{"bloco": "intervalado", "repeticoes": 6, "trabalho_min": 3, "trabalho_zona": "Z4", "descanso_min": 1.5, "descanso_zona": "Z1"}},
+          {{"bloco": "volta_calma", "duracao_min": 10, "zona": "Z1"}}
+        ]
+      }},
+      {{"esporte": "run", "tipo": "Rodagem longa", "duracao_min": 90, "zona": "Z2", "descricao": "Ritmo constante e confortável", "longo": true, "estrutura": null}}
     ]}},
     "...": {{"sessoes": [...]}}
   }}
 }}
+"estrutura" é null (ou pode ser omitido) para sessões contínuas — só use para intervalado/tempo run/séries.
 Inclua TODAS as 28 datas do calendário acima como chaves, mesmo que "sessoes" seja uma lista vazia (dia de descanso ou indisponível).
 Nenhum texto fora do JSON."""
     return prompt
@@ -254,6 +267,12 @@ def main():
     with open("pwa/plano.json", "w", encoding="utf-8") as f:
         json.dump(plano, f, ensure_ascii=False, default=str, indent=2)
     print("  ✅ plano.json salvo → pwa/plano.json")
+
+    # Dispara o envio automático de todo o plano para o Garmin (via Termux —
+    # este workflow roda no GitHub Actions e não pode logar no Garmin direto).
+    with open("pwa/trigger.json", "w", encoding="utf-8") as f:
+        json.dump({"action": "sync_plano", "ts": int(datetime.datetime.now().timestamp() * 1000)}, f)
+    print("  🔔 Gatilho de sincronização com o Garmin criado (Termux processa em até 1 min).")
     print("Concluído ✅")
 
 if __name__ == "__main__":

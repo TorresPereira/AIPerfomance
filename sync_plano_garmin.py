@@ -58,7 +58,65 @@ def garmin_login():
     return api
 
 
-def montar_payload(date_str, sessao):
+def _zona_num(zona):
+    """'Z4' → 4 | None se não der pra interpretar."""
+    if not zona: return None
+    m = "".join(c for c in str(zona) if c.isdigit())
+    return int(m) if m else None
+
+
+def _passo(order, step_type_id, step_type_key, dur_min, zona, desc, usar_alvo):
+    step = {
+        "type": "ExecutableStepDTO",
+        "stepOrder": order,
+        "stepType": {"stepTypeId": step_type_id, "stepTypeKey": step_type_key},
+        "endCondition": {"conditionTypeId": 2, "conditionTypeKey": "time"},
+        "endConditionValue": int(round(dur_min * 60)),
+        "description": (desc or "")[:120],
+    }
+    zn = _zona_num(zona)
+    if usar_alvo and zn:
+        step["targetType"] = {"workoutTargetTypeId": 4, "workoutTargetTypeKey": "heart.rate.zone"}
+        step["zoneNumber"] = zn
+    else:
+        step["targetType"] = {"workoutTargetTypeId": 1, "workoutTargetTypeKey": "no.target"}
+    return step
+
+
+def _steps_estruturados(estrutura, usar_alvo):
+    """Monta aquecimento/intervalado(repeat)/volta_calma a partir dos blocos
+    que a IA gerou. Retorna None se a estrutura vier vazia/mal-formada —
+    quem chama cai de volta no bloco único simples."""
+    if not estrutura: return None
+    steps, order = [], 1
+    for bloco in estrutura:
+        tipo = (bloco.get("bloco") or "").lower()
+        if tipo == "aquecimento":
+            steps.append(_passo(order, 1, "warmup", bloco.get("duracao_min", 10), bloco.get("zona"), "Aquecimento", usar_alvo))
+            order += 1
+        elif tipo == "volta_calma":
+            steps.append(_passo(order, 2, "cooldown", bloco.get("duracao_min", 10), bloco.get("zona"), "Volta à calma", usar_alvo))
+            order += 1
+        elif tipo == "intervalado":
+            reps = int(bloco.get("repeticoes") or 1)
+            trabalho = _passo(1, 3, "interval", bloco.get("trabalho_min", 3),
+                               bloco.get("trabalho_zona"), f"Forte {bloco.get('trabalho_zona','')}", usar_alvo)
+            descanso = _passo(2, 4, "recovery", bloco.get("descanso_min", 1.5),
+                               bloco.get("descanso_zona"), "Recuperação", usar_alvo)
+            steps.append({
+                "type": "RepeatGroupDTO",
+                "stepOrder": order,
+                "stepType": {"stepTypeId": 6, "stepTypeKey": "repeat"},
+                "numberOfIterations": reps,
+                "smartRepeat": False,
+                "endCondition": {"conditionTypeId": 7, "conditionTypeKey": "iterations"},
+                "workoutSteps": [trabalho, descanso],
+            })
+            order += 1
+    return steps or None
+
+
+def montar_payload(date_str, sessao, usar_estrutura=True, usar_alvo=True):
     esporte = sessao.get("esporte")
     sport   = SPORT_TYPE.get(esporte)
     if not sport:
@@ -67,14 +125,14 @@ def montar_payload(date_str, sessao):
     nota = f"{sessao.get('zona','')} — {sessao.get('descricao','')}".strip(" —")[:250]
     nome = f"{SPORT_LABEL.get(esporte,esporte)} · {sessao.get('tipo','Treino')}"[:80]
 
-    step = {
-        "type": "ExecutableStepDTO",
-        "stepOrder": 1,
-        "stepType": {"stepTypeId": 3, "stepTypeKey": "interval"},
-        "endCondition": {"conditionTypeId": 2, "conditionTypeKey": "time"},
-        "endConditionValue": dur_min * 60,
-        "description": nota,
-    }
+    steps = None
+    if usar_estrutura:
+        steps = _steps_estruturados(sessao.get("estrutura"), usar_alvo)
+
+    if not steps:
+        # Sessão contínua (ou fallback): um único bloco pela duração total
+        steps = [_passo(1, 3, "interval", dur_min, sessao.get("zona"), nota, usar_alvo)]
+
     return {
         "workoutName": nome,
         "description": f"TP Performance Coach · plano · {date_str}",
@@ -82,7 +140,7 @@ def montar_payload(date_str, sessao):
         "workoutSegments": [{
             "segmentOrder": 1,
             "sportType": sport,
-            "workoutSteps": [step],
+            "workoutSteps": steps,
         }],
     }
 
@@ -102,19 +160,35 @@ def sync_dia(api, date_str, sessoes, ids_map):
             except Exception:
                 pass  # já pode ter sido apagado manualmente — segue o jogo
 
-        payload = montar_payload(date_str, sessao)
-        if not payload:
-            continue
-        try:
-            res = api.upload_workout(payload)
-            wid = res.get("workoutId")
-            if wid:
+        # 3 tentativas, cada vez mais simples: estrutura+zona → estrutura sem zona → bloco único
+        tentativas = [
+            ("estruturado com zona", dict(usar_estrutura=True,  usar_alvo=True)),
+            ("estruturado sem zona", dict(usar_estrutura=True,  usar_alvo=False)),
+            ("bloco único (fallback)", dict(usar_estrutura=False, usar_alvo=False)),
+        ]
+        wid = None
+        for nome_tentativa, kwargs in tentativas:
+            payload = montar_payload(date_str, sessao, **kwargs)
+            if not payload:
+                break
+            try:
+                res = api.upload_workout(payload)
+                wid = res.get("workoutId")
+                if wid:
+                    break
+            except Exception as e:
+                print(f"    ({nome_tentativa} falhou: {e})")
+                continue
+        if wid:
+            try:
                 api.schedule_workout(wid, date_str)
                 ids_map[key] = wid
                 criados += 1
                 print(f"  ✅ {date_str} {SPORT_LABEL.get(esporte,esporte)}: workout {wid} agendado")
-        except Exception as e:
-            print(f"  ⚠️ Falha em {date_str} {esporte}: {e}")
+            except Exception as e:
+                print(f"  ⚠️ {date_str} {esporte}: criado (id={wid}) mas falhou ao agendar: {e}")
+        else:
+            print(f"  ❌ Falha em {date_str} {esporte} — todas as tentativas falharam")
     return criados
 
 
