@@ -1,0 +1,40 @@
+name: Gerar Plano de Treino (4 semanas)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  gerar-plano:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Gerar plano
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          RACE_DATE:         ${{ secrets.RACE_DATE }}
+        run: python gerar_plano.py
+
+      - name: Sincronizar pwa para docs
+        run: cp -r pwa/. docs/
+
+      - name: Publicar no repositório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f pwa/plano.json docs/
+          git commit -m "📋 plano de 4 semanas $(date +'%Y-%m-%d %H:%M UTC')" || true
+          git push origin HEAD:main
