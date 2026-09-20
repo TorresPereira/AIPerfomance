@@ -176,7 +176,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v4.6 · 20/09/2026</div>
+  <div class="pin-ver">v4.7 · 20/09/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -550,6 +550,7 @@ let plano  = null;
 let planoConfigCache = null;
 let planoGarminIds = {};
 let zonasAtleta = {};
+let treinoAcademia = null;
 
 async function fetchGithubJson(path){
   const c = getCfg();
@@ -578,6 +579,9 @@ async function fetchPlano(){
   try{
     zonasAtleta = await fetchGithubJson("pwa/zonas_atleta.json") || {};
   }catch(e){ zonasAtleta = zonasAtleta || {}; }
+  try{
+    treinoAcademia = await fetchGithubJson("docs/treino_academia.json");
+  }catch(e){ /* mantém o que já tinha em memória, se houver */ }
 }
 
 // ─── Load report ──────────────────────────────────────────────────────────────
@@ -984,22 +988,21 @@ function renderPlano(){
 }
 
 function renderGym(){
-  const g = (report.insights||{}).treino_academia || {};
-  const forca = (report.insights||{}).treino_forca || [];
+  const g = treinoAcademia || {};
   const s = report.saude||{};
 
-  // Suporta formato novo (treinos.A/B/C) e antigo (exercicios direto)
-  const treinosABC = g.treinos || (g.exercicios ? {[g.dia||"A"]: {grupo:g.grupo, exercicios:g.exercicios}} : {});
-  const treinos = {...treinosABC};
-  if (forca.length) treinos["F"] = {grupo:"Treino de Força (Triatlo)", exercicios:forca};
+  const treinos = {...(g.treinos||{})};
+  if ((g.forca||[]).length) treinos["F"] = {grupo:"Treino de Força (Triatlo)", exercicios:g.forca};
 
   if (!Object.keys(treinos).length) {
     return `<div class="empty"><div class="empty-icon">🏋️</div>
-      <h2>Sem treino de academia</h2>
-      <p>Rode o briefing para gerar os treinos.</p></div>`;
+      <h2>Sem treino de academia ainda</h2>
+      <p style="margin-bottom:16px">Gere um treino quando for pra academia —<br>ele fica salvo até você pedir outro.</p>
+      <button class="btn-primary" onclick="gerarTreinoAcademia()" id="gerarTreinoBtn">🔄 Gerar Treino de Academia</button>
+    </div>`;
   }
 
-  const diaHoje = (g.dia_hoje || g.dia || "A").toUpperCase();
+  const diaHoje = (g.dia_hoje || "A").toUpperCase();
   const ordem = ["A","B","C","F"].filter(l=>treinos[l]);
   if (!window.gymDia || !treinos[window.gymDia]) window.gymDia = treinos[diaHoje] ? diaHoje : ordem[0];
   const sel = window.gymDia;
@@ -1070,12 +1073,49 @@ function renderGym(){
       </div>
     </div>
     <h2 style="font-size:19px;font-weight:700;color:#fff;margin-bottom:3px">${t.grupo||"Treino "+sel}</h2>
-    <p style="font-size:11px;color:#555;margin-bottom:12px">${subtitulo} · BB ${s.body_battery||"—"}</p>
-    <button id="gymExportBtn" onclick="exportGym('${sel}')" style="width:100%;background:${dcol}22;border:1.5px solid ${dcol}55;color:${dcol};border-radius:10px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.03em">
+    <p style="font-size:11px;color:#555;margin-bottom:4px">${subtitulo} · BB ${s.body_battery||"—"}</p>
+    <p style="font-size:9px;color:#333;margin-bottom:12px">Gerado ${g.gerado_em?new Date(g.gerado_em).toLocaleDateString("pt-BR"):"—"}</p>
+    <button id="gymExportBtn" onclick="exportGym('${sel}')" style="width:100%;background:${dcol}22;border:1.5px solid ${dcol}55;color:${dcol};border-radius:10px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.03em;margin-bottom:8px">
       ⌚ Enviar Treino ${isForca?"de Força":sel} para o Garmin
     </button>
+    <div style="display:flex;gap:8px">
+      <button class="btn-sec" style="flex:1;margin:0;font-size:11px;padding:9px" onclick="gerarTreinoAcademia()" id="gerarTreinoBtn">🔄 Gerar Novo</button>
+      ${(g.historico||{})[sel]?.length ? `<button class="btn-sec" style="flex:1;margin:0;font-size:11px;padding:9px" onclick="toggleHistoricoGym('${sel}')">📜 Histórico (${g.historico[sel].length})</button>` : ""}
+    </div>
+  </div>
+  <div id="histGym_${sel}" style="display:none;margin-bottom:14px">
+    ${((g.historico||{})[sel]||[]).map((h,i)=>`
+      <div style="background:#111;border-radius:10px;padding:10px 12px;margin-bottom:6px;opacity:.7">
+        <div style="font-size:9px;color:#444;margin-bottom:4px">${h.gerado_em?new Date(h.gerado_em).toLocaleDateString("pt-BR"):"anterior"}</div>
+        ${(h.exercicios||[]).map(ex=>`<div style="font-size:10px;color:#666;padding:2px 0">${ex.exercicio} — ${ex.series}×${ex.repeticoes}</div>`).join("")}
+      </div>`).join("")}
   </div>
   ${cards}`;
+}
+
+function toggleHistoricoGym(letra){
+  const el = document.getElementById("histGym_"+letra);
+  if (el) el.style.display = el.style.display==="none" ? "block" : "none";
+}
+
+async function gerarTreinoAcademia(){
+  const c = getCfg();
+  if (!c.token || !c.user || !c.repo){ openCfg(); return; }
+  const btn = document.getElementById("gerarTreinoBtn");
+  if (btn){ btn.textContent = "⏳ Gerando..."; btn.disabled = true; }
+  try{
+    const res = await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/actions/workflows/gerar-treino-academia.yml/dispatches`,
+      {method:"POST",
+       headers:{"Authorization":"Bearer "+c.token,"Content-Type":"application/json","Accept":"application/vnd.github+json"},
+       body: JSON.stringify({ref:"main"})});
+    if (res.status === 204){
+      toast("💪 Gerando treino novo — ~30s","ok");
+      setTimeout(()=>{ fetchPlano().then(()=>renderTab(currentTab)); }, 40000);
+    } else {
+      toast("Erro "+res.status+". Verifique o token.","err");
+    }
+  }catch(e){ toast("Erro de rede","err"); }
+  if (btn){ setTimeout(()=>{ btn.textContent="🔄 Gerar Novo"; btn.disabled=false; }, 5000); }
 }
 
 // ─── New feature renderers ───────────────────────────────────────────────────
