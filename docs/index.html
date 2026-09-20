@@ -176,7 +176,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v4.4 · 20/09/2026</div>
+  <div class="pin-ver">v4.5 · 20/09/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -1305,20 +1305,15 @@ async function gerarPlano(){
   const c = getCfg();
   if (!c.token || !c.user || !c.repo){ openCfg(); return; }
   const btn = document.getElementById("gerarPlanoBtn");
-  if (btn){ btn.textContent = "⏳ Gerando plano (~2min)..."; btn.disabled = true; }
-  try{
-    const res = await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/actions/workflows/gerar-plano.yml/dispatches`,
-      {method:"POST",
-       headers:{"Authorization":"Bearer "+c.token,"Content-Type":"application/json","Accept":"application/vnd.github+json"},
-       body: JSON.stringify({ref:"main"})});
-    if (res.status === 204){
-      toast("📋 Gerando plano de 4 semanas...","ok");
-      setTimeout(()=>{ fetchPlano().then(()=>renderTab(currentTab)); }, 150000);
-      setTimeout(()=>{ closeCfgPlano(); }, 800);
-    } else {
-      toast("Erro "+res.status+". Verifique o token.","err");
-    }
-  }catch(e){ toast("Erro de rede","err"); }
+  if (btn){ btn.textContent = "⏳ Enviado ao seu dispositivo..."; btn.disabled = true; }
+  const ok = await dispararTrigger("gerar_plano");
+  if (ok){
+    toast("📋 Buscando suas zonas e gerando o plano — até 3 min","ok");
+    setTimeout(()=>{ fetchPlano().then(()=>renderTab(currentTab)); }, 170000);
+    setTimeout(()=>{ closeCfgPlano(); }, 800);
+  } else {
+    toast("Erro ao disparar. Verifique usuário/repo/token.","err");
+  }
   if (btn){ setTimeout(()=>{ btn.textContent="🔄 Gerar Plano de 4 Semanas"; btn.disabled=false; }, 5000); }
 }
 
