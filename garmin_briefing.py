@@ -793,11 +793,6 @@ PROVA & CONTEXTO:
 - Próxima prova: {s.get('prova_data','não configurada')} | Dias restantes: {s.get('prova_dias','—')} | Fase: {s.get('prova_fase','—')}
 - Clima hoje: {dados['clima'].get('emoji','')} {dados['clima'].get('temp_max','—')}°C max / {dados['clima'].get('temp_min','—')}°C min | Chuva: {dados['clima'].get('chuva_pct','—')}% | Vento: {dados['clima'].get('vento_kmh','—')}km/h
 
-TREINO DE ACADEMIA (ABC):
-- Hoje é o dia "{("ABC")[TODAY.toordinal() % 3]}" da rotação ABC:
-  A = Peito, Ombro e Tríceps | B = Costas e Bíceps | C = Pernas, Glúteos e Core
-- Gere os TRÊS treinos (A, B e C) com APARELHOS DE ACADEMIA (máquinas, cabos, halteres), todos adaptados ao readiness de hoje.
-
 OBSERVAÇÕES DO ATLETA (últimos 7 dias — CONSIDERE ISTO NA ANÁLISE):
 {chr(10).join(f'- {k}: {v}' for k,v in dados.get('notas_recentes',{}).items()) or '- nenhuma'}
 
@@ -836,40 +831,12 @@ Responda SOMENTE em JSON válido, sem markdown:
   "status_carga": "SUAVE | IDEAL | ELEVADA | SOBRECARGA",
   "acao_hoje": "MANTER | REDUZIR 20% | REDUZIR 40% | SUBSTITUIR | DESCANSO",
   "analise_hoje": "Análise técnica do treino de hoje em 1-2 frases diretas.",
-  "alerta": "Alerta crítico em 1 frase se houver, senão null",
-  "treino_forca": [
-    {{"exercicio": "Nome do exercício", "series": 3, "repeticoes": "10-12", "carga": "moderada", "foco": "Por que este exercício para triatleta 70.3"}},
-    ...
-  ],
-  "treino_academia": {{
-    "dia_hoje": "A, B ou C conforme informado acima",
-    "treinos": {{
-      "A": {{"grupo": "Peito, Ombro e Tríceps", "exercicios": [
-        {{"exercicio": "Nome com o aparelho (ex: Supino reto na máquina)", "series": 4, "repeticoes": "8-12", "carga": "moderada", "musculo": "Peito", "obs": "Dica de execução em 1 frase"}}, ...
-      ]}},
-      "B": {{"grupo": "Costas e Bíceps", "exercicios": [...]}},
-      "C": {{"grupo": "Pernas, Glúteos e Core", "exercicios": [...]}}
-    }}
-  }}
+  "alerta": "Alerta crítico em 1 frase se houver, senão null"
 }}
-Regras para treino_forca:
-- Escolha 5 a 7 exercícios adequados para triatleta 70.3 baseados no estado atual (readiness {s.get('body_battery')}, carga {s.get('training_status')})
-- Se readiness < 40 ou status = Recuperação: exercícios leves, mobilidade, core suave
-- Se readiness 40-70: força funcional moderada, glúteos, core, estabilidade
-- Se readiness > 70: força explosiva, pliometria, potência
-- Sempre inclua: 1 exercício de core, 1 de mobilidade/flexibilidade
-- carga deve ser: "leve", "moderada" ou "pesada"
-Regras para treino_academia:
-- Gere os 3 treinos completos (A, B, C), cada um com 5 a 7 exercícios COM APARELHOS (máquinas, cabos, barras, halteres)
-- Ajuste séries/reps/carga ao readiness: baixo = 3x12-15 leve | médio = 3-4x10-12 moderada | alto = 4x6-10 pesada
-- Ordene do composto para o isolado; cada treino termina com 1 exercício de core
-- "musculo" = músculo principal do exercício
-- foco: 1 frase curta explicando o benefício para triathlon
 Regras para amanha_ajustado:
 - Sempre repita esporte e tipo originais a menos que haja motivo real para trocar (ex: dor relatada, fadiga extrema)
 - duracao_min: valor INTEIRO em minutos — reduza no máximo 30-40% em relação ao original, nunca aumente
 - motivo_ajuste: null se manteve exatamente igual ao plano original
-- "series" deve ser número inteiro, "repeticoes" pode ser string como "10-12" ou "30s"
 Retorne EXATAMENTE o JSON acima preenchido. Nenhum texto fora do JSON."""
 
     payload = json.dumps({
@@ -890,10 +857,10 @@ Retorne EXATAMENTE o JSON acima preenchido. Nenhum texto fora do JSON."""
         return json.loads(raw)
     except urllib.error.HTTPError as e:
         print(f"API err {e.code}: {e.read().decode()}")
-        return {"frase":"Foco no processo.","briefing":"Erro ao consultar IA.","status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None,"treino_forca":[],"amanha_ajustado":[]}
+        return {"frase":"Foco no processo.","briefing":"Erro ao consultar IA.","status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None,"amanha_ajustado":[]}
     except Exception as e:
         print(f"Parse err: {e}")
-        return {"frase":"Foco no processo.","briefing":str(e),"status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None,"treino_forca":[],"amanha_ajustado":[]}
+        return {"frase":"Foco no processo.","briefing":str(e),"status_readiness":"—","status_carga":"—","acao_hoje":"—","alerta":None,"amanha_ajustado":[]}
 
 # ─── HTML ─────────────────────────────────────────────────────────────────────
 def _sem(v,lo,hi):
