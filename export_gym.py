@@ -9,7 +9,7 @@ from garminconnect import Garmin
 GARMIN_EMAIL    = os.environ["GARMIN_EMAIL"]
 GARMIN_PASSWORD = os.environ["GARMIN_PASSWORD"]
 DIA             = (os.environ.get("DIA") or "").upper().strip()
-CACHE_DIR       = "/tmp/garmin_cache"
+CACHE_DIR       = os.environ.get("GARMIN_CACHE_DIR", "/tmp/garmin_cache")
 TODAY           = datetime.date.today()
 
 # ── Mapeamento PT → categoria de exercício Garmin ─────────────────────────────

@@ -15,7 +15,7 @@ TOMORROW  = TODAY + datetime.timedelta(days=1)
 TODAY_STR     = TODAY.isoformat()
 YESTERDAY_STR = YESTERDAY.isoformat()
 TOMORROW_STR  = TOMORROW.isoformat()
-CACHE_DIR     = "/tmp/garmin_cache"
+CACHE_DIR     = os.environ.get("GARMIN_CACHE_DIR", "/tmp/garmin_cache")
 
 # Notificação push via ntfy.sh (grátis, sem servidor)
 NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "")  # ex: "tp-coach-abc123"
