@@ -72,6 +72,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 .ntab .nl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#333;transition:color .15s}
 .ntab.on .ni,.ntab.on .nl{color:var(--blue)}
 .ntab.forca.on .ni,.ntab.forca.on .nl{color:#a855f7}
+.ntab.plano.on .ni,.ntab.plano.on .nl{color:#14b8a6}
+.day-chip{padding:9px 2px;border-radius:8px;background:#141414;border:1px solid #242424;color:#555;font-size:10px;font-weight:700;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .15s}
+.day-chip.on{background:#14b8a622;border-color:#14b8a655;color:#14b8a6}
+.plan-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px;align-items:center}
+.fixa-row{background:#161616;border-radius:9px;padding:9px;margin-bottom:7px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.fixa-row select,.fixa-row input{background:#0d0d0d;border:1px solid #2a2a2a;border-radius:6px;color:#ddd;font-size:11px;padding:6px 7px}
 .ntab.gym.on .ni,.ntab.gym.on .nl{color:#FF8C00}
 
 /* ── Cards ── */
@@ -170,7 +176,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
 <div id="pin">
   <img src="apple-touch-icon.png" class="pin-logo" alt="TP">
   <div class="pin-title">TP Performance</div>
-  <div class="pin-ver">v3.8 · 19/09/2026</div>
+  <div class="pin-ver">v4.1 · 19/09/2026</div>
   <div class="pin-sub" id="pinSub">Digite seu PIN</div>
   <div class="pin-dots" id="pinDots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -213,6 +219,69 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
   </div>
 </div>
 
+<!-- Config do Plano de Treino -->
+<div id="cfgPlano" style="position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.97);display:none;flex-direction:column;padding:calc(env(safe-area-inset-top,20px)+16px) 20px calc(env(safe-area-inset-bottom,20px)+20px);overflow-y:auto">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+    <div style="font-size:19px;font-weight:700;color:#fff">📋 Meu Plano de Treino</div>
+    <button class="ibtn" onclick="closeCfgPlano()">✕</button>
+  </div>
+
+  <div class="cfg-lbl">Objetivo — tipo de prova</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+    <div class="day-chip" id="tipoProvaCorrida" style="padding:11px 4px" onclick="setTipoProva('corrida')">🏃 Corrida</div>
+    <div class="day-chip" id="tipoProvaTriathlon" style="padding:11px 4px" onclick="setTipoProva('triathlon')">🏊🚴🏃 Triathlon</div>
+  </div>
+  <select id="provaCategoria" class="cfg-inp" style="margin-bottom:16px"></select>
+
+  <div class="cfg-lbl">Foco de melhoria</div>
+  <select id="focoModalidade" class="cfg-inp" style="margin-bottom:16px">
+    <option value="equilibrado">⚖️ Equilibrado (sem foco específico)</option>
+    <option value="swim">🏊 Melhorar Natação</option>
+    <option value="bike">🚴 Melhorar Bike</option>
+    <option value="run">🏃 Melhorar Corrida</option>
+  </select>
+
+  <div class="cfg-lbl">Horas de treino por semana</div>
+  <input id="planHoras" type="number" class="cfg-inp" min="1" max="30" step="0.5" style="margin-bottom:16px" placeholder="8">
+
+  <div class="cfg-lbl">Dias disponíveis para treinar</div>
+  <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:16px">
+    <div class="day-chip" data-dow="seg" onclick="toggleDiaDisp('seg')">SEG</div>
+    <div class="day-chip" data-dow="ter" onclick="toggleDiaDisp('ter')">TER</div>
+    <div class="day-chip" data-dow="qua" onclick="toggleDiaDisp('qua')">QUA</div>
+    <div class="day-chip" data-dow="qui" onclick="toggleDiaDisp('qui')">QUI</div>
+    <div class="day-chip" data-dow="sex" onclick="toggleDiaDisp('sex')">SEX</div>
+    <div class="day-chip" data-dow="sab" onclick="toggleDiaDisp('sab')">SAB</div>
+    <div class="day-chip" data-dow="dom" onclick="toggleDiaDisp('dom')">DOM</div>
+  </div>
+
+  <div class="cfg-lbl">Dia preferido por esporte</div>
+  <div class="plan-row" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:16px">
+    <div><div style="font-size:9px;color:#333;margin-bottom:3px">🏊 Natação</div>
+      <select id="prefSwim" class="cfg-inp" style="padding:9px 8px;font-size:12px"></select></div>
+    <div><div style="font-size:9px;color:#333;margin-bottom:3px">🚴 Bike</div>
+      <select id="prefBike" class="cfg-inp" style="padding:9px 8px;font-size:12px"></select></div>
+    <div><div style="font-size:9px;color:#333;margin-bottom:3px">🏃 Corrida</div>
+      <select id="prefRun" class="cfg-inp" style="padding:9px 8px;font-size:12px"></select></div>
+  </div>
+
+  <div class="cfg-lbl">Dia do treino longo</div>
+  <div class="plan-row" style="margin-bottom:16px">
+    <div><div style="font-size:9px;color:#333;margin-bottom:3px">🚴 Bike longo</div>
+      <select id="longoBike" class="cfg-inp" style="padding:9px 8px;font-size:12px"></select></div>
+    <div><div style="font-size:9px;color:#333;margin-bottom:3px">🏃 Corrida longa</div>
+      <select id="longoRun" class="cfg-inp" style="padding:9px 8px;font-size:12px"></select></div>
+  </div>
+
+  <div class="cfg-lbl">Atividades fixas <span style="color:#333;font-weight:400">(ex: futebol, natação em grupo)</span></div>
+  <div id="planFixasList" style="margin-bottom:8px"></div>
+  <button class="btn-sec" style="width:100%;margin:0 0 20px" onclick="addFixaRow()">+ Adicionar atividade fixa</button>
+
+  <button class="btn-primary" style="width:100%;margin:0 0 8px" onclick="salvarPlanoConfig()">💾 Salvar Configuração</button>
+  <button class="btn-primary" style="width:100%;margin:0;background:#14b8a6" onclick="gerarPlano()" id="gerarPlanoBtn">🔄 Gerar Plano de 4 Semanas</button>
+  <p style="font-size:10px;color:#333;text-align:center;margin-top:10px;line-height:1.6">Gerar o plano consulta a IA e substitui apenas o plano<br>criado pelo app (nunca treinos já agendados no Garmin).<br>Leva ~1-2 minutos.</p>
+</div>
+
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
@@ -239,6 +308,7 @@ td.mn{font-family:monospace;color:#666;white-space:nowrap;font-size:11px}
     <div class="ntab"    id="t-coach"  onclick="tab('coach')" ><span class="ni">🤖</span><span class="nl">Coach</span></div>
     <div class="ntab"    id="t-agenda" onclick="tab('agenda')" ><span class="ni">📅</span><span class="nl">Agenda</span></div>
     <div class="ntab gym" id="t-gym" onclick="tab('gym')"><span class="ni">🏋️</span><span class="nl">Gym</span></div>
+    <div class="ntab plano" id="t-plano" onclick="tab('plano')"><span class="ni">📋</span><span class="nl">Plano</span></div>
   </nav>
 </div>
 
@@ -383,19 +453,30 @@ async function exportGym(dia){
 
 // ─── Fetch report ─────────────────────────────────────────────────────────────
 let report = null;
+let plano  = null;
+let planoConfigCache = null;
 
-async function fetchReport(){
+async function fetchGithubJson(path){
   const c = getCfg();
   if(!c.user || !c.repo) return null;
-
-  // GitHub Contents API — único método com CORS correto
-  const url = `https://api.github.com/repos/${c.user}/${c.repo}/contents/docs/report.json`;
+  const url = `https://api.github.com/repos/${c.user}/${c.repo}/contents/${path}`;
   const headers = { "Accept":"application/vnd.github.raw+json", "X-GitHub-Api-Version":"2022-11-28" };
   if(c.token) headers["Authorization"] = "Bearer "+c.token;
-
   const res = await fetch(url, { headers, cache:"no-store" });
   if(!res.ok) throw new Error("GitHub API: HTTP "+res.status);
   return await res.json();
+}
+
+async function fetchReport(){ return fetchGithubJson("docs/report.json"); }
+
+async function fetchPlano(){
+  try{
+    const data = await fetchGithubJson("docs/plano.json");
+    if(data){ plano = data; localStorage.setItem("tp_plano", JSON.stringify(data)); }
+  }catch(e){
+    const cached = localStorage.getItem("tp_plano");
+    if(cached){ try{ plano = JSON.parse(cached); }catch{} }
+  }
 }
 
 // ─── Load report ──────────────────────────────────────────────────────────────
@@ -412,6 +493,7 @@ async function loadReport(force=false){
       localStorage.setItem(CACHE_K+"_t", new Date().toISOString());
       renderTab(currentTab);
       btn.classList.remove("spin");
+      fetchPlano().catch(()=>{}); // best-effort, não bloqueia a tela principal
       return;
     }
   } catch(e){
@@ -490,6 +572,7 @@ function renderTab(id){
   if(!report){ loadReport(); return; }
   const body = document.getElementById("body");
   if(id==="gym")        { body.innerHTML = renderGym(); return; }
+  if(id==="plano")      { body.innerHTML = renderPlano(); return; }
   if(id==="home")       { body.innerHTML = renderHome();  return; }
   if(id==="treinos")    { body.innerHTML = renderTreinos(); return; }
   if(id==="coach")      { body.innerHTML = renderCoach(); return; }
@@ -652,8 +735,9 @@ function renderAgenda(){
   ${hj_feito.length?`<div style="background:#0a1a0a;border:1px solid #1a3a1a;border-radius:8px;padding:10px 12px;margin-top:8px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">✅</span><div><div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em">Já executado</div><div style="font-size:11px;color:#444;margin-top:2px">${hj_feito.map(t=>t.icone+" "+t.nome+" "+t.dist).join(" · ")}</div></div></div>`:""}
   ${ins.analise_hoje?iaCard("🎯 Análise do Treino de Hoje",ins.analise_hoje,"#071a0f","var(--green)","var(--green)","#70c090"):""}
   ${ins.sugestao_ajuste?iaCard("🔧 Ajuste Concreto",ins.sugestao_ajuste):""}
-  <div class="sl" style="margin-top:20px">Treino de Amanhã</div>
+  <div class="sl" style="margin-top:20px">Treino de Amanhã ${report.plano_meta&&report.plano_meta.semana?`<span style="color:#14b8a6;font-weight:700;font-size:9px">· PLANO S${report.plano_meta.semana}</span>`:""}</div>
   ${amanha.length ? amanha.map((t,i)=>workoutCard(t,100+i)).join("") : tbl([],cal_cols)}
+  ${ins.sec_amanha && ins.sec_amanha!=="null" ? iaCard("🔄 Revisão do Plano p/ Amanhã",ins.sec_amanha,"#0a1414","#14b8a6","#14b8a6","#5fb8ac") : ""}
   ${renderMes(report.mes||{})}`;
 }
 
@@ -704,6 +788,78 @@ function renderMes(mes) {
       <span style="font-size:9px;color:#555"><span style="color:#444">●</span> Planejado</span>
     </div>
   </div>`;
+}
+
+function renderPlano(){
+  if (!plano || !plano.semanas || !plano.semanas.length) {
+    return `<div class="empty"><div class="empty-icon">📋</div>
+      <h2>Monte seu plano de treino</h2>
+      <p style="margin-bottom:18px">Configure horas por semana, dias disponíveis,<br>dias preferidos e atividades fixas.<br>A IA monta uma base de 4 semanas — e cada dia<br>o coach revisa a sessão de amanhã.</p>
+      <button class="btn-primary" onclick="openCfgPlano()">⚙️ Configurar Meu Plano</button>
+    </div>`;
+  }
+
+  const todayStr = report?.date || new Date().toISOString().slice(0,10);
+  if (!window.planoSemana) {
+    const semAtual = plano.semanas.find(s => todayStr >= s.inicio && todayStr <= s.fim);
+    window.planoSemana = semAtual ? semAtual.numero : 1;
+  }
+  const sem = plano.semanas.find(s => s.numero === window.planoSemana) || plano.semanas[0];
+  const FASE_COL = {BASE:"#1a6fff",BUILD:"#FFB800",PEAK:"#FF8C00",TAPER:"#a855f7","TAPER FINAL":"#FF4444","PÓS-PROVA":"#555"};
+  const fcol = FASE_COL[sem.fase] || "#14b8a6";
+
+  const dias = Object.keys(sem.dias).sort().map(dt=>{
+    const info = sem.dias[dt];
+    const isToday = dt === todayStr;
+    const dnum = new Date(dt+"T12:00:00").getDate();
+    const sessoes = info.sessoes || [];
+    return `
+    <div style="background:${isToday?"#0d1a2a":"#161616"};border:1.5px solid ${isToday?"#1a6fff":"transparent"};border-radius:11px;padding:11px;margin-bottom:7px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:${sessoes.length?"7px":"0"}">
+        <div style="width:34px;text-align:center">
+          <div style="font-size:8px;font-weight:700;color:${isToday?"#1a6fff":"#444"};text-transform:uppercase">${DOW_SHORT[info.dow]}</div>
+          <div style="font-size:15px;font-weight:700;color:${isToday?"#1a6fff":"#888"}">${dnum}</div>
+        </div>
+        <div style="flex:1">
+          ${!sessoes.length ? `<span style="font-size:11px;color:#333">${info.disponivel?"Descanso":"—"}</span>` : ""}
+          ${info.longo_bike?`<span style="font-size:8px;font-weight:700;color:#FFB800;background:#FFB80018;border:1px solid #FFB80044;padding:2px 6px;border-radius:4px;margin-right:4px">🚴 LONGO</span>`:""}
+          ${info.longo_run?`<span style="font-size:8px;font-weight:700;color:#00C896;background:#00C89618;border:1px solid #00C89644;padding:2px 6px;border-radius:4px">🏃 LONGO</span>`:""}
+        </div>
+        ${isToday?`<span style="font-size:8px;font-weight:700;color:#1a6fff">HOJE</span>`:""}
+      </div>
+      ${sessoes.map(s=>`
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0 6px 44px">
+          <span style="font-size:15px">${SPORT_ICO[s.esporte]||"⚡"}</span>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12px;font-weight:600;color:#ddd">${s.tipo||s.esporte}${s.fixo?' <span style="color:#333;font-size:9px">📌 fixo</span>':""}</div>
+            ${s.descricao?`<div style="font-size:10px;color:#444">${s.descricao}</div>`:""}
+          </div>
+          <div style="font-size:11px;color:#666;font-family:monospace">${s.duracao_min}min</div>
+        </div>`).join("")}
+    </div>`;
+  }).join("");
+
+  return `
+  <div style="background:linear-gradient(135deg,${fcol}18,${fcol}08);border-radius:13px;padding:16px;margin-bottom:14px;border:1px solid ${fcol}33">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:${fcol}22;color:${fcol};border:1px solid ${fcol}44;padding:3px 8px;border-radius:4px">📋 ${sem.fase}</span>
+      <div style="display:flex;gap:5px">
+        ${plano.semanas.map(s=>`<button onclick="window.planoSemana=${s.numero};renderTab('plano')" style="width:30px;height:30px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;border:1.5px solid ${s.numero===sem.numero?fcol:"#2a2a2a"};background:${s.numero===sem.numero?fcol:"#141414"};color:${s.numero===sem.numero?"#000":"#555"}">${s.numero}</button>`).join("")}
+      </div>
+    </div>
+    <h2 style="font-size:16px;font-weight:700;color:#fff;margin-bottom:2px">Semana ${sem.numero} de ${plano.semanas.length}</h2>
+    <p style="font-size:11px;color:#555;margin-bottom:8px">${sem.inicio.slice(5).split("-").reverse().join("/")} a ${sem.fim.slice(5).split("-").reverse().join("/")}</p>
+    ${(()=>{ const c = plano.config_usada||{}; if(!c.prova_categoria) return "";
+      const cats = {...Object.fromEntries(CATEGORIAS_CORRIDA), ...Object.fromEntries(CATEGORIAS_TRIATHLON)};
+      const focoTxt = c.foco_modalidade && c.foco_modalidade!=="equilibrado" ? ` · Foco: ${SPORT_ICO[c.foco_modalidade]||""} ${c.foco_modalidade}` : "";
+      return `<div style="font-size:10px;color:#888">🎯 Alvo: <strong style="color:#ccc">${cats[c.prova_categoria]||c.prova_categoria}</strong>${focoTxt}</div>`;
+    })()}
+  </div>
+  ${dias}
+  <div style="display:flex;gap:8px;margin-top:12px">
+    <button class="btn-sec" style="flex:1;margin:0" onclick="openCfgPlano()">⚙️ Editar Parâmetros</button>
+  </div>
+  <p style="font-size:9px;color:#222;text-align:center;margin-top:10px">Gerado ${new Date(plano.gerado_em).toLocaleDateString("pt-BR")} · cada dia o coach revisa a sessão de amanhã</p>`;
 }
 
 function renderGym(){
@@ -926,6 +1082,172 @@ async function pushNotas() {
     const res = await fetch(url, {method:"PUT", headers, body:JSON.stringify(body)});
     if (res.ok) console.log("Notas sincronizadas");
   } catch(e) { console.warn("pushNotas:", e.message); }
+}
+
+// ─── Plano de Treino (4 semanas) ───────────────────────────────────────────────
+const DOW_LIST = [["seg","Segunda"],["ter","Terça"],["qua","Quarta"],["qui","Quinta"],["sex","Sexta"],["sab","Sábado"],["dom","Domingo"]];
+const DOW_SHORT = {seg:"Seg",ter:"Ter",qua:"Qua",qui:"Qui",sex:"Sex",sab:"Sáb",dom:"Dom"};
+const SPORT_ICO = {swim:"🏊",bike:"🚴",run:"🏃",strength:"💪",futebol:"⚽",outro:"⚡"};
+
+const CATEGORIAS_CORRIDA   = [["5k","5K"],["10k","10K"],["12k","12K"],["15k","15K"],["21k","21K · Meia Maratona"],["42k","42K · Maratona"]];
+const CATEGORIAS_TRIATHLON = [["sprint","Sprint"],["olimpico","Olímpico"],["middle","Middle · Ironman 70.3"],["long","Long · Ironman Completo"]];
+let tipoProvaAtual = "triathlon";
+
+function setTipoProva(tipo){
+  tipoProvaAtual = tipo;
+  document.getElementById("tipoProvaCorrida").classList.toggle("on", tipo==="corrida");
+  document.getElementById("tipoProvaTriathlon").classList.toggle("on", tipo==="triathlon");
+  const opts = tipo==="corrida" ? CATEGORIAS_CORRIDA : CATEGORIAS_TRIATHLON;
+  const sel = document.getElementById("provaCategoria");
+  sel.innerHTML = opts.map(([v,l])=>`<option value="${v}">${l}</option>`).join("");
+}
+
+let planDiasDisp = new Set(["seg","ter","qua","qui","sex","sab","dom"]);
+window.planFixas = [];
+
+function daySelectOptions(placeholder){
+  let html = `<option value="">${placeholder||"Livre"}</option>`;
+  for (const [v,l] of DOW_LIST) html += `<option value="${v}">${l}</option>`;
+  return html;
+}
+
+async function githubPutJson(path, obj, message){
+  const c = getCfg();
+  if (!c.user || !c.repo || !c.token) { toast("Configure usuário/repo/token em ⚙️","err"); return false; }
+  try{
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 2))));
+    const url = `https://api.github.com/repos/${c.user}/${c.repo}/contents/${path}`;
+    const headers = {"Authorization":"Bearer "+c.token,"Accept":"application/vnd.github+json"};
+    let sha = null;
+    try{ const cur = await fetch(url,{headers}); if(cur.ok) sha=(await cur.json()).sha; }catch{}
+    const body = {message, content, branch:"main"};
+    if (sha) body.sha = sha;
+    const res = await fetch(url, {method:"PUT", headers, body:JSON.stringify(body)});
+    return res.ok;
+  }catch(e){ console.warn("githubPutJson:", e.message); return false; }
+}
+
+async function fetchPlanoConfig(){
+  try{ return await fetchGithubJson("pwa/plano_config.json"); }
+  catch{ return null; }
+}
+
+function toggleDiaDisp(dow){
+  if (planDiasDisp.has(dow)) planDiasDisp.delete(dow); else planDiasDisp.add(dow);
+  document.querySelectorAll(".day-chip").forEach(el=>{
+    el.classList.toggle("on", planDiasDisp.has(el.dataset.dow));
+  });
+}
+
+function addFixaRow(){
+  window.planFixas.push({dia:"qua", nome:"", esporte:"outro", duracao_min:60});
+  renderFixasList();
+}
+function removeFixaRow(i){ window.planFixas.splice(i,1); renderFixasList(); }
+function updateFixa(i, field, val){
+  window.planFixas[i][field] = (field==="duracao_min") ? (parseInt(val)||0) : val;
+}
+function renderFixasList(){
+  const el = document.getElementById("planFixasList");
+  if (!el) return;
+  if (!window.planFixas.length){
+    el.innerHTML = `<p style="font-size:11px;color:#333;text-align:center;padding:8px">Nenhuma atividade fixa</p>`;
+    return;
+  }
+  el.innerHTML = window.planFixas.map((f,i)=>`
+    <div class="fixa-row">
+      <select onchange="updateFixa(${i},'dia',this.value)">
+        ${DOW_LIST.map(([v,l])=>`<option value="${v}" ${f.dia===v?"selected":""}>${l}</option>`).join("")}
+      </select>
+      <input type="text" placeholder="Nome (ex: Futebol)" value="${f.nome||""}" style="flex:1;min-width:90px" oninput="updateFixa(${i},'nome',this.value)">
+      <select onchange="updateFixa(${i},'esporte',this.value)">
+        <option value="outro" ${f.esporte==="outro"?"selected":""}>⚡ Outro</option>
+        <option value="swim" ${f.esporte==="swim"?"selected":""}>🏊 Natação</option>
+        <option value="bike" ${f.esporte==="bike"?"selected":""}>🚴 Bike</option>
+        <option value="run" ${f.esporte==="run"?"selected":""}>🏃 Corrida</option>
+        <option value="futebol" ${f.esporte==="futebol"?"selected":""}>⚽ Futebol</option>
+      </select>
+      <input type="number" min="10" step="5" value="${f.duracao_min||60}" style="width:56px" oninput="updateFixa(${i},'duracao_min',this.value)">
+      <span style="font-size:9px;color:#333">min</span>
+      <button onclick="removeFixaRow(${i})" style="background:none;border:none;color:#FF4444;font-size:16px;cursor:pointer;padding:0 4px">✕</button>
+    </div>`).join("");
+}
+
+async function openCfgPlano(){
+  document.getElementById("cfgPlano").style.display = "flex";
+  ["prefSwim","prefBike","prefRun"].forEach(id=>{
+    document.getElementById(id).innerHTML = daySelectOptions("Livre");
+  });
+  ["longoBike","longoRun"].forEach(id=>{
+    document.getElementById(id).innerHTML = daySelectOptions("Nenhum");
+  });
+
+  let cfg = planoConfigCache;
+  if (!cfg) { cfg = await fetchPlanoConfig(); planoConfigCache = cfg; }
+  cfg = cfg || {};
+
+  setTipoProva(cfg.tipo_prova || "triathlon");
+  document.getElementById("provaCategoria").value = cfg.prova_categoria || (cfg.tipo_prova==="corrida" ? "21k" : "middle");
+  document.getElementById("focoModalidade").value = cfg.foco_modalidade || "equilibrado";
+
+  document.getElementById("planHoras").value = cfg.horas_semana || 8;
+  planDiasDisp = new Set(cfg.dias_disponiveis || ["seg","ter","qua","qui","sex","sab","dom"]);
+  document.querySelectorAll(".day-chip").forEach(el=>{
+    el.classList.toggle("on", planDiasDisp.has(el.dataset.dow));
+  });
+  document.getElementById("prefSwim").value = cfg.dia_preferido?.swim || "";
+  document.getElementById("prefBike").value = cfg.dia_preferido?.bike || "";
+  document.getElementById("prefRun").value  = cfg.dia_preferido?.run  || "";
+  document.getElementById("longoBike").value = cfg.dia_longo?.bike || "";
+  document.getElementById("longoRun").value  = cfg.dia_longo?.run  || "";
+  window.planFixas = (cfg.atividades_fixas || []).map(f=>({...f}));
+  renderFixasList();
+}
+function closeCfgPlano(){ document.getElementById("cfgPlano").style.display = "none"; }
+
+async function salvarPlanoConfig(){
+  const cfg = {
+    tipo_prova: tipoProvaAtual,
+    prova_categoria: document.getElementById("provaCategoria").value,
+    foco_modalidade: document.getElementById("focoModalidade").value,
+    horas_semana: parseFloat(document.getElementById("planHoras").value) || 8,
+    dias_disponiveis: Array.from(planDiasDisp),
+    dia_preferido: {
+      swim: document.getElementById("prefSwim").value || null,
+      bike: document.getElementById("prefBike").value || null,
+      run:  document.getElementById("prefRun").value  || null,
+    },
+    dia_longo: {
+      bike: document.getElementById("longoBike").value || null,
+      run:  document.getElementById("longoRun").value  || null,
+    },
+    atividades_fixas: window.planFixas.filter(f=>f.nome && f.nome.trim()),
+    atualizado_em: new Date().toISOString(),
+  };
+  const ok = await githubPutJson("pwa/plano_config.json", cfg, "📋 config do plano de treino");
+  if (ok){ planoConfigCache = cfg; toast("Configuração salva ✓","ok"); }
+  else toast("Erro ao salvar. Verifique usuário/repo/token.","err");
+}
+
+async function gerarPlano(){
+  const c = getCfg();
+  if (!c.token || !c.user || !c.repo){ openCfg(); return; }
+  const btn = document.getElementById("gerarPlanoBtn");
+  if (btn){ btn.textContent = "⏳ Gerando plano (~2min)..."; btn.disabled = true; }
+  try{
+    const res = await fetch(`https://api.github.com/repos/${c.user}/${c.repo}/actions/workflows/gerar-plano.yml/dispatches`,
+      {method:"POST",
+       headers:{"Authorization":"Bearer "+c.token,"Content-Type":"application/json","Accept":"application/vnd.github+json"},
+       body: JSON.stringify({ref:"main"})});
+    if (res.status === 204){
+      toast("📋 Gerando plano de 4 semanas...","ok");
+      setTimeout(()=>{ fetchPlano().then(()=>renderTab(currentTab)); }, 150000);
+      setTimeout(()=>{ closeCfgPlano(); }, 800);
+    } else {
+      toast("Erro "+res.status+". Verifique o token.","err");
+    }
+  }catch(e){ toast("Erro de rede","err"); }
+  if (btn){ setTimeout(()=>{ btn.textContent="🔄 Gerar Plano de 4 Semanas"; btn.disabled=false; }, 5000); }
 }
 
 // ─── New feature renderers ───────────────────────────────────────────────────
