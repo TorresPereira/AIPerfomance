@@ -1,8 +1,9 @@
 name: Triathlon Daily Briefing
 
+# Cron diário DESATIVADO — o Garmin bloqueia (429) o pool de IPs do
+# GitHub Actions. O briefing diário agora roda via Termux no celular
+# (ver termux_run_briefing.sh). Este workflow fica só como fallback manual.
 on:
-  schedule:
-    - cron: '0 6 * * *'
   workflow_dispatch:
 
 permissions:
