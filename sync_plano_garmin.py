@@ -91,7 +91,9 @@ def _zona_num(zona):
     return max(nums) if nums else None
 
 
-def _passo(order, step_type_id, step_type_key, dur_min, zona, desc, esporte, zonas, usar_alvo_numerico):
+def _passo(order, step_type_id, step_type_key, dur_min, zona, desc, esporte, zonas, modo_alvo):
+    """modo_alvo: 'pace_power' (pace pra corrida / potência pra bike) |
+    'hr' (frequência cardíaca) | 'nenhum' (só o texto da zona, sem alvo numérico)."""
     zona_txt = f" ({zona})" if zona else ""
     step = {
         "type": "ExecutableStepDTO",
@@ -102,25 +104,24 @@ def _passo(order, step_type_id, step_type_key, dur_min, zona, desc, esporte, zon
         "description": ((desc or "") + zona_txt)[:120],
         "targetType": {"workoutTargetTypeId": 1, "workoutTargetTypeKey": "no.target"},
     }
-    if not usar_alvo_numerico or not zona:
+    if modo_alvo == "nenhum" or not zona:
         return step
 
-    # Tenta um alvo NUMÉRICO real (faixa), do jeito que outros apps mostram
-    # (ex: "137-187 W"). IDs de targetType abaixo são melhor esforço — não
-    # confirmados contra a API ao vivo. Se o Garmin recusar, a 2ª tentativa
-    # do sync_dia cai para esta mesma descrição sem alvo (já comprovado OK).
-    if esporte == "bike":
-        faixa = _faixa_zona(zonas.get("bike_zonas_w"), zona)
-        if faixa:
-            step["targetType"] = {"workoutTargetTypeId": 2, "workoutTargetTypeKey": "power.zone"}
-            step["targetValueOne"], step["targetValueTwo"] = faixa
-    # Corrida: NÃO usa pace.zone (nunca testado contra a API ao vivo — se o
-    # Garmin rejeitasse, arriscaria derrubar o alvo por FC pra corrida, que já
-    # está comprovado funcionando, ver print de 20/09). run_zonas_pace_s_km
-    # existe em zonas_atleta.json só para o app mostrar pace/distância —
-    # de propósito não é usado aqui.
-    if "targetValueOne" not in step:
-        # Sem faixa de potência (ou é corrida) — usa FC como faixa numérica
+    if modo_alvo == "pace_power":
+        if esporte == "bike":
+            faixa = _faixa_zona(zonas.get("bike_zonas_w"), zona)
+            if faixa:
+                step["targetType"] = {"workoutTargetTypeId": 2, "workoutTargetTypeKey": "power.zone"}
+                step["targetValueOne"], step["targetValueTwo"] = faixa
+        elif esporte == "run":
+            faixa = _faixa_zona(zonas.get("run_zonas_pace_s_km"), zona)
+            if faixa:
+                # Garmin quer velocidade (m/s) — pace MENOR (s/km) = mais rápido = velocidade MAIOR
+                lo_s, hi_s = faixa
+                v_lo, v_hi = 1000.0/hi_s, 1000.0/lo_s
+                step["targetType"] = {"workoutTargetTypeId": 3, "workoutTargetTypeKey": "pace.zone"}
+                step["targetValueOne"], step["targetValueTwo"] = round(v_lo, 2), round(v_hi, 2)
+    elif modo_alvo == "hr":
         faixa = _faixa_zona(zonas.get("hr_zonas"), zona)
         if faixa:
             step["targetType"] = {"workoutTargetTypeId": 4, "workoutTargetTypeKey": "heart.rate.custom"}
@@ -128,7 +129,7 @@ def _passo(order, step_type_id, step_type_key, dur_min, zona, desc, esporte, zon
     return step
 
 
-def _steps_estruturados(estrutura, esporte, zonas, usar_alvo_numerico):
+def _steps_estruturados(estrutura, esporte, zonas, modo_alvo):
     """Monta aquecimento/intervalado(repeat)/volta_calma a partir dos blocos
     que a IA gerou. Retorna None se a estrutura vier vazia/mal-formada —
     quem chama cai de volta no bloco único simples."""
@@ -138,18 +139,18 @@ def _steps_estruturados(estrutura, esporte, zonas, usar_alvo_numerico):
         tipo = (bloco.get("bloco") or "").lower()
         if tipo == "aquecimento":
             steps.append(_passo(order, 1, "warmup", bloco.get("duracao_min", 10), bloco.get("zona"),
-                                 "Aquecimento", esporte, zonas, usar_alvo_numerico))
+                                 "Aquecimento", esporte, zonas, modo_alvo))
             order += 1
         elif tipo == "volta_calma":
             steps.append(_passo(order, 2, "cooldown", bloco.get("duracao_min", 10), bloco.get("zona"),
-                                 "Volta à calma", esporte, zonas, usar_alvo_numerico))
+                                 "Volta à calma", esporte, zonas, modo_alvo))
             order += 1
         elif tipo == "intervalado":
             reps = int(bloco.get("repeticoes") or 1)
             trabalho = _passo(1, 3, "interval", bloco.get("trabalho_min", 3), bloco.get("trabalho_zona"),
-                               "Forte", esporte, zonas, usar_alvo_numerico)
+                               "Forte", esporte, zonas, modo_alvo)
             descanso = _passo(2, 4, "recovery", bloco.get("descanso_min", 1.5), bloco.get("descanso_zona"),
-                               "Recuperação", esporte, zonas, usar_alvo_numerico)
+                               "Recuperação", esporte, zonas, modo_alvo)
             steps.append({
                 "type": "RepeatGroupDTO",
                 "stepOrder": order,
@@ -163,7 +164,7 @@ def _steps_estruturados(estrutura, esporte, zonas, usar_alvo_numerico):
     return steps or None
 
 
-def montar_payload(date_str, sessao, zonas=None, usar_estrutura=True, usar_alvo_numerico=False):
+def montar_payload(date_str, sessao, zonas=None, usar_estrutura=True, modo_alvo="nenhum"):
     esporte = sessao.get("esporte")
     sport   = SPORT_TYPE.get(esporte)
     if not sport:
@@ -175,11 +176,11 @@ def montar_payload(date_str, sessao, zonas=None, usar_estrutura=True, usar_alvo_
 
     steps = None
     if usar_estrutura:
-        steps = _steps_estruturados(sessao.get("estrutura"), esporte, zonas, usar_alvo_numerico)
+        steps = _steps_estruturados(sessao.get("estrutura"), esporte, zonas, modo_alvo)
 
     if not steps:
         # Sessão contínua (ou fallback): um único bloco pela duração total
-        steps = [_passo(1, 3, "interval", dur_min, sessao.get("zona"), nota, esporte, zonas, usar_alvo_numerico)]
+        steps = [_passo(1, 3, "interval", dur_min, sessao.get("zona"), nota, esporte, zonas, modo_alvo)]
 
     return {
         "workoutName": nome,
@@ -210,10 +211,15 @@ def sync_dia(api, date_str, sessoes, ids_map, zonas=None):
                 pass  # já pode ter sido apagado manualmente — segue o jogo
 
         # 4 tentativas, cada vez mais simples — cai pro próximo nível só se o Garmin recusar:
+        # 1) pace (corrida) / potência (bike) — o que o atleta prefere usar de verdade
+        # 2) frequência cardíaca — plano B numérico, se pace/potência não colar
+        # 3) zona só em texto (sem alvo) — sempre funciona
+        # 4) bloco único (fallback final, se nem a estrutura em blocos for aceita)
         tentativas = [
-            ("estruturado + alvo numérico (W/pace/bpm)", dict(zonas=zonas, usar_estrutura=True,  usar_alvo_numerico=True)),
-            ("estruturado com zona em texto",             dict(zonas=zonas, usar_estrutura=True,  usar_alvo_numerico=False)),
-            ("bloco único com zona em texto",              dict(zonas=zonas, usar_estrutura=False, usar_alvo_numerico=False)),
+            ("pace/potência",           dict(zonas=zonas, usar_estrutura=True,  modo_alvo="pace_power")),
+            ("frequência cardíaca",     dict(zonas=zonas, usar_estrutura=True,  modo_alvo="hr")),
+            ("zona em texto",           dict(zonas=zonas, usar_estrutura=True,  modo_alvo="nenhum")),
+            ("bloco único (fallback)",  dict(zonas=zonas, usar_estrutura=False, modo_alvo="nenhum")),
         ]
         wid = None
         for nome_tentativa, kwargs in tentativas:
