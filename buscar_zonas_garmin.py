@@ -53,40 +53,39 @@ def main():
     api = garmin_login()
     zonas = {"atualizado_em": datetime.datetime.utcnow().isoformat() + "Z"}
 
-    # ── 1. Zonas de FC (FC máxima + limites de cada zona) ────────────────────────
+    # ── 1. FC de limiar (corrida + bike) → zonas de FC (% do LTHR) ───────────────
+    # get_userprofile_settings() só tem preferências de idioma/unidade — não tem
+    # zonas de FC. As zonas de FC vêm daqui: calculadas a partir da FC de limiar
+    # (lactate threshold), que é um dado medido de verdade pelo relógio.
     try:
-        prof = api.get_userprofile_settings()
-        print(f"  [debug] userprofile_settings keys: {list(prof.keys()) if isinstance(prof, dict) else type(prof)}")
-        # Formatos possíveis variam por conta — tenta os caminhos mais comuns
-        hr_zones_raw = None
-        if isinstance(prof, dict):
-            hr_zones_raw = (prof.get("userData", {}).get("heartRateZones")
-                             or prof.get("heartRateZones")
-                             or prof.get("userSleep", {}).get("heartRateZones"))
-        max_hr = None
-        if isinstance(prof, dict):
-            max_hr = (prof.get("userData", {}).get("vo2MaxRunning")  # às vezes não é o certo, ignorar se não for número de bpm plausível
-                       or prof.get("userData", {}).get("maxHr")
-                       or prof.get("maxHr"))
+        lim = api.get_lactate_threshold(latest=True)
+        print(f"  [debug] lactate_threshold raw: {lim}")
+        shr = (lim or {}).get("speed_and_heart_rate", {}) if isinstance(lim, dict) else {}
+        lthr_run  = shr.get("heartRate")
+        lthr_bike = shr.get("heartRateCycling")
 
-        if hr_zones_raw and isinstance(hr_zones_raw, list):
-            hr_z = {}
-            for i, z in enumerate(sorted(hr_zones_raw, key=lambda x: x.get("zoneNumber", i)), start=1):
-                lo = z.get("zoneLowBoundary") or z.get("lowBoundary")
-                hi = z.get("zoneHighBoundary") or z.get("highBoundary")
-                if lo is not None and hi is not None:
-                    hr_z[f"Z{z.get('zoneNumber', i)}"] = [int(lo), int(hi)]
-            if hr_z:
-                zonas["hr_zonas"] = hr_z
-                print(f"  ✅ Zonas de FC: {hr_z}")
-        if max_hr and isinstance(max_hr, (int, float)) and 100 < max_hr < 230:
-            zonas["hr_max"] = int(max_hr)
-            print(f"  ✅ FC máxima: {int(max_hr)}")
+        if lthr_run and 100 < lthr_run < 220:
+            zonas["run_lthr_bpm"] = int(lthr_run)
+            # Zonas por % da FC de limiar (modelo Friel/TrainingPeaks)
+            pct = {"Z1":(0,.81), "Z2":(.81,.89), "Z3":(.90,.93), "Z4":(.94,.99), "Z5":(1.00,1.10)}
+            zonas["hr_zonas"] = {z: [round(lthr_run*lo), round(lthr_run*hi)] for z,(lo,hi) in pct.items()}
+            print(f"  ✅ FC de limiar (corrida): {int(lthr_run)}bpm · zonas de FC calculadas")
+        else:
+            print("  ⚠️ FC de limiar (corrida) não encontrada.")
 
-        if "hr_zonas" not in zonas:
-            print("  ⚠️ Zonas de FC não encontradas no formato esperado — pulando (veja debug acima).")
+        if lthr_bike and 100 < lthr_bike < 220:
+            zonas["bike_lthr_bpm"] = int(lthr_bike)
+            print(f"  ✅ FC de limiar (bike): {int(lthr_bike)}bpm")
+
+        # Pace de limiar: o campo 'speed' que o Garmin devolveu não bateu com
+        # nenhuma unidade plausível (m/s dava ~49min/km, km/min dava ~2:58/km —
+        # nenhum dos dois é crível). Em vez de arriscar um pace errado, corrida
+        # usa FC (acima) até isso ser confirmado.
+        speed_raw = shr.get("speed")
+        if speed_raw:
+            print(f"  ⚠️ Pace de limiar: valor bruto '{speed_raw}' sem unidade confiável — não usado (corrida usa FC).")
     except Exception as e:
-        print(f"  ⚠️ Zonas de FC: {e}")
+        print(f"  ⚠️ FC/pace de limiar: {e}")
 
     # ── 2. FTP de bike → zonas de potência (modelo padrão Coggan, % do FTP) ──────
     try:
@@ -94,44 +93,20 @@ def main():
         print(f"  [debug] cycling_ftp raw: {ftp_res}")
         ftp = None
         if isinstance(ftp_res, dict):
-            ftp = ftp_res.get("ftpValue") or ftp_res.get("ftp") or ftp_res.get("value")
+            ftp = ftp_res.get("functionalThresholdPower") or ftp_res.get("ftpValue") or ftp_res.get("ftp")
         elif isinstance(ftp_res, list) and ftp_res:
-            ftp = ftp_res[0].get("ftpValue") or ftp_res[0].get("ftp")
+            ftp = ftp_res[0].get("functionalThresholdPower") or ftp_res[0].get("ftpValue")
         if ftp and float(ftp) > 30:
             ftp = float(ftp)
             zonas["bike_ftp_w"] = round(ftp)
             # Zonas Coggan clássicas (% do FTP)
             pct = {"Z1":(0,.55), "Z2":(.56,.75), "Z3":(.76,.90), "Z4":(.91,1.05), "Z5":(1.06,1.20), "Z6":(1.21,3.0)}
             zonas["bike_zonas_w"] = {z: [round(ftp*lo), round(ftp*hi)] for z,(lo,hi) in pct.items()}
-            print(f"  ✅ FTP: {round(ftp)}W · zonas calculadas")
+            print(f"  ✅ FTP: {round(ftp)}W · zonas de potência calculadas")
         else:
             print("  ⚠️ FTP não encontrado (sem histórico de bike com potência).")
     except Exception as e:
         print(f"  ⚠️ FTP: {e}")
-
-    # ── 3. Limiar de corrida → zonas de pace (% do pace de limiar) ───────────────
-    try:
-        lim = api.get_lactate_threshold(latest=True)
-        print(f"  [debug] lactate_threshold raw: {lim}")
-        pace_limiar = None
-        if isinstance(lim, dict):
-            # valor pode vir como pace (min/km) ou velocidade (m/s) dependendo da conta
-            speed = lim.get("speed") or lim.get("thresholdSpeed")
-            pace_direct = lim.get("pace") or lim.get("thresholdPace")
-            if speed and float(speed) > 0:
-                pace_limiar = 1000.0 / float(speed)  # m/s → s/km
-            elif pace_direct:
-                pace_limiar = float(pace_direct)
-        if pace_limiar and 120 < pace_limiar < 900:  # entre 2:00 e 15:00/km — filtro de sanidade
-            zonas["run_pace_limiar_s_km"] = round(pace_limiar)
-            # Zonas de pace: % do pace de limiar (pace MAIOR = mais devagar = zona menor)
-            pct = {"Z1":(1.30,1.50), "Z2":(1.15,1.30), "Z3":(1.05,1.15), "Z4":(0.97,1.05), "Z5":(0.88,0.97)}
-            zonas["run_zonas_pace_s_km"] = {z: sorted([round(pace_limiar*lo), round(pace_limiar*hi)]) for z,(lo,hi) in pct.items()}
-            print(f"  ✅ Pace de limiar: {fmt_pace(pace_limiar)} · zonas calculadas")
-        else:
-            print("  ⚠️ Limiar de corrida não encontrado.")
-    except Exception as e:
-        print(f"  ⚠️ Limiar de corrida: {e}")
 
     os.makedirs("pwa", exist_ok=True)
     with open("pwa/zonas_atleta.json", "w", encoding="utf-8") as f:
