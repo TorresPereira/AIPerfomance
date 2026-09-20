@@ -16,7 +16,6 @@ import os, json, datetime, urllib.request, urllib.error
 
 ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
 TODAY = datetime.date.today()
-HIST_MAX = 3  # quantas gerações anteriores guardar por dia (A/B/C/F)
 
 def readiness_atual():
     """Lê o último report.json gerado (se existir) pra adaptar o treino
@@ -99,36 +98,14 @@ def main():
         print(f"❌ Erro ao gerar treino: {e}")
         raise SystemExit(1)
 
-    # Carrega o arquivo atual (se existir) pra arquivar no histórico antes de sobrescrever
     os.makedirs("pwa", exist_ok=True)
     path = "pwa/treino_academia.json"
-    atual = {}
-    if os.path.exists(path):
-        try:
-            with open(path, encoding="utf-8") as f:
-                atual = json.load(f)
-        except Exception:
-            atual = {}
-
-    historico = atual.get("historico", {})
-    treinos_antigos = atual.get("treinos", {})
-    forca_antigo = atual.get("forca")
-    gerado_em_antigo = atual.get("gerado_em")
-
-    for letra, treino in treinos_antigos.items():
-        if treino and treino.get("exercicios"):
-            historico.setdefault(letra, []).insert(0, {"gerado_em": gerado_em_antigo, **treino})
-            historico[letra] = historico[letra][:HIST_MAX]
-    if forca_antigo:
-        historico.setdefault("F", []).insert(0, {"gerado_em": gerado_em_antigo, "grupo": "Força Funcional", "exercicios": forca_antigo})
-        historico["F"] = historico["F"][:HIST_MAX]
 
     saida = {
         "gerado_em": datetime.datetime.utcnow().isoformat() + "Z",
         "dia_hoje": novo.get("dia_hoje"),
         "treinos": novo.get("treinos", {}),
         "forca": novo.get("forca", []),
-        "historico": historico,
     }
 
     with open(path, "w", encoding="utf-8") as f:

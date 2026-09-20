@@ -110,26 +110,30 @@ def montar_workout(dia, treino):
 def main():
     print(f"[{TODAY}] Exportando treino de academia para o Garmin...")
 
-    # ── Carrega report.json ──
-    with open("pwa/report.json", encoding="utf-8") as f:
-        report = json.load(f)
-    ins = report.get("insights") or {}
-    g = ins.get("treino_academia") or {}
-    treinos = g.get("treinos") or {}
-    if not treinos and g.get("exercicios"):
-        treinos = {(g.get("dia") or "A"): {"grupo": g.get("grupo",""), "exercicios": g["exercicios"]}}
+    # ── Carrega pwa/treino_academia.json ──────────────────────────────────────
+    # Esse arquivo só é escrito quando você pede "Gerar Novo Treino" no app —
+    # nunca chama a IA aqui, só reenvia o que já está salvo pro relógio.
+    path = "pwa/treino_academia.json"
+    if not os.path.exists(path):
+        print(f"❌ {path} não existe ainda.")
+        print("   Toque em 'Gerar Treino de Academia' no app pelo menos uma vez.")
+        import sys; sys.exit(1)
 
-    # Treino de Força (triatlo) também pode ser exportado, como opção "F"
-    forca = ins.get("treino_forca") or []
+    with open(path, encoding="utf-8") as f:
+        g = json.load(f)
+    treinos = dict(g.get("treinos") or {})
+
+    # Treino de Força (funcional) também pode ser exportado, como opção "F"
+    forca = g.get("forca") or []
     if forca:
         treinos["F"] = {"grupo": "Treino de Força (Triatlo)", "exercicios": forca}
 
-    dia = DIA if DIA in treinos else (g.get("dia_hoje") or g.get("dia") or "A").upper()
+    dia = DIA if DIA in treinos else (g.get("dia_hoje") or "A").upper()
     treino = treinos.get(dia)
     if not treino or not treino.get("exercicios"):
-        print(f"❌ Treino '{dia}' não encontrado no report.json")
+        print(f"❌ Treino '{dia}' não encontrado em {path}")
         print(f"   Chaves disponíveis: {list(treinos.keys()) or 'nenhuma'}")
-        print("   Rode o briefing principal primeiro para gerar os treinos ABC.")
+        print("   Gere um treino no app antes de enviar.")
         import sys; sys.exit(1)
 
     print(f"  Dia {dia}: {treino.get('grupo')} — {len(treino['exercicios'])} exercícios")
