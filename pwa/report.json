@@ -1,6 +1,6 @@
 {
   "date": "2026-09-22",
-  "generated_at": "2026-09-22T06:01:47.855592Z",
+  "generated_at": "2026-09-22T10:58:12.439499Z",
   "saude": {
     "hrv": 63,
     "hrv_7d": 35,
@@ -14,30 +14,30 @@
     "sono_deep": 1.1,
     "sono_rem": 0.0,
     "sono_awake": 17.0,
-    "body_battery": 49,
-    "stress_avg": 18,
-    "stress_rest": 75.06,
-    "atl": 624.0,
-    "ctl": 2497.0,
+    "body_battery": 51,
+    "stress_avg": 21,
+    "stress_rest": 62.74,
+    "atl": 658.0,
+    "ctl": 2630.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
     "load_aerobic_low": 1436.0,
-    "load_aerobic_high": 519.0,
+    "load_aerobic_high": 652.0,
     "load_anaerobic": 541.0,
-    "load_total_month": 2497.0,
-    "load_target_low": "437–1090",
-    "load_target_high": "759–1412",
+    "load_total_month": 2630.0,
+    "load_target_low": "443–1096",
+    "load_target_high": "752–1405",
     "training_status": "Sobrecarga",
     "fitness_trend": "Caindo",
     "training_readiness": null,
-    "vo2max": 48.5,
+    "vo2max": 48.8,
     "peso": null,
     "previsoes": {
-      "5K": 1377,
-      "10K": 2958,
-      "Meia": 6795,
-      "Maratona": 15290
+      "5K": 1357,
+      "10K": 2923,
+      "Meia": 6703,
+      "Maratona": 15067
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -53,9 +53,9 @@
       "pos_prot_g": 30,
       "dur_min": 0
     },
-    "sono_alvo_h": 8.0,
-    "sono_deita": "22:30",
-    "sono_deficit_h": 2.3
+    "sono_alvo_h": 8.5,
+    "sono_deita": "22:00",
+    "sono_deficit_h": 2.8
   },
   "ontem": [],
   "hoje": [
@@ -85,23 +85,45 @@
       "icone": "🏊",
       "nome": "Natacao Base",
       "tipo": "swim",
-      "dur": "45min",
+      "dur": "35min",
       "dist": "—",
       "passos": [
-        "Sessão fixa de natação, foco em técnica de braçada e respiração bilateral."
+        "Redução de 10min por sono deficitário (REM 0.0h) e treino Z4 executado hoje; Z2 estrito com FC ≤ 140bpm para evitar sobrecarga adicional."
       ]
     }
   ],
-  "hoje_feito": [],
+  "hoje_feito": [
+    {
+      "mod": "run",
+      "icone": "🏃",
+      "nome": "Erkrath - Corrida · Intervalado 4x3min Z4",
+      "dist": "7.6km",
+      "dur": "41m57s",
+      "fc": 145.0,
+      "fc_max": 158.0,
+      "tss": null,
+      "np": 354.0,
+      "perf": "5:29/km",
+      "pl": "Pace",
+      "_dist_m": 7628.81005859375,
+      "_dur_s": 2517.18701171875,
+      "swolf": null,
+      "cad": 165.015625,
+      "cal": 603.0,
+      "aerobic_te": 3.5,
+      "anaerobic_te": 0.5,
+      "elev": 56.0
+    }
+  ],
   "semana": {
     "swim_km": 0,
     "swim_min": 0,
     "bike_km": 0,
     "bike_min": 0,
-    "run_km": 0,
-    "run_min": 0,
-    "total_tss": 0,
-    "n_treinos": 0
+    "run_km": 7.6,
+    "run_min": 42.0,
+    "total_tss": 0.0,
+    "n_treinos": 1
   },
   "semana_passada": {
     "swim_km": 4.1,
@@ -112,11 +134,11 @@
     "run_min": 129.5
   },
   "clima": {
-    "temp_max": 17.4,
+    "temp_max": 16.9,
     "temp_min": 9.8,
     "chuva_pct": 0,
-    "vento_kmh": 7.2,
-    "temp_atual": 12.1,
+    "vento_kmh": 7.6,
+    "temp_atual": 14.5,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
@@ -208,7 +230,7 @@
     },
     {
       "date": "2026-09-22",
-      "value": 48.5
+      "value": 48.8
     }
   ],
   "prs": [],
@@ -262,9 +284,20 @@
       "date": "2026-09-19",
       "sono": 6.1,
       "te": 3.7
+    },
+    {
+      "date": "2026-09-22",
+      "sono": 5.7,
+      "te": 3.5
     }
   ],
   "mes": {
+    "2026-09-22": {
+      "planejados": [],
+      "feitos": [
+        "🏃"
+      ]
+    },
     "2026-09-19": {
       "planejados": [],
       "feitos": [
@@ -386,28 +419,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado, mas sono crítico: execute com controle.",
-    "sec_readiness": "HRV de 63ms representa +28ms vs média 7d (35ms), acima do baseline 30-40ms — sinal positivo de recuperação autonômica. Sono de 5.7h com score 54, REM zerado e deep de apenas 1.1h indica recuperação estrutural insuficiente, com déficit de 2.3h. Body Battery em 49/100 com stress médio baixo (18) sugere reserva funcional moderada, mas limitada pelo sono.",
+    "frase": "HRV elevado, sono fraco: execute com inteligência.",
+    "sec_readiness": "HRV de 63ms representa +28ms acima da média 7d (35ms), sinal positivo de recuperação autonômica, mas ainda acima do baseline (30-40ms), indicando possível resposta adaptativa pontual. Sono crítico: 5.7h com score 54, REM 0.0h e apenas 1.1h de sono profundo — déficit de 2.8h compromete regeneração muscular e consolidação neuromuscular. Body Battery 51/100 com stress médio 21 confirma estado funcional moderado, não ideal para esforços intensos.",
     "sec_treino_ontem": null,
-    "sec_carga": "Z1 em 1436 unidades ultrapassa o teto do target (1090), indicando excesso de volume aeróbico leve. Z2 em 519 está abaixo do piso target (759), e Z3+ em 541 está acima do recomendado para fase de base — distribuição invertida e desequilibrada. Status Garmin confirma sobrecarga com tendência de carga caindo; risco de lesão MODERADO exige contenção de intensidade imediata.",
-    "sec_hoje": "Treino planejado: Intervalado 4x3min Z4 (35min) — sessão de alta intensidade em contexto de sobrecarga Garmin, sono deficitário e Z3+ já acima do target mensal. Nenhuma execução registrada ainda hoje. Caso execute, reduzir para 2x3min Z4 com aquecimento de 10min em Z1 e volta calma; FC teto 168bpm nas séries, sem ultrapassar.",
-    "sec_ajuste": "Reduzir para 2 repetições de 3min Z4 (FC teto 168bpm), mantendo aquecimento e recuperação em Z1. Duração total não deve ultrapassar 28min; suspender se FC não estabilizar entre séries abaixo de 145bpm.",
-    "sec_alertas": "Z3+ mensal já em 541, acima do target — adicionar sessão Z4 hoje aprofunda desequilíbrio de polarização. REM zerado compromete síntese proteica e consolidação neuromuscular; risco real de fadiga acumulada mascarada pelo HRV pontualmente elevado.",
-    "sec_nutricao": "Pré-treino (se executar): 350kcal com CHO de fácil absorção 60-90min antes. Pós-treino: 30g de proteína em até 30min; priorizar jantar rico em triptofano e CHO complexo para maximizar sono com alvo de 8h (deitar 22:30).",
-    "sec_amanha": "Sessão de Natacao Base 45min Z2 é adequada para o dia seguinte dado o contexto de sobrecarga e sono deficitário. Manter duração em 45min, mas garantir execução estritamente em Z2 (FC 130-145bpm ou RPE 3-4); qualidade técnica acima de volume.",
+    "sec_carga": "Z1 em 1436 ultrapassa o teto do target (1096), indicando excesso de volume aeróbico leve; Z2 em 652 está abaixo do piso (752), sinalizando déficit de estímulo aeróbico de qualidade. Anaeróbica (Z3+) em 541 é desproporcional para fase BASE, contribuindo diretamente para o status Garmin de Sobrecarga. Risco de lesão MODERADO é coerente com esse padrão: volume mal distribuído e intensidade elevada sem base aeróbica consolidada.",
+    "sec_hoje": "Treino executado: 7.6km em 41:57, FC média 145bpm (max 158bpm), potência 354W, TE aeróbico 3.5 — execução tecnicamente dentro do protocolo Z4 com 4x3min. FC máxima de 158bpm é aceitável para Z4, mas com sono deficitário e REM zerado, o custo fisiológico real é superior ao aparente. Cadência de 165spm está elevada para um pace de 5:29/km, sugere falta de aplicação de força por passada.",
+    "sec_ajuste": "Treino já executado — sem ajuste possível. Para referência futura: com sono score <60 e REM 0.0h, limitar Z4 a no máximo 2 repetições e FC teto em 152bpm.",
+    "sec_alertas": "REM 0.0h é alerta crítico: ausência total de sono REM compromete síntese proteica, memória motora e regulação do cortisol — risco aumentado de overreaching nas próximas 48h. Z3+ mensal em 541 em semana 1 de BASE é tecnicamente incompatível com o objetivo de fase; revisar programação das próximas sessões para conter intensidade.",
+    "sec_nutricao": "Sem treino amanhã de manhã ainda, priorize hoje pós-treino: 30g proteína imediatos (whey ou equivalente) com 40-60g CHO para reposição de glicogênio. Hidratação mínima de 2.5L ao longo do dia; deitar às 22:00 é mandatório para tentar compensar déficit de 2.8h e recuperar ciclos REM.",
+    "sec_amanha": "Sessão de natação base 45min Z2 planejada — considerando sono deficitário (5.7h, REM 0.0h) e treino Z4 executado hoje, manter a sessão mas reduzir para 35min, mantendo Z2 estrito (FC ≤ 140bpm). O estímulo aeróbico em piscina tem baixo impacto articular e favorece recuperação ativa sem agravar sobrecarga.",
     "amanha_ajustado": [
       {
         "esporte": "swim",
         "tipo": "Natacao Base",
-        "duracao_min": 45,
+        "duracao_min": 35,
         "zona": "Z2",
-        "motivo_ajuste": null
+        "motivo_ajuste": "Redução de 10min por sono deficitário (REM 0.0h) e treino Z4 executado hoje; Z2 estrito com FC ≤ 140bpm para evitar sobrecarga adicional."
       }
     ],
     "status_readiness": "MODERADO",
     "status_carga": "SOBRECARGA",
-    "acao_hoje": "REDUZIR 40%",
-    "analise_hoje": "Sessão Z4 em dia de sobrecarga confirmada e sono estruturalmente comprometido (REM 0h) é contraindicada no volume original; redução para 2x3min Z4 é o limite seguro para não aprofundar o desequilíbrio de carga mensal.",
-    "alerta": "Z3+ mensal já acima do target com status de sobrecarga Garmin ativo — qualquer estímulo intenso hoje aumenta risco de lesão de MODERADO para ALTO."
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Execução do intervalado 4x3min Z4 tecnicamente adequada — FC e potência dentro do esperado, TE 3.5 confirma estímulo aeróbico real. Ponto de atenção: cadência de 165spm sugere padrão de passada curta; trabalhar força específica de corrida nas próximas semanas.",
+    "alerta": "REM 0.0h na noite pré-treino Z4: risco elevado de acúmulo de fadiga oculta — monitorar HRV e Body Battery nas próximas 48h antes de qualquer nova sessão de alta intensidade."
   }
 }

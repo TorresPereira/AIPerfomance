@@ -147,9 +147,9 @@
             {
               "esporte": "swim",
               "tipo": "Natacao Base",
-              "duracao_min": 45,
+              "duracao_min": 35,
               "zona": "Z2",
-              "descricao": "Sessão fixa de natação, foco em técnica de braçada e respiração bilateral.",
+              "descricao": "Redução de 10min por sono deficitário (REM 0.0h) e treino Z4 executado hoje; Z2 estrito com FC ≤ 140bpm para evitar sobrecarga adicional.",
               "longo": false,
               "estrutura": null,
               "fixo": false
