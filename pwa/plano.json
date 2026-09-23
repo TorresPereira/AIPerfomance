@@ -167,9 +167,9 @@
             {
               "esporte": "bike",
               "tipo": "Tempo Bike",
-              "duracao_min": 55,
-              "zona": "Z3",
-              "descricao": "Pedalada em ritmo tempo sustentado, mantendo cadência alta e posição aeróbica.",
+              "duracao_min": 40,
+              "zona": "Z2",
+              "descricao": "Status Sobrecarga + Body Battery 38 contraindicam Z3; redução para Z2 em 40min preserva estímulo aeróbico sem agravar fadiga acumulada.",
               "longo": false,
               "estrutura": null,
               "fixo": false
