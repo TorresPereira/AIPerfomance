@@ -1,22 +1,22 @@
 {
-  "date": "2026-09-23",
-  "generated_at": "2026-09-23T06:01:28.375358Z",
+  "date": "2026-09-24",
+  "generated_at": "2026-09-24T06:01:16.492070Z",
   "saude": {
-    "hrv": 50,
-    "hrv_7d": 35,
+    "hrv": 68,
+    "hrv_7d": 36,
     "hrv_status": "balanced",
-    "hrv_baseline_low": 30,
+    "hrv_baseline_low": 31,
     "hrv_baseline_high": 40,
-    "rhr": 62,
+    "rhr": 61,
     "rhr_baseline": null,
-    "sono_h": 7.2,
-    "sono_score": 74,
-    "sono_deep": 1.8,
-    "sono_rem": 0.7,
-    "sono_awake": 16.0,
-    "body_battery": 38,
-    "stress_avg": 22,
-    "stress_rest": 71.7,
+    "sono_h": 7.5,
+    "sono_score": 82,
+    "sono_deep": 1.5,
+    "sono_rem": 1.1,
+    "sono_awake": 5.0,
+    "body_battery": 54,
+    "stress_avg": 16,
+    "stress_rest": 88.94,
     "atl": 676.0,
     "ctl": 2704.0,
     "tsb": null,
@@ -35,9 +35,9 @@
     "peso": null,
     "previsoes": {
       "5K": 1358,
-      "10K": 2924,
-      "Meia": 6705,
-      "Maratona": 15071
+      "10K": 2925,
+      "Meia": 6707,
+      "Maratona": 15075
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -47,7 +47,7 @@
     "nutricao": {
       "cho_g_h": 80,
       "cho_total": null,
-      "agua_ml_h": 750,
+      "agua_ml_h": 600,
       "agua_total": null,
       "pre_kcal": 350,
       "pos_prot_g": 30,
@@ -55,75 +55,32 @@
     },
     "sono_alvo_h": 8.5,
     "sono_deita": "22:00",
-    "sono_deficit_h": 1.3
+    "sono_deficit_h": 1.0
   },
   "ontem": [
     {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Erkrath Tennis",
-      "dist": "1.9km",
-      "dur": "50m08s",
-      "fc": 127.0,
-      "fc_max": 164.0,
-      "cal": 524.0,
-      "cad": 21.421875,
+      "mod": "swim",
+      "icone": "🏊",
+      "nome": "Pool Swim",
+      "dist": "1675m",
+      "dur": "41m05s",
+      "fc": 129.0,
+      "fc_max": 149.0,
+      "cal": 466.0,
+      "cad": null,
       "tss": null,
       "np": null,
-      "swolf": null,
-      "aerobic_te": 2.5,
-      "anaerobic_te": 2.299999952316284,
+      "swolf": 13.300000190734863,
+      "aerobic_te": 2.4000000953674316,
+      "anaerobic_te": 0.4000000059604645,
       "elev": null,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 1883.43994140625,
-      "_dur_s": 3008.0009765625
-    },
-    {
-      "mod": "run",
-      "icone": "🏃",
-      "nome": "Erkrath - Corrida · Intervalado 4x3min Z4",
-      "dist": "7.6km",
-      "dur": "41m57s",
-      "fc": 145.0,
-      "fc_max": 158.0,
-      "cal": 603.0,
-      "cad": 165.015625,
-      "tss": null,
-      "np": 354.0,
-      "swolf": null,
-      "aerobic_te": 3.5,
-      "anaerobic_te": 0.5,
-      "elev": 56.0,
-      "perf": "5:29/km",
+      "perf": "2:27/100m",
       "pl": "Pace",
-      "_dist_m": 7628.81005859375,
-      "_dur_s": 2517.18701171875
+      "_dist_m": 1675.0,
+      "_dur_s": 2465.802001953125
     }
   ],
   "hoje": [
-    {
-      "icone": "🏊",
-      "nome": "Natacao",
-      "tipo": "swim",
-      "dur": "45min",
-      "dist": "—",
-      "passos": [
-        "Atividade fixa"
-      ]
-    },
-    {
-      "icone": "🏊",
-      "nome": "Natacao Base",
-      "tipo": "swim",
-      "dur": "35min",
-      "dist": "—",
-      "passos": [
-        "Redução de 10min por sono deficitário (REM 0.0h) e treino Z4 executado hoje; Z2 estrito com FC ≤ 140bpm para evitar sobrecarga adicional."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🚴",
       "nome": "Tempo Bike",
@@ -135,29 +92,8 @@
       ]
     }
   ],
-  "hoje_feito": [
-    {
-      "mod": "swim",
-      "icone": "🏊",
-      "nome": "Pool Swim",
-      "dist": "1675m",
-      "dur": "41m05s",
-      "fc": 129.0,
-      "fc_max": 149.0,
-      "tss": null,
-      "np": null,
-      "perf": "2:27/100m",
-      "pl": "Pace",
-      "_dist_m": 1675.0,
-      "_dur_s": 2465.802001953125,
-      "swolf": 13.300000190734863,
-      "cad": null,
-      "cal": 466.0,
-      "aerobic_te": 2.4000000953674316,
-      "anaerobic_te": 0.4000000059604645,
-      "elev": null
-    }
-  ],
+  "amanha": [],
+  "hoje_feito": [],
   "semana": {
     "swim_km": 1.7,
     "swim_min": 41.1,
@@ -177,18 +113,14 @@
     "run_min": 129.5
   },
   "clima": {
-    "temp_max": 21.1,
-    "temp_min": 9.4,
-    "chuva_pct": 8,
-    "vento_kmh": 11.2,
-    "temp_atual": 9.7,
+    "temp_max": 19.3,
+    "temp_min": 11.8,
+    "chuva_pct": 16,
+    "vento_kmh": 11.9,
+    "temp_atual": 13.5,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-09-17",
-      "value": 55.0
-    },
     {
       "date": "2026-09-18",
       "value": 56.0
@@ -212,13 +144,13 @@
     {
       "date": "2026-09-23",
       "value": 50.0
+    },
+    {
+      "date": "2026-09-24",
+      "value": 68.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-09-09",
-      "value": 47.3
-    },
     {
       "date": "2026-09-10",
       "value": 47.7
@@ -274,15 +206,14 @@
     {
       "date": "2026-09-23",
       "value": 48.8
+    },
+    {
+      "date": "2026-09-24",
+      "value": 48.8
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-09-10",
-      "sono": 7.4,
-      "te": 3.5
-    },
     {
       "date": "2026-09-11",
       "sono": 7.5,
@@ -469,28 +400,20 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV em alta, execute com controle e precisão.",
-    "sec_readiness": "HRV de 50ms está 43% acima da média 7d (35ms) e acima do baseline de 30–40ms — sinal positivo de recuperação aguda. RHR de 62bpm sem baseline comparativo, mas aceitável dado contexto. Sono com 7.2h e score 74 apresenta déficit de 1.3h no alvo; REM baixo (0.7h) compromete recuperação cognitiva e neural. Body Battery em 38/100 indica reserva funcional limitada para esforços intensos.",
-    "sec_treino_ontem": "Corrida intervalada 4x3min Z4 executada com FC média 145bpm e potência 354W em 7.6km — TE aeróbico 3.5 indica estímulo adequado sem excessos. Tênis (50min, FC 127bpm) adicionou carga metabólica leve mas elevou ATL total do dia. Combinação de tênis + intervalado no mesmo dia é ponto crítico: carga acumulada acima do planejado para semana BASE.",
-    "sec_carga": "Z1 em 1465 unidades ultrapassa o teto target (1096) em 34% — volume aeróbico leve excessivo para fase BASE. Z2 em 652 está abaixo do piso (752), indicando sub-estímulo na zona de desenvolvimento aeróbico central. Z3+ em 587 com status Garmin 'Sobrecarga' e tendência de carga caindo reforça necessidade de contenção de intensidade nos próximos dias.",
-    "sec_hoje": "Natação executada: 1675m em 41min a 2:27/100m com FC 129bpm (máx 149bpm) e TE aeróbico 2.4 — sessão de base leve, dentro do esperado. Execução coerente com proposta de natação base (Z1-Z2 suave). SWOLF 13.3 indica eficiência técnica razoável; sem dados de braçada para aprofundar análise de padrão.",
-    "sec_ajuste": "Natação de hoje está executada e adequada — nenhum ajuste retroativo necessário. Para o restante do dia, manter FC abaixo de 140bpm em qualquer atividade adicional; Body Battery em 38 contraindica esforços complementares.",
-    "sec_alertas": "Status Garmin 'Sobrecarga' combinado com Z1 excedendo teto em 34% requer atenção imediata na programação da semana. Body Battery 38/100 limita capacidade de resposta a estímulos anaeróbicos amanhã. Déficit de REM (0.7h) pode comprometer adaptação neural pós-intervalado de ontem.",
-    "sec_nutricao": "Treino de hoje já executado (41min natação): pós-treino priorize 30g de proteína + 40–60g CHO dentro de 30min para iniciar recuperação muscular. Hidratação residual: 500ml nas próximas 2h; jantar com densidade calórica moderada, dormir às 22:00 para atingir 8.5h alvo.",
-    "sec_amanha": "Tempo Bike Z3 de 55min está planejado, porém status 'Sobrecarga', Body Battery 38 e ATL elevado recomendam redução de intensidade. Manter duração em 40min e rebaixar zona para Z2 (FC 130–145bpm, potência 185–210W) preservando estímulo aeróbico sem aprofundar déficit de recuperação.",
-    "amanha_ajustado": [
-      {
-        "esporte": "bike",
-        "tipo": "Tempo Bike",
-        "duracao_min": 40,
-        "zona": "Z2",
-        "motivo_ajuste": "Status Sobrecarga + Body Battery 38 contraindicam Z3; redução para Z2 em 40min preserva estímulo aeróbico sem agravar fadiga acumulada."
-      }
-    ],
-    "status_readiness": "MODERADO",
+    "frase": "HRV alto hoje — use a janela, amanhã descansa.",
+    "sec_readiness": "HRV de 68ms está 32ms acima da média 7d (36ms) e bem acima do baseline (31–40ms), sinalizando recuperação autonômica sólida. RHR de 61bpm sem baseline de referência, mas combinado com sono de 7.5h (score 82, deep 1.5h, REM 1.1h) indica boa qualidade — déficit acumulado de 1h é gerenciável. Body Battery em 54/100 com stress médio de 16 reflete reserva funcional moderada, suficiente para esforço controlado.",
+    "sec_treino_ontem": "Nado de 1675m em 41:05 a 2:27/100m com FC média 129bpm e SWOLF 13.3 indica eficiência técnica adequada para ritmo aeróbico leve. TE aeróbico de 2.4 confirma estímulo baixo-moderado, sessão bem executada dentro de Z1-Z2. Sem pontos críticos — sessão cumprida com controle de intensidade.",
+    "sec_carga": "Z1 em 1465 supera o teto do target (1096), indicando excesso de volume leve sem compensação adequada em Z2 (652 vs mínimo 752). Status Garmin de Sobrecarga com ATL 676 e CTL 2704 aponta acúmulo real de fadiga residual — risco de lesão MODERADO. Com bike zerado na semana, a carga está desequilibrada modalmente e a tendência de carga caindo é positiva, mas exige cautela.",
+    "sec_hoje": "Sessão de Tempo Bike de 40min planejada — nenhum treino registrado ainda. Com HRV elevado e Body Battery em 54, a janela fisiológica permite execução, mas o status de Sobrecarga Garmin exige controle rígido de intensidade. Executar em Z1-Z2 estrito, FC teto 148bpm, sem picos anaeróbicos.",
+    "sec_ajuste": "Manter os 40min de bike, mas limitar integralmente a Z1-Z2 com FC teto 148bpm e potência alvo 160–190W (estimado para VO2max 48.8). Sem trechos em Z3+ hoje.",
+    "sec_alertas": "Z1 mensal 34% acima do teto do target — risco de excesso de volume leve acumulado. Bike zerado na semana até hoje cria desequilíbrio modal que deve ser corrigido com moderação. Monitorar HR drift acima de 10bpm na segunda metade do bike como sinal de fadiga residual.",
+    "sec_nutricao": "Dia com apenas 40min de treino: pré-bike com 350kcal leve (CHO + proteína) 60min antes; hidratação mínima de 600ml durante. Pós-treino: 30g proteína dentro de 30min para suporte à recuperação muscular.",
+    "sec_amanha": "Sem sessão de treino planejada para amanhã — dia de descanso ou atividades fixas mantido. Decisão correta dado o status de Sobrecarga; manter o descanso integral para permitir absorção da carga acumulada.",
+    "amanha_ajustado": [],
+    "status_readiness": "BOM",
     "status_carga": "SOBRECARGA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Natação de 1675m em Z1-Z2 executada com eficiência adequada (SWOLF 13.3, TE 2.4) — sessão cumprida dentro do proposto para dia de carga controlada. Nenhum desvio crítico identificado.",
-    "alerta": "Z1 mensal 34% acima do teto e status Sobrecarga: reduzir intensidade amanhã é obrigatório para evitar acúmulo de fadiga na semana BASE."
+    "analise_hoje": "Bike de 40min é adequado e oportuno dado o HRV elevado, mas deve ser executado em Z1-Z2 estrito para não agravar o status de Sobrecarga. Sessão com função de estímulo leve e manutenção modal, não de desenvolvimento.",
+    "alerta": "Status Garmin de Sobrecarga ativo — qualquer desvio para Z3 hoje aumenta risco de lesão classificado como MODERADO."
   }
 }
