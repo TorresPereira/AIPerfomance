@@ -196,9 +196,9 @@
             {
               "esporte": "run",
               "tipo": "Long Run Base",
-              "duracao_min": 80,
+              "duracao_min": 55,
               "zona": "Z2",
-              "descricao": "Corrida longa em ritmo aeróbico fácil, foco em volume e resistência de base.",
+              "descricao": "Redução de 80 para 55min devido a sono deficitário (5.2h, REM zero), Body Battery 38 e status de sobrecarga Garmin com risco de lesão moderado.",
               "longo": true,
               "estrutura": null,
               "fixo": false
