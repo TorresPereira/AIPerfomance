@@ -1,43 +1,41 @@
 {
-  "date": "2026-09-24",
-  "generated_at": "2026-09-24T06:01:16.492070Z",
+  "date": "2026-09-25",
+  "generated_at": "2026-09-25T06:01:24.872181Z",
   "saude": {
-    "hrv": 68,
-    "hrv_7d": 36,
-    "hrv_status": "balanced",
-    "hrv_baseline_low": 31,
-    "hrv_baseline_high": 40,
-    "rhr": 61,
+    "hrv": null,
+    "hrv_7d": null,
+    "hrv_status": null,
+    "rhr": 66,
     "rhr_baseline": null,
-    "sono_h": 7.5,
-    "sono_score": 82,
-    "sono_deep": 1.5,
-    "sono_rem": 1.1,
-    "sono_awake": 5.0,
-    "body_battery": 54,
-    "stress_avg": 16,
-    "stress_rest": 88.94,
-    "atl": 676.0,
-    "ctl": 2704.0,
+    "sono_h": 0.0,
+    "sono_score": null,
+    "sono_deep": 0.0,
+    "sono_rem": 0.0,
+    "sono_awake": 0.0,
+    "body_battery": 0,
+    "stress_avg": 23,
+    "stress_rest": 41.35,
+    "atl": null,
+    "ctl": null,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 1465.0,
-    "load_aerobic_high": 652.0,
-    "load_anaerobic": 587.0,
-    "load_total_month": 2704.0,
-    "load_target_low": "443–1096",
-    "load_target_high": "752–1405",
-    "training_status": "Sobrecarga",
-    "fitness_trend": "Caindo",
+    "load_aerobic_low": null,
+    "load_aerobic_high": null,
+    "load_anaerobic": null,
+    "load_total_month": null,
+    "load_target_low": null,
+    "load_target_high": null,
+    "training_status": null,
+    "fitness_trend": null,
     "training_readiness": null,
-    "vo2max": 48.8,
+    "vo2max": null,
     "peso": null,
     "previsoes": {
-      "5K": 1358,
-      "10K": 2925,
-      "Meia": 6707,
-      "Maratona": 15075
+      "5K": 1359,
+      "10K": 2926,
+      "Meia": 6709,
+      "Maratona": 15080
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -47,52 +45,30 @@
     "nutricao": {
       "cho_g_h": 80,
       "cho_total": null,
-      "agua_ml_h": 600,
+      "agua_ml_h": 750,
       "agua_total": null,
       "pre_kcal": 350,
       "pos_prot_g": 30,
       "dur_min": 0
     },
-    "sono_alvo_h": 8.5,
-    "sono_deita": "22:00",
-    "sono_deficit_h": 1.0
+    "sono_alvo_h": 8.0,
+    "sono_deita": "22:30",
+    "sono_deficit_h": null
   },
-  "ontem": [
+  "ontem": [],
+  "hoje": [],
+  "amanha": [
     {
-      "mod": "swim",
-      "icone": "🏊",
-      "nome": "Pool Swim",
-      "dist": "1675m",
-      "dur": "41m05s",
-      "fc": 129.0,
-      "fc_max": 149.0,
-      "cal": 466.0,
-      "cad": null,
-      "tss": null,
-      "np": null,
-      "swolf": 13.300000190734863,
-      "aerobic_te": 2.4000000953674316,
-      "anaerobic_te": 0.4000000059604645,
-      "elev": null,
-      "perf": "2:27/100m",
-      "pl": "Pace",
-      "_dist_m": 1675.0,
-      "_dur_s": 2465.802001953125
-    }
-  ],
-  "hoje": [
-    {
-      "icone": "🚴",
-      "nome": "Tempo Bike",
-      "tipo": "bike",
-      "dur": "40min",
+      "icone": "🏃",
+      "nome": "Long Run Base",
+      "tipo": "run",
+      "dur": "80min",
       "dist": "—",
       "passos": [
-        "Status Sobrecarga + Body Battery 38 contraindicam Z3; redução para Z2 em 40min preserva estímulo aeróbico sem agravar fadiga acumulada."
+        "Corrida longa em ritmo aeróbico fácil, foco em volume e resistência de base."
       ]
     }
   ],
-  "amanha": [],
   "hoje_feito": [],
   "semana": {
     "swim_km": 1.7,
@@ -113,18 +89,14 @@
     "run_min": 129.5
   },
   "clima": {
-    "temp_max": 19.3,
-    "temp_min": 11.8,
-    "chuva_pct": 16,
-    "vento_kmh": 11.9,
-    "temp_atual": 13.5,
+    "temp_max": 21.6,
+    "temp_min": 8.2,
+    "chuva_pct": 0,
+    "vento_kmh": 9.4,
+    "temp_atual": 8.7,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-09-18",
-      "value": 56.0
-    },
     {
       "date": "2026-09-19",
       "value": 48.0
@@ -148,6 +120,10 @@
     {
       "date": "2026-09-24",
       "value": 68.0
+    },
+    {
+      "date": "2026-09-25",
+      "value": null
     }
   ],
   "vo2max_hist": [
@@ -214,11 +190,6 @@
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-09-11",
-      "sono": 7.5,
-      "te": 2.7
-    },
     {
       "date": "2026-09-12",
       "sono": 7.1,
@@ -400,20 +371,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV alto hoje — use a janela, amanhã descansa.",
-    "sec_readiness": "HRV de 68ms está 32ms acima da média 7d (36ms) e bem acima do baseline (31–40ms), sinalizando recuperação autonômica sólida. RHR de 61bpm sem baseline de referência, mas combinado com sono de 7.5h (score 82, deep 1.5h, REM 1.1h) indica boa qualidade — déficit acumulado de 1h é gerenciável. Body Battery em 54/100 com stress médio de 16 reflete reserva funcional moderada, suficiente para esforço controlado.",
-    "sec_treino_ontem": "Nado de 1675m em 41:05 a 2:27/100m com FC média 129bpm e SWOLF 13.3 indica eficiência técnica adequada para ritmo aeróbico leve. TE aeróbico de 2.4 confirma estímulo baixo-moderado, sessão bem executada dentro de Z1-Z2. Sem pontos críticos — sessão cumprida com controle de intensidade.",
-    "sec_carga": "Z1 em 1465 supera o teto do target (1096), indicando excesso de volume leve sem compensação adequada em Z2 (652 vs mínimo 752). Status Garmin de Sobrecarga com ATL 676 e CTL 2704 aponta acúmulo real de fadiga residual — risco de lesão MODERADO. Com bike zerado na semana, a carga está desequilibrada modalmente e a tendência de carga caindo é positiva, mas exige cautela.",
-    "sec_hoje": "Sessão de Tempo Bike de 40min planejada — nenhum treino registrado ainda. Com HRV elevado e Body Battery em 54, a janela fisiológica permite execução, mas o status de Sobrecarga Garmin exige controle rígido de intensidade. Executar em Z1-Z2 estrito, FC teto 148bpm, sem picos anaeróbicos.",
-    "sec_ajuste": "Manter os 40min de bike, mas limitar integralmente a Z1-Z2 com FC teto 148bpm e potência alvo 160–190W (estimado para VO2max 48.8). Sem trechos em Z3+ hoje.",
-    "sec_alertas": "Z1 mensal 34% acima do teto do target — risco de excesso de volume leve acumulado. Bike zerado na semana até hoje cria desequilíbrio modal que deve ser corrigido com moderação. Monitorar HR drift acima de 10bpm na segunda metade do bike como sinal de fadiga residual.",
-    "sec_nutricao": "Dia com apenas 40min de treino: pré-bike com 350kcal leve (CHO + proteína) 60min antes; hidratação mínima de 600ml durante. Pós-treino: 30g proteína dentro de 30min para suporte à recuperação muscular.",
-    "sec_amanha": "Sem sessão de treino planejada para amanhã — dia de descanso ou atividades fixas mantido. Decisão correta dado o status de Sobrecarga; manter o descanso integral para permitir absorção da carga acumulada.",
-    "amanha_ajustado": [],
-    "status_readiness": "BOM",
-    "status_carga": "SOBRECARGA",
-    "acao_hoje": "MANTER",
-    "analise_hoje": "Bike de 40min é adequado e oportuno dado o HRV elevado, mas deve ser executado em Z1-Z2 estrito para não agravar o status de Sobrecarga. Sessão com função de estímulo leve e manutenção modal, não de desenvolvimento.",
-    "alerta": "Status Garmin de Sobrecarga ativo — qualquer desvio para Z3 hoje aumenta risco de lesão classificado como MODERADO."
+    "frase": "Base sólida se constrói com consistência, não com intensidade.",
+    "sec_readiness": "Dados de HRV, sono e Body Battery indisponíveis ou zerados — impossível quantificar prontidão fisiológica com precisão. RHR de 66 bpm serve como único indicador disponível; sem baseline definido, não é possível avaliar desvio. Monitoramento dos dados de recuperação precisa ser reativado antes de sessões de carga moderada/alta.",
+    "sec_treino_ontem": null,
+    "sec_carga": "Volume semanal muito baixo: 1,7km natação e 7,6km corrida, com zero bike — incompatível com demanda de uma Semana 1 Base para Half Ironman. Dados ATL/CTL e distribuição de zonas ausentes impedem análise de balanço agudo/crônico. Risco de lesão classificado como MODERADO apesar da carga baixa — possível indicador de descontinuidade ou retomada após período sem treino.",
+    "sec_hoje": "Nenhum treino agendado ou executado hoje — dia de descanso ativo ou transição. Sem sessão programada, o foco deve ser recuperação, mobilidade leve e preparação para o Long Run de amanhã. Hidratação e sono esta noite são os principais ativos a gerenciar.",
+    "sec_ajuste": "Hoje: descanso total mantido. Priorizar 8h de sono com deitar às 22:30 e hidratação mínima de 2L ao longo do dia.",
+    "sec_alertas": "Ausência de dados de HRV e sono compromete a tomada de decisão baseada em evidências — verificar conectividade do Garmin 965 e app Garmin Connect. Volume semanal de bike zerado é ponto crítico para Half Ironman na fase de base.",
+    "sec_nutricao": "Sem treino hoje, priorizar refeições balanceadas com foco em 1,6–1,8g proteína/kg para suporte à recuperação muscular. Pré-sono: refeição leve com carboidrato complexo + 20–30g proteína para otimizar recuperação noturna.",
+    "sec_amanha": "Long Run Base 80min Z2 está mantido conforme plano. Sem sinais claros de fadiga acumulada (dia de descanso hoje), a sessão pode ser executada na íntegra. FC alvo Z2: 130–148 bpm (ajustar conforme lactato ou testes individuais); manter pace conversacional e evitar deriva acima de 155 bpm nos últimos 20min.",
+    "amanha_ajustado": [
+      {
+        "esporte": "run",
+        "tipo": "Long Run Base",
+        "duracao_min": 80,
+        "zona": "Z2",
+        "motivo_ajuste": null
+      }
+    ],
+    "status_readiness": "MODERADO",
+    "status_carga": "SUAVE",
+    "acao_hoje": "DESCANSO",
+    "analise_hoje": "Dia sem treino executado conforme agenda — correto dado o contexto de dados de recuperação indisponíveis e necessidade de preparação para o Long Run de amanhã. Nenhuma intervenção necessária.",
+    "alerta": "Dados de HRV, sono e Body Battery zerados — verificar sincronização do dispositivo imediatamente para não comprometer análise de carga nas próximas sessões."
   }
 }
