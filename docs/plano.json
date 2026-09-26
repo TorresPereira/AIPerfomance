@@ -224,9 +224,9 @@
             {
               "esporte": "bike",
               "tipo": "Long Ride Base",
-              "duracao_min": 110,
+              "duracao_min": 75,
               "zona": "Z2",
-              "descricao": "Pedalada longa progressiva em Z2, aumentando volume em relação à semana anterior.",
+              "descricao": "Redução de 110 para 75min devido a Body Battery 17/100, sobrecarga mensal em Z1 já acima do teto e déficit de sono acumulado de 2.7h.",
               "longo": true,
               "estrutura": null,
               "fixo": false
