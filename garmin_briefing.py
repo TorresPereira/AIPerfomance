@@ -396,19 +396,24 @@ def coletar():
             mes.setdefault(dstr, {"planejados":[], "feitos":[]})["feitos"].append(_emo_sport(tipo))
         print(f"  Mês feitos: {sum(len(v['feitos']) for v in mes.values())} atividades")
     except Exception as e: print(f"  Mês feitos err: {e}")
-    # Planejados: calendário (só existe com plano de treino ativo)
+    # Planejados: lidos do NOSSO plano de 4 semanas (pwa/plano.json), que é
+    # exatamente o que fica agendado no Garmin — a API get_scheduled_workouts()
+    # não existe mais nesta versão da lib, então esta é a fonte real agora.
     try:
-        if not hasattr(api, "get_scheduled_workouts"):
-            raise AttributeError("get_scheduled_workouts indisponível nesta versão — pulando planejados do mês")
-        res_m = api.get_scheduled_workouts(TODAY.year, TODAY.month)
-        raw_m = res_m.get("calendarItems",[]) if isinstance(res_m,dict) else (res_m or [])
-        for w in raw_m:
-            if not isinstance(w,dict): continue
-            wd = str(w.get("date") or "")
-            if not wd.startswith(f"{TODAY.year}-{TODAY.month:02d}"): continue
-            if str(w.get("itemType") or "").lower() != "workout": continue
-            emo = _emo_sport(str(w.get("sportTypeKey") or "") + " " + str(w.get("title") or ""))
-            mes.setdefault(wd, {"planejados":[], "feitos":[]})["planejados"].append(emo)
+        if os.path.exists("pwa/plano.json"):
+            with open("pwa/plano.json", encoding="utf-8") as pf:
+                plano_mes = json.load(pf)
+            n_plan = 0
+            for sem in plano_mes.get("semanas", []):
+                for wd, dia in sem.get("dias", {}).items():
+                    if not wd.startswith(f"{TODAY.year}-{TODAY.month:02d}"): continue
+                    for sessao in dia.get("sessoes", []):
+                        emo = _emo_sport(sessao.get("esporte",""))
+                        mes.setdefault(wd, {"planejados":[], "feitos":[]})["planejados"].append(emo)
+                        n_plan += 1
+            print(f"  Mês planejados: {n_plan} sessão(ões) do plano")
+        else:
+            print("  Mês planejados: sem plano.json ainda")
     except Exception as e: print(f"  Mês planejados err: {e}")
     d["mes"] = mes
     print(f"  Mês: {len(mes)} dias com itens")
