@@ -1,31 +1,31 @@
 {
-  "date": "2026-09-26",
-  "generated_at": "2026-09-26T09:27:27.647896Z",
+  "date": "2026-09-27",
+  "generated_at": "2026-09-27T06:01:44.481983Z",
   "saude": {
-    "hrv": 65,
+    "hrv": 47,
     "hrv_7d": 34,
     "hrv_status": "balanced",
     "hrv_baseline_low": 31,
     "hrv_baseline_high": 40,
-    "rhr": 66,
+    "rhr": 65,
     "rhr_baseline": null,
-    "sono_h": 5.8,
-    "sono_score": 50,
-    "sono_deep": 0.8,
-    "sono_rem": 0.7,
-    "sono_awake": 65.0,
-    "body_battery": 17,
-    "stress_avg": 31,
-    "stress_rest": 21.69,
-    "atl": 688.0,
-    "ctl": 2752.0,
+    "sono_h": 6.0,
+    "sono_score": 66,
+    "sono_deep": 1.0,
+    "sono_rem": 0.5,
+    "sono_awake": 3.0,
+    "body_battery": 28,
+    "stress_avg": 27,
+    "stress_rest": 60.55,
+    "atl": 642.0,
+    "ctl": 2568.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 1498.0,
+    "load_aerobic_low": 1359.0,
     "load_aerobic_high": 652.0,
-    "load_anaerobic": 602.0,
-    "load_total_month": 2752.0,
+    "load_anaerobic": 556.0,
+    "load_total_month": 2568.0,
     "load_target_low": "439–1092",
     "load_target_high": "757–1410",
     "training_status": "Sobrecarga",
@@ -34,10 +34,10 @@
     "vo2max": 48.6,
     "peso": null,
     "previsoes": {
-      "5K": 1356,
-      "10K": 2923,
-      "Meia": 6710,
-      "Maratona": 15090
+      "5K": 1361,
+      "10K": 2932,
+      "Meia": 6732,
+      "Maratona": 15131
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,44 +55,32 @@
     },
     "sono_alvo_h": 8.5,
     "sono_deita": "22:00",
-    "sono_deficit_h": 2.7
+    "sono_deficit_h": 2.5
   },
   "ontem": [
     {
       "mod": "run",
       "icone": "🏃",
       "nome": "Porto Running",
-      "dist": "10.4km",
-      "dur": "1h11m",
-      "fc": 135.0,
-      "fc_max": 167.0,
-      "cal": 871.0,
-      "cad": 159.375,
+      "dist": "9.1km",
+      "dur": "1h03m",
+      "fc": 132.0,
+      "fc_max": 151.0,
+      "cal": 745.0,
+      "cad": 163.859375,
       "tss": null,
-      "np": 310.0,
+      "np": 293.0,
       "swolf": null,
-      "aerobic_te": 3.299999952316284,
-      "anaerobic_te": 1.2000000476837158,
-      "elev": 141.0,
-      "perf": "6:50/km",
+      "aerobic_te": 3.0,
+      "anaerobic_te": 0.0,
+      "elev": 32.0,
+      "perf": "6:56/km",
       "pl": "Pace",
-      "_dist_m": 10445.8896484375,
-      "_dur_s": 4287.2119140625
+      "_dist_m": 9083.3798828125,
+      "_dur_s": 3783.055908203125
     }
   ],
   "hoje": [
-    {
-      "icone": "🏃",
-      "nome": "Long Run Base",
-      "tipo": "run",
-      "dur": "55min",
-      "dist": "—",
-      "passos": [
-        "Redução de 80 para 55min devido a sono deficitário (5.2h, REM zero), Body Battery 38 e status de sobrecarga Garmin com risco de lesão moderado."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🚴",
       "nome": "Long Ride Base",
@@ -104,29 +92,19 @@
       ]
     }
   ],
-  "hoje_feito": [
+  "amanha": [
     {
-      "mod": "run",
       "icone": "🏃",
-      "nome": "Porto Running",
-      "dist": "9.1km",
-      "dur": "1h03m",
-      "fc": 132.0,
-      "fc_max": 151.0,
-      "tss": null,
-      "np": 293.0,
-      "perf": "6:56/km",
-      "pl": "Pace",
-      "_dist_m": 9083.3798828125,
-      "_dur_s": 3783.055908203125,
-      "swolf": null,
-      "cad": 163.859375,
-      "cal": 745.0,
-      "aerobic_te": 3.0,
-      "anaerobic_te": 0.0,
-      "elev": 32.0
+      "nome": "Rodagem Aeróbica",
+      "tipo": "run",
+      "dur": "40min",
+      "dist": "—",
+      "passos": [
+        "Redução preventiva de 10min considerando sono deficitário acumulado e Body Battery baixo; FC teto 148bpm."
+      ]
     }
   ],
+  "hoje_feito": [],
   "semana": {
     "swim_km": 1.7,
     "swim_min": 41.1,
@@ -146,18 +124,14 @@
     "run_min": 129.5
   },
   "clima": {
-    "temp_max": 22.1,
-    "temp_min": 10.7,
-    "chuva_pct": 0,
-    "vento_kmh": 13.7,
-    "temp_atual": 17.1,
+    "temp_max": 26.8,
+    "temp_min": 13.9,
+    "chuva_pct": 4,
+    "vento_kmh": 15.1,
+    "temp_atual": 15.1,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-09-20",
-      "value": 50.0
-    },
     {
       "date": "2026-09-21",
       "value": 48.0
@@ -181,13 +155,13 @@
     {
       "date": "2026-09-26",
       "value": 65.0
+    },
+    {
+      "date": "2026-09-27",
+      "value": 47.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-09-12",
-      "value": 47.7
-    },
     {
       "date": "2026-09-13",
       "value": 47.7
@@ -242,6 +216,10 @@
     },
     {
       "date": "2026-09-26",
+      "value": 48.6
+    },
+    {
+      "date": "2026-09-27",
       "value": 48.6
     }
   ],
@@ -441,32 +419,32 @@
     }
   },
   "plano_meta": {
-    "semana": 1,
+    "semana": 2,
     "fase": "BASE"
   },
   "insights": {
-    "frase": "Consistência supera intensidade — respeite o sinal do corpo.",
-    "sec_readiness": "HRV de 65ms está acima do baseline (31–40ms) e +31ms vs média 7d, sinal positivo de recuperação aguda. Porém sono de 5.8h com score 50, deep sleep apenas 0.8h e déficit acumulado de 2.7h comprometem a recuperação estrutural. Body Battery em 17/100 é crítico — reserva energética mínima para esforços adicionais.",
-    "sec_treino_ontem": "Corrida de 10.4km em 1h11 com FC média 135bpm e TE aeróbico 3.3 indica carga aeróbica significativa dentro da zona de base. Potência média de 310W com pace 6:50/km e cadência 159spm sugere execução controlada mas no limite superior do Z2. FC máxima de 167bpm indica pico de intensidade fora do padrão base — ponto de atenção.",
-    "sec_carga": "Z1 em 1498 vs target 439–1092 — já 37% acima do teto superior, configurando sobrecarga estrutural. Z2 em 652 ainda dentro do range (757–1410 target), mas Z3+ em 602 representa 21.9% da carga total, valor elevado para fase BASE. Status Garmin confirmando sobrecarga com tendência de carga caindo — sinal de acúmulo prévio não absorvido.",
-    "sec_hoje": "Treino executado: 9.1km em 1h03 com FC média 132bpm, potência 293W, pace 6:56/km e TE aeróbico 3.0 — execução dentro do Z1/Z2 baixo, tecnicamente coerente. Comparado ao planejado (Long Run Base 55min), o atleta excedeu 8 minutos de duração com Body Battery já crítico (17/100). Sessão tecnicamente aceitável mas execução ultrapassou o volume recomendado dado o estado de recuperação.",
-    "sec_ajuste": "Para o treino de hoje já executado: carga real ficou acima do ideal dado BB 17/100 — prioridade absoluta agora é recuperação passiva. FC teto respeitado em 132bpm médio foi adequado; não adicionar nenhuma sessão complementar hoje.",
-    "sec_alertas": "Z1 mensal 37% acima do teto — risco de lesão moderado por sobrecarga de volume. Sono estruturalmente deficiente (deep 0.8h, REM 0.7h) limitando adaptação hormonal e neurológica. Body Battery 17/100 pós-treino indica reserva energética esgotada — qualquer estresse adicional hoje é contraproducente.",
-    "sec_nutricao": "Pós-treino imediato: 30g de proteína + 80–100g CHO para reposição glicogênica (janela 30min). Hidratação mínima de 500ml nas próximas 2h; dormir às 22:00 é mandatório para atacar déficit de 2.7h e preparar BB para o Long Ride de amanhã.",
-    "sec_amanha": "Long Ride Base de 110min está planejado, mas BB crítico (17/100) e sobrecarga mensal em Z1 exigem cautela. Reduzir para 75min mantendo zona Z2 estrita (FC 130–145bpm, potência 180–210W) — volume suficiente para estímulo aeróbico sem aprofundar fadiga acumulada.",
+    "frase": "HRV elevado, mas o corpo pede cautela hoje.",
+    "sec_readiness": "HRV de 47ms está 38% acima da média 7d (34ms) e acima do baseline (31–40ms), sinal positivo de recuperação aguda. Sono insuficiente: 6.0h com apenas 1.0h deep e 0.5h REM, déficit de 2.5h compromete recuperação estrutural. Body Battery em 28/100 indica reserva energética baixa apesar do HRV favorável — combinação que exige cautela na intensidade.",
+    "sec_treino_ontem": "Corrida de 9.1km em 1h03m com FC média 132bpm e TE aeróbico 3.0 — execução dentro da faixa aeróbica, adequada para base. Potência de 293W e cadência 163spm indicam corrida eficiente; FC máx 151bpm sugere que a sessão não excedeu Z2 de forma significativa. Pace de 6:56/km coerente com Z2 para o perfil do atleta.",
+    "sec_carga": "Z1 mensal em 1359 (excede teto de 1092) e Z3+ em 556 — ambos fora dos targets, com Z2 em 652 (abaixo do mínimo de 757). Distribuição polarizada de forma negativa: excesso de volume leve e anaeróbico, déficit aeróbico de qualidade. Status Garmin de Sobrecarga com risco MODERADO de lesão exige contenção de carga esta semana.",
+    "sec_hoje": "Treino planejado: Long Ride Base 75min. Nenhuma execução registrada até o momento. Dado o Body Battery em 28 e sono deficitário, a sessão deve ser executada em Z1 estrito (FC abaixo de 130bpm), sem oscilações de intensidade. Evitar qualquer pico acima de 135bpm; priorizar recuperação ativa sobre estímulo fisiológico.",
+    "sec_ajuste": "Manter Long Ride Base mas reduzir para 50min em Z1 puro. FC teto: 130bpm; potência alvo: 150–170W (se usado medidor). Cadência >85rpm.",
+    "sec_alertas": "Risco real de acúmulo de fadiga oculta: HRV alto pode refletir resposta parassimpática de estresse, não apenas recuperação. Z1 mensal supera teto em 24% — reduzir volume adicional hoje. Sono REM em apenas 0.5h compromete consolidação neuromuscular; priorizar 8.5h esta noite.",
+    "sec_nutricao": "Sem treino executado hoje ainda: pré-ride consumir 350kcal com foco em carboidratos de baixo índice glicêmico 60min antes. Pós-treino: 30g proteína + carboidrato de reposição moderado; hidratação mínima de 750ml/h durante a ride.",
+    "sec_amanha": "Rodagem Aeróbica de 50min em Z2 pode ser mantida, mas com FC teto de 148bpm dado o déficit de sono acumulado e Body Battery previsivelmente ainda abaixo de 50. Se sono desta noite for inferior a 7.5h, reduzir para 35min.",
     "amanha_ajustado": [
       {
-        "esporte": "bike",
-        "tipo": "Long Ride Base",
-        "duracao_min": 75,
+        "esporte": "run",
+        "tipo": "Rodagem Aeróbica",
+        "duracao_min": 40,
         "zona": "Z2",
-        "motivo_ajuste": "Redução de 110 para 75min devido a Body Battery 17/100, sobrecarga mensal em Z1 já acima do teto e déficit de sono acumulado de 2.7h."
+        "motivo_ajuste": "Redução preventiva de 10min considerando sono deficitário acumulado e Body Battery baixo; FC teto 148bpm."
       }
     ],
-    "status_readiness": "BAIXO",
+    "status_readiness": "MODERADO",
     "status_carga": "SOBRECARGA",
     "acao_hoje": "REDUZIR 20%",
-    "analise_hoje": "Corrida executada com bom controle de FC (132bpm médio) e TE 3.0 adequado para base, mas duração excedeu o planejado em contexto de BB 17/100 — aceitável tecnicamente, porém limiar máximo tolerável dado o estado de recuperação atual.",
-    "alerta": "Body Battery 17/100 com Z1 mensal 37% acima do teto e déficit de sono de 2.7h configuram janela de risco real de overreaching — sono de 8.5h esta noite é condição não negociável para viabilizar o Long Ride de amanhã."
+    "analise_hoje": "Long Ride Base deve ser executado em Z1 estrito com duração reduzida para 50min; Body Battery em 28 não suporta estímulo aeróbico de alta qualidade hoje. Foco em manutenção de mobilidade e fluxo sanguíneo, não em carga.",
+    "alerta": "Z1 mensal 24% acima do teto e status Garmin em Sobrecarga — qualquer sessão acima de Z1 hoje eleva risco de lesão de MODERADO para ALTO."
   }
 }

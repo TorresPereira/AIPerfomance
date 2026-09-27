@@ -244,9 +244,9 @@
             {
               "esporte": "run",
               "tipo": "Rodagem Aeróbica",
-              "duracao_min": 50,
+              "duracao_min": 40,
               "zona": "Z2",
-              "descricao": "Corrida contínua em ritmo confortável, recuperação ativa após o long ride.",
+              "descricao": "Redução preventiva de 10min considerando sono deficitário acumulado e Body Battery baixo; FC teto 148bpm.",
               "longo": false,
               "estrutura": null,
               "fixo": false
