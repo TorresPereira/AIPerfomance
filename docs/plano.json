@@ -263,10 +263,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Tempo Run 3x8min",
-              "duracao_min": 51,
+              "tipo": "Tempo Run 2x8min",
+              "duracao_min": 40,
               "zona": "Z3",
-              "descricao": "Aquecimento, 3 séries de 8min em Z3 com 2min de trote recuperativo, volta calma.",
+              "descricao": "Sono acumulado deficitário (5.5h, REM 0.5h) e Body Battery 38 justificam redução de 1 repetição e 11min totais para limitar stress anaeróbico.",
               "longo": false,
               "estrutura": [
                 {
