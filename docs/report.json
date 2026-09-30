@@ -1,31 +1,31 @@
 {
-  "date": "2026-09-29",
-  "generated_at": "2026-09-29T06:01:33.017909Z",
+  "date": "2026-09-30",
+  "generated_at": "2026-09-30T06:02:00.427428Z",
   "saude": {
-    "hrv": 52,
-    "hrv_7d": 32,
+    "hrv": 33,
+    "hrv_7d": 31,
     "hrv_status": "balanced",
     "hrv_baseline_low": 31,
     "hrv_baseline_high": 40,
     "rhr": 67,
     "rhr_baseline": null,
-    "sono_h": 6.5,
-    "sono_score": 52,
-    "sono_deep": 1.0,
-    "sono_rem": 0.0,
-    "sono_awake": 38.0,
-    "body_battery": 38,
-    "stress_avg": 31,
-    "stress_rest": 40.56,
-    "atl": 589.0,
-    "ctl": 2354.0,
+    "sono_h": 5.7,
+    "sono_score": 43,
+    "sono_deep": 0.8,
+    "sono_rem": 0.2,
+    "sono_awake": 30.0,
+    "body_battery": 18,
+    "stress_avg": 45,
+    "stress_rest": 10.54,
+    "atl": 578.0,
+    "ctl": 2310.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 1342.0,
+    "load_aerobic_low": 1324.0,
     "load_aerobic_high": 506.0,
-    "load_anaerobic": 506.0,
-    "load_total_month": 2354.0,
+    "load_anaerobic": 480.0,
+    "load_total_month": 2310.0,
     "load_target_low": "439–1092",
     "load_target_high": "757–1410",
     "training_status": "Destreinando",
@@ -35,9 +35,9 @@
     "peso": null,
     "previsoes": {
       "5K": 1369,
-      "10K": 2946,
-      "Meia": 6770,
-      "Maratona": 15196
+      "10K": 2948,
+      "Meia": 6773,
+      "Maratona": 15199
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,22 +55,10 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 1.5
+    "sono_deficit_h": 2.3
   },
   "ontem": [],
   "hoje": [
-    {
-      "icone": "🏃",
-      "nome": "Tempo Run 2x8min",
-      "tipo": "run",
-      "dur": "40min",
-      "dist": "—",
-      "passos": [
-        "Sono acumulado deficitário (5.5h, REM 0.5h) e Body Battery 38 justificam redução de 1 repetição e 11min totais para limitar stress anaeróbico."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🏊",
       "nome": "Natacao",
@@ -89,6 +77,18 @@
       "dist": "—",
       "passos": [
         "Sessão fixa de natação com ênfase em drills de técnica e eficiência de braçada."
+      ]
+    }
+  ],
+  "amanha": [
+    {
+      "icone": "🚴",
+      "nome": "Pedal Ativo",
+      "tipo": "bike",
+      "dur": "45min",
+      "dist": "—",
+      "passos": [
+        "Redução preventiva de 55 para 45min dado o estado de recuperação baixo (Body Battery 18, sono 5.7h) — manter FC entre 130-145bpm e não ultrapassar Z2."
       ]
     }
   ],
@@ -112,18 +112,14 @@
     "run_min": 176.5
   },
   "clima": {
-    "temp_max": 26.2,
-    "temp_min": 17.9,
-    "chuva_pct": 0,
-    "vento_kmh": 19.1,
-    "temp_atual": 18.5,
+    "temp_max": 26.9,
+    "temp_min": 18.3,
+    "chuva_pct": 22,
+    "vento_kmh": 16.9,
+    "temp_atual": 19.2,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-09-23",
-      "value": 50.0
-    },
     {
       "date": "2026-09-24",
       "value": 68.0
@@ -147,13 +143,13 @@
     {
       "date": "2026-09-29",
       "value": 52.0
+    },
+    {
+      "date": "2026-09-30",
+      "value": 33.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-09-15",
-      "value": 48.0
-    },
     {
       "date": "2026-09-16",
       "value": 48.0
@@ -209,15 +205,14 @@
     {
       "date": "2026-09-29",
       "value": 48.6
+    },
+    {
+      "date": "2026-09-30",
+      "value": 48.6
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-09-16",
-      "sono": 5.6,
-      "te": 2.3
-    },
     {
       "date": "2026-09-17",
       "sono": 8.4,
@@ -458,28 +453,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV em alta, mas sono fraco exige execução controlada.",
-    "sec_readiness": "HRV de 52ms representa +20ms acima da média 7d (32ms), sinal positivo de recuperação autonômica pontual. Porém sono de 6,5h com score 52, REM zerado e apenas 1h de sono profundo comprometem a qualidade restauradora real. Body Battery em 38/100 indica reserva energética limitada para esforço intenso.",
+    "frase": "Sono e recuperação são treino. Respeite o processo.",
+    "sec_readiness": "HRV 33ms está marginalmente acima da média 7d (31ms), tendência levemente positiva — sinal de estabilização, mas ainda abaixo do baseline superior (40ms). Sono de 5.7h com score 43, apenas 0.8h deep e 0.2h REM representa déficit crítico de 2.3h e arquitetura de sono severamente comprometida. Body Battery em 18/100 com stress médio 45 confirma recuperação insuficiente — estado fisiológico abaixo do ideal para absorver carga.",
     "sec_treino_ontem": null,
-    "sec_carga": "Z1 em 1342 unidades ultrapassa o teto do target (1092), indicando volume aeróbico leve excessivo relativamente ao mês. Z2 em 506 está abaixo do piso recomendado (757), e Z3+ em 506 também está elevado para fase de base. Status Garmin 'Destreinando' com volume semanal zerado é contraditório com carga mensal acumulada — monitorar estagnação.",
-    "sec_hoje": "Treino planejado: Tempo Run 2x8min (40min total). Nenhum registro de execução ainda. Executar com FC teto em 155bpm durante os blocos de tempo, mantendo aquecimento e desaceleração em Z1 (FC abaixo de 140bpm). Dado o sono comprometido e Body Battery em 38, não ultrapassar Z2 nos intervalos.",
-    "sec_ajuste": "Manter os 40min totais, mas limitar os 2x8min de tempo a FC máxima de 155bpm (Z2 alto). Aquecimento e recuperação restritos a Z1 (FC abaixo de 140bpm). Nenhum esforço anaeróbico hoje.",
-    "sec_alertas": "REM zerado é alerta fisiológico relevante — consolidação neural e recuperação muscular prejudicadas. Body Battery 38 indica que intensidade alta pode gerar acúmulo de estresse desproporcional. Monitorar FC durante o Tempo Run: se FC não estabilizar nos primeiros 3min do intervalo, reduzir ritmo imediatamente.",
-    "sec_nutricao": "Pré-treino: 350kcal com foco em carboidrato de rápida absorção (60-70g CHO) entre 60-90min antes. Pós-treino: 30g de proteína dentro de 30min do fim da sessão para suportar recuperação com sono deficitário. Hidratar 500ml nas 2h que antecedem o treino dado calor de 26°C.",
-    "sec_amanha": "Plano prevê duas sessões de natação (técnica + volume, 45min cada). Com Body Battery projetado ainda baixo e déficit de sono acumulado (1,5h), manter apenas a sessão técnica em Z1-Z2 e reduzir a segunda sessão para 30min com foco exclusivo em técnica. Evitar qualquer progressão de volume antes da recuperação do sono.",
+    "sec_carga": "Z1 em 1324 (acima do target máximo de 1092) e Z2 em 506 (abaixo do target mínimo de 757) indicam polarização invertida — volume aeróbico base mal distribuído. Z3+ em 480 representa 20.8% da carga total, excessivo para fase BASE. Garmin sinalizando 'Destreinando' com volume semanal zerado sugere inconsistência nos registros ou interrupção abrupta — risco de lesão MODERADO deve ser monitorado.",
+    "sec_hoje": "Duas sessões de natação planejadas (45min cada) totalizando 90min — nenhuma executada até o momento. Dado o Body Battery em 18/100 e sono criticamente baixo, a execução deve ser conservadora: priorizar técnica em Z1 (FC abaixo de 130bpm), evitando qualquer intensidade anaeróbica. A segunda sessão (técnica) é a mais indicada para o estado atual — foco em drill e eficiência de braçada, não em volume ou esforço.",
+    "sec_ajuste": "Manter ambas as sessões de natação mas limitar FC a 130bpm (Z1 puro). Reduzir densidade total: se houver fadiga percebida após a primeira sessão, cancelar a segunda sem culpa — Body Battery 18/100 não suporta 90min de piscina com qualidade.",
+    "sec_alertas": "Body Battery crítico (18/100): risco real de comprometer adaptação e elevar cortisol. Déficit de sono acumulado (2.3h) prejudica síntese proteica e consolidação neuromuscular. Z3+ acima do tolerável para fase BASE — revisar distribuição nas próximas sessões. Volume semanal zerado combinado com carga mensal alta é inconsistência a investigar nos dados.",
+    "sec_nutricao": "Pré-natação: 350kcal leves 60-90min antes (carboidrato de baixo índice glicêmico, evitar gordura). Pós-treino imediato: 30g proteína + 40-60g CHO para sinalização anabólica e reposição de glicogênio parcial dado o baixo volume.",
+    "sec_amanha": "Pedal Ativo 55min Z2 planejado: manter a sessão, mas condicionado à qualidade do sono desta noite (meta 22:30, alvo 8h). Se sono permanecer abaixo de 6h, reduzir para 40min com FC teto 145bpm em Z2 baixo (130-145bpm). Potência alvo se disponível: 180-200W.",
     "amanha_ajustado": [
       {
-        "esporte": "swim",
-        "tipo": "Natacao Tecnica",
+        "esporte": "bike",
+        "tipo": "Pedal Ativo",
         "duracao_min": 45,
         "zona": "Z2",
-        "motivo_ajuste": null
+        "motivo_ajuste": "Redução preventiva de 55 para 45min dado o estado de recuperação baixo (Body Battery 18, sono 5.7h) — manter FC entre 130-145bpm e não ultrapassar Z2."
       }
     ],
-    "status_readiness": "MODERADO",
+    "status_readiness": "BAIXO",
     "status_carga": "SUAVE",
-    "acao_hoje": "MANTER",
-    "analise_hoje": "Tempo Run 2x8min é apropriado para o status atual — sessão de baixo risco se mantida em Z2 com FC teto de 155bpm. Sono deficitário e Body Battery 38 pedem execução conservadora sem tentativa de superar ritmos de referência.",
-    "alerta": "REM zerado e Body Battery 38 indicam recuperação incompleta — qualquer drift de FC acima de 160bpm durante os intervalos deve sinalizar interrupção imediata da sessão."
+    "acao_hoje": "REDUZIR 20%",
+    "analise_hoje": "Nenhuma sessão executada ainda — janela de treino ainda aberta, mas estado de recuperação (BB 18, sono 5.7h) exige execução conservadora em Z1 técnico. Priorizar qualidade de movimento sobre volume.",
+    "alerta": "Body Battery em 18/100 combinado com déficit de sono de 2.3h representa risco real de overreaching se as duas sessões de natação forem executadas em intensidade normal — reduza FC teto e monitore percepção de esforço."
   }
 }

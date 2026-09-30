@@ -338,9 +338,9 @@
             {
               "esporte": "bike",
               "tipo": "Pedal Ativo",
-              "duracao_min": 55,
+              "duracao_min": 45,
               "zona": "Z2",
-              "descricao": "Pedal contínuo em Z2, mantendo cadência fluida e posição de corrida.",
+              "descricao": "Redução preventiva de 55 para 45min dado o estado de recuperação baixo (Body Battery 18, sono 5.7h) — manter FC entre 130-145bpm e não ultrapassar Z2.",
               "longo": false,
               "estrutura": null,
               "fixo": false
