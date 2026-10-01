@@ -1,43 +1,43 @@
 {
-  "date": "2026-09-30",
-  "generated_at": "2026-09-30T06:02:00.427428Z",
+  "date": "2026-10-01",
+  "generated_at": "2026-10-01T06:01:54.185916Z",
   "saude": {
-    "hrv": 33,
-    "hrv_7d": 31,
-    "hrv_status": "balanced",
+    "hrv": 68,
+    "hrv_7d": 29,
+    "hrv_status": "unbalanced",
     "hrv_baseline_low": 31,
     "hrv_baseline_high": 40,
-    "rhr": 67,
+    "rhr": 64,
     "rhr_baseline": null,
-    "sono_h": 5.7,
-    "sono_score": 43,
-    "sono_deep": 0.8,
-    "sono_rem": 0.2,
-    "sono_awake": 30.0,
-    "body_battery": 18,
-    "stress_avg": 45,
-    "stress_rest": 10.54,
-    "atl": 578.0,
-    "ctl": 2310.0,
+    "sono_h": 7.8,
+    "sono_score": 79,
+    "sono_deep": 1.7,
+    "sono_rem": 0.8,
+    "sono_awake": 10.0,
+    "body_battery": 45,
+    "stress_avg": 20,
+    "stress_rest": 85.11,
+    "atl": 572.0,
+    "ctl": 2287.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 1324.0,
+    "load_aerobic_low": 1302.0,
     "load_aerobic_high": 506.0,
     "load_anaerobic": 480.0,
-    "load_total_month": 2310.0,
+    "load_total_month": 2287.0,
     "load_target_low": "439–1092",
     "load_target_high": "757–1410",
-    "training_status": "Destreinando",
-    "fitness_trend": "Caindo",
+    "training_status": "Improdutivo",
+    "fitness_trend": "Estável",
     "training_readiness": null,
     "vo2max": 48.6,
     "peso": null,
     "previsoes": {
-      "5K": 1369,
+      "5K": 1370,
       "10K": 2948,
-      "Meia": 6773,
-      "Maratona": 15199
+      "Meia": 6774,
+      "Maratona": 15200
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,32 +55,10 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 2.3
+    "sono_deficit_h": 0.2
   },
   "ontem": [],
   "hoje": [
-    {
-      "icone": "🏊",
-      "nome": "Natacao",
-      "tipo": "swim",
-      "dur": "45min",
-      "dist": "—",
-      "passos": [
-        "Atividade fixa"
-      ]
-    },
-    {
-      "icone": "🏊",
-      "nome": "Natacao Tecnica",
-      "tipo": "swim",
-      "dur": "45min",
-      "dist": "—",
-      "passos": [
-        "Sessão fixa de natação com ênfase em drills de técnica e eficiência de braçada."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🚴",
       "nome": "Pedal Ativo",
@@ -92,6 +70,7 @@
       ]
     }
   ],
+  "amanha": [],
   "hoje_feito": [],
   "semana": {
     "swim_km": 0,
@@ -112,18 +91,14 @@
     "run_min": 176.5
   },
   "clima": {
-    "temp_max": 26.9,
-    "temp_min": 18.3,
-    "chuva_pct": 22,
-    "vento_kmh": 16.9,
-    "temp_atual": 19.2,
-    "emoji": "🌤️"
+    "temp_max": 21.5,
+    "temp_min": 17.1,
+    "chuva_pct": 86,
+    "vento_kmh": 12.2,
+    "temp_atual": 18.9,
+    "emoji": "🌧️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-09-24",
-      "value": 68.0
-    },
     {
       "date": "2026-09-25",
       "value": 52.0
@@ -147,13 +122,13 @@
     {
       "date": "2026-09-30",
       "value": 33.0
+    },
+    {
+      "date": "2026-10-01",
+      "value": 68.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-09-16",
-      "value": 48.0
-    },
     {
       "date": "2026-09-17",
       "value": 48.3
@@ -209,15 +184,14 @@
     {
       "date": "2026-09-30",
       "value": 48.6
+    },
+    {
+      "date": "2026-10-01",
+      "value": 48.6
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-09-17",
-      "sono": 8.4,
-      "te": 3.2
-    },
     {
       "date": "2026-09-18",
       "sono": 7.5,
@@ -255,195 +229,89 @@
     }
   ],
   "mes": {
-    "2026-09-27": {
+    "2026-10-01": {
       "planejados": [
         "🚴"
       ],
-      "feitos": [
-        "⚡"
-      ]
+      "feitos": []
     },
-    "2026-09-26": {
+    "2026-10-03": {
       "planejados": [
         "🏃"
       ],
-      "feitos": [
-        "🏃"
-      ]
+      "feitos": []
     },
-    "2026-09-25": {
-      "planejados": [],
-      "feitos": [
-        "🏃"
-      ]
+    "2026-10-04": {
+      "planejados": [
+        "🚴"
+      ],
+      "feitos": []
     },
-    "2026-09-23": {
+    "2026-10-05": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": []
+    },
+    "2026-10-06": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": []
+    },
+    "2026-10-07": {
       "planejados": [
         "🏊",
         "🏊"
       ],
-      "feitos": [
-        "🏊"
-      ]
+      "feitos": []
     },
-    "2026-09-22": {
-      "planejados": [
-        "🏃"
-      ],
-      "feitos": [
-        "🎾",
-        "🏃"
-      ]
-    },
-    "2026-09-19": {
-      "planejados": [],
-      "feitos": [
-        "🏃"
-      ]
-    },
-    "2026-09-18": {
-      "planejados": [],
-      "feitos": [
-        "🚴"
-      ]
-    },
-    "2026-09-17": {
-      "planejados": [],
-      "feitos": [
-        "🎾",
-        "🏃"
-      ]
-    },
-    "2026-09-16": {
-      "planejados": [],
-      "feitos": [
-        "🏊"
-      ]
-    },
-    "2026-09-15": {
-      "planejados": [],
-      "feitos": [
-        "🏊"
-      ]
-    },
-    "2026-09-14": {
-      "planejados": [],
-      "feitos": [
-        "🎾",
-        "🏃"
-      ]
-    },
-    "2026-09-12": {
-      "planejados": [],
-      "feitos": [
-        "🚴"
-      ]
-    },
-    "2026-09-11": {
-      "planejados": [],
-      "feitos": [
-        "🚴"
-      ]
-    },
-    "2026-09-10": {
-      "planejados": [],
-      "feitos": [
-        "🎾",
-        "🏃"
-      ]
-    },
-    "2026-09-09": {
-      "planejados": [],
-      "feitos": [
-        "🏊"
-      ]
-    },
-    "2026-09-08": {
-      "planejados": [],
-      "feitos": [
-        "🚴",
-        "🏊"
-      ]
-    },
-    "2026-09-07": {
-      "planejados": [],
-      "feitos": [
-        "🎾",
-        "🏃"
-      ]
-    },
-    "2026-09-06": {
-      "planejados": [],
-      "feitos": [
-        "⚡"
-      ]
-    },
-    "2026-09-05": {
-      "planejados": [],
-      "feitos": [
-        "🏃"
-      ]
-    },
-    "2026-09-04": {
-      "planejados": [],
-      "feitos": [
-        "🚴",
-        "🏃"
-      ]
-    },
-    "2026-09-03": {
-      "planejados": [],
-      "feitos": [
-        "⚡",
-        "⚡"
-      ]
-    },
-    "2026-09-02": {
-      "planejados": [],
-      "feitos": [
-        "🎾"
-      ]
-    },
-    "2026-09-01": {
-      "planejados": [],
-      "feitos": [
-        "🏊"
-      ]
-    },
-    "2026-09-20": {
+    "2026-10-08": {
       "planejados": [
         "🚴"
       ],
       "feitos": []
     },
-    "2026-09-21": {
+    "2026-10-10": {
       "planejados": [
         "🏃"
       ],
       "feitos": []
     },
-    "2026-09-24": {
+    "2026-10-11": {
       "planejados": [
         "🚴"
       ],
       "feitos": []
     },
-    "2026-09-28": {
+    "2026-10-12": {
       "planejados": [
         "🏃"
       ],
       "feitos": []
     },
-    "2026-09-29": {
+    "2026-10-13": {
       "planejados": [
         "🏃"
       ],
       "feitos": []
     },
-    "2026-09-30": {
+    "2026-10-14": {
       "planejados": [
         "🏊",
         "🏊"
+      ],
+      "feitos": []
+    },
+    "2026-10-16": {
+      "planejados": [
+        "🚴"
+      ],
+      "feitos": []
+    },
+    "2026-10-17": {
+      "planejados": [
+        "🏃"
       ],
       "feitos": []
     }
@@ -453,28 +321,20 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "Sono e recuperação são treino. Respeite o processo.",
-    "sec_readiness": "HRV 33ms está marginalmente acima da média 7d (31ms), tendência levemente positiva — sinal de estabilização, mas ainda abaixo do baseline superior (40ms). Sono de 5.7h com score 43, apenas 0.8h deep e 0.2h REM representa déficit crítico de 2.3h e arquitetura de sono severamente comprometida. Body Battery em 18/100 com stress médio 45 confirma recuperação insuficiente — estado fisiológico abaixo do ideal para absorver carga.",
+    "frase": "HRV recuperando: pedal leve consolida a base hoje.",
+    "sec_readiness": "HRV de 68ms representa +39ms acima da média 7d (29ms), indicando recuperação aguda positiva após período de supressão, mas ainda abaixo do baseline individual (31–40ms histórico está sendo superado pontualmente — sinal de rebote, não de forma estável). RHR em 64bpm sem baseline definido impede comparação relativa. Sono de 7.8h com score 79 é aceitável, mas REM de 0.8h está baixo, comprometendo recuperação neuromuscular; déficit de 0.2h é marginal. Body Battery 45/100 com stress médio 20 indica capacidade funcional moderada — suficiente para esforço leve.",
     "sec_treino_ontem": null,
-    "sec_carga": "Z1 em 1324 (acima do target máximo de 1092) e Z2 em 506 (abaixo do target mínimo de 757) indicam polarização invertida — volume aeróbico base mal distribuído. Z3+ em 480 representa 20.8% da carga total, excessivo para fase BASE. Garmin sinalizando 'Destreinando' com volume semanal zerado sugere inconsistência nos registros ou interrupção abrupta — risco de lesão MODERADO deve ser monitorado.",
-    "sec_hoje": "Duas sessões de natação planejadas (45min cada) totalizando 90min — nenhuma executada até o momento. Dado o Body Battery em 18/100 e sono criticamente baixo, a execução deve ser conservadora: priorizar técnica em Z1 (FC abaixo de 130bpm), evitando qualquer intensidade anaeróbica. A segunda sessão (técnica) é a mais indicada para o estado atual — foco em drill e eficiência de braçada, não em volume ou esforço.",
-    "sec_ajuste": "Manter ambas as sessões de natação mas limitar FC a 130bpm (Z1 puro). Reduzir densidade total: se houver fadiga percebida após a primeira sessão, cancelar a segunda sem culpa — Body Battery 18/100 não suporta 90min de piscina com qualidade.",
-    "sec_alertas": "Body Battery crítico (18/100): risco real de comprometer adaptação e elevar cortisol. Déficit de sono acumulado (2.3h) prejudica síntese proteica e consolidação neuromuscular. Z3+ acima do tolerável para fase BASE — revisar distribuição nas próximas sessões. Volume semanal zerado combinado com carga mensal alta é inconsistência a investigar nos dados.",
-    "sec_nutricao": "Pré-natação: 350kcal leves 60-90min antes (carboidrato de baixo índice glicêmico, evitar gordura). Pós-treino imediato: 30g proteína + 40-60g CHO para sinalização anabólica e reposição de glicogênio parcial dado o baixo volume.",
-    "sec_amanha": "Pedal Ativo 55min Z2 planejado: manter a sessão, mas condicionado à qualidade do sono desta noite (meta 22:30, alvo 8h). Se sono permanecer abaixo de 6h, reduzir para 40min com FC teto 145bpm em Z2 baixo (130-145bpm). Potência alvo se disponível: 180-200W.",
-    "amanha_ajustado": [
-      {
-        "esporte": "bike",
-        "tipo": "Pedal Ativo",
-        "duracao_min": 45,
-        "zona": "Z2",
-        "motivo_ajuste": "Redução preventiva de 55 para 45min dado o estado de recuperação baixo (Body Battery 18, sono 5.7h) — manter FC entre 130-145bpm e não ultrapassar Z2."
-      }
-    ],
-    "status_readiness": "BAIXO",
-    "status_carga": "SUAVE",
-    "acao_hoje": "REDUZIR 20%",
-    "analise_hoje": "Nenhuma sessão executada ainda — janela de treino ainda aberta, mas estado de recuperação (BB 18, sono 5.7h) exige execução conservadora em Z1 técnico. Priorizar qualidade de movimento sobre volume.",
-    "alerta": "Body Battery em 18/100 combinado com déficit de sono de 2.3h representa risco real de overreaching se as duas sessões de natação forem executadas em intensidade normal — reduza FC teto e monitore percepção de esforço."
+    "sec_carga": "Z1 em 1302 unidades supera o teto do target (1092), indicando volume aeróbico leve excessivo para a fase Base Semana 2. Z2 em 506 está abaixo do piso recomendado (757), sinalizando déficit de estímulo aeróbico de qualidade. Z3+ em 480 está desproporcional ao volume total — risco de lesão classificado como MODERADO é coerente com essa distribuição desequilibrada e status Garmin 'Improdutivo'.",
+    "sec_hoje": "Pedal Ativo de 45min está adequado ao estado de readiness moderado (BB 45, HRV em rebote). Executar em Z1 puro, cadência 85–95rpm, sem acelerações. FC teto 135bpm para garantir estímulo regenerativo sem adicionar carga anaeróbica ao pool já elevado de Z3+.",
+    "sec_ajuste": "Manter 45min de pedal ativo integralmente em Z1, FC teto 135bpm, potência alvo 120–150W (se disponível). Nenhuma incursão em Z2 ou acima.",
+    "sec_alertas": "Z3+ acumulada (480 unidades) desproporcional ao Z2 (506) na fase Base — padrão invertido que sustenta o status 'Improdutivo' do Garmin. REM de 0.8h abaixo do ideal; priorizar janela de sono às 22:30. Volume semanal zerado nas três modalidades — verificar se há lacuna de registro ou semana de descanso não documentada.",
+    "sec_nutricao": "Treino de 45min em Z1 dispensa protocolo de carbo intra-treino; hidratação de 500–600ml total durante o pedal é suficiente. Pós-treino: 30g de proteína dentro de 30min para manutenção da síntese proteica, acompanhada de refeição mista com 60–80g de carboidrato complexo.",
+    "sec_amanha": "Sem sessão de treino planejada para amanhã — dia de descanso ou sessão fixa. Manter esse padrão; o acúmulo de Z3+ e BB em 45 tornam o descanso estratégico para a semana de Base.",
+    "amanha_ajustado": [],
+    "status_readiness": "MODERADO",
+    "status_carga": "ELEVADA",
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Pedal ativo de 45min em Z1 é a escolha correta para o dia — estímulo regenerativo que não adiciona carga ao pool anaeróbico já desproporcional. Executar com controle rigoroso de FC (teto 135bpm) para maximizar o efeito de recuperação ativa.",
+    "alerta": "Distribuição de carga mensal com Z3+ (480) próxima ao Z2 (506) na fase Base é um padrão de risco — revisar intensidade das sessões das próximas semanas para reequilibrar pirâmide aeróbica."
   }
 }
