@@ -367,9 +367,9 @@
             {
               "esporte": "run",
               "tipo": "Long Run Base",
-              "duracao_min": 90,
+              "duracao_min": 60,
               "zona": "Z2",
-              "descricao": "Corrida longa progressiva, aumentando 10min em relação à semana 1, ritmo aeróbico constante.",
+              "descricao": "Redução de 90 para 60min devido a sono 5.3h com REM 0.0h, Body Battery 35 e carga anaeróbica de ontem; FC teto 145bpm.",
               "longo": true,
               "estrutura": null,
               "fixo": false
