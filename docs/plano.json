@@ -395,9 +395,9 @@
             {
               "esporte": "bike",
               "tipo": "Long Ride Base",
-              "duracao_min": 120,
+              "duracao_min": 100,
               "zona": "Z2",
-              "descricao": "Pedalada mais longa da fase base, mantendo ritmo aeróbico estável com foco em volume.",
+              "descricao": "Redução de 20min preventiva dado REM crítico de 0.2h e qualidade de sono comprometida; FC teto 145bpm ou potência 185–210W.",
               "longo": true,
               "estrutura": null,
               "fixo": false
