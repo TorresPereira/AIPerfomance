@@ -415,9 +415,9 @@
             {
               "esporte": "run",
               "tipo": "Rodagem Aeróbica",
-              "duracao_min": 55,
+              "duracao_min": 40,
               "zona": "Z2",
-              "descricao": "Corrida leve de recuperação ativa no dia seguinte ao long ride.",
+              "descricao": "Redução de 55 para 40min devido a sono acumulado crítico (4.6h), HRV unbalanced e Body Battery 32 — preservar adaptação sem aprofundar fadiga autonômica.",
               "longo": false,
               "estrutura": null,
               "fixo": false
