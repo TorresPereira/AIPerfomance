@@ -434,10 +434,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Intervalado 8x2min",
-              "duracao_min": 50,
-              "zona": "Z5",
-              "descricao": "Aquecimento, 8 repetições de 2min em Z5 com 1min de recuperação, volta calma.",
+              "tipo": "Rodagem Aeróbica Leve",
+              "duracao_min": 30,
+              "zona": "Z2",
+              "descricao": "Body Battery 24, HRV unbalanced e sono deficitário contraindicam Z5; substituído por Z2 contínuo com duração reduzida em 40% para controle de carga.",
               "longo": false,
               "estrutura": [
                 {
