@@ -491,7 +491,7 @@
               "tipo": "Natacao Resistencia",
               "duracao_min": 45,
               "zona": "Z2",
-              "descricao": "Sessão fixa de natação com séries de resistência aeróbica e controle de ritmo.",
+              "descricao": "Sessão duplicada de natação consolidada em única de 45min devido a status Garmin de sobrecarga e HRV unbalanced; manter Z2 conforme plano original.",
               "longo": false,
               "estrutura": null,
               "fixo": false

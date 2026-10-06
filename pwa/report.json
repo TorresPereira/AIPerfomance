@@ -1,31 +1,31 @@
 {
-  "date": "2026-10-05",
-  "generated_at": "2026-10-05T06:01:34.394669Z",
+  "date": "2026-10-06",
+  "generated_at": "2026-10-06T06:01:11.759234Z",
   "saude": {
-    "hrv": 55,
-    "hrv_7d": 29,
+    "hrv": 47,
+    "hrv_7d": 30,
     "hrv_status": "unbalanced",
     "hrv_baseline_low": 31,
     "hrv_baseline_high": 40,
-    "rhr": 65,
+    "rhr": 62,
     "rhr_baseline": null,
-    "sono_h": 5.0,
-    "sono_score": 62,
-    "sono_deep": 2.2,
-    "sono_rem": 0.3,
-    "sono_awake": 0.0,
-    "body_battery": 24,
-    "stress_avg": 26,
-    "stress_rest": 57.03,
-    "atl": 597.0,
-    "ctl": 2387.0,
+    "sono_h": 7.8,
+    "sono_score": 76,
+    "sono_deep": 1.5,
+    "sono_rem": 0.6,
+    "sono_awake": 10.0,
+    "body_battery": 63,
+    "stress_avg": 17,
+    "stress_rest": 95.01,
+    "atl": 584.0,
+    "ctl": 2334.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 1126.0,
+    "load_aerobic_low": 1073.0,
     "load_aerobic_high": 783.0,
     "load_anaerobic": 478.0,
-    "load_total_month": 2387.0,
+    "load_total_month": 2334.0,
     "load_target_low": "441–1094",
     "load_target_high": "755–1407",
     "training_status": "Sobrecarga",
@@ -34,10 +34,10 @@
     "vo2max": 48.8,
     "peso": null,
     "previsoes": {
-      "5K": 1353,
-      "10K": 2912,
-      "Meia": 6676,
-      "Maratona": 15000
+      "5K": 1354,
+      "10K": 2913,
+      "Meia": 6679,
+      "Maratona": 15006
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,86 +55,32 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 3.0
+    "sono_deficit_h": 0.2
   },
   "ontem": [
     {
-      "mod": "bike",
-      "icone": "🚴",
-      "nome": "Erkrath eBiking",
-      "dist": "14.1km",
-      "dur": "54m02s",
-      "fc": 112.0,
-      "fc_max": 143.0,
-      "cal": 415.0,
-      "cad": 67.0,
+      "mod": "run",
+      "icone": "🏃",
+      "nome": "Erkrath Running",
+      "dist": "6.4km",
+      "dur": "33m40s",
+      "fc": 147.0,
+      "fc_max": 162.0,
+      "cal": 494.0,
+      "cad": 172.015625,
       "tss": null,
-      "np": null,
+      "np": 390.0,
       "swolf": null,
-      "aerobic_te": 1.899999976158142,
-      "anaerobic_te": 0.10000000149011612,
-      "elev": 91.0,
-      "perf": "15.7km/h",
-      "pl": "Velocidade",
-      "_dist_m": 14100.6904296875,
-      "_dur_s": 3242.39990234375
-    },
-    {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Cologne Walking",
-      "dist": "4.9km",
-      "dur": "1h29m",
-      "fc": 100.0,
-      "fc_max": 132.0,
-      "cal": 471.0,
-      "cad": 63.90625,
-      "tss": null,
-      "np": null,
-      "swolf": null,
-      "aerobic_te": 0.6000000238418579,
-      "anaerobic_te": 0.0,
-      "elev": 63.0,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 4853.27001953125,
-      "_dur_s": 5399.75
-    },
-    {
-      "mod": "swim",
-      "icone": "🏊",
-      "nome": "Pool Swim",
-      "dist": "1200m",
-      "dur": "30m13s",
-      "fc": 139.0,
-      "fc_max": 159.0,
-      "cal": 383.0,
-      "cad": null,
-      "tss": null,
-      "np": null,
-      "swolf": 13.600000381469727,
-      "aerobic_te": 2.799999952316284,
-      "anaerobic_te": 1.399999976158142,
-      "elev": null,
-      "perf": "2:31/100m",
+      "aerobic_te": 3.5999999046325684,
+      "anaerobic_te": 1.7999999523162842,
+      "elev": 54.0,
+      "perf": "5:13/km",
       "pl": "Pace",
-      "_dist_m": 1200.0,
-      "_dur_s": 1813.8079833984375
+      "_dist_m": 6439.009765625,
+      "_dur_s": 2020.176025390625
     }
   ],
   "hoje": [
-    {
-      "icone": "🏃",
-      "nome": "Rodagem Aeróbica",
-      "tipo": "run",
-      "dur": "40min",
-      "dist": "—",
-      "passos": [
-        "Redução de 55 para 40min devido a sono acumulado crítico (4.6h), HRV unbalanced e Body Battery 32 — preservar adaptação sem aprofundar fadiga autonômica."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🏃",
       "nome": "Rodagem Aeróbica Leve",
@@ -146,29 +92,29 @@
       ]
     }
   ],
-  "hoje_feito": [
+  "amanha": [
     {
-      "mod": "run",
-      "icone": "🏃",
-      "nome": "Erkrath Running",
-      "dist": "6.4km",
-      "dur": "33m40s",
-      "fc": 147.0,
-      "fc_max": 162.0,
-      "tss": null,
-      "np": 390.0,
-      "perf": "5:13/km",
-      "pl": "Pace",
-      "_dist_m": 6439.009765625,
-      "_dur_s": 2020.176025390625,
-      "swolf": null,
-      "cad": 172.015625,
-      "cal": 494.0,
-      "aerobic_te": 3.5999999046325684,
-      "anaerobic_te": 1.7999999523162842,
-      "elev": 54.0
+      "icone": "🏊",
+      "nome": "Natacao",
+      "tipo": "swim",
+      "dur": "45min",
+      "dist": "—",
+      "passos": [
+        "Atividade fixa"
+      ]
+    },
+    {
+      "icone": "🏊",
+      "nome": "Natacao Resistencia",
+      "tipo": "swim",
+      "dur": "45min",
+      "dist": "—",
+      "passos": [
+        "Sessão duplicada de natação consolidada em única de 45min devido a status Garmin de sobrecarga e HRV unbalanced; manter Z2 conforme plano original."
+      ]
     }
   ],
+  "hoje_feito": [],
   "semana": {
     "swim_km": 0,
     "swim_min": 0,
@@ -188,18 +134,14 @@
     "run_min": 132.5
   },
   "clima": {
-    "temp_max": 21.9,
-    "temp_min": 11.3,
+    "temp_max": 21.4,
+    "temp_min": 9.4,
     "chuva_pct": 0,
-    "vento_kmh": 8.6,
-    "temp_atual": 11.6,
+    "vento_kmh": 10.8,
+    "temp_atual": 9.4,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-09-29",
-      "value": 52.0
-    },
     {
       "date": "2026-09-30",
       "value": 33.0
@@ -223,13 +165,13 @@
     {
       "date": "2026-10-05",
       "value": 55.0
+    },
+    {
+      "date": "2026-10-06",
+      "value": 47.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-09-21",
-      "value": 48.5
-    },
     {
       "date": "2026-09-22",
       "value": 48.8
@@ -285,15 +227,14 @@
     {
       "date": "2026-10-05",
       "value": 48.8
+    },
+    {
+      "date": "2026-10-06",
+      "value": 48.8
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-09-22",
-      "sono": 5.7,
-      "te": 3.5
-    },
     {
       "date": "2026-09-23",
       "sono": 7.2,
@@ -438,28 +379,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "Recuperação inteligente hoje garante performance amanhã.",
-    "sec_readiness": "HRV 55ms está 79% acima da média 7d (29ms), sinal de resposta autonômica instável pós-esforço — status 'unbalanced' confirma. Sono crítico: 5h com apenas 0.3h REM e 2.2h deep, déficit de 3h impacta regeneração neuromuscular e hormonal. Body Battery em 24/100 sinaliza reserva energética mínima para esforço intenso.",
-    "sec_treino_ontem": "Bike eBike (15.7km/h, FC 112bpm, TE 1.9) e Walking (FC 100bpm, TE 0.6) foram estímulos recuperativos de baixíssima carga — adequados. Natação 1200m a 2:31/100m com FC 139bpm e TE 2.8 representou o único estímulo aeróbico real do dia, dentro do esperado para Z2 de base. Nenhum ponto crítico técnico identificado, sessões bem calibradas para o contexto.",
-    "sec_carga": "Z1 mensal em 1126 (acima do target máximo de 1094) e Z3+ em 478 — ambos fora dos limites superiores, indicando distribuição polarizada com excesso de volume leve e carga anaeróbica elevada. Status Garmin confirmado como 'Sobrecarga' com tendência de queda, risco de lesão MODERADO. Na Semana 3 BASE, o acúmulo de Z3+ deveria ser contido; o treino de corrida de hoje (FC avg 147, max 162bpm) elevou ainda mais a carga anaeróbica.",
-    "sec_hoje": "Rodagem aeróbica de 40min planejada foi executada como 6.4km em 33min40s a 5:13/km, FC avg 147bpm e TE 3.6 — intensidade claramente acima do Z1/Z2 esperado para recuperação ativa. FC max 162bpm e potência avg 390W indicam deriva para Z4, incompatível com o estado de Body Battery 24 e sono insuficiente. Treino já executado; análise serve para calibrar amanhã.",
-    "sec_ajuste": "Treino de hoje já executado — não há ajuste possível. Para o restante do dia: descanso absoluto, sem atividade adicional, FC teto 0bpm (repouso completo).",
-    "sec_alertas": "ALERTA: corrida de hoje executada em intensidade Z3-Z4 (FC 147/162bpm, TE 3.6) sobre Body Battery 24 e sono 5h — combinação de alto risco para overreaching. Z1 mensal já ultrapassou target máximo (1126 vs 1094); qualquer volume adicional agrava o acúmulo. HRV 'unbalanced' com baseline 31-40ms exige monitoramento rigoroso amanhã antes de executar intervalados Z5.",
-    "sec_nutricao": "Sem treino restante hoje: priorize refeição rica em CHO complexo (150-200g) e proteína (30g) no pós-treino já executado para reparação muscular. Hidratação mínima 2L ao longo do dia; deitar 22:30 é mandatório — sono alvo 8h é a intervenção de recuperação mais crítica desta noite.",
-    "sec_amanha": "Intervalado 8x2min Z5 (50min) está contraindicado com Body Battery 24, HRV unbalanced e sono acumulado deficitário. Reduza para rodagem contínua Z2 de 30min com FC teto 145bpm — eliminar completamente os intervalos Z5; se HRV amanhã mantiver tendência positiva e Body Battery >40, reconsidere apenas 4x2min no lugar de 8x2min.",
+    "frase": "HRV elevado, mas sobrecarga exige controle preciso hoje.",
+    "sec_readiness": "HRV 47ms está 17ms acima da média 7d (30ms), sinal de recuperação ativa após período de estresse acumulado, mas status 'unbalanced' indica instabilidade autonômica — não interpretar como pico de forma. Sono 7.8h com score 76 é aceitável, porém REM apenas 0.6h indica recuperação neural comprometida; déficit de 0.2h é marginal. Body Battery 63/100 com stress médio 17 sugere reserva funcional moderada para sessão leve.",
+    "sec_treino_ontem": "Corrida 6.4km em 5:13/km com FC média 147bpm e pico 162bpm — intensidade moderada-alta para uma rodagem, TE aeróbico 3.6 indica estímulo produtivo mas próximo do limiar de sobrecarga. Potência de corrida 390W com cadência 172spm é eficiente. Ponto crítico: FC máxima 162bpm em treino que deveria ser aeróbico sugere drift ou esforço acima do Z2 planejado.",
+    "sec_carga": "Z1 em 1073 está no teto superior do target (441–1094) e Z2 em 783 dentro do range (755–1407), porém Z3+ em 478 representa 20.5% da carga total — volume anaeróbico elevado para fase BASE. Status Garmin 'Sobrecarga' com tendência de queda e ATL 584 reforçam necessidade de contenção de intensidade. Volume semanal zerado em natação e bike é preocupante para equilíbrio trimodal na semana 3.",
+    "sec_hoje": "Sessão planejada: Rodagem Aeróbica Leve 30min — não há registro de execução ainda. Executar em Z1 estrito, FC teto 145bpm, sem acelerar mesmo que o esforço percebido permita. Dado o status de sobrecarga e HRV unbalanced, esta sessão serve exclusivamente para manutenção de fluxo sanguíneo e recuperação ativa.",
+    "sec_ajuste": "Manter 30min de rodagem leve com FC teto 145bpm e pace mínimo 6:00/km. Cancelar qualquer aceleração final; potência de corrida alvo abaixo de 340W.",
+    "sec_alertas": "Atenção ao padrão de FC ontem (máx 162bpm em treino aeróbico) — monitorar drift hoje; se FC ultrapassar 145bpm nos primeiros 10min, reduzir para caminhada rápida. Z3+ acumulado mensal elevado para fase BASE — próximas sessões devem blindar intensidade.",
+    "sec_nutricao": "Sem treino registrado hoje ainda: pré-rodagem 30min consumir 150kcal de carboidrato de rápida absorção 30min antes; hidratação 500ml total durante e após. Pós-treino: 30g proteína + 40g CHO para reposição mínima dado volume baixo.",
+    "sec_amanha": "Sessão dupla de natação (45+45min, 90min total) está planejada — dado status de sobrecarga Garmin, HRV unbalanced e REM comprometido, reduzir para sessão única de 45min em Z2 controlado. Manter a Natação Resistência como sessão principal e cancelar a primeira sessão duplicada para evitar estresse cumulativo desnecessário em semana 3 BASE.",
     "amanha_ajustado": [
       {
-        "esporte": "run",
-        "tipo": "Rodagem Aeróbica Leve",
-        "duracao_min": 30,
+        "esporte": "swim",
+        "tipo": "Natacao Resistencia",
+        "duracao_min": 45,
         "zona": "Z2",
-        "motivo_ajuste": "Body Battery 24, HRV unbalanced e sono deficitário contraindicam Z5; substituído por Z2 contínuo com duração reduzida em 40% para controle de carga."
+        "motivo_ajuste": "Sessão duplicada de natação consolidada em única de 45min devido a status Garmin de sobrecarga e HRV unbalanced; manter Z2 conforme plano original."
       }
     ],
-    "status_readiness": "CRÍTICO",
+    "status_readiness": "MODERADO",
     "status_carga": "SOBRECARGA",
-    "acao_hoje": "DESCANSO",
-    "analise_hoje": "Corrida executada em Z3-Z4 (FC avg 147, max 162bpm, TE 3.6) sobre estado de recuperação crítico (BB 24, sono 5h) — intensidade 30-40% acima do planejado para rodagem aeróbica. Eleva risco de overreaching em contexto de sobrecarga mensal já confirmada.",
-    "alerta": "Treino hoje executado em intensidade inadequada para o estado de recuperação crítico — monitorar HRV e Body Battery amanhã antes de qualquer decisão de treino intenso."
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Rodagem aeróbica leve de 30min é adequada e necessária como recuperação ativa; manter rigorosamente em Z1 com FC teto 145bpm sem qualquer progressão de intensidade.",
+    "alerta": "Status Garmin 'Sobrecarga' combinado com HRV unbalanced e Z3+ mensal elevado (20.5%) exige blindagem total de intensidade nas próximas 48h."
   }
 }
