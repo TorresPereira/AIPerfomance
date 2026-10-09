@@ -540,7 +540,7 @@
               "tipo": "Long Run Pico",
               "duracao_min": 100,
               "zona": "Z2",
-              "descricao": "Maior corrida longa do bloco base, ritmo aeróbico constante, foco em resistência.",
+              "descricao": "Manter duração original mas com FC teto 148bpm e potência máx 280W dado esforço anaeróbico registrado ontem (FC max 179bpm) e risco de lesão MODERADO em fase BASE.",
               "longo": true,
               "estrutura": null,
               "fixo": false
