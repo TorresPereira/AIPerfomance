@@ -566,9 +566,9 @@
             {
               "esporte": "bike",
               "tipo": "Long Ride Recuperação",
-              "duracao_min": 75,
+              "duracao_min": 55,
               "zona": "Z1",
-              "descricao": "Pedalada longa reduzida em intensidade e volume para semana de recuperação.",
+              "descricao": "Redução de 75 para 55min devido a Body Battery crítico (25/100), sobrecarga confirmada e sono severamente deficitário; FC teto 130bpm, preferencialmente indoor dado clima adverso.",
               "longo": true,
               "estrutura": null,
               "fixo": false
