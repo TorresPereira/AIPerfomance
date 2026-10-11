@@ -586,9 +586,9 @@
             {
               "esporte": "run",
               "tipo": "Rodagem Leve",
-              "duracao_min": 35,
+              "duracao_min": 30,
               "zona": "Z1",
-              "descricao": "Corrida suave de recuperação ativa, sem pressão de ritmo.",
+              "descricao": "Redução de 5min por esforço de alta intensidade executado hoje (FC máx 185bpm); manter FC teto em 140bpm sem exceções.",
               "longo": false,
               "estrutura": null,
               "fixo": false
