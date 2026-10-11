@@ -1,43 +1,43 @@
 {
-  "date": "2026-10-10",
-  "generated_at": "2026-10-10T06:01:57.057641Z",
+  "date": "2026-10-11",
+  "generated_at": "2026-10-11T06:01:48.095680Z",
   "saude": {
-    "hrv": 45,
-    "hrv_7d": 32,
+    "hrv": 52,
+    "hrv_7d": 33,
     "hrv_status": "balanced",
     "hrv_baseline_low": 30,
     "hrv_baseline_high": 40,
-    "rhr": 67,
+    "rhr": 61,
     "rhr_baseline": null,
-    "sono_h": 5.2,
-    "sono_score": 48,
-    "sono_deep": 1.6,
-    "sono_rem": 0.0,
-    "sono_awake": 48.0,
-    "body_battery": 25,
-    "stress_avg": 34,
-    "stress_rest": 18.97,
-    "atl": 740.0,
-    "ctl": 2961.0,
+    "sono_h": 8.5,
+    "sono_score": 86,
+    "sono_deep": 1.8,
+    "sono_rem": 1.1,
+    "sono_awake": 0.0,
+    "body_battery": 69,
+    "stress_avg": 15,
+    "stress_rest": 99.13,
+    "atl": 772.0,
+    "ctl": 3088.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 946.0,
+    "load_aerobic_low": 1040.0,
     "load_aerobic_high": 1489.0,
-    "load_anaerobic": 526.0,
-    "load_total_month": 2961.0,
-    "load_target_low": "446–1098",
-    "load_target_high": "750–1403",
+    "load_anaerobic": 559.0,
+    "load_total_month": 3088.0,
+    "load_target_low": "443–1096",
+    "load_target_high": "752–1405",
     "training_status": "Sobrecarga",
     "fitness_trend": "Caindo",
     "training_readiness": null,
     "vo2max": 48.9,
     "peso": null,
     "previsoes": {
-      "5K": 1346,
-      "10K": 2899,
-      "Meia": 6648,
-      "Maratona": 14931
+      "5K": 1350,
+      "10K": 2903,
+      "Meia": 6656,
+      "Maratona": 14949
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,22 +55,53 @@
     },
     "sono_alvo_h": 8.5,
     "sono_deita": "22:00",
-    "sono_deficit_h": 3.3
+    "sono_deficit_h": 0.0
   },
-  "ontem": [],
-  "hoje": [
+  "ontem": [
     {
+      "mod": "run",
       "icone": "🏃",
-      "nome": "Long Run Pico",
-      "tipo": "run",
-      "dur": "100min",
-      "dist": "—",
-      "passos": [
-        "Manter duração original mas com FC teto 148bpm e potência máx 280W dado esforço anaeróbico registrado ontem (FC max 179bpm) e risco de lesão MODERADO em fase BASE."
-      ]
+      "nome": "Erkrath Running",
+      "dist": "7.8km",
+      "dur": "50m30s",
+      "fc": 138.0,
+      "fc_max": 165.0,
+      "cal": 661.0,
+      "cad": 166.328125,
+      "tss": null,
+      "np": 332.0,
+      "swolf": null,
+      "aerobic_te": 3.0999999046325684,
+      "anaerobic_te": 2.0999999046325684,
+      "elev": 41.0,
+      "perf": "6:27/km",
+      "pl": "Pace",
+      "_dist_m": 7818.22021484375,
+      "_dur_s": 3030.1220703125
+    },
+    {
+      "mod": "other",
+      "icone": "⚡",
+      "nome": "Erkrath Walking",
+      "dist": "1.5km",
+      "dur": "22m07s",
+      "fc": 103.0,
+      "fc_max": 121.0,
+      "cal": 129.0,
+      "cad": 82.3125,
+      "tss": null,
+      "np": null,
+      "swolf": null,
+      "aerobic_te": 0.4000000059604645,
+      "anaerobic_te": 0.0,
+      "elev": 2.0,
+      "perf": "—",
+      "pl": "—",
+      "_dist_m": 1491.56005859375,
+      "_dur_s": 1327.6390380859375
     }
   ],
-  "amanha": [
+  "hoje": [
     {
       "icone": "🚴",
       "nome": "Long Ride Recuperação",
@@ -82,16 +113,28 @@
       ]
     }
   ],
+  "amanha": [
+    {
+      "icone": "🏃",
+      "nome": "Rodagem Leve",
+      "tipo": "run",
+      "dur": "35min",
+      "dist": "—",
+      "passos": [
+        "Corrida suave de recuperação ativa, sem pressão de ritmo."
+      ]
+    }
+  ],
   "hoje_feito": [],
   "semana": {
     "swim_km": 1.6,
     "swim_min": 48.6,
     "bike_km": 17.0,
     "bike_min": 43.0,
-    "run_km": 19.3,
-    "run_min": 108.5,
+    "run_km": 27.1,
+    "run_min": 159.0,
     "total_tss": 0.0,
-    "n_treinos": 5
+    "n_treinos": 7
   },
   "semana_passada": {
     "swim_km": 1.2,
@@ -102,18 +145,14 @@
     "run_min": 132.5
   },
   "clima": {
-    "temp_max": 14.4,
-    "temp_min": 9.9,
-    "chuva_pct": 100,
-    "vento_kmh": 20.2,
-    "temp_atual": 10.5,
+    "temp_max": 13.2,
+    "temp_min": 8.7,
+    "chuva_pct": 88,
+    "vento_kmh": 18.4,
+    "temp_atual": 8.7,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-10-04",
-      "value": 50.0
-    },
     {
       "date": "2026-10-05",
       "value": 55.0
@@ -137,13 +176,13 @@
     {
       "date": "2026-10-10",
       "value": 45.0
+    },
+    {
+      "date": "2026-10-11",
+      "value": 52.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-09-26",
-      "value": 48.6
-    },
     {
       "date": "2026-09-27",
       "value": 48.6
@@ -199,15 +238,14 @@
     {
       "date": "2026-10-10",
       "value": 48.9
+    },
+    {
+      "date": "2026-10-11",
+      "value": 48.9
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-09-27",
-      "sono": 6.0,
-      "te": 0.7
-    },
     {
       "date": "2026-10-01",
       "sono": 7.8,
@@ -237,9 +275,23 @@
       "date": "2026-10-08",
       "sono": 7.9,
       "te": 5.0
+    },
+    {
+      "date": "2026-10-10",
+      "sono": 5.2,
+      "te": 3.1
     }
   ],
   "mes": {
+    "2026-10-10": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": [
+        "🏃",
+        "⚡"
+      ]
+    },
     "2026-10-08": {
       "planejados": [
         "🚴"
@@ -299,12 +351,6 @@
       ],
       "feitos": []
     },
-    "2026-10-10": {
-      "planejados": [
-        "🏃"
-      ],
-      "feitos": []
-    },
     "2026-10-11": {
       "planejados": [
         "🚴"
@@ -344,32 +390,32 @@
     }
   },
   "plano_meta": {
-    "semana": 3,
+    "semana": 4,
     "fase": "BASE"
   },
   "insights": {
-    "frase": "Recuperação não é fraqueza, é protocolo inteligente.",
-    "sec_readiness": "HRV de 45ms representa +13ms acima da média 7d (32ms) e acima do baseline (30–40ms), sinal positivo de recuperação autonômica. Entretanto, sono de 5.2h com score 48, ausência de REM e déficit acumulado de 3.3h comprometem severamente a qualidade recuperativa real. Body Battery em 25/100 reflete o custo sistêmico: o sistema nervoso central ainda não absorveu a carga recente.",
-    "sec_treino_ontem": null,
-    "sec_carga": "Z1 (946) e Z2 (1489) ultrapassam os targets superiores (1098 e 1403 respectivamente), indicando acúmulo excessivo em ambas as zonas aeróbicas. Z3+ em 526 adiciona estresse anaeróbico relevante para semana 3 de base. Garmin classifica status como Sobrecarga com tendência de carga caindo — risco de lesão MODERADO é consistente com esses números; manutenção de volume elevado sem sono adequado agrava o cenário.",
-    "sec_hoje": "Long Run Pico de 100min está planejado, mas nenhum treino foi registrado ainda hoje. Dado o estado crítico de Body Battery (25/100), sono insuficiente (5.2h, sem REM) e status de Sobrecarga, executar um treino de pico hoje é contraindicado. Caso execute, limite estritamente a Z1 com FC teto 145bpm, reduza para 50–60min e monitore HRV pós-esforço.",
-    "sec_ajuste": "Reduzir Long Run Pico para 55min com FC teto 145bpm estritamente em Z1, sem nenhum acúmulo em Z2 ou Z3. Se Body Battery não subir acima de 30 ao longo do dia, substituir por descanso ativo (mobilidade 20min).",
-    "sec_alertas": "Body Battery em 25/100 com ausência de REM e sono abaixo de 6h é combinação de alto risco — supressão imunológica e déficit de síntese proteica estão ativos. Sobrecarga Garmin com Z2 acima do target superior (+6%) indica que o atleta está treinando acima da capacidade de absorção desta fase de base. Qualquer sessão de alta intensidade hoje eleva risco de lesão de MODERADO para ALTO.",
-    "sec_nutricao": "Sem treino confirmado hoje, priorize alimentação anti-inflamatória: 350kcal pré se houver atividade leve, com foco em CHO complexo e hidratação mínima de 2.5L ao longo do dia independente de treino. Pós-atividade: 30g proteína dentro de 30min; deitar às 22:00 é obrigatório para iniciar reversão do déficit de 3.3h.",
-    "sec_amanha": "Long Ride Recuperação de 75min em Z1 está no plano — dado o estado atual (Body Battery 25, sobrecarga, sono deficitário), manter a sessão mas com redução para 55min, FC teto 130bpm, sem qualquer drift para Z2. Condições climáticas (chuva 100%, 14°C, vento 20km/h) recomendam execução em rolo/indoor para controle preciso de intensidade e evitar hipotermia.",
+    "frase": "HRV elevado: recuperação real, execute com precisão.",
+    "sec_readiness": "HRV de 52ms representa +19ms acima da média 7d (33ms) e está acima do baseline (30–40ms), sinalizando recuperação autonômica sólida. Sono de 8.5h com score 86 e 1.8h de deep sleep — qualidade adequada, sem déficit. Body Battery 69/100 com stress médio 15 confirma estado favorável para treino moderado.",
+    "sec_treino_ontem": "Corrida de 7.8km a 6:27/km com FC média 138bpm e TE aeróbico 3.1 indica execução no limite superior do Z2 — carga aeróbica significativa para uma rodagem. Potência de corrida em 332W com cadência 166spm sugere boa mecânica, mas FC máxima de 165bpm aponta momentos fora do alvo Z1-Z2. Sessão cumprida com volume adequado, porém ligeiramente intensa para o contexto de sobrecarga acumulada.",
+    "sec_carga": "Z1 em 1040 (dentro do target 443–1096) e Z2 em 1489 (acima do target máximo de 1405) indicam desequilíbrio na polarização — excesso de carga aeróbica alta. Z3+ em 559 é preocupante com status Garmin de sobrecarga e risco de lesão MODERADO. CTL estimado de 3088 com ATL 772 exige cautela: reduzir intensidade é prioridade nesta semana 4 de base.",
+    "sec_hoje": "Sessão planejada: Long Ride Recuperação 55min — ainda não executada. Execute estritamente em Z1, FC teto 130bpm, evitando qualquer aceleração espontânea. Dado o clima adverso (13°C, 88% chuva, vento 18.4km/h), priorize treino indoor no rolo para controle de intensidade e segurança.",
+    "sec_ajuste": "Manter 55min de Long Ride Recuperação, FC teto 130bpm, potência alvo 150–170W em Z1 pleno. Sem acelerações; se sensação de cansaço persistir nos primeiros 15min, reduzir para 35min.",
+    "sec_alertas": "Z2 mensal já ultrapassa o target máximo (1489 vs 1405) — qualquer sessão adicional em Z2 agrava o desequilíbrio. Status Garmin de sobrecarga com tendência de carga caindo reforça necessidade de respeitar Z1 rigoroso hoje e amanhã.",
+    "sec_nutricao": "Sem treino registrado ainda hoje: pré-ride ingerir 350kcal (60-90min antes), foco em CHO de baixo IG. Durante 55min: 300–350ml de líquido total; pós-treino: 30g proteína + CHO simples em até 30min.",
+    "sec_amanha": "Rodagem Leve 35min Z1 amanhã está alinhada com o estado atual — manter exatamente como planejado. HRV recuperado permite execução, mas Z2 mensal já excedeu o teto; FC teto 135bpm obrigatório durante toda a sessão.",
     "amanha_ajustado": [
       {
-        "esporte": "bike",
-        "tipo": "Long Ride Recuperação",
-        "duracao_min": 55,
+        "esporte": "run",
+        "tipo": "Rodagem Leve",
+        "duracao_min": 35,
         "zona": "Z1",
-        "motivo_ajuste": "Redução de 75 para 55min devido a Body Battery crítico (25/100), sobrecarga confirmada e sono severamente deficitário; FC teto 130bpm, preferencialmente indoor dado clima adverso."
+        "motivo_ajuste": null
       }
     ],
-    "status_readiness": "BAIXO",
+    "status_readiness": "BOM",
     "status_carga": "SOBRECARGA",
-    "acao_hoje": "REDUZIR 40%",
-    "analise_hoje": "Long Run Pico de 100min é incompatível com Body Battery de 25/100, ausência de REM e status de Sobrecarga — executar esta sessão hoje aprofunda o buraco de recuperação em vez de gerar adaptação. Redução para 55min em Z1 ou descanso ativo é a decisão tecnicamente correta.",
-    "alerta": "Body Battery 25 + ausência de REM + Sobrecarga Garmin = janela anabólica fechada; treino de pico hoje é contraproducente e aumenta risco de lesão para ALTO."
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Long Ride Recuperação de 55min em Z1 é adequado ao contexto de sobrecarga acumulada e HRV elevado — execute indoor dado o clima, FC teto 130bpm e potência 150–170W. Sessão ainda não realizada.",
+    "alerta": "Z2 mensal acima do target máximo (1489 vs teto 1405) — qualquer drift de intensidade hoje ou amanhã aumenta risco de lesão moderado já sinalizado."
   }
 }
