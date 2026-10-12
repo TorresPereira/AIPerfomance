@@ -605,10 +605,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Intervalado 4x3min",
-              "duracao_min": 36,
+              "tipo": "Intervalado 3x3min",
+              "duracao_min": 30,
               "zona": "Z4",
-              "descricao": "Sessão curta de qualidade, mantendo estímulo neuromuscular na semana de recuperação.",
+              "descricao": "Redução de 4 para 3 repetições dado ATL elevado, Z2 mensal acima do target e sono de baixa qualidade acumulado — preservar qualidade dos estímulos sobre volume.",
               "longo": false,
               "estrutura": [
                 {
