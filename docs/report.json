@@ -1,6 +1,6 @@
 {
   "date": "2026-10-12",
-  "generated_at": "2026-10-12T16:26:08.108488Z",
+  "generated_at": "2026-10-12T16:27:35.648379Z",
   "saude": {
     "hrv": 57,
     "hrv_7d": 33,
@@ -116,12 +116,12 @@
   "amanha": [
     {
       "icone": "🏃",
-      "nome": "Intervalado 3x3min",
+      "nome": "Ativação Aeróbica Leve",
       "tipo": "run",
-      "dur": "30min",
+      "dur": "20min",
       "dist": "—",
       "passos": [
-        "Redução de 4 para 3 repetições dado ATL elevado, Z2 mensal acima do target e sono de baixa qualidade acumulado — preservar qualidade dos estímulos sobre volume."
+        "Body Battery 37, status Sobrecarga e sono insuficiente contraindicam Z4 — substituir por Z2 para manter frequência sem aprofundar fadiga acumulada."
       ]
     }
   ],
@@ -402,28 +402,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV recuperado — execute com precisão, não com euforia.",
-    "sec_readiness": "HRV de 57ms representa +24ms vs média 7d (33ms), situando-se acima do baseline (30–40ms) — sinal claro de recuperação aguda após esforço. Sono de 7h com score 70, apenas 1.3h deep e 0.6h REM indica qualidade insuficiente, com déficit de 1.5h acumulado. Body Battery em 37/100 mostra reserva funcional limitada apesar do HRV elevado — não confundir pico de HRV com prontidão plena.",
-    "sec_treino_ontem": "Corrida de 9.6km a 4:48/km com FC média 155bpm e pico de 185bpm indica esforço intenso — TE aeróbico 4.2 confirma carga alta e estímulo próximo ao limiar. Potência média de 429W é valor elevado para o ritmo executado, sugerindo terreno irregular ou fadiga neuromuscular acumulada. A caminhada de 1h55 (FC 93bpm, TE 0.6) foi recuperação ativa válida, mas somada à corrida representa volume total considerável para um dia.",
-    "sec_carga": "Z2 em 1699 (target 752–1405) está 21% acima do teto recomendado para a fase BASE — desequilíbrio claro com excesso de carga aeróbica alta. Z1 em 926 está dentro do target (443–1096), mas Z3+ em 524 também supera limites esperados para base. Status Garmin de Sobrecarga com ATL estimado em 787 e risco de lesão MODERADO exigem controle rigoroso de intensidade nos próximos dias.",
-    "sec_hoje": "Sessão planejada é rodagem leve de 30min — correta para o contexto pós-esforço intenso de ontem e Body Battery em 37. Executar estritamente em Z1 (FC abaixo de 135bpm), ritmo conversacional, sem elevar FC acima de 140bpm em nenhum momento. Prioridade é recuperação ativa, não estímulo — reduzir para 20–25min se perceber FC elevando naturalmente acima de 138bpm.",
-    "sec_ajuste": "Manter rodagem leve mas limitar a 25min máximo com FC teto em 138bpm. Cancelar imediatamente se FC não estabilizar abaixo de 140bpm nos primeiros 8min.",
-    "sec_alertas": "Z2 mensal 21% acima do target máximo — risco real de overreaching se mantida intensidade nos próximos dias. Body Battery 37 com sono de baixa qualidade (REM 0.6h) pode mascarar fadiga real apesar do HRV favorável. Monitorar HR drift durante a rodagem de hoje como indicador sensível de recuperação incompleta.",
-    "sec_nutricao": "Sem treino executado hoje ainda: pré-rodagem ingerir 200–250kcal de carboidrato de baixo IG (banana + aveia) 45min antes. Pós-treino: 30g proteína + 40–60g CHO dentro de 30min; hidratar 500–600ml ao longo do dia independente do volume de treino.",
-    "sec_amanha": "Intervalado 4x3min Z4 com 36min total está programado, mas carga semanal elevada (Z2 acima do target, ATL alto, sono deficitário) justifica redução cautelosa. Manter estrutura de intervalos mas reduzir para 3x3min com recuperação completa (2min andando), totalizando ~28–30min. FC alvo nos intervalos: 168–178bpm (Z4 real), sem ultrapassar 182bpm.",
+    "frase": "HRV elevado, mas corpo ainda pede cautela e ritmo.",
+    "sec_readiness": "HRV de 57ms está 73% acima da média 7d (33ms) — spike positivo significativo, mas baseline 30-40ms sugere que o estado habitual é baixo; interpretar com cautela. Sono de 7.0h com déficit de 1.5h, deep sleep de apenas 1.3h e REM 0.6h indicam qualidade insuficiente para recuperação estrutural. Body Battery de 37/100 com stress médio 26 confirma estado de recuperação incompleta.",
+    "sec_treino_ontem": "Corrida de 9.6km a 4:48/km com FC média 155bpm e pico 185bpm indica esforço em Z4/Z5 — TE aeróbico 4.2 confirma carga fisiológica alta para o volume. Potência média de 429W na corrida é valor elevado, sugerindo esforço neuromuscular intenso. A combinação com hiking de 1h55m adicional totaliza carga acumulada relevante num mesmo dia.",
+    "sec_carga": "Z2 em 1699 unidades está 21% acima do teto target (1405) — polarização invertida com excesso de volume moderado-intenso. Z3+ em 524 acima do recomendado para fase BASE e status Garmin já marcado como Sobrecarga. Risco de lesão MODERADO com CTL estimado em 3148 sem volume semanal registrado esta semana sugere acúmulo residual de semanas anteriores.",
+    "sec_hoje": "Rodagem leve de 30min planejada é a prescrição correta dado o estado de recuperação incompleta (Body Battery 37). Manter estritamente em Z1 com FC teto de 135bpm para não aprofundar o déficit de recuperação. Nenhum treino executado ainda — executar conforme análise.",
+    "sec_ajuste": "Executar rodagem leve 30min com FC teto rígido de 135bpm, pace acima de 6:00/km. Zero aceleração, zero progressão — ritmo conversacional constante.",
+    "sec_alertas": "Spike de HRV pode ser artefato ou resposta parasimpática compensatória pós-esforço intenso — não interpretar como sinal de alta performance. Z2 acumulada mensal 21% acima do target com status Sobrecarga exige freio imediato em intensidade. Déficit de sono recorrente (1.5h hoje) compromete adaptação e aumenta risco de overreaching.",
+    "sec_nutricao": "Sem treino estruturado relevante hoje: foco em dieta anti-inflamatória, CHO moderado 3-4g/kg para reposição glicogênica. Pós-rodagem leve: 30g proteína + CHO 40-50g dentro de 30min; hidratação 2.0-2.5L ao longo do dia.",
+    "sec_amanha": "Intervalado 3x3min Z4 está contraindicado com Body Battery 37, sono deficitário e status Sobrecarga Garmin. Reduzir para rodagem de ativação Z2 de 20min — preservar o estímulo neuromotor mas eliminar o componente anaeróbico até recuperação confirmar melhora real.",
     "amanha_ajustado": [
       {
         "esporte": "run",
-        "tipo": "Intervalado 3x3min",
-        "duracao_min": 30,
-        "zona": "Z4",
-        "motivo_ajuste": "Redução de 4 para 3 repetições dado ATL elevado, Z2 mensal acima do target e sono de baixa qualidade acumulado — preservar qualidade dos estímulos sobre volume."
+        "tipo": "Ativação Aeróbica Leve",
+        "duracao_min": 20,
+        "zona": "Z2",
+        "motivo_ajuste": "Body Battery 37, status Sobrecarga e sono insuficiente contraindicam Z4 — substituir por Z2 para manter frequência sem aprofundar fadiga acumulada."
       }
     ],
     "status_readiness": "MODERADO",
     "status_carga": "SOBRECARGA",
-    "acao_hoje": "REDUZIR 20%",
-    "analise_hoje": "Rodagem leve de 30min é apropriada como recuperação ativa pós-esforço intenso de ontem — reduzir para 25min com FC teto 138bpm para não agravar carga já elevada. Nenhum treino registrado até o momento; executar ainda hoje se Body Battery não deteriorar abaixo de 30.",
-    "alerta": "Z2 mensal 21% acima do teto com status Garmin de Sobrecarga — qualquer intensidade adicional sem recuperação adequada eleva risco de overreaching real nos próximos 5–7 dias."
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Rodagem leve de 30min é a escolha correta para o estado atual — executar em Z1 puro como estímulo de recuperação ativa. Qualquer desvio de intensidade compromete a adaptação da semana.",
+    "alerta": "Status Sobrecarga Garmin + Z2 mensal 21% acima do target: eliminar qualquer sessão Z4 nos próximos 48h para evitar overreaching funcional."
   }
 }

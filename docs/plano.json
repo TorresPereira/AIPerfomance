@@ -605,10 +605,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Intervalado 3x3min",
-              "duracao_min": 30,
-              "zona": "Z4",
-              "descricao": "Redução de 4 para 3 repetições dado ATL elevado, Z2 mensal acima do target e sono de baixa qualidade acumulado — preservar qualidade dos estímulos sobre volume.",
+              "tipo": "Ativação Aeróbica Leve",
+              "duracao_min": 20,
+              "zona": "Z2",
+              "descricao": "Body Battery 37, status Sobrecarga e sono insuficiente contraindicam Z4 — substituir por Z2 para manter frequência sem aprofundar fadiga acumulada.",
               "longo": false,
               "estrutura": [
                 {
