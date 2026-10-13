@@ -1,12 +1,12 @@
 {
-  "gerado_em": "2026-09-20T20:23:59.250922Z",
-  "semana_inicio": "2026-09-20",
-  "semana_fim": "2026-10-17",
+  "gerado_em": "2026-10-13T18:33:57.318586Z",
+  "semana_inicio": "2026-10-13",
+  "semana_fim": "2026-11-09",
   "config_usada": {
     "tipo_prova": "triathlon",
     "prova_categoria": "middle",
     "foco_modalidade": "run",
-    "horas_semana": 7,
+    "horas_semana": 8,
     "dias_disponiveis": [
       "seg",
       "ter",
@@ -31,570 +31,23 @@
         "nome": "Natacao",
         "esporte": "swim",
         "duracao_min": 45
+      },
+      {
+        "dia": "qua",
+        "nome": "Futebol",
+        "esporte": "futebol",
+        "duracao_min": 60
       }
     ],
-    "atualizado_em": "2026-09-20T20:07:42.371Z"
+    "atualizado_em": "2026-10-13T18:33:02.205Z"
   },
   "semanas": [
     {
       "numero": 1,
       "fase": "BASE",
-      "inicio": "2026-09-20",
-      "fim": "2026-09-26",
+      "inicio": "2026-10-13",
+      "fim": "2026-10-19",
       "dias": {
-        "2026-09-20": {
-          "dow": "dom",
-          "disponivel": true,
-          "longo_bike": true,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "bike",
-              "tipo": "Long Ride Base",
-              "duracao_min": 100,
-              "zona": "Z2",
-              "descricao": "Pedalada longa em ritmo aeróbico estável, foco em economia e posição.",
-              "longo": true,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-09-21": {
-          "dow": "seg",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "run",
-              "tipo": "Rodagem Aeróbica",
-              "duracao_min": 45,
-              "zona": "Z2",
-              "descricao": "Corrida contínua em ritmo confortável, construindo base aeróbica.",
-              "longo": false,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-09-22": {
-          "dow": "ter",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "run",
-              "tipo": "Intervalado 4x3min Z4",
-              "duracao_min": 35,
-              "zona": "Z4",
-              "descricao": "Redução de 6 para 4 repetições dado status de sobrecarga Garmin, sono deficitário (6.4h) e retomada de volume após dias sem treino registrado.",
-              "longo": false,
-              "estrutura": [
-                {
-                  "bloco": "aquecimento",
-                  "duracao_min": 10,
-                  "zona": "Z2"
-                },
-                {
-                  "bloco": "intervalado",
-                  "repeticoes": 6,
-                  "trabalho_min": 3,
-                  "trabalho_zona": "Z4",
-                  "descanso_min": 1.5,
-                  "descanso_zona": "Z1"
-                },
-                {
-                  "bloco": "volta_calma",
-                  "duracao_min": 10,
-                  "zona": "Z1"
-                }
-              ],
-              "fixo": false
-            }
-          ]
-        },
-        "2026-09-23": {
-          "dow": "qua",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [
-            {
-              "esporte": "swim",
-              "nome": "Natacao",
-              "duracao_min": 45
-            }
-          ],
-          "sessoes": [
-            {
-              "esporte": "swim",
-              "tipo": "Natacao",
-              "duracao_min": 45,
-              "zona": "—",
-              "descricao": "Atividade fixa",
-              "longo": false,
-              "fixo": true
-            },
-            {
-              "esporte": "swim",
-              "tipo": "Natacao Base",
-              "duracao_min": 35,
-              "zona": "Z2",
-              "descricao": "Redução de 10min por sono deficitário (REM 0.0h) e treino Z4 executado hoje; Z2 estrito com FC ≤ 140bpm para evitar sobrecarga adicional.",
-              "longo": false,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-09-24": {
-          "dow": "qui",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "bike",
-              "tipo": "Tempo Bike",
-              "duracao_min": 40,
-              "zona": "Z2",
-              "descricao": "Status Sobrecarga + Body Battery 38 contraindicam Z3; redução para Z2 em 40min preserva estímulo aeróbico sem agravar fadiga acumulada.",
-              "longo": false,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-09-25": {
-          "dow": "sex",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": []
-        },
-        "2026-09-26": {
-          "dow": "sab",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": true,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "run",
-              "tipo": "Long Run Base",
-              "duracao_min": 55,
-              "zona": "Z2",
-              "descricao": "Redução de 80 para 55min devido a sono deficitário (5.2h, REM zero), Body Battery 38 e status de sobrecarga Garmin com risco de lesão moderado.",
-              "longo": true,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        }
-      }
-    },
-    {
-      "numero": 2,
-      "fase": "BASE",
-      "inicio": "2026-09-27",
-      "fim": "2026-10-03",
-      "dias": {
-        "2026-09-27": {
-          "dow": "dom",
-          "disponivel": true,
-          "longo_bike": true,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "bike",
-              "tipo": "Long Ride Base",
-              "duracao_min": 75,
-              "zona": "Z2",
-              "descricao": "Redução de 110 para 75min devido a Body Battery 17/100, sobrecarga mensal em Z1 já acima do teto e déficit de sono acumulado de 2.7h.",
-              "longo": true,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-09-28": {
-          "dow": "seg",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "run",
-              "tipo": "Rodagem Aeróbica",
-              "duracao_min": 40,
-              "zona": "Z2",
-              "descricao": "Redução preventiva de 10min considerando sono deficitário acumulado e Body Battery baixo; FC teto 148bpm.",
-              "longo": false,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-09-29": {
-          "dow": "ter",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "run",
-              "tipo": "Tempo Run 2x8min",
-              "duracao_min": 40,
-              "zona": "Z3",
-              "descricao": "Sono acumulado deficitário (5.5h, REM 0.5h) e Body Battery 38 justificam redução de 1 repetição e 11min totais para limitar stress anaeróbico.",
-              "longo": false,
-              "estrutura": [
-                {
-                  "bloco": "aquecimento",
-                  "duracao_min": 10,
-                  "zona": "Z2"
-                },
-                {
-                  "bloco": "intervalado",
-                  "repeticoes": 3,
-                  "trabalho_min": 8,
-                  "trabalho_zona": "Z3",
-                  "descanso_min": 2,
-                  "descanso_zona": "Z1"
-                },
-                {
-                  "bloco": "volta_calma",
-                  "duracao_min": 10,
-                  "zona": "Z1"
-                }
-              ],
-              "fixo": false
-            }
-          ]
-        },
-        "2026-09-30": {
-          "dow": "qua",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [
-            {
-              "esporte": "swim",
-              "nome": "Natacao",
-              "duracao_min": 45
-            }
-          ],
-          "sessoes": [
-            {
-              "esporte": "swim",
-              "tipo": "Natacao",
-              "duracao_min": 45,
-              "zona": "—",
-              "descricao": "Atividade fixa",
-              "longo": false,
-              "fixo": true
-            },
-            {
-              "esporte": "swim",
-              "tipo": "Natacao Tecnica",
-              "duracao_min": 45,
-              "zona": "Z2",
-              "descricao": "Sessão fixa de natação com ênfase em drills de técnica e eficiência de braçada.",
-              "longo": false,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-10-01": {
-          "dow": "qui",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "bike",
-              "tipo": "Pedal Ativo",
-              "duracao_min": 45,
-              "zona": "Z2",
-              "descricao": "Redução preventiva de 55 para 45min dado o estado de recuperação baixo (Body Battery 18, sono 5.7h) — manter FC entre 130-145bpm e não ultrapassar Z2.",
-              "longo": false,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-10-02": {
-          "dow": "sex",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": []
-        },
-        "2026-10-03": {
-          "dow": "sab",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": true,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "run",
-              "tipo": "Long Run Base",
-              "duracao_min": 60,
-              "zona": "Z2",
-              "descricao": "Redução de 90 para 60min devido a sono 5.3h com REM 0.0h, Body Battery 35 e carga anaeróbica de ontem; FC teto 145bpm.",
-              "longo": true,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        }
-      }
-    },
-    {
-      "numero": 3,
-      "fase": "BASE",
-      "inicio": "2026-10-04",
-      "fim": "2026-10-10",
-      "dias": {
-        "2026-10-04": {
-          "dow": "dom",
-          "disponivel": true,
-          "longo_bike": true,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "bike",
-              "tipo": "Long Ride Base",
-              "duracao_min": 100,
-              "zona": "Z2",
-              "descricao": "Redução de 20min preventiva dado REM crítico de 0.2h e qualidade de sono comprometida; FC teto 145bpm ou potência 185–210W.",
-              "longo": true,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-10-05": {
-          "dow": "seg",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "run",
-              "tipo": "Rodagem Aeróbica",
-              "duracao_min": 40,
-              "zona": "Z2",
-              "descricao": "Redução de 55 para 40min devido a sono acumulado crítico (4.6h), HRV unbalanced e Body Battery 32 — preservar adaptação sem aprofundar fadiga autonômica.",
-              "longo": false,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-10-06": {
-          "dow": "ter",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "run",
-              "tipo": "Rodagem Aeróbica Leve",
-              "duracao_min": 30,
-              "zona": "Z2",
-              "descricao": "Body Battery 24, HRV unbalanced e sono deficitário contraindicam Z5; substituído por Z2 contínuo com duração reduzida em 40% para controle de carga.",
-              "longo": false,
-              "estrutura": [
-                {
-                  "bloco": "aquecimento",
-                  "duracao_min": 12,
-                  "zona": "Z2"
-                },
-                {
-                  "bloco": "intervalado",
-                  "repeticoes": 8,
-                  "trabalho_min": 2,
-                  "trabalho_zona": "Z5",
-                  "descanso_min": 1,
-                  "descanso_zona": "Z1"
-                },
-                {
-                  "bloco": "volta_calma",
-                  "duracao_min": 10,
-                  "zona": "Z1"
-                }
-              ],
-              "fixo": false
-            }
-          ]
-        },
-        "2026-10-07": {
-          "dow": "qua",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [
-            {
-              "esporte": "swim",
-              "nome": "Natacao",
-              "duracao_min": 45
-            }
-          ],
-          "sessoes": [
-            {
-              "esporte": "swim",
-              "tipo": "Natacao",
-              "duracao_min": 45,
-              "zona": "—",
-              "descricao": "Atividade fixa",
-              "longo": false,
-              "fixo": true
-            },
-            {
-              "esporte": "swim",
-              "tipo": "Natacao Resistencia",
-              "duracao_min": 45,
-              "zona": "Z2",
-              "descricao": "Sessão duplicada de natação consolidada em única de 45min devido a status Garmin de sobrecarga e HRV unbalanced; manter Z2 conforme plano original.",
-              "longo": false,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-10-08": {
-          "dow": "qui",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "bike",
-              "tipo": "Brick Bike+Run",
-              "duracao_min": 70,
-              "zona": "Z2",
-              "descricao": "45min de bike em Z2 seguido de 25min de corrida em Z2 para adaptar a transição.",
-              "longo": false,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-10-09": {
-          "dow": "sex",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": []
-        },
-        "2026-10-10": {
-          "dow": "sab",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": true,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "run",
-              "tipo": "Long Run Pico",
-              "duracao_min": 100,
-              "zona": "Z2",
-              "descricao": "Manter duração original mas com FC teto 148bpm e potência máx 280W dado esforço anaeróbico registrado ontem (FC max 179bpm) e risco de lesão MODERADO em fase BASE.",
-              "longo": true,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        }
-      }
-    },
-    {
-      "numero": 4,
-      "fase": "BASE",
-      "inicio": "2026-10-11",
-      "fim": "2026-10-17",
-      "dias": {
-        "2026-10-11": {
-          "dow": "dom",
-          "disponivel": true,
-          "longo_bike": true,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "bike",
-              "tipo": "Long Ride Recuperação",
-              "duracao_min": 55,
-              "zona": "Z1",
-              "descricao": "Redução de 75 para 55min devido a Body Battery crítico (25/100), sobrecarga confirmada e sono severamente deficitário; FC teto 130bpm, preferencialmente indoor dado clima adverso.",
-              "longo": true,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
-        "2026-10-12": {
-          "dow": "seg",
-          "disponivel": true,
-          "longo_bike": false,
-          "longo_run": false,
-          "fase": "BASE",
-          "fixos": [],
-          "sessoes": [
-            {
-              "esporte": "run",
-              "tipo": "Rodagem Leve",
-              "duracao_min": 30,
-              "zona": "Z1",
-              "descricao": "Redução de 5min por esforço de alta intensidade executado hoje (FC máx 185bpm); manter FC teto em 140bpm sem exceções.",
-              "longo": false,
-              "estrutura": null,
-              "fixo": false
-            }
-          ]
-        },
         "2026-10-13": {
           "dow": "ter",
           "disponivel": true,
@@ -605,10 +58,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Ativação Aeróbica Leve",
-              "duracao_min": 20,
-              "zona": "Z2",
-              "descricao": "Body Battery 37, status Sobrecarga e sono insuficiente contraindicam Z4 — substituir por Z2 para manter frequência sem aprofundar fadiga acumulada.",
+              "tipo": "Intervalado 6x4min",
+              "duracao_min": 52,
+              "zona": "Z4",
+              "descricao": "Aquecimento, 6 repetições de 4min em Z4 com 2min de recuperação, volta calma.",
               "longo": false,
               "estrutura": [
                 {
@@ -618,15 +71,15 @@
                 },
                 {
                   "bloco": "intervalado",
-                  "repeticoes": 4,
-                  "trabalho_min": 3,
+                  "repeticoes": 6,
+                  "trabalho_min": 4,
                   "trabalho_zona": "Z4",
-                  "descanso_min": 1.5,
+                  "descanso_min": 2,
                   "descanso_zona": "Z1"
                 },
                 {
                   "bloco": "volta_calma",
-                  "duracao_min": 8,
+                  "duracao_min": 6,
                   "zona": "Z1"
                 }
               ],
@@ -645,6 +98,11 @@
               "esporte": "swim",
               "nome": "Natacao",
               "duracao_min": 45
+            },
+            {
+              "esporte": "futebol",
+              "nome": "Futebol",
+              "duracao_min": 60
             }
           ],
           "sessoes": [
@@ -658,11 +116,20 @@
               "fixo": true
             },
             {
+              "esporte": "futebol",
+              "tipo": "Futebol",
+              "duracao_min": 60,
+              "zona": "—",
+              "descricao": "Atividade fixa",
+              "longo": false,
+              "fixo": true
+            },
+            {
               "esporte": "swim",
-              "tipo": "Natacao Tecnica Leve",
-              "duracao_min": 35,
-              "zona": "Z1",
-              "descricao": "Reduzido de 45 para 35min dado o treino intervalado executado hoje com FC pico 166bpm em contexto de Sobrecarga Garmin; FC teto 130bpm, apenas drills técnicos.",
+              "tipo": "Natação técnica (fixo)",
+              "duracao_min": 45,
+              "zona": "Z2",
+              "descricao": "Sessão fixa de natação com foco em técnica de braçada e rolamento.",
               "longo": false,
               "estrutura": null,
               "fixo": false
@@ -676,7 +143,18 @@
           "longo_run": false,
           "fase": "BASE",
           "fixos": [],
-          "sessoes": []
+          "sessoes": [
+            {
+              "esporte": "bike",
+              "tipo": "Pedal de ativação Z2",
+              "duracao_min": 60,
+              "zona": "Z2",
+              "descricao": "Pedal contínuo em cadência alta, foco em economia de pedalada e base aeróbica.",
+              "longo": false,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
         },
         "2026-10-16": {
           "dow": "sex",
@@ -687,13 +165,32 @@
           "fixos": [],
           "sessoes": [
             {
-              "esporte": "bike",
-              "tipo": "Pedal Solto",
+              "esporte": "run",
+              "tipo": "Tempo Run 20min",
               "duracao_min": 40,
-              "zona": "Z1",
-              "descricao": "Pedalada curta e leve de manutenção, sem esforço, pernas soltas.",
+              "zona": "Z3",
+              "descricao": "Aquecimento, bloco contínuo de 20min em Z3 (limiar), volta calma.",
               "longo": false,
-              "estrutura": null,
+              "estrutura": [
+                {
+                  "bloco": "aquecimento",
+                  "duracao_min": 10,
+                  "zona": "Z2"
+                },
+                {
+                  "bloco": "intervalado",
+                  "repeticoes": 1,
+                  "trabalho_min": 20,
+                  "trabalho_zona": "Z3",
+                  "descanso_min": 0,
+                  "descanso_zona": "Z1"
+                },
+                {
+                  "bloco": "volta_calma",
+                  "duracao_min": 10,
+                  "zona": "Z1"
+                }
+              ],
               "fixo": false
             }
           ]
@@ -708,15 +205,675 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Long Run Reduzido",
-              "duracao_min": 60,
+              "tipo": "Long Run",
+              "duracao_min": 80,
               "zona": "Z2",
-              "descricao": "Corrida longa reduzida em ~40% para semana de recuperação, ritmo fácil e controlado.",
+              "descricao": "Corrida longa em ritmo aeróbico confortável, mantendo cadência estável do início ao fim.",
               "longo": true,
               "estrutura": null,
               "fixo": false
             }
           ]
+        },
+        "2026-10-18": {
+          "dow": "dom",
+          "disponivel": true,
+          "longo_bike": true,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "bike",
+              "tipo": "Long Ride",
+              "duracao_min": 100,
+              "zona": "Z2",
+              "descricao": "Pedal longo em Z2, ritmo constante, foco em resistência aeróbica e posição no selim.",
+              "longo": true,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-10-19": {
+          "dow": "seg",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": []
+        }
+      }
+    },
+    {
+      "numero": 2,
+      "fase": "BASE",
+      "inicio": "2026-10-20",
+      "fim": "2026-10-26",
+      "dias": {
+        "2026-10-20": {
+          "dow": "ter",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "run",
+              "tipo": "Intervalado 8x3min",
+              "duracao_min": 54,
+              "zona": "Z4",
+              "descricao": "Aquecimento, 8 repetições de 3min em Z4 com 1.5min de recuperação, volta calma.",
+              "longo": false,
+              "estrutura": [
+                {
+                  "bloco": "aquecimento",
+                  "duracao_min": 10,
+                  "zona": "Z2"
+                },
+                {
+                  "bloco": "intervalado",
+                  "repeticoes": 8,
+                  "trabalho_min": 3,
+                  "trabalho_zona": "Z4",
+                  "descanso_min": 1.5,
+                  "descanso_zona": "Z1"
+                },
+                {
+                  "bloco": "volta_calma",
+                  "duracao_min": 8,
+                  "zona": "Z1"
+                }
+              ],
+              "fixo": false
+            }
+          ]
+        },
+        "2026-10-21": {
+          "dow": "qua",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [
+            {
+              "esporte": "swim",
+              "nome": "Natacao",
+              "duracao_min": 45
+            },
+            {
+              "esporte": "futebol",
+              "nome": "Futebol",
+              "duracao_min": 60
+            }
+          ],
+          "sessoes": [
+            {
+              "esporte": "swim",
+              "tipo": "Natacao",
+              "duracao_min": 45,
+              "zona": "—",
+              "descricao": "Atividade fixa",
+              "longo": false,
+              "fixo": true
+            },
+            {
+              "esporte": "futebol",
+              "tipo": "Futebol",
+              "duracao_min": 60,
+              "zona": "—",
+              "descricao": "Atividade fixa",
+              "longo": false,
+              "fixo": true
+            },
+            {
+              "esporte": "swim",
+              "tipo": "Natação técnica (fixo)",
+              "duracao_min": 45,
+              "zona": "Z2",
+              "descricao": "Sessão fixa de natação com ênfase em técnica e ritmo de braçada.",
+              "longo": false,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-10-22": {
+          "dow": "qui",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "bike",
+              "tipo": "Bike Intervalado 5x5min",
+              "duracao_min": 58,
+              "zona": "Z4",
+              "descricao": "Aquecimento, 5 blocos de 5min em Z4 com 2.5min de recuperação, volta calma.",
+              "longo": false,
+              "estrutura": [
+                {
+                  "bloco": "aquecimento",
+                  "duracao_min": 10,
+                  "zona": "Z2"
+                },
+                {
+                  "bloco": "intervalado",
+                  "repeticoes": 5,
+                  "trabalho_min": 5,
+                  "trabalho_zona": "Z4",
+                  "descanso_min": 2.5,
+                  "descanso_zona": "Z1"
+                },
+                {
+                  "bloco": "volta_calma",
+                  "duracao_min": 10,
+                  "zona": "Z1"
+                }
+              ],
+              "fixo": false
+            }
+          ]
+        },
+        "2026-10-23": {
+          "dow": "sex",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "run",
+              "tipo": "Tempo Run 25min",
+              "duracao_min": 45,
+              "zona": "Z3",
+              "descricao": "Aquecimento, bloco contínuo de 25min em Z3, volta calma — trabalho de limiar aeróbico.",
+              "longo": false,
+              "estrutura": [
+                {
+                  "bloco": "aquecimento",
+                  "duracao_min": 10,
+                  "zona": "Z2"
+                },
+                {
+                  "bloco": "intervalado",
+                  "repeticoes": 1,
+                  "trabalho_min": 25,
+                  "trabalho_zona": "Z3",
+                  "descanso_min": 0,
+                  "descanso_zona": "Z1"
+                },
+                {
+                  "bloco": "volta_calma",
+                  "duracao_min": 10,
+                  "zona": "Z1"
+                }
+              ],
+              "fixo": false
+            }
+          ]
+        },
+        "2026-10-24": {
+          "dow": "sab",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": true,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "run",
+              "tipo": "Long Run",
+              "duracao_min": 90,
+              "zona": "Z2",
+              "descricao": "Corrida longa aeróbica em Z2, progressão suave do ritmo nos últimos 20min.",
+              "longo": true,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-10-25": {
+          "dow": "dom",
+          "disponivel": true,
+          "longo_bike": true,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "bike",
+              "tipo": "Long Ride",
+              "duracao_min": 110,
+              "zona": "Z2",
+              "descricao": "Pedal longo e contínuo em Z2, mantendo potência/cadência estável, preparação de resistência.",
+              "longo": true,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-10-26": {
+          "dow": "seg",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": []
+        }
+      }
+    },
+    {
+      "numero": 3,
+      "fase": "BASE",
+      "inicio": "2026-10-27",
+      "fim": "2026-11-02",
+      "dias": {
+        "2026-10-27": {
+          "dow": "ter",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "run",
+              "tipo": "Intervalado 8x4min",
+              "duracao_min": 62,
+              "zona": "Z4",
+              "descricao": "Aquecimento, 8 repetições de 4min em Z4 com 2min de recuperação em Z1, volta calma.",
+              "longo": false,
+              "estrutura": [
+                {
+                  "bloco": "aquecimento",
+                  "duracao_min": 10,
+                  "zona": "Z2"
+                },
+                {
+                  "bloco": "intervalado",
+                  "repeticoes": 8,
+                  "trabalho_min": 4,
+                  "trabalho_zona": "Z4",
+                  "descanso_min": 2,
+                  "descanso_zona": "Z1"
+                },
+                {
+                  "bloco": "volta_calma",
+                  "duracao_min": 8,
+                  "zona": "Z1"
+                }
+              ],
+              "fixo": false
+            }
+          ]
+        },
+        "2026-10-28": {
+          "dow": "qua",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [
+            {
+              "esporte": "swim",
+              "nome": "Natacao",
+              "duracao_min": 45
+            },
+            {
+              "esporte": "futebol",
+              "nome": "Futebol",
+              "duracao_min": 60
+            }
+          ],
+          "sessoes": [
+            {
+              "esporte": "swim",
+              "tipo": "Natacao",
+              "duracao_min": 45,
+              "zona": "—",
+              "descricao": "Atividade fixa",
+              "longo": false,
+              "fixo": true
+            },
+            {
+              "esporte": "futebol",
+              "tipo": "Futebol",
+              "duracao_min": 60,
+              "zona": "—",
+              "descricao": "Atividade fixa",
+              "longo": false,
+              "fixo": true
+            },
+            {
+              "esporte": "swim",
+              "tipo": "Natação técnica (fixo)",
+              "duracao_min": 45,
+              "zona": "Z2",
+              "descricao": "Sessão fixa de natação, foco em eficiência de braçada e manutenção técnica.",
+              "longo": false,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-10-29": {
+          "dow": "qui",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "bike",
+              "tipo": "Pedal Tempo 2x15min",
+              "duracao_min": 60,
+              "zona": "Z3",
+              "descricao": "Aquecimento, 2 blocos de 15min em Z3 com 5min de recuperação, volta calma — foco em potência sustentada.",
+              "longo": false,
+              "estrutura": [
+                {
+                  "bloco": "aquecimento",
+                  "duracao_min": 10,
+                  "zona": "Z2"
+                },
+                {
+                  "bloco": "intervalado",
+                  "repeticoes": 2,
+                  "trabalho_min": 15,
+                  "trabalho_zona": "Z3",
+                  "descanso_min": 5,
+                  "descanso_zona": "Z1"
+                },
+                {
+                  "bloco": "volta_calma",
+                  "duracao_min": 10,
+                  "zona": "Z1"
+                }
+              ],
+              "fixo": false
+            }
+          ]
+        },
+        "2026-10-30": {
+          "dow": "sex",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "run",
+              "tipo": "Tempo Run 30min",
+              "duracao_min": 50,
+              "zona": "Z3",
+              "descricao": "Aquecimento, bloco contínuo de 30min em ritmo de limiar Z3, volta calma — pico de carga da fase.",
+              "longo": false,
+              "estrutura": [
+                {
+                  "bloco": "aquecimento",
+                  "duracao_min": 10,
+                  "zona": "Z2"
+                },
+                {
+                  "bloco": "intervalado",
+                  "repeticoes": 1,
+                  "trabalho_min": 30,
+                  "trabalho_zona": "Z3",
+                  "descanso_min": 0,
+                  "descanso_zona": "Z1"
+                },
+                {
+                  "bloco": "volta_calma",
+                  "duracao_min": 10,
+                  "zona": "Z1"
+                }
+              ],
+              "fixo": false
+            }
+          ]
+        },
+        "2026-10-31": {
+          "dow": "sab",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": true,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "run",
+              "tipo": "Long Run",
+              "duracao_min": 100,
+              "zona": "Z2",
+              "descricao": "Corrida longa em ritmo aeróbico Z2, sessão de pico de volume da fase base — pace controlado.",
+              "longo": true,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-11-01": {
+          "dow": "dom",
+          "disponivel": true,
+          "longo_bike": true,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "bike",
+              "tipo": "Long Ride",
+              "duracao_min": 120,
+              "zona": "Z2",
+              "descricao": "Pedal longo de pico de volume, Z2 constante, foco em resistência e economia de pedalada.",
+              "longo": true,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-11-02": {
+          "dow": "seg",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": []
+        }
+      }
+    },
+    {
+      "numero": 4,
+      "fase": "BASE",
+      "inicio": "2026-11-03",
+      "fim": "2026-11-09",
+      "dias": {
+        "2026-11-03": {
+          "dow": "ter",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "run",
+              "tipo": "Rodagem leve",
+              "duracao_min": 35,
+              "zona": "Z2",
+              "descricao": "Corrida contínua e suave em Z2, ritmo confortável, semana de recuperação — sem pressão.",
+              "longo": false,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-11-04": {
+          "dow": "qua",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [
+            {
+              "esporte": "swim",
+              "nome": "Natacao",
+              "duracao_min": 45
+            },
+            {
+              "esporte": "futebol",
+              "nome": "Futebol",
+              "duracao_min": 60
+            }
+          ],
+          "sessoes": [
+            {
+              "esporte": "swim",
+              "tipo": "Natacao",
+              "duracao_min": 45,
+              "zona": "—",
+              "descricao": "Atividade fixa",
+              "longo": false,
+              "fixo": true
+            },
+            {
+              "esporte": "futebol",
+              "tipo": "Futebol",
+              "duracao_min": 60,
+              "zona": "—",
+              "descricao": "Atividade fixa",
+              "longo": false,
+              "fixo": true
+            },
+            {
+              "esporte": "swim",
+              "tipo": "Natação técnica (fixo)",
+              "duracao_min": 45,
+              "zona": "Z2",
+              "descricao": "Sessão fixa de natação, ênfase em técnica e leveza de movimento na semana de recuperação.",
+              "longo": false,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-11-05": {
+          "dow": "qui",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "bike",
+              "tipo": "Pedal de recuperação ativa",
+              "duracao_min": 45,
+              "zona": "Z1",
+              "descricao": "Pedal leve contínuo em Z1, cadência alta e sem esforço, apenas para manutenção e recuperação.",
+              "longo": false,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-11-06": {
+          "dow": "sex",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "run",
+              "tipo": "Strides 6x20seg",
+              "duracao_min": 30,
+              "zona": "Z2",
+              "descricao": "Aquecimento leve, 6 acelerações de 20seg em ritmo vivo com 40seg de caminhada, volta calma.",
+              "longo": false,
+              "estrutura": [
+                {
+                  "bloco": "aquecimento",
+                  "duracao_min": 10,
+                  "zona": "Z1"
+                },
+                {
+                  "bloco": "intervalado",
+                  "repeticoes": 6,
+                  "trabalho_min": 0.33,
+                  "trabalho_zona": "Z5",
+                  "descanso_min": 0.67,
+                  "descanso_zona": "Z1"
+                },
+                {
+                  "bloco": "volta_calma",
+                  "duracao_min": 16,
+                  "zona": "Z1"
+                }
+              ],
+              "fixo": false
+            }
+          ]
+        },
+        "2026-11-07": {
+          "dow": "sab",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": true,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "run",
+              "tipo": "Long Run (recuperação)",
+              "duracao_min": 60,
+              "zona": "Z2",
+              "descricao": "Longão reduzido da semana de recuperação em Z2, ritmo fácil e sem esforço extra.",
+              "longo": true,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-11-08": {
+          "dow": "dom",
+          "disponivel": true,
+          "longo_bike": true,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": [
+            {
+              "esporte": "bike",
+              "tipo": "Long Ride (recuperação)",
+              "duracao_min": 75,
+              "zona": "Z2",
+              "descricao": "Pedal longo reduzido em Z2, ritmo suave, semana de recuperação — manutenção sem acúmulo.",
+              "longo": true,
+              "estrutura": null,
+              "fixo": false
+            }
+          ]
+        },
+        "2026-11-09": {
+          "dow": "seg",
+          "disponivel": true,
+          "longo_bike": false,
+          "longo_run": false,
+          "fase": "BASE",
+          "fixos": [],
+          "sessoes": []
         }
       }
     }
