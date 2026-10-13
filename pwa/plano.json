@@ -660,9 +660,9 @@
             {
               "esporte": "swim",
               "tipo": "Natacao Tecnica Leve",
-              "duracao_min": 45,
+              "duracao_min": 35,
               "zona": "Z1",
-              "descricao": "Sessão fixa de natação com foco em drills técnicos leves, volume reduzido.",
+              "descricao": "Reduzido de 45 para 35min dado o treino intervalado executado hoje com FC pico 166bpm em contexto de Sobrecarga Garmin; FC teto 130bpm, apenas drills técnicos.",
               "longo": false,
               "estrutura": null,
               "fixo": false
