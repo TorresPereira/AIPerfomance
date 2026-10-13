@@ -1,31 +1,31 @@
 {
-  "date": "2026-10-12",
-  "generated_at": "2026-10-12T16:27:35.648379Z",
+  "date": "2026-10-13",
+  "generated_at": "2026-10-13T06:01:20.636503Z",
   "saude": {
-    "hrv": 57,
-    "hrv_7d": 33,
+    "hrv": 56,
+    "hrv_7d": 34,
     "hrv_status": "balanced",
     "hrv_baseline_low": 30,
     "hrv_baseline_high": 40,
-    "rhr": 66,
+    "rhr": 61,
     "rhr_baseline": null,
-    "sono_h": 7.0,
-    "sono_score": 70,
-    "sono_deep": 1.3,
-    "sono_rem": 0.6,
-    "sono_awake": 20.0,
-    "body_battery": 37,
-    "stress_avg": 26,
-    "stress_rest": 50.78,
+    "sono_h": 7.4,
+    "sono_score": 81,
+    "sono_deep": 1.6,
+    "sono_rem": 0.8,
+    "sono_awake": 1.0,
+    "body_battery": 64,
+    "stress_avg": 14,
+    "stress_rest": 96.89,
     "atl": 787.0,
-    "ctl": 3148.0,
+    "ctl": 3150.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 926.0,
+    "load_aerobic_low": 910.0,
     "load_aerobic_high": 1699.0,
-    "load_anaerobic": 524.0,
-    "load_total_month": 3148.0,
+    "load_anaerobic": 541.0,
+    "load_total_month": 3150.0,
     "load_target_low": "443–1096",
     "load_target_high": "752–1405",
     "training_status": "Sobrecarga",
@@ -34,10 +34,10 @@
     "vo2max": 48.9,
     "peso": null,
     "previsoes": {
-      "5K": 1349,
-      "10K": 2899,
-      "Meia": 6646,
-      "Maratona": 14923
+      "5K": 1350,
+      "10K": 2901,
+      "Meia": 6651,
+      "Maratona": 14933
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,65 +55,32 @@
     },
     "sono_alvo_h": 8.5,
     "sono_deita": "22:00",
-    "sono_deficit_h": 1.5
+    "sono_deficit_h": 1.1
   },
   "ontem": [
     {
       "mod": "other",
       "icone": "⚡",
-      "nome": "Erkrath Hiking",
-      "dist": "7.1km",
-      "dur": "1h55m",
-      "fc": 93.0,
-      "fc_max": 130.0,
-      "cal": 574.0,
-      "cad": 77.078125,
+      "nome": "Erkrath Tennis",
+      "dist": "1.4km",
+      "dur": "34m31s",
+      "fc": 123.0,
+      "fc_max": 170.0,
+      "cal": 346.0,
+      "cad": 24.75,
       "tss": null,
       "np": null,
       "swolf": null,
-      "aerobic_te": 0.6000000238418579,
-      "anaerobic_te": 0.0,
-      "elev": 99.0,
+      "aerobic_te": 2.200000047683716,
+      "anaerobic_te": 2.200000047683716,
+      "elev": null,
       "perf": "—",
       "pl": "—",
-      "_dist_m": 7067.52978515625,
-      "_dur_s": 6945.60009765625
-    },
-    {
-      "mod": "run",
-      "icone": "🏃",
-      "nome": "Erkrath Running",
-      "dist": "9.6km",
-      "dur": "46m22s",
-      "fc": 155.0,
-      "fc_max": 185.0,
-      "cal": 732.0,
-      "cad": 173.3125,
-      "tss": null,
-      "np": 429.0,
-      "swolf": null,
-      "aerobic_te": 4.199999809265137,
-      "anaerobic_te": 2.200000047683716,
-      "elev": 72.0,
-      "perf": "4:48/km",
-      "pl": "Pace",
-      "_dist_m": 9642.650390625,
-      "_dur_s": 2782.136962890625
+      "_dist_m": 1429.6400146484375,
+      "_dur_s": 2071.760986328125
     }
   ],
   "hoje": [
-    {
-      "icone": "🏃",
-      "nome": "Rodagem Leve",
-      "tipo": "run",
-      "dur": "30min",
-      "dist": "—",
-      "passos": [
-        "Redução de 5min por esforço de alta intensidade executado hoje (FC máx 185bpm); manter FC teto em 140bpm sem exceções."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🏃",
       "nome": "Ativação Aeróbica Leve",
@@ -125,6 +92,28 @@
       ]
     }
   ],
+  "amanha": [
+    {
+      "icone": "🏊",
+      "nome": "Natacao",
+      "tipo": "swim",
+      "dur": "45min",
+      "dist": "—",
+      "passos": [
+        "Atividade fixa"
+      ]
+    },
+    {
+      "icone": "🏊",
+      "nome": "Natacao Tecnica Leve",
+      "tipo": "swim",
+      "dur": "45min",
+      "dist": "—",
+      "passos": [
+        "Sessão fixa de natação com foco em drills técnicos leves, volume reduzido."
+      ]
+    }
+  ],
   "hoje_feito": [],
   "semana": {
     "swim_km": 0,
@@ -133,8 +122,8 @@
     "bike_min": 0,
     "run_km": 0,
     "run_min": 0,
-    "total_tss": 0,
-    "n_treinos": 0
+    "total_tss": 0.0,
+    "n_treinos": 1
   },
   "semana_passada": {
     "swim_km": 1.6,
@@ -145,18 +134,14 @@
     "run_min": 205.4
   },
   "clima": {
-    "temp_max": 15.7,
-    "temp_min": 4.4,
-    "chuva_pct": 0,
-    "vento_kmh": 12.2,
-    "temp_atual": 14.5,
-    "emoji": "🌤️"
+    "temp_max": 15.0,
+    "temp_min": 10.1,
+    "chuva_pct": 98,
+    "vento_kmh": 15.5,
+    "temp_atual": 12.1,
+    "emoji": "🌧️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-10-06",
-      "value": 47.0
-    },
     {
       "date": "2026-10-07",
       "value": 51.0
@@ -180,13 +165,13 @@
     {
       "date": "2026-10-12",
       "value": 57.0
+    },
+    {
+      "date": "2026-10-13",
+      "value": 56.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-09-28",
-      "value": 48.6
-    },
     {
       "date": "2026-09-29",
       "value": 48.6
@@ -242,6 +227,10 @@
     {
       "date": "2026-10-12",
       "value": 48.9
+    },
+    {
+      "date": "2026-10-13",
+      "value": 48.9
     }
   ],
   "prs": [],
@@ -285,9 +274,22 @@
       "date": "2026-10-11",
       "sono": 8.5,
       "te": 4.2
+    },
+    {
+      "date": "2026-10-12",
+      "sono": 7.0,
+      "te": 2.2
     }
   ],
   "mes": {
+    "2026-10-12": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": [
+        "🎾"
+      ]
+    },
     "2026-10-11": {
       "planejados": [
         "🚴"
@@ -365,12 +367,6 @@
       ],
       "feitos": []
     },
-    "2026-10-12": {
-      "planejados": [
-        "🏃"
-      ],
-      "feitos": []
-    },
     "2026-10-13": {
       "planejados": [
         "🏃"
@@ -402,28 +398,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado, mas corpo ainda pede cautela e ritmo.",
-    "sec_readiness": "HRV de 57ms está 73% acima da média 7d (33ms) — spike positivo significativo, mas baseline 30-40ms sugere que o estado habitual é baixo; interpretar com cautela. Sono de 7.0h com déficit de 1.5h, deep sleep de apenas 1.3h e REM 0.6h indicam qualidade insuficiente para recuperação estrutural. Body Battery de 37/100 com stress médio 26 confirma estado de recuperação incompleta.",
-    "sec_treino_ontem": "Corrida de 9.6km a 4:48/km com FC média 155bpm e pico 185bpm indica esforço em Z4/Z5 — TE aeróbico 4.2 confirma carga fisiológica alta para o volume. Potência média de 429W na corrida é valor elevado, sugerindo esforço neuromuscular intenso. A combinação com hiking de 1h55m adicional totaliza carga acumulada relevante num mesmo dia.",
-    "sec_carga": "Z2 em 1699 unidades está 21% acima do teto target (1405) — polarização invertida com excesso de volume moderado-intenso. Z3+ em 524 acima do recomendado para fase BASE e status Garmin já marcado como Sobrecarga. Risco de lesão MODERADO com CTL estimado em 3148 sem volume semanal registrado esta semana sugere acúmulo residual de semanas anteriores.",
-    "sec_hoje": "Rodagem leve de 30min planejada é a prescrição correta dado o estado de recuperação incompleta (Body Battery 37). Manter estritamente em Z1 com FC teto de 135bpm para não aprofundar o déficit de recuperação. Nenhum treino executado ainda — executar conforme análise.",
-    "sec_ajuste": "Executar rodagem leve 30min com FC teto rígido de 135bpm, pace acima de 6:00/km. Zero aceleração, zero progressão — ritmo conversacional constante.",
-    "sec_alertas": "Spike de HRV pode ser artefato ou resposta parasimpática compensatória pós-esforço intenso — não interpretar como sinal de alta performance. Z2 acumulada mensal 21% acima do target com status Sobrecarga exige freio imediato em intensidade. Déficit de sono recorrente (1.5h hoje) compromete adaptação e aumenta risco de overreaching.",
-    "sec_nutricao": "Sem treino estruturado relevante hoje: foco em dieta anti-inflamatória, CHO moderado 3-4g/kg para reposição glicogênica. Pós-rodagem leve: 30g proteína + CHO 40-50g dentro de 30min; hidratação 2.0-2.5L ao longo do dia.",
-    "sec_amanha": "Intervalado 3x3min Z4 está contraindicado com Body Battery 37, sono deficitário e status Sobrecarga Garmin. Reduzir para rodagem de ativação Z2 de 20min — preservar o estímulo neuromotor mas eliminar o componente anaeróbico até recuperação confirmar melhora real.",
+    "frase": "HRV elevado abre janela: use com precisão.",
+    "sec_readiness": "HRV de 56ms representa +22ms acima da média 7d (34ms) e está acima do baseline 30-40ms — sinal claro de supercompensação e janela de qualidade aberta. RHR em 61bpm sem baseline definido, mas sono de 7.4h com score 81 é aceitável; déficit de 1.1h e REM baixo (0.8h) merecem atenção. Body Battery 64/100 com stress médio 14 indica reserva funcional adequada para sessão leve.",
+    "sec_treino_ontem": "Tênis em Erkrath (34min, FC média 123bpm, pico 170bpm) gerou TE aeróbico 2.2 — estímulo leve a moderado, sem impacto estrutural relevante para triathlon. Pico de 170bpm indica esforços intermitentes anaeróbicos não planejados, típicos do esporte. Cadência 24.75 sem contexto aplicável; sessão não compromete recuperação hoje.",
+    "sec_carga": "Z1 em 910 (target 443-1096) e Z2 em 1699 (target 752-1405) — Z2 está 21% acima do teto recomendado, indicando desequilíbrio polarizado para cima. Z3+ em 541 é tolerável na fase base, mas combinado com Z2 excessivo justifica o status Garmin de sobrecarga e risco de lesão MODERADO. Volume semanal zerado hoje sugere acúmulo mensal sem distribuição adequada ao longo da semana atual.",
+    "sec_hoje": "Treino planejado: Ativação Aeróbica Leve 20min — nenhuma execução registrada ainda. Se executado, manter FC estritamente abaixo de 130bpm em Z1, priorizando fluidez e baixo impacto. Clima com chuva 98% e 15°C favorece sessão indoor; duração de 20min é adequada e não deve ser ampliada dado o contexto de sobrecarga mensal.",
+    "sec_ajuste": "Manter Ativação Aeróbica Leve exatamente em 20min, FC teto 130bpm, Z1 exclusivo. Nenhuma progressão de intensidade — sessão estritamente regenerativa.",
+    "sec_alertas": "Z2 mensal 21% acima do target máximo com status de sobrecarga Garmin — evitar qualquer deriva de FC acima de Z1 nas próximas 48h. REM baixo (0.8h) pode comprometer recuperação neural; deitar às 22:00 é obrigatório.",
+    "sec_nutricao": "Sem treino registrado hoje, foco em reposição basal: 350kcal pré-ativação com CHO de absorção lenta, 30g proteína pós-sessão. Hidratação mínima de 2L ao longo do dia independente de treino, dado déficit de sono e stress acumulado.",
+    "sec_amanha": "Natação Técnica Leve 45min Z1 está indicada e deve ser mantida integralmente — HRV elevado e Body Battery 64 sustentam a sessão. Priorizar trabalho técnico (braçada, posição, respiração) sem elevar FC acima de 125bpm. Duas entradas de natação no plano amanhã (45min cada) devem ser consolidadas ou executadas com intervalo mínimo de 3h.",
     "amanha_ajustado": [
       {
-        "esporte": "run",
-        "tipo": "Ativação Aeróbica Leve",
-        "duracao_min": 20,
-        "zona": "Z2",
-        "motivo_ajuste": "Body Battery 37, status Sobrecarga e sono insuficiente contraindicam Z4 — substituir por Z2 para manter frequência sem aprofundar fadiga acumulada."
+        "esporte": "swim",
+        "tipo": "Natacao Tecnica Leve",
+        "duracao_min": 45,
+        "zona": "Z1",
+        "motivo_ajuste": null
       }
     ],
-    "status_readiness": "MODERADO",
+    "status_readiness": "BOM",
     "status_carga": "SOBRECARGA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Rodagem leve de 30min é a escolha correta para o estado atual — executar em Z1 puro como estímulo de recuperação ativa. Qualquer desvio de intensidade compromete a adaptação da semana.",
-    "alerta": "Status Sobrecarga Garmin + Z2 mensal 21% acima do target: eliminar qualquer sessão Z4 nos próximos 48h para evitar overreaching funcional."
+    "analise_hoje": "Ativação Aeróbica Leve de 20min ainda não executada — sessão adequada ao contexto de sobrecarga mensal e deve ser realizada com FC teto 130bpm sem extensão de duração.",
+    "alerta": "Z2 mensal 21% acima do teto com status de sobrecarga ativo — qualquer sessão acima de Z1 nas próximas 24h aumenta risco de lesão MODERADO para ALTO."
   }
 }
