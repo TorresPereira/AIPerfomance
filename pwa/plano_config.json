@@ -2,7 +2,7 @@
   "tipo_prova": "triathlon",
   "prova_categoria": "middle",
   "foco_modalidade": "run",
-  "horas_semana": 7,
+  "horas_semana": 8,
   "dias_disponiveis": [
     "seg",
     "ter",
@@ -27,7 +27,13 @@
       "nome": "Natacao",
       "esporte": "swim",
       "duracao_min": 45
+    },
+    {
+      "dia": "qua",
+      "nome": "Futebol",
+      "esporte": "futebol",
+      "duracao_min": 60
     }
   ],
-  "atualizado_em": "2026-09-20T20:07:42.371Z"
+  "atualizado_em": "2026-10-13T18:32:58.055Z"
 }
