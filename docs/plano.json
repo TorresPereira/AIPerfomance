@@ -149,7 +149,7 @@
               "tipo": "Pedal de ativação Z2",
               "duracao_min": 60,
               "zona": "Z2",
-              "descricao": "Pedal contínuo em cadência alta, foco em economia de pedalada e base aeróbica.",
+              "descricao": "Manter duração original, mas aplicar FC teto de 145bpm dado status de sobrecarga e déficit de sono acumulado.",
               "longo": false,
               "estrutura": null,
               "fixo": false
