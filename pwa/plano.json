@@ -147,9 +147,9 @@
             {
               "esporte": "bike",
               "tipo": "Pedal de ativação Z2",
-              "duracao_min": 60,
+              "duracao_min": 55,
               "zona": "Z2",
-              "descricao": "Manter duração original, mas aplicar FC teto de 145bpm dado status de sobrecarga e déficit de sono acumulado.",
+              "descricao": "Redução leve de 5min como margem de segurança dado status sobrecarga e déficit de sono acumulado; FC teto 148bpm, potência alvo 180–210W.",
               "longo": false,
               "estrutura": null,
               "fixo": false

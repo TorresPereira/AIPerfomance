@@ -1,6 +1,6 @@
 {
   "date": "2026-10-14",
-  "generated_at": "2026-10-14T06:01:26.439023Z",
+  "generated_at": "2026-10-14T10:13:14.640828Z",
   "saude": {
     "hrv": 47,
     "hrv_7d": 34,
@@ -15,8 +15,8 @@
     "sono_rem": 0.4,
     "sono_awake": 0.0,
     "body_battery": 46,
-    "stress_avg": 21,
-    "stress_rest": 59.28,
+    "stress_avg": 25,
+    "stress_rest": 49.44,
     "atl": 828.0,
     "ctl": 3311.0,
     "tsb": null,
@@ -47,7 +47,7 @@
     "nutricao": {
       "cho_g_h": 80,
       "cho_total": null,
-      "agua_ml_h": 600,
+      "agua_ml_h": 750,
       "agua_total": null,
       "pre_kcal": 350,
       "pos_prot_g": 30,
@@ -138,10 +138,10 @@
       "icone": "🚴",
       "nome": "Pedal de ativação Z2",
       "tipo": "bike",
-      "dur": "60min",
+      "dur": "55min",
       "dist": "—",
       "passos": [
-        "Manter duração original, mas aplicar FC teto de 145bpm dado status de sobrecarga e déficit de sono acumulado."
+        "Redução leve de 5min como margem de segurança dado status sobrecarga e déficit de sono acumulado; FC teto 148bpm, potência alvo 180–210W."
       ]
     }
   ],
@@ -186,14 +186,7 @@
     "run_km": 36.8,
     "run_min": 205.4
   },
-  "clima": {
-    "temp_max": 17.1,
-    "temp_min": 9.8,
-    "chuva_pct": 46,
-    "vento_kmh": 8.3,
-    "temp_atual": 9.8,
-    "emoji": "🌤️"
-  },
+  "clima": {},
   "hrv_7dias": [
     {
       "date": "2026-10-08",
@@ -524,28 +517,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV em alta, mas o corpo pede respeito à fadiga acumulada.",
-    "sec_readiness": "HRV de 47ms está +13ms acima da média 7d (34ms) e acima do baseline (30–39ms), sinal positivo de recuperação aguda. Sono crítico: 5.9h com score 65, apenas 0.4h de REM — comprometendo consolidação neuromuscular e hormonal. Body Battery em 46/100 com stress médio baixo (21) indica reserva funcional moderada, não ideal para carga alta.",
-    "sec_treino_ontem": "Natação: 1500m a 2:56/100m com SWOLF 12.7 e TE 2.1 — esforço aeróbico leve, eficiência aceitável mas pace elevado para intensidade registrada (FC 122bpm). Corrida intervalada 3x3min: 6.8km a 5:19/km com FC média 148bpm (max 166bpm) e potência 370W — TE 3.4 indica carga aeróbica significativa sobre um sistema já em sobrecarga; volume e intensidade combinados elevam risco acumulado.",
-    "sec_carga": "Z1 em 920 (dentro do target 448–1101) e Z2 em 1822 (acima do target máximo de 1401) — distribuição desequilibrada com excesso de intensidade moderada-alta. Z3+ em 568 somado ao status Garmin 'Sobrecarga' com tendência de carga caindo reforça necessidade de contenção imediata. Risco de lesão MODERADO com CTL estimado igual à carga mensal total (3311) — métrica inconsistente, mas sinaliza acúmulo sem recuperação proporcional.",
-    "sec_hoje": "Natação já executada: 1225m em 36:53 com FC 116bpm (max 140bpm) e TE 1.5 — sessão de baixa intensidade, adequada ao estado de fadiga. Futebol (60min) e natação técnica (45min) planejados ainda: o futebol representa risco por acelerações anaeróbicas não controladas — manter volume mas limitar sprints. Natação técnica: manter foco técnico, FC teto 130bpm.",
-    "sec_ajuste": "Futebol: participar mas limitar intensidade anaeróbica, sem sprints máximos, FC teto 145bpm. Natação técnica: manter 45min, FC teto 130bpm, foco exclusivo em técnica de braçada sem metros de volume adicional.",
-    "sec_alertas": "Deficit de sono acumulado de 2.6h compromete recuperação — prioridade máxima para deitar às 22:00 hoje. Z2 mensal já 30% acima do target máximo com status de sobrecarga ativo — qualquer carga adicional não planejada deve ser eliminada. REM de apenas 0.4h indica recuperação neural insuficiente para esforços de qualidade.",
-    "sec_nutricao": "Sem treino de alta intensidade hoje: priorizar alimentação normocalórica com foco em carboidratos de baixo IG ao longo do dia (~4–5g/kg) e 30g de proteína pós-natação já executada. Hidratação mínima de 2L ao longo do dia; deitar às 22:00 com refeição leve às 20:30 para não comprometer qualidade do sono.",
-    "sec_amanha": "Pedal de ativação Z2 de 60min está adequado ao contexto de sobrecarga e sono deficitário — manter duração mas com FC teto rígido de 145bpm e cadência alvo 85–90rpm. Se o sono de hoje não atingir 7h, reduzir para 45min mantendo mesma zona.",
+    "frase": "HRV favorável, mas sono e carga pedem respeito.",
+    "sec_readiness": "HRV 47ms está 38% acima da média 7d (34ms) e acima do baseline (30–39ms) — sinal de recuperação aguda positivo. Sono de 5,9h com score 65, apenas 0,4h de REM e déficit acumulado de 2,6h comprometem a recuperação do SNC. Body Battery 46/100 reflete reserva moderada; stress médio 25 é controlado.",
+    "sec_treino_ontem": "Natação (1500m, pace 2:56/100m, SWOLF 12,7, TE 2,1) — volume adequado, eficiência técnica aceitável para Z1-Z2 leve. Corrida intervalada 3x3min (6,8km, FC média 148bpm, pico 166bpm, potência 370W, TE 3,4) gerou carga anaeróbica relevante num dia de dois treinos. A combinação swim+run intervalado num único dia eleva o ATL de forma significativa — ponto crítico dado o status Garmin já em sobrecarga.",
+    "sec_carga": "Z1 (920) está dentro do target (448–1101), mas Z2 (1822) excede o teto de 1401 em 30% e Z3+ (568) representa 17% da carga total — distribuição polarizada para um atleta em sobrecarga. ATL 828 vs CTL 3311 indica pico de carga aguda desproporcional; risco de lesão MODERADO deve ser levado a sério. Bike zerado na semana é lacuna estrutural para o Half.",
+    "sec_hoje": "Natação executada: 1225m em 36:53, FC 116bpm (pico 140bpm), SWOLF 12,7, TE 1,5 — sessão leve, adequada ao estado atual, sem excessos. Futebol (60min) e natação técnica (45min) ainda constam como planejados; dada a carga acumulada, o futebol representa o maior risco de carga não controlada (impacto articular, acelerações anaeróbicas).",
+    "sec_ajuste": "Futebol: limitar a 30min de participação leve, evitar sprints e disputas de contato — FC teto 150bpm. Natação técnica: manter 45min com foco exclusivo em drills Z1, FC teto 130bpm, sem aumentar volume.",
+    "sec_alertas": "Sobrecarga Garmin confirmada com Z2 30% acima do target mensal — risco real de fadiga acumulada nos próximos 3–5 dias. REM de 0,4h é criticamente baixo: impacta síntese proteica e consolidação neuromuscular. Bike zerado na semana cria desequilíbrio no perfil de estímulos para Half Ironman.",
+    "sec_nutricao": "Sessão de natação leve já executada: pós-treino imediato com 30g de proteína + 40–50g CHO (ex: iogurte grego + banana). Para futebol e natação técnica à tarde: 350kcal pré-sessão com 1–1,5h de antecedência, 500ml água durante; priorize deitar às 22:00 para tentar compensar déficit de sono de 2,6h.",
+    "sec_amanha": "Pedal de ativação Z2 60min está planejado — dado o HRV positivo mas sono crítico e status sobrecarga, manter o pedal porém com teto rígido de FC. Reduzir para 50min se a percepção de esforço ao início estiver elevada (RPE >13). É a única sessão de bike da semana: executar é importante para equilibrar o perfil de carga.",
     "amanha_ajustado": [
       {
         "esporte": "bike",
         "tipo": "Pedal de ativação Z2",
-        "duracao_min": 60,
+        "duracao_min": 55,
         "zona": "Z2",
-        "motivo_ajuste": "Manter duração original, mas aplicar FC teto de 145bpm dado status de sobrecarga e déficit de sono acumulado."
+        "motivo_ajuste": "Redução leve de 5min como margem de segurança dado status sobrecarga e déficit de sono acumulado; FC teto 148bpm, potência alvo 180–210W."
       }
     ],
     "status_readiness": "MODERADO",
     "status_carga": "SOBRECARGA",
     "acao_hoje": "REDUZIR 20%",
-    "analise_hoje": "Natação matinal executada com intensidade adequada ao estado de fadiga (TE 1.5, FC 116bpm) — boa decisão de autorregulação. Futebol e natação técnica devem seguir o mesmo critério de contenção de intensidade para não aprofundar o déficit de recuperação.",
-    "alerta": "Z2 mensal 30% acima do target máximo com status Garmin 'Sobrecarga' ativo — qualquer sessão hoje acima de FC 145bpm agrava risco de lesão classificado como MODERADO."
+    "analise_hoje": "Natação matinal executada de forma controlada e adequada ao estado atual (TE 1,5, FC baixa). Futebol e natação técnica da tarde devem ser modulados para não agravar o status de sobrecarga já sinalizado.",
+    "alerta": "Z2 mensal 30% acima do target com REM crítico (0,4h) — próximas 48h são determinantes para evitar fadiga profunda; qualquer sinal de queda de HRV abaixo de 38ms amanhã justifica substituir o pedal por descanso ativo."
   }
 }
