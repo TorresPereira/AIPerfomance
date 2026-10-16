@@ -1,6 +1,6 @@
 {
   "date": "2026-10-16",
-  "generated_at": "2026-10-16T20:09:32.320575Z",
+  "generated_at": "2026-10-16T20:10:34.008982Z",
   "saude": {
     "hrv": 61,
     "hrv_7d": 35,
@@ -75,10 +75,10 @@
       "icone": "🏃",
       "nome": "Long Run",
       "tipo": "run",
-      "dur": "65min",
+      "dur": "50min",
       "dist": "—",
       "passos": [
-        "Redução de 15min devido ao excesso de carga Z2 mensal já acima do target e déficit de sono acumulado de 1.7h."
+        "Redução de 15min por sobrecarga mensal acumulada (Z2 acima do target), déficit de sono e treino Tempo executado hoje — FC teto 148bpm para garantir Z2 estrito."
       ]
     }
   ],
@@ -465,28 +465,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado, mas carga acumulada exige respeito ao ritmo.",
-    "sec_readiness": "HRV de 61ms está 26ms acima da média 7d (35ms) e supera o baseline de 30–40ms, sinal positivo de recuperação aguda. RHR em 60bpm sem baseline comparativo; sono de 6.8h com score 79 e apenas 1.3h deep/0.8h REM indica déficit de 1.7h com qualidade comprometida. Body Battery em 55/100 com stress médio 25 — readiness funcional, mas não plena.",
+    "frase": "HRV elevado, mas carga acumulada exige cautela amanhã.",
+    "sec_readiness": "HRV de 61ms está 26ms acima da média 7d (35ms) e bem acima do baseline (30–40ms), sinal positivo de recuperação aguda. RHR em 60bpm sem baseline definido limita interpretação, mas não alarma. Sono de 6.8h com déficit de 1.7h e REM apenas 0.8h comprometem recuperação profunda; Body Battery 55/100 reflete recuperação parcial.",
     "sec_treino_ontem": null,
-    "sec_carga": "Z2 em 1809 ultrapassa o teto do target (1795), e Z1 em 859 está dentro da faixa mas próximo ao piso. Z3+ em 438 representa 14% da carga total, acima do tolerável para fase base. Status Garmin de Sobrecarga com ATL estimado em 777 indica acúmulo agudo elevado — risco de lesão classificado como MODERADO é consistente com os dados.",
-    "sec_hoje": "Treino planejado era Tempo Run 20min; executado foi corrida de 4.3km em 22min19s a FC média 146bpm (max 160bpm) e potência 390W. FC máxima de 160bpm e TE aeróbico 3.0 indicam esforço acima de Z2 puro, compatível com Tempo, mas potência de 390W para corrida é atípica — verificar calibração do sensor. Pace de 5:14/km com cad 172spm está adequado para o esforço, execução dentro do esperado.",
-    "sec_ajuste": "Sessão de hoje já executada — nenhum ajuste necessário. FC teto de 155bpm deve ser respeitado amanhã no Long Run para garantir Z2 real.",
-    "sec_alertas": "Z2 mensal já excedeu o target máximo (1809 vs 1795) — qualquer acréscimo de intensidade amanhã aprofunda o desequilíbrio. Sono acumulado deficitário (1.7h) reduz capacidade de assimilação do treino; priorizar 8.5h esta noite antes do Long Run.",
-    "sec_nutricao": "Sem treino adicional hoje, foco em recuperação: refeição pós-run com 30g de proteína já deve ter sido feita; manter hidratação de 2–2.5L ao longo do dia. Deitar às 22:00 para atingir meta de 8.5h de sono antes do Long Run de amanhã.",
-    "sec_amanha": "Long Run de 80min planejado — reduzir para 65min mantendo Z2 estrito (FC 140–150bpm) dado o excesso de Z2 acumulado no mês e o déficit de sono. Manter pace controlado (~5:40–6:00/km) para não ultrapassar limiar aeróbico.",
+    "sec_carga": "Z2 em 1809 ultrapassa o teto do target (1795), enquanto Z1 em 859 está dentro da faixa — distribuição polarizada mas com excesso de intensidade moderada. Z3+ em 438 adiciona estresse anaeróbico relevante para uma fase Base. Status Garmin de Sobrecarga com ATL/CTL desequilibrado (ATL 777 vs CTL 3106 — provável distorção de escala Garmin) e risco de lesão MODERADO exigem controle de volume nos próximos dias.",
+    "sec_hoje": "Treino planejado era Tempo Run 20min; executado: 4.3km em 22min19s, FC média 146bpm (máx 160bpm), TE aeróbico 3.0. FC máxima de 160bpm indica que o esforço ultrapassou Z2, com picos próximos ao limiar — adequado para um Tempo, mas acima do desejável dado o contexto de sobrecarga. Potência média de 390W e cadência 172spm estão dentro de padrões eficientes para o pace de 5:14/km.",
+    "sec_ajuste": "Treino de hoje já executado — sem ajuste necessário. Para amanhã, FC teto 148bpm em Z2, pace alvo 5:30–5:50/km, duração reduzida para 50min.",
+    "sec_alertas": "Sobrecarga acumulada com Z2 acima do target mensal — risco real de entrar na semana 2 já fatigado. Déficit de sono recorrente (1.7h) pode suprimir adaptações; priorizar 8.5h esta noite. TE aeróbico 3.0 no Tempo de hoje indica carga de treino real — não subestime o impacto residual para amanhã.",
+    "sec_nutricao": "Sem treino adicional hoje — foco em recuperação: refeição pós-treino já deve ter incluído 30g de proteína; hidratação mínima de 2.0L ao longo do dia. Dormir às 22:00 é prioridade máxima para reduzir déficit e otimizar adaptação ao Long Run de amanhã.",
+    "sec_amanha": "Long Run de 65min está planejado, mas Z2 mensal já ultrapassou o target e o atleta acumula sobrecarga com sono deficitário. Reduzir para 50min em Z2 estrito (FC 140–148bpm), sem progressões de ritmo — suficiente para estímulo aeróbico base sem aprofundar a fadiga.",
     "amanha_ajustado": [
       {
         "esporte": "run",
         "tipo": "Long Run",
-        "duracao_min": 65,
+        "duracao_min": 50,
         "zona": "Z2",
-        "motivo_ajuste": "Redução de 15min devido ao excesso de carga Z2 mensal já acima do target e déficit de sono acumulado de 1.7h."
+        "motivo_ajuste": "Redução de 15min por sobrecarga mensal acumulada (Z2 acima do target), déficit de sono e treino Tempo executado hoje — FC teto 148bpm para garantir Z2 estrito."
       }
     ],
     "status_readiness": "MODERADO",
     "status_carga": "SOBRECARGA",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Corrida executada dentro do planejado em duração e esforço; FC máx de 160bpm indica pico acima de Z2, aceitável para sessão Tempo curta. Potência de 390W requer verificação de calibração do sensor de corrida.",
-    "alerta": "Z2 mensal já superou o teto do target — amanhã é obrigatório manter FC abaixo de 150bpm durante todo o Long Run para evitar aprofundar a sobrecarga."
+    "analise_hoje": "Tempo Run executado com boa eficiência mecânica (cadência 172spm, potência 390W) e dentro do tempo planejado; FC máxima de 160bpm indica pico acima de Z2, esperado para esforço Tempo. TE 3.0 confirma estímulo aeróbico real — treino cumprido adequadamente.",
+    "alerta": "Z2 mensal acumulado já supera o target máximo (1809 vs 1795) na semana 1 da fase Base — risco de comprometer progressão das semanas seguintes se não houver controle imediato de intensidade."
   }
 }

@@ -206,9 +206,9 @@
             {
               "esporte": "run",
               "tipo": "Long Run",
-              "duracao_min": 65,
+              "duracao_min": 50,
               "zona": "Z2",
-              "descricao": "Redução de 15min devido ao excesso de carga Z2 mensal já acima do target e déficit de sono acumulado de 1.7h.",
+              "descricao": "Redução de 15min por sobrecarga mensal acumulada (Z2 acima do target), déficit de sono e treino Tempo executado hoje — FC teto 148bpm para garantir Z2 estrito.",
               "longo": true,
               "estrutura": null,
               "fixo": false
