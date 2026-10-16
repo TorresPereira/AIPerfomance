@@ -206,9 +206,9 @@
             {
               "esporte": "run",
               "tipo": "Long Run",
-              "duracao_min": 80,
+              "duracao_min": 65,
               "zona": "Z2",
-              "descricao": "Corrida longa em ritmo aeróbico confortável, mantendo cadência estável do início ao fim.",
+              "descricao": "Redução de 15min devido ao excesso de carga Z2 mensal já acima do target e déficit de sono acumulado de 1.7h.",
               "longo": true,
               "estrutura": null,
               "fixo": false
