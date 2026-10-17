@@ -1,43 +1,41 @@
 {
-  "date": "2026-10-16",
-  "generated_at": "2026-10-16T20:10:34.008982Z",
+  "date": "2026-10-17",
+  "generated_at": "2026-10-17T06:01:10.727147Z",
   "saude": {
-    "hrv": 61,
-    "hrv_7d": 35,
-    "hrv_status": "balanced",
-    "hrv_baseline_low": 30,
-    "hrv_baseline_high": 40,
-    "rhr": 60,
+    "hrv": null,
+    "hrv_7d": null,
+    "hrv_status": null,
+    "rhr": null,
     "rhr_baseline": null,
-    "sono_h": 6.8,
-    "sono_score": 79,
-    "sono_deep": 1.3,
-    "sono_rem": 0.8,
-    "sono_awake": 8.0,
-    "body_battery": 55,
-    "stress_avg": 25,
-    "stress_rest": 48.98,
-    "atl": 777.0,
-    "ctl": 3106.0,
+    "sono_h": 0.0,
+    "sono_score": null,
+    "sono_deep": 0.0,
+    "sono_rem": 0.0,
+    "sono_awake": 0.0,
+    "body_battery": null,
+    "stress_avg": null,
+    "stress_rest": null,
+    "atl": null,
+    "ctl": null,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 859.0,
-    "load_aerobic_high": 1809.0,
-    "load_anaerobic": 438.0,
-    "load_total_month": 3106.0,
-    "load_target_low": "577–1415",
-    "load_target_high": "957–1795",
-    "training_status": "Sobrecarga",
-    "fitness_trend": "Caindo",
+    "load_aerobic_low": null,
+    "load_aerobic_high": null,
+    "load_anaerobic": null,
+    "load_total_month": null,
+    "load_target_low": null,
+    "load_target_high": null,
+    "training_status": null,
+    "fitness_trend": null,
     "training_readiness": null,
-    "vo2max": 49.2,
+    "vo2max": null,
     "peso": null,
     "previsoes": {
-      "5K": 1332,
-      "10K": 2868,
-      "Meia": 6567,
-      "Maratona": 14733
+      "5K": 1333,
+      "10K": 2869,
+      "Meia": 6571,
+      "Maratona": 14743
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -53,24 +51,34 @@
       "pos_prot_g": 30,
       "dur_min": 0
     },
-    "sono_alvo_h": 8.5,
-    "sono_deita": "22:00",
-    "sono_deficit_h": 1.7
+    "sono_alvo_h": 8.0,
+    "sono_deita": "22:30",
+    "sono_deficit_h": null
   },
-  "ontem": [],
-  "hoje": [
+  "ontem": [
     {
+      "mod": "run",
       "icone": "🏃",
-      "nome": "Tempo Run 20min",
-      "tipo": "run",
-      "dur": "40min",
-      "dist": "—",
-      "passos": [
-        "Aquecimento, bloco contínuo de 20min em Z3 (limiar), volta calma."
-      ]
+      "nome": "Erkrath Running",
+      "dist": "4.3km",
+      "dur": "22m19s",
+      "fc": 146.0,
+      "fc_max": 160.0,
+      "cal": 332.0,
+      "cad": 172.8125,
+      "tss": null,
+      "np": 390.0,
+      "swolf": null,
+      "aerobic_te": 3.0,
+      "anaerobic_te": 0.0,
+      "elev": 29.0,
+      "perf": "5:14/km",
+      "pl": "Pace",
+      "_dist_m": 4257.60986328125,
+      "_dur_s": 1339.623046875
     }
   ],
-  "amanha": [
+  "hoje": [
     {
       "icone": "🏃",
       "nome": "Long Run",
@@ -82,29 +90,19 @@
       ]
     }
   ],
-  "hoje_feito": [
+  "amanha": [
     {
-      "mod": "run",
-      "icone": "🏃",
-      "nome": "Erkrath Running",
-      "dist": "4.3km",
-      "dur": "22m19s",
-      "fc": 146.0,
-      "fc_max": 160.0,
-      "tss": null,
-      "np": 390.0,
-      "perf": "5:14/km",
-      "pl": "Pace",
-      "_dist_m": 4257.60986328125,
-      "_dur_s": 1339.623046875,
-      "swolf": null,
-      "cad": 172.8125,
-      "cal": 332.0,
-      "aerobic_te": 3.0,
-      "anaerobic_te": 0.0,
-      "elev": 29.0
+      "icone": "🚴",
+      "nome": "Long Ride",
+      "tipo": "bike",
+      "dur": "100min",
+      "dist": "—",
+      "passos": [
+        "Pedal longo em Z2, ritmo constante, foco em resistência aeróbica e posição no selim."
+      ]
     }
   ],
+  "hoje_feito": [],
   "semana": {
     "swim_km": 2.7,
     "swim_min": 81.1,
@@ -123,19 +121,8 @@
     "run_km": 36.8,
     "run_min": 205.4
   },
-  "clima": {
-    "temp_max": 21.8,
-    "temp_min": 12.0,
-    "chuva_pct": 80,
-    "vento_kmh": 14.0,
-    "temp_atual": 15.7,
-    "emoji": "🌤️"
-  },
+  "clima": {},
   "hrv_7dias": [
-    {
-      "date": "2026-10-10",
-      "value": 45.0
-    },
     {
       "date": "2026-10-11",
       "value": 52.0
@@ -159,6 +146,10 @@
     {
       "date": "2026-10-16",
       "value": 61.0
+    },
+    {
+      "date": "2026-10-17",
+      "value": null
     }
   ],
   "vo2max_hist": [
@@ -225,11 +216,6 @@
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-10-03",
-      "sono": 7.8,
-      "te": 3.2
-    },
     {
       "date": "2026-10-04",
       "sono": 4.6,
@@ -465,28 +451,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado, mas carga acumulada exige cautela amanhã.",
-    "sec_readiness": "HRV de 61ms está 26ms acima da média 7d (35ms) e bem acima do baseline (30–40ms), sinal positivo de recuperação aguda. RHR em 60bpm sem baseline definido limita interpretação, mas não alarma. Sono de 6.8h com déficit de 1.7h e REM apenas 0.8h comprometem recuperação profunda; Body Battery 55/100 reflete recuperação parcial.",
-    "sec_treino_ontem": null,
-    "sec_carga": "Z2 em 1809 ultrapassa o teto do target (1795), enquanto Z1 em 859 está dentro da faixa — distribuição polarizada mas com excesso de intensidade moderada. Z3+ em 438 adiciona estresse anaeróbico relevante para uma fase Base. Status Garmin de Sobrecarga com ATL/CTL desequilibrado (ATL 777 vs CTL 3106 — provável distorção de escala Garmin) e risco de lesão MODERADO exigem controle de volume nos próximos dias.",
-    "sec_hoje": "Treino planejado era Tempo Run 20min; executado: 4.3km em 22min19s, FC média 146bpm (máx 160bpm), TE aeróbico 3.0. FC máxima de 160bpm indica que o esforço ultrapassou Z2, com picos próximos ao limiar — adequado para um Tempo, mas acima do desejável dado o contexto de sobrecarga. Potência média de 390W e cadência 172spm estão dentro de padrões eficientes para o pace de 5:14/km.",
-    "sec_ajuste": "Treino de hoje já executado — sem ajuste necessário. Para amanhã, FC teto 148bpm em Z2, pace alvo 5:30–5:50/km, duração reduzida para 50min.",
-    "sec_alertas": "Sobrecarga acumulada com Z2 acima do target mensal — risco real de entrar na semana 2 já fatigado. Déficit de sono recorrente (1.7h) pode suprimir adaptações; priorizar 8.5h esta noite. TE aeróbico 3.0 no Tempo de hoje indica carga de treino real — não subestime o impacto residual para amanhã.",
-    "sec_nutricao": "Sem treino adicional hoje — foco em recuperação: refeição pós-treino já deve ter incluído 30g de proteína; hidratação mínima de 2.0L ao longo do dia. Dormir às 22:00 é prioridade máxima para reduzir déficit e otimizar adaptação ao Long Run de amanhã.",
-    "sec_amanha": "Long Run de 65min está planejado, mas Z2 mensal já ultrapassou o target e o atleta acumula sobrecarga com sono deficitário. Reduzir para 50min em Z2 estrito (FC 140–148bpm), sem progressões de ritmo — suficiente para estímulo aeróbico base sem aprofundar a fadiga.",
+    "frase": "Base sólida se constrói pedalada a pedalada em Z2.",
+    "sec_readiness": "Dados de HRV, RHR e sono não disponíveis para hoje — avaliação objetiva de prontidão impossível. Sono registrado em 0h, o que indica ausência de sincronização com Garmin ou falha de captura; sono real desconhecido. Sem Body Battery ou Training Readiness, adote postura conservadora como protocolo padrão.",
+    "sec_treino_ontem": "Long Run de 4.3km em 22:19 com FC média 146bpm e pace 5:14/km — esforço aeróbico moderado, TE 3.0 indica carga útil de desenvolvimento. Potência de corrida em 390W com cadência 172spm sugere boa aplicação de força, mas cadência levemente abaixo do ideal (175-180spm) para eficiência em Z2. Sessão executada dentro do esperado para fase de base.",
+    "sec_carga": "Volume semanal registrado é baixo: natação 2.7km, bike apenas 1.4km e corrida 11.1km — distribuição desproporcional entre modalidades com bike severamente subdosada. Dados de ATL, CTL e zonas mensais ausentes, impossibilitando análise de TSB e risco real de fadiga acumulada. Risco de lesão marcado como MODERADO exige atenção à progressão de volume, especialmente na corrida.",
+    "sec_hoje": "Nenhum treino registrado hoje (Long Run de 50min planejado). Se ainda não executado, priorize Z1-Z2 com FC entre 130-145bpm e esforço conversacional estrito. Dado o contexto de dados ausentes e conservadorismo recomendado, mantenha intensidade baixa e monitore percepção subjetiva de esforço (PSE alvo: 5-6/10).",
+    "sec_ajuste": "Manter Long Run de 50min com FC teto em 145bpm, PSE máximo 6/10, pace não inferior a 5:30/km. Nenhum estímulo acima de Z2 até normalização dos dados de recuperação.",
+    "sec_alertas": "Ausência total de dados biométricos (HRV, sono, RHR, Body Battery) compromete tomada de decisão objetiva — revise sincronização do Garmin 965 imediatamente. Volume de bike acumulado na semana (1.4km) está criticamente baixo frente ao Long Ride de 100min planejado para amanhã; transição abrupta de carga representa risco real.",
+    "sec_nutricao": "Para o Long Run de hoje (50min): pré-treino 350kcal com CHO de absorção rápida 60min antes; durante dispensável se abaixo de 60min, mas mantenha 500ml de hidratação. Pós-treino: 30g de proteína em até 30min após o término para síntese proteica.",
+    "sec_amanha": "Long Ride de 100min em Z2 está planejado — manter duração e intensidade dado que é sessão de base fundamental e o risco de lesão moderado não contraindica bike. FC alvo 125-140bpm, potência estimada Z2 (60-75% FTP); execute preferencialmente com cadência 85-95rpm. Se sono de hoje for insuficiente (<6h real), reduza para 75min.",
     "amanha_ajustado": [
       {
-        "esporte": "run",
-        "tipo": "Long Run",
-        "duracao_min": 50,
+        "esporte": "bike",
+        "tipo": "Long Ride",
+        "duracao_min": 100,
         "zona": "Z2",
-        "motivo_ajuste": "Redução de 15min por sobrecarga mensal acumulada (Z2 acima do target), déficit de sono e treino Tempo executado hoje — FC teto 148bpm para garantir Z2 estrito."
+        "motivo_ajuste": null
       }
     ],
     "status_readiness": "MODERADO",
-    "status_carga": "SOBRECARGA",
+    "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Tempo Run executado com boa eficiência mecânica (cadência 172spm, potência 390W) e dentro do tempo planejado; FC máxima de 160bpm indica pico acima de Z2, esperado para esforço Tempo. TE 3.0 confirma estímulo aeróbico real — treino cumprido adequadamente.",
-    "alerta": "Z2 mensal acumulado já supera o target máximo (1809 vs 1795) na semana 1 da fase Base — risco de comprometer progressão das semanas seguintes se não houver controle imediato de intensidade."
+    "analise_hoje": "Long Run de 50min ainda não executado — se realizado hoje, manter Z2 estrito com FC abaixo de 145bpm e PSE 5-6, sem progressão de intensidade dado ausência de dados de recuperação. Sessão de baixo risco dentro da semana de base.",
+    "alerta": "Sincronização de dados biométricos com Garmin 965 falhou — regularize antes do Long Ride de amanhã para garantir monitoramento de carga adequado."
   }
 }
