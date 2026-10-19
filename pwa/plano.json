@@ -262,10 +262,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Intervalado 8x3min",
-              "duracao_min": 54,
+              "tipo": "Intervalado 6x3min",
+              "duracao_min": 42,
               "zona": "Z4",
-              "descricao": "Aquecimento, 8 repetições de 3min em Z4 com 1.5min de recuperação, volta calma.",
+              "descricao": "Redução de 8 para 6 repetições (~22% de corte) devido a status de Sobrecarga Garmin, déficit de sono REM e fadiga acumulada — preservar qualidade dos estímulos sem aprofundar risco de lesão MODERADO.",
               "longo": false,
               "estrutura": [
                 {
