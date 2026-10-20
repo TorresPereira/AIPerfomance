@@ -330,7 +330,7 @@
             },
             {
               "esporte": "swim",
-              "tipo": "Natação técnica (fixo)",
+              "tipo": "Natacao",
               "duracao_min": 45,
               "zona": "Z2",
               "descricao": "Sessão fixa de natação com ênfase em técnica e ritmo de braçada.",
