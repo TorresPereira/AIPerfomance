@@ -350,10 +350,10 @@
           "sessoes": [
             {
               "esporte": "bike",
-              "tipo": "Bike Intervalado 5x5min",
-              "duracao_min": 58,
+              "tipo": "Bike Intervalado 4x5min Z4",
+              "duracao_min": 48,
               "zona": "Z4",
-              "descricao": "Aquecimento, 5 blocos de 5min em Z4 com 2.5min de recuperação, volta calma.",
+              "descricao": "Redução de 5 para 4 intervalos devido ao déficit de sono de 2.9h e Body Battery de 38, preservando qualidade dos esforços Z4.",
               "longo": false,
               "estrutura": [
                 {
