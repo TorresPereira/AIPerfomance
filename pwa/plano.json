@@ -389,10 +389,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Tempo Run 25min",
-              "duracao_min": 45,
+              "tipo": "Tempo Run 20min",
+              "duracao_min": 35,
               "zona": "Z3",
-              "descricao": "Aquecimento, bloco contínuo de 25min em Z3, volta calma — trabalho de limiar aeróbico.",
+              "descricao": "Redução de 45 para 35min e bloco Z3 de 25 para 20min devido a sono comprometido (REM 0.0h), Body Battery 33 e acúmulo de intensidade em dias consecutivos.",
               "longo": false,
               "estrutura": [
                 {
