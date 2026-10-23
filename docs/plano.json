@@ -429,9 +429,9 @@
             {
               "esporte": "run",
               "tipo": "Long Run",
-              "duracao_min": 90,
+              "duracao_min": 75,
               "zona": "Z2",
-              "descricao": "Corrida longa aeróbica em Z2, progressão suave do ritmo nos últimos 20min.",
+              "descricao": "Redução de 15min por Body Battery 44/100, déficit de sono acumulado e Z3 mensal já no limite — preservar qualidade aeróbica sem aprofundar fadiga.",
               "longo": true,
               "estrutura": null,
               "fixo": false
