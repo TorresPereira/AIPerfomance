@@ -449,9 +449,9 @@
             {
               "esporte": "bike",
               "tipo": "Long Ride",
-              "duracao_min": 110,
+              "duracao_min": 80,
               "zona": "Z2",
-              "descricao": "Pedal longo e contínuo em Z2, mantendo potência/cadência estável, preparação de resistência.",
+              "descricao": "Redução de 30min devido a sono crítico acumulado (4.5h), Body Battery baixo e ausência de recuperação REM — preservar assimilação na fase BASE.",
               "longo": true,
               "estrutura": null,
               "fixo": false
