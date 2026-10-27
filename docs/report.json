@@ -1,43 +1,43 @@
 {
-  "date": "2026-10-24",
-  "generated_at": "2026-10-24T06:01:36.291153Z",
+  "date": "2026-10-27",
+  "generated_at": "2026-10-27T07:01:47.985435Z",
   "saude": {
-    "hrv": 48,
-    "hrv_7d": 31,
-    "hrv_status": "balanced",
+    "hrv": 74,
+    "hrv_7d": 30,
+    "hrv_status": "unbalanced",
     "hrv_baseline_low": 31,
     "hrv_baseline_high": 40,
-    "rhr": 63,
+    "rhr": 61,
     "rhr_baseline": null,
-    "sono_h": 4.5,
-    "sono_score": 47,
-    "sono_deep": 1.1,
-    "sono_rem": 0.2,
-    "sono_awake": 47.0,
-    "body_battery": 30,
-    "stress_avg": 30,
-    "stress_rest": 23.29,
-    "atl": 752.0,
-    "ctl": 3006.0,
+    "sono_h": 8.4,
+    "sono_score": 86,
+    "sono_deep": 1.8,
+    "sono_rem": 1.3,
+    "sono_awake": 0.0,
+    "body_battery": 59,
+    "stress_avg": 18,
+    "stress_rest": 81.67,
+    "atl": 777.0,
+    "ctl": 3109.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 746.0,
+    "load_aerobic_low": 848.0,
     "load_aerobic_high": 1734.0,
     "load_anaerobic": 527.0,
-    "load_total_month": 3006.0,
-    "load_target_low": "586–1423",
-    "load_target_high": "949–1786",
+    "load_total_month": 3109.0,
+    "load_target_low": "583–1421",
+    "load_target_high": "952–1789",
     "training_status": "Improdutivo",
     "fitness_trend": "Caindo",
     "training_readiness": null,
-    "vo2max": 49.6,
+    "vo2max": 49.5,
     "peso": null,
     "previsoes": {
-      "5K": 1330,
-      "10K": 2873,
-      "Meia": 6591,
-      "Maratona": 14724
+      "5K": 1335,
+      "10K": 2883,
+      "Meia": 6616,
+      "Maratona": 14782
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,30 +55,72 @@
     },
     "sono_alvo_h": 8.5,
     "sono_deita": "22:00",
-    "sono_deficit_h": 4.0
+    "sono_deficit_h": 0.1
   },
-  "ontem": [],
+  "ontem": [
+    {
+      "mod": "run",
+      "icone": "🏃",
+      "nome": "Munich Running",
+      "dist": "9.5km",
+      "dur": "1h00m",
+      "fc": 136.0,
+      "fc_max": 150.0,
+      "cal": 786.0,
+      "cad": 169.71875,
+      "tss": null,
+      "np": 329.0,
+      "swolf": null,
+      "aerobic_te": 3.0999999046325684,
+      "anaerobic_te": 0.0,
+      "elev": 34.0,
+      "perf": "6:17/km",
+      "pl": "Pace",
+      "_dist_m": 9546.4501953125,
+      "_dur_s": 3600.2890625
+    }
+  ],
   "hoje": [
     {
       "icone": "🏃",
-      "nome": "Long Run",
+      "nome": "Intervalado 8x4min",
       "tipo": "run",
-      "dur": "75min",
+      "dur": "62min",
       "dist": "—",
       "passos": [
-        "Redução de 15min por Body Battery 44/100, déficit de sono acumulado e Z3 mensal já no limite — preservar qualidade aeróbica sem aprofundar fadiga."
+        "Aquecimento, 8 repetições de 4min em Z4 com 2min de recuperação em Z1, volta calma."
       ]
     }
   ],
   "amanha": [
     {
-      "icone": "🚴",
-      "nome": "Long Ride",
-      "tipo": "bike",
-      "dur": "80min",
+      "icone": "🏊",
+      "nome": "Natacao",
+      "tipo": "swim",
+      "dur": "45min",
       "dist": "—",
       "passos": [
-        "Redução de 30min devido a sono crítico acumulado (4.5h), Body Battery baixo e ausência de recuperação REM — preservar assimilação na fase BASE."
+        "Atividade fixa"
+      ]
+    },
+    {
+      "icone": "⚽",
+      "nome": "Futebol",
+      "tipo": "futebol",
+      "dur": "60min",
+      "dist": "—",
+      "passos": [
+        "Atividade fixa"
+      ]
+    },
+    {
+      "icone": "🏊",
+      "nome": "Natação técnica (fixo)",
+      "tipo": "swim",
+      "dur": "45min",
+      "dist": "—",
+      "passos": [
+        "Sessão fixa de natação, foco em eficiência de braçada e manutenção técnica."
       ]
     }
   ],
@@ -88,40 +130,28 @@
     "swim_min": 0,
     "bike_km": 0,
     "bike_min": 0,
-    "run_km": 8.2,
-    "run_min": 41.4,
+    "run_km": 9.5,
+    "run_min": 60.0,
     "total_tss": 0.0,
-    "n_treinos": 3
+    "n_treinos": 1
   },
   "semana_passada": {
-    "swim_km": 2.7,
-    "swim_min": 81.1,
-    "bike_km": 1.4,
-    "bike_min": 4.4,
-    "run_km": 23.8,
-    "run_min": 139.4
+    "swim_km": 0,
+    "swim_min": 0,
+    "bike_km": 0,
+    "bike_min": 0,
+    "run_km": 8.2,
+    "run_min": 41.4
   },
   "clima": {
-    "temp_max": 11.6,
-    "temp_min": 7.5,
-    "chuva_pct": 100,
-    "vento_kmh": 31.0,
-    "temp_atual": 7.7,
+    "temp_max": 17.1,
+    "temp_min": 10.3,
+    "chuva_pct": 99,
+    "vento_kmh": 17.6,
+    "temp_atual": 11.5,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-10-18",
-      "value": 65.0
-    },
-    {
-      "date": "2026-10-19",
-      "value": 56.0
-    },
-    {
-      "date": "2026-10-20",
-      "value": 62.0
-    },
     {
       "date": "2026-10-21",
       "value": 48.0
@@ -137,21 +167,21 @@
     {
       "date": "2026-10-24",
       "value": 48.0
+    },
+    {
+      "date": "2026-10-25",
+      "value": 51.0
+    },
+    {
+      "date": "2026-10-26",
+      "value": 49.0
+    },
+    {
+      "date": "2026-10-27",
+      "value": 74.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-10-10",
-      "value": 48.9
-    },
-    {
-      "date": "2026-10-11",
-      "value": 48.9
-    },
-    {
-      "date": "2026-10-12",
-      "value": 48.9
-    },
     {
       "date": "2026-10-13",
       "value": 49.1
@@ -199,25 +229,22 @@
     {
       "date": "2026-10-24",
       "value": 49.6
+    },
+    {
+      "date": "2026-10-25",
+      "value": 49.6
+    },
+    {
+      "date": "2026-10-26",
+      "value": 49.5
+    },
+    {
+      "date": "2026-10-27",
+      "value": 49.5
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-10-11",
-      "sono": 8.5,
-      "te": 4.2
-    },
-    {
-      "date": "2026-10-12",
-      "sono": 7.0,
-      "te": 2.2
-    },
-    {
-      "date": "2026-10-13",
-      "sono": 7.4,
-      "te": 3.4
-    },
     {
       "date": "2026-10-14",
       "sono": 5.9,
@@ -252,9 +279,33 @@
       "date": "2026-10-22",
       "sono": 6.7,
       "te": 2.2
+    },
+    {
+      "date": "2026-10-25",
+      "sono": 9.2,
+      "te": 1.0
+    },
+    {
+      "date": "2026-10-26",
+      "sono": 5.0,
+      "te": 3.1
     }
   ],
   "mes": {
+    "2026-10-26": {
+      "planejados": [],
+      "feitos": [
+        "🏃"
+      ]
+    },
+    "2026-10-25": {
+      "planejados": [
+        "🚴"
+      ],
+      "feitos": [
+        "⚡"
+      ]
+    },
     "2026-10-22": {
       "planejados": [
         "🚴"
@@ -404,12 +455,6 @@
       ],
       "feitos": []
     },
-    "2026-10-25": {
-      "planejados": [
-        "🚴"
-      ],
-      "feitos": []
-    },
     "2026-10-27": {
       "planejados": [
         "🏃"
@@ -444,32 +489,46 @@
     }
   },
   "plano_meta": {
-    "semana": 2,
+    "semana": 3,
     "fase": "BASE"
   },
   "insights": {
-    "frase": "Sono em déficit crítico: proteja a base antes de construir.",
-    "sec_readiness": "HRV de 48ms está +17ms acima da média 7d (31ms), sinal positivo de recuperação aguda, mas contexto geral é frágil. Sono de 4.5h com score 47, apenas 1.1h de sono profundo e 0.2h REM — recuperação celular e neural comprometidas. Body Battery em 30/100 com déficit de sono acumulado de 4h indicam capacidade de esforço reduzida hoje.",
-    "sec_treino_ontem": null,
-    "sec_carga": "Z1 em 746 (dentro do target 586–1423) e Z2 em 1734 (teto do target 1786) — distribuição polarizada aceitável, mas Z3+ em 527 representa 17.5% da carga total, acima do recomendado para fase BASE. CTL estimado em 3006 com ATL em 752 sugere desequilíbrio de interpretação do modelo Garmin; status 'Improdutivo' com tendência de queda reforça acúmulo sem assimilação. Risco de lesão MODERADO deve ser levado a sério com volume semanal baixo mas qualidade de recuperação deteriorada.",
-    "sec_hoje": "Long Run de 75min planejado, mas nenhuma execução registrada até agora. Caso execute, manter estritamente em Z1 (FC 130–140bpm) devido ao sono severamente comprometido e Body Battery em 30. Evitar qualquer drift aeróbico — se FC ultrapassar 145bpm, reduzir pace imediatamente ou interromper.",
-    "sec_ajuste": "Reduzir Long Run para 45min totais, 100% em Z1 com FC teto de 140bpm. Clima com chuva intensa, 11°C e vento de 31km/h — considerar substituição por corrida em ambiente interno ou cancelamento se sensação térmica for adversa.",
-    "sec_alertas": "Sono crítico (4.5h, REM 0.2h) compromete resposta imune e síntese proteica — risco aumentado de sobrecarga neural. Body Battery 30/100 desaconselha esforço acima de Z1. Condições climáticas (100% chuva, vento 31km/h, 11°C) elevam custo metabólico e risco de hipotermia em treino longo externo.",
-    "sec_nutricao": "Sem treino executado ainda: priorizar refeição normoglicêmica (CHO complexo + proteína) para estabilizar cortisol. Caso execute os 45min reduzidos: pré-treino leve 200kcal (30min antes), hidratação mínima 400ml, pós-treino 30g proteína + CHO 60g para iniciar recuperação.",
-    "sec_amanha": "Long Ride de 110min em Z2 planejado para amanhã — reduzir para 80min mantendo Z2 (FC 140–152bpm ou potência 185–205W). Sono de hoje continuará em déficit; dormir às 22:00 é mandatório para minimizar dano. Manter sessão mas encurtada para preservar assimilação da carga semanal.",
+    "frase": "HRV elevado, mas contexto pede consistência inteligente hoje.",
+    "sec_readiness": "HRV de 74ms está muito acima da média 7d de 30ms (+44ms), porém o status 'unbalanced' indica resposta autonômica instável — não confundir com supercompensação real. RHR de 61bpm sem baseline definido limita interpretação longitudinal. Sono de 8.4h com score 86 é positivo, Deep 1.8h adequado; Body Battery 59/100 com stress médio 18 indica recuperação parcial, não plena.",
+    "sec_treino_ontem": "Corrida de 9.5km a 6:17/km com FC média 136bpm (max 150bpm) e TE aeróbico 3.1 indica sessão de intensidade moderada-baixa, bem executada dentro de Z2. Potência de 329W com cadência 169spm é aceitável para corrida de base, sem sinais de sobrecarga aguda. Ponto de atenção: FC max 150bpm próxima ao teto Z2 — monitorar deriva nas próximas sessões.",
+    "sec_carga": "Z1 em 848 (dentro do target 583–1421) e Z2 em 1734 (dentro do target 952–1789) mostram distribuição tecnicamente adequada, mas Z3+ em 527 representa 17% da carga total — acima do recomendado para fase BASE (<10-12%). ATL 777 com CTL 3109 e status Garmin 'Improdutivo/Caindo' indicam que o volume recente não está gerando adaptação positiva. Risco de lesão MODERADO reforça necessidade de conter Z3+.",
+    "sec_hoje": "Treino planejado: Intervalado 8x4min (62min) — sessão de alta intensidade Z3/Z4. Com HRV unbalanced, carga Z3+ já elevada no mês e nenhum treino executado hoje até agora, executar a sessão com controle rigoroso de FC é essencial. Clima chuvoso (99% chuva, 17.1°C, vento 17.6km/h) exige aquecimento prolongado de 12-15min e atenção ao pace em superfície molhada.",
+    "sec_ajuste": "Executar os 8x4min com FC teto de 158bpm nos intervalos e recuperação ativa a FC <135bpm; reduzir para 6x4min se FC não estabilizar nos primeiros 3 tiros. Volume total máximo 55min, eliminando o 2º aquecimento.",
+    "sec_alertas": "Z3+ mensal já em 527 unidades — adicionar sessão intervalada intensa hoje pode ultrapassar o limite prudente para fase BASE. HRV 'unbalanced' não autoriza treino de alta intensidade pleno; monitorar resposta nos primeiros 2 tiros e abortar se FC derivar >5bpm acima do alvo.",
+    "sec_nutricao": "Dia de treino leve em volume total: pré-treino 350kcal (60-90min antes) com foco em CHO de absorção rápida; pós-treino 30g proteína + CHO 40-50g para reposição glicogênica. Hidratação mínima 500ml durante os 62min em clima frio — risco de subestimar perdas no frio.",
+    "sec_amanha": "Amanhã estão listadas 3 sessões: natação técnica fixa 45min, futebol 60min e uma segunda natação técnica 45min. Dado o treino intervalado de hoje e HRV instável, manter as duas sessões de natação em Z2 técnico, mas avaliar o futebol — 60min de esporte coletivo pode elevar Z3+ de forma não controlada; reduzir para 45min ou converter em participação leve.",
     "amanha_ajustado": [
       {
-        "esporte": "bike",
-        "tipo": "Long Ride",
-        "duracao_min": 80,
+        "esporte": "swim",
+        "tipo": "Natação técnica (fixo)",
+        "duracao_min": 45,
         "zona": "Z2",
-        "motivo_ajuste": "Redução de 30min devido a sono crítico acumulado (4.5h), Body Battery baixo e ausência de recuperação REM — preservar assimilação na fase BASE."
+        "motivo_ajuste": null
+      },
+      {
+        "esporte": "run",
+        "tipo": "Futebol",
+        "duracao_min": 45,
+        "zona": "Z1",
+        "motivo_ajuste": "Reduzido de 60 para 45min e limitado a Z1 para conter acúmulo de Z3+ mensal já elevado e preservar recuperação pós-intervalado."
+      },
+      {
+        "esporte": "swim",
+        "tipo": "Natação técnica (fixo)",
+        "duracao_min": 45,
+        "zona": "Z2",
+        "motivo_ajuste": null
       }
     ],
-    "status_readiness": "BAIXO",
+    "status_readiness": "MODERADO",
     "status_carga": "ELEVADA",
-    "acao_hoje": "REDUZIR 40%",
-    "analise_hoje": "Long Run de 75min está contraindicado no volume original dado sono de 4.5h e Body Battery 30 — reduzir para 45min em Z1 puro ou descansar se condições climáticas forem adversas. Prioridade hoje é não aprofundar o déficit de recuperação.",
-    "alerta": "Déficit de sono severo (4.5h, REM 0.2h) combinado com Body Battery 30 e clima hostil: qualquer esforço acima de Z1 hoje aumenta risco de overreaching e supressão imune."
+    "acao_hoje": "REDUZIR 20%",
+    "analise_hoje": "Intervalado 8x4min viável mas deve ser contido em 6 tiros com FC teto 158bpm dado HRV unbalanced e Z3+ mensal já acima do ideal para fase BASE. Clima adverso exige aquecimento estendido e ajuste de pace.",
+    "alerta": "HRV 'unbalanced' + Z3+ mensal em 527 unidades — evitar volume anaeróbico pleno hoje para não comprometer resposta adaptativa na Semana 3 de BASE."
   }
 }
