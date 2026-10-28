@@ -573,10 +573,10 @@
           "sessoes": [
             {
               "esporte": "bike",
-              "tipo": "Pedal Tempo 2x15min",
-              "duracao_min": 60,
+              "tipo": "Pedal Tempo 2x10min",
+              "duracao_min": 50,
               "zona": "Z3",
-              "descricao": "Aquecimento, 2 blocos de 15min em Z3 com 5min de recuperação, volta calma — foco em potência sustentada.",
+              "descricao": "Carga elevada hoje com 4 sessões executadas e REM crítico (0.3h); blocos Z3 reduzidos de 2x15min para 2x10min para preservar qualidade do estímulo sem sobrecarga residual.",
               "longo": false,
               "estrutura": [
                 {
