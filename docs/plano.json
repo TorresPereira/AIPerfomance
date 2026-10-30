@@ -652,9 +652,9 @@
             {
               "esporte": "run",
               "tipo": "Long Run",
-              "duracao_min": 100,
+              "duracao_min": 70,
               "zona": "Z2",
-              "descricao": "Corrida longa em ritmo aeróbico Z2, sessão de pico de volume da fase base — pace controlado.",
+              "descricao": "Redução de 100 para 70min devido a Body Battery 35, REM crítico de 0.3h e ausência de treino nos dias anteriores — preservar recuperação e garantir qualidade aeróbica em Z2.",
               "longo": true,
               "estrutura": null,
               "fixo": false
