@@ -671,10 +671,10 @@
           "sessoes": [
             {
               "esporte": "bike",
-              "tipo": "Long Ride",
-              "duracao_min": 120,
+              "tipo": "Long Ride controlado Z2",
+              "duracao_min": 80,
               "zona": "Z2",
-              "descricao": "Pedal longo de pico de volume, Z2 constante, foco em resistência e economia de pedalada.",
+              "descricao": "Redução de 120 para 80min devido a treino de hoje executado acima da zona planejada (Z3 real), sono com déficit de 2h e status de sobrecarga mensal ativo.",
               "longo": true,
               "estrutura": null,
               "fixo": false
