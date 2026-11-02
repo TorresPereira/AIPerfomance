@@ -709,9 +709,9 @@
             {
               "esporte": "run",
               "tipo": "Rodagem leve",
-              "duracao_min": 35,
+              "duracao_min": 25,
               "zona": "Z2",
-              "descricao": "Corrida contínua e suave em Z2, ritmo confortável, semana de recuperação — sem pressão.",
+              "descricao": "Redução de 29% devido a sono 4.0h, REM zerado e Body Battery 34 — risco de sobrecarga com volume original.",
               "longo": false,
               "estrutura": null,
               "fixo": false
