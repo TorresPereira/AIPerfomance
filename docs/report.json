@@ -1,43 +1,43 @@
 {
-  "date": "2026-11-02",
-  "generated_at": "2026-11-02T21:17:11.193669Z",
+  "date": "2026-11-03",
+  "generated_at": "2026-11-03T07:01:36.601245Z",
   "saude": {
-    "hrv": 48,
+    "hrv": 49,
     "hrv_7d": 31,
     "hrv_status": "balanced",
     "hrv_baseline_low": 31,
     "hrv_baseline_high": 40,
     "rhr": 63,
     "rhr_baseline": null,
-    "sono_h": 4.0,
-    "sono_score": 42,
-    "sono_deep": 1.9,
-    "sono_rem": 0.0,
-    "sono_awake": 89.0,
-    "body_battery": 34,
-    "stress_avg": 32,
-    "stress_rest": 31.22,
-    "atl": 747.0,
-    "ctl": 2989.0,
+    "sono_h": 6.5,
+    "sono_score": 64,
+    "sono_deep": 1.7,
+    "sono_rem": 0.2,
+    "sono_awake": 6.0,
+    "body_battery": 60,
+    "stress_avg": 19,
+    "stress_rest": 82.26,
+    "atl": null,
+    "ctl": null,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 865.0,
-    "load_aerobic_high": 1673.0,
-    "load_anaerobic": 451.0,
-    "load_total_month": 2989.0,
-    "load_target_low": "580–1418",
-    "load_target_high": "954–1792",
-    "training_status": "Improdutivo",
-    "fitness_trend": "Caindo",
+    "load_aerobic_low": null,
+    "load_aerobic_high": null,
+    "load_anaerobic": null,
+    "load_total_month": null,
+    "load_target_low": null,
+    "load_target_high": null,
+    "training_status": null,
+    "fitness_trend": null,
     "training_readiness": null,
-    "vo2max": 49.4,
+    "vo2max": null,
     "peso": null,
     "previsoes": {
-      "5K": 1336,
-      "10K": 2875,
-      "Meia": 6594,
-      "Maratona": 14809
+      "5K": 1337,
+      "10K": 2876,
+      "Meia": 6597,
+      "Maratona": 14818
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -53,13 +53,12 @@
       "pos_prot_g": 30,
       "dur_min": 0
     },
-    "sono_alvo_h": 8.5,
-    "sono_deita": "22:00",
-    "sono_deficit_h": 4.5
+    "sono_alvo_h": 8.0,
+    "sono_deita": "22:30",
+    "sono_deficit_h": 1.5
   },
   "ontem": [],
-  "hoje": [],
-  "amanha": [
+  "hoje": [
     {
       "icone": "🏃",
       "nome": "Rodagem leve",
@@ -68,6 +67,38 @@
       "dist": "—",
       "passos": [
         "Redução de 29% devido a sono 4.0h, REM zerado e Body Battery 34 — risco de sobrecarga com volume original."
+      ]
+    }
+  ],
+  "amanha": [
+    {
+      "icone": "🏊",
+      "nome": "Natacao",
+      "tipo": "swim",
+      "dur": "45min",
+      "dist": "—",
+      "passos": [
+        "Atividade fixa"
+      ]
+    },
+    {
+      "icone": "⚽",
+      "nome": "Futebol",
+      "tipo": "futebol",
+      "dur": "60min",
+      "dist": "—",
+      "passos": [
+        "Atividade fixa"
+      ]
+    },
+    {
+      "icone": "🏊",
+      "nome": "Natacao",
+      "tipo": "swim",
+      "dur": "45min",
+      "dist": "—",
+      "passos": [
+        "Sessão fixa de natação, ênfase em técnica e leveza de movimento na semana de recuperação."
       ]
     }
   ],
@@ -91,18 +122,14 @@
     "run_min": 211.4
   },
   "clima": {
-    "temp_max": 9.4,
-    "temp_min": 7.1,
-    "chuva_pct": 29,
-    "vento_kmh": 8.6,
-    "temp_atual": 8.3,
-    "emoji": "🌧️"
+    "temp_max": 9.9,
+    "temp_min": 3.6,
+    "chuva_pct": 8,
+    "vento_kmh": 16.6,
+    "temp_atual": 7.8,
+    "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-10-27",
-      "value": 74.0
-    },
     {
       "date": "2026-10-28",
       "value": 53.0
@@ -126,6 +153,10 @@
     {
       "date": "2026-11-02",
       "value": 48.0
+    },
+    {
+      "date": "2026-11-03",
+      "value": 49.0
     }
   ],
   "vo2max_hist": [
@@ -192,11 +223,6 @@
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-10-20",
-      "sono": 8.3,
-      "te": 2.8
-    },
     {
       "date": "2026-10-21",
       "sono": 5.6,
@@ -280,32 +306,39 @@
     }
   },
   "plano_meta": {
-    "semana": 3,
+    "semana": 4,
     "fase": "BASE"
   },
   "insights": {
-    "frase": "Sono crítico compromete adaptação — priorize recuperação antes do treino.",
-    "sec_readiness": "HRV de 48ms está 17ms acima da média 7d (31ms), sinal positivo de recuperação autonômica pontual. Porém, sono de 4.0h com score 42 e REM zerado indica recuperação estrutural severamente comprometida. Body Battery de 34/100 com déficit de 4.5h de sono eleva risco de supressão imune e lesão.",
+    "frase": "HRV elevado abre janela: execute com precisão de zona.",
+    "sec_readiness": "HRV 49ms está +18ms acima da média 7d (31ms), sinalizando recuperação autonômica acima do padrão — janela favorável para carga moderada. Sono de 6.5h com score 64 é insuficiente: REM em apenas 0.2h compromete consolidação neuromuscular. Body Battery 60/100 com stress médio 19 confirma estado funcional aceitável, mas limitado pelo déficit de sono de 1.5h.",
     "sec_treino_ontem": null,
-    "sec_carga": "Z1 em 865 (dentro do target 580–1418) e Z2 em 1673 (dentro de 954–1792), mas volume semanal zerado nas três modalidades indica estagnação aguda. Status Garmin 'Improdutivo' com tendência caindo confirma destreinamento pontual na semana 3 de BASE. Risco de lesão MODERADO pode aumentar com retorno abrupto de carga.",
-    "sec_hoje": "Não há treino agendado para hoje, o que é apropriado dado o estado de recuperação comprometido. Dia de descanso ativo deve ser utilizado para consolidar sono e reduzir estresse acumulado (stress médio 32). Foco total em recuperação passiva.",
-    "sec_ajuste": "Descanso total hoje. Nenhuma atividade física — priorizar ciclo de sono de 8.5h a partir das 22h para recuperar déficit de 4.5h.",
-    "sec_alertas": "Sono 4.0h com REM 0.0h é alerta crítico: ausência de REM compromete consolidação neuromuscular e hormônio de crescimento. Body Battery 34 com volume semanal zerado sugere estressor externo não registrado — monitorar. Retorno abrupto de carga amanhã sem recuperação pode elevar risco de lesão de MODERADO para ALTO.",
-    "sec_nutricao": "Sem treino hoje: foco em 1.6–1.8g/kg de proteína distribuída ao longo do dia para manutenção muscular. Ingerir refeição leve pré-sono (200–250kcal, baixo glicêmico) às 21h para suportar qualidade do sono e evitar catabolismo noturno.",
-    "sec_amanha": "Sessão de rodagem leve 35min Z2 amanhã está no plano — reduzir para 25min dado déficit severo de sono (4.5h) e Body Battery crítico (34/100). Manter Z2 estrita com FC teto 145bpm para evitar deriva anaeróbica. Se sono esta noite for inferior a 7h, substituir por caminhada ativa de 20min.",
+    "sec_carga": "Dados de carga mensal indisponíveis (ATL/CTL/zonas = None), impossibilitando análise de distribuição Z1/Z2/Z3 vs targets. Volume semanal zerado nas três modalidades é dado crítico: ausência de estímulo registrado na Semana 4 de BASE compromete adaptação aeróbica. Risco de lesão MODERADO sinalizando atenção ao retorno de carga mesmo sem histórico recente.",
+    "sec_hoje": "Rodagem leve de 25min planejada — ainda não executada. Executar em Z1 puro com FC teto 140bpm, ritmo conversacional, sem variações de intensidade. Dado o sono fragmentado (REM 0.2h), priorizar técnica de passada sobre qualquer estímulo cardiovascular; temperatura de 9.9°C exige aquecimento de 5min antes de atingir cadência alvo.",
+    "sec_ajuste": "Manter 25min de rodagem leve com FC teto rigoroso de 138bpm e nenhum trecho acima de Z1. Ritmo alvo 6:30–7:00/km dependendo do terreno.",
+    "sec_alertas": "REM em 0.2h é alerta real: coordenação e tempo de reação estão reduzidos — evitar qualquer treino técnico de alta demanda neuromotora hoje. Volume semanal zerado nas três modalidades requer revisão imediata do cumprimento do plano de base.",
+    "sec_nutricao": "Para 25min de rodagem leve sem treino registrado anterior: pré-treino 150–200kcal (carboidrato de fácil digestão) e hidratação de 300–400ml. Pós-treino: 20–30g de proteína dentro de 30min para suporte à recuperação do sono comprometido.",
+    "sec_amanha": "Amanhã apresenta acúmulo de 150min (45min natação técnica + 60min futebol + 45min natação — esta última fixa). Considerando sono deficitário hoje e volume semanal zerado, manter natação técnica fixa integralmente; futebol e primeira sessão de natação devem ser cumpridos mas monitorados quanto à FC. Se deitar às 22:30 for cumprido, readiness amanhã pode ser BOM.",
     "amanha_ajustado": [
       {
-        "esporte": "run",
-        "tipo": "Rodagem leve",
-        "duracao_min": 25,
+        "esporte": "swim",
+        "tipo": "Natacao",
+        "duracao_min": 45,
         "zona": "Z2",
-        "motivo_ajuste": "Redução de 29% devido a sono 4.0h, REM zerado e Body Battery 34 — risco de sobrecarga com volume original."
+        "motivo_ajuste": null
+      },
+      {
+        "esporte": "swim",
+        "tipo": "Natação técnica (fixo)",
+        "duracao_min": 45,
+        "zona": "Z2",
+        "motivo_ajuste": null
       }
     ],
-    "status_readiness": "BAIXO",
+    "status_readiness": "BOM",
     "status_carga": "SUAVE",
-    "acao_hoje": "DESCANSO",
-    "analise_hoje": "Sem treino hoje conforme planejado — decisão correta dado estado de recuperação comprometido. Prioridade absoluta é restaurar qualidade do sono esta noite.",
-    "alerta": "REM 0.0h e sono 4.0h representam risco fisiológico real — qualquer treino de intensidade hoje seria contraproducente e potencialmente lesivo."
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Rodagem leve de 25min é adequada ao estado de recuperação e deve ser executada estritamente em Z1 (FC ≤138bpm), funcionando como estímulo aeróbico mínimo sem gerar fadiga adicional. Prioridade é cumprir o protocolo de sono alvo de 8h para potencializar o HRV elevado de hoje.",
+    "alerta": "REM de 0.2h indica recuperação neurológica comprometida — evitar decisões táticas de carga elevada até normalizar padrão de sono por 2 noites consecutivas."
   }
 }
