@@ -800,7 +800,7 @@
               "tipo": "Strides 6x20seg",
               "duracao_min": 30,
               "zona": "Z2",
-              "descricao": "Aquecimento leve, 6 acelerações de 20seg em ritmo vivo com 40seg de caminhada, volta calma.",
+              "descricao": "Mantido conforme plano original; REM baixo (0.2h) exige monitoramento de FC — interromper se FC basal amanhã manhã estiver >65bpm.",
               "longo": false,
               "estrutura": [
                 {

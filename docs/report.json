@@ -1,43 +1,43 @@
 {
-  "date": "2026-11-04",
-  "generated_at": "2026-11-04T07:02:15.084996Z",
+  "date": "2026-11-05",
+  "generated_at": "2026-11-05T07:01:23.887654Z",
   "saude": {
-    "hrv": 48,
-    "hrv_7d": 30,
+    "hrv": 53,
+    "hrv_7d": 31,
     "hrv_status": "unbalanced",
-    "hrv_baseline_low": 31,
+    "hrv_baseline_low": 32,
     "hrv_baseline_high": 40,
-    "rhr": 64,
+    "rhr": 61,
     "rhr_baseline": null,
-    "sono_h": 7.2,
-    "sono_score": 75,
-    "sono_deep": 1.0,
-    "sono_rem": 1.1,
+    "sono_h": 6.7,
+    "sono_score": 64,
+    "sono_deep": 1.9,
+    "sono_rem": 0.2,
     "sono_awake": 11.0,
-    "body_battery": 42,
-    "stress_avg": 25,
-    "stress_rest": 53.88,
-    "atl": null,
-    "ctl": null,
+    "body_battery": 59,
+    "stress_avg": 16,
+    "stress_rest": 95.41,
+    "atl": 491.0,
+    "ctl": 1966.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": null,
-    "load_aerobic_high": null,
-    "load_anaerobic": null,
-    "load_total_month": null,
-    "load_target_low": null,
-    "load_target_high": null,
-    "training_status": null,
-    "fitness_trend": null,
+    "load_aerobic_low": 773.0,
+    "load_aerobic_high": 841.0,
+    "load_anaerobic": 352.0,
+    "load_total_month": 1966.0,
+    "load_target_low": "580–1418",
+    "load_target_high": "954–1792",
+    "training_status": "Improdutivo",
+    "fitness_trend": "Estável",
     "training_readiness": null,
-    "vo2max": null,
+    "vo2max": 49.4,
     "peso": null,
     "previsoes": {
-      "5K": 1331,
-      "10K": 2870,
-      "Meia": 6590,
-      "Maratona": 14809
+      "5K": 1335,
+      "10K": 2878,
+      "Meia": 6608,
+      "Maratona": 14852
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,64 +55,10 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 0.8
+    "sono_deficit_h": 1.3
   },
-  "ontem": [
-    {
-      "mod": "run",
-      "icone": "🏃",
-      "nome": "Erkrath Running",
-      "dist": "2.7km",
-      "dur": "29m17s",
-      "fc": 115.0,
-      "fc_max": 136.0,
-      "cal": 221.0,
-      "cad": 115.484375,
-      "tss": null,
-      "np": 163.0,
-      "swolf": null,
-      "aerobic_te": 1.0,
-      "anaerobic_te": 0.0,
-      "elev": 25.0,
-      "perf": "11:01/km",
-      "pl": "Pace",
-      "_dist_m": 2654.75,
-      "_dur_s": 1757.06494140625
-    }
-  ],
+  "ontem": [],
   "hoje": [
-    {
-      "icone": "🏊",
-      "nome": "Natacao",
-      "tipo": "swim",
-      "dur": "45min",
-      "dist": "—",
-      "passos": [
-        "Atividade fixa"
-      ]
-    },
-    {
-      "icone": "⚽",
-      "nome": "Futebol",
-      "tipo": "futebol",
-      "dur": "60min",
-      "dist": "—",
-      "passos": [
-        "Atividade fixa"
-      ]
-    },
-    {
-      "icone": "🏊",
-      "nome": "Natacao",
-      "tipo": "swim",
-      "dur": "45min",
-      "dist": "—",
-      "passos": [
-        "Sessão fixa de natação, ênfase em técnica e leveza de movimento na semana de recuperação."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🚴",
       "nome": "Pedal de recuperação ativa",
@@ -121,6 +67,18 @@
       "dist": "—",
       "passos": [
         "Pedal leve contínuo em Z1, cadência alta e sem esforço, apenas para manutenção e recuperação."
+      ]
+    }
+  ],
+  "amanha": [
+    {
+      "icone": "🏃",
+      "nome": "Strides 6x20seg",
+      "tipo": "run",
+      "dur": "30min",
+      "dist": "—",
+      "passos": [
+        "Mantido conforme plano original; REM baixo (0.2h) exige monitoramento de FC — interromper se FC basal amanhã manhã estiver >65bpm."
       ]
     }
   ],
@@ -144,18 +102,14 @@
     "run_min": 211.4
   },
   "clima": {
-    "temp_max": 11.0,
-    "temp_min": 3.1,
+    "temp_max": 12.2,
+    "temp_min": 3.7,
     "chuva_pct": 0,
-    "vento_kmh": 18.0,
-    "temp_atual": 4.7,
-    "emoji": "🌤️"
+    "vento_kmh": 17.3,
+    "temp_atual": 3.9,
+    "emoji": "☀️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-10-29",
-      "value": 68.0
-    },
     {
       "date": "2026-10-30",
       "value": 49.0
@@ -179,13 +133,13 @@
     {
       "date": "2026-11-04",
       "value": 48.0
+    },
+    {
+      "date": "2026-11-05",
+      "value": 53.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-10-20",
-      "value": 49.4
-    },
     {
       "date": "2026-10-21",
       "value": 49.6
@@ -241,15 +195,14 @@
     {
       "date": "2026-11-03",
       "value": 49.4
+    },
+    {
+      "date": "2026-11-05",
+      "value": 49.4
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-10-22",
-      "sono": 6.7,
-      "te": 2.2
-    },
     {
       "date": "2026-10-25",
       "sono": 9.2,
@@ -334,28 +287,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado, execute com precisão e controle de zona.",
-    "sec_readiness": "HRV de 48ms está +18ms acima da média 7d (30ms) e acima do baseline (31–40ms), sinal positivo de recuperação autônoma. RHR em 64bpm sem baseline para comparação, referência limitada. Sono de 7.2h com déficit de 0.8h, Deep apenas 1.0h e REM 1.1h indicam qualidade subótima; Body Battery em 42/100 sugere reserva energética moderada-baixa apesar do HRV favorável.",
-    "sec_treino_ontem": "Run de 2.7km em 29min17s com FC média 115bpm e TE aeróbico 1.0 — estímulo mínimo, essencialmente recuperativo. Pace de 11:01/km com potência 163W e cadência 115spm indica eficiência mecânica baixa para o esforço. Sessão adequada para o contexto, sem pontos críticos relevantes.",
-    "sec_carga": "Volume semanal extremamente baixo: apenas 2.7km de corrida, zero natação e zero bike registrados — carga praticamente nula. Sem dados ATL/CTL/zonas, impossível calcular distribuição Z1/Z2/Z3 vs targets; risco de lesão classificado como MODERADO pode estar relacionado à descontinuidade de estímulos. Na Semana 4 de BASE, a subestimulação crônica é o maior risco atual, não a sobrecarga.",
-    "sec_hoje": "Hoje há duas sessões de natação (45min cada) e futebol (60min) planejados, mas nenhum treino registrado ainda. Executar natação em Z1–Z2 (FC ≤ 145bpm), foco em técnica e volume aeróbico suave. Futebol envolve esforços intermitentes anaeróbicos — monitorar que não comprometa recuperação para amanhã.",
-    "sec_ajuste": "Manter as sessões de natação em Z1 com FC teto 145bpm e esforço percebido ≤ 6/10. Futebol: participação moderada, evitar sprints repetidos acima de 85% FCmax; limitar duração efetiva a 45min se possível.",
-    "sec_alertas": "Body Battery em 42/100 combinado com sono de baixa qualidade (Deep 1.0h) pode mascarar fadiga real apesar do HRV elevado — HRV alto isolado não garante prontidão plena. Futebol adiciona carga anaeróbica não contabilizada no plano estruturado; acúmulo com as natações pode elevar fadiga residual para amanhã.",
-    "sec_nutricao": "Pré-natação: refeição leve de 350kcal (CHO ~60g) 90min antes. Pós-futebol e pós-natação vespertina: 30g de proteína com CHO de reposição (~60–80g) para recuperação muscular e reabastecimento de glicogênio antes do pedal de amanhã.",
-    "sec_amanha": "Manter o pedal de recuperação ativa de 45min em Z1 conforme plano. Dado o HRV positivo mas Body Battery moderado e carga acumulada hoje (natação + futebol), manter duração e zona sem alteração — FC teto 130bpm, potência alvo 55–65% FTP.",
+    "frase": "HRV elevado hoje: execute com controle e precisão.",
+    "sec_readiness": "HRV de 53ms representa +22ms acima da média 7d (31ms) e está acima do baseline (32–40ms), sinalizando recuperação parassimpática elevada — possivelmente rebote após estresse acumulado, não necessariamente prontidão plena. Sono de 6.7h com score 64 é insuficiente: REM de apenas 0.2h é criticamente baixo, indicando recuperação cognitiva e hormonal comprometida. Body Battery 59/100 com stress médio 16 é aceitável, mas o déficit de sono de 1.3h limita a capacidade de resposta ao treino.",
+    "sec_treino_ontem": null,
+    "sec_carga": "Z1 em 773 (target 580–1418) e Z2 em 841 (target 954–1792) — Z2 ainda abaixo do target mínimo, sinalizando volume aeróbico insuficiente para fase BASE. Z3+ em 352 representa 17.9% da carga total mensal, acima do ideal para esta fase. Volume semanal de apenas 2.7km de corrida e zero de natação e bike indica semana com baixíssima carga real, o que contradiz o status 'Improdutivo' do Garmin e reforça necessidade de consistência.",
+    "sec_hoje": "Pedal de recuperação ativa de 45min planejado, mas nenhum treino registrado ainda. Executar em Z1 estrito: FC máxima 125bpm, cadência 85–95rpm, potência leve (sem referência de FTP disponível, priorizar percepção de esforço RPE 2–3/10). O objetivo é fluxo sanguíneo e ativação sem gerar fadiga adicional, especialmente dado o REM baixo de 0.2h.",
+    "sec_ajuste": "Manter os 45min de pedal de recuperação, FC teto 125bpm, RPE máximo 3/10. Nenhum intervalo ou aceleração — Z1 puro durante toda a sessão.",
+    "sec_alertas": "REM de 0.2h é valor crítico — recuperação do sistema nervoso central está comprometida; monitorar sinais de fadiga central durante o pedal (descoordenação, FC elevada desproporcionalmente ao esforço). Volume semanal zerado em natação e bike até agora exige atenção para não comprometer o bloco BASE.",
+    "sec_nutricao": "Treino de 45min leve: pré-treino leve com 150–200kcal (banana + fonte proteica simples), hidratação de 400–500ml durante a sessão. Pós-treino: 30g proteína + fonte de CHO moderada para suporte ao sono e recuperação do REM.",
+    "sec_amanha": "Sessão de Strides 6x20seg (30min Z2) pode ser mantida: o HRV elevado e Body Battery 59 permitem esforço moderado, mas o REM crítico de 0.2h exige cautela nos strides. Manter duração em 30min, limitar aquecimento a Z1 (15min), executar os 6x20seg com recuperação completa entre repetições (60–90seg caminhada). FC durante strides não deve ultrapassar 170bpm.",
     "amanha_ajustado": [
       {
-        "esporte": "bike",
-        "tipo": "Pedal de recuperação ativa",
-        "duracao_min": 45,
-        "zona": "Z1",
-        "motivo_ajuste": null
+        "esporte": "run",
+        "tipo": "Strides 6x20seg",
+        "duracao_min": 30,
+        "zona": "Z2",
+        "motivo_ajuste": "Mantido conforme plano original; REM baixo (0.2h) exige monitoramento de FC — interromper se FC basal amanhã manhã estiver >65bpm."
       }
     ],
     "status_readiness": "MODERADO",
     "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Sessões de natação em Z1–Z2 são adequadas ao estado atual e à fase BASE; futebol representa variável anaeróbica não estruturada que deve ser monitorada para não comprometer a recuperação noturna e o pedal de amanhã.",
-    "alerta": "Futebol com esforços de alta intensidade pode elevar ATL informal e comprometer qualidade do sono — deitar às 22:30 é mandatório para atingir 8.0h e recarregar Body Battery."
+    "analise_hoje": "Pedal de recuperação ativa de 45min é adequado ao contexto: HRV elevado por rebote e sono com REM insuficiente pedem estímulo leve para manutenção sem sobrecarga. Executar em Z1 estrito é a única abordagem correta hoje.",
+    "alerta": "REM de 0.2h indica recuperação neural crítica — priorizar dormir às 22:30 e atingir 8h de sono esta noite antes dos strides de amanhã."
   }
 }
