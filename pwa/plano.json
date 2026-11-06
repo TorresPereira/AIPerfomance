@@ -837,9 +837,9 @@
             {
               "esporte": "run",
               "tipo": "Long Run (recuperação)",
-              "duracao_min": 60,
+              "duracao_min": 50,
               "zona": "Z2",
-              "descricao": "Longão reduzido da semana de recuperação em Z2, ritmo fácil e sem esforço extra.",
+              "descricao": "Redução de 10min dado Body Battery crítico (29/100) e déficit de sono acumulado — FC teto 145bpm, ritmo conversacional estrito.",
               "longo": true,
               "estrutura": null,
               "fixo": false

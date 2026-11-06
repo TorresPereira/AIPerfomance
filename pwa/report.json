@@ -1,31 +1,31 @@
 {
-  "date": "2026-11-05",
-  "generated_at": "2026-11-05T07:01:23.887654Z",
+  "date": "2026-11-06",
+  "generated_at": "2026-11-06T07:01:32.794926Z",
   "saude": {
-    "hrv": 53,
-    "hrv_7d": 31,
+    "hrv": 37,
+    "hrv_7d": 30,
     "hrv_status": "unbalanced",
-    "hrv_baseline_low": 32,
+    "hrv_baseline_low": 31,
     "hrv_baseline_high": 40,
-    "rhr": 61,
+    "rhr": 66,
     "rhr_baseline": null,
-    "sono_h": 6.7,
-    "sono_score": 64,
-    "sono_deep": 1.9,
-    "sono_rem": 0.2,
-    "sono_awake": 11.0,
-    "body_battery": 59,
-    "stress_avg": 16,
-    "stress_rest": 95.41,
-    "atl": 491.0,
-    "ctl": 1966.0,
+    "sono_h": 6.2,
+    "sono_score": 62,
+    "sono_deep": 0.9,
+    "sono_rem": 0.4,
+    "sono_awake": 3.0,
+    "body_battery": 29,
+    "stress_avg": 27,
+    "stress_rest": 35.02,
+    "atl": 520.0,
+    "ctl": 2078.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 773.0,
-    "load_aerobic_high": 841.0,
-    "load_anaerobic": 352.0,
-    "load_total_month": 1966.0,
+    "load_aerobic_low": 782.0,
+    "load_aerobic_high": 922.0,
+    "load_anaerobic": 374.0,
+    "load_total_month": 2078.0,
     "load_target_low": "580–1418",
     "load_target_high": "954–1792",
     "training_status": "Improdutivo",
@@ -34,10 +34,10 @@
     "vo2max": 49.4,
     "peso": null,
     "previsoes": {
-      "5K": 1335,
-      "10K": 2878,
-      "Meia": 6608,
-      "Maratona": 14852
+      "5K": 1334,
+      "10K": 2875,
+      "Meia": 6602,
+      "Maratona": 14838
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,22 +55,32 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 1.3
+    "sono_deficit_h": 1.8
   },
-  "ontem": [],
-  "hoje": [
+  "ontem": [
     {
+      "mod": "bike",
       "icone": "🚴",
-      "nome": "Pedal de recuperação ativa",
-      "tipo": "bike",
-      "dur": "45min",
-      "dist": "—",
-      "passos": [
-        "Pedal leve contínuo em Z1, cadência alta e sem esforço, apenas para manutenção e recuperação."
-      ]
+      "nome": "Erkrath Cycling",
+      "dist": "17.6km",
+      "dur": "40m25s",
+      "fc": 144.0,
+      "fc_max": 168.0,
+      "cal": 431.0,
+      "cad": 77.0,
+      "tss": 45.0,
+      "np": 152.0,
+      "swolf": null,
+      "aerobic_te": 3.0999999046325684,
+      "anaerobic_te": 1.7999999523162842,
+      "elev": 170.0,
+      "perf": "26.1km/h",
+      "pl": "Velocidade",
+      "_dist_m": 17569.76953125,
+      "_dur_s": 2425.041015625
     }
   ],
-  "amanha": [
+  "hoje": [
     {
       "icone": "🏃",
       "nome": "Strides 6x20seg",
@@ -82,16 +92,50 @@
       ]
     }
   ],
-  "hoje_feito": [],
+  "amanha": [
+    {
+      "icone": "🏃",
+      "nome": "Long Run (recuperação)",
+      "tipo": "run",
+      "dur": "50min",
+      "dist": "—",
+      "passos": [
+        "Redução de 10min dado Body Battery crítico (29/100) e déficit de sono acumulado — FC teto 145bpm, ritmo conversacional estrito."
+      ]
+    }
+  ],
+  "hoje_feito": [
+    {
+      "mod": "other",
+      "icone": "⚡",
+      "nome": "Gym F · Treino de Força (Triat",
+      "dist": "—",
+      "dur": "38m57s",
+      "fc": 101.0,
+      "fc_max": 136.0,
+      "tss": null,
+      "np": null,
+      "perf": "—",
+      "pl": "—",
+      "_dist_m": 0.0,
+      "_dur_s": 2337.9560546875,
+      "swolf": null,
+      "cad": null,
+      "cal": 256.0,
+      "aerobic_te": 0.699999988079071,
+      "anaerobic_te": 0.10000000149011612,
+      "elev": null
+    }
+  ],
   "semana": {
     "swim_km": 0,
     "swim_min": 0,
-    "bike_km": 0,
-    "bike_min": 0,
+    "bike_km": 17.6,
+    "bike_min": 40.4,
     "run_km": 2.7,
     "run_min": 29.3,
-    "total_tss": 0.0,
-    "n_treinos": 1
+    "total_tss": 44.8,
+    "n_treinos": 3
   },
   "semana_passada": {
     "swim_km": 1.0,
@@ -102,18 +146,14 @@
     "run_min": 211.4
   },
   "clima": {
-    "temp_max": 12.2,
-    "temp_min": 3.7,
+    "temp_max": 11.4,
+    "temp_min": 1.9,
     "chuva_pct": 0,
-    "vento_kmh": 17.3,
-    "temp_atual": 3.9,
-    "emoji": "☀️"
+    "vento_kmh": 9.7,
+    "temp_atual": 3.0,
+    "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-10-30",
-      "value": 49.0
-    },
     {
       "date": "2026-10-31",
       "value": 57.0
@@ -137,17 +177,13 @@
     {
       "date": "2026-11-05",
       "value": 53.0
+    },
+    {
+      "date": "2026-11-06",
+      "value": 37.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-10-21",
-      "value": 49.6
-    },
-    {
-      "date": "2026-10-22",
-      "value": 49.6
-    },
     {
       "date": "2026-10-23",
       "value": 49.6
@@ -197,7 +233,15 @@
       "value": 49.4
     },
     {
+      "date": "2026-11-04",
+      "value": 49.4
+    },
+    {
       "date": "2026-11-05",
+      "value": 49.4
+    },
+    {
+      "date": "2026-11-06",
       "value": 49.4
     }
   ],
@@ -232,9 +276,35 @@
       "date": "2026-11-03",
       "sono": 6.5,
       "te": 1.0
+    },
+    {
+      "date": "2026-11-05",
+      "sono": 6.7,
+      "te": 3.1
+    },
+    {
+      "date": "2026-11-06",
+      "sono": 6.2,
+      "te": 0.7
     }
   ],
   "mes": {
+    "2026-11-06": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": [
+        "💪"
+      ]
+    },
+    "2026-11-05": {
+      "planejados": [
+        "🚴"
+      ],
+      "feitos": [
+        "🚴"
+      ]
+    },
     "2026-11-03": {
       "planejados": [
         "🏃"
@@ -257,18 +327,6 @@
       ],
       "feitos": []
     },
-    "2026-11-05": {
-      "planejados": [
-        "🚴"
-      ],
-      "feitos": []
-    },
-    "2026-11-06": {
-      "planejados": [
-        "🏃"
-      ],
-      "feitos": []
-    },
     "2026-11-07": {
       "planejados": [
         "🏃"
@@ -287,28 +345,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado hoje: execute com controle e precisão.",
-    "sec_readiness": "HRV de 53ms representa +22ms acima da média 7d (31ms) e está acima do baseline (32–40ms), sinalizando recuperação parassimpática elevada — possivelmente rebote após estresse acumulado, não necessariamente prontidão plena. Sono de 6.7h com score 64 é insuficiente: REM de apenas 0.2h é criticamente baixo, indicando recuperação cognitiva e hormonal comprometida. Body Battery 59/100 com stress médio 16 é aceitável, mas o déficit de sono de 1.3h limita a capacidade de resposta ao treino.",
-    "sec_treino_ontem": null,
-    "sec_carga": "Z1 em 773 (target 580–1418) e Z2 em 841 (target 954–1792) — Z2 ainda abaixo do target mínimo, sinalizando volume aeróbico insuficiente para fase BASE. Z3+ em 352 representa 17.9% da carga total mensal, acima do ideal para esta fase. Volume semanal de apenas 2.7km de corrida e zero de natação e bike indica semana com baixíssima carga real, o que contradiz o status 'Improdutivo' do Garmin e reforça necessidade de consistência.",
-    "sec_hoje": "Pedal de recuperação ativa de 45min planejado, mas nenhum treino registrado ainda. Executar em Z1 estrito: FC máxima 125bpm, cadência 85–95rpm, potência leve (sem referência de FTP disponível, priorizar percepção de esforço RPE 2–3/10). O objetivo é fluxo sanguíneo e ativação sem gerar fadiga adicional, especialmente dado o REM baixo de 0.2h.",
-    "sec_ajuste": "Manter os 45min de pedal de recuperação, FC teto 125bpm, RPE máximo 3/10. Nenhum intervalo ou aceleração — Z1 puro durante toda a sessão.",
-    "sec_alertas": "REM de 0.2h é valor crítico — recuperação do sistema nervoso central está comprometida; monitorar sinais de fadiga central durante o pedal (descoordenação, FC elevada desproporcionalmente ao esforço). Volume semanal zerado em natação e bike até agora exige atenção para não comprometer o bloco BASE.",
-    "sec_nutricao": "Treino de 45min leve: pré-treino leve com 150–200kcal (banana + fonte proteica simples), hidratação de 400–500ml durante a sessão. Pós-treino: 30g proteína + fonte de CHO moderada para suporte ao sono e recuperação do REM.",
-    "sec_amanha": "Sessão de Strides 6x20seg (30min Z2) pode ser mantida: o HRV elevado e Body Battery 59 permitem esforço moderado, mas o REM crítico de 0.2h exige cautela nos strides. Manter duração em 30min, limitar aquecimento a Z1 (15min), executar os 6x20seg com recuperação completa entre repetições (60–90seg caminhada). FC durante strides não deve ultrapassar 170bpm.",
+    "frase": "Consistência supera intensidade — base sólida, progresso real.",
+    "sec_readiness": "HRV 37ms está acima da média 7d (30ms) em +7ms, sinal positivo de recuperação pontual, mas ainda dentro do baseline inferior (31–40ms) e com status 'unbalanced' — variabilidade instável. Sono crítico: 6.2h com apenas 0.9h deep e 0.4h REM indica recuperação estrutural insuficiente, déficit de 1.8h. Body Battery em 29/100 confirma reserva energética baixa para qualquer demanda significativa.",
+    "sec_treino_ontem": "Bike 17.6km a 26.1km/h com potência média de 152W e FC média 144bpm (pico 168bpm) — TE aeróbico 3.1 indica estímulo moderado eficaz para Z2. TSS 45 é compatível com carga controlada, sem excessos. Cadência de 77rpm está abaixo do ideal (85–90rpm) para eficiência neuromuscular no ciclismo de triathlon — ponto a corrigir.",
+    "sec_carga": "Z1 (782) dentro do target (580–1418) e Z2 (922) dentro do target (954–1792), porém no limite inferior — volume semanal muito reduzido (bike 17.6km, corrida 2.7km, natação 0km). Z3+ em 374 representa 18% da carga total, aceitável mas elevado dado o volume absoluto baixo. Status Garmin 'Improdutivo' e risco de lesão MODERADO indicam desequilíbrio entre estresse e adaptação — a base ainda não está consolidada.",
+    "sec_hoje": "Dois estímulos executados hoje: Strides 6x20seg (planejado) e treino de força (38min, FC média 101bpm, TE 0.7 — impacto cardiovascular mínimo, sessão neuromuscular adequada). Os strides como ativação neuromuscular são coerentes com o contexto de baixa carga; força complementa sem adicionar fadiga aeróbica relevante. Combinação correta para o estado de readiness atual.",
+    "sec_ajuste": "Para hoje: sessões já executadas — nenhuma ação adicional necessária. Manter repouso ativo, FC abaixo de 110bpm em qualquer movimento complementar. Foco em recuperação e sono (deitar 22:30, alvo 8h).",
+    "sec_alertas": "Body Battery em 29/100 com sono de apenas 0.4h REM é o maior alerta do dia — recuperação cognitiva e hormonal comprometida. Natação zerada na semana representa gap técnico e de volume que precisa ser endereçado a partir de segunda-feira. Cadência no bike (77rpm) exige atenção sistemática.",
+    "sec_nutricao": "Sem treino adicional hoje: priorize CHO complexo nas refeições principais (arroz, batata-doce) para reabastecimento de glicogênio sem excesso calórico. Pós-força já executada: 30g de proteína dentro de 30min da sessão; hidratação mínima de 2L ao longo do dia independente de treino.",
+    "sec_amanha": "Long Run 60min Z2 planejado — com Body Battery em 29 e sono deficitário, manter o volume mas com FC teto rígido em Z2 baixo (135–145bpm). Redução para 50min se ao iniciar a sessão FC de repouso matinal estiver acima de 70bpm ou sensação de esforço desproporcional. Não justifica cancelar — estímulo aeróbico leve é necessário para reverter status 'Improdutivo'.",
     "amanha_ajustado": [
       {
         "esporte": "run",
-        "tipo": "Strides 6x20seg",
-        "duracao_min": 30,
+        "tipo": "Long Run (recuperação)",
+        "duracao_min": 50,
         "zona": "Z2",
-        "motivo_ajuste": "Mantido conforme plano original; REM baixo (0.2h) exige monitoramento de FC — interromper se FC basal amanhã manhã estiver >65bpm."
+        "motivo_ajuste": "Redução de 10min dado Body Battery crítico (29/100) e déficit de sono acumulado — FC teto 145bpm, ritmo conversacional estrito."
       }
     ],
-    "status_readiness": "MODERADO",
+    "status_readiness": "BAIXO",
     "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Pedal de recuperação ativa de 45min é adequado ao contexto: HRV elevado por rebote e sono com REM insuficiente pedem estímulo leve para manutenção sem sobrecarga. Executar em Z1 estrito é a única abordagem correta hoje.",
-    "alerta": "REM de 0.2h indica recuperação neural crítica — priorizar dormir às 22:30 e atingir 8h de sono esta noite antes dos strides de amanhã."
+    "analise_hoje": "Combinação de strides neuromusculares e força com impacto cardiovascular mínimo (FC 101bpm) foi tecnicamente adequada ao estado de readiness baixo. Execução inteligente — estímulo sem sobrecarga adicional.",
+    "alerta": "Body Battery 29/100 combinado com apenas 0.4h de sono REM indica recuperação insuficiente — prioridade absoluta é dormir 8h esta noite antes do Long Run de amanhã."
   }
 }
