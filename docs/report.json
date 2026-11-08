@@ -1,20 +1,20 @@
 {
-  "date": "2026-11-07",
-  "generated_at": "2026-11-07T07:01:36.709856Z",
+  "date": "2026-11-08",
+  "generated_at": "2026-11-08T07:01:12.714623Z",
   "saude": {
     "hrv": null,
     "hrv_7d": null,
     "hrv_status": null,
-    "rhr": null,
+    "rhr": 64,
     "rhr_baseline": null,
     "sono_h": 0.0,
     "sono_score": null,
     "sono_deep": 0.0,
     "sono_rem": 0.0,
     "sono_awake": 0.0,
-    "body_battery": null,
-    "stress_avg": null,
-    "stress_rest": null,
+    "body_battery": 47,
+    "stress_avg": 22,
+    "stress_rest": 60.53,
     "atl": null,
     "ctl": null,
     "tsb": null,
@@ -32,10 +32,10 @@
     "vo2max": null,
     "peso": null,
     "previsoes": {
-      "5K": 1334,
-      "10K": 2875,
-      "Meia": 6602,
-      "Maratona": 14838
+      "5K": 1344,
+      "10K": 2894,
+      "Meia": 6649,
+      "Maratona": 14940
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -57,40 +57,28 @@
   },
   "ontem": [
     {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Gym F · Treino de Força (Triat",
-      "dist": "—",
-      "dur": "38m57s",
-      "fc": 101.0,
-      "fc_max": 136.0,
-      "cal": 256.0,
-      "cad": null,
+      "mod": "run",
+      "icone": "🏃",
+      "nome": "Erkrath - Corrida · Long Run (recuperaç",
+      "dist": "8.0km",
+      "dur": "45m11s",
+      "fc": 147.0,
+      "fc_max": 164.0,
+      "cal": 644.0,
+      "cad": 167.96875,
       "tss": null,
-      "np": null,
+      "np": 367.0,
       "swolf": null,
-      "aerobic_te": 0.699999988079071,
+      "aerobic_te": 3.5,
       "anaerobic_te": 0.10000000149011612,
-      "elev": null,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 0.0,
-      "_dur_s": 2337.9560546875
+      "elev": 110.0,
+      "perf": "5:40/km",
+      "pl": "Pace",
+      "_dist_m": 7962.9599609375,
+      "_dur_s": 2711.819091796875
     }
   ],
   "hoje": [
-    {
-      "icone": "🏃",
-      "nome": "Long Run (recuperação)",
-      "tipo": "run",
-      "dur": "50min",
-      "dist": "—",
-      "passos": [
-        "Redução de 10min dado Body Battery crítico (29/100) e déficit de sono acumulado — FC teto 145bpm, ritmo conversacional estrito."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🚴",
       "nome": "Long Ride (recuperação)",
@@ -102,16 +90,17 @@
       ]
     }
   ],
+  "amanha": [],
   "hoje_feito": [],
   "semana": {
     "swim_km": 0,
     "swim_min": 0,
     "bike_km": 17.6,
     "bike_min": 40.4,
-    "run_km": 2.7,
-    "run_min": 29.3,
+    "run_km": 10.6,
+    "run_min": 74.5,
     "total_tss": 44.8,
-    "n_treinos": 3
+    "n_treinos": 4
   },
   "semana_passada": {
     "swim_km": 1.0,
@@ -122,18 +111,14 @@
     "run_min": 211.4
   },
   "clima": {
-    "temp_max": 9.2,
-    "temp_min": 1.8,
-    "chuva_pct": 0,
-    "vento_kmh": 9.7,
-    "temp_atual": 3.0,
-    "emoji": "🌤️"
+    "temp_max": 9.3,
+    "temp_min": 5.0,
+    "chuva_pct": 14,
+    "vento_kmh": 11.9,
+    "temp_atual": 6.6,
+    "emoji": "🌧️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-11-01",
-      "value": 48.0
-    },
     {
       "date": "2026-11-02",
       "value": 48.0
@@ -156,14 +141,14 @@
     },
     {
       "date": "2026-11-07",
+      "value": 41.0
+    },
+    {
+      "date": "2026-11-08",
       "value": null
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-10-23",
-      "value": 49.6
-    },
     {
       "date": "2026-10-24",
       "value": 49.6
@@ -219,15 +204,14 @@
     {
       "date": "2026-11-06",
       "value": 49.4
+    },
+    {
+      "date": "2026-11-07",
+      "value": 49.2
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-10-25",
-      "sono": 9.2,
-      "te": 1.0
-    },
     {
       "date": "2026-10-26",
       "sono": 5.0,
@@ -262,9 +246,22 @@
       "date": "2026-11-06",
       "sono": 6.2,
       "te": 0.7
+    },
+    {
+      "date": "2026-11-07",
+      "sono": 6.8,
+      "te": 3.5
     }
   ],
   "mes": {
+    "2026-11-07": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": [
+        "🏃"
+      ]
+    },
     "2026-11-06": {
       "planejados": [
         "🏃"
@@ -303,12 +300,6 @@
       ],
       "feitos": []
     },
-    "2026-11-07": {
-      "planejados": [
-        "🏃"
-      ],
-      "feitos": []
-    },
     "2026-11-08": {
       "planejados": [
         "🚴"
@@ -321,28 +312,20 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "Consistência na base constrói o motor do race day.",
-    "sec_readiness": "Dados de HRV, RHR e Body Battery indisponíveis — impossível quantificar estado autonômico com precisão. Sono registrado em 0.0h é dado inválido ou falha de sincronização do dispositivo; assumir déficit real desconhecido. Sem métricas objetivas, decisão de carga deve ser conservadora por precaução.",
-    "sec_treino_ontem": "Sessão de força (Gym F) executada em ~39min com FC média 101bpm e pico 136bpm — carga cardiovascular baixa, compatível com estímulo neuromuscular de base. TE aeróbico de 0.70 confirma sessão predominantemente anaeróbica/funcional sem impacto aeróbico relevante. Execução adequada para fase BASE semana 4.",
-    "sec_carga": "Volume semanal extremamente baixo: Bike 17.6km + Corrida 2.7km + Natação 0km — bem abaixo de qualquer target funcional para Half IM. ATL/CTL e distribuição por zonas indisponíveis, impossibilitando análise TSB. Risco de lesão MODERADO sinalizando possível destreino ou retomada após pausa, não sobrecarga.",
-    "sec_hoje": "Long Run (recuperação) de 50min planejado, porém nenhum treino registrado até o momento. Se ainda será executado: manter ritmo conversacional estrito, FC abaixo de 140bpm, terreno plano. Clima frio (máx 9.2°C) exige aquecimento de 8-10min e camadas leves para evitar rigidez muscular.",
-    "sec_ajuste": "Executar Long Run 50min integralmente em Z1-Z2 baixo, FC teto 138bpm. Sem acelerações ou fartlek — sessão puramente regenerativa.",
-    "sec_alertas": "Ausência total de dados biométricos (HRV, sono, Body Battery) impede avaliação de prontidão real — risco de decisão às cegas. Volume semanal muito baixo para fase BASE semana 4 de um ciclo Half IM; verificar se há sessões não sincronizadas ou se o plano está sendo subexecutado.",
-    "sec_nutricao": "Pré-corrida (se executar hoje): 350kcal leves 60-90min antes, priorizando CHO de baixo índice glicêmico. Pós-treino: 30g proteína em até 30min; hidratação mínima 400-500ml durante os 50min dado frio e baixa percepção de sede.",
-    "sec_amanha": "Long Ride (recuperação) 75min Z2 amanhã mantido conforme plano — carga de hoje é baixa e risco de sobrecarga é mínimo. Garantir aquecimento de 10min em Z1 antes de sustentar Z2 (FC 130-145bpm ou 65-75% FTP); temperatura prevista exige vestuário adequado ao frio matinal.",
-    "amanha_ajustado": [
-      {
-        "esporte": "bike",
-        "tipo": "Long Ride (recuperação)",
-        "duracao_min": 75,
-        "zona": "Z2",
-        "motivo_ajuste": null
-      }
-    ],
+    "frase": "Recuperação ativa é treino; execute com intenção.",
+    "sec_readiness": "HRV e RHR sem baseline definido dificultam análise comparativa; RHR de 64bpm é referência pontual aceitável. Sono registrado como 0.0h — dado crítico ausente ou falha de captura, pois compromete toda a avaliação de prontidão. Body Battery em 47/100 com stress médio 22 indica reserva energética moderada-baixa, compatível com dia de carga leve.",
+    "sec_treino_ontem": "Long Run de 8km a 5:40/km com FC média 147bpm (TE aeróbico 3.5) indica esforço aeróbico moderado-alto para o contexto de 'recuperação' — FC máxima de 164bpm sinaliza momentos acima da zona alvo. Cadência de 168spm está dentro do range eficiente, mas potência de 367W (métrica de corrida) precisa ser contextualizada com o plano de zonas. Execução aceitável, porém intensidade ligeiramente elevada para uma sessão rotulada como recuperação.",
+    "sec_carga": "Dados de carga mensal (ATL/CTL/zonas) ausentes — impossível análise de distribuição Z1/Z2/Z3 vs targets com precisão. Volume semanal registrado é baixo: 0km natação, 17.6km bike, 10.6km corrida — claramente insuficiente para fase BASE de Half Ironman, sugerindo semana de recuperação ou subregistro. Risco de lesão MODERADO merece atenção, especialmente com histórico de carga não rastreado.",
+    "sec_hoje": "Long Ride de recuperação (75min) ainda não executado — janela de treino permanece aberta. Com Body Battery em 47 e Long Run ontem com FC elevada, prioridade absoluta é manter Z1 rigoroso (FC ≤ 130bpm). Clima frio (9°C) exige aquecimento prolongado de 10-15min e atenção ao vestuário para evitar vasoconstrição que artificialmente eleva FC.",
+    "sec_ajuste": "Manter 75min de Long Ride integralmente em Z1, FC teto 130bpm, potência alvo 60-65% FTP (se disponível). Nenhum pico acima de Z1 — qualquer drift de FC acima de 135bpm: reduzir imediatamente intensidade ou interromper.",
+    "sec_alertas": "Dado de sono 0.0h é inconsistente — verificar sincronização do dispositivo antes de treinar. FC máxima de 164bpm no Long Run de ontem sugere que a sessão ultrapassou o escopo de recuperação; monitorar sinais de fadiga acumulada durante o ride de hoje.",
+    "sec_nutricao": "Pré-ride (30-45min antes): 350kcal com predominância de carboidratos de baixo índice glicêmico. Durante 75min em Z1 leve: hidratação 600ml total (sem necessidade de CHO suplementar abaixo de 90min em baixa intensidade); pós-treino: 30g proteína + CHO de reposição em até 30min.",
+    "sec_amanha": "Nenhuma sessão de treino planejada para amanhã — manter como descanso ativo ou mobilidade leve (10-15min), especialmente dado o contexto de sono não rastreado e Body Battery moderado.",
+    "amanha_ajustado": [],
     "status_readiness": "MODERADO",
     "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Treino de corrida leve (50min recuperação) ainda não executado — executar conforme planejado em Z1-Z2 estrito, sem desvios de intensidade. Volume semanal baixo torna esta sessão importante para manutenção do estímulo aeróbico base.",
-    "alerta": "Dados biométricos ausentes (HRV/sono/Body Battery) — verificar sincronização do Garmin 965 antes do treino de amanhã para restaurar monitoramento de prontidão."
+    "analise_hoje": "Long Ride de 75min em Z1 estrito é a prescrição correta após Long Run com intensidade limítrofe ontem — executar com FC teto 130bpm sem negociação. Frio de 9°C é o principal fator operacional: aquecimento adequado e roupa de camadas são obrigatórios.",
+    "alerta": "Dado de sono 0.0h e ausência de HRV/baseline comprometem a tomada de decisão — verificar sincronização do Garmin 965 imediatamente."
   }
 }
