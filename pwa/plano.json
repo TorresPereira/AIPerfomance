@@ -98,10 +98,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Intervalado 6x4min",
-              "duracao_min": 57,
+              "tipo": "Intervalado 4x4min Z4 (reduzido)",
+              "duracao_min": 45,
               "zona": "Z4",
-              "descricao": "Intervalos em ritmo de limiar/Z4, foco em manter a forma de corrida mesmo sob fadiga.",
+              "descricao": "Redução de 6x4 para 4x4 repetições devido a sono deficiente (6h, REM 0.3h), Body Battery 27 e carga acumulada bike+força ontem — preservar qualidade dos intervalos sem risco de execução comprometida.",
               "longo": false,
               "estrutura": [
                 {
