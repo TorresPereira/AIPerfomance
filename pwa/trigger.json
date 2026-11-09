@@ -1,4 +1,5 @@
 {
-  "action": "gerar_plano",
-  "ts": 1794172975640
+  "action": "export_gym",
+  "ts": 1794222137816,
+  "dia": "F"
 }
