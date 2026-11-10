@@ -167,9 +167,9 @@
             {
               "esporte": "swim",
               "tipo": "Natacao Base Tecnica",
-              "duracao_min": 45,
+              "duracao_min": 35,
               "zona": "Z2",
-              "descricao": "Sessão fixa de natação com foco em técnica de braçada, respiração e posição hidrodinâmica.",
+              "descricao": "Redução de 10min dado acúmulo de carga com futebol e segunda sessão de natação no mesmo dia em Semana 1 BASE.",
               "longo": false,
               "estrutura": null,
               "fixo": false
