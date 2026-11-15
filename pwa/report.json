@@ -1,35 +1,37 @@
 {
   "date": "2026-11-15",
-  "generated_at": "2026-11-15T07:01:40.638288Z",
+  "generated_at": "2026-11-15T09:19:26.038784Z",
   "saude": {
-    "hrv": null,
-    "hrv_7d": null,
-    "hrv_status": null,
-    "rhr": 67,
+    "hrv": 46,
+    "hrv_7d": 32,
+    "hrv_status": "balanced",
+    "hrv_baseline_low": 30,
+    "hrv_baseline_high": 40,
+    "rhr": 60,
     "rhr_baseline": null,
-    "sono_h": 0.0,
-    "sono_score": null,
-    "sono_deep": 0.0,
-    "sono_rem": 0.0,
-    "sono_awake": 0.0,
-    "body_battery": 4,
-    "stress_avg": 29,
-    "stress_rest": 28.41,
-    "atl": null,
-    "ctl": null,
+    "sono_h": 6.9,
+    "sono_score": 71,
+    "sono_deep": 0.8,
+    "sono_rem": 1.1,
+    "sono_awake": 35.0,
+    "body_battery": 44,
+    "stress_avg": 23,
+    "stress_rest": 59.86,
+    "atl": 414.0,
+    "ctl": 1657.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": null,
-    "load_aerobic_high": null,
-    "load_anaerobic": null,
-    "load_total_month": null,
-    "load_target_low": null,
-    "load_target_high": null,
-    "training_status": null,
-    "fitness_trend": null,
+    "load_aerobic_low": 509.0,
+    "load_aerobic_high": 960.0,
+    "load_anaerobic": 189.0,
+    "load_total_month": 1657.0,
+    "load_target_low": "446–1098",
+    "load_target_high": "750–1403",
+    "training_status": "Recuperação",
+    "fitness_trend": "Estável",
     "training_readiness": null,
-    "vo2max": null,
+    "vo2max": 49.1,
     "peso": null,
     "previsoes": {
       "5K": 1350,
@@ -53,7 +55,7 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": null
+    "sono_deficit_h": 1.1
   },
   "ontem": [
     {
@@ -122,11 +124,11 @@
     "run_min": 74.5
   },
   "clima": {
-    "temp_max": 9.3,
+    "temp_max": 8.7,
     "temp_min": 2.5,
     "chuva_pct": 100,
-    "vento_kmh": 19.1,
-    "temp_atual": 3.8,
+    "vento_kmh": 18.4,
+    "temp_atual": 4.0,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
@@ -156,14 +158,10 @@
     },
     {
       "date": "2026-11-15",
-      "value": null
+      "value": 46.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-10-31",
-      "value": 49.4
-    },
     {
       "date": "2026-11-01",
       "value": 49.4
@@ -218,6 +216,10 @@
     },
     {
       "date": "2026-11-14",
+      "value": 49.1
+    },
+    {
+      "date": "2026-11-15",
       "value": 49.1
     }
   ],
@@ -434,28 +436,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "Corpo esgotado pede respeito — recupere para render amanhã.",
-    "sec_readiness": "Body Battery em 4/100 é sinal crítico de acúmulo de fadiga — sem margem operacional para esforço. RHR de 67bpm sem baseline definido impede comparação precisa, mas associado ao BB baixo reforça o alerta. Sono registrado em 0h hoje é o fator mais preocupante: sem recuperação noturna adequada, qualquer carga adicional é risco real.",
-    "sec_treino_ontem": "Rodagem de 6.8km a 5:23/km com FC média 152bpm e TE aeróbico 3.7 indica sessão de intensidade moderada-alta para o contexto de base — FC próxima ao limiar superior de Z2/entrada Z3. Potência de corrida em 384W (avg) com cadência 171spm sugere padrão biomecânico aceitável, mas FC máxima de 163bpm indica momentos acima do alvo Z2. Sessão tecnicamente executada, porém ligeiramente intensa para fase BASE.",
-    "sec_carga": "Sem dados de CTL/ATL e distribuição de zonas mensais disponíveis, a análise de carga fica limitada ao volume semanal: Natação 1.6km, Bike 18km, Corrida 13.6km — volumes baixos para Half IM em fase BASE semana 2. Risco de lesão classificado como MODERADO pelo sistema Garmin merece atenção apesar do volume reduzido. A ausência de métricas de zona impede avaliar se a polarização está sendo respeitada.",
-    "sec_hoje": "Long Ride Base de 120min planejado para hoje, mas nenhum treino foi registrado ainda. Com Body Battery em 4/100 e 0h de sono registradas, executar 2h de bike neste estado representa risco de sobrecarga aguda. Se for executar, limitar intensidade rigidamente a Z1 (FC abaixo de 130bpm), sem nenhuma incursão em Z2+.",
-    "sec_ajuste": "Reduzir Long Ride para no máximo 60min em Z1 puro, FC teto 128bpm, potência alvo abaixo de 170W. Se BB não melhorar antes da sessão, substituir por descanso ativo (mobilidade 20min).",
-    "sec_alertas": "ALERTA CRÍTICO: Body Battery 4/100 combinado com 0h de sono registradas configura estado de recuperação insuficiente — treinar em intensidade normal hoje eleva risco de lesão e regressão de adaptação. Sessão de ontem com FC máx 163bpm indica que Z2 não foi respeitado integralmente na rodagem base.",
-    "sec_nutricao": "Hoje sem treino registrado: priorizar alimentação antiinflamatória — CHO complexo (150-200g ao longo do dia) e 30g proteína em cada refeição principal para suporte à recuperação muscular. Hidratação mínima de 2.5L ao longo do dia independente de treino; dormir às 22:30 é prioridade absoluta para recuperar BB antes de amanhã.",
-    "sec_amanha": "Rodagem Leve 45min Z2 amanhã está planejada e é adequada SE o sono desta noite for de pelo menos 7h e BB recuperar acima de 40/100. Manter duração em 45min mas monitorar FC nos primeiros 10min — se FC em pace leve ultrapassar 148bpm, reduzir para caminhada ativa e encerrar em 30min.",
+    "frase": "HRV elevado: aproveite a janela, execute com critério.",
+    "sec_readiness": "HRV de 46ms está 44% acima da média 7d (32ms) e acima do baseline (30–40ms) — janela de recuperação real e favorável. Sono de 6.9h com déficit de 1.1h, deep sleep apenas 0.8h comprometem a qualidade restauradora. Body Battery em 44/100 com stress médio 23 indica reserva funcional moderada, não máxima.",
+    "sec_treino_ontem": "Rodagem de 6.8km a 5:23/km com FC média 152bpm (máx 163bpm) — Training Effect aeróbico 3.7, carga adequada para Z2. Cadência de 171spm está acima do ideal (180spm é referência), sinaliza possível subfadiga neuromuscular ou padrão técnico a corrigir. Potência de 384W para corrida indica métrica de referência válida; execução dentro do esperado para fase base.",
+    "sec_carga": "Z1 em 509 (dentro do target 446–1098) e Z2 em 960 (dentro do target 750–1403) — distribuição tecnicamente adequada para semana 2 de base. Z3+ em 189 representa ~11.4% da carga total, aceitável mas deve ser monitorado para não inflar em semanas subsequentes. Volume semanal muito baixo (Swim 1.6km / Bike 18km / Run 13.6km) — risco de lesão MODERADO vem mais de inconsistência de carga do que excesso.",
+    "sec_hoje": "Long Ride Base de 120min planejado — clima de 8.7°C máx, chuva 100% e vento de 18.4km/h inviabiliza a sessão ao ar livre com segurança e qualidade. HRV favorável abre espaço para executar em ambiente indoor (rolo/trainer) mantendo o estímulo base. Nenhum treino registrado ainda — decisão de execução pendente.",
+    "sec_ajuste": "Executar Long Ride 120min em rolo/trainer, FC teto 145bpm (Z2 estável), potência alvo 170–195W. Evitar Z3 integralmente hoje dado o déficit de sono e Body Battery em 44.",
+    "sec_alertas": "Cadência de corrida em 171spm ontem — trabalhar consciência de cadência acima de 178spm nas próximas rodagens. Volume semanal muito abaixo do esperado para Half IM em fase base — risco de subadaptação se padrão persistir.",
+    "sec_nutricao": "Sem treino registrado hoje ainda: pré-ride 350kcal com CHO de absorção rápida 60–90min antes; durante os 120min hidratar 600ml/h com eletrólitos dado o frio e sudorese suprimida. Pós-treino: 30g proteína + 60g CHO na janela de 30min.",
+    "sec_amanha": "Rodagem Leve 35min Z2 amanhã: HRV hoje favorável mas sono acumulado deficitário. Manter sessão conforme plano — 35min é volume baixo e adequado para fase base. Executar FC entre 135–148bpm, sem exceder Z2.",
     "amanha_ajustado": [
       {
         "esporte": "run",
         "tipo": "Rodagem Leve",
         "duracao_min": 35,
         "zona": "Z2",
-        "motivo_ajuste": "Redução preventiva de 10min dado Body Battery crítico hoje e 0h de sono registradas — avaliar FC nos primeiros 5min e interromper se acima de 148bpm."
+        "motivo_ajuste": null
       }
     ],
-    "status_readiness": "CRÍTICO",
+    "status_readiness": "BOM",
     "status_carga": "SUAVE",
-    "acao_hoje": "REDUZIR 40%",
-    "analise_hoje": "Nenhum treino executado hoje ainda; com BB em 4/100 e sem sono registrado, o corpo está em estado de recuperação crítica e qualquer esforço acima de Z1 leve é contraindicado. Prioridade absoluta: sono e recuperação passiva.",
-    "alerta": "Body Battery 4/100 + 0h sono = estado crítico de recuperação; executar Long Ride 120min hoje representa risco elevado de lesão e comprometimento do ciclo de adaptação."
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Long Ride Base de 120min deve ser realocado para indoor dado o clima extremo (8.7°C, chuva 100%, vento 18km/h); HRV favorável justifica manter o estímulo sem redução de duração. Executar em rolo com controle estrito de FC e potência em Z2.",
+    "alerta": "Clima inviabiliza outdoor — execute exclusivamente em rolo/trainer ou reavalie segurança; hipotermia e risco de queda são fatores reais hoje."
   }
 }
