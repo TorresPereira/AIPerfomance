@@ -293,9 +293,9 @@
             {
               "esporte": "run",
               "tipo": "Rodagem Leve",
-              "duracao_min": 45,
+              "duracao_min": 35,
               "zona": "Z2",
-              "descricao": "Corrida de recuperação ativa em ritmo fácil após o long ride do domingo.",
+              "descricao": "Redução preventiva de 10min dado Body Battery crítico hoje e 0h de sono registradas — avaliar FC nos primeiros 5min e interromper se acima de 148bpm.",
               "longo": false,
               "estrutura": null,
               "fixo": false

@@ -1,43 +1,41 @@
 {
-  "date": "2026-11-14",
-  "generated_at": "2026-11-14T08:27:29.059613Z",
+  "date": "2026-11-15",
+  "generated_at": "2026-11-15T07:01:40.638288Z",
   "saude": {
-    "hrv": 58,
-    "hrv_7d": 32,
-    "hrv_status": "balanced",
-    "hrv_baseline_low": 30,
-    "hrv_baseline_high": 40,
-    "rhr": 62,
+    "hrv": null,
+    "hrv_7d": null,
+    "hrv_status": null,
+    "rhr": 67,
     "rhr_baseline": null,
-    "sono_h": 8.4,
-    "sono_score": 76,
-    "sono_deep": 1.4,
-    "sono_rem": 0.7,
-    "sono_awake": 12.0,
-    "body_battery": 59,
-    "stress_avg": 18,
-    "stress_rest": 82.14,
-    "atl": 407.0,
-    "ctl": 1630.0,
+    "sono_h": 0.0,
+    "sono_score": null,
+    "sono_deep": 0.0,
+    "sono_rem": 0.0,
+    "sono_awake": 0.0,
+    "body_battery": 4,
+    "stress_avg": 29,
+    "stress_rest": 28.41,
+    "atl": null,
+    "ctl": null,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 509.0,
-    "load_aerobic_high": 933.0,
-    "load_anaerobic": 189.0,
-    "load_total_month": 1630.0,
-    "load_target_low": "452–1105",
-    "load_target_high": "744–1396",
-    "training_status": "Recuperação",
-    "fitness_trend": "Estável",
+    "load_aerobic_low": null,
+    "load_aerobic_high": null,
+    "load_anaerobic": null,
+    "load_total_month": null,
+    "load_target_low": null,
+    "load_target_high": null,
+    "training_status": null,
+    "fitness_trend": null,
     "training_readiness": null,
-    "vo2max": 49.4,
+    "vo2max": null,
     "peso": null,
     "previsoes": {
       "5K": 1350,
-      "10K": 2903,
-      "Meia": 6668,
-      "Maratona": 14976
+      "10K": 2907,
+      "Meia": 6681,
+      "Maratona": 15000
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,22 +53,32 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": -0.4
+    "sono_deficit_h": null
   },
-  "ontem": [],
-  "hoje": [
+  "ontem": [
     {
+      "mod": "run",
       "icone": "🏃",
-      "nome": "Long Run Base",
-      "tipo": "run",
-      "dur": "90min",
-      "dist": "—",
-      "passos": [
-        "Corrida longa em ritmo aeróbico confortável, foco em resistência e economia de movimento."
-      ]
+      "nome": "Erkrath Running",
+      "dist": "6.8km",
+      "dur": "36m51s",
+      "fc": 152.0,
+      "fc_max": 163.0,
+      "cal": 556.0,
+      "cad": 171.265625,
+      "tss": null,
+      "np": 384.0,
+      "swolf": null,
+      "aerobic_te": 3.700000047683716,
+      "anaerobic_te": 0.0,
+      "elev": 49.0,
+      "perf": "5:23/km",
+      "pl": "Pace",
+      "_dist_m": 6826.240234375,
+      "_dur_s": 2211.6298828125
     }
   ],
-  "amanha": [
+  "hoje": [
     {
       "icone": "🚴",
       "nome": "Long Ride Base",
@@ -82,16 +90,28 @@
       ]
     }
   ],
+  "amanha": [
+    {
+      "icone": "🏃",
+      "nome": "Rodagem Leve",
+      "tipo": "run",
+      "dur": "35min",
+      "dist": "—",
+      "passos": [
+        "Redução preventiva de 10min dado Body Battery crítico hoje e 0h de sono registradas — avaliar FC nos primeiros 5min e interromper se acima de 148bpm."
+      ]
+    }
+  ],
   "hoje_feito": [],
   "semana": {
     "swim_km": 1.6,
     "swim_min": 35.4,
     "bike_km": 18.0,
     "bike_min": 42.2,
-    "run_km": 6.8,
-    "run_min": 36.7,
+    "run_km": 13.6,
+    "run_min": 73.5,
     "total_tss": 48.2,
-    "n_treinos": 3
+    "n_treinos": 4
   },
   "semana_passada": {
     "swim_km": 0,
@@ -102,18 +122,14 @@
     "run_min": 74.5
   },
   "clima": {
-    "temp_max": 7.9,
-    "temp_min": 0.7,
-    "chuva_pct": 1,
-    "vento_kmh": 14.8,
-    "temp_atual": 2.0,
-    "emoji": "🌤️"
+    "temp_max": 9.3,
+    "temp_min": 2.5,
+    "chuva_pct": 100,
+    "vento_kmh": 19.1,
+    "temp_atual": 3.8,
+    "emoji": "🌧️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-11-08",
-      "value": 51.0
-    },
     {
       "date": "2026-11-09",
       "value": 35.0
@@ -137,6 +153,10 @@
     {
       "date": "2026-11-14",
       "value": 58.0
+    },
+    {
+      "date": "2026-11-15",
+      "value": null
     }
   ],
   "vo2max_hist": [
@@ -198,7 +218,7 @@
     },
     {
       "date": "2026-11-14",
-      "value": 49.4
+      "value": 49.1
     }
   ],
   "prs": [],
@@ -237,9 +257,22 @@
       "date": "2026-11-12",
       "sono": 6.8,
       "te": 3.2
+    },
+    {
+      "date": "2026-11-14",
+      "sono": 8.4,
+      "te": 3.7
     }
   ],
   "mes": {
+    "2026-11-14": {
+      "planejados": [
+        "🏃"
+      ],
+      "feitos": [
+        "🏃"
+      ]
+    },
     "2026-11-12": {
       "planejados": [
         "🚴",
@@ -302,12 +335,6 @@
         "🏊",
         "⚡",
         "🏊"
-      ],
-      "feitos": []
-    },
-    "2026-11-14": {
-      "planejados": [
-        "🏃"
       ],
       "feitos": []
     },
@@ -403,32 +430,32 @@
     }
   },
   "plano_meta": {
-    "semana": 1,
+    "semana": 2,
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado: janela de adaptação aberta, use com precisão.",
-    "sec_readiness": "HRV de 58ms representa +26ms acima da média 7d (32ms) e está claramente acima do baseline (30–40ms), indicando recuperação autonômica robusta e janela anabólica favorável. RHR de 62bpm sem baseline registrado, mas compatível com atleta em fase base. Sono de 8.4h é positivo, porém qualidade é subótima: REM 0.7h (ideal >1.5h) e Deep 1.4h razoável; Body Battery 59/100 com stress médio 18 reforça estado recuperado mas não em pico.",
-    "sec_treino_ontem": null,
-    "sec_carga": "Z1 em 509 (dentro do target 452–1105) e Z2 em 933 (dentro do target 744–1396) mostram distribuição polarizada correta para fase BASE. Z3+ em 189 é aceitável, mas volume semanal total é muito baixo: natação 1.6km, bike 18km, corrida 6.8km — claramente abaixo do necessário para progressão Half IM. CTL estimado de 1630 com ATL 407 sugere carga pontual baixa; risco de lesão MODERADO deve ser monitorado ao aumentar volume nas próximas semanas.",
-    "sec_hoje": "Long Run Base de 90min planejado, sem execução registrada ainda. Executar em Z2 aeróbico com FC alvo entre 138–148bpm (estimado ~75–80% FCmax para VO2max 49.4). Ritmo controlado, sem drift de FC acima de 155bpm nos últimos 20min; priorizar consistência aeróbica sobre velocidade.",
-    "sec_ajuste": "Manter 90min de Long Run Base integralmente. FC teto 155bpm; se ultrapassar, reduzir pace imediatamente. Nenhum estímulo Z3+ hoje.",
-    "sec_alertas": "REM sleep 0.7h abaixo do ideal — monitorar qualidade do sono nas próximas noites. Volume semanal muito baixo para fase BASE de Half IM; necessário aumentar progressivamente nas semanas 2–3. Temperatura mínima 0.7°C amanhã: aquecimento prolongado obrigatório no Long Ride.",
-    "sec_nutricao": "Pré-Long Run: 350kcal ~60–90min antes (carboidratos de baixo índice glicêmico). Pós-treino: 30g proteína + 60–80g CHO dentro de 30min; hidratação 600ml/h durante execução mesmo em clima frio (7.9°C reduz percepção de sede).",
-    "sec_amanha": "Long Ride Base 120min em Z2 está alinhado com o HRV elevado de hoje e a recuperação registrada. Manter sessão completa, mas dado o frio previsto (0.7°C mínima), executar em rolo/trainer ou com aquecimento de 15min extra incluído no tempo. FC alvo 135–148bpm, potência alvo 160–185W (estimado Z2 para VO2max 49.4 sem dados de FTP explícitos).",
+    "frase": "Corpo esgotado pede respeito — recupere para render amanhã.",
+    "sec_readiness": "Body Battery em 4/100 é sinal crítico de acúmulo de fadiga — sem margem operacional para esforço. RHR de 67bpm sem baseline definido impede comparação precisa, mas associado ao BB baixo reforça o alerta. Sono registrado em 0h hoje é o fator mais preocupante: sem recuperação noturna adequada, qualquer carga adicional é risco real.",
+    "sec_treino_ontem": "Rodagem de 6.8km a 5:23/km com FC média 152bpm e TE aeróbico 3.7 indica sessão de intensidade moderada-alta para o contexto de base — FC próxima ao limiar superior de Z2/entrada Z3. Potência de corrida em 384W (avg) com cadência 171spm sugere padrão biomecânico aceitável, mas FC máxima de 163bpm indica momentos acima do alvo Z2. Sessão tecnicamente executada, porém ligeiramente intensa para fase BASE.",
+    "sec_carga": "Sem dados de CTL/ATL e distribuição de zonas mensais disponíveis, a análise de carga fica limitada ao volume semanal: Natação 1.6km, Bike 18km, Corrida 13.6km — volumes baixos para Half IM em fase BASE semana 2. Risco de lesão classificado como MODERADO pelo sistema Garmin merece atenção apesar do volume reduzido. A ausência de métricas de zona impede avaliar se a polarização está sendo respeitada.",
+    "sec_hoje": "Long Ride Base de 120min planejado para hoje, mas nenhum treino foi registrado ainda. Com Body Battery em 4/100 e 0h de sono registradas, executar 2h de bike neste estado representa risco de sobrecarga aguda. Se for executar, limitar intensidade rigidamente a Z1 (FC abaixo de 130bpm), sem nenhuma incursão em Z2+.",
+    "sec_ajuste": "Reduzir Long Ride para no máximo 60min em Z1 puro, FC teto 128bpm, potência alvo abaixo de 170W. Se BB não melhorar antes da sessão, substituir por descanso ativo (mobilidade 20min).",
+    "sec_alertas": "ALERTA CRÍTICO: Body Battery 4/100 combinado com 0h de sono registradas configura estado de recuperação insuficiente — treinar em intensidade normal hoje eleva risco de lesão e regressão de adaptação. Sessão de ontem com FC máx 163bpm indica que Z2 não foi respeitado integralmente na rodagem base.",
+    "sec_nutricao": "Hoje sem treino registrado: priorizar alimentação antiinflamatória — CHO complexo (150-200g ao longo do dia) e 30g proteína em cada refeição principal para suporte à recuperação muscular. Hidratação mínima de 2.5L ao longo do dia independente de treino; dormir às 22:30 é prioridade absoluta para recuperar BB antes de amanhã.",
+    "sec_amanha": "Rodagem Leve 45min Z2 amanhã está planejada e é adequada SE o sono desta noite for de pelo menos 7h e BB recuperar acima de 40/100. Manter duração em 45min mas monitorar FC nos primeiros 10min — se FC em pace leve ultrapassar 148bpm, reduzir para caminhada ativa e encerrar em 30min.",
     "amanha_ajustado": [
       {
-        "esporte": "bike",
-        "tipo": "Long Ride Base",
-        "duracao_min": 120,
+        "esporte": "run",
+        "tipo": "Rodagem Leve",
+        "duracao_min": 35,
         "zona": "Z2",
-        "motivo_ajuste": null
+        "motivo_ajuste": "Redução preventiva de 10min dado Body Battery crítico hoje e 0h de sono registradas — avaliar FC nos primeiros 5min e interromper se acima de 148bpm."
       }
     ],
-    "status_readiness": "BOM",
+    "status_readiness": "CRÍTICO",
     "status_carga": "SUAVE",
-    "acao_hoje": "MANTER",
-    "analise_hoje": "Long Run Base 90min em Z2 é a sessão correta dado o HRV elevado e carga semanal baixa; executar com disciplina de zona sem exceder 155bpm para maximizar adaptação aeróbica base.",
-    "alerta": "Volume semanal acumulado (bike 18km, run 6.8km, swim 1.6km) está criticamente abaixo para Half IM fase BASE — necessário escalonamento imediato nas próximas semanas."
+    "acao_hoje": "REDUZIR 40%",
+    "analise_hoje": "Nenhum treino executado hoje ainda; com BB em 4/100 e sem sono registrado, o corpo está em estado de recuperação crítica e qualquer esforço acima de Z1 leve é contraindicado. Prioridade absoluta: sono e recuperação passiva.",
+    "alerta": "Body Battery 4/100 + 0h sono = estado crítico de recuperação; executar Long Ride 120min hoje representa risco elevado de lesão e comprometimento do ciclo de adaptação."
   }
 }
