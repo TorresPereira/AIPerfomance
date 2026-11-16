@@ -312,10 +312,10 @@
           "sessoes": [
             {
               "esporte": "run",
-              "tipo": "Intervalado 8x3min",
-              "duracao_min": 59,
+              "tipo": "Intervalado 6x3min Z4",
+              "duracao_min": 50,
               "zona": "Z4",
-              "descricao": "Intervalos curtos em Z4 para desenvolver velocidade e capacidade aeróbica máxima.",
+              "descricao": "Redução de 8 para 6 repetições devido a REM 0h hoje e média HRV 7d baixa (32ms), preservando qualidade do estímulo sem risco de sobrecarga neuromuscular.",
               "longo": false,
               "estrutura": [
                 {
