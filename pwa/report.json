@@ -1,31 +1,31 @@
 {
-  "date": "2026-11-16",
-  "generated_at": "2026-11-16T07:01:27.289875Z",
+  "date": "2026-11-17",
+  "generated_at": "2026-11-17T07:01:33.678975Z",
   "saude": {
-    "hrv": 72,
-    "hrv_7d": 32,
+    "hrv": 46,
+    "hrv_7d": 33,
     "hrv_status": "balanced",
     "hrv_baseline_low": 30,
-    "hrv_baseline_high": 40,
-    "rhr": 61,
+    "hrv_baseline_high": 39,
+    "rhr": 62,
     "rhr_baseline": null,
-    "sono_h": 7.1,
-    "sono_score": 56,
-    "sono_deep": 1.5,
-    "sono_rem": 0.0,
-    "sono_awake": 37.0,
-    "body_battery": 46,
-    "stress_avg": 22,
-    "stress_rest": 58.76,
-    "atl": 416.0,
-    "ctl": 1665.0,
+    "sono_h": 4.5,
+    "sono_score": 64,
+    "sono_deep": 1.2,
+    "sono_rem": 0.2,
+    "sono_awake": 4.0,
+    "body_battery": 41,
+    "stress_avg": 15,
+    "stress_rest": 96.26,
+    "atl": 399.0,
+    "ctl": 1594.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 516.0,
+    "load_aerobic_low": 445.0,
     "load_aerobic_high": 960.0,
     "load_anaerobic": 189.0,
-    "load_total_month": 1665.0,
+    "load_total_month": 1594.0,
     "load_target_low": "446–1098",
     "load_target_high": "750–1403",
     "training_status": "Recuperação",
@@ -34,10 +34,10 @@
     "vo2max": 49.1,
     "peso": null,
     "previsoes": {
-      "5K": 1354,
-      "10K": 2917,
-      "Meia": 6705,
-      "Maratona": 15044
+      "5K": 1361,
+      "10K": 2930,
+      "Meia": 6737,
+      "Maratona": 15105
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,44 +55,10 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 0.9
+    "sono_deficit_h": 3.5
   },
-  "ontem": [
-    {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Gym F · Treino de Força (Triat",
-      "dist": "—",
-      "dur": "45m07s",
-      "fc": 91.0,
-      "fc_max": 122.0,
-      "cal": 233.0,
-      "cad": null,
-      "tss": null,
-      "np": null,
-      "swolf": null,
-      "aerobic_te": 0.6000000238418579,
-      "anaerobic_te": 0.0,
-      "elev": null,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 0.0,
-      "_dur_s": 2707.611083984375
-    }
-  ],
+  "ontem": [],
   "hoje": [
-    {
-      "icone": "🏃",
-      "nome": "Rodagem Leve",
-      "tipo": "run",
-      "dur": "35min",
-      "dist": "—",
-      "passos": [
-        "Redução preventiva de 10min dado Body Battery crítico hoje e 0h de sono registradas — avaliar FC nos primeiros 5min e interromper se acima de 148bpm."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🏃",
       "nome": "Intervalado 6x3min Z4",
@@ -101,6 +67,38 @@
       "dist": "—",
       "passos": [
         "Redução de 8 para 6 repetições devido a REM 0h hoje e média HRV 7d baixa (32ms), preservando qualidade do estímulo sem risco de sobrecarga neuromuscular."
+      ]
+    }
+  ],
+  "amanha": [
+    {
+      "icone": "🏊",
+      "nome": "Natacao",
+      "tipo": "swim",
+      "dur": "45min",
+      "dist": "—",
+      "passos": [
+        "Atividade fixa"
+      ]
+    },
+    {
+      "icone": "⚽",
+      "nome": "Futebol",
+      "tipo": "futebol",
+      "dur": "60min",
+      "dist": "—",
+      "passos": [
+        "Atividade fixa"
+      ]
+    },
+    {
+      "icone": "🏊",
+      "nome": "Natacao",
+      "tipo": "swim",
+      "dur": "35min",
+      "dist": "—",
+      "passos": [
+        "Redução de 10min devido ao déficit de sono severo (3.5h) e carga de Z4 executada hoje."
       ]
     }
   ],
@@ -124,18 +122,14 @@
     "run_min": 73.5
   },
   "clima": {
-    "temp_max": 9.7,
-    "temp_min": 1.5,
+    "temp_max": 13.7,
+    "temp_min": 0.9,
     "chuva_pct": 100,
-    "vento_kmh": 22.0,
-    "temp_atual": 8.3,
+    "vento_kmh": 30.2,
+    "temp_atual": 5.8,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-11-10",
-      "value": 49.0
-    },
     {
       "date": "2026-11-11",
       "value": 48.0
@@ -159,13 +153,13 @@
     {
       "date": "2026-11-16",
       "value": 72.0
+    },
+    {
+      "date": "2026-11-17",
+      "value": 46.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-11-02",
-      "value": 49.4
-    },
     {
       "date": "2026-11-03",
       "value": 49.4
@@ -221,15 +215,14 @@
     {
       "date": "2026-11-16",
       "value": 49.1
+    },
+    {
+      "date": "2026-11-17",
+      "value": 49.1
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-11-03",
-      "sono": 6.5,
-      "te": 1.0
-    },
     {
       "date": "2026-11-05",
       "sono": 6.7,
@@ -443,28 +436,35 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado, mas sono fragmentado exige cautela hoje.",
-    "sec_readiness": "HRV de 72ms está 40ms acima da média 7d (32ms), sinal positivo de recuperação aguda, porém média 7d muito baixa indica fadiga crônica recente. Sono de 7.1h com score 56 e REM 0h é preocupante — ausência de REM compromete recuperação neuromuscular e cognitiva. Body Battery 46/100 com stress médio 22 indica reserva energética moderada, suficiente para treino leve.",
-    "sec_treino_ontem": "Ginásio de força executado ontem (45min, FC média 91bpm, máx 122bpm) com TE aeróbico 0.6 — estímulo neuromuscular correto, sem sobrecarga cardiovascular. Intensidade adequada para sessão complementar em semana de base. Sem dados de volume triathlon ontem, continuidade do zero semanal em natação, bike e corrida.",
-    "sec_carga": "Z1 em 516 (dentro do target 446–1098) e Z2 em 960 (dentro do target 750–1403) — distribuição mensal aparentemente equilibrada, mas volume semanal zerado em todas as modalidades é inconsistente com CTL estimado de 1665. ATL 416 vs CTL 1665 sugere queda abrupta de carga recente; risco de lesão MODERADO deve ser monitorado ao retomar volume.",
-    "sec_hoje": "Rodagem leve de 35min planejada para hoje — sessão não registrada ainda. Executar em Z1-Z2 leve, FC máxima 135bpm, ritmo conversacional. Clima adverso (9.7°C, chuva 100%, vento 22km/h) exige aquecimento prolongado de 8-10min e vestuário impermeável; reduzir exposição ao frio evitando paradas.",
-    "sec_ajuste": "Manter os 35min de rodagem, FC teto 135bpm estritamente em Z1. Nenhum trecho em Z3+; se FC subir por frio ou vento, reduzir pace imediatamente.",
-    "sec_alertas": "REM 0h na última noite é alerta real — desempenho cognitivo e neuromuscular reduzidos; evitar intensidade alta hoje. Volume semanal zerado cria risco de retomada brusca amanhã com intervalado Z4.",
-    "sec_nutricao": "Pré-rodagem: 350kcal com CHO de absorção moderada (banana + aveia) 60min antes. Pós-treino: 30g proteína em até 30min; hidratação mínima 400ml durante os 35min dado frio (não subestime sudorese em frio). Deitar às 22:30 para atingir 8h de sono e recuperar déficit de REM.",
-    "sec_amanha": "Intervalado 8x3min Z4 (59min) é sessão de alta demanda neuromuscular. Dado REM 0h hoje e HRV médio 7d baixo (32ms), recomenda-se reduzir para 6x3min mantendo Z4, com aquecimento de 15min e recuperação 2min entre repetições. Se sono esta noite for abaixo de 7h ou Body Battery amanhã < 40, substituir por rodagem Z2.",
+    "frase": "HRV elevado, mas sono crítico exige gestão inteligente.",
+    "sec_readiness": "HRV 46ms está 13ms acima da média 7d (33ms) e acima do baseline (30–39ms), sinal positivo de recuperação autonômica. Contudo, sono de 4.5h com score 64, apenas 1.2h de sono profundo e 0.2h REM representa déficit severo de 3.5h — comprometendo recuperação muscular e cognitiva. Body Battery 41/100 com stress médio baixo (15) confirma estado sub-ótimo para carga intensa.",
+    "sec_treino_ontem": null,
+    "sec_carga": "Z1 em 445 unidades está praticamente no limite inferior do target (446–1098), indicando base aeróbica leve insuficiente. Z2 em 960 está dentro do target (750–1403), mas próximo ao teto com ATL estimado em 399 — atenção ao acúmulo. Z3+ em 189 é aceitável, porém o risco de lesão MODERADO exige que sessões intensas sejam monitoradas rigorosamente, especialmente sem volume semanal registrado.",
+    "sec_hoje": "O treino planejado é Intervalado 6x3min Z4 (50min), mas nenhuma execução foi registrada ainda. Dado o sono crítico (4.5h) e Body Battery 41, executar Z4 representa risco real de má qualidade de estímulo e sobrecarga sistêmica. Se executado, limitar a 4x3min Z4 com aquecimento de 15min em Z1 e resfriamento de 10min; FC teto 172bpm nos intervalos, retornando abaixo de 135bpm no recovery.",
+    "sec_ajuste": "Reduzir para 4x3min Z4 com FC teto 172bpm; volume total máximo 40min. Clima adverso (13.7°C, chuva 100%, vento 30km/h) — se ao ar livre, priorizar ambiente indoor para evitar hipotermia e queda de performance.",
+    "sec_alertas": "Déficit de sono severo (3.5h) eleva risco de lesão e reduz adaptação ao treino intenso. HRV elevado pode ser artefato de recuperação inicial — não interpretar como sinal verde para carga máxima. Ausência de volume semanal registrado (0km em todas modalidades) exige confirmação de dados antes de calibrar carga real.",
+    "sec_nutricao": "Pré-treino: 350kcal com 60–70% CHO (~50g) e hidratação de 500ml, 90min antes. Pós-treino: 30g proteína + 60g CHO em até 30min; priorizar jantar rico em triptofano e magnésio para maximizar recuperação do sono — alvo 22:30.",
+    "sec_amanha": "Amanhã há dupla de natação (45min + 45min Técnica Base Z2) mais futebol 60min, totalizando carga elevada. Considerando sono crítico hoje e carga de Z4 prevista, manter as natações mas reduzir cada sessão para 35min; futebol mantido como estímulo lúdico de baixa intensidade. Priorizar recuperação do sono esta noite para suportar o volume de amanhã.",
     "amanha_ajustado": [
       {
-        "esporte": "run",
-        "tipo": "Intervalado 6x3min Z4",
-        "duracao_min": 50,
-        "zona": "Z4",
-        "motivo_ajuste": "Redução de 8 para 6 repetições devido a REM 0h hoje e média HRV 7d baixa (32ms), preservando qualidade do estímulo sem risco de sobrecarga neuromuscular."
+        "esporte": "swim",
+        "tipo": "Natacao",
+        "duracao_min": 35,
+        "zona": "Z2",
+        "motivo_ajuste": "Redução de 10min devido ao déficit de sono severo (3.5h) e carga de Z4 executada hoje."
+      },
+      {
+        "esporte": "swim",
+        "tipo": "Natacao Base Tecnica",
+        "duracao_min": 35,
+        "zona": "Z2",
+        "motivo_ajuste": "Redução de 10min alinhada ao estado de recuperação sub-ótimo e acúmulo de carga do dia anterior."
       }
     ],
-    "status_readiness": "MODERADO",
-    "status_carga": "SUAVE",
-    "acao_hoje": "MANTER",
-    "analise_hoje": "Rodagem leve de 35min em Z1 é adequada ao estado de readiness moderado e clima adverso; priorizar controle de FC e temperatura corporal. Sessão ainda não executada — janela ideal nas horas mais quentes do dia.",
-    "alerta": "REM 0h detectado — capacidade de recuperação neuromuscular comprometida; monitorar sono esta noite antes de confirmar intensidade do intervalado amanhã."
+    "status_readiness": "BAIXO",
+    "status_carga": "IDEAL",
+    "acao_hoje": "REDUZIR 20%",
+    "analise_hoje": "Treino de Z4 ainda não executado; com sono de 4.5h e Body Battery 41, reduzir volume para 4x3min Z4 é a abordagem mais segura para preservar qualidade do estímulo sem comprometer recuperação. Clima adverso reforça opção indoor.",
+    "alerta": "Déficit de sono severo (4.5h registradas, déficit de 3.5h) combinado com treino Z4 planejado representa risco moderado-alto de má adaptação e lesão — considere descanso completo se sono não melhorar."
   }
 }

@@ -380,10 +380,10 @@
             },
             {
               "esporte": "swim",
-              "tipo": "Natacao Base Tecnica",
-              "duracao_min": 45,
+              "tipo": "Natacao",
+              "duracao_min": 35,
               "zona": "Z2",
-              "descricao": "Sessão fixa de natação com ênfase em técnica de virada, braçada e respiração bilateral.",
+              "descricao": "Redução de 10min devido ao déficit de sono severo (3.5h) e carga de Z4 executada hoje.",
               "longo": false,
               "estrutura": null,
               "fixo": false
