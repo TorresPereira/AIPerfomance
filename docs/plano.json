@@ -400,10 +400,10 @@
           "sessoes": [
             {
               "esporte": "bike",
-              "tipo": "Tempo Ride 4x8min",
-              "duracao_min": 71,
+              "tipo": "Tempo Ride 4x6min",
+              "duracao_min": 61,
               "zona": "Z3",
-              "descricao": "Blocos de tempo em ritmo de limiar para aumentar a potência sustentável no ciclismo.",
+              "descricao": "Redução dos intervalos de 8 para 6min devido a Body Battery 49 e REM 0.6h, limitando exposição Z3 a 24min totais.",
               "longo": false,
               "estrutura": [
                 {
