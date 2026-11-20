@@ -1,43 +1,43 @@
 {
-  "date": "2026-11-19",
-  "generated_at": "2026-11-19T07:01:31.584275Z",
+  "date": "2026-11-20",
+  "generated_at": "2026-11-20T07:01:12.398364Z",
   "saude": {
-    "hrv": 44,
+    "hrv": 48,
     "hrv_7d": 33,
     "hrv_status": "balanced",
     "hrv_baseline_low": 30,
     "hrv_baseline_high": 39,
-    "rhr": 64,
+    "rhr": 60,
     "rhr_baseline": null,
-    "sono_h": 7.1,
-    "sono_score": 72,
-    "sono_deep": 1.2,
-    "sono_rem": 0.7,
-    "sono_awake": 33.0,
-    "body_battery": 41,
-    "stress_avg": 22,
-    "stress_rest": 75.66,
-    "atl": 325.0,
-    "ctl": 1301.0,
+    "sono_h": 7.8,
+    "sono_score": 82,
+    "sono_deep": 1.3,
+    "sono_rem": 1.0,
+    "sono_awake": 13.0,
+    "body_battery": 56,
+    "stress_avg": 18,
+    "stress_rest": 88.55,
+    "atl": 338.0,
+    "ctl": 1354.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 405.0,
+    "load_aerobic_low": 458.0,
     "load_aerobic_high": 856.0,
     "load_anaerobic": 40.0,
-    "load_total_month": 1301.0,
-    "load_target_low": "446–1098",
-    "load_target_high": "750–1403",
+    "load_total_month": 1354.0,
+    "load_target_low": "437–1090",
+    "load_target_high": "759–1412",
     "training_status": "Improdutivo",
     "fitness_trend": "Estável",
     "training_readiness": null,
-    "vo2max": 49.1,
+    "vo2max": 48.4,
     "peso": null,
     "previsoes": {
-      "5K": 1383,
-      "10K": 2973,
-      "Meia": 6841,
-      "Maratona": 15289
+      "5K": 1397,
+      "10K": 2999,
+      "Meia": 6912,
+      "Maratona": 15437
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,42 +55,54 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 0.9
+    "sono_deficit_h": 0.2
   },
-  "ontem": [],
-  "hoje": [
+  "ontem": [
     {
-      "icone": "🚴",
-      "nome": "Tempo Ride 4x6min",
-      "tipo": "bike",
-      "dur": "61min",
-      "dist": "—",
-      "passos": [
-        "Redução dos intervalos de 8 para 6min devido a Body Battery 49 e REM 0.6h, limitando exposição Z3 a 24min totais."
-      ]
-    },
+      "mod": "run",
+      "icone": "🏃",
+      "nome": "Erkrath Running",
+      "dist": "6.1km",
+      "dur": "42m39s",
+      "fc": 132.0,
+      "fc_max": 157.0,
+      "cal": 506.0,
+      "cad": 163.015625,
+      "tss": null,
+      "np": 300.0,
+      "swolf": null,
+      "aerobic_te": 2.700000047683716,
+      "anaerobic_te": 0.0,
+      "elev": 45.0,
+      "perf": "6:57/km",
+      "pl": "Pace",
+      "_dist_m": 6137.7998046875,
+      "_dur_s": 2559.677978515625
+    }
+  ],
+  "hoje": [],
+  "amanha": [
     {
       "icone": "🏃",
-      "nome": "Brick Run Curto",
+      "nome": "Long Run Base",
       "tipo": "run",
-      "dur": "20min",
+      "dur": "100min",
       "dist": "—",
       "passos": [
-        "Corrida imediata após o bike para simular a transição T2 e ativar a musculatura de corrida."
+        "Corrida longa progressiva em Z2, mantendo ritmo estável e foco na postura e respiração."
       ]
     }
   ],
-  "amanha": [],
   "hoje_feito": [],
   "semana": {
     "swim_km": 0,
     "swim_min": 0,
     "bike_km": 0,
     "bike_min": 0,
-    "run_km": 0,
-    "run_min": 0,
-    "total_tss": 0,
-    "n_treinos": 0
+    "run_km": 6.1,
+    "run_min": 42.7,
+    "total_tss": 0.0,
+    "n_treinos": 1
   },
   "semana_passada": {
     "swim_km": 1.6,
@@ -101,18 +113,14 @@
     "run_min": 73.5
   },
   "clima": {
-    "temp_max": 10.6,
-    "temp_min": 8.3,
+    "temp_max": 9.1,
+    "temp_min": 1.6,
     "chuva_pct": 100,
-    "vento_kmh": 22.0,
-    "temp_atual": 9.1,
+    "vento_kmh": 14.4,
+    "temp_atual": 7.7,
     "emoji": "🌧️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-11-13",
-      "value": 54.0
-    },
     {
       "date": "2026-11-14",
       "value": 58.0
@@ -136,13 +144,13 @@
     {
       "date": "2026-11-19",
       "value": 44.0
+    },
+    {
+      "date": "2026-11-20",
+      "value": 48.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-11-05",
-      "value": 49.4
-    },
     {
       "date": "2026-11-06",
       "value": 49.4
@@ -197,16 +205,15 @@
     },
     {
       "date": "2026-11-19",
-      "value": 49.1
+      "value": 48.4
+    },
+    {
+      "date": "2026-11-20",
+      "value": 48.4
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-11-06",
-      "sono": 6.2,
-      "te": 0.7
-    },
     {
       "date": "2026-11-07",
       "sono": 6.8,
@@ -236,9 +243,23 @@
       "date": "2026-11-15",
       "sono": 6.9,
       "te": 0.6
+    },
+    {
+      "date": "2026-11-19",
+      "sono": 7.1,
+      "te": 2.7
     }
   ],
   "mes": {
+    "2026-11-19": {
+      "planejados": [
+        "🚴",
+        "🏃"
+      ],
+      "feitos": [
+        "🏃"
+      ]
+    },
     "2026-11-15": {
       "planejados": [
         "🚴"
@@ -340,13 +361,6 @@
       ],
       "feitos": []
     },
-    "2026-11-19": {
-      "planejados": [
-        "🚴",
-        "🏃"
-      ],
-      "feitos": []
-    },
     "2026-11-21": {
       "planejados": [
         "🏃"
@@ -410,20 +424,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado: aproveite a janela de qualidade hoje.",
-    "sec_readiness": "HRV 44ms está 11ms acima da média 7d (33ms) e acima do baseline superior (39ms) — janela anabólica favorável. RHR 64bpm sem baseline comparativo, não permite análise de tendência. Sono 7.1h com score 72, deep sleep apenas 1.2h e REM 0.7h indicam recuperação estrutural insuficiente; déficit de 0.9h vs alvo. Body Battery 41/100 com stress médio 22 — reserva energética moderada, não compromete sessão de intensidade moderada.",
-    "sec_treino_ontem": null,
-    "sec_carga": "Z1 em 405 (abaixo do target mínimo 446) e Z2 em 856 (dentro do range 750–1403) — base aeróbica levemente deficitária na zona leve. Z3+ em 40 representa apenas 3% da carga total, distribuição polarizada adequada para fase base. Status Garmin 'Improdutivo' com volume semanal zerado sugere inconsistência de execução; risco de lesão MODERADO deve ser monitorado ao retomar carga.",
-    "sec_hoje": "Tempo Ride 4x6min (61min) + Brick Run 20min ainda não executados — condições climáticas adversas (chuva 100%, 10.6°C, vento 22km/h) exigem ajuste de execução para ambiente indoor ou camadas térmicas adequadas. No Tempo Ride, manter intervalos 4x6min em Z2 alto (75–85% FCmax, estimado 142–160bpm) com recuperação 3–4min entre blocos em Z1. Brick Run 20min em Z1-Z2 (até 155bpm), foco em transição neuromuscular, não em pace.",
-    "sec_ajuste": "Tempo Ride: manter 61min, intervalos 4x6min com FC alvo 148–158bpm (Z2 alto), potência alvo 200–225W se disponível, limitar Z3 a máximo 5min acumulado. Brick Run: manter 20min, FC teto 155bpm, pace confortável sem pressão de ritmo.",
-    "sec_alertas": "Deep sleep 1.2h abaixo do ideal — monitorar resposta de FC durante os intervalos; se FC não estabilizar na recuperação entre blocos, reduzir intensidade para Z2 médio (140–148bpm). Clima 8–10°C com chuva: aquecimento mínimo 12min antes dos intervalos para evitar lesão muscular.",
-    "sec_nutricao": "Pré-treino: 350kcal ~60min antes (CHO + proteína moderada). Durante 61min de bike: 400–500ml de fluido com eletrólitos (frio reduz percepção de sede); sem necessidade de CHO sólido para sessão sub-70min. Pós brick: 30g proteína + 60–80g CHO dentro de 30min para repor glicogênio e iniciar recuperação muscular.",
-    "sec_amanha": "Amanhã sem sessão agendada — dia de descanso confirmado e apropriado após sessão de qualidade hoje. Priorizar sono (deitar 22:30, alvo 8h) para consolidar adaptação dos intervalos de hoje.",
-    "amanha_ajustado": [],
-    "status_readiness": "BOM",
+    "frase": "HRV elevado: aproveite o pico de recuperação amanhã.",
+    "sec_readiness": "HRV de 48ms representa +15ms acima da média 7d (33ms) e bem acima do baseline (30–39ms) — sinal claro de supercompensação e prontidão elevada. Sono de 7.8h com score 82 é adequado, déficit mínimo de 0.2h irrelevante. Body Battery 56/100 com stress médio 18 confirma estado equilibrado e favorável ao treino.",
+    "sec_treino_ontem": "Long run de 6.1km em 42:39 a pace 6:57/km com FC média 132bpm (TE aeróbico 2.7) indica execução controlada em Z2 baixo — execução eficiente para sessão de base. Cadência 163spm está abaixo do ideal (170–175spm), ponto técnico a corrigir. Potência de 300W na corrida sem referência baseline dificulta análise comparativa, mas carga total foi moderada.",
+    "sec_carga": "Z1 em 458 (dentro do target 437–1090) e Z2 em 856 (dentro do target 759–1412) — distribuição mensal tecnicamente adequada para fase Base. Z3+ em apenas 40 unidades é conservador, coerente com semana 2. CTL estimado em 1354 com ATL 338 e status Garmin 'Improdutivo' sugere que a carga está sendo absorvida sem estímulo suficiente — amanhã é oportunidade de incrementar volume aeróbico de forma segura.",
+    "sec_hoje": "Sem treino agendado ou executado hoje — dia de recuperação ativa ou descanso total. Com clima adverso (9°C, chuva 100%, vento 14.4km/h) e HRV em pico, o descanso hoje é estratégico para maximizar a sessão longa de amanhã. Priorize mobilidade leve indoor e descanso ativo.",
+    "sec_ajuste": "Hoje manter descanso total ou no máximo 20–30min de mobilidade/alongamento indoor. Nenhum treino cardiovascular — preservar o estado de prontidão para o Long Run de amanhã.",
+    "sec_alertas": "Cadência de corrida abaixo do ideal (163spm vs target 170–175spm) — foco técnico para amanhã. Risco de lesão MODERADO sinalizado pelo Garmin exige atenção ao volume de corrida semanal (apenas 6.1km até agora).",
+    "sec_nutricao": "Hoje sem treino: manter ingestão normocalórica com foco em carboidratos complexos no jantar (150–200g CHO) para carregar glicogênio para o Long Run amanhã. Pós-amanhã: 30g proteína em até 30min do fim da sessão; hidratação basal de 2–2.5L ao longo do dia.",
+    "sec_amanha": "Long Run Base de 100min está totalmente justificado dado HRV em 48ms e recuperação ótima. Manter duração integral de 100min em Z2 (FC 130–148bpm estimado), priorizando cadência acima de 170spm. Verificar clima para amanhã — se condições similares, vestimenta adequada e redução de pace em 10–15seg/km por temperatura.",
+    "amanha_ajustado": [
+      {
+        "esporte": "run",
+        "tipo": "Long Run Base",
+        "duracao_min": 100,
+        "zona": "Z2",
+        "motivo_ajuste": null
+      }
+    ],
+    "status_readiness": "ÓTIMO",
     "status_carga": "SUAVE",
-    "acao_hoje": "MANTER",
-    "analise_hoje": "HRV favorável cria janela ideal para executar os 4x6min em Z2 alto conforme planejado; a única restrição real é o clima que exige ambiente controlado ou equipamento adequado. Brick Run de 20min é volume gerenciável mesmo com Body Battery 41.",
-    "alerta": null
+    "acao_hoje": "DESCANSO",
+    "analise_hoje": "Dia sem treino com HRV em pico — descanso estratégico correto antes do Long Run de amanhã. Nenhuma intervenção necessária.",
+    "alerta": "Cadência de corrida consistentemente abaixo de 165spm — risco biomecânico em sessões longas; foco técnico obrigatório no Long Run amanhã."
   }
 }
