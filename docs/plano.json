@@ -487,9 +487,9 @@
             {
               "esporte": "bike",
               "tipo": "Long Ride Base",
-              "duracao_min": 135,
+              "duracao_min": 105,
               "zona": "Z2",
-              "descricao": "Long ride mais longo do bloco de 4 semanas em ritmo aeróbico consistente, simulando demanda do 70.3.",
+              "descricao": "Redução de 135 para 105min devido a Body Battery baixo pré-acúmulo de carga do Long Run de hoje e ausência de dados de sono confirmados.",
               "longo": true,
               "estrutura": null,
               "fixo": false

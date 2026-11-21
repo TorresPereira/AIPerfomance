@@ -1,43 +1,41 @@
 {
-  "date": "2026-11-20",
-  "generated_at": "2026-11-20T07:01:12.398364Z",
+  "date": "2026-11-21",
+  "generated_at": "2026-11-21T07:01:33.614423Z",
   "saude": {
-    "hrv": 48,
-    "hrv_7d": 33,
-    "hrv_status": "balanced",
-    "hrv_baseline_low": 30,
-    "hrv_baseline_high": 39,
-    "rhr": 60,
+    "hrv": null,
+    "hrv_7d": null,
+    "hrv_status": null,
+    "rhr": 64,
     "rhr_baseline": null,
-    "sono_h": 7.8,
-    "sono_score": 82,
-    "sono_deep": 1.3,
-    "sono_rem": 1.0,
-    "sono_awake": 13.0,
-    "body_battery": 56,
-    "stress_avg": 18,
-    "stress_rest": 88.55,
-    "atl": 338.0,
-    "ctl": 1354.0,
+    "sono_h": 0.0,
+    "sono_score": null,
+    "sono_deep": 0.0,
+    "sono_rem": 0.0,
+    "sono_awake": 0.0,
+    "body_battery": 34,
+    "stress_avg": 26,
+    "stress_rest": 51.79,
+    "atl": null,
+    "ctl": null,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 458.0,
-    "load_aerobic_high": 856.0,
-    "load_anaerobic": 40.0,
-    "load_total_month": 1354.0,
-    "load_target_low": "437–1090",
-    "load_target_high": "759–1412",
-    "training_status": "Improdutivo",
-    "fitness_trend": "Estável",
+    "load_aerobic_low": null,
+    "load_aerobic_high": null,
+    "load_anaerobic": null,
+    "load_total_month": null,
+    "load_target_low": null,
+    "load_target_high": null,
+    "training_status": null,
+    "fitness_trend": null,
     "training_readiness": null,
-    "vo2max": 48.4,
+    "vo2max": null,
     "peso": null,
     "previsoes": {
-      "5K": 1397,
-      "10K": 2999,
-      "Meia": 6912,
-      "Maratona": 15437
+      "5K": 1399,
+      "10K": 3003,
+      "Meia": 6921,
+      "Maratona": 15453
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,33 +53,10 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 0.2
+    "sono_deficit_h": null
   },
-  "ontem": [
-    {
-      "mod": "run",
-      "icone": "🏃",
-      "nome": "Erkrath Running",
-      "dist": "6.1km",
-      "dur": "42m39s",
-      "fc": 132.0,
-      "fc_max": 157.0,
-      "cal": 506.0,
-      "cad": 163.015625,
-      "tss": null,
-      "np": 300.0,
-      "swolf": null,
-      "aerobic_te": 2.700000047683716,
-      "anaerobic_te": 0.0,
-      "elev": 45.0,
-      "perf": "6:57/km",
-      "pl": "Pace",
-      "_dist_m": 6137.7998046875,
-      "_dur_s": 2559.677978515625
-    }
-  ],
-  "hoje": [],
-  "amanha": [
+  "ontem": [],
+  "hoje": [
     {
       "icone": "🏃",
       "nome": "Long Run Base",
@@ -90,6 +65,18 @@
       "dist": "—",
       "passos": [
         "Corrida longa progressiva em Z2, mantendo ritmo estável e foco na postura e respiração."
+      ]
+    }
+  ],
+  "amanha": [
+    {
+      "icone": "🚴",
+      "nome": "Long Ride Base",
+      "tipo": "bike",
+      "dur": "105min",
+      "dist": "—",
+      "passos": [
+        "Redução de 135 para 105min devido a Body Battery baixo pré-acúmulo de carga do Long Run de hoje e ausência de dados de sono confirmados."
       ]
     }
   ],
@@ -113,18 +100,14 @@
     "run_min": 73.5
   },
   "clima": {
-    "temp_max": 9.1,
-    "temp_min": 1.6,
-    "chuva_pct": 100,
-    "vento_kmh": 14.4,
-    "temp_atual": 7.7,
-    "emoji": "🌧️"
+    "temp_max": 7.2,
+    "temp_min": 0.4,
+    "chuva_pct": 6,
+    "vento_kmh": 7.9,
+    "temp_atual": 3.3,
+    "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-11-14",
-      "value": 58.0
-    },
     {
       "date": "2026-11-15",
       "value": 46.0
@@ -148,6 +131,10 @@
     {
       "date": "2026-11-20",
       "value": 48.0
+    },
+    {
+      "date": "2026-11-21",
+      "value": null
     }
   ],
   "vo2max_hist": [
@@ -214,11 +201,6 @@
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-11-07",
-      "sono": 6.8,
-      "te": 3.5
-    },
     {
       "date": "2026-11-08",
       "sono": 7.4,
@@ -424,28 +406,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado: aproveite o pico de recuperação amanhã.",
-    "sec_readiness": "HRV de 48ms representa +15ms acima da média 7d (33ms) e bem acima do baseline (30–39ms) — sinal claro de supercompensação e prontidão elevada. Sono de 7.8h com score 82 é adequado, déficit mínimo de 0.2h irrelevante. Body Battery 56/100 com stress médio 18 confirma estado equilibrado e favorável ao treino.",
-    "sec_treino_ontem": "Long run de 6.1km em 42:39 a pace 6:57/km com FC média 132bpm (TE aeróbico 2.7) indica execução controlada em Z2 baixo — execução eficiente para sessão de base. Cadência 163spm está abaixo do ideal (170–175spm), ponto técnico a corrigir. Potência de 300W na corrida sem referência baseline dificulta análise comparativa, mas carga total foi moderada.",
-    "sec_carga": "Z1 em 458 (dentro do target 437–1090) e Z2 em 856 (dentro do target 759–1412) — distribuição mensal tecnicamente adequada para fase Base. Z3+ em apenas 40 unidades é conservador, coerente com semana 2. CTL estimado em 1354 com ATL 338 e status Garmin 'Improdutivo' sugere que a carga está sendo absorvida sem estímulo suficiente — amanhã é oportunidade de incrementar volume aeróbico de forma segura.",
-    "sec_hoje": "Sem treino agendado ou executado hoje — dia de recuperação ativa ou descanso total. Com clima adverso (9°C, chuva 100%, vento 14.4km/h) e HRV em pico, o descanso hoje é estratégico para maximizar a sessão longa de amanhã. Priorize mobilidade leve indoor e descanso ativo.",
-    "sec_ajuste": "Hoje manter descanso total ou no máximo 20–30min de mobilidade/alongamento indoor. Nenhum treino cardiovascular — preservar o estado de prontidão para o Long Run de amanhã.",
-    "sec_alertas": "Cadência de corrida abaixo do ideal (163spm vs target 170–175spm) — foco técnico para amanhã. Risco de lesão MODERADO sinalizado pelo Garmin exige atenção ao volume de corrida semanal (apenas 6.1km até agora).",
-    "sec_nutricao": "Hoje sem treino: manter ingestão normocalórica com foco em carboidratos complexos no jantar (150–200g CHO) para carregar glicogênio para o Long Run amanhã. Pós-amanhã: 30g proteína em até 30min do fim da sessão; hidratação basal de 2–2.5L ao longo do dia.",
-    "sec_amanha": "Long Run Base de 100min está totalmente justificado dado HRV em 48ms e recuperação ótima. Manter duração integral de 100min em Z2 (FC 130–148bpm estimado), priorizando cadência acima de 170spm. Verificar clima para amanhã — se condições similares, vestimenta adequada e redução de pace em 10–15seg/km por temperatura.",
+    "frase": "Base sólida se constrói com consistência, não intensidade.",
+    "sec_readiness": "HRV e RHR sem dados históricos suficientes para tendência confiável; RHR de 64bpm serve como referência pontual. Sono registrado em 0.0h — dado ausente ou falha de captura, o que impede avaliação de recuperação real. Body Battery em 34/100 com stress médio de 26 indica recuperação parcial e estado energético abaixo do ideal para esforço prolongado.",
+    "sec_treino_ontem": null,
+    "sec_carga": "Volume semanal extremamente baixo: apenas 6.1km de corrida, natação e bike zerados — distribuição de zonas indisponível por ausência de dados Garmin. Risco de lesão classificado como MODERADO apesar do volume mínimo, possivelmente por histórico ou padrão de carga irregular. Na Semana 2 de BASE, o subvolume acumulado é a principal preocupação: a base aeróbica não está sendo construída no ritmo necessário.",
+    "sec_hoje": "Long Run Base de 100min planejado, ainda não executado. Com Body Battery em 34/100 e sono não registrado (presumível déficit), a execução deve ser estritamente em Z1-Z2 baixo, FC máxima de 145bpm. Priorize os primeiros 20min como aquecimento progressivo abaixo de 135bpm antes de estabilizar no bloco principal.",
+    "sec_ajuste": "Manter os 100min mas limitar FC teto a 145bpm durante todo o bloco; os primeiros 15min em Z1 (abaixo de 132bpm) e nunca exceder Z2 baixo. Sem acelerações ou fartlek — ritmo conversacional estrito.",
+    "sec_alertas": "Body Battery em 34/100 é limiar crítico para treino longo: risco real de HR drift acentuado após 60min. Monitorar FC a cada 10min; se HR ultrapassar 148bpm em esforço percebido leve, reduzir pace imediatamente ou encerrar o treino.",
+    "sec_nutricao": "Pré-treino: 350kcal com carboidratos de baixo índice glicêmico 60-90min antes (ex: aveia + banana). Durante: 600ml/h de água com eletrólitos; se treino exceder 75min, adicionar 30-40g CHO/h via gel ou isotônico. Pós: 30g de proteína em até 30min do encerramento.",
+    "sec_amanha": "Long Ride Base de 135min está no plano — considerando o estado de recuperação parcial de hoje (BB 34/100, sono não confirmado) e que o Long Run ainda será executado hoje, recomenda-se redução para 105min mantendo estritamente Z2 (FC 135-148bpm). Se sono desta noite for inferior a 7h, reduzir para 90min.",
     "amanha_ajustado": [
       {
-        "esporte": "run",
-        "tipo": "Long Run Base",
-        "duracao_min": 100,
+        "esporte": "bike",
+        "tipo": "Long Ride Base",
+        "duracao_min": 105,
         "zona": "Z2",
-        "motivo_ajuste": null
+        "motivo_ajuste": "Redução de 135 para 105min devido a Body Battery baixo pré-acúmulo de carga do Long Run de hoje e ausência de dados de sono confirmados."
       }
     ],
-    "status_readiness": "ÓTIMO",
+    "status_readiness": "BAIXO",
     "status_carga": "SUAVE",
-    "acao_hoje": "DESCANSO",
-    "analise_hoje": "Dia sem treino com HRV em pico — descanso estratégico correto antes do Long Run de amanhã. Nenhuma intervenção necessária.",
-    "alerta": "Cadência de corrida consistentemente abaixo de 165spm — risco biomecânico em sessões longas; foco técnico obrigatório no Long Run amanhã."
+    "acao_hoje": "REDUZIR 20%",
+    "analise_hoje": "Long Run Base de 100min deve ser executado com controle rígido de FC (teto 145bpm) dado o Body Battery em 34/100; redução de 20% na duração (para ~80min) é recomendável se o atleta sentir esforço elevado nos primeiros 30min. Foco absoluto em aeróbico leve para não comprometer o Long Ride de amanhã.",
+    "alerta": "Body Battery em 34/100 combinado com sono não registrado representa risco real de sobrecarga aguda — monitore HR drift e encerre o treino se FC exceder 148bpm em pace confortável."
   }
 }
