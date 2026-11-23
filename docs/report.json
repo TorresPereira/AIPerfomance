@@ -1,31 +1,31 @@
 {
-  "date": "2026-11-22",
-  "generated_at": "2026-11-22T07:01:42.878140Z",
+  "date": "2026-11-23",
+  "generated_at": "2026-11-23T07:01:18.446767Z",
   "saude": {
-    "hrv": 55,
-    "hrv_7d": 32,
+    "hrv": 53,
+    "hrv_7d": 33,
     "hrv_status": "balanced",
     "hrv_baseline_low": 30,
     "hrv_baseline_high": 39,
-    "rhr": 63,
+    "rhr": 62,
     "rhr_baseline": null,
-    "sono_h": 7.4,
-    "sono_score": 77,
-    "sono_deep": 1.2,
-    "sono_rem": 0.9,
-    "sono_awake": 8.0,
-    "body_battery": 43,
-    "stress_avg": 23,
-    "stress_rest": 63.66,
-    "atl": 392.0,
-    "ctl": 1569.0,
+    "sono_h": 8.3,
+    "sono_score": 86,
+    "sono_deep": 1.4,
+    "sono_rem": 1.4,
+    "sono_awake": 7.0,
+    "body_battery": 51,
+    "stress_avg": 16,
+    "stress_rest": 94.29,
+    "atl": 368.0,
+    "ctl": 1472.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
-    "load_aerobic_low": 452.0,
+    "load_aerobic_low": 355.0,
     "load_aerobic_high": 1061.0,
     "load_anaerobic": 55.0,
-    "load_total_month": 1569.0,
+    "load_total_month": 1472.0,
     "load_target_low": "435–1088",
     "load_target_high": "761–1414",
     "training_status": "Recuperação",
@@ -34,10 +34,10 @@
     "vo2max": 48.4,
     "peso": null,
     "previsoes": {
-      "5K": 1381,
-      "10K": 2969,
-      "Meia": 6839,
-      "Maratona": 15300
+      "5K": 1383,
+      "10K": 2973,
+      "Meia": 6847,
+      "Maratona": 15315
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,65 +55,10 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 0.6
+    "sono_deficit_h": -0.3
   },
-  "ontem": [
-    {
-      "mod": "other",
-      "icone": "⚡",
-      "nome": "Erkrath Walking",
-      "dist": "4.5km",
-      "dur": "1h02m",
-      "fc": 88.0,
-      "fc_max": 140.0,
-      "cal": 336.0,
-      "cad": 92.625,
-      "tss": null,
-      "np": null,
-      "swolf": null,
-      "aerobic_te": 0.699999988079071,
-      "anaerobic_te": 0.0,
-      "elev": 68.0,
-      "perf": "—",
-      "pl": "—",
-      "_dist_m": 4511.64990234375,
-      "_dur_s": 3745.721923828125
-    },
-    {
-      "mod": "run",
-      "icone": "🏃",
-      "nome": "Erkrath Running",
-      "dist": "9.8km",
-      "dur": "50m33s",
-      "fc": 154.0,
-      "fc_max": 175.0,
-      "cal": 773.0,
-      "cad": 170.609375,
-      "tss": null,
-      "np": 403.0,
-      "swolf": null,
-      "aerobic_te": 4.5,
-      "anaerobic_te": 1.2999999523162842,
-      "elev": 89.0,
-      "perf": "5:08/km",
-      "pl": "Pace",
-      "_dist_m": 9832.6396484375,
-      "_dur_s": 3033.508056640625
-    }
-  ],
+  "ontem": [],
   "hoje": [
-    {
-      "icone": "🚴",
-      "nome": "Long Ride Base",
-      "tipo": "bike",
-      "dur": "105min",
-      "dist": "—",
-      "passos": [
-        "Redução de 135 para 105min devido a Body Battery baixo pré-acúmulo de carga do Long Run de hoje e ausência de dados de sono confirmados."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🏃",
       "nome": "Rodagem Leve",
@@ -125,38 +70,46 @@
       ]
     }
   ],
+  "amanha": [
+    {
+      "icone": "🏃",
+      "nome": "Tempo Run 3x12min",
+      "tipo": "run",
+      "dur": "71min",
+      "dist": "—",
+      "passos": [
+        "Blocos de tempo em ritmo de limiar para desenvolver resistência de velocidade e eficiência aeróbica."
+      ]
+    }
+  ],
   "hoje_feito": [],
   "semana": {
     "swim_km": 0,
     "swim_min": 0,
     "bike_km": 0,
     "bike_min": 0,
-    "run_km": 16.0,
-    "run_min": 93.2,
-    "total_tss": 0.0,
-    "n_treinos": 3
+    "run_km": 0,
+    "run_min": 0,
+    "total_tss": 0,
+    "n_treinos": 0
   },
   "semana_passada": {
-    "swim_km": 1.6,
-    "swim_min": 35.4,
-    "bike_km": 18.0,
-    "bike_min": 42.2,
-    "run_km": 13.6,
-    "run_min": 73.5
+    "swim_km": 0,
+    "swim_min": 0,
+    "bike_km": 0,
+    "bike_min": 0,
+    "run_km": 16.0,
+    "run_min": 93.2
   },
   "clima": {
-    "temp_max": 7.1,
-    "temp_min": -0.4,
+    "temp_max": 2.8,
+    "temp_min": -2.1,
     "chuva_pct": 0,
-    "vento_kmh": 10.1,
-    "temp_atual": 0.2,
-    "emoji": "🌤️"
+    "vento_kmh": 12.2,
+    "temp_atual": 0.3,
+    "emoji": "🌫️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-11-16",
-      "value": 72.0
-    },
     {
       "date": "2026-11-17",
       "value": 46.0
@@ -180,13 +133,13 @@
     {
       "date": "2026-11-22",
       "value": 55.0
+    },
+    {
+      "date": "2026-11-23",
+      "value": 53.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-11-08",
-      "value": 49.2
-    },
     {
       "date": "2026-11-09",
       "value": 49.2
@@ -241,6 +194,10 @@
     },
     {
       "date": "2026-11-22",
+      "value": 48.4
+    },
+    {
+      "date": "2026-11-23",
       "value": 48.4
     }
   ],
@@ -454,28 +411,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado: aproveite a janela de adaptação com precisão.",
-    "sec_readiness": "HRV de 55ms representa +23ms acima da média 7d (32ms) e está 45% acima do baseline (30–39ms) — sinal claro de supercompensação e prontidão elevada. RHR de 63bpm sem baseline registrado, impossível comparar tendência; sono de 7.4h com score 77 e apenas 1.2h deep/0.9h REM indica qualidade subótima — déficit de 0.6h compromete recuperação neural. Body Battery 43/100 com stress médio 23 sugere reserva energética moderada para o dia.",
-    "sec_treino_ontem": "Corrida de 9.8km em 50:33 a 5:08/km com FC média 154bpm e pico 175bpm indica execução em intensidade elevada — TE aeróbico 4.5 confirma carga significativa para uma sessão que deveria ser base. Potência média de 403W na corrida é dado atípico (possivelmente sensor de potência de corrida) e cadência de 170spm está adequada. Walking pós-sessão (FC 88bpm, TE 0.7) funcionou como recuperação ativa eficiente.",
-    "sec_carga": "Z1 em 452 (dentro do target 435–1088) e Z2 em 1061 (dentro do target 761–1414) mostram distribuição aceitável, mas Z3+ em apenas 55 é residual — coerente com fase BASE. CTL estimado em 1569 equiparando-se à carga mensal total é metodologicamente inconsistente; ATL de 392 sugere carga aguda controlada. Risco de lesão MODERADO demanda atenção ao volume semanal de corrida (16km acumulados esta semana).",
-    "sec_hoje": "Long Ride Base de 105min ainda não executado — janela de HRV favorável (55ms) justifica manter a sessão. Execute em Z1-Z2 estrito com FC teto 148bpm, aproveitando a supercompensação sem gerar nova sobrecarga desnecessária. Clima de 7°C exige aquecimento prolongado (10–15min) e atenção à termorregulação.",
-    "sec_ajuste": "Manter 105min de Long Ride Base com FC teto 148bpm em Z2 predominante (80% do tempo); limitar qualquer pico acima de Z2 a máximo 5min. Cadência alvo 85–90rpm, potência estimada 165–185W (zona endurance).",
-    "sec_alertas": "Corrida de ontem executada com FC 154bpm média e pico 175bpm em sessão base — provável desvio de zona que deve ser corrigido hoje. Body Battery 43/100 limita margem para sobrecarga adicional; priorize Z2 estrito no ride de hoje para não comprometer o treino de amanhã.",
-    "sec_nutricao": "Pré-ride (30–45min antes): 350kcal com foco em carboidratos de baixo índice glicêmico. Durante os 105min: 500–600ml/h de líquido com eletrólitos e 40–50g CHO/h (gel ou bebida isotônica a partir dos 40min); pós-treino: 30g proteína + 60–80g CHO dentro de 30min para reparação e reposição de glicogênio.",
-    "sec_amanha": "Rodagem Leve de 50min em Z2 amanhã: considerando HRV atual favorável mas Body Battery moderado (43) e qualidade de sono subótima, manter duração original em Z2 estrito com FC teto 145bpm. Nenhuma redução necessária se o ride de hoje for executado dentro das zonas prescritas.",
+    "frase": "HRV elevado: janela aberta, execute com precisão.",
+    "sec_readiness": "HRV 53ms representa +20ms acima da média 7d (33ms) e bem acima do baseline (30–39ms), indicando recuperação autonômica excepcional hoje. Sono de 8.3h com score 86, deep 1.4h e REM 1.4h — estrutura sólida, déficit mínimo de -0.3h irrelevante. Body Battery 51/100 com stress médio 16 sugere reserva funcional adequada para carga moderada-alta.",
+    "sec_treino_ontem": null,
+    "sec_carga": "Z1 em 355 (target 435–1088) está abaixo do mínimo recomendado; Z2 em 1061 dentro do target (761–1414), mas próximo do teto. Z3+ em 55 é contido. Volume semanal zerado em todas as modalidades indica provável descanso ou subreporte — risco de lesão MODERADO deve ser monitorado ao retomar carga. Fase BASE exige polarização: aumentar Z1 nas próximas sessões.",
+    "sec_hoje": "Rodagem Leve de 50min planejada — sem registro de execução até o momento. Executar em Z1 estrito: FC máxima 138bpm, ritmo confortável com respiração nasal possível. Dado o HRV elevado e baixo estresse, sessão pode ser executada integralmente sem reduções.",
+    "sec_ajuste": "Manter 50min integrais em Z1. FC teto 138bpm — nenhum pico em Z2 permitido. Ritmo alvo aproximado 6:00–6:40/km dependendo do terreno e temperatura (-2°C a 2.8°C: adicionar aquecimento de 10min).",
+    "sec_alertas": "Temperatura mínima de -2.1°C exige aquecimento muscular prolongado (10min caminhada/trote leve) e proteção de extremidades. Z1 mensal abaixo do target mínimo — próximas sessões devem priorizar volume aeróbico leve para corrigir déficit.",
+    "sec_nutricao": "Treino de 50min em Z1 dispensa janela de CHO intra-treino; pré-treino leve 200–250kcal (~45min antes) com carboidrato de baixo IG. Pós-treino: 30g proteína + hidratação mínima 400ml dado clima frio e sudorese reduzida.",
+    "sec_amanha": "Tempo Run 3x12min (71min, Z3) está indicado dado HRV excepcional hoje (+20ms), sono adequado e carga semanal ainda baixa. Manter sessão conforme plano: 3x12min em Z3 (FC alvo 158–168bpm), aquecimento 15min Z1, recuperação 3min entre intervalos em Z1. Clima amanhã deve ser verificado — se abaixo de -2°C, considerar esteira.",
     "amanha_ajustado": [
       {
         "esporte": "run",
-        "tipo": "Rodagem Leve",
-        "duracao_min": 50,
-        "zona": "Z2",
+        "tipo": "Tempo Run 3x12min",
+        "duracao_min": 71,
+        "zona": "Z3",
         "motivo_ajuste": null
       }
     ],
-    "status_readiness": "BOM",
-    "status_carga": "IDEAL",
+    "status_readiness": "ÓTIMO",
+    "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Long Ride Base de 105min ainda não executado — HRV em 55ms abre janela favorável para execução completa em Z2 estrito (FC 135–148bpm), desde que temperatura de 7°C seja gerenciada com aquecimento adequado e camadas de roupa. Sessão estratégica para consolidar base aeróbica sem nova sobrecarga.",
-    "alerta": "Corrida de ontem com FC pico 175bpm em sessão base indica execução acima da zona alvo — monitore HR drift no ride de hoje e interrompa se FC ultrapassar 150bpm por mais de 5min consecutivos."
+    "analise_hoje": "Rodagem leve de 50min em Z1 é adequada e alinhada ao status de recuperação; HRV elevado permite execução integral sem restrições. Prioridade é manter FC abaixo de 138bpm durante toda a sessão.",
+    "alerta": "Temperatura negativa (-2.1°C): risco de broncoespasmo e lesão muscular sem aquecimento adequado — nunca inicie corrida sem 10min progressivos."
   }
 }
