@@ -594,7 +594,7 @@
             },
             {
               "esporte": "swim",
-              "tipo": "Natacao Base Tecnica",
+              "tipo": "Natacao",
               "duracao_min": 45,
               "zona": "Z2",
               "descricao": "Sessão fixa de natação com foco em saídas rápidas, posição de cabeça e braçada eficiente.",

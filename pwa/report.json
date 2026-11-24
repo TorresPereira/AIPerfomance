@@ -1,22 +1,22 @@
 {
-  "date": "2026-11-23",
-  "generated_at": "2026-11-23T07:01:18.446767Z",
+  "date": "2026-11-24",
+  "generated_at": "2026-11-24T07:01:34.660572Z",
   "saude": {
-    "hrv": 53,
+    "hrv": 54,
     "hrv_7d": 33,
     "hrv_status": "balanced",
     "hrv_baseline_low": 30,
     "hrv_baseline_high": 39,
-    "rhr": 62,
+    "rhr": 60,
     "rhr_baseline": null,
-    "sono_h": 8.3,
-    "sono_score": 86,
-    "sono_deep": 1.4,
-    "sono_rem": 1.4,
-    "sono_awake": 7.0,
+    "sono_h": 6.5,
+    "sono_score": 56,
+    "sono_deep": 1.5,
+    "sono_rem": 0.0,
+    "sono_awake": 38.0,
     "body_battery": 51,
-    "stress_avg": 16,
-    "stress_rest": 94.29,
+    "stress_avg": 18,
+    "stress_rest": 89.16,
     "atl": 368.0,
     "ctl": 1472.0,
     "tsb": null,
@@ -28,16 +28,16 @@
     "load_total_month": 1472.0,
     "load_target_low": "435–1088",
     "load_target_high": "761–1414",
-    "training_status": "Recuperação",
+    "training_status": "Improdutivo",
     "fitness_trend": "Estável",
     "training_readiness": null,
     "vo2max": 48.4,
     "peso": null,
     "previsoes": {
-      "5K": 1383,
-      "10K": 2973,
-      "Meia": 6847,
-      "Maratona": 15315
+      "5K": 1388,
+      "10K": 2982,
+      "Meia": 6868,
+      "Maratona": 15352
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,22 +55,10 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": -0.3
+    "sono_deficit_h": 1.5
   },
   "ontem": [],
   "hoje": [
-    {
-      "icone": "🏃",
-      "nome": "Rodagem Leve",
-      "tipo": "run",
-      "dur": "50min",
-      "dist": "—",
-      "passos": [
-        "Trote leve de recuperação ativa após o long ride mais extenso do bloco."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🏃",
       "nome": "Tempo Run 3x12min",
@@ -79,6 +67,38 @@
       "dist": "—",
       "passos": [
         "Blocos de tempo em ritmo de limiar para desenvolver resistência de velocidade e eficiência aeróbica."
+      ]
+    }
+  ],
+  "amanha": [
+    {
+      "icone": "🏊",
+      "nome": "Natacao",
+      "tipo": "swim",
+      "dur": "45min",
+      "dist": "—",
+      "passos": [
+        "Atividade fixa"
+      ]
+    },
+    {
+      "icone": "⚽",
+      "nome": "Futebol",
+      "tipo": "futebol",
+      "dur": "60min",
+      "dist": "—",
+      "passos": [
+        "Atividade fixa"
+      ]
+    },
+    {
+      "icone": "🏊",
+      "nome": "Natacao",
+      "tipo": "swim",
+      "dur": "45min",
+      "dist": "—",
+      "passos": [
+        "Sessão fixa de natação com foco em saídas rápidas, posição de cabeça e braçada eficiente."
       ]
     }
   ],
@@ -102,18 +122,14 @@
     "run_min": 93.2
   },
   "clima": {
-    "temp_max": 2.8,
-    "temp_min": -2.1,
+    "temp_max": 4.3,
+    "temp_min": -1.5,
     "chuva_pct": 0,
-    "vento_kmh": 12.2,
-    "temp_atual": 0.3,
-    "emoji": "🌫️"
+    "vento_kmh": 14.4,
+    "temp_atual": -1.2,
+    "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-11-17",
-      "value": 46.0
-    },
     {
       "date": "2026-11-18",
       "value": 57.0
@@ -137,13 +153,13 @@
     {
       "date": "2026-11-23",
       "value": 53.0
+    },
+    {
+      "date": "2026-11-24",
+      "value": 54.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-11-09",
-      "value": 49.2
-    },
     {
       "date": "2026-11-10",
       "value": 49.4
@@ -199,15 +215,14 @@
     {
       "date": "2026-11-23",
       "value": 48.4
+    },
+    {
+      "date": "2026-11-24",
+      "value": 48.4
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-11-10",
-      "sono": 7.2,
-      "te": 3.5
-    },
     {
       "date": "2026-11-12",
       "sono": 6.8,
@@ -411,28 +426,42 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV elevado: janela aberta, execute com precisão.",
-    "sec_readiness": "HRV 53ms representa +20ms acima da média 7d (33ms) e bem acima do baseline (30–39ms), indicando recuperação autonômica excepcional hoje. Sono de 8.3h com score 86, deep 1.4h e REM 1.4h — estrutura sólida, déficit mínimo de -0.3h irrelevante. Body Battery 51/100 com stress médio 16 sugere reserva funcional adequada para carga moderada-alta.",
+    "frase": "HRV elevado: aproveite a janela de qualidade hoje.",
+    "sec_readiness": "HRV de 54ms representa +21ms acima da média de 7 dias (33ms) e bem acima do baseline (30–39ms), indicando janela de recuperação favorável. RHR em 60bpm sem baseline de comparação, mas aceitável. Sono crítico: 6.5h com score 56, deep sleep 1.5h e REM zerado — déficit de 1.5h compromete consolidação neuromuscular. Body Battery 51/100 com stress médio 18 é moderado; a janela de HRV é real mas o sono fragmentado limita o teto de desempenho.",
     "sec_treino_ontem": null,
-    "sec_carga": "Z1 em 355 (target 435–1088) está abaixo do mínimo recomendado; Z2 em 1061 dentro do target (761–1414), mas próximo do teto. Z3+ em 55 é contido. Volume semanal zerado em todas as modalidades indica provável descanso ou subreporte — risco de lesão MODERADO deve ser monitorado ao retomar carga. Fase BASE exige polarização: aumentar Z1 nas próximas sessões.",
-    "sec_hoje": "Rodagem Leve de 50min planejada — sem registro de execução até o momento. Executar em Z1 estrito: FC máxima 138bpm, ritmo confortável com respiração nasal possível. Dado o HRV elevado e baixo estresse, sessão pode ser executada integralmente sem reduções.",
-    "sec_ajuste": "Manter 50min integrais em Z1. FC teto 138bpm — nenhum pico em Z2 permitido. Ritmo alvo aproximado 6:00–6:40/km dependendo do terreno e temperatura (-2°C a 2.8°C: adicionar aquecimento de 10min).",
-    "sec_alertas": "Temperatura mínima de -2.1°C exige aquecimento muscular prolongado (10min caminhada/trote leve) e proteção de extremidades. Z1 mensal abaixo do target mínimo — próximas sessões devem priorizar volume aeróbico leve para corrigir déficit.",
-    "sec_nutricao": "Treino de 50min em Z1 dispensa janela de CHO intra-treino; pré-treino leve 200–250kcal (~45min antes) com carboidrato de baixo IG. Pós-treino: 30g proteína + hidratação mínima 400ml dado clima frio e sudorese reduzida.",
-    "sec_amanha": "Tempo Run 3x12min (71min, Z3) está indicado dado HRV excepcional hoje (+20ms), sono adequado e carga semanal ainda baixa. Manter sessão conforme plano: 3x12min em Z3 (FC alvo 158–168bpm), aquecimento 15min Z1, recuperação 3min entre intervalos em Z1. Clima amanhã deve ser verificado — se abaixo de -2°C, considerar esteira.",
+    "sec_carga": "Z1 mensal em 355 (abaixo do target mínimo de 435) e Z2 em 1061 (dentro do target 761–1414), mas volume semanal zerado nos três esportes indica interrupção abrupta. Z3+ em 55 é controlada. Status Garmin 'Improdutivo' com CTL estimado em 1472 sugere acúmulo histórico sem estímulo recente — risco de desadaptação e lesão por retomada abrupta é MODERADO. Z1 precisa ser incrementada prioritariamente.",
+    "sec_hoje": "Treino planejado: Tempo Run 3x12min (71min total) — sessão de intensidade moderada-alta. Com REM zerado e sono score 56, o limiar de tolerância ao esforço está reduzido; execute os intervalos em FC controlada, sem extrapolar Z3. Priorize a execução técnica dos 3x12min com recuperação ativa completa entre séries.",
+    "sec_ajuste": "Manter os 3x12min mas limitar FC a 158bpm durante os blocos de tempo; aquecimento e recuperação entre séries estritamente em Z1 (FC abaixo de 140bpm). Volume total 71min mantido.",
+    "sec_alertas": "REM 0.0h é alerta fisiológico real — recuperação do sistema nervoso central incompleta pode mascarar fadiga durante esforço. Monitorar HR drift nos blocos de 12min: se FC subir >5bpm no mesmo pace do primeiro bloco, encerrar a série.",
+    "sec_nutricao": "Pré-treino: 350kcal com CHO de absorção rápida 60–90min antes (arroz/banana). Pós-treino: 30g proteína + CHO de reposição em até 30min; priorizar hidratação de 600ml/h durante sessão dado o frio (4°C) que pode subestimar perda hídrica.",
+    "sec_amanha": "Amanhã há dupla de natação (45min + 45min Técnica Base Z2) mais futebol (60min). Com o sono atual deficitário e REM zerado, manter as sessões de natação mas reduzir a segunda para 30min focando exclusivamente em técnica Z1-Z2. Futebol como atividade complementar de baixa intensidade — monitorar se há sinais de fadiga acumulada pós treino de hoje.",
     "amanha_ajustado": [
       {
-        "esporte": "run",
-        "tipo": "Tempo Run 3x12min",
-        "duracao_min": 71,
-        "zona": "Z3",
+        "esporte": "swim",
+        "tipo": "Natacao",
+        "duracao_min": 45,
+        "zona": "Z2",
         "motivo_ajuste": null
+      },
+      {
+        "esporte": "futebol",
+        "tipo": "Futebol",
+        "duracao_min": 60,
+        "zona": "Z1",
+        "motivo_ajuste": "Manter duração mas orientar intensidade em Z1 dado o sono deficitário e acúmulo de estímulos no dia."
+      },
+      {
+        "esporte": "swim",
+        "tipo": "Natacao Base Tecnica",
+        "duracao_min": 30,
+        "zona": "Z1",
+        "motivo_ajuste": "Reduzida de 45 para 30min e zona rebaixada para Z1 devido ao sono fragmentado (REM 0h) e triplo estímulo no mesmo dia."
       }
     ],
-    "status_readiness": "ÓTIMO",
+    "status_readiness": "MODERADO",
     "status_carga": "SUAVE",
     "acao_hoje": "MANTER",
-    "analise_hoje": "Rodagem leve de 50min em Z1 é adequada e alinhada ao status de recuperação; HRV elevado permite execução integral sem restrições. Prioridade é manter FC abaixo de 138bpm durante toda a sessão.",
-    "alerta": "Temperatura negativa (-2.1°C): risco de broncoespasmo e lesão muscular sem aquecimento adequado — nunca inicie corrida sem 10min progressivos."
+    "analise_hoje": "Tempo Run 3x12min é viável dado o HRV favorável (54ms), mas o sono comprometido (REM 0h, score 56) exige controle rigoroso de FC para não ultrapassar Z3. Executar com disciplina de zonas é mais importante que pace.",
+    "alerta": "REM 0.0h esta noite — recuperação do SNC incompleta; monitorar HR drift durante os intervalos e interromper se FC não estabilizar dentro de 2min de recuperação ativa."
   }
 }
