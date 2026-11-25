@@ -614,10 +614,10 @@
           "sessoes": [
             {
               "esporte": "bike",
-              "tipo": "Tempo Ride 4x10min",
-              "duracao_min": 79,
+              "tipo": "Tempo Ride 3x8min",
+              "duracao_min": 70,
               "zona": "Z3",
-              "descricao": "Blocos mais longos em ritmo de limiar para pico de estímulo aeróbico do bloco.",
+              "descricao": "Redução de 4x10 para 3x8min de Z3 devido a Body Battery baixo (33), futebol hoje e qualidade de sono comprometida (REM 0.6h).",
               "longo": false,
               "estrutura": [
                 {
