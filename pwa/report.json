@@ -1,22 +1,22 @@
 {
-  "date": "2026-11-25",
-  "generated_at": "2026-11-25T07:02:11.668640Z",
+  "date": "2026-11-26",
+  "generated_at": "2026-11-26T07:01:31.144135Z",
   "saude": {
-    "hrv": 36,
-    "hrv_7d": 31,
+    "hrv": 61,
+    "hrv_7d": 32,
     "hrv_status": "balanced",
     "hrv_baseline_low": 30,
     "hrv_baseline_high": 39,
-    "rhr": 66,
+    "rhr": 65,
     "rhr_baseline": null,
-    "sono_h": 7.1,
-    "sono_score": 63,
-    "sono_deep": 1.4,
-    "sono_rem": 0.6,
-    "sono_awake": 17.0,
-    "body_battery": 33,
-    "stress_avg": 32,
-    "stress_rest": 27.86,
+    "sono_h": 6.2,
+    "sono_score": 72,
+    "sono_deep": 1.1,
+    "sono_rem": 0.8,
+    "sono_awake": 7.0,
+    "body_battery": 46,
+    "stress_avg": 22,
+    "stress_rest": 75.64,
     "atl": 401.0,
     "ctl": 1602.0,
     "tsb": null,
@@ -26,8 +26,8 @@
     "load_aerobic_high": 1203.0,
     "load_anaerobic": 79.0,
     "load_total_month": 1602.0,
-    "load_target_low": "433–1085",
-    "load_target_high": "763–1416",
+    "load_target_low": "344–864",
+    "load_target_high": "607–1127",
     "training_status": "Recuperação",
     "fitness_trend": "Estável",
     "training_readiness": null,
@@ -35,9 +35,9 @@
     "peso": null,
     "previsoes": {
       "5K": 1379,
-      "10K": 2965,
-      "Meia": 6830,
-      "Maratona": 15284
+      "10K": 2964,
+      "Meia": 6828,
+      "Maratona": 15280
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,85 +55,10 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 0.9
+    "sono_deficit_h": 1.8
   },
-  "ontem": [
-    {
-      "mod": "swim",
-      "icone": "🏊",
-      "nome": "Pool Swim",
-      "dist": "1200m",
-      "dur": "33m08s",
-      "fc": 130.0,
-      "fc_max": 160.0,
-      "cal": 387.0,
-      "cad": null,
-      "tss": null,
-      "np": null,
-      "swolf": 12.300000190734863,
-      "aerobic_te": 2.5999999046325684,
-      "anaerobic_te": 2.0,
-      "elev": null,
-      "perf": "2:45/100m",
-      "pl": "Pace",
-      "_dist_m": 1200.0,
-      "_dur_s": 1988.83203125
-    },
-    {
-      "mod": "run",
-      "icone": "🏃",
-      "nome": "Erkrath Running",
-      "dist": "6.9km",
-      "dur": "36m32s",
-      "fc": 152.0,
-      "fc_max": 164.0,
-      "cal": 549.0,
-      "cad": 171.1875,
-      "tss": null,
-      "np": 389.0,
-      "swolf": null,
-      "aerobic_te": 3.799999952316284,
-      "anaerobic_te": 0.0,
-      "elev": 47.0,
-      "perf": "5:18/km",
-      "pl": "Pace",
-      "_dist_m": 6885.93994140625,
-      "_dur_s": 2192.676025390625
-    }
-  ],
+  "ontem": [],
   "hoje": [
-    {
-      "icone": "🏊",
-      "nome": "Natacao",
-      "tipo": "swim",
-      "dur": "45min",
-      "dist": "—",
-      "passos": [
-        "Atividade fixa"
-      ]
-    },
-    {
-      "icone": "⚽",
-      "nome": "Futebol",
-      "tipo": "futebol",
-      "dur": "60min",
-      "dist": "—",
-      "passos": [
-        "Atividade fixa"
-      ]
-    },
-    {
-      "icone": "🏊",
-      "nome": "Natacao",
-      "tipo": "swim",
-      "dur": "45min",
-      "dist": "—",
-      "passos": [
-        "Sessão fixa de natação com foco em saídas rápidas, posição de cabeça e braçada eficiente."
-      ]
-    }
-  ],
-  "amanha": [
     {
       "icone": "🚴",
       "nome": "Tempo Ride 3x8min",
@@ -155,6 +80,7 @@
       ]
     }
   ],
+  "amanha": [],
   "hoje_feito": [],
   "semana": {
     "swim_km": 1.2,
@@ -175,18 +101,14 @@
     "run_min": 93.2
   },
   "clima": {
-    "temp_max": 4.5,
-    "temp_min": -1.5,
+    "temp_max": 2.0,
+    "temp_min": -3.0,
     "chuva_pct": 0,
     "vento_kmh": 13.7,
-    "temp_atual": -1.4,
+    "temp_atual": -3.0,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-11-19",
-      "value": 44.0
-    },
     {
       "date": "2026-11-20",
       "value": 48.0
@@ -210,13 +132,13 @@
     {
       "date": "2026-11-25",
       "value": 36.0
+    },
+    {
+      "date": "2026-11-26",
+      "value": 61.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-11-11",
-      "value": 49.4
-    },
     {
       "date": "2026-11-12",
       "value": 49.4
@@ -272,15 +194,14 @@
     {
       "date": "2026-11-25",
       "value": 48.2
+    },
+    {
+      "date": "2026-11-26",
+      "value": 48.2
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-11-12",
-      "sono": 6.8,
-      "te": 3.2
-    },
     {
       "date": "2026-11-14",
       "sono": 8.4,
@@ -487,35 +408,20 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "HRV acima da média: execute com precisão de zona.",
-    "sec_readiness": "HRV de 36ms está +5ms acima da média 7d (31ms) e dentro do baseline (30–39ms), sinal positivo de recuperação. Sono de 7.1h com score 63 é subótimo — deep sleep 1.4h e REM apenas 0.6h indicam qualidade comprometida, déficit de 0.9h vs alvo. Body Battery em 33/100 com stress médio 32 reflete acúmulo residual; estado geral: recuperação funcional, mas não plena.",
-    "sec_treino_ontem": "Natação 1200m a 2:45/100m com SWOLF 12.3 indica eficiência técnica aceitável para ritmo aeróbico (TE 2.6 — estímulo moderado). Corrida 6.9km a 5:18/km com FC média 152bpm e TE 3.8 sugere intensidade elevada para uma sessão Z2 — potência de 389W com cadência 171spm aponta corrida com boa mecânica, mas FC próxima ao teto Z3. Carga combinada ontem foi significativa para o contexto de recuperação atual.",
-    "sec_carga": "Z1 mensal em 320 (target 433–1085) está abaixo do piso mínimo — déficit crítico de polarização, base aeróbica leve subutilizada. Z2 em 1203 está dentro do target (763–1416), mas representa 75% da carga total, desequilíbrio que eleva risco de fadiga crônica. Com ATL estimado em 401 e risco de lesão MODERADO na semana 3 de base, a ausência de Z1 adequada é o principal ponto de atenção.",
-    "sec_hoje": "Hoje há natação (45min) + futebol (60min) + natação (45min) — nenhum treino registrado ainda. As sessões de natação devem ser executadas em Z1–Z2 (FC ≤ 140bpm), foco em técnica e volume aeróbico leve. O futebol representa carga não estruturada com picos anaeróbicos; monitorar FC e limitar sprints intensos dado o Body Battery de 33 e estado de recuperação parcial.",
-    "sec_ajuste": "Natação: manter 2x45min, ritmo técnico Z1 (FC ≤ 135bpm), sem intervalos intensos — SWOLF alvo ≤ 13. Futebol: participar em intensidade moderada, FC teto 155bpm, evitar sprints repetidos acima de 85% FCmax.",
-    "sec_alertas": "Z1 mensal 26% abaixo do piso mínimo — risco real de overreaching se não corrigido nas próximas sessões. REM de 0.6h é insuficiente e pode comprometer adaptação neuromusuclar; priorizar dormir às 22:30 hoje. Futebol como carga não-planejada eleva ATL em dia já com Body Battery baixo.",
-    "sec_nutricao": "Sem treino registrado ainda (dia com atividades múltiplas): ingerir refeição pré-atividade com ~350kcal (CHO + proteína) 60min antes da primeira natação. Pós último treino: 30g proteína + CHO 1g/kg nas 2h seguintes para recuperação e sono.",
-    "sec_amanha": "Tempo Ride 4x10min Z3 (79min) + Brick Run 25min Z2 é sessão de carga moderada-alta. Dado o Body Battery atual (33), futebol hoje e sono de qualidade comprometida, recomendo manter o Tempo Ride mas reduzir intervalos Z3 de 4x10min para 3x8min (de 40min para 24min de Z3 efetivo), mantendo aquecimento/descanso. Brick Run mantido em 25min Z2 com FC teto 155bpm.",
-    "amanha_ajustado": [
-      {
-        "esporte": "bike",
-        "tipo": "Tempo Ride 3x8min",
-        "duracao_min": 70,
-        "zona": "Z3",
-        "motivo_ajuste": "Redução de 4x10 para 3x8min de Z3 devido a Body Battery baixo (33), futebol hoje e qualidade de sono comprometida (REM 0.6h)."
-      },
-      {
-        "esporte": "run",
-        "tipo": "Brick Run Curto",
-        "duracao_min": 25,
-        "zona": "Z2",
-        "motivo_ajuste": null
-      }
-    ],
-    "status_readiness": "MODERADO",
+    "frase": "HRV elevado: aproveite a janela, execute com precisão.",
+    "sec_readiness": "HRV de 61ms representa +29ms vs média 7d (32ms) — pico fisiológico claro, sistema nervoso autônomo bem recuperado. Sono de 6.2h com déficit de 1.8h e score 72 é o ponto crítico: deep sleep 1.1h e REM 0.8h abaixo do ideal. Body Battery 46/100 com stress médio 22 indica reserva energética moderada — não compromete o treino de hoje mas exige gestão pós-sessão.",
+    "sec_treino_ontem": null,
+    "sec_carga": "Z1 mensal em 320 (target 344–864) — abaixo do mínimo recomendado, base aeróbica leve subutilizada. Z2 em 1203 supera o teto de 1127, configurando desequilíbrio polarizado com excesso de intensidade moderada. Z3+ em 79 está contido, mas com ATL 401 e risco de lesão MODERADO, a distribuição atual pressiona adaptação sem base suficiente.",
+    "sec_hoje": "Sessão planejada: Tempo Ride 3x8min (70min) + Brick Run Curto (25min) — ainda não executada. No Tempo Ride, os 3x8min devem ser executados em Z2 alto/limiar (FC 155–162bpm ou potência estimada 210–230W), com aquecimento de 15min em Z1. O Brick Run de 25min deve ser integralmente em Z1–Z2 baixo (FC ≤ 150bpm), priorizando transição neuromuscular dado o déficit de sono.",
+    "sec_ajuste": "Manter 70min no bike com 3x8min de tempo em FC 155–162bpm; Brick Run mantido em 25min com FC teto 150bpm. Nenhuma redução de volume necessária dado HRV favorável, mas proibir Z3+ em ambas as sessões.",
+    "sec_alertas": "Z2 mensal 6.7% acima do teto — evitar qualquer deriva de intensidade no Tempo Ride que eleve carga semanal nesta zona. Déficit de sono acumulado (1.8h) pode mascarar percepção de esforço; monitorar HR drift nos intervalos de 8min.",
+    "sec_nutricao": "Pré-treino: 350kcal ~60min antes (CHO 60-70g + proteína leve). Pós-sessão imediato: 30g proteína + CHO 60-80g para reparação; priorizar deitar às 22:30 para mitigar déficit de sono de 1.8h.",
+    "sec_amanha": "Amanhã sem sessão agendada — manter descanso conforme plano. Com carga Z2 já acima do teto mensal e risco de lesão MODERADO, o dia livre é estratégico para absorção dos estímulos de hoje.",
+    "amanha_ajustado": [],
+    "status_readiness": "BOM",
     "status_carga": "ELEVADA",
-    "acao_hoje": "REDUZIR 20%",
-    "analise_hoje": "Dia com três atividades (2x natação + futebol) sobre base de recuperação parcial — executar natações em Z1 técnico e controlar intensidade no futebol para não comprometer sessão de carga amanhã. Body Battery de 33 é o limitador principal.",
-    "alerta": "Z1 mensal 26% abaixo do mínimo — risco de desequilíbrio de polarização e overreaching se não priorizado nas próximas sessões da semana 3."
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Janela fisiológica favorável com HRV 61ms justifica manutenção do Tempo Ride + Brick conforme planejado; controle rigoroso de FC evita agravar desequilíbrio Z2 já acima do target mensal.",
+    "alerta": "Z2 mensal 6.7% acima do teto — qualquer deriva de intensidade hoje eleva risco de lesão de MODERADO para ALTO."
   }
 }
