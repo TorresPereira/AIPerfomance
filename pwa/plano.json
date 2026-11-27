@@ -673,9 +673,9 @@
             {
               "esporte": "run",
               "tipo": "Long Run Base",
-              "duracao_min": 110,
+              "duracao_min": 80,
               "zona": "Z2",
-              "descricao": "Corrida longa mais extensa do bloco, ritmo aeróbico controlado, foco em resistência e forma técnica.",
+              "descricao": "Redução de 110 para 80min devido a sono crítico de 4.6h, Body Battery 32/100 e déficit acumulado de recuperação — FC teto 145bpm, sem excursões Z3.",
               "longo": true,
               "estrutura": null,
               "fixo": false
