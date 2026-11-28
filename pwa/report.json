@@ -1,43 +1,43 @@
 {
-  "date": "2026-11-27",
-  "generated_at": "2026-11-27T07:01:56.289619Z",
+  "date": "2026-11-28",
+  "generated_at": "2026-11-28T07:01:30.542024Z",
   "saude": {
-    "hrv": 42,
+    "hrv": 53,
     "hrv_7d": 31,
     "hrv_status": "balanced",
     "hrv_baseline_low": 30,
     "hrv_baseline_high": 39,
-    "rhr": 66,
+    "rhr": 62,
     "rhr_baseline": null,
-    "sono_h": 4.6,
-    "sono_score": 54,
-    "sono_deep": 1.1,
-    "sono_rem": 0.3,
-    "sono_awake": 0.0,
-    "body_battery": 32,
-    "stress_avg": 28,
-    "stress_rest": 40.44,
-    "atl": 367.0,
-    "ctl": 1466.0,
+    "sono_h": 6.2,
+    "sono_score": 62,
+    "sono_deep": 2.3,
+    "sono_rem": 0.2,
+    "sono_awake": 1.0,
+    "body_battery": 54,
+    "stress_avg": 20,
+    "stress_rest": 76.07,
+    "atl": 313.0,
+    "ctl": 1251.0,
     "tsb": null,
     "acwr": null,
     "load_3d": null,
     "load_aerobic_low": 183.0,
-    "load_aerobic_high": 1203.0,
+    "load_aerobic_high": 988.0,
     "load_anaerobic": 79.0,
-    "load_total_month": 1466.0,
+    "load_total_month": 1251.0,
     "load_target_low": "344–864",
     "load_target_high": "607–1127",
-    "training_status": "Recuperação",
-    "fitness_trend": "Estável",
+    "training_status": "Produtivo",
+    "fitness_trend": "Melhorando",
     "training_readiness": null,
     "vo2max": 48.2,
     "peso": null,
     "previsoes": {
-      "5K": 1386,
-      "10K": 2978,
-      "Meia": 6859,
-      "Maratona": 15337
+      "5K": 1388,
+      "10K": 2983,
+      "Meia": 6871,
+      "Maratona": 15359
     },
     "risco_lesao": "MODERADO",
     "risco_cor": "#FFB800",
@@ -55,11 +55,10 @@
     },
     "sono_alvo_h": 8.0,
     "sono_deita": "22:30",
-    "sono_deficit_h": 3.4
+    "sono_deficit_h": 1.8
   },
   "ontem": [],
-  "hoje": [],
-  "amanha": [
+  "hoje": [
     {
       "icone": "🏃",
       "nome": "Long Run Base",
@@ -68,6 +67,18 @@
       "dist": "—",
       "passos": [
         "Redução de 110 para 80min devido a sono crítico de 4.6h, Body Battery 32/100 e déficit acumulado de recuperação — FC teto 145bpm, sem excursões Z3."
+      ]
+    }
+  ],
+  "amanha": [
+    {
+      "icone": "🚴",
+      "nome": "Long Ride Regenerativo",
+      "tipo": "bike",
+      "dur": "80min",
+      "dist": "—",
+      "passos": [
+        "Long ride de recuperação, volume reduzido, ritmo suave para assimilar as cargas das semanas anteriores."
       ]
     }
   ],
@@ -91,18 +102,14 @@
     "run_min": 93.2
   },
   "clima": {
-    "temp_max": 1.8,
-    "temp_min": -4.6,
+    "temp_max": 2.8,
+    "temp_min": -2.2,
     "chuva_pct": 0,
-    "vento_kmh": 10.1,
-    "temp_atual": -4.6,
+    "vento_kmh": 20.9,
+    "temp_atual": -2.1,
     "emoji": "🌤️"
   },
   "hrv_7dias": [
-    {
-      "date": "2026-11-21",
-      "value": 47.0
-    },
     {
       "date": "2026-11-22",
       "value": 55.0
@@ -126,13 +133,13 @@
     {
       "date": "2026-11-27",
       "value": 42.0
+    },
+    {
+      "date": "2026-11-28",
+      "value": 53.0
     }
   ],
   "vo2max_hist": [
-    {
-      "date": "2026-11-13",
-      "value": 49.4
-    },
     {
       "date": "2026-11-14",
       "value": 49.1
@@ -188,15 +195,14 @@
     {
       "date": "2026-11-27",
       "value": 48.2
+    },
+    {
+      "date": "2026-11-28",
+      "value": 48.2
     }
   ],
   "prs": [],
   "sono_performance": [
-    {
-      "date": "2026-11-14",
-      "sono": 8.4,
-      "te": 3.7
-    },
     {
       "date": "2026-11-15",
       "sono": 6.9,
@@ -398,28 +404,28 @@
     "fase": "BASE"
   },
   "insights": {
-    "frase": "Sono é treino: recupere hoje para performar amanhã.",
-    "sec_readiness": "HRV de 42ms está 11ms acima da média 7d (31ms) e acima do baseline (30–39ms), sinal positivo de recuperação aguda. Porém sono de 4.6h com score 54, apenas 1.1h deep e 0.3h REM representa déficit crítico de 3.4h — compromete síntese proteica e consolidação neural. Body Battery em 32/100 com stress médio 28 confirma reserva energética baixa apesar do HRV favorável.",
+    "frase": "HRV elevado: janela de adaptação aberta, use com precisão.",
+    "sec_readiness": "HRV de 53ms representa +22ms acima da média 7d (31ms) e está acima do baseline (30–39ms), indicando janela anabólica favorável — sinal de recuperação sistêmica real. RHR de 62bpm sem baseline comparativo; sono de 6.2h com score 62, déficit de 1.8h e REM crítico de apenas 0.2h comprometem recuperação neural. Body Battery em 54/100 com estresse médio baixo (20) sugere reserva funcional moderada, limitada pelo sono insuficiente.",
     "sec_treino_ontem": null,
-    "sec_carga": "Z1 mensal em 183 (target 344–864) está gravemente subdosada — apenas 53% do mínimo recomendado. Z2 em 1203 ultrapassa o teto de 1127, indicando polarização invertida com excesso aeróbico alto e déficit de base leve. Volume semanal crítico: natação 1.2km, bike 0km, corrida 6.9km — distribuição incompleta com risco de lesão classificado como MODERADO.",
-    "sec_hoje": "Nenhum treino agendado ou executado hoje. Dia de descanso ativo, adequado dado o quadro de sono deficiente (4.6h) e Body Battery em 32. Foco total em recuperação passiva, hidratação e nutrição reparadora.",
-    "sec_ajuste": "Manter descanso completo hoje. Nenhuma atividade física, nem Z1 leve — prioridade absoluta é elevar Body Battery acima de 60 para amanhã.",
-    "sec_alertas": "Déficit de sono acumulado (3.4h) é o maior risco operacional: impacta percepção de esforço, coordenação e recuperação muscular para o Long Run de 110min amanhã. Z1 mensal 47% abaixo do mínimo exige rebalanceamento urgente nas próximas sessões — aumentar volume leve para corrigir polarização.",
-    "sec_nutricao": "Hoje sem treino: priorizar 2.0–2.2g proteína/kg corporal distribuída em 4 refeições para reparação tecidual. Manter carboidratos moderados (3–4g/kg) e dormir às 22:30 para maximizar janela de sono — alvo 8h.",
-    "sec_amanha": "Long Run 110min Z2 está planejado, mas sono deficiente (4.6h, score 54) e Body Battery em 32 são fatores limitantes reais. Reduzir para 80min mantendo zona Z2 estrita (FC 130–145bpm estimado). Se ao acordar Body Battery < 45 ou HRV cair abaixo de 35ms, reduzir adicionalmente para 60min ou substituir por caminhada ativa.",
+    "sec_carga": "Z1 em 183 (target 344–864) está severamente abaixo do mínimo — base aeróbica leve negligenciada. Z2 em 988 dentro do target (607–1127) mas próximo ao teto; Z3+ em 79 aceitável. Volume semanal crítico: natação 1.2km, bike 0km, corrida 6.9km — distribuição modal desequilibrada com bike zerado. CTL estimado em 1251 vs ATL 313 levanta dúvida metodológica nos valores; risco de lesão MODERADO requer atenção na progressão.",
+    "sec_hoje": "Long Run Base de 80min ainda não executado hoje. Com HRV favorável mas sono deficitário (REM 0.2h), o treino deve ser executado em Z2 controlado, FC alvo 138–148bpm. Temperatura de 2.8°C máxima exige protocolo de aquecimento prolongado (15min progressivos) e gestão de vestimenta para manter performance aeróbica sem desvio de zona.",
+    "sec_ajuste": "Manter 80min de Long Run Base, FC teto 148bpm em Z2, primeiros 15min em Z1 (FC abaixo de 135bpm) como aquecimento ativo dado frio intenso (-2.2°C). Ritmo alvo Z2: 5:50–6:20/km dependendo de resposta cardíaca ao frio.",
+    "sec_alertas": "REM de 0.2h é criticamente baixo — risco de déficit cognitivo e motor que pode mascarar fadiga durante a corrida. Monitorar HR drift após 50min; se FC subir >8bpm sem aumento de ritmo, reduzir para Z1 imediatamente. Frio extremo com vento 20.9km/h: windchill efetivo próximo de -6°C — risco de broncoespasmo e hipotermia periférica se vestimenta inadequada.",
+    "sec_nutricao": "Pré-treino: 350kcal com CHO de absorção rápida 45–60min antes, incluir bebida quente para termorregulação no frio. Pós-treino: 30g proteína + 60–80g CHO dentro de 30min; priorizar hidratação aquecida durante sessão (mínimo 400ml dado frio reduzir sensação de sede).",
+    "sec_amanha": "Long Ride Regenerativo de 80min em Z2 está adequado considerando HRV favorável de hoje, mas REM crítico e déficit de sono acumulado exigem monitoramento. Manter sessão em 80min se sono desta noite atingir mínimo de 7h (deitar 22:30); caso contrário reduzir para 60min. Potência alvo Z2: 160–185W (estimado sem FTP registrado); FC teto 148bpm.",
     "amanha_ajustado": [
       {
-        "esporte": "run",
-        "tipo": "Long Run Base",
+        "esporte": "bike",
+        "tipo": "Long Ride Regenerativo",
         "duracao_min": 80,
         "zona": "Z2",
-        "motivo_ajuste": "Redução de 110 para 80min devido a sono crítico de 4.6h, Body Battery 32/100 e déficit acumulado de recuperação — FC teto 145bpm, sem excursões Z3."
+        "motivo_ajuste": null
       }
     ],
-    "status_readiness": "BAIXO",
-    "status_carga": "ELEVADA",
-    "acao_hoje": "DESCANSO",
-    "analise_hoje": "Dia sem treino adequado ao estado atual: Body Battery 32 e sono 4.6h inviabilizam qualquer estímulo produtivo. Recuperação é a prescrição correta.",
-    "alerta": "Déficit de sono de 3.4h combinado com Body Battery 32 eleva risco de lesão no Long Run de amanhã — condicione execução ao HRV matinal e Body Battery ao acordar."
+    "status_readiness": "MODERADO",
+    "status_carga": "SUAVE",
+    "acao_hoje": "MANTER",
+    "analise_hoje": "Long Run Base de 80min é apropriado para o estado atual — HRV elevado abre janela de carga, mas REM de 0.2h e déficit de 1.8h de sono limitam intensidade máxima segura; executar integralmente em Z2 com aquecimento prolongado pelo frio extremo.",
+    "alerta": "REM de 0.2h esta noite é sinal crítico de recuperação neural comprometida — priorizar sono de 8h esta noite (22:30) como intervenção tão importante quanto o treino."
   }
 }
